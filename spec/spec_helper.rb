@@ -1,5 +1,11 @@
-require "bundler/setup"
-require "arclight"
+ENV['RAILS_ENV'] ||= 'test'
+
+require 'engine_cart'
+EngineCart.load_application!
+
+require 'rspec/rails'
+
+require 'arclight'
 
 RSpec.configure do |config|
   # Enable flags like --only-failures and --next-failure
