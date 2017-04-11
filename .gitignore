@@ -10,3 +10,5 @@
 
 # rspec failure tracking
 .rspec_status
+
+.internal_test_app
