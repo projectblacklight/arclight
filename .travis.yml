@@ -2,7 +2,7 @@ sudo: false
 language: ruby
 rvm:
   - 2.4.1
+jdk:
+  - oraclejdk8
 cache: bundler
 before_install: gem install bundler -v 1.14.6
-before_script:
-  - jdk_switcher use oraclejdk8
