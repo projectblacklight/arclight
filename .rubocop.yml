@@ -1,0 +1,33 @@
+require: rubocop-rspec
+
+AllCops:
+  Exclude:
+    - '.internal_test_app/**/*'
+    - 'bin/**/*'
+    - 'db/**/*'
+    - 'vendor/**/*'
+  TargetRubyVersion: 2.3
+  DisplayCopNames: true
+
+Rails:
+  Enabled: true
+
+Metrics/LineLength:
+  Max: 120
+  Exclude:
+    - 'Gemfile'
+    - 'tasks/arclight.rake'
+
+Metrics/ModuleLength:
+  Max: 120
+
+Metrics/ClassLength:
+  Max: 120
+
+Style/Documentation:
+  Exclude:
+    - 'spec/**/*'
+    - 'lib/arclight.rb'
+
+Bundler/DuplicatedGem:
+  Enabled: false
