@@ -11,5 +11,6 @@ RuboCop::RakeTask.new(:rubocop)
 load 'tasks/arclight.rake'
 
 require 'engine_cart/rake_task'
+require 'solr_ead'
 
 task default: %i[rubocop ci]
