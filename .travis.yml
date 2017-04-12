@@ -5,4 +5,3 @@ rvm:
 jdk:
   - oraclejdk8
 cache: bundler
-before_install: gem install bundler -v 1.14.6
