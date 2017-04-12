@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'solr_wrapper'
 require 'engine_cart/rake_task'
 require 'rspec/core/rake_task'
@@ -16,7 +18,6 @@ task ci: ['arclight:generate'] do
   end
 end
 
-
 namespace :arclight do
   desc 'Generate a test application'
   task generate: ['engine_cart:generate'] do
@@ -34,7 +35,6 @@ namespace :arclight do
 
     SolrWrapper.wrap(port: '8983') do |solr|
       solr.with_collection(name: 'blacklight-core', dir: File.join(File.expand_path('..', File.dirname(__FILE__)), 'solr', 'conf')) do
-
         within_test_app do
           system "bundle exec rails s #{args[:rails_server_args]}"
         end
