@@ -1,0 +1,449 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ead xmlns="urn:isbn:1-931666-22-9" xmlns:xlink="http://www.w3.org/1999/xlink"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="urn:isbn:1-931666-22-9 http://www.loc.gov/ead/ead.xsd">
+  <eadheader countryencoding="iso3166-1" dateencoding="iso8601"
+    findaidstatus="unverified-partial-draft" langencoding="iso639-2b" repositoryencoding="iso15511">
+    <eadid countrycode="US" mainagencycode="US-CaS-BVSC">aoa271</eadid>
+    <filedesc>
+      <titlestmt>
+        <titleproper type="filing">Alpha Omega Alpha Archives</titleproper>
+        <titleproper>Finding Aid to the Alpha Omega Alpha Archives, <date era="ce"
+            calendar="gregorian">1894-1992</date>
+          <num>MS C 271</num></titleproper>
+        <author>History of Medicine Division</author>
+      </titlestmt>
+      <publicationstmt>
+        <publisher>1118 Badger Vine Special Collections</publisher>
+        <address>
+          <addressline>1118 Badger Vine Ln</addressline>
+          <addressline>Portola Valley, CA</addressline>
+        </address>
+      </publicationstmt>
+    </filedesc>
+    <profiledesc>
+      <creation>This finding aid was produced using ArchivesSpace on <date>2017-04-13 14:08:18
+          -0700</date>.</creation>
+      <langusage>Finding aid is written in <language>English.</language></langusage>
+    </profiledesc>
+  </eadheader>
+  <archdesc level="collection">
+    <did>
+      <langmaterial>
+        <language langcode="eng">English</language>
+      </langmaterial>
+      <repository>
+        <corpname>1118 Badger Vine Special Collections</corpname>
+      </repository>
+      <unittitle>Alpha Omega Alpha Archives</unittitle>
+      <origination label="creator">
+        <corpname source="ingest">Alpha Omega Alpha</corpname>
+      </origination>
+      <unitid>MS C 271</unitid>
+      <physdesc altrender="whole">
+        <extent altrender="materialtype spaceoccupied">15.0 linear feet (36 boxes + oversize
+          folder)</extent>
+      </physdesc>
+      <unitdate normal="1894/1992" type="inclusive">1894-1992</unitdate>
+      <langmaterial id="aspace_1cf405d4520ad390ab7b5532eab3ea00">Collection materials primarily in
+          <language langcode="eng">English.</language></langmaterial>
+      <abstract id="aspace_3dcd45a7a2d2d0a1568d71906a03a4c1">Alpha Omega Alpha Honor Medical Society
+        was founded in 1902 by W.W. Root. Material relates to the history, organization, membership,
+        meetings and publications. A large portion of the collection pertain to the different
+        chapters of the Society.</abstract>
+    </did>
+    <odd id="aspace_3be3b2c4bb6ad119fb3027aa9f75fb91">
+      <head>General</head>
+      <list type="ordered">
+        <head>Contact Information</head>
+        <item>History of Medicine Division</item>
+        <item>National Library of Medicine</item>
+        <item>8600 Rockville Pike</item>
+        <item>Bethesda, Maryland</item>
+        <item>USA</item>
+        <item>Phone:(301) 402-8878 (Reference Desk)</item>
+        <item>Fax:(301) 402-0872</item>
+        <item>Email:hmdref@nlm.nih.gov</item>
+      </list>
+    </odd>
+    <odd id="aspace_62624f13b2147d69ad6866d84e86d816">
+      <head>General</head>
+      <list type="deflist">
+        <defitem>
+          <label>Processed by</label>
+          <item>HMD Staff; Jim Labosier</item>
+        </defitem>
+        <defitem>
+          <label>Processing Completed</label>
+          <item>1980s; Nov. 2012</item>
+        </defitem>
+        <defitem>
+          <label>Encoded by</label>
+          <item>Dan Jenkins; Jim Labosier</item>
+        </defitem>
+      </list>
+    </odd>
+    <acqinfo id="aspace_4179cc95d0af3f4bc52ca7f563e45888">
+      <head>Provenance</head>
+      <p>Gift,John Z. Bowers in 1973; Gladys Brill Brampton in 1999 and 2000. Acc. 0169, Acc
+        1999-044, Acc 2000-012, Acc 2000-023.</p>
+    </acqinfo>
+    <accessrestrict id="aspace_f3efe9521ccfb67645681d717b05fbb6">
+      <head>Access Restrictions</head>
+      <p>No restrictions on access.</p>
+    </accessrestrict>
+    <userestrict id="aspace_d24bd36228fd6cbe95cc2c8ff9b148ed">
+      <head>Copyright Information</head>
+      <p>Copyright was transferred to the public domain. Contact the Reference Staff for details
+        regarding rights.</p>
+    </userestrict>
+    <prefercite id="aspace_2daf7c36b72f93355658d54ce0a066c0">
+      <head>Preferred Citation</head>
+      <p>Alpha Omega Alpha. Alpha Omega Alpha Archives. 1894-1992. Located in: Archives and Modern
+        Manuscripts Collection, History of Medicine Division, National Library of Medicine,
+        Bethesda, MD; MS C 271.</p>
+    </prefercite>
+    <bioghist id="aspace_ff0f836406ce214cae38e1f7c798d76e">
+      <head>Historical Note</head>
+      <p>Alpha Omega Alpha Honor Medical Society was founded in 1902 by William Webster Root and
+        five other medical students at the College of Physicians and Surgeons in Chicago. Root
+        viewed the society as a protest against "a condition which associated the name medical
+        student with rowdyism, boorishness, immorality, and low educational ideals." Of the
+        approximately 25,000 medical students in the United States at the turn of the century, no
+        more than 15 percent were college graduates. The only requirement in most schools was a high
+        school diploma or its equivalent; the latter often meaning the ability to pay the fee. The
+        schools themselves-there were about 150-were by and large of dubious quality. With a few
+        exceptions, notably the Johns Hopkins School of Medicine, founded in 1893, the medical
+        school curriculum consisted of a series of lectures, sometimes supplemented by
+        demonstrations at the bedside or in the laboratory, if such existed.</p>
+      <p> Root and his fellow medical students met to form a society that would foster honesty and
+        formulate higher ideals of scholastic achievement. Chartered in 1903 by the state of
+        Illinois, Alpha Omega Alpha's growth has paralleled the development of American medical
+        education. Within a decade after the society was founded, chapters were established at
+        seventeen medical schools. At present there are 124 active chapters in the United States and
+        Canada. Today, when students and established physicians alike reject easy platitudes, the
+        tenets of the society are more relevant than ever. As framed by Root, they are a modern
+        interpretation of the Hippocratic oath: "It is the duty of members to foster the scientific
+        and philosophical features of the medical profession, to look beyond self to the welfare of
+        the profession and of the public, to cultivate social mindedness, as well as individualistic
+        attitude toward responsibilities, to show respect for colleagues, especially for elders and
+        teachers, to foster research and in all ways to ennoble the profession of medicine and
+        advance it in public opinion. It is equally a duty to avoid that which is unworthy,
+        including the commercial spirit and all practices injurious to the welfare of patients, the
+        public, or the profession." [Excerpted from Alpha Omega Alpha website.]</p>
+    </bioghist>
+    <scopecontent id="aspace_00d4328c32ed5e54eac5c662aa45245f">
+      <head>Collection Summary</head>
+      <p>Correspondence, documents, records, photos and printed matter. Material relates to the
+        history, organization, membership, meetings and publications. A large portion of the
+        collection pertains to the different chapters of the Society.</p>
+    </scopecontent>
+    <controlaccess>
+      <subject source="mesh">Societies</subject>
+      <corpname role="fmo" source="ingest">Alpha Omega Alpha</corpname>
+      <persname source="mesh">Root, William Webster, 1867-1932</persname>
+      <persname source="mesh">Bierring, Walter L. (Walter Lawrence), 1868-1961</persname>
+    </controlaccess>
+    <dsc>
+      <c id="aspace_563a320bb37d24a9e1e6f7bf95b52671" level="series">
+        <did>
+          <unittitle>Series I: Administrative Records,</unittitle>
+          <unitid>MS C 271.I</unitid>
+          <unitdate>1902-1976</unitdate>
+        </did>
+        <c id="aspace_843e8f9f22bac69872d0802d6fffbb04" level="file">
+          <did>
+            <unittitle>"A brief account of the origin of the Alpha Omega Alpha Honorary Fraternity"
+              - William W. Root,</unittitle>
+            <unitdate>n.d.</unitdate>
+            <container id="aspace_d258aae2bcdc020db8152ebcd05b648f" label="Mixed Materials"
+              type="box">1</container>
+            <container id="aspace_8a0450988fafd6cee4c334fe4811c392"
+              parent="aspace_d258aae2bcdc020db8152ebcd05b648f" type="folder">1</container>
+            <dao xlink:actuate="onLoad"
+              xlink:href="https://collections.nlm.nih.gov/bookviewer?PID=nlm:nlmuid-100957835-bk"
+              xlink:show="embed" xlink:title="Folder of digitized stuff">
+              <daodesc>
+                <p>Folder of digitized stuff</p>
+              </daodesc>
+            </dao>
+            <dao xlink:actuate="onRequest"
+              xlink:href="https://profiles.nlm.nih.gov/ps/access/KKBBFL.pdf" xlink:show="new"
+              xlink:title="Letter from Christian B. Anfinsen (to the owner of the reel of yellow nylon rope [behind the bar])">
+              <daodesc>
+                <p>Letter from Christian B. Anfinsen (to the owner of the reel of yellow nylon rope
+                  [behind the bar]): 1965-09-02</p>
+              </daodesc>
+            </dao>
+          </did>
+        </c>
+        <c id="aspace_e6db65d47e891d61d69c2798c68a8f02" level="otherlevel">
+          <did>
+            <unittitle>Statements of purpose,</unittitle>
+            <unitdate>c.1902</unitdate>
+            <container id="aspace_cb0ce54fec31ceb66bcb46ff50143d54" label="Mixed Materials"
+              type="box">1</container>
+            <container id="aspace_4b9fef8e13c68338317e50cc7d5b4c14"
+              parent="aspace_cb0ce54fec31ceb66bcb46ff50143d54" type="folder">2</container>
+          </did>
+        </c>
+        <c id="aspace_4e7f6dfada4b6e243f6f29f92d765073" level="otherlevel">
+          <did>
+            <unittitle>Constitution - notes on drafting of constitution,</unittitle>
+            <unitdate>c.1902-1903</unitdate>
+            <container id="aspace_81e350623cc9e23c3f8dad75863c298a" label="Mixed Materials"
+              type="box">1</container>
+            <container id="aspace_9157e54a2d498fbe1ba22e664bfaf859"
+              parent="aspace_81e350623cc9e23c3f8dad75863c298a" type="folder">3</container>
+          </did>
+        </c>
+        <c id="aspace_dc2aaf83625280ae2e193beb3f4aea78" level="otherlevel">
+          <did>
+            <unittitle>Constitution and by-laws - drafts,</unittitle>
+            <unitdate>1902-1904</unitdate>
+            <container id="aspace_19171bacef2f302c352195eaafca6b75" label="Mixed Materials"
+              type="box">1</container>
+            <container id="aspace_4cceb568b39913f2342e43dd3d54b772"
+              parent="aspace_19171bacef2f302c352195eaafca6b75" type="folder">4-5</container>
+          </did>
+        </c>
+        <c id="aspace_a8b5c3a57013462581d0e807241fcf93" level="otherlevel">
+          <did>
+            <unittitle>Constitution and by-laws - drafts,</unittitle>
+            <unitdate>1904, n.d.</unitdate>
+            <container id="aspace_3162cd6967365a525caa18ec94ba7fdc" label="Mixed Materials"
+              type="box">35</container>
+            <container id="aspace_eb1fe308c3568863585c8b763f287eed"
+              parent="aspace_3162cd6967365a525caa18ec94ba7fdc" type="folder">18</container>
+          </did>
+        </c>
+        <c id="aspace_ee4d4a9531f5d98d3525fdd79ef8b425" level="otherlevel">
+          <did>
+            <unittitle>The constitution of the Alpha Omega Alpha Honor Fraternity together with the
+              Oath of Hippocrates,</unittitle>
+            <unitdate>1904</unitdate>
+            <container id="aspace_0b80509251d5cbcf6e5b4a10cdbae607" label="Mixed Materials"
+              type="box">1</container>
+            <container id="aspace_561ca5e6c10100629c3c1889fccbbade"
+              parent="aspace_0b80509251d5cbcf6e5b4a10cdbae607" type="folder">7</container>
+          </did>
+        </c>
+        <c id="aspace_69f38ca641523c3c2426d11b2ac839af" level="otherlevel">
+          <did>
+            <unittitle>History and constitution,</unittitle>
+            <unitdate>1913-1960, n.d.</unitdate>
+            <container id="aspace_01235347001eb8ca7d27603a7f4b143d" label="Mixed Materials"
+              type="box">1</container>
+            <container id="aspace_e01635b890bf513f2ed9e30946c9568f"
+              parent="aspace_01235347001eb8ca7d27603a7f4b143d" type="folder">8</container>
+          </did>
+        </c>
+        <c id="aspace_e440da3c98ed7d64ef8179d56244f931" level="otherlevel">
+          <did>
+            <unittitle>Constitution amendments - drafts,</unittitle>
+            <unitdate>n.d.</unitdate>
+            <container id="aspace_280bc85c62bcbb37050c50102e5c0e03" label="Mixed Materials"
+              type="box">1</container>
+            <container id="aspace_7372618d7633353ec7e09ad87cfa2041"
+              parent="aspace_280bc85c62bcbb37050c50102e5c0e03" type="folder">9</container>
+          </did>
+        </c>
+        <c id="aspace_0d7174f0081ee8fd43f08872cfd7adc3" level="otherlevel">
+          <did>
+            <unittitle>Review of constitution and suggestions,</unittitle>
+            <unitdate>n.d.</unitdate>
+            <container id="aspace_bd1aa7181b44ccc0dab5de0b136e6f03" label="Mixed Materials"
+              type="box">1</container>
+            <container id="aspace_bc1538a6492b885f4dcd272afbdab900"
+              parent="aspace_bd1aa7181b44ccc0dab5de0b136e6f03" type="folder">10</container>
+          </did>
+        </c>
+        <c id="aspace_24d96d896c187b4e90ebb6c910f0462f" level="otherlevel">
+          <did>
+            <unittitle>Articles of incorporation,</unittitle>
+            <unitdate>1903</unitdate>
+            <container id="aspace_70b598eea1a92f336fd167d2c8519f5f" label="Mixed Materials"
+              type="box">1</container>
+            <container id="aspace_e82933e98fa0499532a565a2f6f942a0"
+              parent="aspace_70b598eea1a92f336fd167d2c8519f5f" type="folder">11</container>
+          </did>
+        </c>
+        <c id="aspace_9758c1f47b10bc70e01a396e99a3e57a" level="otherlevel">
+          <did>
+            <unittitle>Amendments to articles of incorporation and revised constitution and
+              by-laws,</unittitle>
+            <unitdate>1960</unitdate>
+            <container id="aspace_a4164fdebecd8b931065ddfb1116009e" label="Mixed Materials"
+              type="box">1</container>
+            <container id="aspace_dd54c6dd0a662e547d6834d716637dd0"
+              parent="aspace_a4164fdebecd8b931065ddfb1116009e" type="folder">12</container>
+          </did>
+        </c>
+        <c id="aspace_2d7e583e94eb2b46d5dd1a0ec4cdca1f" level="otherlevel">
+          <did>
+            <unittitle>Dr. Root and L. Raymond Higgins' collaboration on Alpha Omega Alpha
+              motto,</unittitle>
+            <unitdate>1903-1952</unitdate>
+            <container id="aspace_36fe2fc6c516a56117b69ab12913687f" label="Mixed Materials"
+              type="box">1</container>
+            <container id="aspace_4bef9bbbfbbd17dc4776ef97ac47531b"
+              parent="aspace_36fe2fc6c516a56117b69ab12913687f" type="folder">13</container>
+          </did>
+        </c>
+        <c id="aspace_f8c48bea8a2a056b98698382b0ef079a" level="otherlevel">
+          <did>
+            <unittitle>Plans for motto and evolution of key [photocopy],</unittitle>
+            <unitdate>1903</unitdate>
+            <container id="aspace_47e029c45d6bc57ed786511ee1e4d1da" label="Mixed Materials"
+              type="box">35</container>
+            <container id="aspace_f72ca777a6a88aff952c74763294be4a"
+              parent="aspace_47e029c45d6bc57ed786511ee1e4d1da" type="folder">17</container>
+          </did>
+        </c>
+        <c id="aspace_e3894c8be3020742fe44a6eaf25e130a" level="otherlevel">
+          <did>
+            <unittitle>Plans for Alpha Omega Alpha key,</unittitle>
+            <unitdate>c.1903</unitdate>
+            <container id="aspace_5442b1e681d8d5c057c5e598e139807e" label="Mixed Materials"
+              type="box">1</container>
+            <container id="aspace_7a2430aa9d7adfc52321dd3f1a3eb6cb"
+              parent="aspace_5442b1e681d8d5c057c5e598e139807e" type="folder">14</container>
+          </did>
+        </c>
+        <c id="aspace_34cd578f62025b5b10d111528c1e225d" level="otherlevel">
+          <did>
+            <unittitle>Fraternity Charter certificate - draft,</unittitle>
+            <unitdate>n.d.</unitdate>
+            <container id="aspace_1579b968f44866f4066a9387e4446ce1" label="Mixed Materials"
+              type="box">1</container>
+            <container id="aspace_b60ff470b57285b4f198c8a7edcf2f61"
+              parent="aspace_1579b968f44866f4066a9387e4446ce1" type="folder">15</container>
+          </did>
+        </c>
+        <c id="aspace_d908ca557e8b2f6a4d13002616b086c1" level="otherlevel">
+          <did>
+            <unittitle>Fraternity Charter certificate - blank form,</unittitle>
+            <unitdate>n.d.</unitdate>
+            <container id="aspace_6d4dfa7db9a186576147009f3d5bd9ee" label="Mixed Materials"
+              type="folder">1</container>
+          </did>
+        </c>
+        <c id="aspace_a68ee517caa6d765f01eb923c177af2b" level="otherlevel">
+          <did>
+            <unittitle>Fraternity Charter certificates for University of Cincinnati, State
+              University of Iowa, and University of Texas,</unittitle>
+            <unitdate>1913-1920</unitdate>
+            <container id="aspace_fcc97c0ccf63624181b12646dca435c9" label="Mixed Materials"
+              type="folder">1</container>
+          </did>
+        </c>
+        <c id="aspace_06b161e4521e5df6c955ea4d58af1e6d" level="otherlevel">
+          <did>
+            <unittitle>Individual membership certificate - draft,</unittitle>
+            <unitdate>1904</unitdate>
+            <container id="aspace_8ad0db4efd18578c1a7d939259c481dc" label="Mixed Materials"
+              type="box">1</container>
+            <container id="aspace_09d7005965e24bf52aff2c9e6df0b075"
+              parent="aspace_8ad0db4efd18578c1a7d939259c481dc" type="folder">16</container>
+          </did>
+        </c>
+        <c id="aspace_a630a288a09e47e488b78bf665922262" level="otherlevel">
+          <did>
+            <unittitle>Individual membership certificate - blank form,</unittitle>
+            <unitdate>n.d.</unitdate>
+            <container id="aspace_50680a904fe2a46b7299e0bda8a80e9a" label="Mixed Materials"
+              type="folder">1</container>
+          </did>
+        </c>
+        <c id="aspace_073cf098f23a9fd6f439e29dcdb3c1b8" level="otherlevel">
+          <did>
+            <unittitle>Organizational chart - directors and chapters,</unittitle>
+            <unitdate>c.1910</unitdate>
+            <container id="aspace_06f4923c631900f2000aec572908b66d" label="Mixed Materials"
+              type="box">1</container>
+            <container id="aspace_38529a27b37639f8e711c02bb685b53e"
+              parent="aspace_06f4923c631900f2000aec572908b66d" type="folder">17</container>
+          </did>
+        </c>
+        <c id="aspace_bec38df1c5b4450c6c459e8695eab218" level="otherlevel">
+          <did>
+            <unittitle>Officers and directors - lists,</unittitle>
+            <unitdate>1961, n.d.</unitdate>
+            <container id="aspace_5017eb351ed6464db58a0ab48d6c9dd2" label="Mixed Materials"
+              type="box">1</container>
+            <container id="aspace_568570681c50be12d0251b0c7c6224e0"
+              parent="aspace_5017eb351ed6464db58a0ab48d6c9dd2" type="folder">18</container>
+          </did>
+        </c>
+        <c id="aspace_238a0567431f36f49acea49ef576d408" level="subseries">
+          <did>
+            <unittitle>Reports</unittitle>
+          </did>
+        </c>
+        <c id="aspace_81c806b82a14c3c79d395bbd383b886f" level="subseries">
+          <did>
+            <unittitle>Meetings</unittitle>
+          </did>
+        </c>
+        <c id="aspace_01daa89087641f7fc9dbd7a10d3f2da9" level="subseries">
+          <did>
+            <unittitle>Financial Records</unittitle>
+          </did>
+        </c>
+        <c id="aspace_4365cd1ed8bd8fee1bac6077a4d81359" level="otherlevel">
+          <did>
+            <unittitle>General announcements,</unittitle>
+            <unitdate>1909-1967</unitdate>
+            <container id="aspace_9cac9a24a014e4376ab604ddf2b616e5" label="Mixed Materials"
+              type="box">4</container>
+            <container id="aspace_3e7fd3fb480c183f64d887e0000c689c"
+              parent="aspace_9cac9a24a014e4376ab604ddf2b616e5" type="folder">6</container>
+          </did>
+        </c>
+      </c>
+      <c id="aspace_a951375d104030369a993ff943f61a77" level="series">
+        <did>
+          <unittitle>Series II: Membership,</unittitle>
+          <unitid>MS C 271.II</unitid>
+          <unitdate>1902-1973</unitdate>
+        </did>
+      </c>
+      <c id="aspace_d5765d98e333f83b6278c00e9a81f31f" level="series">
+        <did>
+          <unittitle>Series III: Correspondence,</unittitle>
+          <unitid>MS C 271.III</unitid>
+          <unitdate>1894-1992</unitdate>
+        </did>
+      </c>
+      <c id="aspace_ceb3f1a2514bc94713bac9b118afa552" level="series">
+        <did>
+          <unittitle>Series IV: Publications,</unittitle>
+          <unitid>MS C 271.IV</unitid>
+          <unitdate>1896-1972</unitdate>
+        </did>
+      </c>
+      <c id="aspace_5d78c1be23c9d911552da0d63ec7cc98" level="series">
+        <did>
+          <unittitle>Series V: Speeches,</unittitle>
+          <unitid>MS C 271.V</unitid>
+          <unitdate>1905-1973</unitdate>
+        </did>
+      </c>
+      <c id="aspace_72f14d6c32e142baa3eeafdb6e4d69be" level="series">
+        <did>
+          <unittitle>Series VI: Photographs,</unittitle>
+          <unitid>MS C 271.VI</unitid>
+          <unitdate>1916-1967</unitdate>
+        </did>
+      </c>
+      <c id="aspace_dba76dab6f750f31aa5fc73e5402e71d" level="series">
+        <did>
+          <unittitle>Series VII: Subject Files,</unittitle>
+          <unitid>MS C 271.VII</unitid>
+          <unitdate>1924-1955</unitdate>
+        </did>
+        <accessrestrict><p>Restricted until 2018.</p></accessrestrict>
+      </c>
+    </dsc>
+  </archdesc>
+</ead>

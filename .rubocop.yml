@@ -24,6 +24,13 @@ Metrics/ModuleLength:
 Metrics/ClassLength:
   Max: 120
 
+Metrics/BlockLength:
+  Exclude:
+    - 'tasks/**/*'
+
+Performance/RegexpMatch:
+  Enabled: false
+
 Style/Documentation:
   Exclude:
     - 'spec/**/*'

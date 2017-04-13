@@ -536,6 +536,18 @@
         alternately, change the type="ignored" to some other type e.g. "text" if you want 
         unknown fields indexed and/or stored by default --> 
    <!--dynamicField name="*" type="ignored" multiValued="true" /-->
+
+   <dynamicField name="*_teim"  type="text_en"   stored="false" indexed="true"  multiValued="true"  />
+   <dynamicField name="*_si"    type="string"    stored="false" indexed="true"  multiValued="false" />
+   <dynamicField name="*_sim"   type="string"    stored="false" indexed="true"  multiValued="true"  />
+   <dynamicField name="*_ssm"   type="string"    stored="true"  indexed="false" multiValued="true"  />
+   <dynamicField name="*_ssi"   type="string"    stored="true"  indexed="true"  multiValued="false" />
+   <dynamicField name="*_ssim"  type="string"    stored="true"  indexed="true"  multiValued="true"  />
+   <dynamicField name="*_dtsi"  type="date"      stored="true"  indexed="true"  multiValued="false" />
+   <dynamicField name="*_dtsim" type="date"      stored="true"  indexed="true"  multiValued="true"  />
+   <dynamicField name="*_bsi"   type="boolean"   stored="true"  indexed="true"  multiValued="false" />
+   <dynamicField name="*_isim"  type="int"       stored="true"  indexed="true"  multiValued="true"  />
+   <dynamicField name="*_ii"    type="int"       stored="false" indexed="true"  multiValued="false" />
    
  </fields>
 
