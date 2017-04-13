@@ -8,8 +8,8 @@ require 'arclight/version'
 Gem::Specification.new do |spec|
   spec.name          = 'arclight'
   spec.version       = Arclight::VERSION
-  spec.authors       = ['Jack Reed']
-  spec.email         = ['phillipjreed@gmail.com']
+  spec.authors       = ['Darren Hardy', 'Jessie Keck', 'Gordon Leacock', 'Jack Reed']
+  spec.email         = ['drh@stanford.edu', 'jessie.keck@gmail.com', 'gordonl@umich.edu', 'phillipjreed@gmail.com']
 
   spec.summary       = ''
   spec.description   = ''
