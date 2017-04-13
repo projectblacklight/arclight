@@ -3,10 +3,6 @@
 require 'spec_helper'
 
 RSpec.describe 'Arclight', type: :feature do
-  it 'navigates to homepage' do
-    visit '/'
-    expect(page).to have_css 'h2', text: 'Welcome!'
-  end
   it 'an index view is present with search results' do
     visit search_catalog_path q: '', search_field: 'all_fields'
     expect(page).to have_css '.document', count: 10

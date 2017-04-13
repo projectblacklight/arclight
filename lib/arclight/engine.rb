@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require 'rails/engine'
+require 'blacklight'
 require 'solr_ead'
 require 'arclight/custom_document'
 require 'arclight/custom_component'
