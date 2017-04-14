@@ -98,6 +98,10 @@ class CatalogController < ApplicationController
     config.add_index_field 'unitdate_ssm', label: 'Date'
     config.add_index_field 'creator_ssm', label: 'Creator'
     config.add_index_field 'language_ssm', label: 'Language'
+    config.add_index_field 'scopecontent_ssm', label: 'Scope Content'
+    config.add_index_field 'extent_ssm', label: 'Physical Description'
+    config.add_index_field 'accessrestrict_ssm', label: 'Conditions Governing Access'
+    config.add_index_field 'collection_ssm', label: 'Collection Title'
 
     # solr fields to be displayed in the show (single result) view
     #   The ordering of the field names is the order of the display
@@ -107,6 +111,11 @@ class CatalogController < ApplicationController
     config.add_show_field 'unitdate_ssm', label: 'Date'
     config.add_show_field 'creator_ssm', label: 'Creator'
     config.add_show_field 'language_ssm', label: 'Language'
+    config.add_show_field 'scopecontent_ssm', label: 'Scope Content'
+    config.add_show_field 'extent_ssm', label: 'Physical Description'
+    config.add_show_field 'accessrestrict_ssm', label: 'Conditions Governing Access'
+    config.add_show_field 'collection_ssm', label: 'Collection Title'
+
     # "fielded" search configuration. Used by pulldown among other places.
     # For supported keys in hash, see rdoc for Blacklight::SearchFields
     #

@@ -14,7 +14,7 @@ module Arclight
       t.ref_(path: '/c/@id', index_as: %i[displayable])
       t.level(path: 'c/@level', index_as: %i[displayable facetable])
       t.extent(path: 'c/did/physdesc/extent', index_as: %i[displayable])
-      t.unitdate(path: 'c/did/unitdate[not(@type)]', index_as: %i[displayable])
+      t.unitdate(path: 'c/did/unitdate', index_as: %i[displayable])
       t.accessrestrict(path: 'c/accessrestrict/p', index_as: %i[displayable])
       t.scopecontent(path: 'c/scopecontent/p', index_as: %i[displayable])
     end

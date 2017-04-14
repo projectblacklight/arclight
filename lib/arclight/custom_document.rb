@@ -13,7 +13,7 @@ module Arclight
 
       # overrides of solr_ead to get different `index_as` properties
       t.extent(path: 'archdesc/did/physdesc/extent', index_as: %i[displayable])
-      t.unitdate(path: 'archdesc/did/unitdate[not(@type)]', index_as: %i[displayable])
+      t.unitdate(path: 'archdesc/did/unitdate', index_as: %i[displayable])
       t.accessrestrict(path: 'archdesc/accessrestrict/p', index_as: %i[displayable])
       t.scopecontent(path: 'archdesc/scopecontent/p', index_as: %i[displayable])
     end
