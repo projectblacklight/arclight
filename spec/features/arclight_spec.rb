@@ -55,8 +55,11 @@ RSpec.describe 'Arclight', type: :feature do
 
       within('#facets') do
         expect(page).to have_css('h3 a', text: 'Level')
+        expect(page).to have_css('li .facet-label', text: 'series', visible: false)
         expect(page).to have_css('h3 a', text: 'Creator')
+        expect(page).to have_css('li .facet-label', text: 'Alpha Omega Alpha', visible: false)
         expect(page).to have_css('h3 a', text: 'Names')
+        expect(page).to have_css('li .facet-label', text: '1118 Badger Vine Special Collections', visible: false)
       end
     end
   end
