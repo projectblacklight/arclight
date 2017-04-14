@@ -49,6 +49,14 @@ RSpec.describe 'Arclight', type: :feature do
     end
 
     it 'renders metadata to meet minumum DACS requirements for a component'
+
+    it 'renders facets' do
+      visit search_catalog_path q: '', search_field: 'all_fields'
+
+      within('#facets') do
+        expect(page).to have_css('h3 a', text: 'Level')
+      end
+    end
   end
 
   describe 'show page' do
