@@ -10,7 +10,7 @@ EngineCart.fingerprint_proc = EngineCart.rails_fingerprint_proc
 desc 'Run test suite'
 task ci: ['arclight:generate'] do
   SolrWrapper.wrap do |solr|
-    solr.with_collection(name: 'blacklight-core', dir: File.join(File.expand_path('..', File.dirname(__FILE__)), 'solr', 'conf')) do
+    solr.with_collection do
       Rake::Task['arclight:seed'].invoke
       within_test_app do
         ## Do stuff inside arclight app here
@@ -35,8 +35,8 @@ namespace :arclight do
       Rake::Task['engine_cart:generate'].invoke
     end
 
-    SolrWrapper.wrap(port: '8983') do |solr|
-      solr.with_collection(name: 'blacklight-core', dir: File.join(File.expand_path('..', File.dirname(__FILE__)), 'solr', 'conf')) do
+    SolrWrapper.wrap do |solr|
+      solr.with_collection do
         Rake::Task['arclight:seed'].invoke
         within_test_app do
           system "bundle exec rails s #{args[:rails_server_args]}"
