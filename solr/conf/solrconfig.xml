@@ -208,6 +208,7 @@
        <str name="facet.mincount">1</str>
        <str name="facet.field">level_sim</str>
        <str name="facet.field">creator_sim</str>
+       <str name="facet.field">names_sim</str>
 
        <str name="spellcheck">true</str>
        <str name="spellcheck.dictionary">default</str>

@@ -71,6 +71,7 @@ class CatalogController < ApplicationController
 
     config.add_facet_field 'creator_sim', label: 'Creator'
     config.add_facet_field 'level_sim', label: 'Level'
+    config.add_facet_field 'names_sim', label: 'Names'
 
     # Have BL send all facet field names to Solr, which has been the default
     # previously. Simply remove these lines if you'd rather use Solr request

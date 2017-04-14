@@ -56,6 +56,7 @@ RSpec.describe 'Arclight', type: :feature do
       within('#facets') do
         expect(page).to have_css('h3 a', text: 'Level')
         expect(page).to have_css('h3 a', text: 'Creator')
+        expect(page).to have_css('h3 a', text: 'Names')
       end
     end
   end

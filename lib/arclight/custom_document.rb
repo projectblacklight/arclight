@@ -17,5 +17,17 @@ module Arclight
       t.accessrestrict(path: 'archdesc/accessrestrict/p', index_as: %i[displayable])
       t.scopecontent(path: 'archdesc/scopecontent/p', index_as: %i[displayable])
     end
+
+    def to_solr(solr_doc = {})
+      super
+      Solrizer.insert_field(solr_doc, 'names', names, :facetable)
+      solr_doc
+    end
+
+    private
+
+    def names
+      [corpname, famname, name, persname].flatten.compact.uniq
+    end
   end
 end
