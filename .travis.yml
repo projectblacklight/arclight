@@ -1,5 +1,7 @@
 sudo: false
 language: ruby
+notifications:
+  email: false
 rvm:
   - 2.4.1
 jdk:
