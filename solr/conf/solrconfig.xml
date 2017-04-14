@@ -189,27 +189,16 @@
 
        <!-- NOT using marc_display because it is large and will slow things down for search results -->
        <str name="fl">
-         id, 
+         id,
          score,
-         author_display,
-         author_vern_display, 
-         format, 
-         isbn_t, 
-         language_facet, 
-         lc_callnum_display,
-         material_type_display, 
-         published_display,
-         published_vern_display,
-         pub_date,
-         title_display,
-         title_vern_display,
-         subject_topic_facet,
-         subject_geo_facet,
-         subject_era_facet,
-         subtitle_display,
-         subtitle_vern_display,
-         url_fulltext_display,
-         url_suppl_display,
+         creator_ssm,
+         language_ssm,
+         level_sim,
+         physdesc_ssm,
+         repository_ssm,
+         title_ssm,
+         unitdate_ssm,
+         unitid_ssm,
        </str>
 
        <str name="facet">true</str>
