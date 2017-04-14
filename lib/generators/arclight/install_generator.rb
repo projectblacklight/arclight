@@ -8,8 +8,9 @@ module Arclight
   class Install < Rails::Generators::Base
     source_root File.expand_path('../templates', __FILE__)
 
-    def todo
-      # add installation components here
+    def create_blacklight_catalog
+      remove_file 'app/controllers/catalog_controller.rb'
+      copy_file 'catalog_controller.rb', 'app/controllers/catalog_controller.rb'
     end
   end
 end

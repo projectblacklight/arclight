@@ -5,6 +5,7 @@ AllCops:
     - '.internal_test_app/**/*'
     - 'bin/**/*'
     - 'db/**/*'
+    - 'lib/generators/arclight/templates/**/*'
     - 'vendor/**/*'
   TargetRubyVersion: 2.4
   DisplayCopNames: true
@@ -26,9 +27,16 @@ Metrics/ClassLength:
 
 Metrics/BlockLength:
   Exclude:
+    - 'spec/**/*'
     - 'tasks/**/*'
 
 Performance/RegexpMatch:
+  Enabled: false
+
+RSpec/ExampleLength:
+  Enabled: false
+
+RSpec/MultipleExpectations:
   Enabled: false
 
 Style/Documentation:
