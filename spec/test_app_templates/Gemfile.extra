@@ -1,1 +1,0 @@
-gem 'solr_ead', github: 'awead/solr_ead', branch: 'master'
