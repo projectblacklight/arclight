@@ -2,6 +2,14 @@
 
 ENV['RAILS_ENV'] ||= 'test'
 
+require 'simplecov'
+require 'coveralls'
+SimpleCov.formatter = Coveralls::SimpleCov::Formatter
+SimpleCov.start do
+  add_filter '/.internal_test_app/'
+  add_filter '/spec/'
+end
+
 require 'engine_cart'
 EngineCart.load_application!
 

@@ -9,14 +9,6 @@ EngineCart.fingerprint_proc = EngineCart.rails_fingerprint_proc
 
 desc 'Run test suite'
 task ci: ['arclight:generate'] do
-  require 'simplecov'
-  require 'coveralls'
-  SimpleCov.formatter = Coveralls::SimpleCov::Formatter
-  SimpleCov.start do
-    add_filter '/.internal_test_app/'
-    add_filter '/spec/'
-  end
-
   SolrWrapper.wrap do |solr|
     solr.with_collection do
       Rake::Task['arclight:seed'].invoke
