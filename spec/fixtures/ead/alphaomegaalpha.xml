@@ -379,6 +379,21 @@
           <did>
             <unittitle>Reports</unittitle>
           </did>
+          <c id="aspace_f934f1add34289f28bd0feb478e68275" level="subseries">
+            <did>
+              <unittitle>Expansion Plan</unittitle>
+            </did>
+            <c id="aspace_6ea193f778e553ca9ea0d00a3e5a1891" level="file">
+              <did>
+                <unittitle>Initial Phase</unittitle>
+              </did>
+            </c>
+            <c id="aspace_791e5985d38f40cef215124fd2e240ad" level="file">
+              <did>
+                <unittitle>Phase II: Expansion</unittitle>
+              </did>
+            </c>
+          </c>
         </c>
         <c id="aspace_81c806b82a14c3c79d395bbd383b886f" level="subseries">
           <did>
