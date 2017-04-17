@@ -7,5 +7,8 @@ require 'arclight/custom_component'
 
 module Arclight
   class Engine < ::Rails::Engine
+    initializer 'arclight.helpers' do
+      ActionView::Base.send :include, ArclightHelper
+    end
   end
 end

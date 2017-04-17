@@ -136,5 +136,9 @@ class CatalogController < ApplicationController
     # Configuration for autocomplete suggestor
     config.autocomplete_enabled = true
     config.autocomplete_path = 'suggest'
+
+    ##
+    # Configuration for partials
+    config.index.partials.insert(0, :index_breadcrumb)
   end
 end
