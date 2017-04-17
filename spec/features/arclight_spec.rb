@@ -57,6 +57,8 @@ RSpec.describe 'Arclight', type: :feature do
         expect(page).to have_css('h3 a', text: 'Creator')
         expect(page).to have_css('li .facet-label', text: 'Alpha Omega Alpha', visible: false)
         expect(page).to have_css('h3 a', text: 'Names')
+        expect(page).to have_css('li .facet-label', text: 'Root, William Webster, 1867-1932', visible: false)
+        expect(page).to have_css('h3 a', text: 'Repository')
         expect(page).to have_css('li .facet-label', text: '1118 Badger Vine Special Collections', visible: false)
       end
     end

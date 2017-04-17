@@ -27,7 +27,7 @@ module Arclight
     private
 
     def names
-      [corpname, famname, name, persname].flatten.compact.uniq
+      [corpname, famname, name, persname].flatten.compact.uniq - repository
     end
   end
 end
