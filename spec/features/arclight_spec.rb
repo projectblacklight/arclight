@@ -42,6 +42,9 @@ RSpec.describe 'Arclight', type: :feature do
 
       expect(page).to have_css('dt', text: 'Creator')
       expect(page).to have_css('dd', text: 'Alpha Omega Alpha')
+
+      expect(page).to have_css('dt', text: 'Place')
+      expect(page).to have_css('dd', text: 'Mindanao Island (Philippines)')
     end
 
     it 'renders metadata to meet minumum DACS requirements for a component'
@@ -73,6 +76,11 @@ RSpec.describe 'Arclight', type: :feature do
         within('.blacklight-repository_sim') do
           expect(page).to have_css('h3 a', text: 'Repository')
           expect(page).to have_css('li .facet-label', text: '1118 Badger Vine Special Collections', visible: false)
+        end
+
+        within('.blacklight-geogname_sim') do
+          expect(page).to have_css('h3 a', text: 'Place')
+          expect(page).to have_css('li .facet-label', text: 'Mindanao Island (Philippines)', visible: false)
         end
       end
     end
@@ -110,6 +118,9 @@ RSpec.describe 'Arclight', type: :feature do
 
       expect(page).to have_css('dt', text: 'Creator')
       expect(page).to have_css('dd', text: 'Alpha Omega Alpha')
+
+      expect(page).to have_css('dt', text: 'Place')
+      expect(page).to have_css('dd', text: 'Mindanao Island (Philippines)')
     end
 
     it 'renders metadata to meet minumum DACS requirements for a component'
