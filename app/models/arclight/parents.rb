@@ -21,9 +21,9 @@ module Arclight
     ##
     # @param [SolrDocument] document
     def self.from_solr_document(document)
-      ids = document.fetch('parent_ssm', [])
-      labels = document.fetch('parent_unittitles_ssm', [])
-      eadid = document.fetch('ead_ssi', '')
+      ids = document.parent_ids
+      labels = document.parent_labels
+      eadid = document.eadid
       new(ids: ids, labels: labels, eadid: eadid)
     end
   end
