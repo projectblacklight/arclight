@@ -8,7 +8,7 @@ module Arclight
 
     extend_terminology do |t|
       t.unitid(path: 'archdesc/did/unitid', index_as: %i[displayable])
-      t.repository(path: 'archdesc/did/repository/*/text()', index_as: %i[displayable facetable])
+      t.repository(path: 'archdesc/did/repository/corpname/text() | archdesc/did/repository/name/text()', index_as: %i[displayable facetable])
       t.creator(path: "archdesc/did/origination[@label='creator']/*/text()", index_as: %i[displayable facetable])
 
       # overrides of solr_ead to get different `index_as` properties
