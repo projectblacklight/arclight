@@ -57,7 +57,9 @@ RSpec.describe 'Arclight', type: :feature do
 
         within('.blacklight-level_sim') do
           expect(page).to have_css('h3 a', text: 'Level')
-          expect(page).to have_css('li .facet-label', text: 'series', visible: false)
+          expect(page).to have_css('li .facet-label', text: 'Series', visible: false) # level != "otherlevel"
+          expect(page).to have_css('li .facet-label', text: 'Mixed File', visible: false) # "otherlevel" with alt value
+          expect(page).to have_css('li .facet-label', text: 'Other', visible: false) # "otherlevel" but missing alt val
         end
 
         within('.blacklight-creator_sim') do
