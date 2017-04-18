@@ -1,25 +1,21 @@
-<div id="header-navbar" class="navbar navbar-inverse navbar-static-top" role="navigation">
+<nav class="navbar navbar-toggleable-md navbar-inverse bg-inverse" role="navigation">
   <div class="<%= container_classes %>">
-    <div class="navbar-header">
-    <button type="button" class="navbar-toggle btn collapsed" data-toggle="collapse" data-target="#user-util-collapse">
-      <span class="sr-only">Toggle navigation</span>
-      <span class="icon-bar"></span>
-      <span class="icon-bar"></span>
-      <span class="icon-bar"></span>
+    <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#user-util-collapse" aria-controls="user-util-collapse" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
     </button>
-    <%= link_to application_name, root_path, class: "navbar-brand" %>
-    </div>
 
-    <div class="collapse navbar-collapse" id="user-util-collapse">
-      <%= render :partial=>'/user_util_links' %>
+    <%= link_to application_name, root_path, class: "navbar-brand" %>
+
+    <div class="collapse navbar-collapse justify-content-md-end" id="user-util-collapse">
+      <%= render 'shared/user_util_links' %>
     </div>
   </div>
-</div>
+</nav>
 
 <% if has_search_parameters? %>
-  <div id="search-navbar" class="navbar navbar-default navbar-static-top" role="navigation">
+  <div class="navbar-search navbar navbar-light bg-faded" role="navigation">
     <div class="<%= container_classes %>">
-      <%= render_search_bar %>
+      <%= render_search_bar  %>
     </div>
   </div>
 <% end %>

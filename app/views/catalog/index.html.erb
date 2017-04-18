@@ -1,11 +1,8 @@
 <% unless has_search_parameters? %>
   <%= render 'home' %>
 <% else %>
-  <div id="sidebar" class="<%= sidebar_classes %>">
+  <% content_for(:sidebar) do %>
     <%= render 'search_sidebar' %>
-  </div>
-
-  <div id="content" class="<%= main_content_classes %>">
-      <%= render 'search_results' %>
-  </div>
+  <% end %>
+  <%= render 'search_results' %>
 <% end %>
