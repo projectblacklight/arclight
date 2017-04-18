@@ -10,4 +10,10 @@ module ArclightHelper
       link_to parent.label, solr_document_path(parent.global_id)
     end, t('arclight.breadcrumb_separator'))
   end
+
+  ##
+  # Classes used for customized show page in arclight
+  def custom_show_content_classes
+    'col-md-12 show-document'
+  end
 end
