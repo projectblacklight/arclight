@@ -1,0 +1,9 @@
+<div class='al-sidebar-navigation-overview'>
+  <ul class='nav flex-column'>
+    <% blacklight_config.show.metadata_partials.each do |item| %>
+      <li class='nav-item'>
+        <%= link_to t("arclight.views.show.sections.#{item}"), "##{t("arclight.views.show.sections.#{item}").parameterize}", class: 'nav-link' %>
+      </li>
+    <% end %>
+  </ul>
+</div>

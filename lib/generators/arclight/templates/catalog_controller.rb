@@ -96,18 +96,6 @@ class CatalogController < ApplicationController
 
     # solr fields to be displayed in the show (single result) view
     #   The ordering of the field names is the order of the display
-    # In Arclight these are shown in the "Summary" portion of the page for
-    # Collections
-    config.add_show_field 'title_display', label: 'Title'
-    config.add_show_field 'unitid_ssm', label: 'Unit ID'
-    config.add_show_field 'repository_ssm', label: 'Repository'
-    config.add_show_field 'unitdate_ssm', label: 'Date'
-    config.add_show_field 'creator_ssm', label: 'Creator'
-    config.add_show_field 'language_ssm', label: 'Language'
-    config.add_show_field 'scopecontent_ssm', label: 'Scope Content'
-    config.add_show_field 'extent_ssm', label: 'Physical Description'
-    config.add_show_field 'collection_ssm', label: 'Collection Title'
-    config.add_show_field 'geogname_ssm', label: 'Place'
 
     # "fielded" search configuration. Used by pulldown among other places.
     # For supported keys in hash, see rdoc for Blacklight::SearchFields
@@ -148,10 +136,19 @@ class CatalogController < ApplicationController
     ##
     # Configuration for partials
     config.index.partials.insert(0, :index_breadcrumb)
+    
+    config.show.metadata_partials = [:summary_field, :access_field]
+    
+    # Collection Show Page - Summary Section
+    config.add_summary_field 'creator_ssm', label: 'Creator'
+    config.add_summary_field 'abstract_ssm', label: 'Abstract'
+    config.add_summary_field 'extent_ssm', label: 'Extent'
+    config.add_summary_field 'language_ssm', label: 'Language'
+    config.add_summary_field 'prefercite_ssm', label: 'Preferred citation'
 
     # Collection Show Page - Access Section
-    config.add_collection_access_field 'accessrestrict_ssm', label: 'Conditions Governing Access'
-    config.add_collection_access_field 'userestrict_ssm', label: 'Terms Of Use'
+    config.add_access_field 'accessrestrict_ssm', label: 'Conditions Governing Access'
+    config.add_access_field 'userestrict_ssm', label: 'Terms Of Use'
 
   end
 end
