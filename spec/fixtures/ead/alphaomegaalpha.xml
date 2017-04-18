@@ -140,6 +140,9 @@
     </scopecontent>
     <controlaccess>
       <subject source="mesh">Societies</subject>
+      <function source="local">Fraternizing</function>
+      <genreform source="aat">Photographs</genreform>
+      <occupation source="mesh">Medicine</occupation>
       <corpname role="fmo" source="ingest">Alpha Omega Alpha</corpname>
       <persname source="mesh">Root, William Webster, 1867-1932</persname>
       <persname source="mesh">Bierring, Walter L. (Walter Lawrence), 1868-1961</persname>
@@ -384,6 +387,9 @@
           <did>
             <unittitle>Meetings</unittitle>
           </did>
+          <controlaccess>
+            <genreform source="aat">Minutes</genreform>
+          </controlaccess>
         </c>
         <c id="aspace_01daa89087641f7fc9dbd7a10d3f2da9" level="subseries">
           <did>
