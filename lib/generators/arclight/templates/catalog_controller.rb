@@ -76,6 +76,7 @@ class CatalogController < ApplicationController
     config.add_facet_field 'names_sim', label: 'Names'
     config.add_facet_field 'repository_sim', label: 'Repository'
     config.add_facet_field 'geogname_sim', label: 'Place'
+    config.add_facet_field 'access_subjects_sim', label: 'Subject'
 
     # Have BL send all facet field names to Solr, which has been the default
     # previously. Simply remove these lines if you'd rather use Solr request

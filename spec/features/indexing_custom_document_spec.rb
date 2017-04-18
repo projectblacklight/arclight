@@ -49,6 +49,10 @@ RSpec.describe 'Indexing Custom Document', type: :feature do
       expect(doc['names_sim']).to include 'Root, William Webster, 1867-1932'
     end
 
+    it '#access_subjects' do
+      expect(doc['access_subjects_sim']).to include 'Fraternizing'
+    end
+
     describe '#date_range' do
       it 'includes an array of all the years in a particular unit-date range described in YYYY/YYYY format' do
         date_range_field = doc['date_range_sim']

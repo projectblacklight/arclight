@@ -91,6 +91,14 @@ RSpec.describe 'Arclight', type: :feature do
           expect(page).to have_css('h3 a', text: 'Place')
           expect(page).to have_css('li .facet-label', text: 'Mindanao Island (Philippines)', visible: false)
         end
+
+        within('.blacklight-access_subjects_sim') do
+          expect(page).to have_css('h3 a', text: 'Subject')
+          expect(page).to have_css('li .facet-label', text: 'Societies', visible: false)
+          expect(page).to have_css('li .facet-label', text: 'Fraternizing', visible: false)
+          expect(page).to have_css('li .facet-label', text: 'Photographs', visible: false)
+          expect(page).to have_css('li .facet-label', text: 'Medicine', visible: false)
+        end
       end
     end
   end
