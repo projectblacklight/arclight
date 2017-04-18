@@ -202,6 +202,9 @@
          title_ssm,
          unitdate_ssm,
          unitid_ssm,
+         parent_ssm,
+         parent_unittitles_ssm,
+         ead_ssi
        </str>
 
        <str name="facet">true</str>

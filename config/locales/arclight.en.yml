@@ -3,5 +3,4 @@ en:
     views:
       home:
         heading: 'Archival Collections at Institution'
-
-
+    breadcrumb_separator: ' » '

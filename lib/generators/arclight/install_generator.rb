@@ -12,5 +12,11 @@ module Arclight
       remove_file 'app/controllers/catalog_controller.rb'
       copy_file 'catalog_controller.rb', 'app/controllers/catalog_controller.rb'
     end
+
+    def include_arclight_solrdocument
+      inject_into_file 'app/models/solr_document.rb', after: 'include Blacklight::Solr::Document' do
+        "\n include Arclight::SolrDocument"
+      end
+    end
   end
 end
