@@ -50,6 +50,8 @@ RSpec.describe 'Arclight', type: :feature do
       visit search_catalog_path q: '', search_field: 'all_fields'
 
       within('#facets') do
+        expect(page).to have_css('h3 a', text: 'Collection')
+        expect(page).to have_css('li .facet-label', text: 'Alpha Omega Alpha Archives', visible: false)
         expect(page).to have_css('h3 a', text: 'Level')
         expect(page).to have_css('li .facet-label', text: 'series', visible: false)
         expect(page).to have_css('h3 a', text: 'Creator')
