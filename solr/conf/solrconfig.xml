@@ -195,6 +195,7 @@
          collection_ssm,
          creator_ssm,
          extent_ssm,
+         geogname_ssm,
          language_ssm,
          level_ssm,
          repository_ssm,
@@ -212,6 +213,7 @@
        <str name="facet.field">level_sim</str>
        <str name="facet.field">creator_sim</str>
        <str name="facet.field">names_sim</str>
+       <str name="facet.field">geogname_sim</str>
 
        <str name="spellcheck">true</str>
        <str name="spellcheck.dictionary">default</str>

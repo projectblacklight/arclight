@@ -74,6 +74,7 @@ class CatalogController < ApplicationController
     config.add_facet_field 'level_sim', label: 'Level'
     config.add_facet_field 'names_sim', label: 'Names'
     config.add_facet_field 'repository_sim', label: 'Repository'
+    config.add_facet_field 'geogname_sim', label: 'Place'
 
     # Have BL send all facet field names to Solr, which has been the default
     # previously. Simply remove these lines if you'd rather use Solr request
@@ -91,6 +92,7 @@ class CatalogController < ApplicationController
     config.add_index_field 'extent_ssm', label: 'Physical Description'
     config.add_index_field 'accessrestrict_ssm', label: 'Conditions Governing Access'
     config.add_index_field 'collection_ssm', label: 'Collection Title'
+    config.add_index_field 'geogname_ssm', label: 'Place'
 
     # solr fields to be displayed in the show (single result) view
     #   The ordering of the field names is the order of the display
@@ -104,6 +106,7 @@ class CatalogController < ApplicationController
     config.add_show_field 'extent_ssm', label: 'Physical Description'
     config.add_show_field 'accessrestrict_ssm', label: 'Conditions Governing Access'
     config.add_show_field 'collection_ssm', label: 'Collection Title'
+    config.add_show_field 'geogname_ssm', label: 'Place'
 
     # "fielded" search configuration. Used by pulldown among other places.
     # For supported keys in hash, see rdoc for Blacklight::SearchFields
