@@ -17,6 +17,8 @@ Metrics/LineLength:
   Max: 120
   Exclude:
     - 'Gemfile'
+    - 'lib/arclight/custom_document.rb'  # XPaths get long
+    - 'lib/arclight/custom_component.rb' # XPaths get long
 
 Metrics/ModuleLength:
   Max: 120
