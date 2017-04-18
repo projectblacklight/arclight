@@ -96,6 +96,8 @@ class CatalogController < ApplicationController
 
     # solr fields to be displayed in the show (single result) view
     #   The ordering of the field names is the order of the display
+    # In Arclight these are shown in the "Summary" portion of the page for
+    # Collections
     config.add_show_field 'title_display', label: 'Title'
     config.add_show_field 'unitid_ssm', label: 'Unit ID'
     config.add_show_field 'repository_ssm', label: 'Repository'
@@ -104,7 +106,6 @@ class CatalogController < ApplicationController
     config.add_show_field 'language_ssm', label: 'Language'
     config.add_show_field 'scopecontent_ssm', label: 'Scope Content'
     config.add_show_field 'extent_ssm', label: 'Physical Description'
-    config.add_show_field 'accessrestrict_ssm', label: 'Conditions Governing Access'
     config.add_show_field 'collection_ssm', label: 'Collection Title'
     config.add_show_field 'geogname_ssm', label: 'Place'
 
@@ -142,7 +143,15 @@ class CatalogController < ApplicationController
     config.autocomplete_path = 'suggest'
 
     ##
+    # Arclight Configurations
+
+    ##
     # Configuration for partials
     config.index.partials.insert(0, :index_breadcrumb)
+
+    # Collection Show Page - Access Section
+    config.add_collection_access_field 'accessrestrict_ssm', label: 'Conditions Governing Access'
+    config.add_collection_access_field 'userestrict_ssm', label: 'Terms Of Use'
+
   end
 end
