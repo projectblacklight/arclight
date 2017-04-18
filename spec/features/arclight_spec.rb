@@ -98,4 +98,10 @@ RSpec.describe 'Arclight', type: :feature do
 
     it 'renders metadata to meet minumum DACS requirements for a component'
   end
+  describe 'Search history' do
+    it 'successfully navigates' do
+      visit blacklight.search_history_path
+      expect(page).to have_css 'h3', 'Your recent searches'
+    end
+  end
 end

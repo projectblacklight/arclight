@@ -12,7 +12,8 @@
   </div>
 </nav>
 
-<% if has_search_parameters? %>
+
+<% if controller_name == 'catalog' && has_search_parameters? %>
   <div class="navbar-search navbar navbar-light bg-faded" role="navigation">
     <div class="<%= container_classes %>">
       <%= render_search_bar  %>
