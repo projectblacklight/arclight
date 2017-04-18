@@ -69,6 +69,7 @@ class CatalogController < ApplicationController
     #  (useful when user clicks "more" on a large facet and wants to navigate alphabetically across a large set of results)
     # :index_range can be an array or range of prefixes that will be used to create the navigation (note: It is case sensitive when searching values)
 
+    config.add_facet_field 'collection_sim', label: 'Collection'
     config.add_facet_field 'creator_sim', label: 'Creator'
     config.add_facet_field 'level_sim', label: 'Level'
     config.add_facet_field 'names_sim', label: 'Names'
