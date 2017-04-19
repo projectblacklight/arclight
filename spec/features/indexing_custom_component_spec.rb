@@ -23,7 +23,7 @@ RSpec.describe 'Indexing Custom Component', type: :feature do
 
       doc = components[2].to_solr
       expect(doc['level_ssm'].first).to eq 'otherlevel'
-      expect(doc['level_sim'].first).to eq 'Mixed File'
+      expect(doc['level_sim'].first).to eq 'Binder'
 
       doc = components[3].to_solr
       expect(doc['level_ssm'].first).to eq 'otherlevel'
