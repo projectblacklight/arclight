@@ -18,5 +18,9 @@ module Arclight
         "\n include Arclight::SolrDocument"
       end
     end
+
+    def install_blacklight_range_limit
+      generate 'blacklight_range_limit:install'
+    end
   end
 end

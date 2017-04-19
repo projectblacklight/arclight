@@ -71,6 +71,7 @@ class CatalogController < ApplicationController
 
     config.add_facet_field 'collection_sim', label: 'Collection'
     config.add_facet_field 'creator_sim', label: 'Creator'
+    config.add_facet_field 'date_range_sim', label: 'Date range', range: true
     config.add_facet_field 'level_sim', label: 'Level'
     config.add_facet_field 'names_sim', label: 'Names'
     config.add_facet_field 'repository_sim', label: 'Repository'
