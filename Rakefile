@@ -8,7 +8,8 @@ RSpec::Core::RakeTask.new(:spec)
 require 'rubocop/rake_task'
 RuboCop::RakeTask.new(:rubocop)
 
-load 'tasks/arclight.rake'
+Dir.glob('./tasks/*.rake').each { |f| load f }
+Dir.glob('./lib/tasks/*.rake').each { |f| load f }
 
 require 'engine_cart/rake_task'
 require 'solr_ead'
