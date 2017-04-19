@@ -7,3 +7,9 @@ rvm:
 jdk:
   - oraclejdk8
 cache: bundler
+before_script:
+  - xmllint --noout --schema spec/fixtures/xsd/ead.xsd spec/fixtures/ead/*.xml
+addons:
+  apt:
+    sources:
+      - libxml2-utils
