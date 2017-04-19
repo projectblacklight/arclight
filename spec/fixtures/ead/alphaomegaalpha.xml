@@ -153,7 +153,7 @@
         <did>
           <unittitle>Series I: Administrative Records,</unittitle>
           <unitid>MS C 271.I</unitid>
-          <unitdate normal="1902/1976">1902-1976</unitdate>
+          <unitdate normal="1902/1976" type="inclusive">1902-1976</unitdate>
         </did>
         <c id="aspace_843e8f9f22bac69872d0802d6fffbb04" level="file">
           <did>
@@ -184,7 +184,7 @@
         <c id="aspace_e6db65d47e891d61d69c2798c68a8f02" level="otherlevel" otherlevel="Binder">
           <did>
             <unittitle>Statements of purpose,</unittitle>
-            <unitdate normal="1902" certainty="circa">c.1902</unitdate>
+            <unitdate normal="1902/1902">c.1902</unitdate>
             <container id="aspace_cb0ce54fec31ceb66bcb46ff50143d54" label="Mixed Materials"
               type="box">1</container>
             <container id="aspace_4b9fef8e13c68338317e50cc7d5b4c14"
@@ -194,7 +194,8 @@
         <c id="aspace_4e7f6dfada4b6e243f6f29f92d765073" level="otherlevel">
           <did>
             <unittitle>Constitution - notes on drafting of constitution,</unittitle>
-            <unitdate normal="1902/1903" certainty="circa">c.1902-1903</unitdate>
+            <unitdate certainty="approximate" normal="1902/1903" type="inclusive"
+              >c.1902-1903</unitdate>
             <container id="aspace_81e350623cc9e23c3f8dad75863c298a" label="Mixed Materials"
               type="box">1</container>
             <container id="aspace_9157e54a2d498fbe1ba22e664bfaf859"
@@ -204,7 +205,7 @@
         <c id="aspace_dc2aaf83625280ae2e193beb3f4aea78" level="otherlevel">
           <did>
             <unittitle>Constitution and by-laws - drafts,</unittitle>
-            <unitdate normal="1902/1904" certainty="circa">1902-1904</unitdate>
+            <unitdate normal="1902/1904" type="inclusive">1902-1904</unitdate>
             <container id="aspace_19171bacef2f302c352195eaafca6b75" label="Mixed Materials"
               type="box">1</container>
             <container id="aspace_4cceb568b39913f2342e43dd3d54b772"
@@ -214,7 +215,7 @@
         <c id="aspace_a8b5c3a57013462581d0e807241fcf93" level="otherlevel">
           <did>
             <unittitle>Constitution and by-laws - drafts,</unittitle>
-            <unitdate normal="1904">1904, n.d.</unitdate>
+            <unitdate normal="1904/1904">1904, n.d.</unitdate>
             <container id="aspace_3162cd6967365a525caa18ec94ba7fdc" label="Mixed Materials"
               type="box">35</container>
             <container id="aspace_eb1fe308c3568863585c8b763f287eed"
@@ -225,7 +226,7 @@
           <did>
             <unittitle>The constitution of the Alpha Omega Alpha Honor Fraternity together with the
               Oath of Hippocrates,</unittitle>
-            <unitdate normal="1904">1904</unitdate>
+            <unitdate normal="1904/1904">1904</unitdate>
             <container id="aspace_0b80509251d5cbcf6e5b4a10cdbae607" label="Mixed Materials"
               type="box">1</container>
             <container id="aspace_561ca5e6c10100629c3c1889fccbbade"
@@ -235,7 +236,7 @@
         <c id="aspace_69f38ca641523c3c2426d11b2ac839af" level="otherlevel">
           <did>
             <unittitle>History and constitution,</unittitle>
-            <unitdate normal="1913/1960">1913-1960, n.d.</unitdate>
+            <unitdate normal="1913/1960" type="inclusive">1913-1960, n.d.</unitdate>
             <container id="aspace_01235347001eb8ca7d27603a7f4b143d" label="Mixed Materials"
               type="box">1</container>
             <container id="aspace_e01635b890bf513f2ed9e30946c9568f"
@@ -265,7 +266,7 @@
         <c id="aspace_24d96d896c187b4e90ebb6c910f0462f" level="otherlevel">
           <did>
             <unittitle>Articles of incorporation,</unittitle>
-            <unitdate normal="1903">1903</unitdate>
+            <unitdate normal="1903/1903">1903</unitdate>
             <container id="aspace_70b598eea1a92f336fd167d2c8519f5f" label="Mixed Materials"
               type="box">1</container>
             <container id="aspace_e82933e98fa0499532a565a2f6f942a0"
@@ -276,7 +277,7 @@
           <did>
             <unittitle>Amendments to articles of incorporation and revised constitution and
               by-laws,</unittitle>
-            <unitdate normal="1960">1960</unitdate>
+            <unitdate normal="1960/1960">1960</unitdate>
             <container id="aspace_a4164fdebecd8b931065ddfb1116009e" label="Mixed Materials"
               type="box">1</container>
             <container id="aspace_dd54c6dd0a662e547d6834d716637dd0"
@@ -287,7 +288,7 @@
           <did>
             <unittitle>Dr. Root and L. Raymond Higgins' collaboration on Alpha Omega Alpha
               motto,</unittitle>
-            <unitdate normal="1903/1952">1903-1952</unitdate>
+            <unitdate normal="1903/1952" type="inclusive">1903-1952</unitdate>
             <container id="aspace_36fe2fc6c516a56117b69ab12913687f" label="Mixed Materials"
               type="box">1</container>
             <container id="aspace_4bef9bbbfbbd17dc4776ef97ac47531b"
@@ -297,7 +298,7 @@
         <c id="aspace_f8c48bea8a2a056b98698382b0ef079a" level="otherlevel">
           <did>
             <unittitle>Plans for motto and evolution of key [photocopy],</unittitle>
-            <unitdate normal="1903">1903</unitdate>
+            <unitdate normal="1903/1903">1903</unitdate>
             <container id="aspace_47e029c45d6bc57ed786511ee1e4d1da" label="Mixed Materials"
               type="box">35</container>
             <container id="aspace_f72ca777a6a88aff952c74763294be4a"
@@ -307,7 +308,7 @@
         <c id="aspace_e3894c8be3020742fe44a6eaf25e130a" level="otherlevel">
           <did>
             <unittitle>Plans for Alpha Omega Alpha key,</unittitle>
-            <unitdate normal="1903" certainty="circa">c.1903</unitdate>
+            <unitdate normal="1903/1903">c.1903</unitdate>
             <container id="aspace_5442b1e681d8d5c057c5e598e139807e" label="Mixed Materials"
               type="box">1</container>
             <container id="aspace_7a2430aa9d7adfc52321dd3f1a3eb6cb"
@@ -336,7 +337,7 @@
           <did>
             <unittitle>Fraternity Charter certificates for University of Cincinnati, State
               University of Iowa, and University of Texas,</unittitle>
-            <unitdate normal="1913/1920">1913-1920</unitdate>
+            <unitdate normal="1913/1920" type="inclusive">1913-1920</unitdate>
             <container id="aspace_fcc97c0ccf63624181b12646dca435c9" label="Mixed Materials"
               type="folder">1</container>
           </did>
@@ -362,7 +363,7 @@
         <c id="aspace_073cf098f23a9fd6f439e29dcdb3c1b8" level="otherlevel">
           <did>
             <unittitle>Organizational chart - directors and chapters,</unittitle>
-            <unitdate normal="1910" certainty="circa">c.1910</unitdate>
+            <unitdate normal="1910/1910">c.1910</unitdate>
             <container id="aspace_06f4923c631900f2000aec572908b66d" label="Mixed Materials"
               type="box">1</container>
             <container id="aspace_38529a27b37639f8e711c02bb685b53e"
@@ -372,7 +373,7 @@
         <c id="aspace_bec38df1c5b4450c6c459e8695eab218" level="otherlevel">
           <did>
             <unittitle>Officers and directors - lists,</unittitle>
-            <unitdate normal="1961">1961, n.d.</unitdate>
+            <unitdate normal="1961/1961">1961, n.d.</unitdate>
             <container id="aspace_5017eb351ed6464db58a0ab48d6c9dd2" label="Mixed Materials"
               type="box">1</container>
             <container id="aspace_568570681c50be12d0251b0c7c6224e0"
@@ -415,7 +416,7 @@
         <c id="aspace_4365cd1ed8bd8fee1bac6077a4d81359" level="otherlevel">
           <did>
             <unittitle>General announcements,</unittitle>
-            <unitdate normal="1909/1967">1909-1967</unitdate>
+            <unitdate normal="1909/1967" type="inclusive">1909-1967</unitdate>
             <container id="aspace_9cac9a24a014e4376ab604ddf2b616e5" label="Mixed Materials"
               type="box">4</container>
             <container id="aspace_3e7fd3fb480c183f64d887e0000c689c"
@@ -427,42 +428,42 @@
         <did>
           <unittitle>Series II: Membership,</unittitle>
           <unitid>MS C 271.II</unitid>
-          <unitdate normal="1902/1973">1902-1973</unitdate>
+          <unitdate normal="1902/1973" type="inclusive">1902-1973</unitdate>
         </did>
       </c>
       <c id="aspace_d5765d98e333f83b6278c00e9a81f31f" level="series">
         <did>
           <unittitle>Series III: Correspondence,</unittitle>
           <unitid>MS C 271.III</unitid>
-          <unitdate normal="1894/1992">1894-1992</unitdate>
+          <unitdate normal="1894/1992" type="inclusive">1894-1992</unitdate>
         </did>
       </c>
       <c id="aspace_ceb3f1a2514bc94713bac9b118afa552" level="series">
         <did>
           <unittitle>Series IV: Publications,</unittitle>
           <unitid>MS C 271.IV</unitid>
-          <unitdate normal="1896/1972">1896-1972</unitdate>
+          <unitdate normal="1896/1972" type="inclusive">1896-1972</unitdate>
         </did>
       </c>
       <c id="aspace_5d78c1be23c9d911552da0d63ec7cc98" level="series">
         <did>
           <unittitle>Series V: Speeches,</unittitle>
           <unitid>MS C 271.V</unitid>
-          <unitdate normal="1905/1973">1905-1973</unitdate>
+          <unitdate normal="1905/1973" type="inclusive">1905-1973</unitdate>
         </did>
       </c>
       <c id="aspace_72f14d6c32e142baa3eeafdb6e4d69be" level="series">
         <did>
           <unittitle>Series VI: Photographs,</unittitle>
           <unitid>MS C 271.VI</unitid>
-          <unitdate normal="1916/1967">1916-1967</unitdate>
+          <unitdate normal="1916/1967" type="inclusive">1916-1967</unitdate>
         </did>
       </c>
       <c id="aspace_dba76dab6f750f31aa5fc73e5402e71d" level="series">
         <did>
           <unittitle>Series VII: Subject Files,</unittitle>
           <unitid>MS C 271.VII</unitid>
-          <unitdate normal="1924/1955">1924-1955</unitdate>
+          <unitdate normal="1924/1955" type="inclusive">1924-1955</unitdate>
         </did>
         <accessrestrict><p>Restricted until 2018.</p></accessrestrict>
       </c>
