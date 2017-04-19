@@ -4,6 +4,7 @@ module Arclight
   ##
   # An Arclight custom component indexing code
   class CustomComponent < SolrEad::Component
+    include Arclight::SharedIndexingBehavior
     use_terminology SolrEad::Component
 
     extend_terminology do |t|
@@ -18,11 +19,13 @@ module Arclight
       t.unitdate(path: 'c/did/unitdate', index_as: %i[displayable])
       t.accessrestrict(path: 'c/accessrestrict/p', index_as: %i[displayable])
       t.scopecontent(path: 'c/scopecontent/p', index_as: %i[displayable])
+      t.normal_unit_dates(path: 'c/did/unitdate/@normal')
     end
 
     def to_solr(solr_doc = {})
       super
       Solrizer.insert_field(solr_doc, 'level', formatted_level, :facetable) # human-readable for facet `level_sim`
+      Solrizer.insert_field(solr_doc, 'date_range', formatted_unitdate_for_range, :facetable)
       solr_doc
     end
 
