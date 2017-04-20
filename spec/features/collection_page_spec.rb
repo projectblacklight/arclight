@@ -27,12 +27,20 @@ RSpec.describe 'Collection Page', type: :feature do
         expect(page).to have_css('dd', text: /Copyright was transferred/)
       end
     end
+
+    it 'background has configured metadata' do
+      within '#background' do
+        expect(page).to have_css('dt', text: 'Biographical / Historical')
+        expect(page).to have_css('dd', text: /^Alpha Omega Alpha Honor Medical Society was founded/)
+      end
+    end
   end
   describe 'navigation bar' do
     it 'has configured links' do
       within '.al-sidebar-navigation-overview' do
         expect(page).to have_css 'a[href="#summary"]', text: 'Summary'
         expect(page).to have_css 'a[href="#access-and-use"]', text: 'Access and Use'
+        expect(page).to have_css 'a[href="#background"]', text: 'Background'
       end
     end
   end

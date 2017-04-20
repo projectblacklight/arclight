@@ -7,4 +7,5 @@ en:
         sections:
           summary_field: 'Summary'
           access_field: 'Access and Use'
+          background_field: 'Background'
     breadcrumb_separator: ' » '

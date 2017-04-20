@@ -10,6 +10,10 @@ RSpec.describe 'Indexing Custom Document', type: :feature do
   context 'solrizer' do
     let(:doc) { subject.to_solr }
 
+    it '#bioghist' do
+      expect(doc['bioghist_ssm'].first).to match(/^Alpha Omega Alpha Honor Medical Society was founded/)
+    end
+
     it '#level' do
       expect(doc['level_ssm'].first).to eq 'collection'
       expect(doc['level_sim'].first).to eq 'Collection'
