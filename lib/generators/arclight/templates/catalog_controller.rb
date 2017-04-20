@@ -150,12 +150,20 @@ class CatalogController < ApplicationController
       :admin_info_field
     ]
 
+    config.show.context_sidebar_items = [
+      :terms_field
+    ]
+
     # Collection Show Page - Summary Section
     config.add_summary_field 'creator_ssm', label: 'Creator'
     config.add_summary_field 'abstract_ssm', label: 'Abstract'
     config.add_summary_field 'extent_ssm', label: 'Extent'
     config.add_summary_field 'language_ssm', label: 'Language'
     config.add_summary_field 'prefercite_ssm', label: 'Preferred citation'
+
+    # Collection Show Page - Terms and Condition Section
+    config.add_terms_field 'accessrestrict_ssm', label: 'Restrictions'
+    config.add_terms_field 'userestrict_ssm', label: 'Terms of Access'
 
     # Collection Show Page - Access Section
     config.add_access_field 'accessrestrict_ssm', label: 'Conditions Governing Access'

@@ -3,8 +3,10 @@
     <%= render partial: 'show_sidebar' %>
   </div>
   <div class='col-md-9'>
-    <% blacklight_config.show.metadata_partials.each do |metadata| %>
-      <%= render partial: 'custom_metadata', locals: { document: @document, field_accessor: metadata } %>
+    <% unless blacklight_config.show.metadata_partials.nil? %>
+      <% blacklight_config.show.metadata_partials.each do |metadata| %>
+        <%= render partial: 'custom_metadata', locals: { document: @document, field_accessor: metadata } %>
+      <% end %>
     <% end %>
   </div>
 </div>
