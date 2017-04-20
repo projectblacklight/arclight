@@ -63,6 +63,22 @@ RSpec.describe 'Collection Page', type: :feature do
         expect(page).to have_css('dd', text: /^Something incredible is waiting/)
       end
     end
+
+    it 'adminstrative information has configured metadata' do
+      within '#administrative-information' do
+        expect(page).to have_css('dt', text: 'Acquisition information')
+        expect(page).to have_css('dd', text: 'Donated by Alpha Omega Alpha.')
+
+        expect(page).to have_css('dt', text: 'Appraisal information')
+        expect(page).to have_css('dd', text: /^Corpus callosum something incredible/)
+
+        expect(page).to have_css('dt', text: 'Custodial history')
+        expect(page).to have_css('dd', text: 'Maintained by Alpha Omega Alpha and the family of William Root.')
+
+        expect(page).to have_css('dt', text: 'Processing information')
+        expect(page).to have_css('dd', text: /^Processed in 2001\. Descended from astronomers\./)
+      end
+    end
   end
   describe 'navigation bar' do
     it 'has configured links' do
@@ -71,6 +87,7 @@ RSpec.describe 'Collection Page', type: :feature do
         expect(page).to have_css 'a[href="#access-and-use"]', text: 'Access and Use'
         expect(page).to have_css 'a[href="#background"]', text: 'Background'
         expect(page).to have_css 'a[href="#related"]', text: 'Related'
+        expect(page).to have_css 'a[href="#administrative-information"]', text: 'Administrative Information'
       end
     end
   end

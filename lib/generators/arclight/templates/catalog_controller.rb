@@ -146,7 +146,8 @@ class CatalogController < ApplicationController
       :access_field,
       :background_field,
       :scope_and_arrangement_field,
-      :related_field
+      :related_field,
+      :admin_info_field
     ]
 
     # Collection Show Page - Summary Section
@@ -173,5 +174,11 @@ class CatalogController < ApplicationController
     config.add_related_field 'otherfindaid_ssm', label: 'Other finding aids'
     config.add_related_field 'altformavail_ssm', label: 'Alternative form available'
     config.add_related_field 'originalsloc_ssm', label: 'Location of originals'
+
+    # Collection Show Page - Administrative Information Section
+    config.add_admin_info_field 'acqinfo_ssm', label: 'Acquisition information'
+    config.add_admin_info_field 'appraisal_ssm', label: 'Appraisal information'
+    config.add_admin_info_field 'custodhist_ssm', label: 'Custodial history'
+    config.add_admin_info_field 'processinfo_ssm', label: 'Processing information'
   end
 end

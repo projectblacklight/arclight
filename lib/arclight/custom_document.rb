@@ -30,6 +30,10 @@ module Arclight
       t.separatedmaterial(path: 'archdesc/separatedmaterial/p', index_as: %i[displayable])
       t.altformavail(path: 'archdesc/altformavail/p', index_as: %i[displayable])
       t.originalsloc(path: 'archdesc/originalsloc/p', index_as: %i[displayable])
+      t.acqinfo(path: 'archdesc/acqinfo/p', index_as: %i[displayable])
+      t.appraisal(path: 'archdesc/appraisal/p', index_as: %i[displayable])
+      t.custodhist(path: 'archdesc/custodhist/p', index_as: %i[displayable])
+      t.processinfo(path: 'archdesc/processinfo/p', index_as: %i[displayable])
     end
 
     def to_solr(solr_doc = {})
