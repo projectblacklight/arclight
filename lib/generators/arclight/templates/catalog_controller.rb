@@ -134,12 +134,14 @@ class CatalogController < ApplicationController
     ##
     # Arclight Configurations
 
+    config.show.document_presenter_class = Arclight::ShowPresenter
+
     ##
     # Configuration for partials
     config.index.partials.insert(0, :index_breadcrumb)
-    
+
     config.show.metadata_partials = [:summary_field, :access_field]
-    
+
     # Collection Show Page - Summary Section
     config.add_summary_field 'creator_ssm', label: 'Creator'
     config.add_summary_field 'abstract_ssm', label: 'Abstract'
