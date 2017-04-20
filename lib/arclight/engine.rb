@@ -2,6 +2,7 @@
 
 require 'blacklight'
 require 'solr_ead'
+require 'arclight/shared_indexing_behavior'
 require 'arclight/custom_document'
 require 'arclight/custom_component'
 

@@ -48,5 +48,21 @@ RSpec.describe 'Indexing Custom Document', type: :feature do
     it '#names' do
       expect(doc['names_sim']).to include 'Root, William Webster, 1867-1932'
     end
+
+    describe '#date_range' do
+      it 'includes an array of all the years in a particular unit-date range described in YYYY/YYYY format' do
+        date_range_field = doc['date_range_sim']
+        expect(doc['unitdate_ssm']).to eq ['1894-1992'] # the field the range is derived from
+        expect(date_range_field).to be_an Array
+        expect(date_range_field.length).to eq 99
+        expect(date_range_field.first).to eq '1894'
+        expect(date_range_field.last).to eq '1992'
+      end
+
+      # We don't have EADs in our fixtures that exhibit the following behaviors
+      it 'is nil for non normal dates'
+      it 'handles normal unitdates formatted as YYYY/YYYY when the years are the same'
+      it 'handles normal unitdates formatted as YYYY'
+    end
   end
 end

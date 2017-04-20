@@ -24,6 +24,7 @@ Gem::Specification.new do |spec|
   spec.require_paths = ['lib']
 
   spec.add_dependency 'blacklight'
+  spec.add_dependency 'blacklight_range_limit'
   spec.add_dependency 'rails', '>= 4.2.6', '< 6'
   spec.add_dependency 'solr_ead'
 
@@ -31,6 +32,7 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency 'capybara'
   spec.add_development_dependency 'coveralls'
   spec.add_development_dependency 'engine_cart'
+  spec.add_development_dependency 'poltergeist'
   spec.add_development_dependency 'rake', '~> 12.0'
   spec.add_development_dependency 'rubocop', '~> 0.48.1'
   spec.add_development_dependency 'rubocop-rspec', '~> 1.15.0'

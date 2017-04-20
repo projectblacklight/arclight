@@ -49,7 +49,7 @@ RSpec.describe 'Arclight', type: :feature do
 
     it 'renders metadata to meet minumum DACS requirements for a component'
 
-    it 'renders facets' do
+    it 'renders facets', js: true do
       visit search_catalog_path q: '', search_field: 'all_fields'
 
       within('#facets') do
@@ -68,6 +68,13 @@ RSpec.describe 'Arclight', type: :feature do
         within('.blacklight-creator_sim') do
           expect(page).to have_css('h3 a', text: 'Creator')
           expect(page).to have_css('li .facet-label', text: 'Alpha Omega Alpha', visible: false)
+        end
+
+        within('.blacklight-date_range_sim') do
+          expect(page).to have_css('h3 a', text: 'Date range')
+          click_link 'Date range'
+          expect(page).to have_css('.range_limit', visible: true)
+          expect(page).to have_css('.profile canvas.flot-base', visible: true)
         end
 
         within('.blacklight-names_sim') do

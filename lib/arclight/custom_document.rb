@@ -4,6 +4,7 @@ module Arclight
   ##
   # An Arclight custom document indexing code
   class CustomDocument < SolrEad::Document
+    include Arclight::SharedIndexingBehavior
     use_terminology SolrEad::Document
 
     extend_terminology do |t|
@@ -19,6 +20,7 @@ module Arclight
       t.scopecontent(path: 'archdesc/scopecontent/p', index_as: %i[displayable])
       t.userestrict(path: 'archdesc/userestrict/p', index_as: %i[displayable])
       t.abstract(path: 'archdesc/did/abstract', index_as: %i[displayable])
+      t.normal_unit_dates(path: 'archdesc/did/unitdate/@normal')
     end
 
     def to_solr(solr_doc = {})
@@ -26,6 +28,7 @@ module Arclight
       Solrizer.insert_field(solr_doc, 'level', 'collection', :displayable) # machine-readable
       Solrizer.insert_field(solr_doc, 'level', 'Collection', :facetable) # human-readable
       Solrizer.insert_field(solr_doc, 'names', names, :facetable)
+      Solrizer.insert_field(solr_doc, 'date_range', formatted_unitdate_for_range, :facetable)
       solr_doc
     end
 

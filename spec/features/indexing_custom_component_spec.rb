@@ -29,5 +29,42 @@ RSpec.describe 'Indexing Custom Component', type: :feature do
       expect(doc['level_ssm'].first).to eq 'otherlevel'
       expect(doc['level_sim'].first).to eq 'Other'
     end
+
+    describe '#date_range' do
+      it 'includes an array of all the years in a particular unit-date range described in YYYY/YYYY format' do
+        doc = components[0].to_solr
+
+        date_range_field = doc['date_range_sim']
+        expect(doc['unitdate_ssm']).to eq ['1902-1976'] # the field the range is derived from
+        expect(date_range_field).to be_an Array
+        expect(date_range_field.length).to eq 75
+        expect(date_range_field.first).to eq '1902'
+        expect(date_range_field.last).to eq '1976'
+      end
+
+      it 'is nil for non normal dates' do
+        doc = components[1].to_solr
+
+        date_range_field = doc['date_range_sim']
+        expect(doc['unitdate_ssm']).to eq ['n.d.']
+        expect(date_range_field).to be_nil
+      end
+
+      it 'handles normal unitdates formatted as YYYY/YYYY when the years are the same' do
+        doc = components[2].to_solr
+
+        date_range_field = doc['date_range_sim']
+        expect(doc['unitdate_ssm']).to eq ['c.1902']
+        expect(date_range_field).to eq ['1902']
+      end
+
+      it 'handles normal unitdates formatted as YYYY' do
+        doc = components[6].to_solr
+
+        date_range_field = doc['date_range_sim']
+        expect(doc['unitdate_ssm']).to eq ['1904']
+        expect(date_range_field).to eq ['1904']
+      end
+    end
   end
 end

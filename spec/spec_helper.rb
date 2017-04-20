@@ -15,6 +15,9 @@ EngineCart.load_application!
 
 require 'rspec/rails'
 
+require 'capybara/poltergeist'
+Capybara.javascript_driver = :poltergeist
+
 require 'arclight'
 
 RSpec.configure do |config|
