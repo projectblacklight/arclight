@@ -141,7 +141,13 @@ class CatalogController < ApplicationController
     # Configuration for partials
     config.index.partials.insert(0, :index_breadcrumb)
 
-    config.show.metadata_partials = [:summary_field, :access_field, :background_field, :scope_and_arrangement_field]
+    config.show.metadata_partials = [
+      :summary_field,
+      :access_field,
+      :background_field,
+      :scope_and_arrangement_field,
+      :related_field
+    ]
 
     # Collection Show Page - Summary Section
     config.add_summary_field 'creator_ssm', label: 'Creator'
@@ -160,5 +166,12 @@ class CatalogController < ApplicationController
     # Collection Show Page - Scope and Arrangement Section
     config.add_scope_and_arrangement_field 'scopecontent_ssm', label: 'Scope and Content'
     config.add_scope_and_arrangement_field 'arrangement_ssm', label: 'Arrangement'
+
+    # Collection Show Page - Related Section
+    config.add_related_field 'relatedmaterial_ssm', label: 'Related material'
+    config.add_related_field 'separatedmaterial_ssm', label: 'Separated material'
+    config.add_related_field 'otherfindaid_ssm', label: 'Other finding aids'
+    config.add_related_field 'altformavail_ssm', label: 'Alternative form available'
+    config.add_related_field 'originalsloc_ssm', label: 'Location of originals'
   end
 end

@@ -44,6 +44,25 @@ RSpec.describe 'Collection Page', type: :feature do
         expect(page).to have_css('dd', text: /^Arranged into seven series\./)
       end
     end
+
+    it 'related has configured metadata' do
+      within '#related' do
+        expect(page).to have_css('dt', text: 'Related material')
+        expect(page).to have_css('dd', text: /^An unprocessed collection includes/)
+
+        expect(page).to have_css('dt', text: 'Separated material')
+        expect(page).to have_css('dd', text: /^Birth, Apollonius of Perga brain/)
+
+        expect(page).to have_css('dt', text: 'Other finding aids')
+        expect(page).to have_css('dd', text: /^Li Europan lingues es membres del/)
+
+        expect(page).to have_css('dt', text: 'Alternative form available')
+        expect(page).to have_css('dd', text: /^Rig Veda a mote of dust suspended/)
+
+        expect(page).to have_css('dt', text: 'Location of originals')
+        expect(page).to have_css('dd', text: /^Something incredible is waiting/)
+      end
+    end
   end
   describe 'navigation bar' do
     it 'has configured links' do
@@ -51,6 +70,7 @@ RSpec.describe 'Collection Page', type: :feature do
         expect(page).to have_css 'a[href="#summary"]', text: 'Summary'
         expect(page).to have_css 'a[href="#access-and-use"]', text: 'Access and Use'
         expect(page).to have_css 'a[href="#background"]', text: 'Background'
+        expect(page).to have_css 'a[href="#related"]', text: 'Related'
       end
     end
   end

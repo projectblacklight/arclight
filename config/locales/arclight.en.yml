@@ -9,4 +9,5 @@ en:
           access_field: 'Access and Use'
           background_field: 'Background'
           scope_and_arrangement_field: 'Scope and Arrangement'
+          related_field: 'Related'
     breadcrumb_separator: ' » '

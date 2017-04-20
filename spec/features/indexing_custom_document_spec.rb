@@ -14,6 +14,26 @@ RSpec.describe 'Indexing Custom Document', type: :feature do
       expect(doc['bioghist_ssm'].first).to match(/^Alpha Omega Alpha Honor Medical Society was founded/)
     end
 
+    it '#relatedmaterial' do
+      expect(doc['relatedmaterial_ssm'].first).to match(/^An unprocessed collection includes/)
+    end
+
+    it '#separatedmaterial' do
+      expect(doc['separatedmaterial_ssm'].first).to match(/^Birth, Apollonius of Perga brain/)
+    end
+
+    it '#otherfindaid' do
+      expect(doc['otherfindaid_ssm'].first).to match(/^Li Europan lingues es membres del/)
+    end
+
+    it '#altformavail' do
+      expect(doc['altformavail_ssm'].first).to match(/^Rig Veda a mote of dust suspended/)
+    end
+
+    it '#originalsloc' do
+      expect(doc['originalsloc_ssm'].first).to match(/^Something incredible is waiting/)
+    end
+
     it '#arrangement' do
       expect(doc['arrangement_ssm'].first).to eq 'Arranged into seven series.'
     end
