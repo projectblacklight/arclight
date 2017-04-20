@@ -3,4 +3,8 @@ en:
     views:
       home:
         heading: 'Archival Collections at Institution'
+      show:
+        sections:
+          summary_field: 'Summary'
+          access_field: 'Access and Use'
     breadcrumb_separator: ' » '
