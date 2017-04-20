@@ -8,4 +8,5 @@ en:
           summary_field: 'Summary'
           access_field: 'Access and Use'
           background_field: 'Background'
+          scope_and_arrangement_field: 'Scope and Arrangement'
     breadcrumb_separator: ' » '

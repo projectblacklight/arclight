@@ -24,6 +24,7 @@ module Arclight
       t.abstract(path: 'archdesc/did/abstract', index_as: %i[displayable])
       t.normal_unit_dates(path: 'archdesc/did/unitdate/@normal')
       t.bioghist(path: 'archdesc/bioghist/p', index_as: %i[displayable])
+      t.arrangement(path: 'archdesc/arrangement/p', index_as: %i[displayable])
     end
 
     def to_solr(solr_doc = {})

@@ -34,6 +34,16 @@ RSpec.describe 'Collection Page', type: :feature do
         expect(page).to have_css('dd', text: /^Alpha Omega Alpha Honor Medical Society was founded/)
       end
     end
+
+    it 'scope and arrangement has configured metadata' do
+      within '#scope-and-arrangement' do
+        expect(page).to have_css('dt', text: 'Scope and Content')
+        expect(page).to have_css('dd', text: /^Correspondence, documents, records, photos/)
+
+        expect(page).to have_css('dt', text: 'Arrangement')
+        expect(page).to have_css('dd', text: /^Arranged into seven series\./)
+      end
+    end
   end
   describe 'navigation bar' do
     it 'has configured links' do

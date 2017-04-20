@@ -14,6 +14,10 @@ RSpec.describe 'Indexing Custom Document', type: :feature do
       expect(doc['bioghist_ssm'].first).to match(/^Alpha Omega Alpha Honor Medical Society was founded/)
     end
 
+    it '#arrangement' do
+      expect(doc['arrangement_ssm'].first).to eq 'Arranged into seven series.'
+    end
+
     it '#level' do
       expect(doc['level_ssm'].first).to eq 'collection'
       expect(doc['level_sim'].first).to eq 'Collection'
