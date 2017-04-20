@@ -141,7 +141,14 @@ class CatalogController < ApplicationController
     # Configuration for partials
     config.index.partials.insert(0, :index_breadcrumb)
 
-    config.show.metadata_partials = [:summary_field, :access_field]
+    config.show.metadata_partials = [
+      :summary_field,
+      :access_field,
+      :background_field,
+      :scope_and_arrangement_field,
+      :related_field,
+      :admin_info_field
+    ]
 
     # Collection Show Page - Summary Section
     config.add_summary_field 'creator_ssm', label: 'Creator'
@@ -154,5 +161,24 @@ class CatalogController < ApplicationController
     config.add_access_field 'accessrestrict_ssm', label: 'Conditions Governing Access'
     config.add_access_field 'userestrict_ssm', label: 'Terms Of Use'
 
+    # Collection Show Page - Background Section
+    config.add_background_field 'bioghist_ssm', label: 'Biographical / Historical'
+
+    # Collection Show Page - Scope and Arrangement Section
+    config.add_scope_and_arrangement_field 'scopecontent_ssm', label: 'Scope and Content'
+    config.add_scope_and_arrangement_field 'arrangement_ssm', label: 'Arrangement'
+
+    # Collection Show Page - Related Section
+    config.add_related_field 'relatedmaterial_ssm', label: 'Related material'
+    config.add_related_field 'separatedmaterial_ssm', label: 'Separated material'
+    config.add_related_field 'otherfindaid_ssm', label: 'Other finding aids'
+    config.add_related_field 'altformavail_ssm', label: 'Alternative form available'
+    config.add_related_field 'originalsloc_ssm', label: 'Location of originals'
+
+    # Collection Show Page - Administrative Information Section
+    config.add_admin_info_field 'acqinfo_ssm', label: 'Acquisition information'
+    config.add_admin_info_field 'appraisal_ssm', label: 'Appraisal information'
+    config.add_admin_info_field 'custodhist_ssm', label: 'Custodial history'
+    config.add_admin_info_field 'processinfo_ssm', label: 'Processing information'
   end
 end

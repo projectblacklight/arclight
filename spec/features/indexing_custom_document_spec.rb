@@ -10,6 +10,50 @@ RSpec.describe 'Indexing Custom Document', type: :feature do
   context 'solrizer' do
     let(:doc) { subject.to_solr }
 
+    it '#bioghist' do
+      expect(doc['bioghist_ssm'].first).to match(/^Alpha Omega Alpha Honor Medical Society was founded/)
+    end
+
+    it '#relatedmaterial' do
+      expect(doc['relatedmaterial_ssm'].first).to match(/^An unprocessed collection includes/)
+    end
+
+    it '#separatedmaterial' do
+      expect(doc['separatedmaterial_ssm'].first).to match(/^Birth, Apollonius of Perga brain/)
+    end
+
+    it '#otherfindaid' do
+      expect(doc['otherfindaid_ssm'].first).to match(/^Li Europan lingues es membres del/)
+    end
+
+    it '#altformavail' do
+      expect(doc['altformavail_ssm'].first).to match(/^Rig Veda a mote of dust suspended/)
+    end
+
+    it '#originalsloc' do
+      expect(doc['originalsloc_ssm'].first).to match(/^Something incredible is waiting/)
+    end
+
+    it '#arrangement' do
+      expect(doc['arrangement_ssm'].first).to eq 'Arranged into seven series.'
+    end
+
+    it '#acqinfo' do
+      expect(doc['acqinfo_ssm'].first).to eq 'Donated by Alpha Omega Alpha.'
+    end
+
+    it '#appraisal' do
+      expect(doc['appraisal_ssm'].first).to match(/^Corpus callosum something incredible/)
+    end
+
+    it '#custodhist' do
+      expect(doc['custodhist_ssm'].first).to eq 'Maintained by Alpha Omega Alpha and the family of William Root.'
+    end
+
+    it '#processinfo' do
+      expect(doc['processinfo_ssm'].first).to match(/^Processed in 2001\. Descended from astronomers\./)
+    end
+
     it '#level' do
       expect(doc['level_ssm'].first).to eq 'collection'
       expect(doc['level_sim'].first).to eq 'Collection'

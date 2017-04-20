@@ -7,4 +7,8 @@ en:
         sections:
           summary_field: 'Summary'
           access_field: 'Access and Use'
+          background_field: 'Background'
+          scope_and_arrangement_field: 'Scope and Arrangement'
+          related_field: 'Related'
+          admin_info_field: 'Administrative Information'
     breadcrumb_separator: ' » '

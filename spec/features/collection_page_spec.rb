@@ -27,12 +27,67 @@ RSpec.describe 'Collection Page', type: :feature do
         expect(page).to have_css('dd', text: /Copyright was transferred/)
       end
     end
+
+    it 'background has configured metadata' do
+      within '#background' do
+        expect(page).to have_css('dt', text: 'Biographical / Historical')
+        expect(page).to have_css('dd', text: /^Alpha Omega Alpha Honor Medical Society was founded/)
+      end
+    end
+
+    it 'scope and arrangement has configured metadata' do
+      within '#scope-and-arrangement' do
+        expect(page).to have_css('dt', text: 'Scope and Content')
+        expect(page).to have_css('dd', text: /^Correspondence, documents, records, photos/)
+
+        expect(page).to have_css('dt', text: 'Arrangement')
+        expect(page).to have_css('dd', text: /^Arranged into seven series\./)
+      end
+    end
+
+    it 'related has configured metadata' do
+      within '#related' do
+        expect(page).to have_css('dt', text: 'Related material')
+        expect(page).to have_css('dd', text: /^An unprocessed collection includes/)
+
+        expect(page).to have_css('dt', text: 'Separated material')
+        expect(page).to have_css('dd', text: /^Birth, Apollonius of Perga brain/)
+
+        expect(page).to have_css('dt', text: 'Other finding aids')
+        expect(page).to have_css('dd', text: /^Li Europan lingues es membres del/)
+
+        expect(page).to have_css('dt', text: 'Alternative form available')
+        expect(page).to have_css('dd', text: /^Rig Veda a mote of dust suspended/)
+
+        expect(page).to have_css('dt', text: 'Location of originals')
+        expect(page).to have_css('dd', text: /^Something incredible is waiting/)
+      end
+    end
+
+    it 'adminstrative information has configured metadata' do
+      within '#administrative-information' do
+        expect(page).to have_css('dt', text: 'Acquisition information')
+        expect(page).to have_css('dd', text: 'Donated by Alpha Omega Alpha.')
+
+        expect(page).to have_css('dt', text: 'Appraisal information')
+        expect(page).to have_css('dd', text: /^Corpus callosum something incredible/)
+
+        expect(page).to have_css('dt', text: 'Custodial history')
+        expect(page).to have_css('dd', text: 'Maintained by Alpha Omega Alpha and the family of William Root.')
+
+        expect(page).to have_css('dt', text: 'Processing information')
+        expect(page).to have_css('dd', text: /^Processed in 2001\. Descended from astronomers\./)
+      end
+    end
   end
   describe 'navigation bar' do
     it 'has configured links' do
       within '.al-sidebar-navigation-overview' do
         expect(page).to have_css 'a[href="#summary"]', text: 'Summary'
         expect(page).to have_css 'a[href="#access-and-use"]', text: 'Access and Use'
+        expect(page).to have_css 'a[href="#background"]', text: 'Background'
+        expect(page).to have_css 'a[href="#related"]', text: 'Related'
+        expect(page).to have_css 'a[href="#administrative-information"]', text: 'Administrative Information'
       end
     end
   end

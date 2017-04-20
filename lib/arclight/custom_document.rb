@@ -14,6 +14,7 @@ module Arclight
       t.prefercite(path: 'archdesc/prefercite/p', index_as: %i[displayable])
       t.function(path: 'archdesc/controlaccess/function/text()', index_as: %i[displayable facetable])
       t.occupation(path: 'archdesc/controlaccess/occupation/text()', index_as: %i[displayable facetable])
+      t.otherfindaid(path: 'archdesc/otherfindaid/p', index_as: %i[displayable])
 
       # overrides of solr_ead to get different `index_as` properties
       t.extent(path: 'archdesc/did/physdesc/extent', index_as: %i[displayable])
@@ -23,6 +24,16 @@ module Arclight
       t.userestrict(path: 'archdesc/userestrict/p', index_as: %i[displayable])
       t.abstract(path: 'archdesc/did/abstract', index_as: %i[displayable])
       t.normal_unit_dates(path: 'archdesc/did/unitdate/@normal')
+      t.bioghist(path: 'archdesc/bioghist/p', index_as: %i[displayable])
+      t.arrangement(path: 'archdesc/arrangement/p', index_as: %i[displayable])
+      t.relatedmaterial(path: 'archdesc/relatedmaterial/p', index_as: %i[displayable])
+      t.separatedmaterial(path: 'archdesc/separatedmaterial/p', index_as: %i[displayable])
+      t.altformavail(path: 'archdesc/altformavail/p', index_as: %i[displayable])
+      t.originalsloc(path: 'archdesc/originalsloc/p', index_as: %i[displayable])
+      t.acqinfo(path: 'archdesc/acqinfo/p', index_as: %i[displayable])
+      t.appraisal(path: 'archdesc/appraisal/p', index_as: %i[displayable])
+      t.custodhist(path: 'archdesc/custodhist/p', index_as: %i[displayable])
+      t.processinfo(path: 'archdesc/processinfo/p', index_as: %i[displayable])
     end
 
     def to_solr(solr_doc = {})
