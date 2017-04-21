@@ -15,9 +15,9 @@ module Arclight
       (start_date..end_date).to_a
     end
 
-    def subjects_array(elements)
+    def subjects_array(elements, parent:)
       xpath_elements = elements.map { |el| "local-name()='#{el}'" }.join(' or ')
-      subjects = search("//*[#{xpath_elements}]").to_a
+      subjects = search("//#{parent}/controlaccess/*[#{xpath_elements}]").to_a
       clean_facets_array(subjects.flatten.map(&:text))
     end
 

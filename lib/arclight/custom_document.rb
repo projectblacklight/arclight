@@ -59,11 +59,11 @@ module Arclight
     #  <controlaccess/><genreform></genreform>
     #  <controlaccess/><occupation></occupation>
     def access_subjects
-      subjects_array(%w[subject function occupation genreform])
+      subjects_array(%w[subject function occupation genreform], parent: 'archdesc')
     end
 
     def all_subjects
-      subjects_array(%w[corpname famname function genreform geogname occupation persname subject title])
+      subjects_array(%w[corpname famname function genreform geogname occupation persname subject title], parent: 'archdesc')
     end
   end
 end

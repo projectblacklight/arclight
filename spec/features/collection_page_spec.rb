@@ -67,8 +67,8 @@ RSpec.describe 'Collection Page', type: :feature do
     it 'indexed terms has configured metadata' do
       within '#indexed-terms' do
         expect(page).to have_css('dt', text: 'Subjects')
-        expect(page).to have_css('dd', text: '1118 Badger Vine Special Collections')
-        expect(page).to have_css('dd', text: 'Minutes')
+        expect(page).to have_css('dd', text: 'Societies')
+        expect(page).to have_css('dd', text: 'Mindanao Island (Philippines)')
       end
     end
 

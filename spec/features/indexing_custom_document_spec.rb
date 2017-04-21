@@ -100,9 +100,9 @@ RSpec.describe 'Indexing Custom Document', type: :feature do
     it '#all_subjects' do
       subjects = doc['all_subjects_ssm']
 
-      expect(subjects.length).to eq 11
-      expect(subjects.first).to eq '1118 Badger Vine Special Collections'
-      expect(subjects.last).to eq 'Minutes'
+      expect(subjects.length).to eq 8
+      expect(subjects.first).to eq 'Societies'
+      expect(subjects.last).to eq 'Mindanao Island (Philippines)'
     end
 
     describe '#date_range' do
