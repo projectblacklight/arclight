@@ -58,27 +58,7 @@ module Arclight
     #  <controlaccess/><genreform></genreform>
     #  <controlaccess/><occupation></occupation>
     def access_subjects
-      subjects = search("//*[local-name()='subject' or local-name()='function' or local-name() = 'occupation' or local-name() = 'genreform']").to_a
-      clean_facets_array(subjects.flatten.map(&:text))
-    end
-
-    # Return a cleaned array of facets without marc subfields
-    #
-    # E.g. clean_facets_array(['FacetValue1 |z FacetValue2','FacetValue3']) => ['FacetValue1 -- FacetValue2', 'FacetValue3']
-    def clean_facets_array(facets_array)
-      Array(facets_array).map { |text| fix_subfield_demarcators(text) }.compact.uniq
-    end
-
-    # Replace MARC style subfield demarcators
-    #
-    # Usage: fix_subfield_demarcators("Subject 1 |z Sub-Subject 2") => "Subject 1 -- Sub-Subject 2"
-    def fix_subfield_demarcators(value)
-      value.gsub(/\|\w{1}/, '--')
-    end
-
-    # Wrap OM's find_by_xpath for convenience
-    def search(path)
-      find_by_xpath(path) # rubocop:disable DynamicFindBy
+      subjects_array(%w[subject function occupation genreform])
     end
   end
 end
