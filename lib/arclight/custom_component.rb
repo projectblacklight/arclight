@@ -26,6 +26,7 @@ module Arclight
       super
       Solrizer.insert_field(solr_doc, 'level', formatted_level, :facetable) # human-readable for facet `level_sim`
       Solrizer.insert_field(solr_doc, 'date_range', formatted_unitdate_for_range, :facetable)
+      Solrizer.insert_field(solr_doc, 'access_subjects', access_subjects, :facetable)
       solr_doc
     end
 
@@ -44,6 +45,10 @@ module Arclight
       elsif actual_level.present?
         actual_level.capitalize
       end
+    end
+
+    def access_subjects
+      subjects_array(%w[subject function occupation genreform], parent: 'c')
     end
   end
 end

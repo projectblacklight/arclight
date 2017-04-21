@@ -30,6 +30,16 @@ RSpec.describe 'Indexing Custom Component', type: :feature do
       expect(doc['level_sim'].first).to eq 'Other'
     end
 
+    describe '#access_subject' do
+      it 'has the subjects for the given compontent' do
+        doc1 = components[26].to_solr
+        doc2 = components[27].to_solr
+
+        expect(doc1['access_subjects_sim']).to eq ['Minutes']
+        expect(doc2['access_subjects_sim']).to eq ['Records']
+      end
+    end
+
     describe '#date_range' do
       it 'includes an array of all the years in a particular unit-date range described in YYYY/YYYY format' do
         doc = components[0].to_solr
