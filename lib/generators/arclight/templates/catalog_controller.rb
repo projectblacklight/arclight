@@ -177,7 +177,11 @@ class CatalogController < ApplicationController
     config.add_related_field 'originalsloc_ssm', label: 'Location of originals'
 
     # Collection Show Page - Indexed Terms Section
-    config.add_indexed_terms_field 'all_subjects_ssm', label: 'Subjects'
+    config.add_indexed_terms_field 'all_subjects_ssm', label: 'Subjects', separator_options: {
+      words_connector: '<br/>',
+      two_words_connector: '<br/>',
+      last_word_connector: '<br/>'
+    }
 
     # Collection Show Page - Administrative Information Section
     config.add_admin_info_field 'acqinfo_ssm', label: 'Acquisition information'

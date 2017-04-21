@@ -1,4 +1,4 @@
-<% doc_presenter = show_presenter(document) %>
+<% doc_presenter = show_presenter(document).with_field_group(field_accessor) %>
 
 <%= content_tag(:div, id: t("arclight.views.show.sections.#{field_accessor}").parameterize) do %>
   <h3 class='al-show-sub-heading'>
