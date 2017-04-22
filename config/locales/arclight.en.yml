@@ -4,6 +4,7 @@ en:
       home:
         heading: 'Archival Collections at Institution'
       show:
+        collection_id: 'Collection ID: %{id}'
         context_sidebar:
           terms_field: 'Terms & Conditions'
           cite_field: 'How to cite this collection'

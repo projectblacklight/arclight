@@ -6,6 +6,16 @@ RSpec.describe 'Collection Page', type: :feature do
   before do
     visit solr_document_path(id: 'aoa271')
   end
+
+  describe 'arclight document header' do
+    it 'includes a card with the repository' do
+      within('.card.document-header') do
+        expect(page).to have_content '1118 Badger Vine Special Collections'
+        expect(page).to have_content 'Collection ID: MS C 271'
+      end
+    end
+  end
+
   describe 'custom metadata sections' do
     it 'summary has configured metadata' do
       within '#summary' do
