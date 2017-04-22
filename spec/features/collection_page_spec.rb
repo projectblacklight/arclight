@@ -100,6 +100,14 @@ RSpec.describe 'Collection Page', type: :feature do
           expect(page).to have_css '.card-block dd', text: /^Copyright was transferred/
         end
       end
+
+      it 'has a how to cite card' do
+        within '#accordion' do
+          expect(page).to have_css '.card-header h5', text: 'How to cite this collection'
+          expect(page).to have_css '.card-block dt', text: 'Preferred citation'
+          expect(page).to have_css '.card-block dd', text: /Omega Alpha Archives\. 1894-1992/
+        end
+      end
     end
   end
 end

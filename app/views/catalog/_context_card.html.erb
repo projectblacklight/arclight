@@ -1,20 +1,24 @@
 <% doc_presenter = show_presenter(document) %>
 <div class="card">
-  <div class="card-header" role="tab" id="headingOne">
+  <div class="card-header" role="tab" id="heading<%= card_index %>">
     <h5 class="mb-0">
-      <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+      <a data-toggle="collapse" data-parent="#accordion" href="#collapse<%= card_index %>" aria-expanded="<%= card_index.zero? %>" aria-controls="collapse<%= card_index %>">
         <%= t("arclight.views.show.context_sidebar.#{field_accessor}") %>
       </a>
     </h5>
   </div>
 
-  <div id="collapseOne" class="collapse show" role="tabpanel" aria-labelledby="headingOne">
+  <div id="collapse<%= card_index %>" class="collapse <%= 'show' if card_index.zero? %>" role="tabpanel" aria-labelledby="heading<%= card_index %>">
     <div class="card-block">
-      <dl class="dl-invert">
+      <dl>
         <% generic_document_fields(field_accessor).each do |field_name, field| %>
           <% if generic_should_render_field?(field_accessor, document, field) %>
-            <dt class="blacklight-<%= field_name.parameterize %> col-md-3"><%= generic_render_document_field_label(field_accessor, document, field: field_name) %></dt>
-            <dd class="blacklight-<%= field_name.parameterize %> col-md-9"><%= doc_presenter.field_value field_name %></dd>
+            <dt class="blacklight-<%= field_name.parameterize %>">
+              <%= generic_render_document_field_label(field_accessor, document, field: field_name) %>
+            </dt>
+            <dd class="blacklight-<%= field_name.parameterize %>">
+              <%= doc_presenter.field_value field_name %>
+            </dd>
           <% end %>
         <% end %>
       </dl>

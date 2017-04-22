@@ -6,7 +6,7 @@ en:
       show:
         context_sidebar:
           terms_field: 'Terms & Conditions'
-          cite: 'How to cite this collection'
+          cite_field: 'How to cite this collection'
         sections:
           summary_field: 'Summary'
           access_field: 'Access and Use'

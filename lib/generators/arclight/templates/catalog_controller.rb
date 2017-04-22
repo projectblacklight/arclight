@@ -151,7 +151,8 @@ class CatalogController < ApplicationController
     ]
 
     config.show.context_sidebar_items = [
-      :terms_field
+      :terms_field,
+      :cite_field
     ]
 
     # Collection Show Page - Summary Section
@@ -164,6 +165,9 @@ class CatalogController < ApplicationController
     # Collection Show Page - Terms and Condition Section
     config.add_terms_field 'accessrestrict_ssm', label: 'Restrictions'
     config.add_terms_field 'userestrict_ssm', label: 'Terms of Access'
+
+    # Collection Show Page - How to Cite Section
+    config.add_cite_field 'prefercite_ssm', label: 'Preferred citation'
 
     # Collection Show Page - Access Section
     config.add_access_field 'accessrestrict_ssm', label: 'Conditions Governing Access'

@@ -12,8 +12,8 @@
 
 <% unless blacklight_config.show.context_sidebar_items.nil? %>
   <div id="accordion" role="tablist" aria-multiselectable="true">
-    <% blacklight_config.show.context_sidebar_items.each do |item| %>
-        <%= render partial: 'context_card', locals: { document: @document, field_accessor: item } %>
+    <% blacklight_config.show.context_sidebar_items.each_with_index do |item, index| %>
+        <%= render partial: 'context_card', locals: { document: @document, field_accessor: item, card_index: index} %>
     <% end %>
   </div>
 <% end %>
