@@ -4,6 +4,9 @@ en:
       home:
         heading: 'Archival Collections at Institution'
       show:
+        context_sidebar:
+          terms_field: 'Terms & Conditions'
+          cite_field: 'How to cite this collection'
         sections:
           summary_field: 'Summary'
           access_field: 'Access and Use'

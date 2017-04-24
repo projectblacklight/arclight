@@ -16,6 +16,9 @@ module Arclight
       background_field
       scope_and_arrangement_field
       related_field
+      admin_info_field
+      terms_field
+      cite_field
       indexed_terms_field
       admin_info_field
     ]

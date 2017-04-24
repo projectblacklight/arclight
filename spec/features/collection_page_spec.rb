@@ -98,5 +98,24 @@ RSpec.describe 'Collection Page', type: :feature do
         expect(page).to have_css 'a[href="#administrative-information"]', text: 'Administrative Information'
       end
     end
+    describe 'context_sidebar' do
+      it 'has a terms and conditions card' do
+        within '#accordion' do
+          expect(page).to have_css '.card-header h5', text: 'Terms & Conditions'
+          expect(page).to have_css '.card-block dt', text: 'Restrictions:'
+          expect(page).to have_css '.card-block dd', text: 'No restrictions on access.'
+          expect(page).to have_css '.card-block dt', text: 'Terms of Access:'
+          expect(page).to have_css '.card-block dd', text: /^Copyright was transferred/
+        end
+      end
+
+      it 'has a how to cite card' do
+        within '#accordion' do
+          expect(page).to have_css '.card-header h5', text: 'How to cite this collection'
+          expect(page).to have_css '.card-block dt', text: 'Preferred citation'
+          expect(page).to have_css '.card-block dd', text: /Omega Alpha Archives\. 1894-1992/
+        end
+      end
+    end
   end
 end
