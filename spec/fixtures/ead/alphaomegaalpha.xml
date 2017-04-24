@@ -497,6 +497,9 @@
           <did>
             <unittitle>Financial Records</unittitle>
           </did>
+          <controlaccess>
+            <genreform source="aat">Records</genreform>
+          </controlaccess>
         </c>
         <c id="aspace_4365cd1ed8bd8fee1bac6077a4d81359" level="otherlevel">
           <did>

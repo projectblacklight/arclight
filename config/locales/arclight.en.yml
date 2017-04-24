@@ -10,5 +10,6 @@ en:
           background_field: 'Background'
           scope_and_arrangement_field: 'Scope and Arrangement'
           related_field: 'Related'
+          indexed_terms_field: 'Indexed Terms'
           admin_info_field: 'Administrative Information'
     breadcrumb_separator: ' » '

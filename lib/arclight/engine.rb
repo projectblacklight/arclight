@@ -11,7 +11,13 @@ module Arclight
   # This is the defining class for the Arclight Rails Engine
   class Engine < ::Rails::Engine
     Arclight::Engine.config.catalog_controller_field_accessors = %i[
-      summary_field access_field background_field scope_and_arrangement_field related_field admin_info_field
+      summary_field
+      access_field
+      background_field
+      scope_and_arrangement_field
+      related_field
+      indexed_terms_field
+      admin_info_field
     ]
 
     initializer 'arclight.fields' do
