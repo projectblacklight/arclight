@@ -28,5 +28,9 @@ module Arclight
         "\n    mount Arclight::Engine => '/'\n"
       end
     end
+
+    def assets
+      copy_file 'arclight.scss', 'app/assets/stylesheets/arclight.scss'
+    end
   end
 end
