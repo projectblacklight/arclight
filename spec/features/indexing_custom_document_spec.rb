@@ -97,6 +97,14 @@ RSpec.describe 'Indexing Custom Document', type: :feature do
       expect(doc['access_subjects_sim']).to include 'Fraternizing'
     end
 
+    it '#all_subjects' do
+      subjects = doc['all_subjects_ssm']
+
+      expect(subjects.length).to eq 8
+      expect(subjects.first).to eq 'Societies'
+      expect(subjects.last).to eq 'Mindanao Island (Philippines)'
+    end
+
     describe '#date_range' do
       it 'includes an array of all the years in a particular unit-date range described in YYYY/YYYY format' do
         date_range_field = doc['date_range_sim']

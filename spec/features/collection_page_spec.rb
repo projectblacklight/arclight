@@ -64,6 +64,14 @@ RSpec.describe 'Collection Page', type: :feature do
       end
     end
 
+    it 'indexed terms has configured metadata' do
+      within '#indexed-terms' do
+        expect(page).to have_css('dt', text: 'Subjects')
+        expect(page).to have_css('dd', text: 'Societies')
+        expect(page).to have_css('dd', text: 'Mindanao Island (Philippines)')
+      end
+    end
+
     it 'adminstrative information has configured metadata' do
       within '#administrative-information' do
         expect(page).to have_css('dt', text: 'Acquisition information')

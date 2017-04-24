@@ -19,6 +19,8 @@ module Arclight
       admin_info_field
       terms_field
       cite_field
+      indexed_terms_field
+      admin_info_field
     ]
 
     initializer 'arclight.fields' do

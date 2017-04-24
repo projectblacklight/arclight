@@ -29,4 +29,22 @@ describe Arclight::ShowPresenter, type: :presenter do
       expect(presenter.heading).to eq 'My Title'
     end
   end
+
+  describe '#with_field_group' do
+    it 'defaults to the show_field group when none is set' do
+      expect(presenter.send(:field_group)).to eq 'show_field'
+    end
+
+    it 'sets the field group based on the given field accessor (and returns the presenter)' do
+      returned_presenter = presenter.with_field_group('a_group')
+      expect(returned_presenter).to be_a Arclight::ShowPresenter
+      expect(returned_presenter.send(:field_group)).to eq 'a_group'
+    end
+  end
+
+  describe '#field_config' do
+    it 'returns a field configuration (NullField in this context)' do
+      expect(presenter.send(:field_config, 'some_field')).to be_a Blacklight::Configuration::NullField
+    end
+  end
 end
