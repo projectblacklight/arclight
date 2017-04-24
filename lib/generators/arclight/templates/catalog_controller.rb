@@ -200,5 +200,7 @@ class CatalogController < ApplicationController
     config.add_admin_info_field 'appraisal_ssm', label: 'Appraisal information'
     config.add_admin_info_field 'custodhist_ssm', label: 'Custodial history'
     config.add_admin_info_field 'processinfo_ssm', label: 'Processing information'
+
+    config.show.partials.insert(0, :arclight_document_header)
   end
 end

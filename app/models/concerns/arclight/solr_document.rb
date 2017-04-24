@@ -17,5 +17,13 @@ module Arclight
     def eadid
       fetch('ead_ssi', nil)
     end
+
+    def unitid
+      first('unitid_ssm')
+    end
+
+    def repository
+      first('repository_ssm')
+    end
   end
 end
