@@ -31,6 +31,10 @@ module Arclight
 
     def assets
       copy_file 'arclight.scss', 'app/assets/stylesheets/arclight.scss'
+      copy_file 'arclight.js', 'app/assets/javascripts/arclight.js'
+      inject_into_file 'app/assets/javascripts/application.js', after: '//= require blacklight/blacklight' do
+        "\n//= require bootstrap/scrollspy\n"
+      end
     end
   end
 end
