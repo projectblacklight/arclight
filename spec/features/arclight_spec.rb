@@ -7,6 +7,12 @@ RSpec.describe 'Arclight', type: :feature do
     visit search_catalog_path q: '', search_field: 'all_fields'
     expect(page).to have_css '.document', count: 10
   end
+  describe 'eadid with a period' do
+    it 'is visitable with a hyphen' do
+      visit solr_document_path('m0198-xmlaspace_ref11_d0s')
+      expect(page).to have_css 'h1', text: 'Pages 1-78'
+    end
+  end
 
   describe 'show page' do
     it 'renders metadata to meet minumum DACS requirements for a component'

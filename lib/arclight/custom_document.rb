@@ -38,6 +38,7 @@ module Arclight
 
     def to_solr(solr_doc = {})
       super
+      solr_doc['id'] = eadid.first.strip.tr('.', '-')
       Solrizer.insert_field(solr_doc, 'level', 'collection', :displayable) # machine-readable
       Solrizer.insert_field(solr_doc, 'level', 'Collection', :facetable) # human-readable
       Solrizer.insert_field(solr_doc, 'names', names, :facetable)
