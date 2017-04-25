@@ -128,4 +128,12 @@ RSpec.describe 'Collection Page', type: :feature do
       end
     end
   end
+  describe 'search within' do
+    it 'has only items from this collection' do
+      click_button 'search'
+      within '#facet-collection_sim' do
+        expect(page).to have_css 'li', count: 1
+      end
+    end
+  end
 end
