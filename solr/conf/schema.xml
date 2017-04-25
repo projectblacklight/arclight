@@ -566,7 +566,10 @@
         is added to the index.  It's used either to index the same field differently,
         or to add multiple fields to the same field for easier/faster searching.  -->
    <!-- Copy Fields -->
-        
+   <!-- Indexed fields -->
+   <copyField source="*i" dest="text"/>
+   <copyField source="*im" dest="text"/>
+  
    <!-- unstemmed fields -->
    <copyField source="title_t" dest="title_unstem_search"/>
    <copyField source="subtitle_t" dest="subtitle_unstem_search"/>
