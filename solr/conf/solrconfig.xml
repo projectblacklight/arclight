@@ -191,6 +191,7 @@
        <str name="fl">
          id,
          score,
+         abstract_ssm,
          accessrestrict_ssm,
          collection_ssm,
          creator_ssm,

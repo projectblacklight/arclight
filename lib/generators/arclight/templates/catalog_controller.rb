@@ -140,6 +140,8 @@ class CatalogController < ApplicationController
     ##
     # Configuration for partials
     config.index.partials.insert(0, :index_breadcrumb)
+    config.index.partials.insert(0, :arclight_document_header)
+
 
     config.show.metadata_partials = [
       :summary_field,
