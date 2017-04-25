@@ -1,14 +1,19 @@
 <div class='al-sticky-sidebar'>
-  <div class='al-sidebar-navigation-overview'>
-    <ul class='nav nav-pills flex-column'>
-      <% unless blacklight_config.show.metadata_partials.nil? %>
-        <% blacklight_config.show.metadata_partials.each do |item| %>
-          <li class='nav-item'>
-            <%= link_to t("arclight.views.show.sections.#{item}"), "##{t("arclight.views.show.sections.#{item}").parameterize}", class: 'nav-link' %>
-          </li>
+  <div class='al-sidebar-navigation-overview card'>
+    <div class='card-header'>
+      <%= t('arclight.views.show.navigation_sidebar.title') %>
+    </div>
+    <div class='card-block'>
+      <ul class='nav nav-pills flex-column'>
+        <% unless blacklight_config.show.metadata_partials.nil? %>
+          <% blacklight_config.show.metadata_partials.each do |item| %>
+            <li class='nav-item'>
+              <%= link_to t("arclight.views.show.sections.#{item}"), "##{t("arclight.views.show.sections.#{item}").parameterize}", class: 'nav-link' %>
+            </li>
+          <% end %>
         <% end %>
-      <% end %>
-    </ul>
+      </ul>
+    </div>
   </div>
 
   <% unless blacklight_config.show.context_sidebar_items.nil? %>
