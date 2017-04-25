@@ -1,5 +1,9 @@
 en:
   arclight:
+    routes:
+      home: 'Home'
+      collections: 'Collections'
+      search_results: 'Search results'
     views:
       home:
         heading: 'Archival Collections at Institution'
