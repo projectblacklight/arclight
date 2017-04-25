@@ -14,9 +14,16 @@
 
 
 <% if controller_name == 'catalog' && has_search_parameters? %>
-  <div class="navbar-search navbar navbar-light bg-faded" role="navigation">
+  <div class="navbar-search navbar navbar-light navbar-toggleable-md bg-faded" role="navigation">
     <div class="<%= container_classes %>">
-      <%= render_search_bar  %>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item <%= collection_active_class %>">
+            <%= link_to 'Collections', arclight_engine.collections_path, class: 'nav-link' %>
+          </li>
+        </ul>
+        <%= render_search_bar  %>
+      </div>
     </div>
   </div>
 <% end %>

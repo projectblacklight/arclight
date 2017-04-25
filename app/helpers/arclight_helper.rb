@@ -17,6 +17,14 @@ module ArclightHelper
     'col-md-12 show-document'
   end
 
+  def collection_active?
+    search_state.params_for_search.try(:[], 'f').try(:[], 'level_sim') == ['Collection']
+  end
+
+  def collection_active_class
+    'active' if collection_active?
+  end
+
   ##
   # Defines custom helpers used for creating unique metadata blocks to render
   Arclight::Engine.config.catalog_controller_field_accessors.each do |config_field|
