@@ -24,6 +24,7 @@ module Arclight
 
     def to_solr(solr_doc = {})
       super
+      solr_doc['id'] = solr_doc['id'].to_s.strip.tr('.', '-')
       Solrizer.insert_field(solr_doc, 'level', formatted_level, :facetable) # human-readable for facet `level_sim`
       Solrizer.insert_field(solr_doc, 'date_range', formatted_unitdate_for_range, :facetable)
       Solrizer.insert_field(solr_doc, 'access_subjects', access_subjects, :facetable)

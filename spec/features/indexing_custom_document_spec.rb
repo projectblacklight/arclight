@@ -9,6 +9,13 @@ RSpec.describe 'Indexing Custom Document', type: :feature do
 
   context 'solrizer' do
     let(:doc) { subject.to_solr }
+    let(:with_periods) do
+      Arclight::CustomDocument.from_xml(File.read('spec/fixtures/ead/m0198_from_ASpace.xml')).to_solr
+    end
+
+    it 'id' do
+      expect(with_periods['id']).to eq 'm0198-xml'
+    end
 
     it '#bioghist' do
       expect(doc['bioghist_ssm'].first).to match(/^Alpha Omega Alpha Honor Medical Society was founded/)

@@ -25,5 +25,9 @@ module Arclight
     def repository
       first('repository_ssm')
     end
+
+    def collection_name
+      first('collection_ssm')
+    end
   end
 end
