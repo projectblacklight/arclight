@@ -70,13 +70,15 @@ class CatalogController < ApplicationController
     # :index_range can be an array or range of prefixes that will be used to create the navigation (note: It is case sensitive when searching values)
 
     config.add_facet_field 'collection_sim', label: 'Collection'
-    config.add_facet_field 'creator_sim', label: 'Creator'
+    config.add_facet_field 'creator_ssim', label: 'Creator'
     config.add_facet_field 'date_range_sim', label: 'Date range', range: true
     config.add_facet_field 'level_sim', label: 'Level'
     config.add_facet_field 'names_sim', label: 'Names'
     config.add_facet_field 'repository_sim', label: 'Repository'
     config.add_facet_field 'geogname_sim', label: 'Place'
-    config.add_facet_field 'access_subjects_sim', label: 'Subject'
+    # Temp disable access_subjects_ssim for later revision
+    #config.add_facet_field 'access_subjects_ssim', label: 'Subject'
+    config.add_facet_field 'all_subjects_ssim', label: 'All Subjects'
 
     # Have BL send all facet field names to Solr, which has been the default
     # previously. Simply remove these lines if you'd rather use Solr request
@@ -157,7 +159,7 @@ class CatalogController < ApplicationController
     ]
 
     # Collection Show Page - Summary Section
-    config.add_summary_field 'creator_ssm', label: 'Creator'
+    config.add_summary_field 'creator_ssim', label: 'Creator', :link_to_facet => true
     config.add_summary_field 'abstract_ssm', label: 'Abstract'
     config.add_summary_field 'extent_ssm', label: 'Extent'
     config.add_summary_field 'language_ssm', label: 'Language'
@@ -189,7 +191,7 @@ class CatalogController < ApplicationController
     config.add_related_field 'originalsloc_ssm', label: 'Location of originals'
 
     # Collection Show Page - Indexed Terms Section
-    config.add_indexed_terms_field 'all_subjects_ssm', label: 'Subjects', separator_options: {
+    config.add_indexed_terms_field 'all_subjects_ssim', label: 'Subjects', :link_to_facet => true, separator_options: {
       words_connector: '<br/>',
       two_words_connector: '<br/>',
       last_word_connector: '<br/>'

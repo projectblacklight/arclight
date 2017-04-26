@@ -64,7 +64,7 @@ RSpec.describe 'Search resutls', type: :feature do
           expect(page).to have_css('li .facet-label', text: 'Other', visible: false) # "otherlevel" but missing alt val
         end
 
-        within('.blacklight-creator_sim') do
+        within('.blacklight-creator_ssim') do
           expect(page).to have_css('h3 a', text: 'Creator')
           expect(page).to have_css('li .facet-label', text: 'Alpha Omega Alpha', visible: false)
         end
@@ -91,8 +91,8 @@ RSpec.describe 'Search resutls', type: :feature do
           expect(page).to have_css('li .facet-label', text: 'Mindanao Island (Philippines)', visible: false)
         end
 
-        within('.blacklight-access_subjects_sim') do
-          expect(page).to have_css('h3 a', text: 'Subject')
+        within('.blacklight-all_subjects_ssim') do
+          expect(page).to have_css('h3 a', text: 'All Subjects')
           expect(page).to have_css('li .facet-label', text: 'Societies', visible: false)
           expect(page).to have_css('li .facet-label', text: 'Fraternizing', visible: false)
           expect(page).to have_css('li .facet-label', text: 'Photographs', visible: false)
