@@ -1,19 +1,26 @@
-<div class='al-sidebar-navigation-overview'>
-  <ul class='nav flex-column'>
-    <% unless blacklight_config.show.metadata_partials.nil? %>
-      <% blacklight_config.show.metadata_partials.each do |item| %>
-        <li class='nav-item'>
-          <%= link_to t("arclight.views.show.sections.#{item}"), "##{t("arclight.views.show.sections.#{item}").parameterize}", class: 'nav-link' %>
-        </li>
-      <% end %>
-    <% end %>
-  </ul>
-</div>
-
-<% unless blacklight_config.show.context_sidebar_items.nil? %>
-  <div id="accordion" role="tablist" aria-multiselectable="true">
-    <% blacklight_config.show.context_sidebar_items.each_with_index do |item, index| %>
-        <%= render partial: 'context_card', locals: { document: @document, field_accessor: item, card_index: index} %>
-    <% end %>
+<div class='al-sticky-sidebar'>
+  <div class='al-sidebar-navigation-overview card'>
+    <div class='card-header'>
+      <%= t('arclight.views.show.navigation_sidebar.title') %>
+    </div>
+    <div class='card-block'>
+      <ul class='nav nav-pills flex-column'>
+        <% unless blacklight_config.show.metadata_partials.nil? %>
+          <% blacklight_config.show.metadata_partials.each do |item| %>
+            <li class='nav-item'>
+              <%= link_to t("arclight.views.show.sections.#{item}"), "##{t("arclight.views.show.sections.#{item}").parameterize}", class: 'nav-link' %>
+            </li>
+          <% end %>
+        <% end %>
+      </ul>
+    </div>
   </div>
-<% end %>
+
+  <% unless blacklight_config.show.context_sidebar_items.nil? %>
+    <div id="accordion" role="tablist" aria-multiselectable="true">
+      <% blacklight_config.show.context_sidebar_items.each_with_index do |item, index| %>
+          <%= render partial: 'context_card', locals: { document: @document, field_accessor: item, card_index: index} %>
+      <% end %>
+    </div>
+  <% end %>
+</div>
