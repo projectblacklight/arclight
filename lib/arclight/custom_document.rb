@@ -45,6 +45,7 @@ module Arclight
       Solrizer.insert_field(solr_doc, 'date_range', formatted_unitdate_for_range, :facetable)
       Solrizer.insert_field(solr_doc, 'access_subjects', access_subjects, :facetable)
       Solrizer.insert_field(solr_doc, 'all_subjects', all_subjects, :symbol)
+      Solrizer.insert_field(solr_doc, 'has_online_content', online_content?, :displayable)
       solr_doc
     end
 
@@ -65,6 +66,10 @@ module Arclight
 
     def all_subjects
       subjects_array(%w[corpname famname function genreform geogname occupation persname subject title], parent: 'archdesc')
+    end
+
+    def online_content?
+      search('//dao[@href]').present?
     end
   end
 end

@@ -10,6 +10,7 @@ en:
       index:
         collection_search:
           count: 'collection'
+      online_content_indicator: 'online content'
       show:
         collection_id: 'Collection ID: %{id}'
         navigation_sidebar:
