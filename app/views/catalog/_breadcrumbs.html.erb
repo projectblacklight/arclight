@@ -1,0 +1,9 @@
+<div class='al-search-breadcrumb'>
+  <%= link_to t('arclight.routes.home'), root_path %>
+  <%= t('arclight.breadcrumb_separator') %>
+  <% if collection_active? %>
+    <%= t('arclight.routes.collections') %>
+  <% else %>
+    <%= t('arclight.routes.search_results') %>
+  <% end %>
+</div>

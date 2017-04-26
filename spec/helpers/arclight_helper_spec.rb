@@ -3,6 +3,38 @@
 require 'spec_helper'
 
 RSpec.describe ArclightHelper, type: :helper do
+  describe '#collection_active?' do
+    context 'with active collection search' do
+      let(:search_state) do
+        instance_double(
+          'Blacklight::SearchState',
+          params_for_search: { 'f' => { 'level_sim' => ['Collection'] } }
+        )
+      end
+
+      before do
+        allow(helper).to receive(:search_state).and_return(search_state)
+      end
+      it do
+        expect(helper.collection_active?).to eq true
+      end
+    end
+    context 'without active collection search' do
+      let(:search_state) do
+        instance_double(
+          'Blacklight::SearchState',
+          params_for_search: {}
+        )
+      end
+
+      before do
+        allow(helper).to receive(:search_state).and_return(search_state)
+      end
+      it do
+        expect(helper.collection_active?).to eq false
+      end
+    end
+  end
   describe '#parents_to_links' do
     let(:document) do
       SolrDocument.new(
