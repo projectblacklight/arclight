@@ -105,7 +105,7 @@ RSpec.describe 'Indexing Custom Document', type: :feature do
     end
 
     it '#all_subjects' do
-      subjects = doc['all_subjects_ssm']
+      subjects = doc['all_subjects_ssim']
 
       expect(subjects.length).to eq 8
       expect(subjects.first).to eq 'Societies'

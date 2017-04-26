@@ -10,7 +10,7 @@ module Arclight
     extend_terminology do |t|
       t.unitid(path: 'archdesc/did/unitid', index_as: %i[displayable])
       t.repository(path: 'archdesc/did/repository/corpname/text() | archdesc/did/repository/name/text()', index_as: %i[displayable facetable])
-      t.creator(path: "archdesc/did/origination[@label='creator']/*/text()", index_as: %i[displayable facetable])
+      t.creator(path: "archdesc/did/origination[@label='creator']/*/text()", index_as: %i[displayable facetable symbol])
       t.prefercite(path: 'archdesc/prefercite/p', index_as: %i[displayable])
       t.function(path: 'archdesc/controlaccess/function/text()', index_as: %i[displayable facetable])
       t.occupation(path: 'archdesc/controlaccess/occupation/text()', index_as: %i[displayable facetable])
@@ -44,7 +44,7 @@ module Arclight
       Solrizer.insert_field(solr_doc, 'names', names, :facetable)
       Solrizer.insert_field(solr_doc, 'date_range', formatted_unitdate_for_range, :facetable)
       Solrizer.insert_field(solr_doc, 'access_subjects', access_subjects, :facetable)
-      Solrizer.insert_field(solr_doc, 'all_subjects', all_subjects, :displayable)
+      Solrizer.insert_field(solr_doc, 'all_subjects', all_subjects, :symbol)
       solr_doc
     end
 
