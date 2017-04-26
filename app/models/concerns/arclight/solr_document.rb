@@ -29,5 +29,9 @@ module Arclight
     def collection_name
       first('collection_ssm')
     end
+    
+    def unitdate
+      first('unitdate_ssm')
+    end
   end
 end

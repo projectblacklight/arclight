@@ -136,7 +136,7 @@ class CatalogController < ApplicationController
     # Arclight Configurations
 
     config.show.document_presenter_class = Arclight::ShowPresenter
-
+    config.index.document_presenter_class = Arclight::IndexPresenter
     ##
     # Configuration for partials
     config.index.partials.insert(0, :index_breadcrumb)
