@@ -39,17 +39,25 @@ module Arclight
     def to_solr(solr_doc = {})
       super
       solr_doc['id'] = eadid.first.strip.tr('.', '-')
-      Solrizer.insert_field(solr_doc, 'level', 'collection', :displayable) # machine-readable
-      Solrizer.insert_field(solr_doc, 'level', 'Collection', :facetable) # human-readable
-      Solrizer.insert_field(solr_doc, 'names', names, :facetable)
-      Solrizer.insert_field(solr_doc, 'date_range', formatted_unitdate_for_range, :facetable)
-      Solrizer.insert_field(solr_doc, 'access_subjects', access_subjects, :facetable)
-      Solrizer.insert_field(solr_doc, 'all_subjects', all_subjects, :symbol)
-      Solrizer.insert_field(solr_doc, 'has_online_content', online_content?, :displayable)
+      arclight_field_definitions.each do |field|
+        Solrizer.insert_field(solr_doc, field[:name], field[:value], field[:index_as])
+      end
       solr_doc
     end
 
     private
+
+    def arclight_field_definitions
+      [
+        { name: 'level', value: 'collection', index_as: :displayable },
+        { name: 'level', value: 'Collection', index_as: :facetable },
+        { name: 'names', value: names, index_as: :facetable },
+        { name: 'date_range', value: formatted_unitdate_for_range, index_as: :facetable },
+        { name: 'access_subjects', value: access_subjects, index_as: :facetable },
+        { name: 'all_subjects', value: all_subjects, index_as: :symbol },
+        { name: 'has_online_content', value: online_content?, index_as: :displayable }
+      ]
+    end
 
     def names
       [corpname, famname, name, persname].flatten.compact.uniq - repository
