@@ -58,6 +58,32 @@ RSpec.describe ArclightHelper, type: :helper do
       it { expect(helper.collection_count).to be_nil }
     end
   end
+
+  describe '#fields_have_content?' do
+    before do
+      expect(helper).to receive_messages(
+        blacklight_config: CatalogController.blacklight_config,
+        blacklight_configuration_context: Blacklight::Configuration::Context.new(helper)
+      )
+    end
+
+    context 'when the configured fields have content' do
+      let(:document) { SolrDocument.new('acqinfo_ssm': ['Data']) }
+
+      it 'is true' do
+        expect(helper.fields_have_content?(document, :admin_info_field)).to eq true
+      end
+    end
+
+    context 'when the configured fields have no content' do
+      let(:document) { SolrDocument.new }
+
+      it 'is true' do
+        expect(helper.fields_have_content?(document, :admin_info_field)).to eq false
+      end
+    end
+  end
+
   describe '#parents_to_links' do
     let(:document) do
       SolrDocument.new(
