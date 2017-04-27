@@ -13,6 +13,8 @@ en:
       online_content_indicator: 'online content'
       show:
         collection_id: 'Collection ID: %{id}'
+        overview: 'Overview'
+        no_contents: 'No content inventory'
         navigation_sidebar:
           title: 'Navigation overview'
         context_sidebar:

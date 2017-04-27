@@ -32,5 +32,9 @@ module Arclight
     initializer 'arclight.helpers' do
       ActionView::Base.send :include, ArclightHelper
     end
+
+    initializer 'arclight.views' do
+      Blacklight::Configuration.default_values[:view].hierarchy
+    end
   end
 end
