@@ -7,6 +7,9 @@ en:
     views:
       home:
         heading: 'Archival Collections at Institution'
+      index:
+        collection_search:
+          count: 'collection'
       show:
         collection_id: 'Collection ID: %{id}'
         navigation_sidebar:

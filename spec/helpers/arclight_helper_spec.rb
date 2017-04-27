@@ -35,6 +35,29 @@ RSpec.describe ArclightHelper, type: :helper do
       end
     end
   end
+  describe '#collection_count' do
+    let(:facets_from_request) do
+      [
+        Blacklight::Solr::Response::Facets::FacetField.new('collection_sim', [1, 2]),
+        Blacklight::Solr::Response::Facets::FacetField.new('cool_factor', [1])
+      ]
+    end
+
+    context 'when there are items' do
+      before do
+        allow(helper).to receive(:facets_from_request).and_return(facets_from_request)
+      end
+      it 'returns the item count from a selected Blacklight::Solr::Response::Facets::FacetField' do
+        expect(helper.collection_count).to eq 2
+      end
+    end
+    context 'when there are no items' do
+      before do
+        allow(helper).to receive(:facets_from_request).and_return([])
+      end
+      it { expect(helper.collection_count).to be_nil }
+    end
+  end
   describe '#parents_to_links' do
     let(:document) do
       SolrDocument.new(
