@@ -29,5 +29,21 @@ module Arclight
     def collection_name
       first('collection_ssm')
     end
+
+    def unitdate
+      first('unitdate_ssm')
+    end
+
+    def extent
+      first('extent_ssm')
+    end
+
+    def abstract_or_scope
+      first('abstract_ssm') || first('scopecontent_ssm')
+    end
+
+    def creator
+      first('creator_ssm')
+    end
   end
 end

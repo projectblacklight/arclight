@@ -1,0 +1,12 @@
+<div class='al-document-title-bar'>
+  <div class='row'>
+    <div class='col-8'>
+      <%= document.repository %>
+    </div>
+    <% if document.unitid  %>
+      <div class='col-4 text-right'>
+        <%= t(:'arclight.views.show.collection_id', id: document.unitid) %>
+      </div>
+    <% end %>
+  </div>
+</div>
