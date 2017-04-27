@@ -1,0 +1,7 @@
+<% if collection_active? %>
+  <div class='al-collection-count'>
+    <p class='lead'>
+      <%= pluralize(number_with_delimiter(collection_count), t('arclight.views.index.collection_search.count')) %>
+    </p>
+  </div>
+<% end %>
