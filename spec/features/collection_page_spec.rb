@@ -128,12 +128,20 @@ RSpec.describe 'Collection Page', type: :feature do
       end
     end
   end
+
   describe 'search within' do
     it 'has only items from this collection' do
       click_button 'search'
       within '#facet-collection_sim' do
         expect(page).to have_css 'li', count: 1
       end
+    end
+
+    it 'does not include the collection record' do
+      click_button 'search'
+
+      expect(page).not_to have_css('h3.index_title', text: /Alpha Omega Alpha Archives/)
+      expect(page).to have_css('.page-entries', text: '1 - 10 of 35')
     end
   end
 end

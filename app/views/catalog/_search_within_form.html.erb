@@ -2,6 +2,7 @@
   <%= render_hash_as_hidden_fields({f: {collection_sim: [@document.collection_name]}}) %>
   <div class='input-group'>
     <%= hidden_field_tag :search_field, search_fields.first.last %>
+    <%= hidden_field_tag :search_field, 'within_collection' %>
 
     <label for='q' class='sr-only'><%= t('blacklight.search.form.search.label') %></label>
     <%= text_field_tag :q, params[:q], class: 'search_q q form-control', id: 'q', autofocus: should_autofocus_on_search_box? %>
