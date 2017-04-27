@@ -20,6 +20,11 @@ task ci: %w[arclight:generate] do
   end
 end
 
+desc 'Run Eslint'
+task :eslint do
+  system './node_modules/.bin/eslint app/assets/javascripts'
+end
+
 namespace :arclight do
   desc 'Generate a test application'
   task generate: %w[engine_cart:generate]
