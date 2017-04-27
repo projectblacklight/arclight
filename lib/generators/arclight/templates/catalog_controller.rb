@@ -148,6 +148,7 @@ class CatalogController < ApplicationController
     config.index.document_presenter_class = Arclight::IndexPresenter
     ##
     # Configuration for partials
+    config.index.partials.insert(0, :arclight_online_content_indicator)
     config.index.partials.insert(0, :index_breadcrumb)
     config.index.partials.insert(0, :arclight_document_header)
 
@@ -212,6 +213,7 @@ class CatalogController < ApplicationController
     config.add_admin_info_field 'custodhist_ssm', label: 'Custodial history'
     config.add_admin_info_field 'processinfo_ssm', label: 'Processing information'
 
+    config.show.partials.insert(0, :arclight_online_content_indicator)
     config.show.partials.insert(0, :arclight_document_header)
   end
 end

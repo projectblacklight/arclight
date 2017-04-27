@@ -3,8 +3,10 @@
 require 'spec_helper'
 
 RSpec.describe 'Collection Page', type: :feature do
+  let(:doc_id) { 'aoa271' }
+
   before do
-    visit solr_document_path(id: 'aoa271')
+    visit solr_document_path(id: doc_id)
   end
 
   describe 'arclight document header' do
@@ -12,6 +14,22 @@ RSpec.describe 'Collection Page', type: :feature do
       within('.al-document-title-bar') do
         expect(page).to have_content '1118 Badger Vine Special Collections'
         expect(page).to have_content 'Collection ID: MS C 271'
+      end
+    end
+  end
+
+  describe 'online content idicator' do
+    context 'when there is online content avilable' do
+      it 'is rendered' do
+        expect(page).to have_css('.badge-success', text: 'online content')
+      end
+    end
+
+    context 'when there is no online content avilable' do
+      let(:doc_id) { 'm0198-xml' }
+
+      it 'is not rendered' do
+        expect(page).not_to have_css('.badge-success', text: 'online content')
       end
     end
   end

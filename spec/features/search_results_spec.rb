@@ -28,6 +28,18 @@ RSpec.describe 'Search resutls', type: :feature do
       end
     end
 
+    it 'renders the online content label when there is online content' do
+      visit search_catalog_path f: { level_sim: ['Collection'] }, search_field: 'all_fields'
+
+      within '.document.document-position-0' do
+        expect(page).to have_css('.badge.badge-success', text: 'online content')
+      end
+
+      within '.document.document-position-1' do
+        expect(page).not_to have_css('.badge.badge-success', text: 'online content')
+      end
+    end
+
     it 'does not include result numbers in the document header' do
       visit search_catalog_path q: '', search_field: 'all_fields'
 
