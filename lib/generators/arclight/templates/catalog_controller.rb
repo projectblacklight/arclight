@@ -120,6 +120,13 @@ class CatalogController < ApplicationController
     # since we aren't specifying it otherwise.
     config.add_search_field 'all_fields', label: 'All Fields'
 
+    config.add_search_field 'within_collection' do |field|
+      field.include_in_simple_select = false
+      field.solr_parameters = {
+        fq: '-level_sim:Collection'
+      }
+    end
+
     # "sort results by" select (pulldown)
     # label in pulldown is followed by the name of the SOLR field to sort by and
     # whether the sort is ascending or descending (it must be asc or desc
