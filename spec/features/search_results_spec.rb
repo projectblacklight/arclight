@@ -89,5 +89,12 @@ RSpec.describe 'Search resutls', type: :feature do
         end
       end
     end
+
+    describe 'accessibility review', driver: :poltergeist do
+      it 'complies to WCAG 2.0 AA guidelines', js: true do
+        visit search_catalog_path q: '', search_field: 'all_fields'
+        expect(page).to be_accessible.within('#main-container').according_to :wcag2aa
+      end
+    end
   end
 end

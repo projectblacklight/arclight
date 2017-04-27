@@ -38,4 +38,5 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency 'rubocop-rspec', '~> 1.15.0'
   spec.add_development_dependency 'rspec-rails', '~> 3.0'
   spec.add_development_dependency 'solr_wrapper'
+  spec.add_development_dependency 'axe-matchers'
 end

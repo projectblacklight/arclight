@@ -18,6 +18,7 @@ require 'rspec/rails'
 require 'capybara/poltergeist'
 Capybara.javascript_driver = :poltergeist
 
+require 'axe/rspec'
 require 'arclight'
 
 RSpec.configure do |config|
