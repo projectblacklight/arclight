@@ -100,7 +100,14 @@ RSpec.describe 'Collection Page', type: :feature do
     it 'indexed terms has configured metadata' do
       within '#indexed-terms' do
         expect(page).to have_css('dt', text: 'Subjects')
+        expect(page).to have_css('dt', text: 'Names')
+        expect(page).to have_css('dt', text: 'Places')
         expect(page).to have_css('dd', text: 'Societies')
+        expect(page).to have_css('dd', text: 'Photographs')
+        expect(page).to have_css('dd', text: 'Medicine')
+        expect(page).to have_css('dd', text: 'Alpha Omega Alpha')
+        expect(page).to have_css('dd', text: 'Root, William Webster, 1867-1932')
+        expect(page).to have_css('dd', text: 'Bierring, Walter L. (Walter Lawrence), 1868-1961')
         expect(page).to have_css('dd', text: 'Mindanao Island (Philippines)')
       end
     end

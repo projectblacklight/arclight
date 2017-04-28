@@ -11,9 +11,13 @@ module Arclight
       t.unitid(path: 'archdesc/did/unitid', index_as: %i[displayable])
       t.repository(path: 'archdesc/did/repository/corpname/text() | archdesc/did/repository/name/text()', index_as: %i[displayable facetable])
       t.creator(path: "archdesc/did/origination[@label='creator']/*/text()", index_as: %i[displayable facetable symbol])
+      t.creator_persname(path: "archdesc/did/origination[@label='creator']/persname/text()", index_as: %i[displayable facetable symbol])
+      t.creator_corpname(path: "archdesc/did/origination[@label='creator']/corpname/text()", index_as: %i[displayable facetable symbol])
+      t.creator_famname(path: "archdesc/did/origination[@label='creator']/famname/text()", index_as: %i[displayable facetable symbol])
       t.prefercite(path: 'archdesc/prefercite/p', index_as: %i[displayable])
       t.function(path: 'archdesc/controlaccess/function/text()', index_as: %i[displayable facetable])
       t.occupation(path: 'archdesc/controlaccess/occupation/text()', index_as: %i[displayable facetable])
+      t.places(path: 'archdesc/controlaccess/geogname/text()', index_as: %i[displayable facetable symbol])
       t.otherfindaid(path: 'archdesc/otherfindaid/p', index_as: %i[displayable])
 
       # overrides of solr_ead to get different `index_as` properties
@@ -51,10 +55,10 @@ module Arclight
       [
         { name: 'level', value: 'collection', index_as: :displayable },
         { name: 'level', value: 'Collection', index_as: :facetable },
-        { name: 'names', value: names, index_as: :facetable },
+        { name: 'names', value: names, index_as: :symbol },
         { name: 'date_range', value: formatted_unitdate_for_range, index_as: :facetable },
-        { name: 'access_subjects', value: access_subjects, index_as: :facetable },
-        { name: 'all_subjects', value: all_subjects, index_as: :symbol },
+        { name: 'access_subjects', value: access_subjects, index_as: :symbol },
+        { name: 'creators', value: creators, index_as: :symbol },
         { name: 'has_online_content', value: online_content?, index_as: :displayable }
       ]
     end
@@ -63,17 +67,17 @@ module Arclight
       [corpname, famname, name, persname].flatten.compact.uniq - repository
     end
 
+    def creators
+      [creator_persname, creator_corpname, creator_famname].flatten.compact.uniq - repository
+    end
     # Combine subjets into one group from:
     #  <controlaccess/><subject></subject>
     #  <controlaccess/><function></function>
     #  <controlaccess/><genreform></genreform>
     #  <controlaccess/><occupation></occupation>
+
     def access_subjects
       subjects_array(%w[subject function occupation genreform], parent: 'archdesc')
-    end
-
-    def all_subjects
-      subjects_array(%w[corpname famname function genreform geogname occupation persname subject title], parent: 'archdesc')
     end
 
     def online_content?

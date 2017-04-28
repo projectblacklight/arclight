@@ -31,6 +31,7 @@ Metrics/BlockLength:
     - 'arclight.gemspec'
     - 'spec/**/*'
     - 'tasks/**/*'
+    - 'lib/arclight/custom_document.rb'
 
 Performance/RegexpMatch:
   Enabled: false
