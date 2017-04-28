@@ -2,6 +2,7 @@
 class CatalogController < ApplicationController
 
   include Blacklight::Catalog
+  include Arclight::Catalog
 
   configure_blacklight do |config|
     ## Class for sending and receiving requests from a search index

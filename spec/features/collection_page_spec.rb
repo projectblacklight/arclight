@@ -204,6 +204,12 @@ RSpec.describe 'Collection Page', type: :feature do
         end
         expect(page).to have_css '.show-document', text: /Series I: Administrative Records/
       end
+      it 'clicking contents does not change the session results view context' do
+        visit search_catalog_path q: '', search_field: 'all_fields'
+
+        expect(page).to have_css('#documents.documents-list')
+        expect(page).not_to have_css('#documents.documents-hierarchy')
+      end
     end
   end
 end
