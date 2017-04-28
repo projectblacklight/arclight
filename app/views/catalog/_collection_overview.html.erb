@@ -1,0 +1,7 @@
+<h2 class="sr-only">Collection description</h2>
+<% unless blacklight_config.show.metadata_partials.nil? %>
+  <% blacklight_config.show.metadata_partials.each do |metadata| %>
+    <% next unless fields_have_content?(@document, metadata) %>
+    <%= render partial: 'custom_metadata', locals: { document: @document, field_accessor: metadata } %>
+  <% end %>
+<% end %>

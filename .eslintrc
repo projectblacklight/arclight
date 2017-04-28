@@ -1,0 +1,12 @@
+{
+  "extends": "airbnb-base/legacy",
+  "globals": {
+    "jQuery": true,
+    "$": true,
+    "Blacklight": true
+  },
+  "rules": {
+    "no-param-reassign": [2, { "props": false }],
+    "func-names": ["error", "never"]
+  }
+}

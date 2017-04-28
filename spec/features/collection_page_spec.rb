@@ -170,4 +170,35 @@ RSpec.describe 'Collection Page', type: :feature do
       expect(page).to have_css('.page-entries', text: '1 - 10 of 35')
     end
   end
+
+  describe 'overview and contents' do
+    it 'contents are not visible by default' do
+      expect(page).to have_css '#contents', visible: false
+    end
+    it 'overview is visible' do
+      expect(page).to have_css '#overview', visible: true
+    end
+    describe 'interactions', js: true do
+      before { click_link 'Contents' }
+      it 'clicking contents toggles visibility' do
+        expect(page).to have_css '#contents', visible: true
+        expect(page).to have_css '#overview', visible: false
+        click_link 'Overview'
+        expect(page).to have_css '#overview', visible: true
+        expect(page).to have_css '#contents', visible: false
+      end
+      it 'contents contain linked level 1 components' do
+        within '#contents' do
+          click_link 'Series I: Administrative Records, 1902-1976'
+        end
+        expect(page).to have_css '.show-document', text: /Series I: Administrative Records/
+      end
+      it 'clicking contents does not change the session results view context' do
+        visit search_catalog_path q: '', search_field: 'all_fields'
+
+        expect(page).to have_css('#documents.documents-list')
+        expect(page).not_to have_css('#documents.documents-hierarchy')
+      end
+    end
+  end
 end

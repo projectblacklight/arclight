@@ -2,6 +2,7 @@
 class CatalogController < ApplicationController
 
   include Blacklight::Catalog
+  include Arclight::Catalog
 
   configure_blacklight do |config|
     ## Class for sending and receiving requests from a search index
@@ -208,5 +209,11 @@ class CatalogController < ApplicationController
 
     config.show.partials.insert(0, :arclight_online_content_indicator)
     config.show.partials.insert(0, :arclight_document_header)
+
+    ##
+    # Hierarchy Index View
+    config.view.hierarchy
+    config.view_config(:hierarchy).document_actions.delete(:bookmark)
+    config.view.hierarchy.display_control = false
   end
 end

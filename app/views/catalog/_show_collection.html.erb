@@ -3,12 +3,25 @@
     <%= render partial: 'show_sidebar' %>
   </div>
   <div class='col-md-9'>
-    <h2 class="sr-only">Collection description</h2>
-    <% unless blacklight_config.show.metadata_partials.nil? %>
-      <% blacklight_config.show.metadata_partials.each do |metadata| %>
-        <% next unless fields_have_content?(@document, metadata) %>
-        <%= render partial: 'custom_metadata', locals: { document: @document, field_accessor: metadata } %>
-      <% end %>
-    <% end %>
+    <ul class='nav nav-pills' role='tablist'>
+      <li class='nav-item'>
+        <a class='nav-link active' data-toggle='pill' href='#overview' role='tab'>
+          <%= t 'arclight.views.show.overview' %>
+        </a>
+      </li>
+      <li class='nav-item'>
+        <a class='nav-link disabled' data-toggle='pill' href='#contents' role='tab' data-hierarchy-enable-me='true'>
+          <%= t 'arclight.views.show.no_contents' %>
+        </a>
+      </li>
+    </ul>
+    <div class='tab-content'>
+      <div class='tab-pane active' id='overview' role='tabpanel'>
+        <%= render 'collection_overview' %>
+      </div>
+      <div class='tab-pane' id='contents' role='tabpanel'>
+        <%= render 'collection_contents' %>
+      </div>
+    </div>
   </div>
 </div>
