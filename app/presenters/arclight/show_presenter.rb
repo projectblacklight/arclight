@@ -5,9 +5,8 @@ module Arclight
   class ShowPresenter < Blacklight::ShowPresenter
     def heading
       title = super
-      date = document.fetch('unitdate_ssm', [])
-      title += ", #{date.first}" if date.present?
-      title
+      delimiter = heading_delimiter(title)
+      [title, document.unitdate].compact.join(delimiter)
     end
 
     def with_field_group(group)
@@ -25,6 +24,11 @@ module Arclight
 
     def field_config(field)
       BlacklightFieldConfigurationFactory.for(config: configuration, field: field, field_group: field_group)
+    end
+
+    def heading_delimiter(title)
+      return ', ' unless title.ends_with?(',')
+      ' '
     end
   end
 end
