@@ -115,6 +115,14 @@ RSpec.describe 'Collection Page', type: :feature do
         expect(page).to have_css('dd', text: /^Processed in 2001\. Descended from astronomers\./)
       end
     end
+
+    context 'sections that do not have metadata' do
+      let(:doc_id) { 'm0198-xml' }
+
+      it 'are not displayed' do
+        expect(page).not_to have_css('.al-show-sub-heading', text: 'Background')
+      end
+    end
   end
   describe 'navigation bar' do
     it 'has configured links' do
@@ -126,6 +134,17 @@ RSpec.describe 'Collection Page', type: :feature do
         expect(page).to have_css 'a[href="#administrative-information"]', text: 'Administrative Information'
       end
     end
+
+    context 'for sections that do not have metadata' do
+      let(:doc_id) { 'm0198-xml' }
+
+      it 'does not include links to those sections' do
+        within '.al-sidebar-navigation-overview' do
+          expect(page).not_to have_css 'a[href="#background"]', text: 'Background'
+        end
+      end
+    end
+
     describe 'context_sidebar' do
       it 'has a terms and conditions card' do
         within '#accordion' do

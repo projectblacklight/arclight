@@ -29,6 +29,12 @@ module ArclightHelper
     facets_from_request.find { |f| f.name == 'collection_sim' }.try(:items).try(:count)
   end
 
+  def fields_have_content?(document, field_accessor)
+    generic_document_fields(field_accessor).any? do |_, field|
+      generic_should_render_field?(field_accessor, document, field)
+    end
+  end
+
   ##
   # Defines custom helpers used for creating unique metadata blocks to render
   Arclight::Engine.config.catalog_controller_field_accessors.each do |config_field|
