@@ -26,6 +26,10 @@ module Arclight
       first('repository_ssm')
     end
 
+    def repository_and_unitid
+      [repository, unitid].compact.join(': ')
+    end
+
     def collection_name
       first('collection_ssm')
     end

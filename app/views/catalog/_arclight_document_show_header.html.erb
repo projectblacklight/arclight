@@ -1,0 +1,15 @@
+<% document_actions = capture do %>
+  <% # bookmark functions for items/docs -%>
+  <%= render_show_doc_actions document %>
+<% end %>
+
+<div class='al-document-title-bar'>
+  <div class='row'>
+    <div class='col-9'>
+      <%= document.repository_and_unitid %>
+    </div>
+    <div class='col-3 text-right'>
+      <%= document_actions %>
+    </div>
+  </div>
+</div>

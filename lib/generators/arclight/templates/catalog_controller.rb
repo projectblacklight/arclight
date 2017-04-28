@@ -151,7 +151,7 @@ class CatalogController < ApplicationController
     # Configuration for partials
     config.index.partials.insert(0, :arclight_online_content_indicator)
     config.index.partials.insert(0, :index_breadcrumb)
-    config.index.partials.insert(0, :arclight_document_header)
+    config.index.partials.insert(0, :arclight_document_index_header)
 
 
     config.show.metadata_partials = [
@@ -208,12 +208,16 @@ class CatalogController < ApplicationController
     }
 
     config.show.partials.insert(0, :arclight_online_content_indicator)
-    config.show.partials.insert(0, :arclight_document_header)
+    config.show.partials.insert(0, :arclight_document_show_header)
+
+    # Remove unused show document actions
+    %i[citation email sms].each do |action|
+      config.view_config(:show).document_actions.delete(action)
+    end
 
     ##
     # Hierarchy Index View
     config.view.hierarchy
-    config.view_config(:hierarchy).document_actions.delete(:bookmark)
     config.view.hierarchy.display_control = false
   end
 end
