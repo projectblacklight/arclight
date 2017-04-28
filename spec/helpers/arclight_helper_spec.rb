@@ -71,7 +71,7 @@ RSpec.describe ArclightHelper, type: :helper do
       let(:document) { SolrDocument.new('acqinfo_ssm': ['Data']) }
 
       it 'is true' do
-        expect(helper.fields_have_content?(document, :admin_info_field)).to eq true
+        expect(helper.fields_have_content?(document, :background_field)).to eq true
       end
     end
 
@@ -79,7 +79,7 @@ RSpec.describe ArclightHelper, type: :helper do
       let(:document) { SolrDocument.new }
 
       it 'is true' do
-        expect(helper.fields_have_content?(document, :admin_info_field)).to eq false
+        expect(helper.fields_have_content?(document, :background_field)).to eq false
       end
     end
   end

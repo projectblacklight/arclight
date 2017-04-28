@@ -58,18 +58,23 @@ RSpec.describe 'Collection Page', type: :feature do
 
     it 'background has configured metadata' do
       within '#background' do
-        expect(page).to have_css('dt', text: 'Biographical / Historical')
-        expect(page).to have_css('dd', text: /^Alpha Omega Alpha Honor Medical Society was founded/)
-      end
-    end
-
-    it 'scope and arrangement has configured metadata' do
-      within '#scope-and-arrangement' do
         expect(page).to have_css('dt', text: 'Scope and Content')
         expect(page).to have_css('dd', text: /^Correspondence, documents, records, photos/)
 
-        expect(page).to have_css('dt', text: 'Arrangement')
-        expect(page).to have_css('dd', text: /^Arranged into seven series\./)
+        expect(page).to have_css('dt', text: 'Biographical / Historical')
+        expect(page).to have_css('dd', text: /^Alpha Omega Alpha Honor Medical Society was founded/)
+
+        expect(page).to have_css('dt', text: 'Acquisition information')
+        expect(page).to have_css('dd', text: 'Donated by Alpha Omega Alpha.')
+
+        expect(page).to have_css('dt', text: 'Appraisal information')
+        expect(page).to have_css('dd', text: /^Corpus callosum something incredible/)
+
+        expect(page).to have_css('dt', text: 'Custodial history')
+        expect(page).to have_css('dd', text: 'Maintained by Alpha Omega Alpha and the family of William Root.')
+
+        expect(page).to have_css('dt', text: 'Processing information')
+        expect(page).to have_css('dd', text: /^Processed in 2001\. Descended from astronomers\./)
       end
     end
 
@@ -100,27 +105,11 @@ RSpec.describe 'Collection Page', type: :feature do
       end
     end
 
-    it 'adminstrative information has configured metadata' do
-      within '#administrative-information' do
-        expect(page).to have_css('dt', text: 'Acquisition information')
-        expect(page).to have_css('dd', text: 'Donated by Alpha Omega Alpha.')
-
-        expect(page).to have_css('dt', text: 'Appraisal information')
-        expect(page).to have_css('dd', text: /^Corpus callosum something incredible/)
-
-        expect(page).to have_css('dt', text: 'Custodial history')
-        expect(page).to have_css('dd', text: 'Maintained by Alpha Omega Alpha and the family of William Root.')
-
-        expect(page).to have_css('dt', text: 'Processing information')
-        expect(page).to have_css('dd', text: /^Processed in 2001\. Descended from astronomers\./)
-      end
-    end
-
     context 'sections that do not have metadata' do
       let(:doc_id) { 'm0198-xml' }
 
       it 'are not displayed' do
-        expect(page).not_to have_css('.al-show-sub-heading', text: 'Background')
+        expect(page).not_to have_css('.al-show-sub-heading', text: 'Related')
       end
     end
   end
@@ -131,7 +120,7 @@ RSpec.describe 'Collection Page', type: :feature do
         expect(page).to have_css 'a[href="#access-and-use"]', text: 'Access and Use'
         expect(page).to have_css 'a[href="#background"]', text: 'Background'
         expect(page).to have_css 'a[href="#related"]', text: 'Related'
-        expect(page).to have_css 'a[href="#administrative-information"]', text: 'Administrative Information'
+        expect(page).to have_css 'a[href="#indexed-terms"]', text: 'Indexed Terms'
       end
     end
 
@@ -140,7 +129,7 @@ RSpec.describe 'Collection Page', type: :feature do
 
       it 'does not include links to those sections' do
         within '.al-sidebar-navigation-overview' do
-          expect(page).not_to have_css 'a[href="#background"]', text: 'Background'
+          expect(page).not_to have_css 'a[href="#related"]', text: 'Related'
         end
       end
     end
