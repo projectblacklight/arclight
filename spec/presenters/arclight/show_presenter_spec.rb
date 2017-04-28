@@ -24,9 +24,25 @@ describe Arclight::ShowPresenter, type: :presenter do
     it 'appends the date' do
       expect(presenter.heading).to eq 'My Title, 1900-2000'
     end
-    it 'handles missing date' do
-      allow(document).to receive(:fetch).with('unitdate_ssm', []).and_return(nil)
-      expect(presenter.heading).to eq 'My Title'
+
+    context 'documents without dates' do
+      let(:document) { SolrDocument.new(id: 1, 'title_ssm' => ['My Title']) }
+
+      it 'only renders the title' do
+        expect(presenter.heading).to eq 'My Title'
+      end
+    end
+
+    context 'titles with commas' do
+      let(:document) do
+        SolrDocument.new(id: 1,
+                         'title_ssm' => ['My Title,'],
+                         'unitdate_ssm' => ['1900-2000'])
+      end
+
+      it 'does not duplicate commas' do
+        expect(presenter.heading).to eq 'My Title, 1900-2000'
+      end
     end
   end
 
