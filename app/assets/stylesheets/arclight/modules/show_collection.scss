@@ -1,4 +1,18 @@
 .al-sticky-sidebar {
   position: sticky;
   top: 0;
+
+  // Separate first-level divs in sidebar
+  > div {
+    margin-bottom: $spacer;
+  }
+
+  .card-header h3 {
+    font-size: $font-size-h6;
+    font-weight: 400;
+  }
+}
+
+.show-document h1 {
+  margin-bottom: $spacer * 2;
 }
