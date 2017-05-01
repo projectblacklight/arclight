@@ -76,7 +76,7 @@ RSpec.describe 'Search resutls', type: :feature do
           expect(page).to have_css('.profile canvas.flot-base', visible: true)
         end
 
-        within('.blacklight-names_sim') do
+        within('.blacklight-names_ssim') do
           expect(page).to have_css('h3 a', text: 'Names')
           expect(page).to have_css('li .facet-label', text: 'Root, William Webster, 1867-1932', visible: false)
         end
@@ -91,8 +91,8 @@ RSpec.describe 'Search resutls', type: :feature do
           expect(page).to have_css('li .facet-label', text: 'Mindanao Island (Philippines)', visible: false)
         end
 
-        within('.blacklight-all_subjects_ssim') do
-          expect(page).to have_css('h3 a', text: 'All Subjects')
+        within('.blacklight-access_subjects_ssim') do
+          expect(page).to have_css('h3 a', text: 'Subject')
           expect(page).to have_css('li .facet-label', text: 'Societies', visible: false)
           expect(page).to have_css('li .facet-label', text: 'Fraternizing', visible: false)
           expect(page).to have_css('li .facet-label', text: 'Photographs', visible: false)

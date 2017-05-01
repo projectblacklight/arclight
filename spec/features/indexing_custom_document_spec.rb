@@ -87,8 +87,7 @@ RSpec.describe 'Indexing Custom Document', type: :feature do
     end
 
     it '#creator' do
-      expect(doc['creator_ssm'].first).to eq 'Alpha Omega Alpha'
-      expect(doc['creator_sim'].first).to eq 'Alpha Omega Alpha'
+      expect(doc['creators_ssim'].first).to eq 'Alpha Omega Alpha'
     end
 
     it '#extent' do
@@ -107,20 +106,10 @@ RSpec.describe 'Indexing Custom Document', type: :feature do
       expect(doc['scopecontent_ssm'].first).to match(/^Correspondence, documents/)
     end
 
-    it '#names' do
-      expect(doc['names_sim']).to include 'Root, William Webster, 1867-1932'
-    end
-
-    it '#access_subjects' do
-      expect(doc['access_subjects_sim']).to include 'Fraternizing'
-    end
-
-    it '#all_subjects' do
-      subjects = doc['all_subjects_ssim']
-
-      expect(subjects.length).to eq 8
-      expect(subjects.first).to eq 'Societies'
-      expect(subjects.last).to eq 'Mindanao Island (Philippines)'
+    it '#indexed-terms' do
+      expect(doc['access_subjects_ssim']).to include 'Fraternizing'
+      expect(doc['names_ssim']).to include 'Root, William Webster, 1867-1932'
+      expect(doc['places_ssim']).to include 'Mindanao Island (Philippines)'
     end
 
     describe '#has_online_content' do
