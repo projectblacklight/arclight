@@ -10,4 +10,22 @@ RSpec.describe Arclight::SolrDocument do
     it { expect(document).to respond_to(:parent_labels) }
     it { expect(document).to respond_to(:eadid) }
   end
+
+  describe '#repository_and_unitid' do
+    let(:document) do
+      SolrDocument.new(repository_ssm: 'Repository Name', unitid_ssm: 'MS 123')
+    end
+
+    it 'joins the repository and unitid with a colon' do
+      expect(document.repository_and_unitid).to eq 'Repository Name: MS 123'
+    end
+
+    context 'when the document does not have a unitid' do
+      let(:document) { SolrDocument.new(repository_ssm: 'Repository Name') }
+
+      it 'just returns the "Repository Name"' do
+        expect(document.repository_and_unitid).to eq 'Repository Name'
+      end
+    end
+  end
 end

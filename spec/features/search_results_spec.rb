@@ -13,8 +13,7 @@ RSpec.describe 'Search resutls', type: :feature do
 
       within('.document.document-position-0') do
         within('.al-document-title-bar') do
-          expect(page).to have_content '1118 Badger Vine Special Collections'
-          expect(page).to have_content 'Collection ID: MS C 271'
+          expect(page).to have_content '1118 Badger Vine Special Collections: MS C 271'
         end
 
         expect(page).to have_css('h3 a', text: 'Alpha Omega Alpha Archives, 1894-1992')
