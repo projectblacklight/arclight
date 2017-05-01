@@ -52,6 +52,13 @@
         meetings and publications. A large portion of the collection pertain to the different
         chapters of the Society.</abstract>
     </did>
+    <dao xlink:actuate="onRequest"
+      xlink:href="http://alphaomegaalpha.org/pdfs/AOAHistorySlideshow.ppt" xlink:role="application"
+      xlink:show="new" xlink:title="History slideshow">
+      <daodesc>
+        <p>History slideshow</p>
+      </daodesc>
+    </dao>
     <odd id="aspace_3be3b2c4bb6ad119fb3027aa9f75fb91">
       <head>General</head>
       <list type="ordered">
@@ -240,6 +247,11 @@
           <unitid>MS C 271.I</unitid>
           <unitdate normal="1902/1976" type="inclusive">1902-1976</unitdate>
         </did>
+        <scopecontent id="aspace_00d4328c32ed5e54eac5c662aa45245a">
+          <p>Administrative records include details materials directly related to the history and
+            operation of Alpha Omega Alpha. Not all records are necessarily official documents
+            but provide important background context.</p>
+        </scopecontent>
         <c id="aspace_843e8f9f22bac69872d0802d6fffbb04" level="file">
           <did>
             <unittitle>"A brief account of the origin of the Alpha Omega Alpha Honorary Fraternity"
@@ -373,6 +385,10 @@
           <did>
             <unittitle>Dr. Root and L. Raymond Higgins' collaboration on Alpha Omega Alpha
               motto,</unittitle>
+            <origination label="creator"><persname source="mesh">Root, William Webster,
+                1867-1932</persname></origination>
+            <origination label="creator"><persname source="local">Higgins, L.
+              Raymond</persname></origination>
             <unitdate normal="1903/1952" type="inclusive">1903-1952</unitdate>
             <container id="aspace_36fe2fc6c516a56117b69ab12913687f" label="Mixed Materials"
               type="box">1</container>
