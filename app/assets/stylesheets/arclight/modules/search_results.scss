@@ -1,0 +1,38 @@
+.documents-list {
+  // Result item header
+  .al-document-title-bar {
+    background-color: $gray-lighter;
+    border: $result-item-border-styling;
+    font-size: $font-size-sm;
+    margin: 0 (-$result-item-body-padding - 1px) 0.5rem;
+    padding: 3px $result-item-body-padding;
+
+    .toggle-bookmark {
+      margin-bottom: 0;
+    }
+  }
+
+  // Result item body
+  article.document {
+    border-bottom: 0;
+    border-left: $result-item-border-styling;
+    border-right: $result-item-border-styling;
+    margin-bottom: $spacer * 2;
+    padding: 0 $result-item-body-padding;
+
+    .documentHeader {
+      padding-top: 0.4rem;
+    }
+
+    .document-title-heading {
+      font-size: $font-size-h5;
+    }
+
+    .breadcrumb-links,
+    .al-document-creator,
+    .al-document-extent,
+    .al-document-abstract-or-scope {
+      font-size: $font-size-sm;
+    }
+  }
+}
