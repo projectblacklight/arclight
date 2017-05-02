@@ -173,7 +173,7 @@ class CatalogController < ApplicationController
     config.show.component_metadata_partials = [
       :component_field
     ]
-
+    
     # Component Show Page - Metadata Section
     config.add_component_field 'containers_ssim', label: 'Containers'
     config.add_component_field 'abstract_ssm', label: 'Abstract'

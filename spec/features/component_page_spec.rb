@@ -41,4 +41,12 @@ RSpec.describe 'Component Page', type: :feature do
       end
     end
   end
+
+  describe 'collection context', js: true do
+    it 'has a collection title' do
+      within '#collection-context' do
+        expect(page).to have_css 'h1', text: 'Alpha Omega Alpha Archives, 1894-1992'
+      end
+    end
+  end
 end

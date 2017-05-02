@@ -5,3 +5,17 @@
     <%= render partial: 'custom_metadata', locals: { document: @document, field_accessor: metadata } %>
   <% end %>
 <% end %>
+<!-- Section below will be moved into its own partial later -->
+<%= content_tag(:div, id: t("arclight.views.show.sections.collection_context_field").parameterize) do %>
+  <h3 class='al-show-sub-heading'>
+    <%= t("arclight.views.show.sections.collection_context_field") %>
+  </h3>
+  <%= content_tag(
+    :div, '',
+    class: 'al-context',
+    data: {
+      arclight_collection_context: true,
+      arclight_collection_context_url: solr_document_path(@document.eadid)
+    }
+  ) %>
+<% end %>
