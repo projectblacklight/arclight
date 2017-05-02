@@ -35,6 +35,22 @@ RSpec.describe ArclightHelper, type: :helper do
       end
     end
   end
+  describe '#repositories_active?' do
+    context 'with active repositories page' do
+      it do
+        allow(helper).to receive(:controller_name).twice.and_return('repositories')
+        expect(helper.repositories_active?).to eq true
+        expect(helper.repositories_active_class).to eq 'active'
+      end
+    end
+    context 'without active repositories page' do
+      it do
+        allow(helper).to receive(:controller_name).twice.and_return('NOT repositories')
+        expect(helper.repositories_active?).to eq false
+        expect(helper.repositories_active_class).to eq nil
+      end
+    end
+  end
   describe '#collection_count' do
     let(:facets_from_request) do
       [

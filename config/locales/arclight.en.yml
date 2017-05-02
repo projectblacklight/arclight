@@ -3,6 +3,7 @@ en:
     routes:
       home: 'Home'
       collections: 'Collections'
+      repositories: 'Repositories'
       search_results: 'Search results'
     views:
       home:
