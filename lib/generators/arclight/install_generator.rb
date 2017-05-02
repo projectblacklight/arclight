@@ -37,5 +37,9 @@ module Arclight
         "\n//= require bootstrap/tab\n"
       end
     end
+
+    def add_repository_config
+      copy_file 'config/repositories.yml' unless File.exist?('config/repositories.yml')
+    end
   end
 end

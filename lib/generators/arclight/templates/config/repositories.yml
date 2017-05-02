@@ -1,0 +1,12 @@
+MyRepositorySlug:
+  name: 'My Repository'
+  description: 'My Description'
+  building: 'My Building'
+  address1: 'My Street Address'
+  address2: 'My Extra Address'
+  city: 'My City'
+  state: 'My State'
+  country: 'My Country'
+  phone: '123-456-7890'
+  contact_info: 'My Contact Info'
+  thumbnail_url: 'http://example.com/thumbnail.jpg'
