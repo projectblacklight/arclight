@@ -160,7 +160,7 @@ class CatalogController < ApplicationController
       :access_field,
       :background_field,
       :related_field,
-      :indexed_terms_field,
+      :indexed_terms_field
     ]
 
     config.show.context_sidebar_items = [
@@ -168,7 +168,24 @@ class CatalogController < ApplicationController
       :terms_field,
       :cite_field
     ]
+    
+    config.show.component_metadata_partials = [
+      :component_field
+    ]
 
+    # Component Show Page - Metadata Section
+    # MISSING CONTAINER FIELD FOR NOW
+    config.add_component_field 'abstract_ssm', label: 'Abstract'
+    config.add_component_field 'extent_ssm', label: 'Extent'
+    config.add_component_field 'scopecontent_ssm', label: 'Scope and Content'
+    config.add_component_field 'accessrestrict_ssm', label: 'Restrictions'
+    config.add_component_field 'userestrict_ssm', label: 'Terms of Access'
+    config.add_component_field 'access_subjects_ssm', label: 'Subjects', separator_options: {
+      words_connector: '<br/>',
+      two_words_connector: '<br/>',
+      last_word_connector: '<br/>'
+    }
+    
     # Collection Show Page - Summary Section
     config.add_summary_field 'creators_ssim', label: 'Creator', :link_to_facet => true
     config.add_summary_field 'abstract_ssm', label: 'Abstract'
