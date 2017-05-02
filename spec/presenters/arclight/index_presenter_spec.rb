@@ -5,7 +5,7 @@ require 'spec_helper'
 describe Arclight::IndexPresenter, type: :presenter do
   subject { presenter }
 
-  let(:request_context) { double }
+  let(:request_context) { instance_double('Context', document_index_view_type: 'index') }
   let(:config) { Blacklight::Configuration.new }
 
   let(:presenter) { described_class.new(document, request_context, config) }
