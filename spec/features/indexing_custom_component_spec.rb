@@ -40,6 +40,13 @@ RSpec.describe 'Indexing Custom Component', type: :feature do
       end
     end
 
+    describe '#containers' do
+      it 'has containers for the given component' do
+        doc1 = components[1].to_solr
+        expect(doc1['containers_ssim']).to eq ['box 1', 'folder 1']
+      end
+    end
+
     describe '#date_range' do
       it 'includes an array of all the years in a particular unit-date range described in YYYY/YYYY format' do
         doc = components[0].to_solr

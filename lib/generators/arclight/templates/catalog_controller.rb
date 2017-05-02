@@ -174,7 +174,7 @@ class CatalogController < ApplicationController
     ]
 
     # Component Show Page - Metadata Section
-    # MISSING CONTAINER FIELD FOR NOW
+    config.add_component_field 'containers_ssim', label: 'Containers'
     config.add_component_field 'abstract_ssm', label: 'Abstract'
     config.add_component_field 'extent_ssm', label: 'Extent'
     config.add_component_field 'scopecontent_ssm', label: 'Scope and Content'

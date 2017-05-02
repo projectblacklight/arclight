@@ -28,6 +28,7 @@ module Arclight
       Solrizer.insert_field(solr_doc, 'level', formatted_level, :facetable) # human-readable for facet `level_sim`
       Solrizer.insert_field(solr_doc, 'date_range', formatted_unitdate_for_range, :facetable)
       Solrizer.insert_field(solr_doc, 'access_subjects', access_subjects, :facetable)
+      Solrizer.insert_field(solr_doc, 'containers', containers, :symbol)
       resolve_repository(solr_doc)
       solr_doc
     end
@@ -58,6 +59,13 @@ module Arclight
 
     def access_subjects
       subjects_array(%w[subject function occupation genreform], parent: 'c')
+    end
+
+    def containers
+      contains = search('//container').to_a
+      contains.map do |c|
+        "#{c.attributes['type'].try(:value)} #{c.text}".strip
+      end
     end
   end
 end
