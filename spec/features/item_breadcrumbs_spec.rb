@@ -10,10 +10,13 @@ RSpec.describe 'Item breadcrumb', type: :feature do
     end
 
     within document do
-      expect(page).to have_css 'a', text: 'Series I: Administrative Records'
-      expect(page).to have_css 'a', text: 'Reports'
-      expect(page).to have_css 'a', text: 'Expansion Plan'
-      click_link 'Expansion Plan'
+      within '.breadcrumb-links' do
+        expect(page).to have_css 'a', text: 'Alpha Omega Alpha Archives'
+        expect(page).to have_css 'a', text: 'Series I: Administrative Records'
+        expect(page).to have_css 'a', text: 'Reports'
+        expect(page).to have_css 'a', text: 'Expansion Plan'
+        click_link 'Expansion Plan'
+      end
     end
     expect(page).to have_css 'h1', text: 'Expansion Plan'
   end

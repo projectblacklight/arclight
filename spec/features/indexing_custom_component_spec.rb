@@ -6,7 +6,7 @@ RSpec.describe 'Indexing Custom Component', type: :feature do
   let(:components) do # an Array<Arclight::CustomComponent>
     options = { component: Arclight::CustomComponent }
     ENV['SOLR_URL'] = Blacklight.connection_config[:url]
-    indexer = SolrEad::Indexer.new(options) # `initialize` requires a solr connection
+    indexer = Arclight::Indexer.new(options) # `initialize` requires a solr connection
 
     components = []
     indexer.components('spec/fixtures/ead/alphaomegaalpha.xml').each do |node|

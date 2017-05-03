@@ -30,5 +30,6 @@ def load_indexer
     document: Arclight::CustomDocument,
     component: Arclight::CustomComponent
   }
-  SolrEad::Indexer.new(options)
+
+  Arclight::Indexer.new(options)
 end
