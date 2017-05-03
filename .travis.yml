@@ -11,6 +11,7 @@ jdk:
 # See https://github.com/travis-ci/travis-ci/issues/3225#issuecomment-177592725
 # and https://github.com/travis-ci/travis-ci/issues/3225#issuecomment-200965782
 cache:
+  bundler: true
   directories:
     - "travis_phantomjs"
 
