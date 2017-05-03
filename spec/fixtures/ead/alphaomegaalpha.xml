@@ -532,7 +532,11 @@
         <did>
           <unittitle>Series II: Membership,</unittitle>
           <unitid>MS C 271.II</unitid>
+          <physdesc altrender="whole"><extent altrender="materialtype spaceoccupied">1.5 Linear
+              Feet</extent></physdesc>
           <unitdate normal="1902/1973" type="inclusive">1902-1973</unitdate>
+          <abstract id="aspace_e806089c6553f2132b727ead99b47a70">Contains a mixture of membership
+            cards and membership rosters.</abstract>
         </did>
       </c>
       <c id="aspace_d5765d98e333f83b6278c00e9a81f31f" level="series">
@@ -555,6 +559,14 @@
           <unitid>MS C 271.V</unitid>
           <unitdate normal="1905/1973" type="inclusive">1905-1973</unitdate>
         </did>
+        <scopecontent id="aspace_e995367253cb63edb4894170879bc4cc">
+          <head>Scope and Contents</head>
+          <p>Speeches are primarily from special events such as annual membership dinners and awards
+            ceremonies.</p>
+        </scopecontent>
+        <controlaccess>
+          <genreform source="gmgpc">Speeches</genreform>
+        </controlaccess>
       </c>
       <c id="aspace_72f14d6c32e142baa3eeafdb6e4d69be" level="series">
         <did>
@@ -562,6 +574,10 @@
           <unitid>MS C 271.VI</unitid>
           <unitdate normal="1916/1967" type="inclusive">1916-1967</unitdate>
         </did>
+        <userestrict id="aspace_926880924b775f96727740894dbefc7a">
+          <head>Conditions Governing Use</head>
+          <p>Original photographs must be handled using gloves.</p>
+        </userestrict>
       </c>
       <c id="aspace_dba76dab6f750f31aa5fc73e5402e71d" level="series">
         <did>
