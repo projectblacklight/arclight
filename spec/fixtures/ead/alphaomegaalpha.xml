@@ -52,6 +52,13 @@
         meetings and publications. A large portion of the collection pertain to the different
         chapters of the Society.</abstract>
     </did>
+    <dao xlink:actuate="onRequest"
+      xlink:href="http://alphaomegaalpha.org/pdfs/AOAHistorySlideshow.ppt" xlink:role="application"
+      xlink:show="new" xlink:title="History slideshow">
+      <daodesc>
+        <p>History slideshow</p>
+      </daodesc>
+    </dao>
     <odd id="aspace_3be3b2c4bb6ad119fb3027aa9f75fb91">
       <head>General</head>
       <list type="ordered">
@@ -240,6 +247,11 @@
           <unitid>MS C 271.I</unitid>
           <unitdate normal="1902/1976" type="inclusive">1902-1976</unitdate>
         </did>
+        <scopecontent id="aspace_00d4328c32ed5e54eac5c662aa45245a">
+          <p>Administrative records include details materials directly related to the history and
+            operation of Alpha Omega Alpha. Not all records are necessarily official documents
+            but provide important background context.</p>
+        </scopecontent>
         <c id="aspace_843e8f9f22bac69872d0802d6fffbb04" level="file">
           <did>
             <unittitle>"A brief account of the origin of the Alpha Omega Alpha Honorary Fraternity"
@@ -373,6 +385,10 @@
           <did>
             <unittitle>Dr. Root and L. Raymond Higgins' collaboration on Alpha Omega Alpha
               motto,</unittitle>
+            <origination label="creator"><persname source="mesh">Root, William Webster,
+                1867-1932</persname></origination>
+            <origination label="creator"><persname source="local">Higgins, L.
+              Raymond</persname></origination>
             <unitdate normal="1903/1952" type="inclusive">1903-1952</unitdate>
             <container id="aspace_36fe2fc6c516a56117b69ab12913687f" label="Mixed Materials"
               type="box">1</container>
@@ -516,7 +532,11 @@
         <did>
           <unittitle>Series II: Membership,</unittitle>
           <unitid>MS C 271.II</unitid>
+          <physdesc altrender="whole"><extent altrender="materialtype spaceoccupied">1.5 Linear
+              Feet</extent></physdesc>
           <unitdate normal="1902/1973" type="inclusive">1902-1973</unitdate>
+          <abstract id="aspace_e806089c6553f2132b727ead99b47a70">Contains a mixture of membership
+            cards and membership rosters.</abstract>
         </did>
       </c>
       <c id="aspace_d5765d98e333f83b6278c00e9a81f31f" level="series">
@@ -539,6 +559,14 @@
           <unitid>MS C 271.V</unitid>
           <unitdate normal="1905/1973" type="inclusive">1905-1973</unitdate>
         </did>
+        <scopecontent id="aspace_e995367253cb63edb4894170879bc4cc">
+          <head>Scope and Contents</head>
+          <p>Speeches are primarily from special events such as annual membership dinners and awards
+            ceremonies.</p>
+        </scopecontent>
+        <controlaccess>
+          <genreform source="gmgpc">Speeches</genreform>
+        </controlaccess>
       </c>
       <c id="aspace_72f14d6c32e142baa3eeafdb6e4d69be" level="series">
         <did>
@@ -546,6 +574,10 @@
           <unitid>MS C 271.VI</unitid>
           <unitdate normal="1916/1967" type="inclusive">1916-1967</unitdate>
         </did>
+        <userestrict id="aspace_926880924b775f96727740894dbefc7a">
+          <head>Conditions Governing Use</head>
+          <p>Original photographs must be handled using gloves.</p>
+        </userestrict>
       </c>
       <c id="aspace_dba76dab6f750f31aa5fc73e5402e71d" level="series">
         <did>
