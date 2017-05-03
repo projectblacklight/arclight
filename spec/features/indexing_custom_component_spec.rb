@@ -76,5 +76,35 @@ RSpec.describe 'Indexing Custom Component', type: :feature do
         expect(date_range_field).to eq ['1904']
       end
     end
+
+    context '#repository_as_configured' do
+      let(:component) { components[0] }
+
+      before do
+        ENV['REPOSITORY_ID'] = nil
+        ENV['REPOSITORY_FILE'] = 'spec/fixtures/config/repositories.yml'
+      end
+
+      after do # ensure we reset these otherwise other tests will fail
+        ENV['REPOSITORY_ID'] = nil
+        ENV['REPOSITORY_FILE'] = nil
+      end
+
+      it '#repository' do
+        expect(component.repository_as_configured('foobar')).to eq 'foobar'
+      end
+
+      context 'with repository configuration' do
+        it 'with valid id' do
+          ENV['REPOSITORY_ID'] = 'US-CaS-BVSC'
+          expect(component.repository_as_configured('XXX')).to eq 'US CaS Badger Vine Special Collections'
+        end
+
+        it 'with an invalid id' do
+          ENV['REPOSITORY_ID'] = 'NOT FOUND'
+          expect { component.repository_as_configured('XXX') }.to raise_error(RuntimeError)
+        end
+      end
+    end
   end
 end

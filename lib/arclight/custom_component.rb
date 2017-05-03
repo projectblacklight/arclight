@@ -28,10 +28,18 @@ module Arclight
       Solrizer.insert_field(solr_doc, 'level', formatted_level, :facetable) # human-readable for facet `level_sim`
       Solrizer.insert_field(solr_doc, 'date_range', formatted_unitdate_for_range, :facetable)
       Solrizer.insert_field(solr_doc, 'access_subjects', access_subjects, :facetable)
+      resolve_repository(solr_doc)
       solr_doc
     end
 
     private
+
+    def resolve_repository(solr_doc)
+      repository = solr_doc[Solrizer.solr_name('repository', :displayable)]
+      %i[displayable facetable].each do |index_as|
+        Solrizer.set_field(solr_doc, 'repository', repository_as_configured(repository), index_as)
+      end
+    end
 
     # @see http://eadiva.com/2/c/
     def formatted_level

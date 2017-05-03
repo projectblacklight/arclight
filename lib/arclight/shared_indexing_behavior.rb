@@ -41,5 +41,21 @@ module Arclight
     def search(path)
       find_by_xpath(path) # rubocop:disable DynamicFindBy
     end
+
+    # If a repository slug is provided via an environment variable `REPOSITORY_ID`,
+    # then use that to lookup the name rather than the parsed out name from the EAD
+    # @param [String] `repository` the default repository name
+    def repository_as_configured(repository)
+      slug = ENV['REPOSITORY_ID']
+      if slug.present?
+        begin
+          Arclight::Repository.find_by(slug).name
+        rescue => e
+          raise "The repository slug '#{slug}' was given but it is not found in the Repository configuration data: #{e}"
+        end
+      else
+        repository
+      end
+    end
   end
 end

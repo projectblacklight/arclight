@@ -3,10 +3,25 @@
 require 'spec_helper'
 
 RSpec.describe 'Repository', type: :feature do
-  let(:test_data) { Arclight::Repository.from_yaml('spec/fixtures/config/repositories.yml') }
+  before do # don't read from the default config/repositories.yml for tests
+    ENV['REPOSITORY_FILE'] = 'spec/fixtures/config/repositories.yml'
+  end
+
+  context 'has an ActiveRecord like interface' do
+    it '#all' do
+      repos = Arclight::Repository.all
+      expect(repos[0].slug).to eq 'slug_abc'
+      expect(repos[1].slug).to eq 'slug_xyz'
+    end
+    it '#find_by' do
+      expect(Arclight::Repository.find_by('slug_abc').slug).to eq 'slug_abc'
+      expect(Arclight::Repository.find_by('slug_xyz').slug).to eq 'slug_xyz'
+      expect(Arclight::Repository.find_by('not_there')).to be_nil
+    end
+  end
 
   context 'a single repository has data' do
-    let(:repo) { test_data['slug_abc'] }
+    let(:repo) { Arclight::Repository.find_by('slug_abc') }
 
     it 'in a YAML file' do
       expect(repo.slug).to eq 'slug_abc'
@@ -49,26 +64,11 @@ RSpec.describe 'Repository', type: :feature do
     end
   end
   context 'a second repository has data' do
-    let(:repo) { test_data['slug_xyz'] }
+    let(:repo) { Arclight::Repository.find_by('slug_xyz') }
 
     it 'in a YAML file' do
       expect(repo.slug).to eq 'slug_xyz'
       expect(repo.name).to eq 'XYZ'
-    end
-  end
-  context 'has an ActiveRecord like interface' do
-    before do # we don't want to read from the normal config/ directory for tests...
-      allow(Arclight::Repository).to receive(:from_yaml).with('config/repositories.yml').and_return(test_data)
-    end
-    it '#all' do
-      repos = Arclight::Repository.all
-      expect(repos[0].slug).to eq 'slug_abc'
-      expect(repos[1].slug).to eq 'slug_xyz'
-    end
-    it '#find_by' do
-      expect(Arclight::Repository.find_by('slug_abc').slug).to eq 'slug_abc'
-      expect(Arclight::Repository.find_by('slug_xyz').slug).to eq 'slug_xyz'
-      expect(Arclight::Repository.find_by('not_there')).to be_nil
     end
   end
 end

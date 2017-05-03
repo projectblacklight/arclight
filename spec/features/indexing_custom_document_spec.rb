@@ -81,9 +81,29 @@ RSpec.describe 'Indexing Custom Document', type: :feature do
       expect(doc['unitid_ssm'].first).to eq 'MS C 271'
     end
 
-    it '#repository' do
-      expect(doc['repository_ssm'].first).to eq '1118 Badger Vine Special Collections'
-      expect(doc['repository_sim'].first).to eq '1118 Badger Vine Special Collections'
+    context '#repository' do
+      before do
+        ENV['REPOSITORY_ID'] = nil
+        ENV['REPOSITORY_FILE'] = 'spec/fixtures/config/repositories.yml'
+      end
+
+      after do # ensure we reset these otherwise other tests will fail
+        ENV['REPOSITORY_ID'] = nil
+        ENV['REPOSITORY_FILE'] = nil
+      end
+
+      it 'matches EAD data' do
+        expect(doc['repository_ssm'].first).to eq '1118 Badger Vine Special Collections'
+        expect(doc['repository_sim'].first).to eq '1118 Badger Vine Special Collections'
+      end
+
+      context 'with REPOSITORY_ID' do
+        it 'matches Repository configuration' do
+          ENV['REPOSITORY_ID'] = 'US-CaS-BVSC'
+          expect(doc['repository_ssm'].first).to eq 'US CaS Badger Vine Special Collections'
+          expect(doc['repository_sim'].first).to eq 'US CaS Badger Vine Special Collections'
+        end
+      end
     end
 
     it '#creator' do
