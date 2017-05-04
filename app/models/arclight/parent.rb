@@ -17,6 +17,7 @@ module Arclight
     # Blacklight and Solr
     # @return [String]
     def global_id
+      return id if eadid == id
       "#{eadid}#{id}"
     end
   end
