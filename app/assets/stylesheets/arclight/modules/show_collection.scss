@@ -33,3 +33,15 @@
     margin-bottom: $spacer;
   }
 }
+
+// Collection overview
+.al-show-sub-heading {
+  font-size: $font-size-h6;
+  text-transform: uppercase;
+
+  + dl dt {
+    font-size: $font-size-xs;
+    margin-top: 4px;
+    text-transform: uppercase;
+  }
+}
