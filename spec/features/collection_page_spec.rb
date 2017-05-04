@@ -200,6 +200,13 @@ RSpec.describe 'Collection Page', type: :feature do
         end
         expect(page).to have_css '.show-document', text: /Series I: Administrative Records/
       end
+
+      it 'includes the number of direct children of the component' do
+        within '.document-position-0' do
+          expect(page).to have_css('.document-title-heading .al-number-of-children-badge', text: '25 children')
+        end
+      end
+
       it 'clicking contents does not change the session results view context' do
         visit search_catalog_path q: '', search_field: 'all_fields'
 

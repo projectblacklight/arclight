@@ -193,6 +193,7 @@
          score,
          abstract_ssm,
          accessrestrict_ssm,
+         child_component_count_isim,
          collection_ssm,
          creator_ssm,
          extent_ssm,
