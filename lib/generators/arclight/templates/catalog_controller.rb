@@ -217,15 +217,12 @@ class CatalogController < ApplicationController
       two_words_connector: '<br/>',
       last_word_connector: '<br/>'
     }
-        
+
     # Collection Show Page - Administrative Information Section
     config.add_admin_info_field 'acqinfo_ssm', label: 'Acquisition information'
     config.add_admin_info_field 'appraisal_ssm', label: 'Appraisal information'
     config.add_admin_info_field 'custodhist_ssm', label: 'Custodial history'
     config.add_admin_info_field 'processinfo_ssm', label: 'Processing information'
-
-    config.show.partials.insert(0, :arclight_online_content_indicator)
-    config.show.partials.insert(0, :arclight_document_show_header)
 
     # Remove unused show document actions
     %i[citation email sms].each do |action|
