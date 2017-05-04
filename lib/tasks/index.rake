@@ -20,6 +20,7 @@ namespace :arclight do
   task :index do
     raise 'Please specify your file, ex. FILE=<path/to/file.xml>' unless ENV['FILE']
     indexer = load_indexer
+    print "Loading #{ENV['FILE']} into index...\n"
     elapsed_time = Benchmark.realtime { indexer.update(ENV['FILE']) }
     print "Indexed #{ENV['FILE']} (in #{elapsed_time.round(3)} secs).\n"
   end

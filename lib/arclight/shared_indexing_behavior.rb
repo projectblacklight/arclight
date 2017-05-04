@@ -49,7 +49,7 @@ module Arclight
       slug = ENV['REPOSITORY_ID']
       if slug.present?
         begin
-          Arclight::Repository.find_by(slug).name
+          Arclight::Repository.find_by(slug: slug).name
         rescue => e
           raise "The repository slug '#{slug}' was given but it is not found in the Repository configuration data: #{e}"
         end

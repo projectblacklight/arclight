@@ -2,7 +2,7 @@
 
 require 'spec_helper'
 
-RSpec.describe 'Search resutls', type: :feature do
+RSpec.describe 'Search results', type: :feature do
   describe 'search results' do
     it 'text search works' do
       visit search_catalog_path q: 'a brief', search_field: 'all_fields'
@@ -13,7 +13,7 @@ RSpec.describe 'Search resutls', type: :feature do
 
       within('.document.document-position-0') do
         within('.al-document-title-bar') do
-          expect(page).to have_content '1118 Badger Vine Special Collections: MS C 271'
+          expect(page).to have_content 'National Library of Medicine. History of Medicine Division: MS C 271'
         end
 
         expect(page).to have_css('h3 a', text: 'Alpha Omega Alpha Archives, 1894-1992')
@@ -83,7 +83,7 @@ RSpec.describe 'Search resutls', type: :feature do
 
         within('.blacklight-repository_sim') do
           expect(page).to have_css('h3 a', text: 'Repository')
-          expect(page).to have_css('li .facet-label', text: '1118 Badger Vine Special Collections', visible: false)
+          expect(page).to have_css('li .facet-label', text: 'National Library of Medicine. History of Medicine Division', visible: false) # rubocop: disable Metrics/LineLength
         end
 
         within('.blacklight-geogname_sim') do
@@ -99,6 +99,20 @@ RSpec.describe 'Search resutls', type: :feature do
           expect(page).to have_css('li .facet-label', text: 'Medicine', visible: false)
         end
       end
+    end
+    it 'renders the repository card when faceted on repository' do
+      visit search_catalog_path f: {
+        repository_sim: ['National Library of Medicine. History of Medicine Division']
+      }, search_field: 'all_fields'
+
+      expect(page).to have_css('.al-repository-card')
+      expect(page).to have_css('.al-repository')
+      expect(page).not_to have_css('.al-repository-extra')
+    end
+    it 'does not include repository card if not faceted on repository' do
+      visit search_catalog_path q: '', search_field: 'all_fields'
+
+      expect(page).not_to have_css('.al-repository-card')
     end
   end
 end

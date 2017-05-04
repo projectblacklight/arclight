@@ -53,6 +53,16 @@ namespace :arclight do
 
   desc 'Seed fixture data to Solr'
   task :seed do
-    system('DIR=./spec/fixtures/ead rake arclight:index_dir')
+    puts 'Seeding index with data from spec/fixtures/ead...'
+    Dir.glob('spec/fixtures/ead/*.xml').each do |file|
+      system("FILE=#{file} rake arclight:index")
+    end
+    Dir.glob('spec/fixtures/ead/*').each do |dir|
+      next unless File.directory?(dir)
+      system("REPOSITORY_ID=#{File.basename(dir)} " \
+             'REPOSITORY_FILE=spec/fixtures/config/repositories.yml ' \
+             "DIR=#{dir} " \
+             'rake arclight:index_dir')
+    end
   end
 end

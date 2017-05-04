@@ -59,11 +59,18 @@ module Arclight
       from_yaml(ENV['REPOSITORY_FILE'] || 'config/repositories.yml').values
     end
 
-    # Mimics ActiveRecord `find_by` behavior
+    # Mimics ActiveRecord dynamic `find_by` behavior for the slug or name
     #
-    # @param [String] `slug`
-    def self.find_by(slug)
-      all.select { |repo| repo.slug == slug }.first
+    # @param [String] `slug` or `name`
+    # @return [Repository]
+    def self.find_by(slug: nil, name: nil)
+      if slug
+        all.find { |repo| repo.slug == slug }
+      elsif name
+        all.find { |repo| repo.name == name }
+      else
+        raise ArgumentError, 'Requires either slug or name parameters to find_by'
+      end
     end
   end
 end

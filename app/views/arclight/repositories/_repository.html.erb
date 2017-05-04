@@ -18,14 +18,16 @@
           <% end %>
         </address>
       </div>
-      <div class='col-5 al-repository-description'>
+      <div class='col al-repository-description'>
         <%= repository.description %>
       </div>
-      <div class='col-2 al-repository-extra'>
-        <!-- TODO: actually count the collections -->
-        <div class='al-repository-extra-collection-count'>n collections</div>
-        <button type='button' class='btn btn-secondary'>Learn More</button>
-      </div>
+      <% if repositories_active? %>
+        <div class='col-2 al-repository-extra'>
+          <!-- TODO: actually count the collections -->
+          <div class='al-repository-extra-collection-count'>n collections</div>
+          <button type='button' class='btn btn-secondary'>Learn More</button>
+        </div>
+      <% end %>
     </div>
   </div>
 </div>
