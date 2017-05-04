@@ -44,13 +44,15 @@ module Arclight
       super
       solr_doc['id'] = eadid.first.strip.tr('.', '-')
       arclight_field_definitions.each do |field|
-        Solrizer.insert_field(solr_doc, field[:name], field[:value], field[:index_as])
+        # we want to use `set_field` rather than `insert_field` since we may be overriding fields
+        Solrizer.set_field(solr_doc, field[:name], field[:value], field[:index_as])
       end
       solr_doc
     end
 
     private
 
+    # rubocop: disable Metrics/MethodLength
     def arclight_field_definitions
       [
         { name: 'level', value: 'collection', index_as: :displayable },
@@ -59,9 +61,12 @@ module Arclight
         { name: 'date_range', value: formatted_unitdate_for_range, index_as: :facetable },
         { name: 'access_subjects', value: access_subjects, index_as: :symbol },
         { name: 'creators', value: creators, index_as: :symbol },
-        { name: 'has_online_content', value: online_content?, index_as: :displayable }
+        { name: 'has_online_content', value: online_content?, index_as: :displayable },
+        { name: 'repository', value: repository_as_configured(repository), index_as: :displayable },
+        { name: 'repository', value: repository_as_configured(repository), index_as: :facetable }
       ]
     end
+    # rubocop: enable Metrics/MethodLength
 
     def names
       [corpname, famname, name, persname].flatten.compact.uniq - repository
@@ -70,12 +75,12 @@ module Arclight
     def creators
       [creator_persname, creator_corpname, creator_famname].flatten.compact.uniq - repository
     end
+
     # Combine subjets into one group from:
     #  <controlaccess/><subject></subject>
     #  <controlaccess/><function></function>
     #  <controlaccess/><genreform></genreform>
     #  <controlaccess/><occupation></occupation>
-
     def access_subjects
       subjects_array(%w[subject function occupation genreform], parent: 'archdesc')
     end

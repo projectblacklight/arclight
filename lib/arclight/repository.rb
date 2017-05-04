@@ -46,7 +46,7 @@ module Arclight
     #
     # @return [Array<Repository>]
     def self.all
-      from_yaml('config/repositories.yml').values
+      from_yaml(ENV['REPOSITORY_FILE'] || 'config/repositories.yml').values
     end
 
     # Mimics ActiveRecord `find_by` behavior
