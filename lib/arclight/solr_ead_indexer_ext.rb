@@ -10,6 +10,8 @@ module Arclight
 
       add_collection_context_to_parent_fields(node, solr_doc)
 
+      add_count_of_child_compontents(node, solr_doc)
+
       solr_doc
     end
 
@@ -39,6 +41,10 @@ module Arclight
 
       solr_doc[parent_titles_field_name] = (solr_doc[parent_titles_field_name] || []).unshift(eadtitle)
       solr_doc[parent_titles_search_field_name] = (solr_doc[parent_titles_search_field_name] || []).unshift(eadtitle)
+    end
+
+    def add_count_of_child_compontents(node, solr_doc)
+      solr_doc[Solrizer.solr_name('child_component_count', type: :integer)] = node.xpath('count(c)').to_i
     end
   end
 end
