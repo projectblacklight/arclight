@@ -1,0 +1,7 @@
+@mixin document-title-bar {
+  background-color: $gray-lighter;
+  border: $result-item-border-styling;
+  font-size: $font-size-sm;
+  margin: 0 (-$result-item-body-padding - 1px) 0.5rem;
+  padding: 3px $result-item-body-padding;
+}
