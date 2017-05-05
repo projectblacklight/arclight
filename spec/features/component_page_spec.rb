@@ -2,7 +2,7 @@
 
 require 'spec_helper'
 
-RSpec.describe 'Collection Page', type: :feature do
+RSpec.describe 'Component Page', type: :feature do
   let(:doc_id) { 'aoa271aspace_843e8f9f22bac872d0802d6fffbb04' }
 
   before { visit solr_document_path(id: doc_id) }
