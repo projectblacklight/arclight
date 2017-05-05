@@ -1,5 +1,6 @@
 sample:
   name: 'My Repository'
+  visit_note: 'Containers are stored offsite and must be pages 2 to 3 days in advance'
   description: 'Lorem ipsum'
   building: 'My Building'
   address1: 'My Street Address'
@@ -13,6 +14,7 @@ sample:
   thumbnail_url: 'http://example.com/thumbnail_ABC.jpg'
 sul-spec:
   name: 'Stanford University Libraries. Special Collections and University Archives'
+  visit_note: 'Special Collections and University Archives materials are stored offsite and must be paged 36 hours in advance.'
   description: 'The Special Collections and University Archives Department of Stanford University Libraries is committed to acquiring, preserving, and providing access to primary source materials that support the research needs of the Stanford community and beyond. There are three distinct divisions in our department: Manuscripts, Rare Books and University Archives. We welcome all students, scholars and members of the general public to the Field Reading Room. Learn more about using and accessing our collections.'
   building: 'Green Library'
   address1: '557 Escondido Mall'

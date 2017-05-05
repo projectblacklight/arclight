@@ -1,0 +1,19 @@
+<div class='al-in-person-repository-name'>
+  <% if repository.thumbnail_url %>
+    <%= image_tag repository.thumbnail_url, alt: repository.name, class: 'img-fluid float-left' %>
+  <% end %>
+  <div>
+    <%= repository.name %>
+  </div>
+</div>
+<div class='al-in-person-repository-location'>
+  <address>
+    <% %i[building address1 address2 city_state_zip_country phone contact_info].each do |f| %>
+      <% if repository.send(f).present? %>
+        <div class='al-repository-contact-<%= f %>'>
+          <%= repository.send(f) %>
+        </div>
+      <% end %>
+    <% end %>
+  </address>
+</div>

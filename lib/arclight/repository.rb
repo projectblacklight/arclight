@@ -9,6 +9,7 @@ module Arclight
 
     FIELDS = %i[name
                 description
+                visit_note
                 building
                 address1
                 address2

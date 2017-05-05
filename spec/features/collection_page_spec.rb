@@ -142,6 +142,21 @@ RSpec.describe 'Collection Page', type: :feature do
     end
 
     describe 'context_sidebar' do
+      context 'that has a visitation note' do
+        let(:doc_id) { 'm0198-xml' }
+
+        it 'has an in person card' do
+          within '#accordion' do
+            expect(page).to have_css '.card-header h3', text: 'In person'
+            expect(page).to have_css '.card-block dt', text: 'Before you visit:'
+            expect(page).to have_css '.card-block dd', text: /materials are stored offsite and must be paged/
+            expect(page).to have_css '.card-block dt', text: 'Location of this collection:'
+            expect(page).to have_css '.card-block dd', text: /Special Collections and University Archives/
+            expect(page).to have_css '.card-block dd .al-repository-contact-building', text: 'Green Library'
+          end
+        end
+      end
+
       it 'has a terms and conditions card' do
         within '#accordion' do
           expect(page).to have_css '.card-header h3', text: 'Terms & Conditions'

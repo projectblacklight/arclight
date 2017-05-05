@@ -25,6 +25,7 @@ en:
         navigation_sidebar:
           title: 'Navigation overview'
         context_sidebar:
+          in_person_field: 'In person'
           terms_field: 'Terms & Conditions'
           cite_field: 'How to cite this collection'
         sections:

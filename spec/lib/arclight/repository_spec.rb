@@ -30,6 +30,9 @@ RSpec.describe Arclight::Repository do
       it '#name' do
         expect(repo.name).to eq 'My Repository'
       end
+      it '#visit_note' do
+        expect(repo.visit_note).to eq 'Containers are stored offsite and must be pages 2 to 3 days in advance'
+      end
       it '#description' do
         expect(repo.description).to eq 'Lorem ipsum'
       end
