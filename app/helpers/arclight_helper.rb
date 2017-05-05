@@ -43,6 +43,16 @@ module ArclightHelper
     end
   end
 
+  # If we have a facet on the repository, then return the Repository object for it
+  #
+  # @return [Repository]
+  def repository_faceted_on
+    return unless try(:search_state)
+    repos = facets_from_request.find { |f| f.name == 'repository_sim' }.try(:items)
+    faceted = repos && repos.length == 1 && repos.first.value
+    Arclight::Repository.find_by(name: repos.first.value) if faceted
+  end
+
   ##
   # Defines custom helpers used for creating unique metadata blocks to render
   Arclight::Engine.config.catalog_controller_field_accessors.each do |config_field|

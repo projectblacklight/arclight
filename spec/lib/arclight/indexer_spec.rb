@@ -8,7 +8,7 @@ RSpec.describe Arclight::Indexer do
 
   let(:xml) do
     data = Nokogiri::XML(
-      File.open('spec/fixtures/ead/alphaomegaalpha.xml').read
+      File.open('spec/fixtures/ead/nlm/alphaomegaalpha.xml').read
     )
     data.remove_namespaces!
     data

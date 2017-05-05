@@ -7,14 +7,14 @@ RSpec.describe 'Indexing Custom Document', type: :feature do
     Arclight::CustomDocument.from_xml(file)
   end
 
-  let(:file) { File.read('spec/fixtures/ead/alphaomegaalpha.xml') }
+  let(:file) { File.read('spec/fixtures/ead/nlm/alphaomegaalpha.xml') }
 
   context 'solrizer' do
     let(:doc) { subject.to_solr }
 
     describe '#id' do
       context 'with periods' do
-        let(:file) { File.read('spec/fixtures/ead/m0198_from_ASpace.xml') }
+        let(:file) { File.read('spec/fixtures/ead/sul-spec/m0198_from_ASpace.xml') }
 
         it 'are replaced with hyphens in the identifier' do
           expect(doc['id']).to eq 'm0198-xml'
@@ -84,12 +84,10 @@ RSpec.describe 'Indexing Custom Document', type: :feature do
     context '#repository' do
       before do
         ENV['REPOSITORY_ID'] = nil
-        ENV['REPOSITORY_FILE'] = 'spec/fixtures/config/repositories.yml'
       end
 
       after do # ensure we reset these otherwise other tests will fail
         ENV['REPOSITORY_ID'] = nil
-        ENV['REPOSITORY_FILE'] = nil
       end
 
       it 'matches EAD data' do
@@ -99,9 +97,9 @@ RSpec.describe 'Indexing Custom Document', type: :feature do
 
       context 'with REPOSITORY_ID' do
         it 'matches Repository configuration' do
-          ENV['REPOSITORY_ID'] = 'US-CaS-BVSC'
-          expect(doc['repository_ssm'].first).to eq 'US CaS Badger Vine Special Collections'
-          expect(doc['repository_sim'].first).to eq 'US CaS Badger Vine Special Collections'
+          ENV['REPOSITORY_ID'] = 'nlm'
+          expect(doc['repository_ssm'].first).to eq 'National Library of Medicine. History of Medicine Division'
+          expect(doc['repository_sim'].first).to eq 'National Library of Medicine. History of Medicine Division'
         end
       end
     end
@@ -140,7 +138,7 @@ RSpec.describe 'Indexing Custom Document', type: :feature do
       end
 
       context 'when a document does not have online content' do
-        let(:file) { File.read('spec/fixtures/ead/m0198_from_ASpace.xml') }
+        let(:file) { File.read('spec/fixtures/ead/sul-spec/m0198_from_ASpace.xml') }
 
         it 'is false' do
           expect(doc['has_online_content_ssm']).to eq [false]

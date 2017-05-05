@@ -26,7 +26,7 @@ before_install:
   - "phantomjs --version"
 
 before_script:
-  - xmllint --noout --schema spec/fixtures/xsd/ead.xsd spec/fixtures/ead/*.xml
+  - find spec/fixtures/ead -name '*.xml' | xargs xmllint --noout --schema spec/fixtures/xsd/ead.xsd
 addons:
   apt:
     sources:

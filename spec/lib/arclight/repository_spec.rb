@@ -2,34 +2,33 @@
 
 require 'spec_helper'
 
-RSpec.describe 'Repository', type: :feature do
-  before do # don't read from the default config/repositories.yml for tests
-    ENV['REPOSITORY_FILE'] = 'spec/fixtures/config/repositories.yml'
-  end
-
+RSpec.describe Arclight::Repository do
   context 'has an ActiveRecord like interface' do
     it '#all' do
-      repos = Arclight::Repository.all
-      expect(repos[0].slug).to eq 'slug_abc'
-      expect(repos[1].slug).to eq 'slug_xyz'
+      repos = described_class.all
+      expect(repos.map(&:slug)).to include 'sample', 'nlm', 'sul-spec'
     end
-    it '#find_by' do
-      expect(Arclight::Repository.find_by('slug_abc').slug).to eq 'slug_abc'
-      expect(Arclight::Repository.find_by('slug_xyz').slug).to eq 'slug_xyz'
-      expect(Arclight::Repository.find_by('not_there')).to be_nil
+    it '#find_by(slug)' do
+      expect(described_class.find_by(slug: 'sample').slug).to eq 'sample'
+      expect(described_class.find_by(slug: 'not_there')).to be_nil
+      expect { described_class.find_by(slug: nil) }.to raise_error(ArgumentError)
+    end
+    it '#find_by(name)' do
+      expect(described_class.find_by(name: 'My Repository').slug).to eq 'sample'
+      expect(described_class.find_by(name: 'not_there')).to be_nil
+      expect { described_class.find_by(name: nil) }.to raise_error(ArgumentError)
     end
   end
 
   context 'a single repository has data' do
-    let(:repo) { Arclight::Repository.find_by('slug_abc') }
+    let(:repo) { described_class.find_by(slug: 'sample') }
 
     it 'in a YAML file' do
-      expect(repo.slug).to eq 'slug_abc'
-      expect(repo.name).to eq 'ABC'
+      expect(repo.slug).to eq 'sample'
     end
     context 'fields' do
       it '#name' do
-        expect(repo.name).to eq 'ABC'
+        expect(repo.name).to eq 'My Repository'
       end
       it '#description' do
         expect(repo.description).to eq 'Lorem ipsum'
@@ -70,15 +69,14 @@ RSpec.describe 'Repository', type: :feature do
     end
   end
   context 'a second repository has data' do
-    let(:repo) { Arclight::Repository.find_by('slug_xyz') }
+    let(:repo) { described_class.find_by(slug: 'nlm') }
 
     it 'in a YAML file' do
-      expect(repo.slug).to eq 'slug_xyz'
-      expect(repo.name).to eq 'XYZ'
+      expect(repo.slug).to eq 'nlm'
     end
   end
   context 'when missing data' do
-    let(:repo) { Arclight::Repository.find_by('slug_abc') }
+    let(:repo) { described_class.find_by(slug: 'sample') }
 
     it 'handles missing a country' do
       repo.country = nil

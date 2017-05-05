@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 ENV['RAILS_ENV'] ||= 'test'
+ENV['REPOSITORY_FILE'] ||= 'spec/fixtures/config/repositories.yml'
 
 require 'simplecov'
 require 'coveralls'

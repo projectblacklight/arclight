@@ -12,7 +12,7 @@ RSpec.describe 'Collection Page', type: :feature do
   describe 'arclight document header' do
     it 'includes a div with the repository and collection ID' do
       within('.al-document-title-bar') do
-        expect(page).to have_content '1118 Badger Vine Special Collections'
+        expect(page).to have_content 'National Library of Medicine. History of Medicine Division'
         expect(page).to have_content 'Collection ID: MS C 271'
       end
     end

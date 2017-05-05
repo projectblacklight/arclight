@@ -9,7 +9,7 @@ RSpec.describe 'Indexing Custom Component', type: :feature do
     indexer = Arclight::Indexer.new(options) # `initialize` requires a solr connection
 
     components = []
-    indexer.components('spec/fixtures/ead/alphaomegaalpha.xml').each do |node|
+    indexer.components('spec/fixtures/ead/nlm/alphaomegaalpha.xml').each do |node|
       components << indexer.send(:om_component_from_node, node) # private method :(
     end
     components
@@ -82,12 +82,10 @@ RSpec.describe 'Indexing Custom Component', type: :feature do
 
       before do
         ENV['REPOSITORY_ID'] = nil
-        ENV['REPOSITORY_FILE'] = 'spec/fixtures/config/repositories.yml'
       end
 
       after do # ensure we reset these otherwise other tests will fail
         ENV['REPOSITORY_ID'] = nil
-        ENV['REPOSITORY_FILE'] = nil
       end
 
       it '#repository' do
@@ -96,8 +94,10 @@ RSpec.describe 'Indexing Custom Component', type: :feature do
 
       context 'with repository configuration' do
         it 'with valid id' do
-          ENV['REPOSITORY_ID'] = 'US-CaS-BVSC'
-          expect(component.repository_as_configured('XXX')).to eq 'US CaS Badger Vine Special Collections'
+          ENV['REPOSITORY_ID'] = 'nlm'
+          expect(component.repository_as_configured('XXX')).to eq(
+            'National Library of Medicine. History of Medicine Division'
+          )
         end
 
         it 'with an invalid id' do
