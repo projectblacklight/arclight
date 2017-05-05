@@ -13,7 +13,7 @@ module Arclight
     end
 
     def eadid
-      (@eadid || '').tr('.', '-')
+      Arclight::NormalizedId.new(@eadid).to_s
     end
 
     ##

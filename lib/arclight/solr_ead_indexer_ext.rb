@@ -26,7 +26,7 @@ module Arclight
     end
 
     def add_collection_id(node, solr_doc)
-      eadid = node.xpath('//eadid').text.strip.tr('.', '-')
+      eadid = Arclight::NormalizedId.new(node.xpath('//eadid').text).to_s
       parent_id_field_name = Solrizer.solr_name('parent', :stored_sortable)
       parent_ids_field_name = Solrizer.solr_name('parent', :displayable)
 
