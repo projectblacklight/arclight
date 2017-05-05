@@ -5,10 +5,10 @@ require 'spec_helper'
 describe Arclight::ShowPresenter, type: :presenter do
   subject { presenter }
 
-  let(:request_context) { double }
+  let(:view_context) { ActionView::Base.new }
   let(:config) { Blacklight::Configuration.new }
 
-  let(:presenter) { described_class.new(document, request_context, config) }
+  let(:presenter) { described_class.new(document, view_context, config) }
 
   let(:document) do
     SolrDocument.new(id: 1,

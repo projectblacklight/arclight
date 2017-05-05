@@ -5,10 +5,11 @@ require 'spec_helper'
 describe Arclight::IndexPresenter, type: :presenter do
   subject { presenter }
 
-  let(:request_context) { instance_double('Context', document_index_view_type: 'index') }
+  let(:view_context) { ActionView::Base.new }
+
   let(:config) { Blacklight::Configuration.new }
 
-  let(:presenter) { described_class.new(document, request_context, config) }
+  let(:presenter) { described_class.new(document, view_context, config) }
 
   let(:document) do
     SolrDocument.new(id: 1,
@@ -17,6 +18,10 @@ describe Arclight::IndexPresenter, type: :presenter do
   end
 
   before do
+    expect(view_context).to receive_messages(
+      controller: instance_double('Controller', params: {}, session: {}),
+      default_document_index_view_type: 'index'
+    )
     config.index.title_field = :title_ssm
   end
 

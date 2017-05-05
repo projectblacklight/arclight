@@ -45,6 +45,18 @@ RSpec.describe 'Search results', type: :feature do
       expect(page).not_to have_css('.document-counter')
     end
 
+    it 'does not double escape entities in the heading' do
+      visit search_catalog_path q: '', search_field: 'all_fields'
+      expect(page).to have_css(
+        'h3.index_title',
+        text: '"A brief account of the origin of the Alpha Omega Alpha Honorary Fraternity" - William W. Root, n.d.'
+      )
+      expect(page).not_to have_css(
+        'h3.index_title',
+        text: /&quote;A brief account of the origin/
+      )
+    end
+
     # Very little metadata exists at the component level to drive any tests
     it 'renders metadata to meet minumum DACS requirements for a component'
 
