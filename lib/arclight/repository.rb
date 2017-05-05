@@ -5,6 +5,8 @@ module Arclight
   # Static information about a given repository identified by a unique `slug`
   #
   class Repository
+    include ActiveModel::Conversion # for to_partial_path
+
     FIELDS = %i[name
                 description
                 building
@@ -12,6 +14,7 @@ module Arclight
                 address2
                 city
                 state
+                zip
                 country
                 phone
                 contact_info
@@ -27,6 +30,13 @@ module Arclight
         value = data[field.to_s]
         send("#{field}=", value) if value.present?
       end
+    end
+
+    # @return [String] handles the formatting of "city, state zip, country"
+    def city_state_zip_country
+      state_zip = state
+      state_zip += " #{zip}" if zip
+      [city, state_zip, country].compact.join(', ')
     end
 
     # Load repository information from a YAML file

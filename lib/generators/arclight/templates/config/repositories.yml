@@ -6,6 +6,7 @@ MyRepositorySlug:
   address2: 'My Extra Address'
   city: 'My City'
   state: 'My State'
+  zip: '12345'
   country: 'My Country'
   phone: '123-456-7890'
   contact_info: 'My Contact Info'

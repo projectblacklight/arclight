@@ -3,6 +3,8 @@
   <%= t('arclight.breadcrumb_separator') %>
   <% if collection_active? %>
     <%= t('arclight.routes.collections') %>
+  <% elsif repositories_active? %>
+    <%= t('arclight.routes.repositories') %>
   <% else %>
     <%= t('arclight.routes.search_results') %>
   <% end %>

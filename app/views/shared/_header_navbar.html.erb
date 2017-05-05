@@ -12,14 +12,16 @@
   </div>
 </nav>
 
-
-<% if controller_name == 'catalog' && has_search_parameters? %>
+<% if (controller_name == 'catalog' && has_search_parameters?) || controller_name == 'repositories' %>
   <div class="navbar-search navbar navbar-light navbar-toggleable-md bg-faded" role="navigation">
     <div class="<%= container_classes %>">
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
+          <li class="nav-item <%= repositories_active_class %>">
+            <%= link_to t('arclight.routes.repositories'), arclight_engine.repositories_path, class: 'nav-link' %>
+          </li>
           <li class="nav-item <%= collection_active_class %>">
-            <%= link_to 'Collections', arclight_engine.collections_path, class: 'nav-link' %>
+            <%= link_to t('arclight.routes.collections'), arclight_engine.collections_path, class: 'nav-link' %>
           </li>
         </ul>
         <%= render_search_bar  %>

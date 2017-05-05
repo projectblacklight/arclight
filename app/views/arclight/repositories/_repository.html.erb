@@ -1,0 +1,31 @@
+<div class="al-repository">
+  <div class='container'>
+    <div class='row'>
+      <div class='col-2 align-self-center al-repository-thumbnail'>
+        <%= image_tag repository.thumbnail_url, alt: repository.name, class: 'img-fluid' %>
+      </div>
+      <div class='col-3 al-repository-contact'>
+        <h3>
+          <%= repository.name %><!-- TODO: linkify -->
+        </h3>
+        <address>
+          <% %i[building address1 address2 city_state_zip_country phone contact_info].each do |f| %>
+            <% if repository.send(f).present? %>
+              <div class='al-repository-contact-<%= f %>'>
+                <%= repository.send(f) %>
+              </div>
+            <% end %>
+          <% end %>
+        </address>
+      </div>
+      <div class='col-5 al-repository-description'>
+        <%= repository.description %>
+      </div>
+      <div class='col-2 al-repository-extra'>
+        <!-- TODO: actually count the collections -->
+        <div class='al-repository-extra-collection-count'>n collections</div>
+        <button type='button' class='btn btn-secondary'>Learn More</button>
+      </div>
+    </div>
+  </div>
+</div>

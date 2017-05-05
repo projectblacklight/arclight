@@ -18,7 +18,7 @@ module ArclightHelper
   end
 
   def collection_active?
-    search_state.params_for_search.try(:[], 'f').try(:[], 'level_sim') == ['Collection']
+    try(:search_state) && search_state.params_for_search.try(:[], 'f').try(:[], 'level_sim') == ['Collection']
   end
 
   def collection_active_class
@@ -27,6 +27,14 @@ module ArclightHelper
 
   def collection_count
     facets_from_request.find { |f| f.name == 'collection_sim' }.try(:items).try(:count)
+  end
+
+  def repositories_active?
+    controller_name == 'repositories'
+  end
+
+  def repositories_active_class
+    'active' if repositories_active?
   end
 
   def fields_have_content?(document, field_accessor)
