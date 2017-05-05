@@ -29,4 +29,18 @@ RSpec.describe Arclight::Indexer do
       end
     end
   end
+
+  describe '#add_count_of_child_compontents' do
+    it 'adds the number of direct children' do
+      node = xml.xpath('//c[@id="aspace_563a320bb37d24a9e1e6f7bf95b52671"]').first
+      fields = indexer.additional_component_fields(node)
+      expect(fields['child_component_count_isim']).to eq 25
+    end
+
+    it 'retunrs zero when the child has no components' do
+      node = xml.xpath('//c[@id="aspace_843e8f9f22bac69872d0802d6fffbb04"]').first
+      fields = indexer.additional_component_fields(node)
+      expect(fields['child_component_count_isim']).to eq 0
+    end
+  end
 end
