@@ -1,0 +1,50 @@
+.documents-hierarchy {
+  h3 {
+    font-size: $font-size-h5;
+  }
+
+  article {
+    padding: 5px;
+  }
+}
+
+// Collapse arrow indicators
+.al-toggle-view-more {
+  &[aria-expanded="true"] {
+    &::after {
+      content: '\25BC';
+    }
+  }
+
+  &::after {
+    content: '\25B6';
+  }
+}
+
+// Placeholder styling
+.al-hierarchy-placeholder {
+  padding: 5px;
+
+  h3 {
+    background-color: $gray-lighter;
+    border-radius: 5px;
+    height: $font-size-h3;
+  }
+
+  p {
+    background-color: $gray-lighter;
+    border-radius: 5px;
+    height: $font-size-base;
+  }
+}
+
+// Class styling for all level hierarchies
+@mixin hierarchy-levels {
+  @for $i from 1 through 12 {
+    .al-hierarchy-level-#{$i} {
+      margin-left: 20px;
+    }
+  }
+}
+
+@include hierarchy-levels;

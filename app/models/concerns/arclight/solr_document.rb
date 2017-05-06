@@ -57,5 +57,13 @@ module Arclight
     def number_of_children
       first('child_component_count_isim') || 0
     end
+
+    def reference
+      first('ref_ssm')
+    end
+
+    def component_level
+      first('component_level_isim')
+    end
   end
 end

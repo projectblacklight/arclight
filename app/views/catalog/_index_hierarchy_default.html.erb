@@ -1,3 +1,38 @@
 <%= content_tag('div', class: 'al-document-abstract-or-scope', title: document.abstract_or_scope) do %>
   <%= truncate(document.abstract_or_scope, length: 175) %>
 <% end if document.abstract_or_scope %>
+
+<% if document.number_of_children > 0 %>
+
+  <%= link_to(
+        t('arclight.hierarchy.view_more'),
+        "##{document.reference}-collapsible-hierarchy",
+        class: 'al-toggle-view-more',
+        data: {
+          toggle: 'collapse'
+        }
+      )
+  %>
+
+  <hr>
+
+  <%= content_tag(:div, id: "#{document.reference}-collapsible-hierarchy",
+    class: "collapse al-hierarchy-level-#{document.component_level}",
+  ) do %>
+
+    <%= content_tag(
+      :div, '',
+      class: 'al-contents',
+      data: {
+        arclight: {
+          hierarchy: true,
+          level: document.component_level + 1,
+          path: search_catalog_path,
+          name: document.collection_name,
+          parent: document.reference
+        }
+      }
+    ) %>
+
+  <% end %>
+<% end %>

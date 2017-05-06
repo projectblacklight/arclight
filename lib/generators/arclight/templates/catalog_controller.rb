@@ -233,5 +233,7 @@ class CatalogController < ApplicationController
     # Hierarchy Index View
     config.view.hierarchy
     config.view.hierarchy.display_control = false
+    config.view.hierarchy.partials = config.index.partials.dup
+    config.view.hierarchy.partials.delete(:index_breadcrumb)
   end
 end
