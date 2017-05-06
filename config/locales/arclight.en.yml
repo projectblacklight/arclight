@@ -1,5 +1,7 @@
 en:
   arclight:
+    hierarchy:
+      view_more: 'View more'
     routes:
       home: 'Home'
       collections: 'Collections'

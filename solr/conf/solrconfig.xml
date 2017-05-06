@@ -208,7 +208,9 @@
          unitid_ssm,
          parent_ssm,
          parent_unittitles_ssm,
-         ead_ssi
+         ead_ssi,
+         ref_ssm,
+         component_level_isim
        </str>
 
        <str name="facet">true</str>

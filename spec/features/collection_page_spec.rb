@@ -200,7 +200,23 @@ RSpec.describe 'Collection Page', type: :feature do
         end
         expect(page).to have_css '.show-document', text: /Series I: Administrative Records/
       end
-
+      it 'sub components are viewable and expandable' do
+        within '#contents' do
+          within '.document-position-0' do
+            click_link 'View more'
+            expect(page).to have_css 'a', text: 'Reports'
+            within '.blacklight-subseries.document-position-21' do
+              click_link 'View more'
+              expect(page).to have_css 'a', text: 'Expansion Plan'
+              within '.blacklight-subseries.document-position-0' do
+                click_link 'View more'
+                expect(page).to have_css 'a', text: 'Initial Phase'
+                expect(page).to have_css 'a', text: 'Phase II: Expansion'
+              end
+            end
+          end
+        end
+      end
       it 'includes the number of direct children of the component' do
         within '.document-position-0' do
           expect(page).to have_css('.document-title-heading .al-number-of-children-badge', text: '25 children')
