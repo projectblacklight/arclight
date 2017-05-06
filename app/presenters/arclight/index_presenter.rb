@@ -6,7 +6,7 @@ module Arclight
     def label(*)
       title = super
       delimiter = heading_delimiter(title)
-      [title, document.unitdate].compact.join(delimiter)
+      view_context.safe_join([title, document.unitdate].compact, delimiter)
     end
 
     private
