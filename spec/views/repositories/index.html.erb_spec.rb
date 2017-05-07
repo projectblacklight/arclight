@@ -21,19 +21,24 @@ RSpec.describe 'arclight/repositories/index', type: :view do
         expect(rendered).to have_css(".al-repository-#{f}", count: 4)
       end
     end
-    it 'has the correct location/contact information' do
-      %w[address1 city_state_zip_country contact_info].each do |f|
-        expect(rendered).to have_css(".al-repository-contact-#{f}", count: 4)
+    it 'has the correct address information' do
+      %w[address1 city_state_zip_country].each do |f|
+        expect(rendered).to have_css(".al-repository-street-address-#{f}", count: 4)
+      end
+    end
+    it 'has the correct contact information' do
+      %w[contact_info].each do |f|
+        expect(rendered).to have_css(".al-repository-contact-info-#{f}", count: 4)
       end
     end
     it 'handles a missing building' do
-      expect(rendered).to have_css('.al-repository-contact-building', count: 3)
-    end
-    it 'handles a missing phone' do
-      expect(rendered).to have_css('.al-repository-contact-phone', count: 2)
+      expect(rendered).to have_css('.al-repository-street-address-building', count: 3)
     end
     it 'handles a missing address2' do
-      expect(rendered).to have_css('.al-repository-contact-address2', count: 1)
+      expect(rendered).to have_css('.al-repository-street-address-address2', count: 1)
+    end
+    it 'handles a missing phone' do
+      expect(rendered).to have_css('.al-repository-contact-info-phone', count: 2)
     end
   end
   context 'switched extra content' do
