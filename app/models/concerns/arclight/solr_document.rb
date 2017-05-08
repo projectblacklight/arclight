@@ -6,6 +6,11 @@ module Arclight
   module SolrDocument
     extend Blacklight::Solr::Document
 
+    def repository_config
+      return unless repository
+      @repository_config ||= Arclight::Repository.find_by(name: repository)
+    end
+
     def parent_ids
       fetch('parent_ssm', [])
     end

@@ -3,6 +3,7 @@ class CatalogController < ApplicationController
 
   include Blacklight::Catalog
   include Arclight::Catalog
+  include Arclight::FieldConfigHelpers
 
   configure_blacklight do |config|
     ## Class for sending and receiving requests from a search index
@@ -163,6 +164,7 @@ class CatalogController < ApplicationController
     ]
 
     config.show.context_sidebar_items = [
+      :in_person_field,
       :terms_field,
       :cite_field
     ]
@@ -173,6 +175,10 @@ class CatalogController < ApplicationController
     config.add_summary_field 'extent_ssm', label: 'Extent'
     config.add_summary_field 'language_ssm', label: 'Language'
     config.add_summary_field 'prefercite_ssm', label: 'Preferred citation'
+
+    # Collection Show Page - In Person Section
+    config.add_in_person_field 'id', if: :before_you_visit_note_present, label: 'Before you visit', helper_method: :context_sidebar_visit_note # Using ID because we know it will always exist
+    config.add_in_person_field 'repository_ssm', if: :repository_config_present, label: 'Location of this collection', helper_method: :context_sidebar_repository
 
     # Collection Show Page - Terms and Condition Section
     config.add_terms_field 'accessrestrict_ssm', label: 'Restrictions'

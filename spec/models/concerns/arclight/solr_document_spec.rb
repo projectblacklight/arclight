@@ -11,6 +11,18 @@ RSpec.describe Arclight::SolrDocument do
     it { expect(document).to respond_to(:eadid) }
   end
 
+  describe '#repository_config' do
+    let(:document) { SolrDocument.new(repository_ssm: 'My Repository') }
+
+    it 'is an instance of Arclight::Repository' do
+      expect(document.repository_config).to be_a Arclight::Repository
+    end
+
+    it 'finds the correct repository' do
+      expect(document.repository_config.name).to eq document.repository
+    end
+  end
+
   describe '#repository_and_unitid' do
     let(:document) do
       SolrDocument.new(repository_ssm: 'Repository Name', unitid_ssm: 'MS 123')

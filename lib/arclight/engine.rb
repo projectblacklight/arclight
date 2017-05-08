@@ -22,6 +22,7 @@ module Arclight
       terms_field
       cite_field
       indexed_terms_field
+      in_person_field
     ]
 
     initializer 'arclight.fields' do
