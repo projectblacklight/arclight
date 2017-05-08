@@ -1,9 +1,9 @@
 @import 'bootstrap/variables';
 @import 'bootstrap_overrides';
-@import 'modules/variables';
+@import 'variables';
 @import 'modules/layout';
 @import 'modules/show_collection';
-@import 'modules/show_repositories';
+@import 'modules/repository_card.scss';
 @import 'modules/collection_search';
 @import 'modules/search_results';
 @import 'modules/hierarchy';

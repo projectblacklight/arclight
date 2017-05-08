@@ -1,0 +1,54 @@
+.al-repository {
+  background-color: $gray-lighter;
+  border: $result-item-border-styling;
+  margin-bottom: $spacer;
+
+  .al-repository-information {
+    font-size: $font-size-sm;
+    padding: $spacer;
+
+    @media (min-width: 992px) {
+      padding-left: 0;
+    }
+
+    h2 {
+      font-size: $font-size-h5;
+      margin-bottom: $spacer;
+    }
+
+    address {
+      margin-bottom: 0;
+    }
+
+    .al-repository-contact,
+    .al-repository-extra-collection-count {
+      font-weight: 300;
+    }
+
+    .al-repository-street-address {
+      margin-bottom: 0.5rem;
+    }
+
+    .al-repository-description {
+      margin-right: $spacer;
+      padding-left: $spacer * 2;
+
+      @media (min-width: 992px) {
+        border-left: $result-item-border-styling;
+      }
+    }
+
+    .al-repository-extra {
+      text-align: center;
+
+      .al-repository-extra-collection-count {
+        font-style: italic;
+        margin-bottom: $spacer;
+      }
+
+      .al-repository-collection-count {
+        font-weight: $font-weight-bold;
+      }
+    }
+  }
+}
