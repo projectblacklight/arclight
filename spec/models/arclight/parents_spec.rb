@@ -10,8 +10,18 @@ RSpec.describe Arclight::Parents do
       ead_ssi: 'abc123'
     )
   end
+
+  let(:dot_eadid_doc) do
+    SolrDocument.new(
+      parent_ssm: %w[def ghi],
+      parent_unittitles_ssm: %w[DEF GHI],
+      ead_ssi: 'abc123.xml'
+    )
+  end
+
   let(:empty_document) { SolrDocument.new }
   let(:good_instance) { described_class.from_solr_document(document) }
+  let(:dot_eadid_instance) { described_class.from_solr_document(dot_eadid_doc) }
 
   describe '.from_solr_document' do
     context 'with good data' do
@@ -22,6 +32,10 @@ RSpec.describe Arclight::Parents do
         expect(good_instance.ids).to eq %w[def ghi]
         expect(good_instance.labels).to eq %w[DEF GHI]
         expect(good_instance.eadid).to eq 'abc123'
+      end
+
+      it 'cleans up the eadid properly by replacing dots with dashes' do
+        expect(dot_eadid_instance.eadid).to eq 'abc123-xml'
       end
     end
     context 'with no data' do

@@ -5,11 +5,15 @@ module Arclight
   # Object for parsing and formalizing Solr_Ead "Parents"
   # https://github.com/awead/solr_ead/blob/8cf7ffaa66e0e4c9c0b12f5646d6c2e20984cd99/lib/solr_ead/behaviors.rb#L54-L57
   class Parents
-    attr_reader :ids, :labels, :eadid
+    attr_reader :ids, :labels
     def initialize(ids:, labels:, eadid:)
       @ids = ids
       @labels = labels
       @eadid = eadid
+    end
+
+    def eadid
+      Arclight::NormalizedId.new(@eadid).to_s
     end
 
     ##

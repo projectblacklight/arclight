@@ -42,7 +42,7 @@ module Arclight
 
     def to_solr(solr_doc = {})
       super
-      solr_doc['id'] = eadid.first.strip.tr('.', '-')
+      solr_doc['id'] = Arclight::NormalizedId.new(eadid.first).to_s
       arclight_field_definitions.each do |field|
         # we want to use `set_field` rather than `insert_field` since we may be overriding fields
         Solrizer.set_field(solr_doc, field[:name], field[:value], field[:index_as])
