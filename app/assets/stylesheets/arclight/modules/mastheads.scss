@@ -39,5 +39,17 @@
     .active a {
       color: $gray;
     }
+
+    // TODO: remove this after figuring out why the default toggler icon is not displaying
+    .navbar-toggler {
+      background: #ccc;
+    }
+  }
+
+  @media (max-width: 992px) {
+    h1,
+    + .navbar-search {
+      text-align: center;
+    }
   }
 }
