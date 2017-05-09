@@ -25,6 +25,7 @@ module Arclight
       indexed_terms_field
       in_person_field
       component_field
+      online_field
     ]
 
     initializer 'arclight.fields' do

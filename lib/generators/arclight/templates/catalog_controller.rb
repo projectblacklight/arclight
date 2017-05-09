@@ -164,11 +164,12 @@ class CatalogController < ApplicationController
     ]
 
     config.show.context_sidebar_items = [
+      :online_field,
       :in_person_field,
       :terms_field,
       :cite_field
     ]
-    
+
     config.show.component_metadata_partials = [
       :component_field
     ]
@@ -185,13 +186,16 @@ class CatalogController < ApplicationController
       two_words_connector: '<br/>',
       last_word_connector: '<br/>'
     }
-    
+
     # Collection Show Page - Summary Section
     config.add_summary_field 'creators_ssim', label: 'Creator', :link_to_facet => true
     config.add_summary_field 'abstract_ssm', label: 'Abstract'
     config.add_summary_field 'extent_ssm', label: 'Extent'
     config.add_summary_field 'language_ssm', label: 'Language'
     config.add_summary_field 'prefercite_ssm', label: 'Preferred citation'
+
+    # Collection Show Page - Online Section
+    config.add_online_field 'digital_objects_ssm', label: 'Access this item', helper_method: :context_sidebar_digital_object
 
     # Collection Show Page - In Person Section
     config.add_in_person_field 'id', if: :before_you_visit_note_present, label: 'Before you visit', helper_method: :context_sidebar_visit_note # Using ID because we know it will always exist

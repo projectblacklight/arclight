@@ -8,11 +8,21 @@ module Arclight
 
     included do
       if respond_to?(:helper_method)
+        helper_method :context_sidebar_digital_object
         helper_method :repository_config_present
         helper_method :context_sidebar_repository
         helper_method :before_you_visit_note_present
         helper_method :context_sidebar_visit_note
       end
+    end
+
+    def context_sidebar_digital_object(args)
+      document = args[:document]
+      ApplicationController.renderer.render(
+        'arclight/digital_objects/_sidebar_section',
+        layout: false,
+        locals: { digital_objects: document.digital_objects }
+      )
     end
 
     def repository_config_present(_, document)

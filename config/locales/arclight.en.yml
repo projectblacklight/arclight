@@ -1,6 +1,9 @@
 en:
   arclight:
     masthead_heading: 'Archival Collections at Institution'
+    digital_objects:
+      sidebar_section:
+        link: 'Open viewer'
     hierarchy:
       view_more: 'View more'
     routes:
@@ -25,6 +28,7 @@ en:
         navigation_sidebar:
           title: 'Navigation overview'
         context_sidebar:
+          online_field: 'Online'
           in_person_field: 'In person'
           terms_field: 'Terms & Conditions'
           cite_field: 'How to cite this collection'
