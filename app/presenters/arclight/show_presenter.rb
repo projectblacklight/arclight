@@ -4,9 +4,7 @@ module Arclight
   # Custom presentation methods for show partial
   class ShowPresenter < Blacklight::ShowPresenter
     def heading
-      title = super
-      delimiter = heading_delimiter(title)
-      view_context.safe_join([title, document.unitdate].compact, delimiter)
+      view_context.safe_join([normalize_title(super), document.unitdate].compact.map(&:html_safe), ', ')
     end
 
     def with_field_group(group)
@@ -26,9 +24,14 @@ module Arclight
       BlacklightFieldConfigurationFactory.for(config: configuration, field: field, field_group: field_group)
     end
 
-    def heading_delimiter(title)
-      return ', ' unless title.ends_with?(',')
-      ' '
+    # TODO: duplicate of IndexPresenter#normalize_title
+    def normalize_title(title)
+      if document.unitdate.blank?
+        return document.id.to_s if title.blank? # fallback to id when nothing there
+      elsif title.blank? || title == document.id.to_s # unitdate is present
+        return nil
+      end
+      title.gsub(/\s*,\s*$/, '') # strip trailing commas
     end
   end
 end

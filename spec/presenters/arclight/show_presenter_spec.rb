@@ -44,6 +44,27 @@ describe Arclight::ShowPresenter, type: :presenter do
         expect(presenter.heading).to eq 'My Title, 1900-2000'
       end
     end
+
+    context 'no title' do
+      let(:document) do
+        SolrDocument.new(id: 1,
+                         'unitdate_ssm' => ['1900-2000'])
+      end
+
+      it 'uses the date only' do
+        expect(presenter.heading).to eq '1900-2000'
+      end
+    end
+
+    context 'no title or date' do
+      let(:document) do
+        SolrDocument.new(id: 1)
+      end
+
+      it 'uses the document id' do
+        expect(presenter.heading).to eq '1'
+      end
+    end
   end
 
   describe '#with_field_group' do
