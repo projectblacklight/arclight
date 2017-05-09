@@ -38,6 +38,10 @@ module Arclight
       end
     end
 
+    def solr_config
+      directory '../../../../solr', 'solr', force: true
+    end
+
     def add_repository_config
       copy_file 'config/repositories.yml' unless File.exist?('config/repositories.yml')
     end
