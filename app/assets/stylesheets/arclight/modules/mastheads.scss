@@ -1,4 +1,4 @@
-.al-homepage.jumbotron {
+.al-homepage-masthead.jumbotron {
   border-bottom: $result-item-border-styling;
   padding: ($spacer * 2) $spacer $spacer;
 
@@ -13,9 +13,31 @@
 
   .navbar {
     padding-bottom: 0;
-    
+
     a {
       font-weight: $font-weight-bold;
+    }
+  }
+}
+
+.al-masthead {
+  h1 {
+    font-size: $font-size-h2;
+    margin: 0;
+    padding: ($spacer * 1.5) ($spacer / 2);
+  }
+
+  + .navbar-search {
+    border-bottom: $result-item-border-styling;
+    border-top: $result-item-border-styling;
+    margin-bottom: ($spacer / 2);
+
+    a {
+      font-weight: $font-weight-bold;
+    }
+
+    .active a {
+      color: $gray;
     }
   }
 }

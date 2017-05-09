@@ -13,10 +13,10 @@
 </nav>
 
 <% if controller_name == 'catalog' && !has_search_parameters? && action_name == 'index' %>
-  <div class='al-homepage jumbotron'>
+  <div class='al-homepage-masthead jumbotron'>
     <div class='row'>
       <div class='col-md-8 offset-md-2'>
-        <h1 class='text-center'><%= t('arclight.views.home.heading') %></h1>
+        <h1 class='text-center'><%= t('arclight.masthead_heading') %></h1>
       </div>
     </div>
     <div class='row'>
@@ -31,7 +31,14 @@
     </nav>
   </div>
 <% else %>
-  <div class="navbar-search navbar navbar-light navbar-toggleable-md bg-faded" role="navigation">
+  <div class='row bg-faded al-masthead'>
+    <div class='col'>
+      <div class="container">
+        <h1><%= t('arclight.masthead_heading') %></h1>
+      </div>
+    </div>
+  </div>
+  <div class="navbar-search navbar navbar-toggleable-md bg-faded" role="navigation">
     <div class="<%= container_classes %>">
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
