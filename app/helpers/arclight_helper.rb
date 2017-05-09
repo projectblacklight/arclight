@@ -53,6 +53,13 @@ module ArclightHelper
     Arclight::Repository.find_by(name: repos.first.value) if faceted
   end
 
+  # `link_to` to a search that facets on the given repository
+  #
+  # @param [String] `name` of the repository
+  def link_to_repository_facet(name)
+    link_to name, search_action_path(f: { 'repository_sim': [name] })
+  end
+
   ##
   # Defines custom helpers used for creating unique metadata blocks to render
   Arclight::Engine.config.catalog_controller_field_accessors.each do |config_field|

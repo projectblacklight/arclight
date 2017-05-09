@@ -7,7 +7,7 @@
 
       <div class="col-sm-12 col-lg-10 al-repository-information">
         <h2>
-          <%= repository.name %><!-- TODO: linkify -->
+          <%= link_to_repository_facet repository.name %>
         </h2>
         <div class='row no-gutters justify-content-md-center'>
           <div class='col-4 col-md-3 al-repository-contact'>
@@ -23,12 +23,19 @@
              </div>
 
               <div class="al-repository-contact-info">
-                <% %i[phone contact_info].each do |k| %>
-                  <% if repository.send(k).present? %>
-                    <div class='al-repository-contact-info-<%= k %>'>
-                      <%= repository.send(k) %>
-                    </div>
-                  <% end %>
+                <% if repository.phone.present? %>
+                  <div class='al-repository-contact-info-phone'>
+                    <%= repository.phone %>
+                  </div>
+                <% end %>
+                <% if repository.contact_info.present? %>
+                  <div class='al-repository-contact-info-contact_info'>
+                    <% if repository.contact_info.include?('@') %>
+                      <%= mail_to repository.contact_info %>
+                    <% else %>
+                      <%= repository.contact_info %>
+                    <% end %>
+                  </div>
                 <% end %>
               </div>
             </address>

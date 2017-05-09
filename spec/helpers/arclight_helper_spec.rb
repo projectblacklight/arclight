@@ -171,4 +171,19 @@ RSpec.describe ArclightHelper, type: :helper do
       end
     end
   end
+  describe '#link_to_repository_facet' do
+    let(:name) { 'My Repository' }
+    let(:path) { '/catalog?f=...' }
+
+    it 'links to an f query using search_action_path' do
+      allow(helper).to receive(:search_action_path)
+        .with(f: { 'repository_sim': [name] })
+        .and_return(path)
+      html = helper.link_to_repository_facet(name)
+      expect(helper).to have_received(:search_action_path)
+        .with(f: { 'repository_sim': [name] })
+      expect(html).to have_css('a @href', text: path)
+      expect(html).to have_css('a', text: name)
+    end
+  end
 end

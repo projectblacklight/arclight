@@ -8,6 +8,7 @@ RSpec.describe 'arclight/repositories/index', type: :view do
   before do
     ENV['REPOSITORY_FILE'] = 'spec/fixtures/config/repositories.yml'
     assign(:repositories, test_data)
+    allow(view).to receive(:search_action_path).and_return('/catalog?f=...')
   end
 
   context 'renders the three repository examples' do
@@ -27,9 +28,7 @@ RSpec.describe 'arclight/repositories/index', type: :view do
       end
     end
     it 'has the correct contact information' do
-      %w[contact_info].each do |f|
-        expect(rendered).to have_css(".al-repository-contact-info-#{f}", count: 4)
-      end
+      expect(rendered).to have_css('.al-repository-contact-info-contact_info a @href', count: 3, text: /mailto:/)
     end
     it 'handles a missing building' do
       expect(rendered).to have_css('.al-repository-street-address-building', count: 3)
@@ -51,6 +50,18 @@ RSpec.describe 'arclight/repositories/index', type: :view do
       allow(view).to receive(:repositories_active?).and_return(false)
       render
       expect(rendered).not_to have_css('.al-repository-extra')
+    end
+  end
+  context 'missing data' do
+    it 'handles a missing email' do
+      test_data.first.contact_info = nil
+      render
+      expect(rendered).to have_css('.al-repository-contact-info-contact_info a @href', count: 3, text: /mailto:/)
+    end
+    it 'handles a malformed email' do
+      test_data.first.contact_info = 'not-an-email-address'
+      render
+      expect(rendered).to have_css('.al-repository-contact-info-contact_info a @href', count: 3, text: /mailto:/)
     end
   end
 end
