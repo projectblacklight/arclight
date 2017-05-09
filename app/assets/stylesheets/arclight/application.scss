@@ -1,10 +1,11 @@
 @import 'bootstrap/variables';
 @import 'bootstrap_overrides';
 @import 'variables';
-@import 'modules/layout';
-@import 'modules/show_collection';
-@import 'modules/repository_card.scss';
 @import 'modules/collection_search';
-@import 'modules/search_results';
 @import 'modules/hierarchy';
+@import 'modules/layout';
+@import 'modules/mastheads';
+@import 'modules/repository_card.scss';
+@import 'modules/search_results';
+@import 'modules/show_collection';
 @import 'modules/sidebar';

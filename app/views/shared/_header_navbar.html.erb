@@ -13,7 +13,7 @@
 </nav>
 
 <% if controller_name == 'catalog' && !has_search_parameters? && action_name == 'index' %>
-  <div class='jumbotron'>
+  <div class='al-homepage jumbotron'>
     <div class='row'>
       <div class='col-md-8 offset-md-2'>
         <h1 class='text-center'><%= t('arclight.views.home.heading') %></h1>
@@ -24,18 +24,18 @@
         <%= render_search_bar %>
       </div>
     </div>
+    <nav class="navbar" role="navigation">
+      <ul class="nav justify-content-center">
+        <%= render 'shared/main_menu_links' %>
+      </ul>
+    </nav>
   </div>
 <% else %>
   <div class="navbar-search navbar navbar-light navbar-toggleable-md bg-faded" role="navigation">
     <div class="<%= container_classes %>">
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
-          <li class="nav-item <%= repositories_active_class %>">
-            <%= link_to t('arclight.routes.repositories'), arclight_engine.repositories_path, class: 'nav-link' %>
-          </li>
-          <li class="nav-item <%= collection_active_class %>">
-            <%= link_to t('arclight.routes.collections'), arclight_engine.collections_path, class: 'nav-link' %>
-          </li>
+          <%= render 'shared/main_menu_links' %>
         </ul>
         <%= render_search_bar  %>
       </div>

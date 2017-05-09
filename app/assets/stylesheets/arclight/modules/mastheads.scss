@@ -1,0 +1,21 @@
+.al-homepage.jumbotron {
+  border-bottom: $result-item-border-styling;
+  padding: ($spacer * 2) $spacer $spacer;
+
+  h1 {
+    font-size: 2.25rem;
+    margin-bottom: ($spacer * 2);
+  }
+
+  .search-query-form {
+    margin-bottom: $spacer;
+  }
+
+  .navbar {
+    padding-bottom: 0;
+    
+    a {
+      font-weight: $font-weight-bold;
+    }
+  }
+}
