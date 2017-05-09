@@ -47,6 +47,9 @@ module Arclight
         # we want to use `set_field` rather than `insert_field` since we may be overriding fields
         Solrizer.set_field(solr_doc, field[:name], field[:value], field[:index_as])
       end
+
+      add_digital_content(prefix: 'ead/archdesc', solr_doc: solr_doc)
+
       solr_doc
     end
 

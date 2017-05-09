@@ -84,6 +84,28 @@ RSpec.describe 'Indexing Custom Component', type: :feature do
       end
     end
 
+    describe '#add_digital_content' do
+      it 'adds digital object json' do
+        doc = components.find do |c|
+          c.to_solr['ref_ssm'] == ['aspace_843e8f9f22bac872d0802d6fffbb04']
+        end.to_solr
+
+        digital_objects = doc['digital_objects_ssm']
+        expect(digital_objects.length).to eq 2
+        digital_objects.each do |object|
+          json = JSON.parse(object)
+          expect(json).to be_a Hash
+          expect(json).to have_key 'label'
+          expect(json).to have_key 'href'
+        end
+      end
+
+      it 'does not include the field of there is no dao for the component' do
+        doc = components[2].to_solr
+        expect(doc).not_to include 'digital_objects_ssm'
+      end
+    end
+
     context '#repository_as_configured' do
       let(:component) { components[0] }
 

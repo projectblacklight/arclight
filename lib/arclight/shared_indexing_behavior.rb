@@ -57,5 +57,20 @@ module Arclight
         repository
       end
     end
+
+    def add_digital_content(prefix:, solr_doc:)
+      dao = ng_xml.xpath("#{prefix}/dao").to_a
+      return if dao.blank?
+      field_name = Solrizer.solr_name('digital_objects', :displayable)
+      solr_doc[field_name] = digital_objects(dao)
+    end
+
+    def digital_objects(objects)
+      objects.map do |dao|
+        label = dao.attributes['title'].try(:value) || dao.xpath('daodesc/p').try(:text)
+        href = (dao.attributes['href'] || dao.attributes['xlink:href']).try(:value)
+        Arclight::DigitalObject.new(label: label, href: href).to_json
+      end
+    end
   end
 end

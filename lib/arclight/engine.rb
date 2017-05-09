@@ -3,6 +3,7 @@
 require 'blacklight'
 require 'solr_ead'
 require 'arclight/normalized_id'
+require 'arclight/digital_object'
 require 'arclight/shared_indexing_behavior'
 require 'arclight/custom_document'
 require 'arclight/custom_component'
