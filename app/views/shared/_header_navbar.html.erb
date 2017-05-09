@@ -12,7 +12,20 @@
   </div>
 </nav>
 
-<% if (controller_name == 'catalog' && has_search_parameters?) || controller_name == 'repositories' %>
+<% if controller_name == 'catalog' && !has_search_parameters? && action_name == 'index' %>
+  <div class='jumbotron'>
+    <div class='row'>
+      <div class='col-md-8 offset-md-2'>
+        <h1 class='text-center'><%= t('arclight.views.home.heading') %></h1>
+      </div>
+    </div>
+    <div class='row'>
+      <div class='col-md-6 offset-md-3'>
+        <%= render_search_bar %>
+      </div>
+    </div>
+  </div>
+<% else %>
   <div class="navbar-search navbar navbar-light navbar-toggleable-md bg-faded" role="navigation">
     <div class="<%= container_classes %>">
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
