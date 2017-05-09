@@ -12,7 +12,7 @@ en:
         heading: 'Archival Collections at Institution'
       index:
         number_of_children:
-          zero: 'No children'
+          zero: 'box 1 folder 2'
           one: '1 child'
           other: '%{count} children'
         collection_search:

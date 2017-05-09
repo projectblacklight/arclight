@@ -210,7 +210,8 @@
          parent_unittitles_ssm,
          ead_ssi,
          ref_ssm,
-         component_level_isim
+         component_level_isim,
+         containers_ssim
        </str>
 
        <str name="facet">true</str>
