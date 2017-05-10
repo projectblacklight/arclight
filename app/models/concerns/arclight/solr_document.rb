@@ -70,5 +70,14 @@ module Arclight
     def component_level
       first('component_level_isim')
     end
+
+    def digital_objects
+      digital_objects_field = fetch('digital_objects_ssm', [])
+      return [] if digital_objects_field.blank?
+
+      digital_objects_field.map do |object|
+        Arclight::DigitalObject.from_json(object)
+      end
+    end
   end
 end

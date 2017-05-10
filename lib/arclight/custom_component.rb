@@ -30,6 +30,8 @@ module Arclight
       Solrizer.insert_field(solr_doc, 'access_subjects', access_subjects, :facetable)
       Solrizer.insert_field(solr_doc, 'containers', containers, :symbol)
       resolve_repository(solr_doc)
+      add_digital_content(prefix: 'c/did', solr_doc: solr_doc)
+
       solr_doc
     end
 

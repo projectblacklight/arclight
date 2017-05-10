@@ -13,4 +13,20 @@ RSpec.describe 'Component Page', type: :feature do
       expect(page).not_to have_css('h1', text: /^&quot;A brief account of the origin of/)
     end
   end
+
+  describe 'sidebar' do
+    it 'includes an online section when the component includes a DAO' do
+      within('.al-sticky-sidebar') do
+        expect(page).to have_css('h3', text: 'Online')
+        # Blacklight renders the dt and it is not necessary in our display
+        expect(page).to have_css('dt', visible: false)
+
+        expect(page).to have_css('.al-digital-object', count: 2)
+
+        expect(page).to have_css('.al-digtal-object-label', text: 'Folder of digitized stuff')
+        expect(page).to have_css('.al-digtal-object-label', text: /^Letter from Christian B\. Anfinsen/)
+        expect(page).to have_css('.btn-primary', text: 'Open viewer', count: 2)
+      end
+    end
+  end
 end

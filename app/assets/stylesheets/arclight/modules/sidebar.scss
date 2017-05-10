@@ -1,3 +1,12 @@
 .al-in-person-repository-location {
   clear: left;
 }
+
+.al-digital-object {
+  margin-bottom: $spacer;
+}
+
+// Hiding this from display since we don't need it.
+dt.blacklight-digital_objects_ssm {
+  display: none;
+}

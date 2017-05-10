@@ -3,6 +3,7 @@
 require 'blacklight'
 require 'solr_ead'
 require 'arclight/normalized_id'
+require 'arclight/digital_object'
 require 'arclight/shared_indexing_behavior'
 require 'arclight/custom_document'
 require 'arclight/custom_component'
@@ -24,6 +25,7 @@ module Arclight
       indexed_terms_field
       in_person_field
       component_field
+      online_field
     ]
 
     initializer 'arclight.fields' do

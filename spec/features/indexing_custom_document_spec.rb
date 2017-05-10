@@ -161,5 +161,25 @@ RSpec.describe 'Indexing Custom Document', type: :feature do
       it 'handles normal unitdates formatted as YYYY/YYYY when the years are the same'
       it 'handles normal unitdates formatted as YYYY'
     end
+
+    describe 'digital content' do
+      context 'for a collection with a digital object' do
+        it 'indexes the dao for the collection document' do
+          objects = doc['digital_objects_ssm']
+          expect(objects.length).to eq 1
+          json = JSON.parse(objects.first)
+          expect(json).to have_key 'label'
+          expect(json).to have_key 'href'
+        end
+      end
+
+      context 'for a collection without a digital object' do
+        let(:file) { File.read('spec/fixtures/ead/sul-spec/m0198_from_ASpace.xml') }
+
+        it 'does not include a digital objects field' do
+          expect(doc['digital_objects_ssm']).to be_nil
+        end
+      end
+    end
   end
 end
