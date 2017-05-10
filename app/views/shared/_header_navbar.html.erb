@@ -12,17 +12,40 @@
   </div>
 </nav>
 
-<% if (controller_name == 'catalog' && has_search_parameters?) || controller_name == 'repositories' %>
-  <div class="navbar-search navbar navbar-light navbar-toggleable-md bg-faded" role="navigation">
+<% if controller_name == 'catalog' && !has_search_parameters? && action_name == 'index' %>
+  <div class='al-homepage-masthead jumbotron'>
+    <div class='row'>
+      <div class='col-md-8 offset-md-2'>
+        <h1 class='text-center'><%= t('arclight.masthead_heading') %></h1>
+      </div>
+    </div>
+    <div class='row'>
+      <div class='col-md-6 offset-md-3'>
+        <%= render_search_bar %>
+      </div>
+    </div>
+    <nav class="navbar" role="navigation">
+      <ul class="nav justify-content-center">
+        <%= render 'shared/main_menu_links' %>
+      </ul>
+    </nav>
+  </div>
+<% else %>
+  <div class='row bg-faded al-masthead'>
+    <div class='col'>
+      <div class="container">
+        <h1><%= t('arclight.masthead_heading') %></h1>
+      </div>
+    </div>
+  </div>
+  <div class="navbar-search navbar navbar-toggleable-sm bg-faded" role="navigation">
     <div class="<%= container_classes %>">
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
-          <li class="nav-item <%= repositories_active_class %>">
-            <%= link_to t('arclight.routes.repositories'), arclight_engine.repositories_path, class: 'nav-link' %>
-          </li>
-          <li class="nav-item <%= collection_active_class %>">
-            <%= link_to t('arclight.routes.collections'), arclight_engine.collections_path, class: 'nav-link' %>
-          </li>
+          <%= render 'shared/main_menu_links' %>
         </ul>
         <%= render_search_bar  %>
       </div>

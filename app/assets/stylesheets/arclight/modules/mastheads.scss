@@ -1,0 +1,55 @@
+.al-homepage-masthead.jumbotron {
+  border-bottom: $result-item-border-styling;
+  padding: ($spacer * 2) $spacer $spacer;
+
+  h1 {
+    font-size: 2.25rem;
+    margin-bottom: ($spacer * 2);
+  }
+
+  .search-query-form {
+    margin-bottom: $spacer;
+  }
+
+  .navbar {
+    padding-bottom: 0;
+
+    a {
+      font-weight: $font-weight-bold;
+    }
+  }
+}
+
+.al-masthead {
+  h1 {
+    font-size: $font-size-h2;
+    margin: 0;
+    padding: ($spacer * 1.5) ($spacer / 2);
+  }
+
+  + .navbar-search {
+    border-bottom: $result-item-border-styling;
+    border-top: $result-item-border-styling;
+    margin-bottom: ($spacer / 2);
+
+    a {
+      font-weight: $font-weight-bold;
+    }
+
+    .active a {
+      color: $gray;
+    }
+
+    // TODO: remove this after figuring out why the default toggler icon is not displaying
+    .navbar-toggler {
+      background: #ccc;
+    }
+  }
+
+  @media (max-width: 992px) {
+    h1,
+    + .navbar-search {
+      text-align: center;
+    }
+  }
+}

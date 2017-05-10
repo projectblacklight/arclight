@@ -1,5 +1,6 @@
 en:
   arclight:
+    masthead_heading: 'Archival Collections at Institution'
     hierarchy:
       view_more: 'View more'
     routes:
@@ -8,8 +9,6 @@ en:
       repositories: 'Repositories'
       search_results: 'Search results'
     views:
-      home:
-        heading: 'Archival Collections at Institution'
       index:
         number_of_children:
           zero: 'No children'
@@ -22,6 +21,7 @@ en:
         collection_id: 'Collection ID: %{id}'
         overview: 'Overview'
         no_contents: 'No content inventory'
+        search_within: 'Search within this collection'
         navigation_sidebar:
           title: 'Navigation overview'
         context_sidebar:
