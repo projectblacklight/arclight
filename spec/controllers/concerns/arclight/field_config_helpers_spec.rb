@@ -14,6 +14,9 @@ RSpec.describe Arclight::FieldConfigHelpers do
     SolrDocument.new(repository_ssm: ['National Library of Medicine. History of Medicine Division'])
   end
   let(:document_without_repository) { SolrDocument.new }
+  let(:document_without_request) do
+    SolrDocument.new(repository_ssm: ['Stanford University Libraries. Special Collections and University Archives'])
+  end
 
   describe '#repository_config_present' do
     it 'is true when the repository configuration is present' do
@@ -26,6 +29,24 @@ RSpec.describe Arclight::FieldConfigHelpers do
       expect(
         helper.repository_config_present(nil, document_without_repository)
       ).to be false
+    end
+  end
+
+  describe '#request_config_present' do
+    context 'when repository_config is present' do
+      it do
+        expect(helper.request_config_present(nil, document_with_repository)).to be true
+      end
+      context 'when no request config is present' do
+        it do
+          expect(helper.request_config_present(nil, document_without_request)).to be false
+        end
+      end
+    end
+    context 'when repository_config is absent' do
+      it do
+        expect(helper.repository_config_present(nil, document_without_repository)).to be false
+      end
     end
   end
 

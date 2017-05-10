@@ -1,0 +1,42 @@
+# frozen_string_literal: true
+
+module Arclight
+  module Requests
+    ##
+    # This object relies on the ability to respond to attributes passed in as
+    # query parameters from the form mapping configuratino
+    class GoogleForm
+      attr_reader :document, :presenter
+      delegate :collection_name, :eadid, :containers, to: :document
+
+      ##
+      # @param [Blacklight::SolrDocument] document
+      # @param [Arclight::ShowPresenter] presenter
+      def initialize(document, presenter)
+        @document = document
+        @presenter = presenter
+      end
+
+      ##
+      # Url of form to fill
+      def url
+        document.repository_config.google_request_url
+      end
+
+      ##
+      # Converts mappings as a query url param into a Hash used for sending
+      # messages and providing pre-filled form fields
+      # "collection_name=entry.123" => { "collection_name" => "entry.123" }
+      # @return [Hash]
+      def form_mapping
+        Rack::Utils.parse_nested_query(
+          document.repository_config.google_request_mappings
+        )
+      end
+
+      def title
+        presenter.heading
+      end
+    end
+  end
+end

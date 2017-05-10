@@ -69,6 +69,12 @@ RSpec.describe Arclight::Repository do
       it '#thumbnail_url' do
         expect(repo.thumbnail_url).to eq 'http://example.com/thumbnail_ABC.jpg'
       end
+      it '#google_request_url' do
+        expect(repo.google_request_url).to eq 'https://docs.google.com/abc123'
+      end
+      it '#google_request_mappings' do
+        expect(repo.google_request_mappings).to eq 'collection_name=abc&eadid=123'
+      end
     end
   end
   context 'a second repository has data' do

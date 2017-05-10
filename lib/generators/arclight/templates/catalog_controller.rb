@@ -199,6 +199,7 @@ class CatalogController < ApplicationController
 
     # Collection Show Page - In Person Section
     config.add_in_person_field 'id', if: :before_you_visit_note_present, label: 'Before you visit', helper_method: :context_sidebar_visit_note # Using ID because we know it will always exist
+    config.add_in_person_field 'containers_ssim', if: :request_config_present, label: 'Request', helper_method: :context_sidebar_containers_request
     config.add_in_person_field 'repository_ssm', if: :repository_config_present, label: 'Location of this collection', helper_method: :context_sidebar_repository
 
     # Collection Show Page - Terms and Condition Section
