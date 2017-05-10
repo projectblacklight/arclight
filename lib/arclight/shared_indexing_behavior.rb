@@ -5,14 +5,33 @@ module Arclight
   # A mixin intended to share indexing behavior between
   # the CustomDocument and CustomComponent classes
   module SharedIndexingBehavior
+    # TODO: probably should have a proper DateRange class at some point
+    def to_year_from_iso8601(date)
+      return if date.blank?
+      date.split('-').first[0..3].to_i
+    end
+
+    # @param [String] `dates` YYYY or YYYY/YYYY formats, including YYYY-MM, YYYY-MM-DD, and YYYYMMDD
+    # @return [Array<String>] all of the years between the given years
+    # TODO: probably should have a proper DateRange class at some point
+    def to_date_range(dates)
+      return if dates.blank?
+      start_year, end_year = dates.split('/').map { |date| to_year_from_iso8601(date) }
+
+      return [start_year.to_s] if end_year.nil?
+      raise "Unsupported date formats: #{dates}" if (end_year - start_year).abs > 2100
+      (start_year..end_year).to_a.map(&:to_s)
+    end
+
     # @see http://eadiva.com/2/unitdate/
-    # Currently only handling normal attributes and YYYY or YYYY/YYYY formats
+    # @return [Array<String>] all of the years between the given years
     def formatted_unitdate_for_range
       return if normal_unit_dates.blank?
-      normal_unit_date = Array.wrap(normal_unit_dates).first
-      start_date, end_date = normal_unit_date.split('/')
-      return [start_date] if end_date.blank?
-      (start_date..end_date).to_a
+
+      all_dates = Array.wrap(normal_unit_dates)
+      puts "WARNING: Unsupported multi-date data: #{normal_unit_dates}" if all_dates.length > 1 # rubocop: disable Rails/Output, Metrics/LineLength
+
+      to_date_range(all_dates.first)
     end
 
     def subjects_array(elements, parent:)
