@@ -7,6 +7,12 @@ RSpec.describe 'Component Page', type: :feature do
 
   before { visit solr_document_path(id: doc_id) }
 
+  describe 'Component section heading' do
+    it 'includes the level' do
+      expect(page).to have_css('h3.al-show-sub-heading', text: 'About this file')
+    end
+  end
+
   describe 'label/title' do
     it 'does not double escape entities in the heading' do
       expect(page).to have_css('h1', text: /^"A brief account of the origin of/)

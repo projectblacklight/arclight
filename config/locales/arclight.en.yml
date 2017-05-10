@@ -40,5 +40,6 @@ en:
           related_field: 'Related'
           indexed_terms_field: 'Indexed Terms'
           admin_info_field: 'Administrative Information'
+          component_field: 'About this %{level}'
           collection_context_field: 'Collection Context'
     breadcrumb_separator: ' » '
