@@ -40,9 +40,13 @@
       color: $gray;
     }
 
-    // TODO: remove this after figuring out why the default toggler icon is not displaying
     .navbar-toggler {
-      background: #ccc;
+      background-color: $white;
+      border: $result-item-border-styling;
+    }
+
+    .navbar-toggler-icon {
+      background-image: $navbar-light-toggler-bg;
     }
   }
 
