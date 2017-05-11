@@ -30,11 +30,25 @@ RSpec.describe 'Search results', type: :feature do
     it 'renders the online content label when there is online content' do
       visit search_catalog_path f: { level_sim: ['Collection'] }, search_field: 'all_fields'
 
-      within '.document.document-position-0' do
+      online_doc = page.all('.document').find do |el|
+        el.all(
+          'h3.index_title',
+          text: 'Alpha Omega Alpha Archives, 1894-1992'
+        ).present?
+      end
+
+      not_online_doc = page.all('.document').find do |el|
+        el.all(
+          'h3.index_title',
+          text: 'The Italian or the confessional of the black penitents : typescript, 1930'
+        ).present?
+      end
+
+      within online_doc do
         expect(page).to have_css('.badge.badge-success', text: 'online content')
       end
 
-      within '.document.document-position-1' do
+      within not_online_doc do
         expect(page).not_to have_css('.badge.badge-success', text: 'online content')
       end
     end
