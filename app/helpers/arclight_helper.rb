@@ -17,6 +17,10 @@ module ArclightHelper
     'col-md-12 show-document'
   end
 
+  def normalize_id(id)
+    Arclight::NormalizedId.new(id).to_s
+  end
+
   def collection_active?
     try(:search_state) && search_state.params_for_search.try(:[], 'f').try(:[], 'level_sim') == ['Collection']
   end
