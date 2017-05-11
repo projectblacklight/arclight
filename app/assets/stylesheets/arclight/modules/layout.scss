@@ -2,3 +2,11 @@
   font-size: $font-size-sm;
   margin-bottom: $spacer;
 }
+
+.al-document-title-bar {
+  .toggle-bookmark {
+    @media (min-width: 576px) and (max-width: 991px) {
+      padding-right: $spacer;
+    }
+  }
+}
