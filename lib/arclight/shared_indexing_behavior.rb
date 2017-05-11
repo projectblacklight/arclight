@@ -5,33 +5,13 @@ module Arclight
   # A mixin intended to share indexing behavior between
   # the CustomDocument and CustomComponent classes
   module SharedIndexingBehavior
-    # TODO: probably should have a proper DateRange class at some point
-    def to_year_from_iso8601(date)
-      return if date.blank?
-      date.split('-').first[0..3].to_i
-    end
-
-    # @param [String] `dates` YYYY or YYYY/YYYY formats, including YYYY-MM, YYYY-MM-DD, and YYYYMMDD
-    # @return [Array<String>] all of the years between the given years
-    # TODO: probably should have a proper DateRange class at some point
-    def to_date_range(dates)
-      return if dates.blank?
-      start_year, end_year = dates.split('/').map { |date| to_year_from_iso8601(date) }
-
-      return [start_year.to_s] if end_year.nil?
-      raise "Unsupported date formats: #{dates}" if (end_year - start_year).abs > 2100
-      (start_year..end_year).to_a.map(&:to_s)
-    end
-
     # @see http://eadiva.com/2/unitdate/
-    # @return [Array<String>] all of the years between the given years
-    def formatted_unitdate_for_range
-      return if normal_unit_dates.blank?
-
-      all_dates = Array.wrap(normal_unit_dates)
-      puts "WARNING: Unsupported multi-date data: #{normal_unit_dates}" if all_dates.length > 1 # rubocop: disable Rails/Output, Metrics/LineLength
-
-      to_date_range(all_dates.first)
+    # @return [YearRange] all of the years between the given years
+    def unitdate_for_range
+      range = YearRange.new
+      return range if normal_unit_dates.blank?
+      range << range.parse_ranges(normal_unit_dates)
+      range
     end
 
     def subjects_array(elements, parent:)
@@ -90,6 +70,11 @@ module Arclight
         href = (dao.attributes['href'] || dao.attributes['xlink:href']).try(:value)
         Arclight::DigitalObject.new(label: label, href: href).to_json
       end
+    end
+
+    def add_date_ranges(solr_doc)
+      Solrizer.insert_field(solr_doc, 'date_range', unitdate_for_range.years, :facetable)
+      Solrizer.insert_field(solr_doc, 'normalized_date_range', unitdate_for_range.to_s, :displayable)
     end
   end
 end

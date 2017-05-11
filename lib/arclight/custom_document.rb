@@ -48,6 +48,7 @@ module Arclight
         Solrizer.set_field(solr_doc, field[:name], field[:value], field[:index_as])
       end
 
+      add_date_ranges(solr_doc)
       add_digital_content(prefix: 'ead/archdesc', solr_doc: solr_doc)
 
       solr_doc
@@ -55,13 +56,11 @@ module Arclight
 
     private
 
-    # rubocop: disable Metrics/MethodLength
     def arclight_field_definitions
       [
         { name: 'level', value: 'collection', index_as: :displayable },
         { name: 'level', value: 'Collection', index_as: :facetable },
         { name: 'names', value: names, index_as: :symbol },
-        { name: 'date_range', value: formatted_unitdate_for_range, index_as: :facetable },
         { name: 'access_subjects', value: access_subjects, index_as: :symbol },
         { name: 'creators', value: creators, index_as: :symbol },
         { name: 'has_online_content', value: online_content?, index_as: :displayable },

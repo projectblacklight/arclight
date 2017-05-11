@@ -53,6 +53,7 @@ RSpec.describe 'Indexing Custom Component', type: :feature do
 
         date_range_field = doc['date_range_sim']
         expect(doc['unitdate_ssm']).to eq ['1902-1976'] # the field the range is derived from
+        expect(doc['normalized_date_range_ssm']).to eq ['1902-1976']
         expect(date_range_field).to be_an Array
         expect(date_range_field.length).to eq 75
         expect(date_range_field.first).to eq '1902'
@@ -64,6 +65,7 @@ RSpec.describe 'Indexing Custom Component', type: :feature do
 
         date_range_field = doc['date_range_sim']
         expect(doc['unitdate_ssm']).to eq ['n.d.']
+        expect(doc['normalized_date_range_ssm']).to be_nil # TODO: is this what we really want?
         expect(date_range_field).to be_nil
       end
 
@@ -72,6 +74,7 @@ RSpec.describe 'Indexing Custom Component', type: :feature do
 
         date_range_field = doc['date_range_sim']
         expect(doc['unitdate_ssm']).to eq ['c.1902']
+        expect(doc['normalized_date_range_ssm']).to eq ['1902']
         expect(date_range_field).to eq ['1902']
       end
 
@@ -80,7 +83,32 @@ RSpec.describe 'Indexing Custom Component', type: :feature do
 
         date_range_field = doc['date_range_sim']
         expect(doc['unitdate_ssm']).to eq ['1904']
+        expect(doc['normalized_date_range_ssm']).to eq ['1904']
         expect(date_range_field).to eq ['1904']
+      end
+
+      it 'handles odd date specifications' do
+        doc = components.find do |c|
+          c.to_solr['ref_ssm'] == ['aspace_dba76dab6f750f31aa5fc73e5402e71d']
+        end.to_solr
+        expect(doc['unitdate_ssm']).to eq ['1924-1955', '1944']
+        expect(doc['normalized_date_range_ssm']).to eq ['1924-1955']
+      end
+
+      it 'handles missing date specifications' do
+        doc = components.find do |c|
+          c.to_solr['ref_ssm'] == ['aspace_01daa89087641f7fc9dbd7a10d3f2da9']
+        end.to_solr
+        expect(doc['unitdate_ssm']).to be_nil
+        expect(doc['normalized_date_range_ssm']).to be_nil
+      end
+
+      it 'handles n.d. with a date' do
+        doc = components.find do |c|
+          c.to_solr['ref_ssm'] == ['aspace_a8b5c3a57013462581d0e807241fcf93']
+        end.to_solr
+        expect(doc['unitdate_ssm']).to eq ['1904, n.d.']
+        expect(doc['normalized_date_range_ssm']).to eq ['1904'] # TODO: is this what we want?
       end
     end
 

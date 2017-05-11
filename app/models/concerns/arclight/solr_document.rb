@@ -40,7 +40,9 @@ module Arclight
     end
 
     def unitdate
-      first('unitdate_ssm')
+      date = fetch('unitdate_ssm', []).join(', ')
+      return if date.blank?
+      date
     end
 
     def extent

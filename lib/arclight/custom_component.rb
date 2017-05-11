@@ -26,9 +26,9 @@ module Arclight
       super
       solr_doc['id'] = Arclight::NormalizedId.new(solr_doc['id']).to_s
       Solrizer.insert_field(solr_doc, 'level', formatted_level, :facetable) # human-readable for facet `level_sim`
-      Solrizer.insert_field(solr_doc, 'date_range', formatted_unitdate_for_range, :facetable)
       Solrizer.insert_field(solr_doc, 'access_subjects', access_subjects, :facetable)
       Solrizer.insert_field(solr_doc, 'containers', containers, :symbol)
+      add_date_ranges(solr_doc)
       resolve_repository(solr_doc)
       add_digital_content(prefix: 'c/did', solr_doc: solr_doc)
 
