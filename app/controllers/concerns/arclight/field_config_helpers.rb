@@ -10,9 +10,11 @@ module Arclight
       if respond_to?(:helper_method)
         helper_method :context_sidebar_digital_object
         helper_method :repository_config_present
+        helper_method :request_config_present
         helper_method :context_sidebar_repository
         helper_method :before_you_visit_note_present
         helper_method :context_sidebar_visit_note
+        helper_method :context_sidebar_containers_request
       end
     end
 
@@ -27,6 +29,12 @@ module Arclight
 
     def repository_config_present(_, document)
       document.repository_config.present?
+    end
+
+    def request_config_present(var, document)
+      repository_config_present(var, document) &&
+        document.repository_config.google_request_url.present? &&
+        document.repository_config.google_request_mappings.present?
     end
 
     def context_sidebar_repository(args)
@@ -45,6 +53,18 @@ module Arclight
     def context_sidebar_visit_note(args)
       document = args[:document]
       document.repository_config.visit_note
+    end
+
+    def context_sidebar_containers_request(args)
+      document = args[:document]
+      presenter = Arclight::ShowPresenter.new(document, view_context)
+      ApplicationController.renderer.render(
+        'arclight/requests/_google_form',
+        layout: false,
+        locals: {
+          google_form: Arclight::Requests::GoogleForm.new(document, presenter, solr_document_url(document))
+        }
+      )
     end
   end
 end

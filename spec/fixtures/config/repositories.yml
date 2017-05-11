@@ -12,6 +12,8 @@ sample:
   phone: '123-456-7890'
   contact_info: 'My Contact Info'
   thumbnail_url: 'http://example.com/thumbnail_ABC.jpg'
+  google_request_url: 'https://docs.google.com/abc123'
+  google_request_mappings: 'collection_name=abc&eadid=123'
 sul-spec:
   name: 'Stanford University Libraries. Special Collections and University Archives'
   visit_note: 'Special Collections and University Archives materials are stored offsite and must be paged 36 hours in advance.'
@@ -39,6 +41,9 @@ nlm:
   phone: ''
   contact_info: 'hmdref@nlm.nih.gov'
   thumbnail_url: "https://collections.nlm.nih.gov/pageturnerserver/ajaxp?theurl=http://localhost:8080/fedora/get/nlm:nlmuid-101421040-img/THUMB"
+  google_request_url: 'https://docs.google.com/a/stanford.edu/forms/d/e/1FAIpQLSeOamhY_IcFw4sPnz0ddwWWkrPaHbM5wp7JVbOLOL_mIusEyw/viewform'
+  google_request_mappings: "document_url=entry.1980510262&collection_name=entry.619150170&eadid=entry.996397105&containers=entry.1125277048&title=entry.862815208"
+
 umich-bhl:
   name: 'University of Michigan. Bentley Historical Library'
   description: 'The Bentley Historical Library collects the materials for and promotes the study of the histories of two great, intertwined institutions, the State of Michigan and the University of Michigan. The Library is open without fee to the public, and we welcome researchers regardless of academic or professional affiliation.'

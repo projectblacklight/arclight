@@ -83,5 +83,9 @@ module Arclight
         Arclight::DigitalObject.from_json(object)
       end
     end
+
+    def containers
+      fetch('containers_ssim', [])
+    end
   end
 end

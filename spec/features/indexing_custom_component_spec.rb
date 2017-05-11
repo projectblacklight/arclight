@@ -87,7 +87,7 @@ RSpec.describe 'Indexing Custom Component', type: :feature do
     describe '#add_digital_content' do
       it 'adds digital object json' do
         doc = components.find do |c|
-          c.to_solr['ref_ssm'] == ['aspace_843e8f9f22bac872d0802d6fffbb04']
+          c.to_solr['ref_ssm'] == ['aspace_843e8f9f22bac69872d0802d6fffbb04']
         end.to_solr
 
         digital_objects = doc['digital_objects_ssm']

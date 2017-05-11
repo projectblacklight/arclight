@@ -6,6 +6,8 @@ en:
         link: 'Open viewer'
     hierarchy:
       view_more: 'View more'
+    request:
+      container: 'Request container(s)'
     routes:
       home: 'Home'
       collections: 'Collections'

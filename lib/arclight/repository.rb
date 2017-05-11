@@ -19,7 +19,9 @@ module Arclight
                 country
                 phone
                 contact_info
-                thumbnail_url].freeze
+                thumbnail_url
+                google_request_url
+                google_request_mappings].freeze
 
     attr_accessor :slug, *FIELDS
 
