@@ -8,6 +8,10 @@
   }
 }
 
+.al-hierarchy-highlight {
+  background: $state-warning-bg;
+}
+
 // Collapse arrow indicators
 .al-toggle-view-more {
   &[aria-expanded="true"] {

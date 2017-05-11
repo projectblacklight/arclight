@@ -54,5 +54,12 @@ RSpec.describe 'Component Page', type: :feature do
         expect(page).to have_css 'h1', text: 'Alpha Omega Alpha Archives, 1894-1992'
       end
     end
+    it 'has a sibling list with highlighted self' do
+      within '#collection-context' do
+        within '.al-contents' do
+          expect(page).to have_css 'h3', text: /"A brief account of the origin/
+        end
+      end
+    end
   end
 end

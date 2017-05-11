@@ -20,4 +20,18 @@
       )
     }
   ) %>
+  <%= content_tag(
+    :div, '',
+    class: 'al-contents',
+    data: {
+      arclight: {
+        hierarchy: true,
+        level: @document.component_level,
+        path: search_catalog_path,
+        name: @document.collection_name,
+        highlight: show_presenter(@document).heading
+      }
+    }
+  ) %>
+
 <% end %>

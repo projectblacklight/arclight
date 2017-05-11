@@ -25,6 +25,14 @@
         var resp = $.parseHTML(response);
         var $doc = $(resp);
         var showDocs = $doc.find('article.document');
+
+        // Add a highlight class here for containing text. We need to parse the
+        // area for text as it is potentially encoded.
+        var parsedHighlightText = $('<textarea/>').html(data.arclight.highlight).val();
+        if (parsedHighlightText) {
+          $doc.find('article:contains(' + parsedHighlightText + ')').addClass('al-hierarchy-highlight');
+        }
+
         $el.hide().html($doc.find('#documents')).fadeIn(500);
         if (showDocs.length > 0) {
           $el.trigger('navigation.contains.elements');
