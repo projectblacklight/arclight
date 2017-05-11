@@ -11,11 +11,15 @@ require 'arclight/custom_document'
 require 'arclight/custom_component'
 require 'arclight/solr_ead_indexer_ext'
 require 'arclight/indexer'
+require 'arclight/viewer'
 
 module Arclight
   ##
   # This is the defining class for the Arclight Rails Engine
   class Engine < ::Rails::Engine
+    config.viewer_class = Arclight::Viewers::OEmbed
+    config.oembed_resource_exclude_patterns = [/\.pdf$/, /\.ppt$/]
+
     Arclight::Engine.config.catalog_controller_field_accessors = %i[
       summary_field
       access_field
