@@ -6,15 +6,17 @@ module Arclight
     # This object relies on the ability to respond to attributes passed in as
     # query parameters from the form mapping configuratino
     class GoogleForm
-      attr_reader :document, :presenter
+      attr_reader :document, :presenter, :document_url
       delegate :collection_name, :eadid, :containers, to: :document
 
       ##
       # @param [Blacklight::SolrDocument] document
       # @param [Arclight::ShowPresenter] presenter
-      def initialize(document, presenter)
+      # @param [String] document_url
+      def initialize(document, presenter, document_url)
         @document = document
         @presenter = presenter
+        @document_url = document_url
       end
 
       ##

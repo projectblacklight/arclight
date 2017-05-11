@@ -62,7 +62,7 @@ module Arclight
         'arclight/requests/_google_form',
         layout: false,
         locals: {
-          google_form: Arclight::Requests::GoogleForm.new(document, presenter)
+          google_form: Arclight::Requests::GoogleForm.new(document, presenter, solr_document_url(document))
         }
       )
     end

@@ -3,7 +3,7 @@
 require 'spec_helper'
 
 RSpec.describe Arclight::Requests::GoogleForm do
-  subject(:valid_object) { described_class.new(document, presenter) }
+  subject(:valid_object) { described_class.new(document, presenter, '') }
 
   let(:config) do
     instance_double 'Arclight::Repository',
