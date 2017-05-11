@@ -71,6 +71,10 @@ module Arclight
       first('component_level_isim')
     end
 
+    def level
+      first('level_ssm')
+    end
+
     def digital_objects
       digital_objects_field = fetch('digital_objects_ssm', [])
       return [] if digital_objects_field.blank?

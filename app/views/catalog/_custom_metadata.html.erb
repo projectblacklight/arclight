@@ -2,7 +2,7 @@
 
 <%= content_tag(:div, id: t("arclight.views.show.sections.#{field_accessor}").parameterize) do %>
   <h3 class='al-show-sub-heading'>
-    <%= t("arclight.views.show.sections.#{field_accessor}") %>
+    <%= t("arclight.views.show.sections.#{field_accessor}", level: document.level) %>
   </h3>
 
   <dl class="row dl-invert">
