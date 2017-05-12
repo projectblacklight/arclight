@@ -112,10 +112,6 @@ RSpec.describe 'Indexing Custom Document', type: :feature do
       expect(doc['extent_ssm'].first).to match(/^15\.0 linear feet/)
     end
 
-    it '#unitdate' do
-      expect(doc['unitdate_ssm'].first).to eq '1894-1992'
-    end
-
     it '#accessrestrict' do
       expect(doc['accessrestrict_ssm'].first).to eq 'No restrictions on access.'
     end
@@ -128,6 +124,14 @@ RSpec.describe 'Indexing Custom Document', type: :feature do
       expect(doc['access_subjects_ssim']).to include 'Fraternizing'
       expect(doc['names_ssim']).to include 'Root, William Webster, 1867-1932'
       expect(doc['places_ssim']).to include 'Mindanao Island (Philippines)'
+    end
+
+    it '#normalized_title' do
+      expect(doc['normalized_title_ssm'].first).to eq 'Alpha Omega Alpha Archives, 1894-1992'
+    end
+
+    it '#normalized_date' do
+      expect(doc['normalized_date_ssm'].first).to eq '1894-1992'
     end
 
     describe '#has_online_content' do
@@ -149,17 +153,11 @@ RSpec.describe 'Indexing Custom Document', type: :feature do
     describe '#date_range' do
       it 'includes an array of all the years in a particular unit-date range described in YYYY/YYYY format' do
         date_range_field = doc['date_range_sim']
-        expect(doc['unitdate_ssm']).to eq ['1894-1992'] # the field the range is derived from
         expect(date_range_field).to be_an Array
         expect(date_range_field.length).to eq 99
         expect(date_range_field.first).to eq '1894'
         expect(date_range_field.last).to eq '1992'
       end
-
-      # We don't have EADs in our fixtures that exhibit the following behaviors
-      it 'is nil for non normal dates'
-      it 'handles normal unitdates formatted as YYYY/YYYY when the years are the same'
-      it 'handles normal unitdates formatted as YYYY'
     end
 
     describe 'digital content' do

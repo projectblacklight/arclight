@@ -68,4 +68,20 @@ RSpec.describe Arclight::SolrDocument do
       end
     end
   end
+
+  describe '#normalize_title' do
+    let(:document) { SolrDocument.new(normalized_title_ssm: 'My Title, 1990-2000') }
+
+    it 'uses the normalized title from index-time' do
+      expect(document.normalized_title).to eq 'My Title, 1990-2000'
+    end
+  end
+
+  describe '#normalize_date' do
+    let(:document) { SolrDocument.new(normalized_date_ssm: '1990-2000') }
+
+    it 'uses the normalized date from index-time' do
+      expect(document.normalized_date).to eq '1990-2000'
+    end
+  end
 end

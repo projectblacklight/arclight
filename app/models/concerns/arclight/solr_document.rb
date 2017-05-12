@@ -39,12 +39,6 @@ module Arclight
       first('collection_ssm')
     end
 
-    def unitdate
-      date = fetch('unitdate_ssm', []).join(', ')
-      return if date.blank?
-      date
-    end
-
     def extent
       first('extent_ssm')
     end
@@ -88,6 +82,14 @@ module Arclight
 
     def containers
       fetch('containers_ssim', [])
+    end
+
+    def normalized_title
+      first('normalized_title_ssm')
+    end
+
+    def normalized_date
+      first('normalized_date_ssm')
     end
   end
 end

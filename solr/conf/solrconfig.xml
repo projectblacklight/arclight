@@ -111,7 +111,8 @@
          repository_ssm,
          scopecontent_ssm,
          title_ssm,
-         unitdate_ssm,
+         normalized_title_ssm,
+         normalized_date_ssm,
          unitid_ssm,
          parent_ssm,
          parent_unittitles_ssm,
@@ -129,6 +130,7 @@
        <str name="facet.field">geogname_sim</str>
        <str name="facet.field">access_subjects_sim</str>
        <str name="facet.field">repository_sim</str>
+       <str name="facet.field">collection_sim</str>
 
        <str name="spellcheck">true</str>
        <str name="spellcheck.dictionary">default</str>

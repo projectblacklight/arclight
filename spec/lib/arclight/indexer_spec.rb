@@ -21,24 +21,24 @@ RSpec.describe Arclight::Indexer do
   describe '#add_collection_context_to_parent_fields' do
     context 'collection context' do
       it 'are appended to the existing parent fields' do
-        node = xml.xpath('//c').first
+        node = xml.at_xpath('//c')
         fields = indexer.additional_component_fields(node)
         expect(fields['parent_ssi']).to eq 'aoa271'
         expect(fields['parent_ssm']).to eq ['aoa271']
-        expect(fields['parent_unittitles_ssm']).to eq ['Alpha Omega Alpha Archives']
+        expect(fields['parent_unittitles_ssm']).to eq ['Alpha Omega Alpha Archives, 1894-1992']
       end
     end
   end
 
   describe '#add_count_of_child_compontents' do
     it 'adds the number of direct children' do
-      node = xml.xpath('//c[@id="aspace_563a320bb37d24a9e1e6f7bf95b52671"]').first
+      node = xml.at_xpath('//c[@id="aspace_563a320bb37d24a9e1e6f7bf95b52671"]')
       fields = indexer.additional_component_fields(node)
       expect(fields['child_component_count_isim']).to eq 25
     end
 
     it 'retunrs zero when the child has no components' do
-      node = xml.xpath('//c[@id="aspace_843e8f9f22bac69872d0802d6fffbb04"]').first
+      node = xml.at_xpath('//c[@id="aspace_843e8f9f22bac69872d0802d6fffbb04"]')
       fields = indexer.additional_component_fields(node)
       expect(fields['child_component_count_isim']).to eq 0
     end

@@ -80,7 +80,7 @@ RSpec.describe 'Search results', type: :feature do
       within('#facets') do
         within('.blacklight-collection_sim') do
           expect(page).to have_css('h3 a', text: 'Collection')
-          expect(page).to have_css('li .facet-label', text: 'Alpha Omega Alpha Archives', visible: false)
+          expect(page).to have_css('li .facet-label', text: 'Alpha Omega Alpha Archives, 1894-1992', visible: false)
         end
 
         within('.blacklight-level_sim') do

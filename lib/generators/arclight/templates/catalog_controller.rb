@@ -38,7 +38,7 @@ class CatalogController < ApplicationController
     #}
 
     # solr field configuration for search results/index views
-    config.index.title_field = 'title_ssm'
+    config.index.title_field = 'normalized_title_ssm'
     config.index.display_type_field = 'level_ssm'
     #config.index.thumbnail_field = 'thumbnail_path_ss'
 
@@ -91,7 +91,7 @@ class CatalogController < ApplicationController
     #   The ordering of the field names is the order of the display
     config.add_index_field 'unitid_ssm', label: 'Unit ID'
     config.add_index_field 'repository_ssm', label: 'Repository'
-    config.add_index_field 'unitdate_ssm', label: 'Date'
+    config.add_index_field 'normalized_date_ssm', label: 'Date'
     config.add_index_field 'creator_ssm', label: 'Creator'
     config.add_index_field 'language_ssm', label: 'Language'
     config.add_index_field 'scopecontent_ssm', label: 'Scope Content'
@@ -173,7 +173,7 @@ class CatalogController < ApplicationController
     config.show.component_metadata_partials = [
       :component_field
     ]
-    
+
     # Component Show Page - Metadata Section
     config.add_component_field 'containers_ssim', label: 'Containers'
     config.add_component_field 'abstract_ssm', label: 'Abstract'
