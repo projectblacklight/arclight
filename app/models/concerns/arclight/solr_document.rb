@@ -57,6 +57,10 @@ module Arclight
       first('creator_ssm')
     end
 
+    def collection_creator
+      first('collection_creator_ssm')
+    end
+
     def online_content?
       first('has_online_content_ssm') == 'true'
     end
