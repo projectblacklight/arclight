@@ -36,6 +36,7 @@ en:
           in_person_field: 'In person'
           terms_field: 'Terms & Conditions'
           cite_field: 'How to cite this collection'
+          component_terms_field: "Terms & Conditions"
         sections:
           summary_field: 'Summary'
           access_field: 'Access and Use'

@@ -14,6 +14,10 @@ module Arclight
 
       add_collection_creator_to_component(node, solr_doc)
 
+      add_self_or_parents_restrictions(node, solr_doc)
+
+      add_self_or_parents_terms(node, solr_doc)
+
       solr_doc
     end
 
@@ -125,6 +129,32 @@ module Arclight
       repository = solr_doc[Solrizer.solr_name('repository', :displayable)]
       creators = node.xpath('//archdesc/did/origination[@label="creator"]/*/text()').map(&:text)
       solr_doc[field_name] = creators - [repository]
+    end
+
+    def parent_check_list(node, root_path, element_path, results = [])
+      orginal_node = node
+      results = node.xpath("#{root_path}/#{element_path}").map(&:text)
+      # if current restriction return, else go up to parent and check
+      while node.parent.name == 'c' && results.blank?
+        parent = node.parent
+        results = parent.xpath("#{root_path}/#{element_path}").map(&:text)
+        node = parent
+      end
+      # If no parental results, check the collection
+      results = orginal_node.xpath("//archdesc/#{element_path}").map(&:text) if results.blank?
+      results.flatten # can't use with flatten! because that returns nil
+    end
+
+    def add_self_or_parents_restrictions(node, solr_doc)
+      field_name = Solrizer.solr_name('parent_access_restrict', :displayable)
+      solr_doc[field_name] = parent_check_list(node, './', 'accessrestrict/p/text()')
+      solr_doc[field_name]
+    end
+
+    def add_self_or_parents_terms(node, solr_doc)
+      field_name = Solrizer.solr_name('parent_access_terms', :displayable)
+      solr_doc[field_name] = parent_check_list(node, './', 'userestrict/p/text()')
+      solr_doc[field_name]
     end
   end
 end

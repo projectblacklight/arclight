@@ -79,6 +79,20 @@ module Arclight
       @digital_object_viewer ||= Arclight::Viewer.render(self)
     end
 
+    def terms
+      first('userestrict_ssm')
+    end
+
+    # Restrictions for component sidebar
+    def parent_restrictions
+      first('parent_access_restrict_ssm')
+    end
+
+    # Terms for component sidebar
+    def parent_terms
+      first('parent_access_terms_ssm')
+    end
+
     def digital_objects
       digital_objects_field = fetch('digital_objects_ssm', [])
       return [] if digital_objects_field.blank?

@@ -118,7 +118,9 @@
          parent_unittitles_ssm,
          ead_ssi,
          ref_ssm,
-         component_level_isim
+         component_level_isim,
+         parent_access_restrict_ssm,
+         parent_access_terms_ssm
        </str>
 
        <str name="facet">true</str>

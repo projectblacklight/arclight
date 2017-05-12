@@ -52,6 +52,17 @@ RSpec.describe 'Component Page', type: :feature do
     end
 
     describe 'context_sidebar' do
+      context 'that has restrictions and terms of access' do
+        it 'has a terms and conditions card' do
+          within '#accordion' do
+            expect(page).to have_css('.card-header h3', text: 'Terms & Conditions')
+            expect(page).to have_css('.card-block dt', text: 'Restrictions:')
+            expect(page).to have_css('.card-block dd', text: 'No restrictions on access.')
+            expect(page).to have_css('.card-block dt', text: 'Terms of Access:')
+            expect(page).to have_css('.card-block dd', text: /^Copyright was transferred to the public domain./)
+          end
+        end
+      end
       context 'that has a visitation note' do
         it 'has an in person card' do
           within '#accordion' do
