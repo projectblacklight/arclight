@@ -44,6 +44,15 @@ RSpec.describe Arclight::Indexer do
     end
   end
 
+  describe '#add_collection_creator_to_component' do
+    it 'adds the creator of the collection to a stored non-indexed/faceted field' do
+      node = xml.xpath('//c[@id="aspace_563a320bb37d24a9e1e6f7bf95b52671"]').first
+      fields = indexer.additional_component_fields(node)
+      expect(fields['creator_ssim']).to be_nil
+      expect(fields['collection_creator_ssm']).to eq ['Alpha Omega Alpha']
+    end
+  end
+
   describe 'delete_all' do
     before do
       expect(indexer).to receive_messages(solr: solr_client)

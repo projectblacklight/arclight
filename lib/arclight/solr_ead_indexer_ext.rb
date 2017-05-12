@@ -12,6 +12,8 @@ module Arclight
 
       add_count_of_child_compontents(node, solr_doc)
 
+      add_collection_creator_to_component(node, solr_doc)
+
       solr_doc
     end
 
@@ -50,6 +52,14 @@ module Arclight
 
     def add_count_of_child_compontents(node, solr_doc)
       solr_doc[Solrizer.solr_name('child_component_count', type: :integer)] = node.xpath('count(c)').to_i
+    end
+
+    # This mimics similar behavior in Arclight::CustomDocument
+    def add_collection_creator_to_component(node, solr_doc)
+      field_name = Solrizer.solr_name('collection_creator', :displayable)
+      repository = solr_doc[Solrizer.solr_name('repository', :displayable)]
+      creators = node.xpath('//archdesc/did/origination[@label="creator"]/*/text()').map(&:text)
+      solr_doc[field_name] = creators - [repository]
     end
   end
 end
