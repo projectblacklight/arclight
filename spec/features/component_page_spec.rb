@@ -54,5 +54,41 @@ RSpec.describe 'Component Page', type: :feature do
         expect(page).to have_css 'h1', text: 'Alpha Omega Alpha Archives, 1894-1992'
       end
     end
+    it 'has a ancestor list, siblings and highlighted self' do
+      within '#collection-context' do
+        expect(page).to have_css(
+          '.al-hierarchy-level-0 article a',
+          text: 'Series I: Administrative Records, 1902-1976'
+        )
+        within '.al-contents' do
+          expect(page).to have_css(
+            '.al-hierarchy-highlight h3',
+            text: /"A brief account of the origin/
+          )
+          expect(page).to have_css 'article', text: 'Statements of purpose, c.1902'
+          expect(page).to have_css 'article', text: 'Constitution - notes on drafting of constitution, c.1902-1903'
+          click_link('Statements of purpose, c.1902')
+        end
+      end
+      expect(page).to have_css 'h1', text: 'Statements of purpose, c.1902'
+      within '#collection-context .al-contents' do
+        expect(page).to have_css '.al-hierarchy-highlight h3', text: 'Statements of purpose, c.1902'
+        expect(page).to have_css 'article', text: /"A brief account of the origin/
+        expect(page).to have_css(
+          'article',
+          text: 'Constitution - notes on drafting of constitution, c.1902-1903'
+        )
+        click_link 'Constitution - notes on drafting of constitution, c.1902-1903'
+      end
+      expect(page).to have_css 'h1', text: 'Constitution - notes on drafting of constitution, c.1902-1903'
+      within '#collection-context .al-contents' do
+        expect(page).to have_css(
+          '.al-hierarchy-highlight h3',
+          text: 'Constitution - notes on drafting of constitution, c.1902-1903'
+        )
+        expect(page).to have_css 'article', text: 'Statements of purpose, c.1902'
+        expect(page).to have_css 'article', text: 'Constitution and by-laws - drafts, 1902-1904'
+      end
+    end
   end
 end

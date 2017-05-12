@@ -8,6 +8,10 @@
   }
 }
 
+.al-hierarchy-highlight {
+  background: $state-warning-bg;
+}
+
 // Collapse arrow indicators
 .al-toggle-view-more {
   &[aria-expanded="true"] {
@@ -43,6 +47,10 @@
   @for $i from 1 through 12 {
     .al-hierarchy-level-#{$i} {
       margin-left: 20px;
+      // provides for n indention
+      &.extra-indent {
+        margin-left: ($i * 20) + px;
+      }
     }
   }
 }
