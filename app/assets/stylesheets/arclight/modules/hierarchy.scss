@@ -47,6 +47,10 @@
   @for $i from 1 through 12 {
     .al-hierarchy-level-#{$i} {
       margin-left: 20px;
+      // provides for n indention
+      &.extra-indent {
+        margin-left: ($i * 20) + px;
+      }
     }
   }
 }

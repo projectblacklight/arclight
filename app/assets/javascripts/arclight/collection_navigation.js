@@ -1,5 +1,45 @@
 (function (global) {
-  var CollectionNavigation = {
+  var CollectionNavigation;
+  /**
+   * Converts documents that should be used in a hierarchy, to highlighted
+   * localized siblings.
+   */
+  function convertDocsForContext(parsedHighlightText, $doc) {
+    var newDocs;
+    var $currentDoc;
+    var $previousDocs;
+    var $nextDocs;
+    $currentDoc = $doc.find('article:contains(' + parsedHighlightText + ')');
+    $currentDoc.addClass('al-hierarchy-highlight');
+
+    $previousDocs = $currentDoc.prevUntil().slice(0, 2);
+    $nextDocs = $currentDoc.nextUntil().slice(0, 2);
+
+    // Case where there are siblings on both sides
+    if ($previousDocs.length > 0 && $nextDocs.length > 0) {
+      newDocs = $('<div>');
+      newDocs.append($previousDocs.first());
+      newDocs.append($currentDoc);
+      newDocs.append($nextDocs.first());
+    } else if ($previousDocs.length > 0) {
+      // Case where there are only previous siblings
+      newDocs = $('<div>');
+      newDocs.append($previousDocs);
+      newDocs.append($currentDoc);
+    } else {
+      // Case where there are only next siblings
+      newDocs = $('<div>');
+      newDocs.append($currentDoc);
+      newDocs.append($nextDocs);
+    }
+    // Cleanup to remove collapsible children stuff
+    newDocs.find('.al-toggle-view-more').remove();
+    newDocs.find('.collapse').remove();
+    newDocs.find('hr').remove();
+    return newDocs;
+  }
+
+  CollectionNavigation = {
     init: function (el) {
       var $el = $(el);
       var data = $el.data();
@@ -25,15 +65,17 @@
         var resp = $.parseHTML(response);
         var $doc = $(resp);
         var showDocs = $doc.find('article.document');
+        var newDocs = $doc.find('#documents');
 
         // Add a highlight class here for containing text. We need to parse the
-        // area for text as it is potentially encoded.
+        // area for text as it is potentially encoded. This is also the case
+        // that we only want to include localized siblings
         var parsedHighlightText = $('<textarea/>').html(data.arclight.highlight).val();
         if (parsedHighlightText) {
-          $doc.find('article:contains(' + parsedHighlightText + ')').addClass('al-hierarchy-highlight');
+          newDocs = convertDocsForContext(parsedHighlightText, $doc);
         }
 
-        $el.hide().html($doc.find('#documents')).fadeIn(500);
+        $el.hide().html(newDocs).fadeIn(500);
         if (showDocs.length > 0) {
           $el.trigger('navigation.contains.elements');
         }

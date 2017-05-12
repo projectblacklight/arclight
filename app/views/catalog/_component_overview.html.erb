@@ -22,7 +22,15 @@
   ) %>
   <%= content_tag(
     :div, '',
-    class: 'al-contents',
+    class: 'al-ancestors',
+    data: {
+      arclight_ancestors: @document.parent_ids,
+      arclight_path: search_catalog_path
+    }
+  ) %>
+  <%= content_tag(
+    :div, '',
+    class: "al-contents al-hierarchy-level-#{@document.component_level} extra-indent documents-hierarchy",
     data: {
       arclight: {
         hierarchy: true,
