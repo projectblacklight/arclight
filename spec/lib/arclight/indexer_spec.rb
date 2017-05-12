@@ -43,4 +43,18 @@ RSpec.describe Arclight::Indexer do
       expect(fields['child_component_count_isim']).to eq 0
     end
   end
+
+  describe 'delete_all' do
+    before do
+      expect(indexer).to receive_messages(solr: solr_client)
+    end
+
+    let(:solr_client) { instance_spy('SolrClient') }
+
+    it 'sends the delete all query to solr and commits' do
+      indexer.delete_all
+      expect(solr_client).to have_received(:delete_by_query).with('*:*')
+      expect(solr_client).to have_receive(:commit)
+    end
+  end
 end
