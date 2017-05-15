@@ -15,6 +15,11 @@ module Arclight
       solr_doc
     end
 
+    def delete_all
+      solr.delete_by_query('*:*')
+      solr.commit
+    end
+
     private
 
     ##

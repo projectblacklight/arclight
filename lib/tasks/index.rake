@@ -32,6 +32,13 @@ namespace :arclight do
       system("rake arclight:index FILE=#{file}")
     end
   end
+
+  desc'Destroy all documents in the index'
+  task :destroy_index_docs do
+    puts 'Deleting all documents from index...'
+    indexer = load_indexer
+    indexer.delete_all
+  end
 end
 
 def load_indexer
