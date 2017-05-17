@@ -17,6 +17,9 @@ module Arclight
       t.level(path: 'c/@level', index_as: %i[displayable]) # machine-readable for string `level_ssm`
       t.extent(path: 'c/did/physdesc/extent', index_as: %i[displayable])
       t.unitdate(path: 'c/did/unitdate', index_as: %i[displayable])
+      t.unitdate_inclusive(path: 'c/did/unitdate[@type=\'inclusive\']', index_as: %i[displayable])
+      t.unitdate_bulk(path: 'c/did/unitdate[@type=\'bulk\']', index_as: %i[displayable])
+      t.unitdate_other(path: 'c/did/unitdate[not(@type)]', index_as: %i[displayable])
       t.accessrestrict(path: 'c/accessrestrict/p', index_as: %i[displayable])
       t.scopecontent(path: 'c/scopecontent/p', index_as: %i[displayable])
       t.normal_unit_dates(path: 'c/did/unitdate/@normal')
@@ -29,6 +32,7 @@ module Arclight
       Solrizer.insert_field(solr_doc, 'access_subjects', access_subjects, :facetable)
       Solrizer.insert_field(solr_doc, 'containers', containers, :symbol)
       add_date_ranges(solr_doc)
+      add_normalized_title(solr_doc)
       resolve_repository(solr_doc)
       add_digital_content(prefix: 'c/did', solr_doc: solr_doc)
 

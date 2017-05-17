@@ -23,6 +23,9 @@ module Arclight
       # overrides of solr_ead to get different `index_as` properties
       t.extent(path: 'archdesc/did/physdesc/extent', index_as: %i[displayable])
       t.unitdate(path: 'archdesc/did/unitdate', index_as: %i[displayable])
+      t.unitdate_inclusive(path: 'archdesc/did/unitdate[@type=\'inclusive\']', index_as: %i[displayable])
+      t.unitdate_bulk(path: 'archdesc/did/unitdate[@type=\'bulk\']', index_as: %i[displayable])
+      t.unitdate_other(path: 'archdesc/did/unitdate[not(@type)]', index_as: %i[displayable])
       t.accessrestrict(path: 'archdesc/accessrestrict/p', index_as: %i[displayable])
       t.scopecontent(path: 'archdesc/scopecontent/p', index_as: %i[displayable])
       t.userestrict(path: 'archdesc/userestrict/p', index_as: %i[displayable])
@@ -50,11 +53,18 @@ module Arclight
 
       add_date_ranges(solr_doc)
       add_digital_content(prefix: 'ead/archdesc', solr_doc: solr_doc)
+      add_normalized_titles(solr_doc)
 
       solr_doc
     end
 
     private
+
+    def add_normalized_titles(solr_doc)
+      title = add_normalized_title(solr_doc)
+      solr_doc['collection_sim'] = [title]
+      solr_doc['collection_ssm'] = [title]
+    end
 
     def arclight_field_definitions
       [

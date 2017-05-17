@@ -246,6 +246,7 @@
           <unittitle>Series I: Administrative Records,</unittitle>
           <unitid>MS C 271.I</unitid>
           <unitdate normal="1902/1976" type="inclusive">1902-1976</unitdate>
+          <unitdate normal="1902/1976" type="bulk">1975-1976</unitdate>
         </did>
         <scopecontent id="aspace_00d4328c32ed5e54eac5c662aa45245a">
           <p>Administrative records include details materials directly related to the history and
@@ -584,7 +585,6 @@
           <unittitle>Series VII: Subject Files,</unittitle>
           <unitid>MS C 271.VII</unitid>
           <unitdate normal="1924/1955" type="inclusive">1924-1955</unitdate>
-          <unitdate normal="1944/1944" type="inclusive">1944</unitdate>
         </did>
         <accessrestrict><p>Restricted until 2018.</p></accessrestrict>
       </c>

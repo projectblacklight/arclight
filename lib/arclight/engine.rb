@@ -2,7 +2,9 @@
 
 require 'blacklight'
 require 'solr_ead'
+require 'arclight/normalized_date'
 require 'arclight/normalized_id'
+require 'arclight/normalized_title'
 require 'arclight/digital_object'
 require 'arclight/shared_indexing_behavior'
 require 'arclight/custom_document'
