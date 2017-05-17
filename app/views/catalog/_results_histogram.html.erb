@@ -1,0 +1,8 @@
+<div class='al-data-range-histogram'>
+  <div id='al-date-range-histogram-content' class='collapse show'>
+    <%= render partial: 'arclight_rangelimit', locals: { field_name: :date_range_sim, solr_field: :date_range_sim } %>
+  </div>
+  <a class='float-right' data-toggle='collapse' href='#al-date-range-histogram-content' aria-expanded='false' aria-controls='al-date-range-histogram-content'>
+    <%= t('arclight.date_range_histogram.show_hide') %>
+  </a>
+</div>

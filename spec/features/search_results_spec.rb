@@ -141,4 +141,23 @@ RSpec.describe 'Search results', type: :feature do
       expect(page).not_to have_css('.al-repository-card')
     end
   end
+  describe 'date range histogram', js: true do
+    before do
+      visit search_catalog_path q: '', search_field: 'all_fields'
+    end
+    it 'is present on load' do
+      within '.distribution.subsection.chart_js' do
+        expect(page).to have_css 'canvas', visible: true
+      end
+    end
+    it 'is hideable' do
+      within '.distribution.subsection.chart_js' do
+        expect(page).to have_css 'canvas', visible: true
+      end
+      page.find('[href="#al-date-range-histogram-content"]').click
+      within '.distribution.subsection.chart_js' do
+        expect(page).to have_css 'canvas', visible: false
+      end
+    end
+  end
 end
