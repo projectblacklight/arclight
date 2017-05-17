@@ -37,6 +37,7 @@
         level: @document.component_level,
         path: search_catalog_path,
         name: @document.collection_name,
+        parent: @document.parent_ids.last,
         highlight: show_presenter(@document).heading
       }
     }
