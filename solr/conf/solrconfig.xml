@@ -94,7 +94,6 @@
        <int name="ps">3</int>
        <float name="tie">0.01</float>
 
-       <!-- NOT using marc_display because it is large and will slow things down for search results -->
        <str name="fl">
          id,
          score,
@@ -138,62 +137,130 @@
        <str name="spellcheck.count">5</str>
 
      </lst>
-    <!-- In addition to defaults, "appends" params can be specified
-         to identify values which should be appended to the list of
-         multi-val params from the query (or the existing "defaults").
-      -->
-    <!-- In this example, the param "fq=instock:true" would be appended to
-         any query time fq params the user may specify, as a mechanism for
-         partitioning the index, independent of any user selected filtering
-         that may also be desired (perhaps as a result of faceted searching).
-
-         NOTE: there is *absolutely* nothing a client can do to prevent these
-         "appends" values from being used, so don't use this mechanism
-         unless you are sure you always want it.
-      -->
-    <!--
-       <lst name="appends">
-         <str name="fq">inStock:true</str>
-       </lst>
-      -->
-    <!-- "invariants" are a way of letting the Solr maintainer lock down
-         the options available to Solr clients.  Any params values
-         specified here are used regardless of what values may be specified
-         in either the query, the "defaults", or the "appends" params.
-
-         In this example, the facet.field and facet.query params would
-         be fixed, limiting the facets clients can use.  Faceting is
-         not turned on by default - but if the client does specify
-         facet=true in the request, these are the only facets they
-         will be able to see counts for; regardless of what other
-         facet.field or facet.query params they may specify.
-
-         NOTE: there is *absolutely* nothing a client can do to prevent these
-         "invariants" values from being used, so don't use this mechanism
-         unless you are sure you always want it.
-      -->
-    <!--
-       <lst name="invariants">
-         <str name="facet.field">cat</str>
-         <str name="facet.field">manu_exact</str>
-         <str name="facet.query">price:[* TO 500]</str>
-         <str name="facet.query">price:[500 TO *]</str>
-       </lst>
-      -->
-    <!-- If the default list of SearchComponents is not desired, that
-         list can either be overridden completely, or components can be
-         prepended or appended to the default list.  (see below)
-      -->
-    <!--
-       <arr name="components">
-         <str>nameOfCustomComponent1</str>
-         <str>nameOfCustomComponent2</str>
-       </arr>
-      -->
     <arr name="last-components">
       <str>spellcheck</str>
     </arr>
+  </requestHandler>
 
+  <!-- Field-based searches -->
+  <requestHandler name="name_search" class="solr.SearchHandler">
+    <lst name="defaults">
+      <str name="defType">edismax</str>
+      <str name="echoParams">explicit</str>
+      <int name="rows">10</int>
+      <str name="q.alt">*:*</str>
+      <str name="mm">2&lt;-1 5&lt;-2 6&lt;90%</str>
+      <str name="df">name_teim</str>
+      <str name="q.op">AND</str>
+
+      <str name="qf">
+        name_teim
+      </str>
+      <str name="pf">
+        name_teim
+      </str>
+
+      <str name="fl">*</str>
+      <str name="facet">true</str>
+      <str name="facet.mincount">1</str>
+      <str name="facet.field">level_sim</str>
+      <str name="facet.field">creator_sim</str>
+      <str name="facet.field">date_range_sim</str>
+      <str name="facet.field">names_sim</str>
+      <str name="facet.field">geogname_sim</str>
+      <str name="facet.field">access_subjects_sim</str>
+      <str name="facet.field">repository_sim</str>
+    </lst>
+  </requestHandler>
+
+  <requestHandler name="place_search" class="solr.SearchHandler">
+    <lst name="defaults">
+      <str name="defType">edismax</str>
+      <str name="echoParams">explicit</str>
+      <int name="rows">10</int>
+      <str name="q.alt">*:*</str>
+      <str name="mm">2&lt;-1 5&lt;-2 6&lt;90%</str>
+      <str name="df">place_teim</str>
+      <str name="q.op">AND</str>
+
+      <str name="qf">
+        place_teim
+      </str>
+      <str name="pf">
+        place_teim
+      </str>
+
+      <str name="fl">*</str>
+      <str name="facet">true</str>
+      <str name="facet.mincount">1</str>
+      <str name="facet.field">level_sim</str>
+      <str name="facet.field">creator_sim</str>
+      <str name="facet.field">date_range_sim</str>
+      <str name="facet.field">names_sim</str>
+      <str name="facet.field">geogname_sim</str>
+      <str name="facet.field">access_subjects_sim</str>
+      <str name="facet.field">repository_sim</str>
+    </lst>
+  </requestHandler>
+
+  <requestHandler name="subject_search" class="solr.SearchHandler">
+    <lst name="defaults">
+      <str name="defType">edismax</str>
+      <str name="echoParams">explicit</str>
+      <int name="rows">10</int>
+      <str name="q.alt">*:*</str>
+      <str name="mm">2&lt;-1 5&lt;-2 6&lt;90%</str>
+      <str name="df">subject_teim</str>
+      <str name="q.op">AND</str>
+
+      <str name="qf">
+        subject_teim
+      </str>
+      <str name="pf">
+        subject_teim
+      </str>
+
+      <str name="fl">*</str>
+      <str name="facet">true</str>
+      <str name="facet.mincount">1</str>
+      <str name="facet.field">level_sim</str>
+      <str name="facet.field">creator_sim</str>
+      <str name="facet.field">date_range_sim</str>
+      <str name="facet.field">names_sim</str>
+      <str name="facet.field">geogname_sim</str>
+      <str name="facet.field">access_subjects_sim</str>
+      <str name="facet.field">repository_sim</str>
+    </lst>
+  </requestHandler>
+
+  <requestHandler name="title_search" class="solr.SearchHandler">
+    <lst name="defaults">
+      <str name="defType">edismax</str>
+      <str name="echoParams">explicit</str>
+      <int name="rows">10</int>
+      <str name="q.alt">*:*</str>
+      <str name="mm">2&lt;-1 5&lt;-2 6&lt;90%</str>
+      <str name="df">title_teim</str>
+      <str name="q.op">AND</str>
+
+      <str name="qf">
+        title_teim
+      </str>
+      <str name="pf">
+        title_teim
+      </str>
+
+      <str name="fl">*</str>
+      <str name="facet">true</str>
+      <str name="facet.mincount">1</str>
+      <str name="facet.field">level_sim</str>
+      <str name="facet.field">creator_sim</str>
+      <str name="facet.field">date_range_sim</str>
+      <str name="facet.field">names_sim</str>
+      <str name="facet.field">geogname_sim</str>
+      <str name="facet.field">access_subjects_sim</str>
+      <str name="facet.field">repository_sim</str>
+    </lst>
   </requestHandler>
 
   <!-- for requests to get a single document; use id=666 instead of q=id:666 -->

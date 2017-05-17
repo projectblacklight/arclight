@@ -19,4 +19,20 @@ RSpec.describe 'Home Page', type: :feature do
   it 'does not have a search-navbar' do
     expect(page).not_to have_css '#search-navbar'
   end
+  context 'search dropdown' do
+    it 'has all fields' do
+      within('.search-field') do
+        expect(page).to have_css 'option', text: 'All Fields'
+      end
+    end
+    it 'has several fielded' do
+      within('.search-field') do
+        expect(page).to have_css 'option', text: 'Keyword'
+        expect(page).to have_css 'option', text: 'Name'
+        expect(page).to have_css 'option', text: 'Place'
+        expect(page).to have_css 'option', text: 'Subject'
+        expect(page).to have_css 'option', text: 'Title'
+      end
+    end
+  end
 end
