@@ -14,7 +14,9 @@ describe 'Google Form Request', type: :feature, js: true do
             'input[name="entry.1980510262"][value$="catalog/aoa271aspace_843e8f9f22bac69872d0802d6fffbb04"]',
             visible: false
           )
+
           expect(page).to have_css 'input[name="entry.619150170"][value="Alpha Omega Alpha Archives"]', visible: false
+          expect(page).to have_css 'input[name="entry.14428541"][value="Alpha Omega Alpha"]', visible: false
           expect(page).to have_css 'input[name="entry.996397105"][value="aoa271"]', visible: false
           expect(page).to have_css 'input[name="entry.1125277048"][value="box 1 folder 1"]', visible: false
           expect(page).to have_css 'input[name="entry.862815208"][value$="William W. Root, n.d."]', visible: false

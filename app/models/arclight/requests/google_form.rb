@@ -7,7 +7,7 @@ module Arclight
     # query parameters from the form mapping configuratino
     class GoogleForm
       attr_reader :document, :presenter, :document_url
-      delegate :collection_name, :eadid, :containers, to: :document
+      delegate :collection_name, :collection_creator, :eadid, :containers, to: :document
 
       ##
       # @param [Blacklight::SolrDocument] document

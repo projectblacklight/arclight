@@ -42,7 +42,7 @@ nlm:
   contact_info: 'hmdref@nlm.nih.gov'
   thumbnail_url: "https://collections.nlm.nih.gov/pageturnerserver/ajaxp?theurl=http://localhost:8080/fedora/get/nlm:nlmuid-101421040-img/THUMB"
   google_request_url: 'https://docs.google.com/a/stanford.edu/forms/d/e/1FAIpQLSeOamhY_IcFw4sPnz0ddwWWkrPaHbM5wp7JVbOLOL_mIusEyw/viewform'
-  google_request_mappings: "document_url=entry.1980510262&collection_name=entry.619150170&eadid=entry.996397105&containers=entry.1125277048&title=entry.862815208"
+  google_request_mappings: "document_url=entry.1980510262&collection_name=entry.619150170&collection_creator=entry.14428541&eadid=entry.996397105&containers=entry.1125277048&title=entry.862815208"
 
 umich-bhl:
   name: 'University of Michigan. Bentley Historical Library'
