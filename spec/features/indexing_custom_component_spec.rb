@@ -32,8 +32,12 @@ RSpec.describe 'Indexing Custom Component', type: :feature do
 
     describe '#access_subject' do
       it 'has the subjects for the given compontent' do
-        doc1 = components[26].to_solr
-        doc2 = components[27].to_solr
+        doc1 = components.find do |c|
+          c.to_solr['ref_ssm'] == ['aspace_81c806b82a14c3c79d395bbd383b886f']
+        end.to_solr
+        doc2 = components.find do |c|
+          c.to_solr['ref_ssm'] == ['aspace_01daa89087641f7fc9dbd7a10d3f2da9']
+        end.to_solr
 
         expect(doc1['access_subjects_sim']).to eq ['Minutes']
         expect(doc2['access_subjects_sim']).to eq ['Records']

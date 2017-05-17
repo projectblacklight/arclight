@@ -204,7 +204,7 @@ RSpec.describe 'Collection Page', type: :feature do
       end
 
       expect(page).not_to have_css('h3.index_title', text: /Alpha Omega Alpha Archives/)
-      expect(page).to have_css('.page-entries', text: '1 - 10 of 35')
+      expect(page).to have_css('.page-entries', text: '1 - 10 of 37')
     end
   end
 
