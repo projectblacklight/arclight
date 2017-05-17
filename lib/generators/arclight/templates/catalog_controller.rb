@@ -120,13 +120,33 @@ class CatalogController < ApplicationController
     # This one uses all the defaults set by the solr request handler. Which
     # solr request handler? The one set in config[:default_solr_parameters][:qt],
     # since we aren't specifying it otherwise.
-    config.add_search_field 'all_fields', label: 'All Fields'
+    config.add_search_field 'all_fields', label: 'All Fields' do |field|
+      field.include_in_simple_select = true
+    end
 
     config.add_search_field 'within_collection' do |field|
       field.include_in_simple_select = false
       field.solr_parameters = {
         fq: '-level_sim:Collection'
       }
+    end
+
+    # Field-based searches. We have registered handlers in the Solr configuration
+    # so we have Blacklight use the `qt` parameter to invoke them
+    config.add_search_field 'keyword', label: 'Keyword' do |field|
+      field.qt = 'search' # default
+    end
+    config.add_search_field 'name', label: 'Name' do |field|
+      field.qt = 'name_search'
+    end
+    config.add_search_field 'place', label: 'Place' do |field|
+      field.qt = 'place_search'
+    end
+    config.add_search_field 'subject', label: 'Subject' do |field|
+      field.qt = 'subject_search'
+    end
+    config.add_search_field 'title', label: 'Title' do |field|
+      field.qt = 'title_search'
     end
 
     # "sort results by" select (pulldown)
@@ -173,7 +193,7 @@ class CatalogController < ApplicationController
     config.show.component_metadata_partials = [
       :component_field
     ]
-    
+
     # Component Show Page - Metadata Section
     config.add_component_field 'containers_ssim', label: 'Containers'
     config.add_component_field 'abstract_ssm', label: 'Abstract'
