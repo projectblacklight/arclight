@@ -542,13 +542,13 @@
    <!-- Copy Fields -->
 
    <!-- field-based searches -->
-   <copyField source="title_ssm" dest="title_teim"/>
+   <copyField source="normalized_title_ssm" dest="title_teim"/>
    <copyField source="places_ssm" dest="place_teim"/>
    <copyField source="names_ssim" dest="name_teim"/>
    <copyField source="access_subjects_ssim" dest="subject_teim"/>
 
    <!-- The catch all `text` field -->
-   <copyField source="title_ssm" dest="text"/>
+   <copyField source="normalized_title_ssm" dest="text"/>
    <copyField source="scopecontent_ssm" dest="text"/>
    <copyField source="abstract_ssm" dest="text"/>
    <!-- TODO: we probably need to add more fields here -->
