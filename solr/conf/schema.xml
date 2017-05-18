@@ -45,7 +45,7 @@
     that avoids logging every request
 -->
 
-<schema name="Blacklight Demo Index" version="1.5">
+<schema name="Arclight Demo Index" version="1.5">
   <!-- attribute "name" is the name of this schema and is only used for display purposes.
        Applications should change this to reflect the nature of the search collection.
        version="1.4" is Solr's version number for the schema syntax and semantics.  It should
@@ -548,13 +548,38 @@
    <copyField source="access_subjects_ssim" dest="subject_teim"/>
 
    <!-- The catch all `text` field -->
-   <copyField source="normalized_title_ssm" dest="text"/>
-   <copyField source="scopecontent_ssm" dest="text"/>
-   <copyField source="abstract_ssm" dest="text"/>
-   <!-- TODO: we probably need to add more fields here -->
-   <!-- Indexed fields -->
-   <copyField source="*i" dest="text"/>
-   <copyField source="*im" dest="text"/>
+   <!-- grab the fielded searches -->
+   <copyField source="normalized_title_ssm" dest="text" />
+   <copyField source="places_ssm" dest="text" />
+   <copyField source="names_ssim" dest="text" />
+   <copyField source="access_subjects_ssim" dest="text" />
+   <!-- grab the searchable notes -->
+   <copyField source="abstract_teim" dest="text" />
+   <copyField source="accessrestricct_teim" dest="text" />
+   <copyField source="accruals_teim" dest="text" />
+   <copyField source="acqinfo_teim" dest="text" />
+   <copyField source="altformavail_teim" dest="text" />
+   <copyField source="appraisal_teim" dest="text" />
+   <copyField source="arrangement_teim" dest="text" />
+   <copyField source="bibliography_teim" dest="text" />
+   <copyField source="bioghist_teim" dest="text" />
+   <copyField source="custodhist_teim" dest="text" />
+   <copyField source="did_note_teim" dest="text" />
+   <copyField source="fileplan_teim" dest="text" />
+   <copyField source="materialspec_teim" dest="text" />
+   <copyField source="note_teim" dest="text" />
+   <copyField source="odd_teim" dest="text" />
+   <copyField source="originalsloc_teim" dest="text" />
+   <copyField source="physdesc_teim" dest="text" />
+   <copyField source="physloc_teim" dest="text" />
+   <copyField source="phystech_teim" dest="text" />
+   <copyField source="processinfo_teim" dest="text" />
+   <copyField source="relatedmaterial_teim" dest="text" />
+   <copyField source="scopecontent_teim" dest="text" />
+   <copyField source="separatedmaterial_teim" dest="text" />
+   <copyField source="userestrict_teim" dest="text" />
+   <!-- grab structured data that's important -->
+   <copyField source="unitid_ssm" dest="text" />
 
    <!-- unstemmed fields -->
    <!-- <copyField source="title_t" dest="title_unstem_search"/> -->
