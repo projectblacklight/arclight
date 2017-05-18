@@ -569,7 +569,7 @@
    <copyField source="*_t" dest="spell"/>
 
    <!-- for suggestions -->
-   <copyField source="title_ssm" dest="suggest"/>
+   <copyField source="normalized_title_ssm" dest="suggest"/>
    <copyField source="collection_sim" dest="suggest"/>
    <copyField source="names_ssim" dest="suggest"/>
    <copyField source="repository_sim" dest="suggest"/>
