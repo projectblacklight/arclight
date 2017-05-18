@@ -261,4 +261,13 @@ RSpec.describe 'Collection Page', type: :feature do
       end
     end
   end
+  describe 'breadcrumb' do
+    it 'links home, collection, displays title' do
+      within '.al-show-breadcrumb' do
+        expect(page).to have_css 'a', text: 'Home'
+        expect(page).to have_css 'a', text: 'Collections'
+        expect(page).to have_content 'Alpha Omega Alpha Archives, 1894-1992'
+      end
+    end
+  end
 end
