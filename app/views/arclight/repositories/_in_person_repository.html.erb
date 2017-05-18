@@ -3,7 +3,7 @@
     <%= image_tag repository.thumbnail_url, alt: repository.name, class: 'img-fluid float-left' %>
   <% end %>
   <div>
-    <%= repository.name %>
+    <%= link_to_repository_facet repository.name %>
   </div>
 </div>
 <div class='al-in-person-repository-location'>

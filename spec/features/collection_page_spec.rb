@@ -151,7 +151,7 @@ RSpec.describe 'Collection Page', type: :feature do
             expect(page).to have_css '.card-block dt', text: 'Before you visit:'
             expect(page).to have_css '.card-block dd', text: /materials are stored offsite and must be paged/
             expect(page).to have_css '.card-block dt', text: 'Location of this collection:'
-            expect(page).to have_css '.card-block dd', text: /Special Collections and University Archives/
+            expect(page).to have_css '.card-block dd a', text: /Special Collections and University Archives/
             expect(page).to have_css '.card-block dd .al-repository-contact-building', text: 'Green Library'
           end
         end
