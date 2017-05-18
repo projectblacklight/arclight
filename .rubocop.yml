@@ -39,6 +39,10 @@ Performance/RegexpMatch:
 RSpec/ExampleLength:
   Enabled: false
 
+RSpec/FilePath:
+  Exclude:
+    - 'spec/lib/arclight/viewers/oembed_spec.rb' # Default file path is o_embed, and that looks weird
+
 RSpec/MultipleExpectations:
   Enabled: false
 

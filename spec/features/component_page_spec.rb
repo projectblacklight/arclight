@@ -7,6 +7,14 @@ RSpec.describe 'Component Page', type: :feature do
 
   before { visit solr_document_path(id: doc_id) }
 
+  describe 'Viewer section' do
+    let(:doc_id) { 'a0011-xmlaspace_ref6_lx4' }
+
+    it 'renders digital object viewer initialization markup' do
+      expect(page).to have_css('.al-oembed-viewer[data-arclight-oembed-url="http://purl.stanford.edu/kc844kt2526"]')
+    end
+  end
+
   describe 'Component section heading' do
     it 'includes the level' do
       expect(page).to have_css('h3.al-show-sub-heading', text: 'About this file')

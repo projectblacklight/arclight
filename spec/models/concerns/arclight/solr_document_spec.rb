@@ -41,30 +41,39 @@ RSpec.describe Arclight::SolrDocument do
     end
   end
 
-  describe '#digital_objects' do
-    context 'when the document has a digital object' do
-      let(:document) do
-        SolrDocument.new(
-          digital_objects_ssm: [
-            { href: 'http://example.com', label: 'Label 1' }.to_json,
-            { href: 'http://another-example.com', label: 'Label 2' }.to_json
-          ]
-        )
-      end
+  describe 'digital objects' do
+    let(:document) do
+      SolrDocument.new(
+        digital_objects_ssm: [
+          { href: 'http://example.com', label: 'Label 1' }.to_json,
+          { href: 'http://another-example.com', label: 'Label 2' }.to_json
+        ]
+      )
+    end
 
-      it 'is array of DigitalObjects' do
-        expect(document.digital_objects.length).to eq 2
-        document.digital_objects.all? do |object|
-          expect(object).to be_a Arclight::DigitalObject
-        end
+    describe '#digital_object_viewer' do
+      it 'renders the appropriate viewer' do
+        content = Capybara.string(document.digital_object_viewer)
+        expect(content).to have_css('.al-oembed-viewer', count: 2)
       end
     end
 
-    context 'when the document does not have a digital object' do
-      let(:document) { SolrDocument.new }
+    describe '#digital_objects' do
+      context 'when the document has a digital object' do
+        it 'is array of DigitalObjects' do
+          expect(document.digital_objects.length).to eq 2
+          document.digital_objects.all? do |object|
+            expect(object).to be_a Arclight::DigitalObject
+          end
+        end
+      end
 
-      it 'is a blank array' do
-        expect(document.digital_objects).to be_blank
+      context 'when the document does not have a digital object' do
+        let(:document) { SolrDocument.new }
+
+        it 'is a blank array' do
+          expect(document.digital_objects).to be_blank
+        end
       end
     end
   end

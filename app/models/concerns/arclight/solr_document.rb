@@ -75,6 +75,10 @@ module Arclight
       first('level_ssm')
     end
 
+    def digital_object_viewer
+      @digital_object_viewer ||= Arclight::Viewer.render(self)
+    end
+
     def digital_objects
       digital_objects_field = fetch('digital_objects_ssm', [])
       return [] if digital_objects_field.blank?
