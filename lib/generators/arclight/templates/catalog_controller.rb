@@ -279,6 +279,8 @@ class CatalogController < ApplicationController
 
     # Insert the viewer between the header and the content
     config.show.partials.insert(1, :arclight_viewer)
+    # Insert the breadcrumbs at the beginning
+    config.show.partials.unshift(:show_breadcrumbs)
 
     ##
     # Hierarchy Index View

@@ -105,4 +105,14 @@ RSpec.describe 'Component Page', type: :feature do
       end
     end
   end
+  describe 'breadcrumb' do
+    it 'links home, collection, parents and displays title' do
+      within '.al-show-breadcrumb' do
+        expect(page).to have_css 'a', text: 'Home'
+        expect(page).to have_css 'a', text: 'Collections'
+        expect(page).to have_css 'a', count: 4
+        expect(page).to have_content(/"A brief account of the origin of the /)
+      end
+    end
+  end
 end
