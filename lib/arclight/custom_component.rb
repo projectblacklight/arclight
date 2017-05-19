@@ -4,25 +4,26 @@ module Arclight
   ##
   # An Arclight custom component indexing code
   class CustomComponent < SolrEad::Component
+    extend Arclight::SharedTerminologyBehavior
     include Arclight::SharedIndexingBehavior
     use_terminology SolrEad::Component
 
+    # we extend the terminology to provide additional fields and/or indexing strategies
+    # than `solr_ead` provides as-is. in many cases we're doing redundant indexing, but
+    # we're trying to modify the `solr_ead` gem as little as possible
     extend_terminology do |t|
-      t.unitid(path: 'c/did/unitid', index_as: %i[displayable])
-      t.creator(path: "c/did/origination[@label='creator']/*/text()", index_as: %i[displayable facetable])
-      t.otherlevel(path: 'c/@otherlevel', index_as: %i[displayable])
-
-      # overrides of solr_ead to get different `index_as` properties
-      t.ref_(path: '/c/@id', index_as: %i[displayable])
+      # identifiers
       t.level(path: 'c/@level', index_as: %i[displayable]) # machine-readable for string `level_ssm`
-      t.extent(path: 'c/did/physdesc/extent', index_as: %i[displayable])
-      t.unitdate(path: 'c/did/unitdate', index_as: %i[displayable])
-      t.unitdate_inclusive(path: 'c/did/unitdate[@type=\'inclusive\']', index_as: %i[displayable])
-      t.unitdate_bulk(path: 'c/did/unitdate[@type=\'bulk\']', index_as: %i[displayable])
-      t.unitdate_other(path: 'c/did/unitdate[not(@type)]', index_as: %i[displayable])
-      t.accessrestrict(path: 'c/accessrestrict/p', index_as: %i[displayable])
-      t.scopecontent(path: 'c/scopecontent/p', index_as: %i[displayable])
-      t.normal_unit_dates(path: 'c/did/unitdate/@normal')
+      t.otherlevel(path: 'c/@otherlevel', index_as: %i[displayable])
+      t.ref_(path: '/c/@id', index_as: %i[displayable])
+
+      # facets
+      t.creator(path: "c/did/origination[@label='creator']/*/text()", index_as: %i[displayable facetable])
+
+      add_unitid(t, 'c/')
+      add_extent(t, 'c/')
+      add_dates(t, 'c/')
+      add_searchable_notes(t, 'c/')
     end
 
     def to_solr(solr_doc = {})

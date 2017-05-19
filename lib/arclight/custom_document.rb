@@ -4,43 +4,28 @@ module Arclight
   ##
   # An Arclight custom document indexing code
   class CustomDocument < SolrEad::Document
+    extend Arclight::SharedTerminologyBehavior
     include Arclight::SharedIndexingBehavior
     use_terminology SolrEad::Document
 
+    # we extend the terminology to provide additional fields and/or indexing strategies
+    # than `solr_ead` provides as-is. in many cases we're doing redundant indexing, but
+    # we're trying to modify the `solr_ead` gem as little as possible
     extend_terminology do |t|
-      t.unitid(path: 'archdesc/did/unitid', index_as: %i[displayable])
+      # facets
       t.repository(path: 'archdesc/did/repository/corpname/text() | archdesc/did/repository/name/text()', index_as: %i[displayable facetable])
       t.creator(path: "archdesc/did/origination[@label='creator']/*/text()", index_as: %i[displayable facetable symbol])
       t.creator_persname(path: "archdesc/did/origination[@label='creator']/persname/text()", index_as: %i[displayable facetable symbol])
       t.creator_corpname(path: "archdesc/did/origination[@label='creator']/corpname/text()", index_as: %i[displayable facetable symbol])
       t.creator_famname(path: "archdesc/did/origination[@label='creator']/famname/text()", index_as: %i[displayable facetable symbol])
-      t.prefercite(path: 'archdesc/prefercite/p', index_as: %i[displayable])
       t.function(path: 'archdesc/controlaccess/function/text()', index_as: %i[displayable facetable])
       t.occupation(path: 'archdesc/controlaccess/occupation/text()', index_as: %i[displayable facetable])
       t.places(path: 'archdesc/controlaccess/geogname/text()', index_as: %i[displayable facetable symbol])
-      t.otherfindaid(path: 'archdesc/otherfindaid/p', index_as: %i[displayable])
 
-      # overrides of solr_ead to get different `index_as` properties
-      t.extent(path: 'archdesc/did/physdesc/extent', index_as: %i[displayable])
-      t.unitdate(path: 'archdesc/did/unitdate', index_as: %i[displayable])
-      t.unitdate_inclusive(path: 'archdesc/did/unitdate[@type=\'inclusive\']', index_as: %i[displayable])
-      t.unitdate_bulk(path: 'archdesc/did/unitdate[@type=\'bulk\']', index_as: %i[displayable])
-      t.unitdate_other(path: 'archdesc/did/unitdate[not(@type)]', index_as: %i[displayable])
-      t.accessrestrict(path: 'archdesc/accessrestrict/p', index_as: %i[displayable])
-      t.scopecontent(path: 'archdesc/scopecontent/p', index_as: %i[displayable])
-      t.userestrict(path: 'archdesc/userestrict/p', index_as: %i[displayable])
-      t.abstract(path: 'archdesc/did/abstract', index_as: %i[displayable])
-      t.normal_unit_dates(path: 'archdesc/did/unitdate/@normal')
-      t.bioghist(path: 'archdesc/bioghist/p', index_as: %i[displayable])
-      t.arrangement(path: 'archdesc/arrangement/p', index_as: %i[displayable])
-      t.relatedmaterial(path: 'archdesc/relatedmaterial/p', index_as: %i[displayable])
-      t.separatedmaterial(path: 'archdesc/separatedmaterial/p', index_as: %i[displayable])
-      t.altformavail(path: 'archdesc/altformavail/p', index_as: %i[displayable])
-      t.originalsloc(path: 'archdesc/originalsloc/p', index_as: %i[displayable])
-      t.acqinfo(path: 'archdesc/acqinfo/p', index_as: %i[displayable])
-      t.appraisal(path: 'archdesc/appraisal/p', index_as: %i[displayable])
-      t.custodhist(path: 'archdesc/custodhist/p', index_as: %i[displayable])
-      t.processinfo(path: 'archdesc/processinfo/p', index_as: %i[displayable])
+      add_unitid(t, 'archdesc/')
+      add_extent(t, 'archdesc/')
+      add_dates(t, 'archdesc/')
+      add_searchable_notes(t, 'archdesc/')
     end
 
     def to_solr(solr_doc = {})
@@ -62,8 +47,8 @@ module Arclight
 
     def add_normalized_titles(solr_doc)
       title = add_normalized_title(solr_doc)
-      solr_doc['collection_sim'] = [title]
-      solr_doc['collection_ssm'] = [title]
+      Solrizer.set_field(solr_doc, 'collection', title, :facetable)
+      Solrizer.set_field(solr_doc, 'collection', title, :displayable)
     end
 
     def arclight_field_definitions
