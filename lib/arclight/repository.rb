@@ -21,7 +21,8 @@ module Arclight
                 contact_info
                 thumbnail_url
                 google_request_url
-                google_request_mappings].freeze
+                google_request_mappings
+                collection_count].freeze
 
     attr_accessor :slug, *FIELDS
 
