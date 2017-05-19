@@ -58,7 +58,7 @@ module Arclight
         { name: 'names', value: names, index_as: :symbol },
         { name: 'access_subjects', value: access_subjects, index_as: :symbol },
         { name: 'creators', value: creators, index_as: :symbol },
-        { name: 'has_online_content', value: online_content?, index_as: :displayable },
+        { name: 'has_online_content', value: online_content?, index_as: :symbol },
         { name: 'repository', value: repository_as_configured(repository), index_as: :displayable },
         { name: 'repository', value: repository_as_configured(repository), index_as: :facetable }
       ]
@@ -80,10 +80,6 @@ module Arclight
     #  <controlaccess/><occupation></occupation>
     def access_subjects
       subjects_array(%w[subject function occupation genreform], parent: 'archdesc')
-    end
-
-    def online_content?
-      search('//dao[@href]').present?
     end
   end
 end

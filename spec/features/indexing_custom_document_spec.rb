@@ -137,7 +137,7 @@ RSpec.describe 'Indexing Custom Document', type: :feature do
     describe '#has_online_content' do
       context 'when a document has online content' do
         it 'is true' do
-          expect(doc['has_online_content_ssm']).to eq [true]
+          expect(doc['has_online_content_ssim']).to eq [true]
         end
       end
 
@@ -145,7 +145,7 @@ RSpec.describe 'Indexing Custom Document', type: :feature do
         let(:file) { File.read('spec/fixtures/ead/sul-spec/m0198_from_ASpace.xml') }
 
         it 'is false' do
-          expect(doc['has_online_content_ssm']).to eq [false]
+          expect(doc['has_online_content_ssim']).to eq [false]
         end
       end
     end

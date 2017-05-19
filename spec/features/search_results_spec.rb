@@ -124,6 +124,11 @@ RSpec.describe 'Search results', type: :feature do
           expect(page).to have_css('li .facet-label', text: 'Photographs', visible: false)
           expect(page).to have_css('li .facet-label', text: 'Medicine', visible: false)
         end
+
+        within('.blacklight-has_online_content_ssim') do
+          expect(page).to have_css('h3 a', text: 'Access')
+          expect(page).to have_css('li .facet-label', text: 'Online access', visible: false)
+        end
       end
     end
     it 'renders the repository card when faceted on repository' do
