@@ -9,7 +9,10 @@ Blacklight.onLoad(function () {
     }).done(function (response) {
       var resp = $.parseHTML(response);
       var $doc = $(resp);
-      $el.hide().html($doc.find('.al-show-header-section')).fadeIn(500);
+      var link = $('<a></a>').attr('href', data.arclightCollectionContextUrl);
+      var addedSection = $doc.find('.al-show-header-section');
+      addedSection.find('h1').wrapInner(link);
+      $el.hide().html(addedSection).fadeIn(500);
     });
   });
 });
