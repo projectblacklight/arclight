@@ -7,7 +7,7 @@
 
       <div class="col-sm-12 col-lg-10 al-repository-information">
         <h2>
-          <%= link_to_repository_facet repository.name %>
+          <%= link_to(repository.name, arclight_engine.repository_path(repository.slug)) %>
         </h2>
         <div class='row no-gutters justify-content-md-center'>
           <div class='col-4 col-md-3 al-repository-contact'>
@@ -45,7 +45,7 @@
             <%= repository.description %>
           </div>
 
-          <% if repositories_active? %>
+          <% if on_repositories_index? %>
             <div class='col col-lg-2 al-repository-extra align-self-center hidden-md-down'>
               <div class='al-repository-extra-collection-count'>
                 <span class="al-repository-collection-count">

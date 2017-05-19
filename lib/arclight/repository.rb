@@ -76,5 +76,16 @@ module Arclight
         raise ArgumentError, 'Requires either slug or name parameters to find_by'
       end
     end
+
+    # Mimics ActiveRecord dynamic `find_by!` behavior for the slug or name
+    #
+    # @param [String] `slug` or `name` -- same as `find_by`
+    # @return [Repository]
+    # @raise [ActiveRecord::RecordNotFound] if cannot find repository
+    def self.find_by!(*args)
+      repository = find_by(*args)
+      raise ActiveRecord::RecordNotFound if repository.blank?
+      repository
+    end
   end
 end

@@ -8,13 +8,21 @@ RSpec.describe 'arclight/repositories/index', type: :view do
   before do
     ENV['REPOSITORY_FILE'] = 'spec/fixtures/config/repositories.yml'
     assign(:repositories, test_data)
-    allow(view).to receive(:search_action_path).and_return('/catalog?f=...')
+    allow(view).to receive(:search_action_path).and_return('/')
+    allow(view).to receive(:on_repositories_index?).and_return(true)
+    allow(view).to receive(:on_repositories_show?).and_return(false)
   end
 
   context 'renders the three repository examples' do
     before { render }
     it 'has the header class' do
       expect(rendered).to have_css('.al-repositories', count: 1)
+    end
+    it 'has the proper title' do
+      within('.al-repository:nth-of-type(1)') do
+        expect(rendered).to have_css('h2', text: /My Repository/)
+        expect(rendered).to have_css('h2 a @href', text: '/repositories/sample')
+      end
     end
     it 'has the four sections' do
       expect(rendered).to have_css('.al-repository', count: 4)
@@ -59,12 +67,18 @@ RSpec.describe 'arclight/repositories/index', type: :view do
   end
   context 'switched extra content' do
     it 'shows on repositories page' do
-      allow(view).to receive(:repositories_active?).and_return(true)
       render
       expect(rendered).to have_css('.al-repository-extra', count: 4)
     end
+    it 'does not show on repositories detail page' do
+      assign(:repository, instance_double('repository', name: 'My Repository'))
+      allow(view).to receive(:on_repositories_index?).and_return(false)
+      allow(view).to receive(:on_repositories_show?).and_return(true)
+      render
+      expect(rendered).not_to have_css('.al-repository-extra')
+    end
     it 'does not show on search page' do
-      allow(view).to receive(:repositories_active?).and_return(false)
+      allow(view).to receive(:on_repositories_index?).and_return(false)
       render
       expect(rendered).not_to have_css('.al-repository-extra')
     end
