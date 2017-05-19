@@ -57,9 +57,10 @@ RSpec.describe 'Component Page', type: :feature do
   end
 
   describe 'collection context', js: true do
-    it 'has a collection title' do
+    it 'has a linkable collection title' do
       within '#collection-context' do
-        expect(page).to have_css 'h1', text: 'Alpha Omega Alpha Archives, 1894-1992'
+        expect(page).to have_css 'a[href="/catalog/aoa271"]', text: 'Alpha Omega Alpha Archives, 1894-1992'
+        expect(page).to have_css 'h1'
       end
     end
     it 'has a ancestor list, siblings and highlighted self' do
