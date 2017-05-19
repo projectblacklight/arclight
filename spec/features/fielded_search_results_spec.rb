@@ -24,6 +24,18 @@ RSpec.describe 'Field-based search results', type: :feature do
             expect(page).to have_css '.index_title', text: /Alpha Omega Alpha Archives/
           end
         end
+        it 'odd note without <p> tag' do
+          visit search_catalog_path q: 'Jim Labosier', search_field: 'all_fields'
+          within('.document-position-0') do
+            expect(page).to have_css '.index_title', text: /Alpha Omega Alpha Archives/
+          end
+        end
+        it 'relatedmaterial note with nested structured tags within a <p> tag' do
+          visit search_catalog_path q: 'HMD MS ACC 496', search_field: 'all_fields'
+          within('.document-position-0') do
+            expect(page).to have_css '.index_title', text: /Alpha Omega Alpha Archives/
+          end
+        end
       end
       context 'for components, fielded content is searchable by' do
         it 'title' do
@@ -34,6 +46,12 @@ RSpec.describe 'Field-based search results', type: :feature do
         end
         it 'userestrict note' do
           visit search_catalog_path q: 'Original photographs must be handled using gloves', search_field: 'all_fields'
+          within('.document-position-0') do
+            expect(page).to have_css '.index_title', text: /Series VI: Photographs/
+          end
+        end
+        it 'unitid' do
+          visit search_catalog_path q: 'MS C 271.VI', search_field: 'all_fields'
           within('.document-position-0') do
             expect(page).to have_css '.index_title', text: /Series VI: Photographs/
           end

@@ -47,7 +47,8 @@ module Arclight
         separatedmaterial
         userestrict
       ].each do |k|
-        t.send(k, path: "#{prefix}#{k}/p", index_as: %i[displayable searchable])
+        # many of the notes support various markup so we want everything but the heading
+        t.send(k, path: "#{prefix}#{k}/*[local-name()!=\"head\"]", index_as: %i[displayable searchable])
       end
 
       # various searchable notes in the did
