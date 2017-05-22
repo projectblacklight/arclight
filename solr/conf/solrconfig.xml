@@ -104,7 +104,7 @@
          creator_ssm,
          extent_ssm,
          geogname_ssm,
-         has_online_content_ssm,
+         has_online_content_ssim,
          language_ssm,
          level_ssm,
          repository_ssm,

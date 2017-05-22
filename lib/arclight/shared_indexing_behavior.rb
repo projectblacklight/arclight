@@ -83,5 +83,9 @@ module Arclight
       solr_doc['normalized_date_ssm'] = [dates]
       title
     end
+
+    def online_content?
+      search('//dao[@href]').present?
+    end
   end
 end

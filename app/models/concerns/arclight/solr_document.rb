@@ -56,7 +56,7 @@ module Arclight
     end
 
     def online_content?
-      first('has_online_content_ssm') == 'true'
+      first('has_online_content_ssim') == 'true'
     end
 
     def number_of_children

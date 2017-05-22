@@ -29,9 +29,10 @@ module Arclight
     def to_solr(solr_doc = {})
       super
       solr_doc['id'] = Arclight::NormalizedId.new(solr_doc['id']).to_s
-      Solrizer.insert_field(solr_doc, 'level', formatted_level, :facetable) # human-readable for facet `level_sim`
-      Solrizer.insert_field(solr_doc, 'access_subjects', access_subjects, :facetable)
-      Solrizer.insert_field(solr_doc, 'containers', containers, :symbol)
+      component_field_definitions.each do |field|
+        # we want to use `set_field` rather than `insert_field` since we may be overriding fields
+        Solrizer.set_field(solr_doc, field[:name], field[:value], field[:index_as])
+      end
       add_date_ranges(solr_doc)
       add_normalized_title(solr_doc)
       resolve_repository(solr_doc)
@@ -41,6 +42,15 @@ module Arclight
     end
 
     private
+
+    def component_field_definitions
+      [
+        { name: 'level', value: formatted_level, index_as: :facetable },
+        { name: 'access_subjects', value: access_subjects, index_as: :facetable },
+        { name: 'containers', value: containers, index_as: :symbol },
+        { name: 'has_online_content', value: online_content?, index_as: :symbol }
+      ]
+    end
 
     def resolve_repository(solr_doc)
       repository = solr_doc[Solrizer.solr_name('repository', :displayable)]

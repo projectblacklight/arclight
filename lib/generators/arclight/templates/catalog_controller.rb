@@ -100,6 +100,10 @@ class CatalogController < ApplicationController
     config.add_index_field 'collection_ssm', label: 'Collection Title'
     config.add_index_field 'geogname_ssm', label: 'Place'
 
+    config.add_facet_field 'has_online_content_ssim', label: 'Access', query: {
+      online: { label: 'Online access', fq: 'has_online_content_ssim:true' }
+    }
+
     # solr fields to be displayed in the show (single result) view
     #   The ordering of the field names is the order of the display
 

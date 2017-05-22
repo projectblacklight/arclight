@@ -154,6 +154,26 @@ RSpec.describe 'Indexing Custom Component', type: :feature do
       end
     end
 
+    describe '#has_online_content' do
+      context 'when a component has online content' do
+        it 'is true' do
+          doc = components.find do |c|
+            c.to_solr['ref_ssm'] == ['aspace_843e8f9f22bac69872d0802d6fffbb04']
+          end.to_solr
+          expect(doc['has_online_content_ssim']).to eq [true]
+        end
+      end
+
+      context 'when a component does not have online content' do
+        it 'is false' do
+          doc = components.find do |c|
+            c.to_solr['ref_ssm'] == ['aspace_563a320bb37d24a9e1e6f7bf95b52671']
+          end.to_solr
+          expect(doc['has_online_content_ssim']).to eq [false]
+        end
+      end
+    end
+
     context '#repository_as_configured' do
       let(:component) { components[0] }
 
