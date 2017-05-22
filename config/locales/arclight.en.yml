@@ -7,7 +7,7 @@ en:
       sidebar_section:
         link: 'Open viewer'
     hierarchy:
-      view_more: 'View more'
+      view_all: 'View'
     request:
       container: 'Request container(s)'
     routes:

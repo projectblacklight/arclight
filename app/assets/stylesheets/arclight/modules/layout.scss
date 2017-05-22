@@ -4,6 +4,22 @@
   margin-bottom: $spacer;
 }
 
+// Collapse arrow indicators
+.al-toggle-view-more,
+.al-toggle-view-all {
+  &[aria-expanded="true"] {
+    &::after {
+      content: '\25BC';
+      margin-left: 6px;
+    }
+  }
+
+  &::after {
+    content: '\25B6';
+    margin-left: 6px;
+  }
+}
+
 .al-document-title-bar {
   .toggle-bookmark {
     @media (min-width: 576px) and (max-width: 991px) {

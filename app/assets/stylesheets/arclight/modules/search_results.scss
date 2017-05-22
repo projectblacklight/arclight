@@ -39,6 +39,9 @@
 
 .documents-hierarchy {
   .al-number-of-children-badge {
-    margin-left: $spacer * 2;
+    background-color: #eee;
+    border: 1px solid #ccc;
+    color: $gray-light;
+    vertical-align: top;
   }
 }
