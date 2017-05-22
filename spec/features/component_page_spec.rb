@@ -37,8 +37,8 @@ RSpec.describe 'Component Page', type: :feature do
 
         expect(page).to have_css('.al-digital-object', count: 2)
 
-        expect(page).to have_css('.al-digtal-object-label', text: 'Folder of digitized stuff')
-        expect(page).to have_css('.al-digtal-object-label', text: /^Letter from Christian B\. Anfinsen/)
+        expect(page).to have_css('.al-digital-object-label', text: 'Folder of digitized stuff')
+        expect(page).to have_css('.al-digital-object-label', text: /^Letter from Christian B\. Anfinsen/)
         expect(page).to have_css('.btn-primary', text: 'Open viewer', count: 2)
       end
     end

@@ -163,7 +163,7 @@ RSpec.describe 'Collection Page', type: :feature do
           # Blacklight renders the dt and it is not necessary in our display
           expect(page).to have_css('dt', visible: false)
 
-          expect(page).to have_css('.al-digtal-object-label', text: 'History slideshow')
+          expect(page).to have_css('.al-digital-object-label', text: 'History slideshow')
           expect(page).to have_css('.btn-primary', text: 'Open viewer')
         end
       end

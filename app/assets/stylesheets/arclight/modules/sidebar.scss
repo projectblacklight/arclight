@@ -4,6 +4,10 @@
 
 .al-digital-object {
   margin-bottom: $spacer;
+
+  .al-digital-object-label {
+    margin-bottom: ($spacer / 2);
+  }
 }
 
 // Hiding this from display since we don't need it.
