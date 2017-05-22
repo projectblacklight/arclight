@@ -1,10 +1,86 @@
 .documents-hierarchy {
-  h3 {
+  .document-title-heading {
     font-size: $font-size-h5;
   }
 
-  article {
-    padding: 5px;
+  // Number of children badge & toggle
+  .al-hierarchy-children-status {
+    text-align: right;
+  }
+
+  .al-toggle-view-all {
+    color: $gray-light;
+
+    &:before {
+      color: $gray-light;
+      content: "\2022";
+      padding-right: 3px;
+    }
+  }
+
+  // Component title + children badge
+  .documentHeader {
+    border-bottom: $border-width dashed #ccc;
+    margin-bottom: ($spacer / 2);
+    margin-top: ($spacer * 2);
+  }
+
+  // Headings and text
+  .al-document-abstract-or-scope {
+    font-size: 0.85rem;
+    line-height: 1.25;
+  }
+
+  // Series level
+  .blacklight-series .document-title-heading,
+  .blacklight-otherlevel .document-title-heading {
+    font-size: $font-size-h5;
+    font-weight: 400;
+    margin-bottom: ($spacer / 2);
+
+    > a {
+      color: $gray-dark;
+    }
+  }
+
+  .blacklight-series {
+    // Additional for levels below series
+    .blacklight-subseries .document-title-heading,
+    .blacklight-file .document-title-heading,
+    .blacklight-otherlevel .document-title-heading {
+      font-size: $font-size-h6;
+
+      .documentHeader {
+        margin-top: $spacer;
+      }
+    }
+
+    // Icongraphy for each level
+    .blacklight-subseries .document-title-heading,
+    .al-hierarchy-level-1 .blacklight-file .document-title-heading,
+    .al-hierarchy-level-1 .blacklight-otherlevel .document-title-heading {
+      border-left: ($border-width * 2) solid #999;
+      padding-left: 10px;
+    }
+
+    .al-hierarchy-level-2 .document-title-heading,
+    .al-hierarchy-level-2 .blacklight-file .document-title-heading {
+      border-left: 0;
+      padding-left: 0;
+
+      &:before {
+        color: $gray-light;
+        content: "\a6";
+        padding-right: 6px;
+      }
+    }
+
+    .al-hierarchy-level-3 .document-title-heading,
+    .al-hierarchy-level-3 .blacklight-file .document-title-heading {
+      &:before {
+        content: "\205D";
+      }
+    }
   }
 }
 
@@ -12,22 +88,9 @@
   background: $state-warning-bg;
 }
 
-// Collapse arrow indicators
-.al-toggle-view-more {
-  &[aria-expanded="true"] {
-    &::after {
-      content: '\25BC';
-    }
-  }
-
-  &::after {
-    content: '\25B6';
-  }
-}
-
 // Placeholder styling
 .al-hierarchy-placeholder {
-  padding: 5px;
+  margin-top: $spacer;
 
   h3 {
     background-color: $gray-lighter;
@@ -42,7 +105,7 @@
   }
 }
 
-// Class styling for all level hierarchies
+// Indentation styling for all level hierarchies
 @mixin hierarchy-levels {
   @for $i from 1 through 12 {
     .al-hierarchy-level-#{$i} {

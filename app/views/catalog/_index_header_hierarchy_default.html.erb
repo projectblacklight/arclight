@@ -1,10 +1,23 @@
 <header class="documentHeader row">
-  <h3 class="index_title document-title-heading col-md-12">
+  <h3 class="index_title document-title-heading <%= document.number_of_children > 0 ? 'col-md-9' : 'col-md-12' %> ">
     <% counter = document_counter_with_offset(document_counter) %>
     <%= link_to_document document, document_show_link_field(document), counter: counter %>
-
-    <span class='badge badge-default al-number-of-children-badge'>
-      <%= t(:'arclight.views.index.number_of_children', count: document.number_of_children) %>
-    </span>
   </h3>
+
+  <div class="al-hierarchy-children-status <%= document.number_of_children > 0 ? 'col-md-3' : 'col' %> ">
+    <% if document.number_of_children > 0 %>
+      <span class='badge badge-default al-number-of-children-badge'>
+        <%= t(:'arclight.views.index.number_of_children', count: document.number_of_children) %>
+        <%= link_to(
+          t('arclight.hierarchy.view_all'),
+          "##{document.reference}-collapsible-hierarchy",
+          class: 'al-toggle-view-all',
+            data: {
+              toggle: 'collapse'
+            }
+          )
+        %>
+      </span>
+    <% end %>
+  </div>
 </header>

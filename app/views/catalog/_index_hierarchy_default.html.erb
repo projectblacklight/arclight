@@ -3,19 +3,6 @@
 <% end if document.abstract_or_scope %>
 
 <% if document.number_of_children > 0 %>
-
-  <%= link_to(
-        t('arclight.hierarchy.view_more'),
-        "##{document.reference}-collapsible-hierarchy",
-        class: 'al-toggle-view-more',
-        data: {
-          toggle: 'collapse'
-        }
-      )
-  %>
-
-  <hr>
-
   <%= content_tag(:div, id: "#{document.reference}-collapsible-hierarchy",
     class: "collapse al-hierarchy-level-#{document.component_level}",
   ) do %>
