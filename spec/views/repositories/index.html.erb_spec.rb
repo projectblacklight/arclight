@@ -39,6 +39,23 @@ RSpec.describe 'arclight/repositories/index', type: :view do
     it 'handles a missing phone' do
       expect(rendered).to have_css('.al-repository-contact-info-phone', count: 2)
     end
+    context 'collection counts' do
+      it '0 collections' do
+        within('.al-repository-extra-collection-count') do
+          expect(rendered).to have_css('.al-repository-collection-count', text: 'No collections')
+        end
+      end
+      it '1 collection' do
+        within('.al-repository-extra-collection-count') do
+          expect(rendered).to have_css('.al-repository-collection-count', text: '1 collection')
+        end
+      end
+      it 'n collections' do
+        within('.al-repository-extra-collection-count') do
+          expect(rendered).to have_css('.al-repository-collection-count', text: '2 collections')
+        end
+      end
+    end
   end
   context 'switched extra content' do
     it 'shows on repositories page' do

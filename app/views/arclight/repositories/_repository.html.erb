@@ -47,10 +47,10 @@
 
           <% if repositories_active? %>
             <div class='col col-lg-2 al-repository-extra align-self-center hidden-md-down'>
-              <!-- TODO: actually count the collections -->
               <div class='al-repository-extra-collection-count'>
-                <span class="al-repository-collection-count">9999</span>
-                 collections
+                <span class="al-repository-collection-count">
+                  <%= t(:'arclight.views.repositories.number_of_collections', count: repository.collection_count) %>
+                </span>
                </div>
               <button type='button' class='btn btn-secondary btn-sm'>Learn more</button>
             </div>

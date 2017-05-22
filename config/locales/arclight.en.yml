@@ -46,4 +46,9 @@ en:
           admin_info_field: 'Administrative Information'
           component_field: 'About this %{level}'
           collection_context_field: 'Collection Context'
+      repositories:
+        number_of_collections:
+          zero: 'No collections'
+          one: '1 collection'
+          other: '%{count} collections'
     breadcrumb_separator: ' » '
