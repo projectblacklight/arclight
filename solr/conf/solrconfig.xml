@@ -85,9 +85,11 @@
        -->
 
        <str name="qf">
-         text
+         title_teim^100
+         text^10
        </str>
        <str name="pf">
+         title_teim^100
          text^10
        </str>
 
