@@ -3,6 +3,12 @@
     font-size: $font-size-h5;
   }
 
+  .document-title-containers {
+    &:after {
+      padding-right: 3px;
+    }
+  }
+
   // Number of children badge & toggle
   .al-hierarchy-children-status {
     text-align: right;

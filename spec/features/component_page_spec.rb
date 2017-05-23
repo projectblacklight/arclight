@@ -28,6 +28,14 @@ RSpec.describe 'Component Page', type: :feature do
     end
   end
 
+  describe 'metadata' do
+    let(:doc_id) { 'aoa271aspace_dc2aaf83625280ae2e193beb3f4aea78' }
+
+    it 'uses our rules for displaying containers' do
+      expect(page).to have_css('dd', text: 'Box 1, Folder 4-5')
+    end
+  end
+
   describe 'sidebar' do
     it 'includes an online section when the component includes a DAO' do
       within('.al-sticky-sidebar') do

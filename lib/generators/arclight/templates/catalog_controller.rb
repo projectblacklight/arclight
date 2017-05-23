@@ -199,7 +199,13 @@ class CatalogController < ApplicationController
     ]
 
     # Component Show Page - Metadata Section
-    config.add_component_field 'containers_ssim', label: 'Containers'
+    config.add_component_field 'containers', label: 'Containers', accessor: 'containers', separator_options: {
+      words_connector: ', ',
+      two_words_connector: ', ',
+      last_word_connector: ', '
+    }, if: lambda { |_context, _field_config, document|
+      document.containers.present?
+    }
     config.add_component_field 'abstract_ssm', label: 'Abstract'
     config.add_component_field 'extent_ssm', label: 'Extent'
     config.add_component_field 'scopecontent_ssm', label: 'Scope and Content'

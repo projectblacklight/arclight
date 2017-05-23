@@ -1,5 +1,10 @@
 <header class="documentHeader row">
   <h3 class="index_title document-title-heading <%= document.number_of_children > 0 ? 'col-md-9' : 'col-md-12' %> ">
+    <% if document.containers.present? %>
+      <span class="document-title-containers">
+        <%= document.containers.join(', ') %>:
+      </span>
+    <% end %>
     <% counter = document_counter_with_offset(document_counter) %>
     <%= link_to_document document, document_show_link_field(document), counter: counter %>
   </h3>
