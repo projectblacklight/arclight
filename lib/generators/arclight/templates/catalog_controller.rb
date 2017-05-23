@@ -308,5 +308,9 @@ class CatalogController < ApplicationController
     config.view.hierarchy.display_control = false
     config.view.hierarchy.partials = config.index.partials.dup
     config.view.hierarchy.partials.delete(:index_breadcrumb)
+
+    ##
+    # Extra actions
+    config.add_results_document_tool :google_form, partial: 'arclight/requests/google_form', if: :item_requestable?
   end
 end

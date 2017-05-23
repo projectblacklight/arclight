@@ -37,4 +37,10 @@ describe 'Google Form Request', type: :feature, js: true do
       expect(page).not_to have_css '.al-sticky-sidebar form'
     end
   end
+  context 'in search results' do
+    it 'shows up when item is requestable' do
+      visit search_catalog_path q: '', search_field: 'all_fields'
+      expect(page).to have_css 'form[action*="https://docs.google.com"]', count: 7
+    end
+  end
 end
