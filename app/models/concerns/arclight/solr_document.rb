@@ -89,7 +89,8 @@ module Arclight
     end
 
     def containers
-      fetch('containers_ssim', [])
+      # note that .titlecase strips punctuation, like hyphens, we want to keep
+      fetch('containers_ssim', []).map(&:capitalize)
     end
 
     def normalized_title

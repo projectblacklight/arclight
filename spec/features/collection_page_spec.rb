@@ -18,8 +18,8 @@ RSpec.describe 'Collection Page', type: :feature do
     end
   end
 
-  describe 'online content idicator' do
-    context 'when there is online content avilable' do
+  describe 'online content indicator' do
+    context 'when there is online content available' do
       it 'is rendered' do
         expect(page).to have_css('.badge-success', text: 'online content')
       end
@@ -234,6 +234,9 @@ RSpec.describe 'Collection Page', type: :feature do
         within '#contents' do
           within '.document-position-0' do
             click_link 'View'
+            within '.blacklight-otherlevel.document-position-3' do
+              expect(page).to have_css '.document-title-containers', text: /Box 1, Folder 4\-5/
+            end
             expect(page).to have_css 'a', text: 'Reports'
             within '.blacklight-subseries.document-position-21' do
               click_link 'View'

@@ -93,4 +93,12 @@ RSpec.describe Arclight::SolrDocument do
       expect(document.normalized_date).to eq '1990-2000'
     end
   end
+
+  describe '#containers' do
+    let(:document) { SolrDocument.new(containers_ssim: ['box 1', 'folder 4-5']) }
+
+    it 'uses our rules for joining' do
+      expect(document.containers.join(', ')).to eq 'Box 1, Folder 4-5'
+    end
+  end
 end
