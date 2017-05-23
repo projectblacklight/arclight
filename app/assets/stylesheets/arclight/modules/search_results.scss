@@ -41,3 +41,16 @@
     vertical-align: top;
   }
 }
+
+.al-data-range-histogram {
+  margin-bottom: $spacer;
+}
+
+#appliedParams {
+  margin-bottom: ($spacer * 2) !important;
+}
+
+.applied-filter,
+.catalog_startOverLink {
+  margin-bottom: ($spacer / 2);
+}
