@@ -25,7 +25,7 @@
     class: 'al-ancestors',
     data: {
       arclight_ancestors: @document.parent_ids,
-      arclight_path: search_catalog_path
+      arclight_path: search_catalog_path(hierarchy_context: 'component')
     }
   ) %>
   <%= content_tag(
@@ -35,7 +35,7 @@
       arclight: {
         hierarchy: true,
         level: @document.component_level,
-        path: search_catalog_path,
+        path: search_catalog_path(hierarchy_context: 'component'),
         name: @document.collection_name,
         parent: @document.parent_ids.last,
         highlight: show_presenter(@document).heading

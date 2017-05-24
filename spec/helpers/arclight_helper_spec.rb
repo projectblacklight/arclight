@@ -191,4 +191,14 @@ RSpec.describe ArclightHelper, type: :helper do
       end
     end
   end
+  context '#hierarchy_component_context?' do
+    it 'requires a parameter to enable' do
+      allow(helper).to receive(:params).and_return(hierarchy_context: 'component')
+      expect(helper.hierarchy_component_context?).to be_truthy
+    end
+    it 'omission is disabled' do
+      allow(helper).to receive(:params).and_return({})
+      expect(helper.hierarchy_component_context?).to be_falsey
+    end
+  end
 end

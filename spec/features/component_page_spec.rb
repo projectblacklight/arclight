@@ -82,12 +82,20 @@ RSpec.describe 'Component Page', type: :feature do
         expect(page).to have_css 'h1'
       end
     end
-    it 'has a ancestor list, siblings and highlighted self' do
+    it 'has ancestor component with badge having children count' do
       within '#collection-context' do
-        expect(page).to have_css(
-          '.al-hierarchy-level-0 article a',
-          text: 'Series I: Administrative Records, 1902-1976'
-        )
+        within '.al-hierarchy-level-0' do
+          expect(page).to have_css(
+            'article a',
+            text: 'Series I: Administrative Records, 1902-1976'
+          )
+          expect(page).to have_css('.al-number-of-children-badge', text: '25 children')
+          expect(page).not_to have_css('.al-number-of-children-badge', text: /View/)
+        end
+      end
+    end
+    it 'has siblings and highlighted self' do
+      within '#collection-context' do
         within '.al-contents' do
           expect(page).to have_css(
             '.al-hierarchy-highlight h3',
@@ -95,6 +103,12 @@ RSpec.describe 'Component Page', type: :feature do
           )
           expect(page).to have_css 'article', text: 'Statements of purpose, c.1902'
           expect(page).to have_css 'article', text: 'Constitution - notes on drafting of constitution, c.1902-1903'
+        end
+      end
+    end
+    it 'supports clicks within collection context' do
+      within '#collection-context' do
+        within '.al-contents' do
           click_link('Statements of purpose, c.1902')
         end
       end
