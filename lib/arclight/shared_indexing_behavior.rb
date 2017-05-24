@@ -20,6 +20,12 @@ module Arclight
       clean_facets_array(subjects.flatten.map(&:text))
     end
 
+    def names_array(elements, parent:)
+      xpath_elements = elements.map { |el| "local-name()='#{el}'" }.join(' or ')
+      names = search("//#{parent}/controlaccess/*[#{xpath_elements}]").to_a
+      clean_facets_array(names.flatten.map(&:text))
+    end
+
     # Return a cleaned array of facets without marc subfields
     #
     # E.g. clean_facets_array(
