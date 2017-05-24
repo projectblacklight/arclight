@@ -16,16 +16,16 @@ require 'benchmark'
 # (default: http://127.0.0.1:8983/solr/blacklight-core)
 #
 namespace :arclight do
-  desc 'Index a document'
+  desc 'Index an EAD document, use FILE=<path/to/ead.xml> and REPOSITORY_ID=<myid>'
   task :index do
-    raise 'Please specify your file, ex. FILE=<path/to/file.xml>' unless ENV['FILE']
+    raise 'Please specify your EAD document, ex. FILE=<path/to/ead.xml>' unless ENV['FILE']
     indexer = load_indexer
     print "Loading #{ENV['FILE']} into index...\n"
     elapsed_time = Benchmark.realtime { indexer.update(ENV['FILE']) }
     print "Indexed #{ENV['FILE']} (in #{elapsed_time.round(3)} secs).\n"
   end
 
-  desc 'Index a directory of documents'
+  desc 'Index a directory of EADs, use DIR=<path/to/directory> and REPOSITORY_ID=<myid>'
   task :index_dir do
     raise 'Please specify your directory, ex. DIR=<path/to/directory>' unless ENV['DIR']
     Dir.glob(File.join(ENV['DIR'], '*.xml')).each do |file|
