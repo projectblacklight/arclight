@@ -55,7 +55,7 @@ namespace :arclight do
   task :seed do
     puts 'Seeding index with data from spec/fixtures/ead...'
     Dir.glob('spec/fixtures/ead/*.xml').each do |file|
-      system("FILE=#{file} rake arclight:index")
+      system("FILE=#{file} rake arclight:index") # no REPOSITORY_ID
     end
     Dir.glob('spec/fixtures/ead/*').each do |dir|
       next unless File.directory?(dir)
