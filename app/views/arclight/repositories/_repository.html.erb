@@ -52,7 +52,7 @@
                   <%= t(:'arclight.views.repositories.number_of_collections', count: repository.collection_count) %>
                 </span>
                </div>
-              <button type='button' class='btn btn-secondary btn-sm'>Learn more</button>
+               <%= link_to(t(:'arclight.views.repositories.view_more'), arclight_engine.repository_path(repository.slug), class: 'btn btn-secondary btn-sm') %>
             </div>
           <% end %>
         </div>
