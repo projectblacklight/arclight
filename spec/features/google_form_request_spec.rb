@@ -37,4 +37,26 @@ describe 'Google Form Request', type: :feature, js: true do
       expect(page).not_to have_css '.al-sticky-sidebar form'
     end
   end
+  context 'in search results' do
+    it 'shows up when item is requestable' do
+      visit search_catalog_path q: '', search_field: 'all_fields'
+      expect(page).to have_css 'form[action*="https://docs.google.com"]', count: 7
+    end
+  end
+  context 'in collection hierarchy' do
+    it 'shows up in hierarchy' do
+      visit solr_document_path 'aoa271'
+      click_link 'Contents'
+      first('.al-toggle-view-all').click
+      within '#contents' do
+        expect(page).to have_css 'form[action*="https://docs.google.com"]', count: 22
+      end
+    end
+    it 'shows up in context' do
+      visit solr_document_path 'aoa271aspace_843e8f9f22bac69872d0802d6fffbb04'
+      within '#collection-context' do
+        expect(page).to have_css 'form[action*="https://docs.google.com"]', count: 3
+      end
+    end
+  end
 end

@@ -15,6 +15,7 @@ module Arclight
         helper_method :before_you_visit_note_present
         helper_method :context_sidebar_visit_note
         helper_method :context_sidebar_containers_request
+        helper_method :item_requestable?
       end
     end
 
@@ -29,6 +30,11 @@ module Arclight
 
     def repository_config_present(_, document)
       document.repository_config.present?
+    end
+
+    def item_requestable?(_, options)
+      document = options[:document]
+      request_config_present('', document) && document.containers.present?
     end
 
     def request_config_present(var, document)

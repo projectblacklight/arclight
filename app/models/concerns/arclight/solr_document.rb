@@ -63,6 +63,10 @@ module Arclight
       first('child_component_count_isim') || 0
     end
 
+    def children?
+      number_of_children.positive?
+    end
+
     def reference
       first('ref_ssm')
     end

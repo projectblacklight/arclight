@@ -1,8 +1,11 @@
-<%= form_tag google_form.url, method: :get do |f| %>
+<% document ||= @document %>
+<% google_form ||= Arclight::Requests::GoogleForm.new(document, show_presenter(document), solr_document_path(document)) %>
+
+<%= form_tag google_form.url, method: :get, class: 'al-request-form' do |f| %>
   <% google_form.form_mapping.each do |key, value| %>
     <%= hidden_field_tag value, google_form.send(key) %>
   <% end %>
-  <button type='submit' class='btn btn-primary'>
+  <button type='submit' class='btn btn-sm btn-primary'>
     <%= t('arclight.request.container') %>
   </button>
 <% end %>
