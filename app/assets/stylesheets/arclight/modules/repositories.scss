@@ -1,0 +1,29 @@
+.blacklight-repositories-show {
+  .al-repository-show-header {
+    margin-bottom: ($spacer / 2);
+    margin-top: ($spacer * 2);
+
+    h3 {
+      font-size: $font-size-h4;
+    }
+  }
+
+  .al-repository-collections{
+    font-size: $font-size-sm;
+
+    &::after {
+      content: '\bb';
+    }
+  }
+
+  .al-document-title-bar {
+    border-top: $result-item-border-styling;
+    margin-bottom: $spacer;
+    padding-top: ($spacer / 2);
+
+    .al-document-abstract-or-scope,
+    .al-collection-id {
+      font-size: $font-size-sm;
+    }
+  }
+}
