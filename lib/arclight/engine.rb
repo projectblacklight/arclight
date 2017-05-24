@@ -33,6 +33,7 @@ module Arclight
       in_person_field
       component_field
       online_field
+      component_terms_field
     ]
 
     initializer 'arclight.fields' do

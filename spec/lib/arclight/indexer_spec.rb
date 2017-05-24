@@ -37,7 +37,7 @@ RSpec.describe Arclight::Indexer do
       expect(fields['child_component_count_isim']).to eq 25
     end
 
-    it 'retunrs zero when the child has no components' do
+    it 'returns zero when the child has no components' do
       node = xml.at_xpath('//c[@id="aspace_843e8f9f22bac69872d0802d6fffbb04"]')
       fields = indexer.additional_component_fields(node)
       expect(fields['child_component_count_isim']).to eq 0
@@ -50,6 +50,22 @@ RSpec.describe Arclight::Indexer do
       fields = indexer.additional_component_fields(node)
       expect(fields['creator_ssim']).to be_nil
       expect(fields['collection_creator_ssm']).to eq ['Alpha Omega Alpha']
+    end
+  end
+
+  describe '#add_self_or_parents_restrictions' do
+    it 'adds first restrictions found in self, parents, or collection' do
+      node = xml.xpath('//c[@id="aspace_72f14d6c32e142baa3eeafdb6e4d69be"]').first
+      fields = indexer.additional_component_fields(node)
+      expect(fields['parent_access_restrict_ssm']).to eq ['No restrictions on access.']
+    end
+  end
+
+  describe '#add_self_or_parents_terms' do
+    it 'adds first user terms found in self, parents, or collection' do
+      node = xml.xpath('//c[@id="aspace_72f14d6c32e142baa3eeafdb6e4d69be"]').first
+      fields = indexer.additional_component_fields(node)
+      expect(fields['parent_access_terms_ssm']).to eq ['Original photographs must be handled using gloves.']
     end
   end
 
