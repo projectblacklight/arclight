@@ -1,5 +1,7 @@
 <header class="documentHeader row">
-  <h3 class="index_title document-title-heading <%= document.number_of_children > 0 ? 'col-md-9' : 'col-md-12' %> ">
+  <% requestable = item_requestable?('', { document: document }) %>
+  <% side_content = document.children? || requestable %>
+  <h3 class="index_title document-title-heading <%= side_content ? 'col-md-9' : 'col-md-12' %> ">
     <% if document.containers.present? %>
       <span class="document-title-containers">
         <%= document.containers.join(', ') %>:
@@ -9,20 +11,26 @@
     <%= link_to_document document, document_show_link_field(document), counter: counter %>
   </h3>
 
-  <div class="al-hierarchy-children-status <%= document.number_of_children > 0 ? 'col-md-3' : 'col' %> ">
-    <% if document.number_of_children > 0 %>
-      <span class='badge badge-default al-number-of-children-badge'>
-        <%= t(:'arclight.views.index.number_of_children', count: document.number_of_children) %>
-        <%= link_to(
-          t('arclight.hierarchy.view_all'),
-          "##{document.reference}-collapsible-hierarchy",
-          class: 'al-toggle-view-all',
-            data: {
-              toggle: 'collapse'
-            }
-          )
-        %>
-      </span>
+  
+  <div class="al-hierarchy-side-content float-right <%= side_content ? 'col-md-3' : 'col' %> ">
+    <% if requestable %>
+      <%= render partial: 'arclight/requests/google_form', locals: { document: document } %>
+    <% end %>
+    <% if document.children? %>
+      <div class='al-hierarchy-children-status'>
+        <span class='badge badge-default al-number-of-children-badge'>
+          <%= t(:'arclight.views.index.number_of_children', count: document.number_of_children) %>
+          <%= link_to(
+            t('arclight.hierarchy.view_all'),
+            "##{document.reference}-collapsible-hierarchy",
+            class: 'al-toggle-view-all',
+              data: {
+                toggle: 'collapse'
+              }
+            )
+          %>
+        </span>
+      </div>
     <% end %>
   </div>
 </header>

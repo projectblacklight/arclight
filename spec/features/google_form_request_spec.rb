@@ -43,4 +43,20 @@ describe 'Google Form Request', type: :feature, js: true do
       expect(page).to have_css 'form[action*="https://docs.google.com"]', count: 7
     end
   end
+  context 'in collection hierarchy' do
+    it 'shows up in hierarchy' do
+      visit solr_document_path 'aoa271'
+      click_link 'Contents'
+      first('.al-toggle-view-all').click
+      within '#contents' do
+        expect(page).to have_css 'form[action*="https://docs.google.com"]', count: 22
+      end
+    end
+    it 'shows up in context' do
+      visit solr_document_path 'aoa271aspace_843e8f9f22bac69872d0802d6fffbb04'
+      within '#collection-context' do
+        expect(page).to have_css 'form[action*="https://docs.google.com"]', count: 3
+      end
+    end
+  end
 end
