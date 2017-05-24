@@ -62,6 +62,10 @@ module ArclightHelper
     Arclight::Repository.find_by(name: repos.first.value) if faceted
   end
 
+  def hierarchy_component_context?
+    params[:hierarchy_context] == 'component'
+  end
+
   ##
   # Defines custom helpers used for creating unique metadata blocks to render
   Arclight::Engine.config.catalog_controller_field_accessors.each do |config_field|

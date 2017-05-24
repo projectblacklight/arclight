@@ -11,7 +11,6 @@
     <%= link_to_document document, document_show_link_field(document), counter: counter %>
   </h3>
 
-  
   <div class="al-hierarchy-side-content float-right <%= side_content ? 'col-md-3' : 'col' %> ">
     <% if requestable %>
       <%= render partial: 'arclight/requests/google_form', locals: { document: document } %>
@@ -20,15 +19,17 @@
       <div class='al-hierarchy-children-status'>
         <span class='badge badge-default al-number-of-children-badge'>
           <%= t(:'arclight.views.index.number_of_children', count: document.number_of_children) %>
-          <%= link_to(
-            t('arclight.hierarchy.view_all'),
-            "##{document.reference}-collapsible-hierarchy",
-            class: 'al-toggle-view-all',
-              data: {
-                toggle: 'collapse'
-              }
-            )
-          %>
+          <% unless hierarchy_component_context? %>
+            <%= link_to(
+              t('arclight.hierarchy.view_all'),
+              "##{document.reference}-collapsible-hierarchy",
+              class: 'al-toggle-view-all',
+                data: {
+                  toggle: 'collapse'
+                }
+              )
+            %>
+          <% end %>
         </span>
       </div>
     <% end %>
