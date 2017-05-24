@@ -53,4 +53,6 @@ en:
           zero: 'No collections'
           one: '1 collection'
           other: '%{count} collections'
+        view_more: 'View more'
+        view_all_collections: 'View all of our collections'
     breadcrumb_separator: ' » '
