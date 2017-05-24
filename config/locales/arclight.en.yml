@@ -46,6 +46,7 @@ en:
           admin_info_field: 'Administrative Information'
           component_field: 'About this %{level}'
           collection_context_field: 'Collection Context'
+        our_collections: 'Our Collections'
       repositories:
         number_of_collections:
           zero: 'No collections'

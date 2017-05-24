@@ -2,12 +2,21 @@
 
 require 'spec_helper'
 
-RSpec.describe 'Vanity repositories route', type: :routing do
+RSpec.describe 'Vanity repositories routes', type: :routing do
   routes { Arclight::Engine.routes }
-  it 'routes to repositories display' do
-    expect(get: '/repositories').to route_to(
-      controller: 'arclight/repositories',
-      action: 'index'
-    )
+  context 'repositories' do
+    it '#index' do
+      expect(get: '/repositories').to route_to(
+        controller: 'arclight/repositories',
+        action: 'index'
+      )
+    end
+    it '#show' do
+      expect(get: '/repositories/my-slug').to route_to(
+        controller: 'arclight/repositories',
+        action: 'show',
+        id: 'my-slug'
+      )
+    end
   end
 end

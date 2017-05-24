@@ -1,0 +1,26 @@
+<%= render 'shared/breadcrumbs' %>
+<%= render @repository %>
+<h3>
+  <%= t('arclight.views.show.our_collections') %>
+</h3>
+<br/>
+<% @collections.each do |document| %>
+  <div class="col-md-12">
+    <div class='al-document-title-bar'>
+      <div class='row'>
+        <div class='col-8'>
+          <h5><%= link_to document.normalized_title, solr_document_path(document.id) %></h5>
+          <%= content_tag('div', class: 'al-document-abstract-or-scope', title: document.abstract_or_scope) do %>
+            <%= truncate(document.abstract_or_scope, length: 175) %>
+          <% end if document.abstract_or_scope %>
+        </div>
+        <% if document.unitid %>
+          <div class='col-4 text-right'>
+            <%= t(:'arclight.views.show.collection_id', id: document.unitid) %>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+  <br/>
+<% end %>

@@ -18,6 +18,14 @@ RSpec.describe Arclight::Repository do
       expect(described_class.find_by(name: 'not_there')).to be_nil
       expect { described_class.find_by(name: nil) }.to raise_error(ArgumentError)
     end
+    it '#find_by!(slug)' do
+      expect(described_class.find_by!(slug: 'sample').slug).to eq 'sample'
+      expect { described_class.find_by!(slug: 'not_there') }.to raise_error(ActiveRecord::RecordNotFound)
+    end
+    it '#find_by!(name)' do
+      expect(described_class.find_by!(name: 'My Repository').slug).to eq 'sample'
+      expect { described_class.find_by!(name: 'not_there') }.to raise_error(ActiveRecord::RecordNotFound)
+    end
   end
 
   context 'a single repository has data' do

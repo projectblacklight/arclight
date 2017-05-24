@@ -33,12 +33,17 @@ module ArclightHelper
     facets_from_request.find { |f| f.name == 'collection_sim' }.try(:items).try(:count)
   end
 
-  def repositories_active?
-    controller_name == 'repositories'
+  def on_repositories_show?
+    controller_name == 'repositories' && action_name == 'show'
   end
 
+  def on_repositories_index?
+    controller_name == 'repositories' && action_name == 'index'
+  end
+
+  # the Repositories menu item is only active on the Repositories index page
   def repositories_active_class
-    'active' if repositories_active?
+    'active' if on_repositories_index?
   end
 
   def fields_have_content?(document, field_accessor)
@@ -55,13 +60,6 @@ module ArclightHelper
     repos = facets_from_request.find { |f| f.name == 'repository_sim' }.try(:items)
     faceted = repos && repos.length == 1 && repos.first.value
     Arclight::Repository.find_by(name: repos.first.value) if faceted
-  end
-
-  # `link_to` to a search that facets on the given repository
-  #
-  # @param [String] `name` of the repository
-  def link_to_repository_facet(name)
-    link_to name, search_action_path(f: { 'repository_sim': [name] })
   end
 
   ##

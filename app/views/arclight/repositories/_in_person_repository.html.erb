@@ -3,7 +3,7 @@
     <%= image_tag repository.thumbnail_url, alt: repository.name, class: 'img-fluid float-left' %>
   <% end %>
   <div>
-    <%= link_to_repository_facet repository.name %>
+    <%= link_to(repository.name, arclight_engine.repository_path(repository.slug)) %>
   </div>
 </div>
 <div class='al-in-person-repository-location'>

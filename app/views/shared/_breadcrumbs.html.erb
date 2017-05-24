@@ -3,8 +3,12 @@
   <%= t('arclight.breadcrumb_separator') %>
   <% if collection_active? %>
     <%= t('arclight.routes.collections') %>
-  <% elsif repositories_active? %>
+  <% elsif on_repositories_index? %>
     <%= t('arclight.routes.repositories') %>
+  <% elsif on_repositories_show? %>
+    <%= link_to t('arclight.routes.repositories'), arclight_engine.repositories_path %>
+    <%= t('arclight.breadcrumb_separator') %>
+    <%= @repository.name %>
   <% else %>
     <%= t('arclight.routes.search_results') %>
   <% end %>

@@ -8,6 +8,16 @@ module Arclight
       load_collection_counts
     end
 
+    def show
+      @repository = Arclight::Repository.find_by!(slug: params[:id])
+      search_service = Blacklight.repository_class.new(blacklight_config)
+      @response = search_service.search(
+        q: "level_sim:Collection repository_sim:\"#{@repository.name}\"",
+        rows: 100
+      )
+      @collections = @response.documents
+    end
+
     private
 
     def load_collection_counts

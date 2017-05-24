@@ -35,18 +35,38 @@ RSpec.describe ArclightHelper, type: :helper do
       end
     end
   end
-  describe '#repositories_active?' do
-    context 'with active repositories page' do
+  describe '#on_repositories_index?' do
+    before { allow(helper).to receive(:action_name).twice.and_return('index') }
+
+    context 'with repositories index' do
       it do
         allow(helper).to receive(:controller_name).twice.and_return('repositories')
-        expect(helper.repositories_active?).to eq true
+        expect(helper.on_repositories_index?).to eq true
         expect(helper.repositories_active_class).to eq 'active'
       end
     end
-    context 'without active repositories page' do
+    context 'without repositories index' do
       it do
         allow(helper).to receive(:controller_name).twice.and_return('NOT repositories')
-        expect(helper.repositories_active?).to eq false
+        expect(helper.on_repositories_index?).to eq false
+        expect(helper.repositories_active_class).to eq nil
+      end
+    end
+  end
+  describe '#on_repositories_show?' do
+    before { allow(helper).to receive(:action_name).twice.and_return('show') }
+
+    context 'with repositories show' do
+      it do
+        allow(helper).to receive(:controller_name).twice.and_return('repositories')
+        expect(helper.on_repositories_show?).to eq true
+        expect(helper.repositories_active_class).to eq nil
+      end
+    end
+    context 'without repositories show' do
+      it do
+        allow(helper).to receive(:controller_name).twice.and_return('NOT repositories')
+        expect(helper.on_repositories_show?).to eq false
         expect(helper.repositories_active_class).to eq nil
       end
     end
@@ -169,21 +189,6 @@ RSpec.describe ArclightHelper, type: :helper do
         expect(helper).to receive_messages(render_document_yolo_label: nil)
         helper.generic_render_document_field_label(field, 0, field: 1)
       end
-    end
-  end
-  describe '#link_to_repository_facet' do
-    let(:name) { 'My Repository' }
-    let(:path) { '/catalog?f=...' }
-
-    it 'links to an f query using search_action_path' do
-      allow(helper).to receive(:search_action_path)
-        .with(f: { 'repository_sim': [name] })
-        .and_return(path)
-      html = helper.link_to_repository_facet(name)
-      expect(helper).to have_received(:search_action_path)
-        .with(f: { 'repository_sim': [name] })
-      expect(html).to have_css('a @href', text: path)
-      expect(html).to have_css('a', text: name)
     end
   end
 end
