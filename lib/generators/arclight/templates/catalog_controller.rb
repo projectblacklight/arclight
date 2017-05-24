@@ -203,7 +203,7 @@ class CatalogController < ApplicationController
       :component_terms_field,
       :cite_field
     ]
-    
+
     # Component Show Page - Metadata Section
     config.add_component_field 'containers', label: 'Containers', accessor: 'containers', separator_options: {
       words_connector: ', ',
@@ -222,7 +222,7 @@ class CatalogController < ApplicationController
       two_words_connector: '<br/>',
       last_word_connector: '<br/>'
     }
-    
+
     # Component Show Page Sidebar - Terms and Condition Section
     config.add_component_terms_field 'parent_access_restrict_ssm', label: 'Restrictions'
     config.add_component_terms_field 'parent_access_terms_ssm', label: 'Terms of Access'
@@ -308,6 +308,11 @@ class CatalogController < ApplicationController
     config.view.hierarchy.display_control = false
     config.view.hierarchy.partials = config.index.partials.dup
     config.view.hierarchy.partials.delete(:index_breadcrumb)
+
+    # #
+    # Compact index view
+    config.view.compact
+    config.view.compact.partials = %i[arclight_index_compact]
 
     ##
     # Extra actions

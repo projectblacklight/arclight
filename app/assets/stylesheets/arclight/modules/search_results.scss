@@ -54,3 +54,17 @@
 .catalog_startOverLink {
   margin-bottom: ($spacer / 2);
 }
+
+// Compact Search Results
+.documents-compact {
+  margin-bottom: $spacer;
+
+  .document {
+    border-bottom: $result-item-border-styling;
+    padding: $spacer 0;
+
+    &:first-child {
+      border-top: $result-item-border-styling;
+    }
+  }
+}
