@@ -38,6 +38,12 @@ module Arclight
       end
     end
 
+    def add_arclight_search_behavior
+      inject_into_file 'app/models/search_builder.rb', after: 'include Blacklight::Solr::SearchBuilderBehavior' do
+        "\n  include Arclight::SearchBehavior"
+      end
+    end
+
     def solr_config
       directory '../../../../solr', 'solr', force: true
     end

@@ -58,8 +58,7 @@
           'f[component_level_isim][]': data.arclight.level,
           'f[collection_sim][]': data.arclight.name,
           'f[parent_ssi][]': data.arclight.parent,
-          view: 'hierarchy',
-          per_page: 9999999
+          view: 'hierarchy'
         }
       }).done(function (response) {
         var resp = $.parseHTML(response);
