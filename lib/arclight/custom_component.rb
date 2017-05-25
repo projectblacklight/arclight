@@ -29,6 +29,14 @@ module Arclight
     def to_solr(solr_doc = {})
       super
       solr_doc['id'] = Arclight::NormalizedId.new(solr_doc['id']).to_s
+      solr_doc['creator_sort'] = creator.to_a.join(', ') if creator.present?
+      add_component_fields(solr_doc)
+      solr_doc
+    end
+
+    private
+
+    def add_component_fields(solr_doc)
       component_field_definitions.each do |field|
         # we want to use `set_field` rather than `insert_field` since we may be overriding fields
         Solrizer.set_field(solr_doc, field[:name], field[:value], field[:index_as])
@@ -37,11 +45,7 @@ module Arclight
       add_normalized_title(solr_doc)
       resolve_repository(solr_doc)
       add_digital_content(prefix: 'c/did', solr_doc: solr_doc)
-
-      solr_doc
     end
-
-    private
 
     def component_field_definitions
       [

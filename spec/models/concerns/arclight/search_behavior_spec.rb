@@ -30,4 +30,18 @@ describe Arclight::SearchBehavior do
       end
     end
   end
+  describe '#add_hierarchy_sort' do
+    context 'when in hierarchy view' do
+      let(:user_params) { { view: 'hierarchy' } }
+
+      it 'adds component-order sort to query' do
+        expect(search_builder_instance.add_hierarchy_sort(solr_params)).to include(sort: 'sort_ii asc')
+      end
+    end
+    context 'when not in hierarchy view' do
+      it 'does not affect sort param' do
+        expect(search_builder_instance.add_hierarchy_sort(solr_params)).to eq({})
+      end
+    end
+  end
 end

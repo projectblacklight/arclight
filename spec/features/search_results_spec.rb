@@ -11,7 +11,7 @@ RSpec.describe 'Search results', type: :feature do
     it 'renders the expected metadata for a collection' do
       visit search_catalog_path q: '', search_field: 'all_fields'
 
-      within('.document.document-position-0') do
+      within('.document.document-position-1') do
         within('.al-document-title-bar') do
           expect(page).to have_content 'National Library of Medicine. History of Medicine Division: MS C 271'
         end
@@ -162,6 +162,14 @@ RSpec.describe 'Search results', type: :feature do
       page.find('[href="#al-date-range-histogram-content"]').click
       within '.distribution.subsection.chart_js' do
         expect(page).to have_css 'canvas', visible: false
+      end
+    end
+  end
+  describe 'sorting' do
+    it 'provides a dropdown with all the options' do
+      visit search_catalog_path q: '', search_field: 'all_fields'
+      within '.sort-dropdown' do
+        expect(page).to have_css '.dropdown-item', count: 7
       end
     end
   end

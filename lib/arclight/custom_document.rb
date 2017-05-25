@@ -31,6 +31,14 @@ module Arclight
     def to_solr(solr_doc = {})
       super
       solr_doc['id'] = Arclight::NormalizedId.new(eadid.first).to_s
+      solr_doc['creator_sort'] = creator.to_a.join(', ') if creator.present?
+      add_document_fields(solr_doc)
+      solr_doc
+    end
+
+    private
+
+    def add_document_fields(solr_doc)
       arclight_field_definitions.each do |field|
         # we want to use `set_field` rather than `insert_field` since we may be overriding fields
         Solrizer.set_field(solr_doc, field[:name], field[:value], field[:index_as])
@@ -39,11 +47,7 @@ module Arclight
       add_date_ranges(solr_doc)
       add_digital_content(prefix: 'ead/archdesc', solr_doc: solr_doc)
       add_normalized_titles(solr_doc)
-
-      solr_doc
     end
-
-    private
 
     def add_normalized_titles(solr_doc)
       title = add_normalized_title(solr_doc)

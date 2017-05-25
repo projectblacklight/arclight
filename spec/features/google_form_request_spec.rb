@@ -39,8 +39,8 @@ describe 'Google Form Request', type: :feature, js: true do
   end
   context 'in search results' do
     it 'shows up when item is requestable' do
-      visit search_catalog_path q: '', search_field: 'all_fields'
-      expect(page).to have_css 'form[action*="https://docs.google.com"]', count: 7
+      visit search_catalog_path q: 'alpha', search_field: 'all_fields'
+      expect(page).to have_css 'form[action*="https://docs.google.com"]', count: 4
     end
   end
   context 'in collection hierarchy' do

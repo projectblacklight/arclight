@@ -337,7 +337,7 @@
          With various TokenFilterFactories to produce a sortable field
          that does not include some properties of the source text
       -->
-    <fieldType name="alphaOnlySort" class="solr.TextField" sortMissingLast="true" omitNorms="true">
+    <fieldType name="alphaNumericSort" class="solr.TextField" sortMissingLast="true" omitNorms="true">
       <analyzer>
         <!-- KeywordTokenizer does no actual tokenizing, so the entire
              input string is preserved as a single token
@@ -361,7 +361,7 @@
              http://java.sun.com/j2se/1.5.0/docs/api/java/util/regex/package-summary.html
           -->
         <filter class="solr.PatternReplaceFilterFactory"
-                pattern="([^a-z])" replacement="" replace="all"
+                pattern="([^a-z0-9])" replacement="" replace="all"
         />
       </analyzer>
     </fieldType>
@@ -500,7 +500,7 @@
 
    <dynamicField name="*_display" type="string" indexed="false" stored="true" multiValued="true" />
    <dynamicField name="*_facet" type="string" indexed="true" stored="false" multiValued="true" />
-   <dynamicField name="*_sort" type="alphaOnlySort" indexed="true" stored="false" multiValued="false" />
+   <dynamicField name="*_sort" type="alphaNumericSort" indexed="true" stored="false" multiValued="false" />
    <dynamicField name="*_unstem_search" type="text_general" indexed="true" stored="false" multiValued="true" />
    <dynamicField name="*spell" type="textSpell" indexed="true" stored="false" multiValued="true" />
    <dynamicField name="*suggest" type="textSuggest" indexed="true" stored="false" multiValued="true" />
@@ -586,8 +586,8 @@
    <!-- <copyField source="title_t" dest="title_unstem_search"/> -->
 
    <!-- sort fields -->
-   <!-- <copyField source="pub_date" dest="pub_date_sort"/> -->
-
+   <copyField source="normalized_title_ssm" dest="title_sort"/> <!-- TODO: assumes single values -->
+   <copyField source="normalized_date_ssm" dest="date_sort"/> <!-- TODO: assumes single values -->
 
    <!-- spellcheck fields -->
    <!-- default spell check;  should match fields for default request handler -->
