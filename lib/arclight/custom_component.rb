@@ -18,7 +18,8 @@ module Arclight
       t.ref_(path: '/c/@id', index_as: %i[displayable])
 
       # facets
-      t.creator(path: "c/did/origination[@label='creator']/*/text()", index_as: %i[displayable facetable])
+      t.creator(path: "c/did/origination[@label='creator']/*/text()", index_as: %i[displayable facetable symbol])
+      t.places(path: 'c/controlaccess/geogname/text()', index_as: %i[displayable facetable symbol])
 
       add_unitid(t, 'c/')
       add_extent(t, 'c/')
@@ -50,7 +51,7 @@ module Arclight
     def component_field_definitions
       [
         { name: 'level', value: formatted_level, index_as: :facetable },
-        { name: 'access_subjects', value: access_subjects, index_as: :facetable },
+        { name: 'access_subjects', value: access_subjects, index_as: :symbol },
         { name: 'containers', value: containers, index_as: :symbol },
         { name: 'has_online_content', value: online_content?, index_as: :symbol }
       ]

@@ -39,8 +39,8 @@ RSpec.describe 'Indexing Custom Component', type: :feature do
           c.to_solr['ref_ssm'] == ['aspace_01daa89087641f7fc9dbd7a10d3f2da9']
         end.to_solr
 
-        expect(doc1['access_subjects_sim']).to eq ['Minutes']
-        expect(doc2['access_subjects_sim']).to eq ['Records']
+        expect(doc1['access_subjects_ssim']).to eq ['Minutes']
+        expect(doc2['access_subjects_ssim']).to eq ['Records']
       end
     end
 
@@ -48,6 +48,24 @@ RSpec.describe 'Indexing Custom Component', type: :feature do
       it 'has containers for the given component' do
         doc1 = components[1].to_solr
         expect(doc1['containers_ssim']).to eq ['box 1', 'folder 1']
+      end
+    end
+
+    describe '#creator' do
+      it 'has creators for the given component' do
+        doc1 = components.find do |c|
+          c.to_solr['ref_ssm'] == ['aspace_2d7e583e94eb2b46d5dd1a0ec4cdca1f']
+        end.to_solr
+        expect(doc1['creator_ssim'].last).to eq "Higgins, L.\n              Raymond"
+      end
+    end
+
+    describe '#places' do
+      it 'has a place for the given component' do
+        doc1 = components.find do |c|
+          c.to_solr['ref_ssm'] == ['aspace_843e8f9f22bac69872d0802d6fffbb04']
+        end.to_solr
+        expect(doc1['places_ssim']).to eq ['Popes Creek (Md.)']
       end
     end
 
@@ -112,7 +130,6 @@ RSpec.describe 'Indexing Custom Component', type: :feature do
 
       it 'is nil for non normal dates' do
         doc = components[1].to_solr
-
         date_range_field = doc['date_range_sim']
         expect(date_range_field).to be_nil
       end
@@ -163,7 +180,6 @@ RSpec.describe 'Indexing Custom Component', type: :feature do
           expect(doc['has_online_content_ssim']).to eq [true]
         end
       end
-
       context 'when a component does not have online content' do
         it 'is false' do
           doc = components.find do |c|
