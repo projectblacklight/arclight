@@ -53,7 +53,8 @@ module Arclight
         { name: 'level', value: formatted_level, index_as: :facetable },
         { name: 'access_subjects', value: access_subjects, index_as: :symbol },
         { name: 'containers', value: containers, index_as: :symbol },
-        { name: 'has_online_content', value: online_content?, index_as: :symbol }
+        { name: 'has_online_content', value: online_content?, index_as: :symbol },
+        { name: 'places', value: places, index_as: :facetable }
       ]
     end
 
