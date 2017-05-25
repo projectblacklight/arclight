@@ -56,6 +56,14 @@ RSpec.describe 'Collection Page', type: :feature do
       end
     end
 
+    it 'notes are rendered as paragaphs' do
+      within 'dd.blacklight-bioghist_ssm' do
+        expect(page).to have_css('p', count: 2)
+        expect(page).to have_css('p', text: /^Alpha Omega Alpha Honor Medical Society was founded/)
+        expect(page).to have_css('p', text: /^Root and his fellow medical students/)
+      end
+    end
+
     it 'background has configured metadata' do
       within '#background' do
         expect(page).to have_css('dt', text: 'Scope and Content')

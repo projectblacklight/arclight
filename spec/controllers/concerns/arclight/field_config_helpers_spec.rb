@@ -84,4 +84,11 @@ RSpec.describe Arclight::FieldConfigHelpers do
       expect(content).to eq 'Containers are stored offsite and must be pages 2 to 3 days in advance'
     end
   end
+
+  describe '#paragraph_separator' do
+    it 'returns paragraphs' do
+      content = helper.paragraph_separator(value: ['The lazy dog', 'jumped over', 'the sleeping fox.'])
+      expect(content).to eq '<p>The lazy dog</p><p>jumped over</p><p>the sleeping fox.</p>'
+    end
+  end
 end

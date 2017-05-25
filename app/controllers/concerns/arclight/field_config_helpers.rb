@@ -5,6 +5,8 @@ module Arclight
   # A module to add configuration helpers for certain fields used by Arclight
   module FieldConfigHelpers
     extend ActiveSupport::Concern
+    include ActionView::Helpers::OutputSafetyHelper
+    include ActionView::Helpers::TagHelper
 
     included do
       if respond_to?(:helper_method)
@@ -16,6 +18,7 @@ module Arclight
         helper_method :context_sidebar_visit_note
         helper_method :context_sidebar_containers_request
         helper_method :item_requestable?
+        helper_method :paragraph_separator
       end
     end
 
@@ -71,6 +74,10 @@ module Arclight
           google_form: Arclight::Requests::GoogleForm.new(document, presenter, solr_document_url(document))
         }
       )
+    end
+
+    def paragraph_separator(args)
+      safe_join(args[:value].map { |paragraph| content_tag(:p, paragraph) })
     end
   end
 end
