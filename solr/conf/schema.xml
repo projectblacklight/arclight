@@ -462,7 +462,7 @@
    <field name="_version_" type="long" indexed="true" stored="true" multiValued="false" />
    <field name="timestamp" type="date" indexed="true" stored="true" default="NOW" multiValued="false"/>
    <!-- default, catch all search field -->
-   <field name="text" type="text" indexed="true" stored="false" multiValued="true"/>
+   <field name="text" type="text" indexed="true" stored="true" multiValued="true"/>
 
    <!-- Dynamic field definitions.  If a field name is not found, dynamicFields
         will be used if the name matches any of the patterns.
@@ -511,6 +511,7 @@
         unknown fields indexed and/or stored by default -->
    <!--dynamicField name="*" type="ignored" multiValued="true" /-->
 
+   <dynamicField name="*_tesim" type="text_en"   stored="true"  indexed="true"  multiValued="true"  />
    <dynamicField name="*_teim"  type="text_en"   stored="false" indexed="true"  multiValued="true"  />
    <dynamicField name="*_si"    type="string"    stored="false" indexed="true"  multiValued="false" />
    <dynamicField name="*_sim"   type="string"    stored="false" indexed="true"  multiValued="true"  />
@@ -542,10 +543,10 @@
    <!-- Copy Fields -->
 
    <!-- field-based searches -->
-   <copyField source="normalized_title_ssm" dest="title_teim"/>
-   <copyField source="places_ssm" dest="place_teim"/>
-   <copyField source="names_ssim" dest="name_teim"/>
-   <copyField source="access_subjects_ssim" dest="subject_teim"/>
+   <copyField source="normalized_title_ssm" dest="title_tesim"/>
+   <copyField source="places_ssm" dest="place_tesim"/>
+   <copyField source="names_ssim" dest="name_tesim"/>
+   <copyField source="access_subjects_ssim" dest="subject_tesim"/>
 
    <!-- The catch all `text` field -->
    <!-- grab the fielded searches -->

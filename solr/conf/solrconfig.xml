@@ -85,11 +85,11 @@
        -->
 
        <str name="qf">
-         title_teim^100
+         title_tesim^100
          text^10
        </str>
        <str name="pf">
-         title_teim^100
+         title_tesim^100
          text^10
        </str>
 
@@ -142,7 +142,6 @@
        <str name="spellcheck.extendedResults">true</str>
        <str name="spellcheck.collate">false</str>
        <str name="spellcheck.count">5</str>
-
      </lst>
     <arr name="last-components">
       <str>spellcheck</str>
@@ -157,14 +156,14 @@
       <int name="rows">10</int>
       <str name="q.alt">*:*</str>
       <str name="mm">2&lt;-1 5&lt;-2 6&lt;90%</str>
-      <str name="df">name_teim</str>
+      <str name="df">name_tesim</str>
       <str name="q.op">AND</str>
 
       <str name="qf">
-        name_teim
+        name_tesim
       </str>
       <str name="pf">
-        name_teim
+        name_tesim
       </str>
 
       <str name="fl">*</str>
@@ -187,14 +186,14 @@
       <int name="rows">10</int>
       <str name="q.alt">*:*</str>
       <str name="mm">2&lt;-1 5&lt;-2 6&lt;90%</str>
-      <str name="df">place_teim</str>
+      <str name="df">place_tesim</str>
       <str name="q.op">AND</str>
 
       <str name="qf">
-        place_teim
+        place_tesim
       </str>
       <str name="pf">
-        place_teim
+        place_tesim
       </str>
 
       <str name="fl">*</str>
@@ -217,14 +216,14 @@
       <int name="rows">10</int>
       <str name="q.alt">*:*</str>
       <str name="mm">2&lt;-1 5&lt;-2 6&lt;90%</str>
-      <str name="df">subject_teim</str>
+      <str name="df">subject_tesim</str>
       <str name="q.op">AND</str>
 
       <str name="qf">
-        subject_teim
+        subject_tesim
       </str>
       <str name="pf">
-        subject_teim
+        subject_tesim
       </str>
 
       <str name="fl">*</str>
@@ -247,14 +246,14 @@
       <int name="rows">10</int>
       <str name="q.alt">*:*</str>
       <str name="mm">2&lt;-1 5&lt;-2 6&lt;90%</str>
-      <str name="df">title_teim</str>
+      <str name="df">title_tesim</str>
       <str name="q.op">AND</str>
 
       <str name="qf">
-        title_teim
+        title_tesim
       </str>
       <str name="pf">
-        title_teim
+        title_tesim
       </str>
 
       <str name="fl">*</str>

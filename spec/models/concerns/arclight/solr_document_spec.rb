@@ -125,4 +125,42 @@ RSpec.describe Arclight::SolrDocument do
       expect(document.parent_terms).to eq 'Must use gloves with photos.'
     end
   end
+
+  describe '#highlights' do
+    before { allow(document).to receive(:response).and_return(response) }
+
+    context 'without any highlighting data at all' do
+      let(:response) { { highlighting: {} } }
+
+      it 'handles gracefully' do
+        expect(document.highlights).to be_falsey
+      end
+    end
+
+    context 'without any highlighting hits for document' do
+      let(:response) { { highlighting: { document.id => {} } } }
+
+      it 'handles gracefully' do
+        expect(document.highlights).to be_falsey
+      end
+    end
+
+    context 'with highlighting hits for document but wrong field' do
+      let(:response) { { highlighting: { document.id => { title: %w[my hits] } } } }
+
+      it 'handles gracefully' do
+        expect(document.highlights).to be_falsey
+      end
+    end
+
+    context 'with highlighting hits' do
+      let(:response) { { highlighting: { document.id => { text: %w[my hits] } } } }
+
+      it 'handles gracefully' do
+        expect(document.highlights).to be_truthy
+        expect(document.highlights.length).to eq 2
+        expect(document.highlights.join).to eq 'myhits'
+      end
+    end
+  end
 end

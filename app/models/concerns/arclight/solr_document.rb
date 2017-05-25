@@ -118,5 +118,14 @@ module Arclight
     def normalized_date
       first('normalized_date_ssm')
     end
+
+    # @return [Array<String>] with embedded highlights using <em>...</em>
+    def highlights
+      highlight_response = response[:highlighting]
+      return if highlight_response.blank? ||
+                highlight_response[id].blank? ||
+                highlight_response[id][:text].blank?
+      highlight_response[id][:text]
+    end
   end
 end
