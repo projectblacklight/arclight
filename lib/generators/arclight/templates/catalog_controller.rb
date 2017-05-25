@@ -250,23 +250,23 @@ class CatalogController < ApplicationController
     config.add_cite_field 'prefercite_ssm', label: 'Preferred citation'
 
     # Collection Show Page - Access Section
-    config.add_access_field 'accessrestrict_ssm', label: 'Conditions Governing Access'
-    config.add_access_field 'userestrict_ssm', label: 'Terms Of Use'
+    config.add_access_field 'accessrestrict_ssm', label: 'Conditions Governing Access', helper_method: :paragraph_separator
+    config.add_access_field 'userestrict_ssm', label: 'Terms Of Use', helper_method: :paragraph_separator
 
     # Collection Show Page - Background Section
-    config.add_background_field 'scopecontent_ssm', label: 'Scope and Content'
-    config.add_background_field 'bioghist_ssm', label: 'Biographical / Historical'
-    config.add_background_field 'acqinfo_ssm', label: 'Acquisition information'
-    config.add_background_field 'appraisal_ssm', label: 'Appraisal information'
-    config.add_background_field 'custodhist_ssm', label: 'Custodial history'
-    config.add_background_field 'processinfo_ssm', label: 'Processing information'
+    config.add_background_field 'scopecontent_ssm', label: 'Scope and Content', helper_method: :paragraph_separator
+    config.add_background_field 'bioghist_ssm', label: 'Biographical / Historical', helper_method: :paragraph_separator
+    config.add_background_field 'acqinfo_ssm', label: 'Acquisition information', helper_method: :paragraph_separator
+    config.add_background_field 'appraisal_ssm', label: 'Appraisal information', helper_method: :paragraph_separator
+    config.add_background_field 'custodhist_ssm', label: 'Custodial history', helper_method: :paragraph_separator
+    config.add_background_field 'processinfo_ssm', label: 'Processing information', helper_method: :paragraph_separator
 
     # Collection Show Page - Related Section
-    config.add_related_field 'relatedmaterial_ssm', label: 'Related material'
-    config.add_related_field 'separatedmaterial_ssm', label: 'Separated material'
-    config.add_related_field 'otherfindaid_ssm', label: 'Other finding aids'
-    config.add_related_field 'altformavail_ssm', label: 'Alternative form available'
-    config.add_related_field 'originalsloc_ssm', label: 'Location of originals'
+    config.add_related_field 'relatedmaterial_ssm', label: 'Related material', helper_method: :paragraph_separator
+    config.add_related_field 'separatedmaterial_ssm', label: 'Separated material', helper_method: :paragraph_separator
+    config.add_related_field 'otherfindaid_ssm', label: 'Other finding aids', helper_method: :paragraph_separator
+    config.add_related_field 'altformavail_ssm', label: 'Alternative form available', helper_method: :paragraph_separator
+    config.add_related_field 'originalsloc_ssm', label: 'Location of originals', helper_method: :paragraph_separator
 
     # Collection Show Page - Indexed Terms Section
     config.add_indexed_terms_field 'access_subjects_ssim', label: 'Subjects', :link_to_facet => true, separator_options: {
