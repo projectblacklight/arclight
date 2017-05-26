@@ -36,6 +36,13 @@
     line-height: 1.25;
   }
 
+  .al-document-abstract-or-scope-heading {
+    color: #636c72;
+    font-size: $font-size-xs;
+    font-weight: normal;
+    text-transform: uppercase;
+  }
+
   // Series level
   .blacklight-series .document-title-heading,
   .blacklight-file .document-title-heading,
