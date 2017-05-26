@@ -1,6 +1,4 @@
 <div class="al-repositories">
   <%= render 'shared/breadcrumbs' %>
-  <% @repositories.each do |repository| %>
-    <%= render repository %>
-  <% end %>
+  <%= render @repositories %>
 </div>
