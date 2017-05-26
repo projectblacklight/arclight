@@ -46,14 +46,10 @@
   margin-bottom: $spacer;
 }
 
-#appliedParams {
-  margin-bottom: ($spacer * 2) !important;
+.blacklight-catalog-index #appliedParams {
+  margin-bottom: ($spacer * 3) !important;
 }
 
-.applied-filter,
-.catalog_startOverLink {
-  margin-bottom: ($spacer / 2);
-}
 
 // Compact Search Results
 .documents-compact {
