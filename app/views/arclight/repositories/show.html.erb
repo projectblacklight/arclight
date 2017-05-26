@@ -8,8 +8,7 @@
   </div>
   <div class="col text-right">
     <span class="al-repository-collections">
-      <%# TODO: This link should go to search results scoped to a) this repository and b) Level = 'collection' #%>
-      <%= link_to(t(:'arclight.views.repositories.view_all_collections'), "#") %>
+      <%= link_to(t(:'arclight.views.repositories.view_all_collections'), repository_collections_path(@repository)) %>
     </span>
   </div>
 </div>
