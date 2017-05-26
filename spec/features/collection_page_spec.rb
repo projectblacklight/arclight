@@ -117,6 +117,7 @@ RSpec.describe 'Collection Page', type: :feature do
         expect(page).to have_css('dd', text: 'Root, William Webster, 1867-1932')
         expect(page).to have_css('dd', text: 'Bierring, Walter L. (Walter Lawrence), 1868-1961')
         expect(page).to have_css('dd', text: 'Mindanao Island (Philippines)')
+        expect(page).not_to have_css('dd', text: 'Higgins, L. Raymond')
       end
     end
 

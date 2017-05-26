@@ -60,20 +60,24 @@ module Arclight
         { name: 'creators', value: creators, index_as: :symbol },
         { name: 'has_online_content', value: online_content?, index_as: :symbol },
         { name: 'repository', value: repository_as_configured(repository), index_as: :displayable },
-        { name: 'repository', value: repository_as_configured(repository), index_as: :facetable }
+        { name: 'repository', value: repository_as_configured(repository), index_as: :facetable },
+        { name: 'names_coll', value: names_coll, index_as: :symbol }
       ]
     end
-    # rubocop: enable Metrics/MethodLength
 
     def names
       [corpname, famname, name, persname].flatten.compact.uniq - repository
+    end
+
+    def names_coll
+      names_array(%w[corpname famname name persname], parent: 'archdesc')
     end
 
     def creators
       [creator_persname, creator_corpname, creator_famname].flatten.compact.uniq - repository
     end
 
-    # Combine subjets into one group from:
+    # Combine subjets into one group from
     #  <controlaccess/><subject></subject>
     #  <controlaccess/><function></function>
     #  <controlaccess/><genreform></genreform>

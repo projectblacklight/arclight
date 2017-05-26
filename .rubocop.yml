@@ -33,6 +33,10 @@ Metrics/BlockLength:
     - 'tasks/**/*'
     - 'lib/arclight/custom_document.rb'
 
+Metrics/MethodLength:
+  Exclude:
+    - 'lib/arclight/custom_document.rb' # arclight_field_definitions too long
+
 Performance/RegexpMatch:
   Enabled: false
 

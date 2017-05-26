@@ -122,7 +122,8 @@
          ref_ssm,
          component_level_isim,
          parent_access_restrict_ssm,
-         parent_access_terms_ssm
+         parent_access_terms_ssm,
+         names_coll_ssim
        </str>
 
        <str name="facet">true</str>
