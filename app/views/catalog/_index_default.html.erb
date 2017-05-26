@@ -9,3 +9,7 @@
 <%= content_tag('div', class: 'al-document-abstract-or-scope', title: document.abstract_or_scope) do %>
   <%= truncate(document.abstract_or_scope, length: 175) %>
 <% end if document.abstract_or_scope %>
+
+<%= content_tag('div', class: 'al-document-highlight') do %>
+  <%= document.highlights.join('<br/>').html_safe %>
+<% end if document.highlights %>
