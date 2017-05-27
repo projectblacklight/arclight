@@ -275,11 +275,11 @@ class CatalogController < ApplicationController
       last_word_connector: '<br/>'
     }
 
-    config.add_indexed_terms_field 'names_coll_ssim', label: 'Names', :link_to_facet => true, separator_options: {
+    config.add_indexed_terms_field 'names_coll_ssim', label: 'Names', separator_options: {
       words_connector: '<br/>',
       two_words_connector: '<br/>',
       last_word_connector: '<br/>'
-    }
+    }, helper_method: :link_to_name_facet
 
     config.add_indexed_terms_field 'places_ssim', label: 'Places', :link_to_facet => true, separator_options: {
       words_connector: '<br/>',
