@@ -36,6 +36,13 @@
     line-height: 1.25;
   }
 
+  .al-hierarchy-sub-heading {
+    color: $gray-light;
+    font-size: $font-size-xs;
+    font-weight: normal;
+    text-transform: uppercase;
+  }
+
   // Series level
   .blacklight-series .document-title-heading,
   .blacklight-file .document-title-heading,
