@@ -1,5 +1,5 @@
 <%= content_tag('div', class: 'al-document-abstract-or-scope', title: document.abstract_or_scope) do %>
-  <%= content_tag(:h4,'Scope and Contents', class: 'al-document-abstract-or-scope-heading') %>
+  <%= content_tag(:h4,'Scope and Contents', class: 'al-hierarchy-sub-heading') %>
   <%= truncate(document.abstract_or_scope, length: 175) %>
 <% end if document.abstract_or_scope %>
 
