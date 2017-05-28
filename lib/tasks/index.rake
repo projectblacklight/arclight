@@ -33,7 +33,40 @@ namespace :arclight do
     end
   end
 
-  desc'Destroy all documents in the index'
+  desc 'Index an EAD document, use URL=<http[s]://domain/path/to/ead.xml> and REPOSITORY_ID=<myid>'
+  task :index_url do
+    raise 'Please specify your EAD document, ex. URL=<http[s]://domain/path/to/ead.xml>' unless ENV['URL']
+    ead = Nokogiri::XML(open(ENV['URL']))
+    tmp = Tempfile.new(["#{Time.now.to_i}-", '.xml'], encoding: 'utf-8')
+    begin
+      tmp.write ead
+      puts "Downloaded EAD to #{tmp.path}"
+      ENV['FILE'] = tmp.path
+      Rake::Task['arclight:index'].invoke
+      Rake::Task['arclight:index'].reenable
+      tmp.close
+    ensure
+      tmp.delete
+    end
+  end
+
+  desc 'Index EADs from a file of URLs, use BATCH=<path/to/urls.txt> and REPOSITORY_ID=<myid>'
+  task :index_url_batch do
+    raise 'Please specify your URLs file, ex. BATCH=<path/to/urls.txt>' unless ENV['BATCH']
+    File.open(ENV['BATCH']).each_line do |l|
+      ENV['URL'] = l.chomp
+      next if ENV['URL'].empty?
+      unless ENV['URL'] =~ /\A#{URI.regexp(%w[http https])}\z/
+        puts "Skipping invalid looking url #{ENV['URL']}"
+        next
+      end
+      puts "Indexing #{ENV['URL']}"
+      Rake::Task['arclight:index_url'].invoke
+      Rake::Task['arclight:index_url'].reenable
+    end
+  end
+
+  desc 'Destroy all documents in the index'
   task :destroy_index_docs do
     puts 'Deleting all documents from index...'
     indexer = load_indexer

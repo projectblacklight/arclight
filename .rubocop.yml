@@ -28,9 +28,9 @@ Metrics/ClassLength:
 
 Metrics/BlockLength:
   Exclude:
+    - !ruby/regexp /\.rake$/
     - 'arclight.gemspec'
     - 'spec/**/*'
-    - 'tasks/**/*'
     - 'lib/arclight/custom_document.rb'
 
 Metrics/MethodLength:
