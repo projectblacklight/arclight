@@ -44,4 +44,18 @@ describe Arclight::SearchBehavior do
       end
     end
   end
+  describe '#add_highlighting' do
+    context 'when in hierarchy view' do
+      let(:user_params) { { view: 'hierarchy' } }
+
+      it 'disables highlighting' do
+        expect(search_builder_instance.add_highlighting(solr_params)).to include('hl' => false)
+      end
+    end
+    context 'when not in hierarchy view' do
+      it 'enables highlighting' do
+        expect(search_builder_instance.add_highlighting(solr_params)).to include('hl' => true)
+      end
+    end
+  end
 end
