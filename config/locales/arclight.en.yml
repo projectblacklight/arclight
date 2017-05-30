@@ -49,6 +49,10 @@ en:
           component_field: 'About this %{level}'
           collection_context_field: 'Collection Context'
         our_collections: 'Our Collections'
+        download:
+          default: 'Download'
+          pdf: 'Collection PDF (%{size})'
+          ead: 'Collection EAD (%{size})'
       repositories:
         number_of_collections:
           zero: 'No collections'

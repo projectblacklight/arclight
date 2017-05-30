@@ -201,4 +201,29 @@ RSpec.describe ArclightHelper, type: :helper do
       expect(helper.hierarchy_component_context?).to be_falsey
     end
   end
+  context '#collection_downloads' do
+    let(:document) { SolrDocument.new('unitid_ssm' => 'MS C 271') }
+    let(:config_file) { File.join('spec', 'fixtures', 'config', 'downloads.yml') }
+    let(:config_data) { YAML.safe_load(File.read(config_file)) }
+
+    it 'no download metadata' do
+      allow(File).to receive(:read).and_raise(Errno::ENOENT)
+      expect(helper.collection_downloads(document)).to eq({})
+    end
+    it 'handles no downloads' do
+      expect(helper.collection_downloads(document, {})).to eq({})
+    end
+    it 'handles PDF downloads' do
+      expect(helper.collection_downloads(document, config_data)[:pdf]).to include(
+        href: 'http://example.com/MS+C+271.pdf',
+        size: '1.23MB'
+      )
+    end
+    it 'handles EAD downloads' do
+      expect(helper.collection_downloads(document, config_data)[:ead]).to include(
+        href: 'http://example.com/MS+C+271.xml',
+        size: '121 KB'
+      )
+    end
+  end
 end
