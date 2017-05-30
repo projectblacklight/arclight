@@ -121,6 +121,17 @@ RSpec.describe 'Collection Page', type: :feature do
       end
     end
 
+    it 'indexed name terms link to the appropriate name facet' do
+      name = 'Root, William Webster, 1867-1932'
+      within '#indexed-terms' do
+        click_link name
+      end
+
+      within '.blacklight-names_ssim.facet-limit-active' do
+        expect(page).to have_css('.facet-label .selected', text: name)
+      end
+    end
+
     context 'sections that do not have metadata' do
       let(:doc_id) { 'm0198-xml' }
 

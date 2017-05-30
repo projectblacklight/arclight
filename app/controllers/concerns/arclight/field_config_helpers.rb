@@ -19,6 +19,7 @@ module Arclight
         helper_method :context_sidebar_containers_request
         helper_method :item_requestable?
         helper_method :paragraph_separator
+        helper_method :link_to_name_facet
       end
     end
 
@@ -78,6 +79,18 @@ module Arclight
 
     def paragraph_separator(args)
       safe_join(args[:value].map { |paragraph| content_tag(:p, paragraph) })
+    end
+
+    def link_to_name_facet(args)
+      options = args[:config].try(:separator_options) || {}
+      values = args[:value] || []
+
+      values.map do |value|
+        view_context.link_to(
+          value,
+          view_context.search_action_path(f: { names_ssim: [value] })
+        )
+      end.to_sentence(options).html_safe
     end
   end
 end

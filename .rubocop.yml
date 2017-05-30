@@ -40,6 +40,10 @@ Metrics/MethodLength:
 Performance/RegexpMatch:
   Enabled: false
 
+Rails/OutputSafety:
+  Exclude:
+    - 'app/controllers/concerns/arclight/field_config_helpers.rb' # html_safe needs to be called to mimic BL JOIN behavior
+
 RSpec/ExampleLength:
   Enabled: false
 
