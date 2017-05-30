@@ -4,13 +4,20 @@
 
 # Arclight
 
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/arclight`. To experiment with that code, run `bin/console` for an interactive prompt.
+A Rails engine supporting discovery of archival materials.
 
-TODO: Delete this and the text above, and describe your gem
+During April - June 2017, ArcLight underwent its initial development as a Minimally Viable Product (MVP). The MVP is targeted for content that is described in the [Encoded Archival Description](http://eadiva.com/2/) (EAD) format. Future development is in the planning phase with no definitive timeline as yet.
+
+## Requirements
+
+* [Ruby](https://www.ruby-lang.org/en/) 2.2 or later
+* [Rails](http://rubyonrails.org) 5.0 or later
 
 ## Installation
 
-Add this line to your application's Gemfile:
+[Installing ArcLight](https://github.com/sul-dlss/arclight/wiki/Creating,-installing,-and-running-your-ArcLight-application) is straightforward in a Rails environment.
+
+Basically, add this line to your application's `Gemfile`:
 
 ```ruby
 gem 'arclight'
@@ -28,15 +35,47 @@ Or install it yourself as:
 $ gem install arclight
 ```
 
+For further details, see our [Installing ArcLight](https://github.com/sul-dlss/arclight/wiki/Creating,-installing,-and-running-your-ArcLight-application) documentation.
+
 ## Usage
 
-TODO: Write usage instructions here
+See the [ArcLight demo](https://arclight-demo.projectblacklight.org/) and [ArcLight MVP Wiki](https://github.com/sul-dlss/arclight/wiki) for usage.
+
+## Resources
+
+* General
+  * [ArcLight team wiki](https://wiki.duraspace.org/display/hydra/ArcLight): includes design process documentation
+  * Use the [ArcLight Google Group](http://groups.google.com/d/forum/arclight-community) to contact us with questions
+* MVP Implementation:
+  * [ArcLight demo site](https://arclight-demo.projectblacklight.org/)
+  * [YouTube channel](https://www.youtube.com/channel/UCbSaP93HdypsW6hXy7V1nFQ): MVP sprint demo videos
+  * [ArcLight MVP Wiki](https://github.com/sul-dlss/arclight/wiki)
+  * [Blacklight wiki](https://github.com/projectblacklight/blacklight/wiki)
+
+## ArcLight MVP Development team
+
+* Stanford University
+  * [Camille Villa](https://github.com/camillevilla)
+  * [Darren Hardy](https://github.com/drh-stanford)
+  * [Gary Geisler](https://github.com/ggeisler)
+  * [Jack Reed](https://github.com/mejackreed)
+  * [Jennifer Vine](https://github.com/jvine)
+  * [Jessie Keck](https://github.com/jkeck)
+  * [Mark Matienzo](https://github.com/anarchivist)
+* University of Michagan
+  * [Gordon Leacock](https://github.com/gordonleacock)
 
 ## Development
 
-After checking out the repo, run `bin/setup` to install dependencies. Then, run `bundle exec rake` to run the tests. You can also run `bin/console` for an interactive prompt that will allow you to experiment.
+ArcLight development uses [`solr_wrapper`](https://rubygems.org/gems/solr_wrapper/versions/0.18.1) and [`engine_cart`](https://rubygems.org/gems/engine_cart) to host development instances of Solr and Rails server on your local machine.
 
-To install this gem onto your local machine, run `bundle exec rake install`.
+### Run the test suite
+
+Ensure Solr and Rails are _not_ running (ports 8983 and 3000 respectively), then:
+
+```sh
+$ bundle exec rake
+```
 
 ### Run a development server
 
@@ -46,21 +85,20 @@ $ bundle exec rake arclight:server
 
 Then visit http://localhost:3000. It will also start a Solr instance on port 8983.
 
-### Run the test suite
+### Run a console
 
-Ensure Solr and Rails are not running (ports 8983 and 3000 respectively), then:
+You can also run `bin/console` for an interactive prompt that will allow you to experiment.
 
-```sh
-$ bundle exec rake
-```
+### Release a new version of the gem
 
-### Release
+To release a new version:
 
-To release a new version, update the version number in `version.rb`, and then run `bundle exec rake release`, which will create a git tag for the version, push git commits and tags, build the gem file (e.g., `gem build arclight.gemspec`) and push the `.gem` file to [rubygems.org](https://rubygems.org) (e.g., `gem push arclight-x.y.z.gem`).
+1. Update the version number in `lib/arclight/version.rb`
+2. Run `bundle exec rake release`, which will create a git tag for the version, push git commits and tags, build the gem file (e.g., `gem build arclight.gemspec`) and push the `.gem` file to [rubygems.org](https://rubygems.org) (e.g., `gem push arclight-x.y.z.gem`).
 
 ## Contributing
 
-Bug reports and pull requests are welcome on GitHub at https://github.com/sul-dlss/arclight.
+[Bug reports](https://github.com/sul-dlss/arclight/issues) and [pull requests](https://github.com/sul-dlss/arclight/pulls) are welcome on GitHub at https://github.com/sul-dlss/arclight.
 
 ## License
 
