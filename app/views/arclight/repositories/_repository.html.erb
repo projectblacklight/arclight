@@ -7,7 +7,7 @@
 
       <div class="col-sm-12 col-lg-10 al-repository-information">
         <h2>
-          <%= link_to(repository.name, arclight_engine.repository_path(repository.slug)) %>
+          <%= link_to_unless(params[:id] == repository.slug, repository.name, arclight_engine.repository_path(repository.slug)) %>
         </h2>
         <div class='row no-gutters justify-content-md-center'>
           <div class='col-4 col-md-3 al-repository-contact'>

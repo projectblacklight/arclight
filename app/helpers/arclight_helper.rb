@@ -11,6 +11,15 @@ module ArclightHelper
     end, t('arclight.breadcrumb_separator'))
   end
 
+  def repository_collections_path(repository)
+    search_action_url(
+      f: {
+        repository_sim: [repository.name],
+        level_sim: ['Collection']
+      }
+    )
+  end
+
   ##
   # Classes used for customized show page in arclight
   def custom_show_content_classes

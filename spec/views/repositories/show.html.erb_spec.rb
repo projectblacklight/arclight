@@ -10,6 +10,7 @@ RSpec.describe 'arclight/repositories/show', type: :view do
     assign(:repository, test_data)
     assign(:collections, [])
     allow(view).to receive(:on_repositories_show?).and_return(true)
+    allow(view).to receive(:search_action_url).and_return('/')
   end
 
   context 'renders a repository detail page' do
