@@ -150,18 +150,14 @@ RSpec.describe 'Search results', type: :feature do
     before do
       visit search_catalog_path q: '', search_field: 'all_fields'
     end
-    it 'is present on load' do
-      within '.distribution.subsection.chart_js' do
-        expect(page).to have_css 'canvas', visible: true
-      end
+    it 'is not present on load' do
+      expect(page).to have_css '.distribution.subsection.chart_js', visible: false
     end
-    it 'is hideable' do
-      within '.distribution.subsection.chart_js' do
-        expect(page).to have_css 'canvas', visible: true
-      end
+    it 'is showable' do
+      expect(page).to have_css '.distribution.subsection.chart_js', visible: false
       page.find('[href="#al-date-range-histogram-content"]').click
       within '.distribution.subsection.chart_js' do
-        expect(page).to have_css 'canvas', visible: false
+        expect(page).to have_css 'canvas', visible: true
       end
     end
   end
