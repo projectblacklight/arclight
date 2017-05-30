@@ -9,6 +9,12 @@ RSpec.describe 'Collection Page', type: :feature do
     visit solr_document_path(id: doc_id)
   end
 
+  describe 'accessibility review', driver: :poltergeist do
+    it 'complies to WCAG 2.0 AA guidelines' do
+      expect(page).to be_accessible.within('#main-container').according_to :wcag2aa
+    end
+  end
+
   describe 'arclight document header' do
     it 'includes a div with the repository and collection ID' do
       within('.al-document-title-bar') do

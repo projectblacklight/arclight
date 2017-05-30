@@ -168,5 +168,12 @@ RSpec.describe 'Search results', type: :feature do
         expect(page).to have_css '.dropdown-item', count: 7
       end
     end
+
+    describe 'accessibility review', driver: :poltergeist do
+      it 'complies to WCAG 2.0 AA guidelines', js: true do
+        visit search_catalog_path q: '', search_field: 'all_fields'
+        expect(page).to be_accessible.within('#main-container').according_to :wcag2aa
+      end
+    end
   end
 end
