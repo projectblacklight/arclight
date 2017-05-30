@@ -250,12 +250,12 @@ RSpec.describe 'Collection Page', type: :feature do
         end
         expect(page).to have_css '.show-document', text: /Series I: Administrative Records/
       end
-      it 'displays truncated component metadata' do
+      it 'component metadata' do
         within '#contents' do
           within '.document-position-0 ' do
             expect(page).to have_css(
               '.al-document-abstract-or-scope',
-              text: /^SCOPE AND CONTENTS Administrative records include.*\.{3}/i
+              text: /^SCOPE AND CONTENTS Administrative records include/i
             )
           end
         end

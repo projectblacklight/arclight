@@ -1,0 +1,23 @@
+Blacklight.onLoad(function () {
+  'use strict';
+
+  // Any element on page load
+  $('[data-arclight-truncate="true"]').each(function (i, e) {
+    $(e).responsiveTruncate({
+      more: "<%= I18n.t 'arclight.truncation.view_more' %>",
+      less: "<%= I18n.t 'arclight.truncation.view_less' %>"
+    });
+  });
+
+  // When elements get loaded from hierarchy
+  $('.al-contents').on('navigation.contains.elements', function () {
+    $('a[data-toggle="pill"]').on('shown.bs.tab', function () {
+      $('[data-arclight-truncate="true"]').each(function (_, el) {
+        $(el).responsiveTruncate({
+          more: "<%= I18n.t 'arclight.truncation.view_more' %>",
+          less: "<%= I18n.t 'arclight.truncation.view_less' %>"
+        });
+      });
+    });
+  });
+});
