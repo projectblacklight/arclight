@@ -74,6 +74,7 @@ RSpec.describe 'Indexing Custom Document', type: :feature do
 
     it '#level' do
       expect(doc['level_ssm'].first).to eq 'collection'
+      expect(doc['level_sim'].first).to eq 'Collection'
     end
 
     it '#unitid' do
@@ -91,12 +92,14 @@ RSpec.describe 'Indexing Custom Document', type: :feature do
 
       it 'matches EAD data' do
         expect(doc['repository_ssm'].first).to eq '1118 Badger Vine Special Collections'
+        expect(doc['repository_sim'].first).to eq '1118 Badger Vine Special Collections'
       end
 
       context 'with REPOSITORY_ID' do
         it 'matches Repository configuration' do
           ENV['REPOSITORY_ID'] = 'nlm'
           expect(doc['repository_ssm'].first).to eq 'National Library of Medicine. History of Medicine Division'
+          expect(doc['repository_sim'].first).to eq 'National Library of Medicine. History of Medicine Division'
         end
       end
     end

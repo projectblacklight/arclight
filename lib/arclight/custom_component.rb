@@ -51,10 +51,10 @@ module Arclight
     def component_field_definitions
       [
         { name: 'level', value: formatted_level, index_as: :facetable },
+        { name: 'names', value: names, index_as: :symbol },
         { name: 'access_subjects', value: access_subjects, index_as: :symbol },
         { name: 'containers', value: containers, index_as: :symbol },
-        { name: 'has_online_content', value: online_content?, index_as: :symbol },
-        { name: 'places', value: places, index_as: :facetable }
+        { name: 'has_online_content', value: online_content?, index_as: :symbol }
       ]
     end
 
@@ -78,6 +78,10 @@ module Arclight
       elsif actual_level.present?
         actual_level.capitalize
       end
+    end
+
+    def names
+      names_array(%w[corpname famname name persname], parent: 'c')
     end
 
     def access_subjects

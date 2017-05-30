@@ -199,7 +199,8 @@ class CatalogController < ApplicationController
     ]
 
     config.show.component_metadata_partials = [
-      :component_field
+      :component_field,
+      :component_indexed_terms_field
     ]
 
     config.show.component_sidebar_items = [
@@ -222,6 +223,25 @@ class CatalogController < ApplicationController
     config.add_component_field 'accessrestrict_ssm', label: 'Restrictions'
     config.add_component_field 'userestrict_ssm', label: 'Terms of Access'
     config.add_component_field 'access_subjects_ssm', label: 'Subjects', separator_options: {
+      words_connector: '<br/>',
+      two_words_connector: '<br/>',
+      last_word_connector: '<br/>'
+    }
+    
+    # Collection Show Page - Indexed Terms Section
+    config.add_component_indexed_terms_field 'access_subjects_ssim', label: 'Subjects', :link_to_facet => true, separator_options: {
+      words_connector: '<br/>',
+      two_words_connector: '<br/>',
+      last_word_connector: '<br/>'
+    }
+
+    config.add_component_indexed_terms_field 'names_ssim', label: 'Names', separator_options: {
+      words_connector: '<br/>',
+      two_words_connector: '<br/>',
+      last_word_connector: '<br/>'
+    }, helper_method: :link_to_name_facet
+
+    config.add_component_indexed_terms_field 'places_ssim', label: 'Places', :link_to_facet => true, separator_options: {
       words_connector: '<br/>',
       two_words_connector: '<br/>',
       last_word_connector: '<br/>'

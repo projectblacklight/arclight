@@ -30,6 +30,41 @@ RSpec.describe 'Component Page', type: :feature do
     end
   end
 
+  describe 'Indexed Terms section heading' do
+    it 'includes the heading text' do
+      expect(page).to have_css('h3.al-show-sub-heading', text: 'Indexed Terms')
+    end
+  end
+
+  describe 'Indexed Terms names section' do
+    it 'includes names dt subheading text' do
+      expect(page).to have_css('dt.blacklight-names_ssim', text: 'Names:')
+    end
+    it 'includes names dd link text' do
+      expect(page).to have_css('dd a', text: "Robertson's Crab House")
+    end
+  end
+
+  describe 'Indexed Terms places section' do
+    it 'includes places dt subheading text' do
+      expect(page).to have_css('dt.blacklight-places_ssim', text: 'Places:')
+    end
+    it 'includes places dd link text' do
+      expect(page).to have_css('dd a', text: 'Popes Creek (Md.)')
+    end
+  end
+
+  describe 'Indexed Terms subjects section' do
+    let(:doc_id) { 'aoa271aspace_01daa89087641f7fc9dbd7a10d3f2da9' }
+
+    it 'includes subjects dt subheading text' do
+      expect(page).to have_css('dt.blacklight-access_subjects_ssim', text: 'Subjects:')
+    end
+    it 'includes subjects dd link text' do
+      expect(page).to have_css('dd.blacklight-access_subjects_ssim a', text: 'Records')
+    end
+  end
+
   describe 'metadata' do
     let(:doc_id) { 'aoa271aspace_dc2aaf83625280ae2e193beb3f4aea78' }
 
