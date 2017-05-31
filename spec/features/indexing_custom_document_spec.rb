@@ -134,6 +134,10 @@ RSpec.describe 'Indexing Custom Document', type: :feature do
       expect(doc['normalized_date_ssm'].first).to eq '1894-1992'
     end
 
+    it '#names_coll' do
+      expect(doc['names_coll_ssim']).to include 'Bierring, Walter L. (Walter Lawrence), 1868-1961'
+    end
+
     describe '#has_online_content' do
       context 'when a document has online content' do
         it 'is true' do
