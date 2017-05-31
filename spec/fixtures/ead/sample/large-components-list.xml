@@ -33,6 +33,7 @@
       </physdesc>
       <unitdate normal="1843/1872" type="inclusive">1843-1872</unitdate>
     </did>
+    <dao xlink:actuate="onRequest" xlink:href="https://purl.stanford.edu/yy901zw2656" xlink:show="new" xlink:title="1st Street Arcade San Francisco"><daodesc><p>1st Street Arcade San Francisco</p></daodesc></dao>
     <dsc>
       <c id="aspace_327a75c226d44aa1a769edb4d2f13c6e" level="file">
         <did>
