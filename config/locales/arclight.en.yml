@@ -25,6 +25,8 @@ en:
       show:
         collection_id: 'Collection ID: %{id}'
         overview: 'Overview'
+        online_content: 'Online content'
+        no_online_content: 'No online content'
         no_contents: 'No content inventory'
         search_within: 'Search within this collection'
         navigation_sidebar:
