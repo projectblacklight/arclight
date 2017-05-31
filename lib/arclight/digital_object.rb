@@ -18,5 +18,9 @@ module Arclight
       object_data = JSON.parse(json)
       new(label: object_data['label'], href: object_data['href'])
     end
+
+    def ==(other)
+      href == other.href && label == other.label
+    end
   end
 end

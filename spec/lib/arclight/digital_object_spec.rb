@@ -22,4 +22,22 @@ RSpec.describe Arclight::DigitalObject do
       expect(deserialized.label).to eq 'An object label'
     end
   end
+
+  describe '==' do
+    let(:dissimilar) do
+      described_class.new(label: 'A different label', href: 'https://example.com/an-object-href')
+    end
+
+    let(:similar) do
+      described_class.new(label: 'An object label', href: 'https://example.com/an-object-href')
+    end
+
+    it 'is true when href and label are similar' do
+      expect(instance).not_to eq dissimilar
+    end
+
+    it 'is false when objects have dissimilar labels' do
+      expect(instance).to eq similar
+    end
+  end
 end

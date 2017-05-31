@@ -1,6 +1,0 @@
-<% digital_objects.each do |object| %>
-  <div class='al-digital-object'>
-    <div class='al-digital-object-label'><%= object.label %></div>
-    <%= link_to(t(:'.link'), object.href, class: 'btn btn-sm btn-primary', role: 'button') %>
-  </div>
-<% end %>

@@ -177,17 +177,6 @@ RSpec.describe 'Collection Page', type: :feature do
         end
       end
 
-      it 'has an online card' do
-        within('#accordion') do
-          expect(page).to have_css('h3', text: 'Online')
-          # Blacklight renders the dt and it is not necessary in our display
-          expect(page).to have_css('dt', visible: false)
-
-          expect(page).to have_css('.al-digital-object-label', text: 'History slideshow')
-          expect(page).to have_css('.btn-primary', text: 'Open viewer')
-        end
-      end
-
       it 'has a terms and conditions card' do
         within '#accordion' do
           expect(page).to have_css '.card-header h3', text: 'Terms & Conditions'

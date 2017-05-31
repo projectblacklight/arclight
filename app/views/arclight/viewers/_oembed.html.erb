@@ -1,9 +1,7 @@
 <% viewer.resources.each do |resource| %>
-  <%= content_tag(
-        :div, '',
-        class: 'al-oembed-viewer',
-        'data-arclight-oembed': true,
-        'data-arclight-oembed-url': resource.href
-      )
-  %>
+  <%= content_tag(:div, viewer.attributes_for(resource)) do %>
+    <div class='al-digital-object'>
+      <%= link_to(resource.label, resource.href) %>
+    </div>
+  <% end %>
 <% end %>

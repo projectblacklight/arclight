@@ -10,7 +10,6 @@ module Arclight
 
     included do
       if respond_to?(:helper_method)
-        helper_method :context_sidebar_digital_object
         helper_method :repository_config_present
         helper_method :request_config_present
         helper_method :context_sidebar_repository
@@ -21,15 +20,6 @@ module Arclight
         helper_method :paragraph_separator
         helper_method :link_to_name_facet
       end
-    end
-
-    def context_sidebar_digital_object(args)
-      document = args[:document]
-      ApplicationController.renderer.render(
-        'arclight/digital_objects/_sidebar_section',
-        layout: false,
-        locals: { digital_objects: document.digital_objects }
-      )
     end
 
     def repository_config_present(_, document)

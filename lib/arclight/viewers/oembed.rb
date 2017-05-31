@@ -22,11 +22,16 @@ module Arclight
       end
 
       def resources
-        document.digital_objects.reject do |object|
-          exclude_patterns.any? do |pattern|
-            object.href =~ pattern
-          end
-        end
+        document.digital_objects
+      end
+
+      def embeddable?(resource)
+        embeddable_resources.include?(resource)
+      end
+
+      def attributes_for(resource)
+        return {} unless embeddable?(resource)
+        { class: 'al-oembed-viewer', 'data-arclight-oembed': true, 'data-arclight-oembed-url': resource.href }
       end
 
       def to_partial_path
@@ -37,6 +42,14 @@ module Arclight
 
       def exclude_patterns
         Arclight::Engine.config.oembed_resource_exclude_patterns
+      end
+
+      def embeddable_resources
+        document.digital_objects.reject do |object|
+          exclude_patterns.any? do |pattern|
+            object.href =~ pattern
+          end
+        end
       end
     end
   end
