@@ -33,6 +33,15 @@
   }
 }
 
+.documents-compact {
+  .document {
+    .breadcrumb-links,
+    .al-repository-footer {
+      font-size: $font-size-sm;
+    }
+  }
+}
+
 .documents-hierarchy {
   .al-number-of-children-badge {
     background-color: #eee;
