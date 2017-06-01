@@ -54,7 +54,7 @@ RSpec.describe Arclight::SolrDocument do
     describe '#digital_object_viewer' do
       it 'renders the appropriate viewer' do
         content = Capybara.string(document.digital_object_viewer)
-        expect(content).to have_css('.al-oembed-viewer', count: 2)
+        expect(content).to have_css('.al-oembed-viewer', count: 1)
       end
     end
 

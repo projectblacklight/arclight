@@ -26,7 +26,7 @@ module Arclight
       end
 
       def embeddable?(resource)
-        embeddable_resources.include?(resource)
+        resource == resources.first && embeddable_resources.include?(resource)
       end
 
       def attributes_for(resource)
