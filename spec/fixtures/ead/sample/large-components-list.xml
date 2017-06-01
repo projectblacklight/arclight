@@ -1044,6 +1044,11 @@
             <unittitle>Item AA201</unittitle>
           </did>
         </c>
+        <c id="aspace_1d6609b84353d5091c36e5fa98306bc0" level="item">
+          <did>
+            <unittitle>Item AA201</unittitle><!-- need duplicate title -->
+          </did>
+        </c>
       </c>
       <c id="aspace_6ae90875c59eed6d2ce30294c8cfb873" level="file">
         <did>

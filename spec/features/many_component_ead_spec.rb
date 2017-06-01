@@ -16,7 +16,7 @@ RSpec.describe 'Many component EAD', type: :feature do
       within '#contents' do
         click_link 'View'
         within '#aspace_327a75c226d44aa1a769edb4d2f13c6e-collapsible-hierarchy' do
-          expect(page).to have_css '.blacklight-item', count: 201
+          expect(page).to have_css '.blacklight-item', count: 202
         end
       end
     end
