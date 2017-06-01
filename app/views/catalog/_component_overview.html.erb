@@ -38,7 +38,7 @@
         path: search_catalog_path(hierarchy_context: 'component'),
         name: @document.collection_name,
         parent: @document.parent_ids.last,
-        highlight: show_presenter(@document).heading
+        highlightId: @document.id
       }
     }
   ) %>

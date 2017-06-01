@@ -1,4 +1,4 @@
-<header class="documentHeader row">
+<header class="documentHeader row" data-document-id="<%= document.id %>">
   <% requestable = item_requestable?('', { document: document }) %>
   <% side_content = document.children? || requestable %>
   <h3 class="index_title document-title-heading <%= side_content ? 'col-md-9' : 'col-md-12' %> ">

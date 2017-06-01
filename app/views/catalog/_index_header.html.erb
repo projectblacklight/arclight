@@ -1,5 +1,5 @@
 <%# header bar for doc items in index view -%>
-<header class="documentHeader row">
+<header class="documentHeader row" data-document-id="<%= document.id %>">
   <h3 class="index_title document-title-heading col-md-12">
     <% counter = document_counter_with_offset(document_counter) %>
     <%= link_to_document document, document_show_link_field(document), counter: counter %>

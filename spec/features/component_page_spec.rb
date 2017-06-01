@@ -94,15 +94,54 @@ RSpec.describe 'Component Page', type: :feature do
         end
       end
     end
-    it 'has siblings and highlighted self' do
-      within '#collection-context' do
-        within '.al-contents' do
-          expect(page).to have_css(
-            '.al-hierarchy-highlight h3',
-            text: /"A brief account of the origin/
-          )
-          expect(page).to have_css 'article', text: 'Statements of purpose, c.1902'
-          expect(page).to have_css 'article', text: 'Constitution - notes on drafting of constitution, c.1902-1903'
+    context 'siblings and highlighted self' do
+      it 'has next 2 siblings -- i.e., at beginning' do
+        within '#collection-context' do
+          within '.al-contents' do
+            expect(page).to have_css(
+              'article:nth-child(1).al-hierarchy-highlight h3',
+              text: /"A brief account of the origin/
+            )
+            expect(page).to have_css 'article:nth-child(2)', text: 'Statements of purpose, c.1902'
+            expect(page).to have_css 'article:nth-child(3)',
+                                     text: 'Constitution - notes on drafting of constitution, c.1902-1903'
+            expect(page).to have_css 'article', count: 3
+          end
+        end
+      end
+      context '2 prev siblings only' do
+        let(:doc_id) { 'aoa271aspace_4365cd1ed8bd8fee1bac6077a4d81359' }
+
+        it 'is at the end' do
+          within '#collection-context' do
+            within '.al-contents' do
+              expect(page).to have_css(
+                'article:nth-child(3).al-hierarchy-highlight h3',
+                text: 'General announcements, 1909-1967'
+              )
+              expect(page).to have_css 'article:nth-child(1)', text: 'Meetings'
+              expect(page).to have_css 'article:nth-child(2)', text: 'Financial Records'
+              expect(page).to have_css 'article', count: 3
+            end
+          end
+        end
+      end
+      context 'prev and next sibling' do
+        let(:doc_id) { 'aoa271aspace_e6db65d47e891d61d69c2798c68a8f02' }
+
+        it 'is in the middle' do
+          within '#collection-context' do
+            within '.al-contents' do
+              expect(page).to have_css(
+                'article:nth-child(2).al-hierarchy-highlight h3',
+                text: /Statements of purpose/
+              )
+              expect(page).to have_css 'article:nth-child(1)', text: /"A brief account of the origin/
+              expect(page).to have_css 'article:nth-child(3)',
+                                       text: 'Constitution - notes on drafting of constitution, c.1902-1903'
+              expect(page).to have_css 'article', count: 3
+            end
+          end
         end
       end
     end
@@ -138,6 +177,15 @@ RSpec.describe 'Component Page', type: :feature do
       it 'only has one component at level 4' do
         within '#collection-context .al-contents.al-hierarchy-level-4' do
           expect(page).to have_css 'h3', text: 'Building Plans', count: 1
+        end
+      end
+    end
+    context 'duplicate titles' do
+      let(:doc_id) { 'lc0100aspace_c5ef89d4ae68bb77e7c641f3edb3f1c8' }
+
+      it 'does not highlight duplicate titles' do
+        within '#collection-context .al-hierarchy-highlight' do
+          expect(page).to have_css 'h3', text: 'Item AA201', count: 1
         end
       end
     end

@@ -4,30 +4,35 @@
    * Converts documents that should be used in a hierarchy, to highlighted
    * localized siblings.
    */
-  function convertDocsForContext(parsedHighlightText, $doc) {
+  function convertDocsForContext(id, $doc) {
     var newDocs;
     var $currentDoc;
     var $previousDocs;
     var $nextDocs;
-    $currentDoc = $doc.find('article:contains(' + parsedHighlightText + ')');
+    var headers = $doc.find('article header[data-document-id="' + id + '"]')
+    if (headers.length == 0) {
+      $.error('Document is missing id=' + id);
+    }
+    $currentDoc = $(headers[0].parentNode); // need article element
     $currentDoc.addClass('al-hierarchy-highlight');
 
+    // We want to show 0-1 or 0-2 siblings depending on where highlighted component is
     $previousDocs = $currentDoc.prevUntil().slice(0, 2);
     $nextDocs = $currentDoc.nextUntil().slice(0, 2);
 
-    // Case where there are siblings on both sides
     if ($previousDocs.length > 0 && $nextDocs.length > 0) {
+      // Case where there are siblings on both sides, show 1 each
       newDocs = $('<div>');
       newDocs.append($previousDocs.first());
       newDocs.append($currentDoc);
       newDocs.append($nextDocs.first());
     } else if ($previousDocs.length > 0) {
-      // Case where there are only previous siblings
+      // Case where there are only previous siblings, show 2 of them
       newDocs = $('<div>');
-      newDocs.append($previousDocs);
+      newDocs.append($previousDocs.get().reverse()); // previous is not in the order we need
       newDocs.append($currentDoc);
     } else {
-      // Case where there are only next siblings
+      // Case where there are only next siblings, show 2 of them
       newDocs = $('<div>');
       newDocs.append($currentDoc);
       newDocs.append($nextDocs);
@@ -66,12 +71,9 @@
         var showDocs = $doc.find('article.document');
         var newDocs = $doc.find('#documents');
 
-        // Add a highlight class here for containing text. We need to parse the
-        // area for text as it is potentially encoded. This is also the case
-        // that we only want to include localized siblings
-        var parsedHighlightText = $('<textarea/>').html(data.arclight.highlight).val();
-        if (parsedHighlightText) {
-          newDocs = convertDocsForContext(parsedHighlightText, $doc);
+        // Add a highlight class for the article matching the highlight id
+        if (data.arclight.highlightId) {
+          newDocs = convertDocsForContext(data.arclight.highlightId, $doc);
         }
 
         $el.hide().html(newDocs).fadeIn(500);
