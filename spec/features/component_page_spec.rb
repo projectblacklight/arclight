@@ -132,10 +132,13 @@ RSpec.describe 'Component Page', type: :feature do
         expect(page).to have_css 'article', text: 'Constitution and by-laws - drafts, 1902-1904'
       end
     end
-    it 'ancestor list does not contain cousins' do
-      visit solr_document_path 'aoa271aspace_e8755922a9336970292ca817983e7139'
-      within '#collection-context .al-contents.al-hierarchy-level-4' do
-        expect(page).to have_css 'h3', count: 1
+    context 'ancestor list does not contain cousins' do
+      let(:doc_id) { 'aoa271aspace_e8755922a9336970292ca817983e7139' }
+
+      it 'only has one component at level 4' do
+        within '#collection-context .al-contents.al-hierarchy-level-4' do
+          expect(page).to have_css 'h3', text: 'Building Plans', count: 1
+        end
       end
     end
   end
