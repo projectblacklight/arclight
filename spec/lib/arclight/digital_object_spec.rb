@@ -7,6 +7,16 @@ RSpec.describe Arclight::DigitalObject do
     described_class.new(label: 'An object label', href: 'https://example.com/an-object-href')
   end
 
+  describe 'label' do
+    let(:empty_label) do
+      described_class.new(label: '', href: 'https://example.com/an-object-href')
+    end
+
+    it 'uses href if label is blank' do
+      expect(empty_label.href).to eq empty_label.href
+    end
+  end
+
   describe '#to_json' do
     it 'returns a json serialization of the object' do
       json = JSON.parse(instance.to_json)
