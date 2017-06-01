@@ -3,7 +3,7 @@
 require 'spec_helper'
 
 RSpec.describe Arclight::NormalizedTitle do
-  subject(:normalized_title) { described_class.new(title, date, id).to_s }
+  subject(:normalized_title) { described_class.new(title, date).to_s }
 
   let(:title) { 'My Title' }
   let(:date) { '1990-2000' }
@@ -119,18 +119,11 @@ RSpec.describe Arclight::NormalizedTitle do
     let(:title) { nil }
     let(:date) { nil }
 
-    it 'uses the id' do
-      expect(normalized_title).to eq id
-    end
-  end
-
-  context 'no information' do
-    let(:title) { nil }
-    let(:date) { nil }
-    let(:id) { nil }
-
-    it 'does not know what to do' do
-      expect(normalized_title).to eq ''
+    it do
+      expect { normalized_title }.to raise_error(
+        Arclight::Exceptions::TitleNotFound,
+        '<unittitle/> or <unitdate/> must be present for all documents and components'
+      )
     end
   end
 end

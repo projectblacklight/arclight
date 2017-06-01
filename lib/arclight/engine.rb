@@ -2,6 +2,7 @@
 
 require 'blacklight'
 require 'solr_ead'
+require 'arclight/exceptions'
 require 'arclight/normalized_date'
 require 'arclight/normalized_id'
 require 'arclight/normalized_title'

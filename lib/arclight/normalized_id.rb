@@ -6,7 +6,7 @@ module Arclight
   # to be used around the application for linking
   class NormalizedId
     def initialize(id)
-      @id = id || ''
+      @id = id
     end
 
     def to_s
@@ -18,6 +18,7 @@ module Arclight
     attr_reader :id
 
     def normalize
+      raise Arclight::Exceptions::IDNotFound if id.blank?
       id.strip.tr('.', '-')
     end
   end

@@ -7,11 +7,9 @@ module Arclight
   class NormalizedTitle
     # @param [String] `title` from the `unittitle`
     # @param [String] `date` from the `unitdate`
-    # @param [String] `default` the fallback for the title (e.g., an id)
-    def initialize(title, date = nil, default = nil)
+    def initialize(title, date = nil)
       @title = title.gsub(/\s*,\s*$/, '').strip if title.present?
       @date = date.strip if date.present?
-      @default = default
     end
 
     # @return [String] the normalized title/date
@@ -25,7 +23,7 @@ module Arclight
 
     def normalize
       result = [title, date].compact.join(', ')
-      return default.to_s if result.blank?
+      raise Arclight::Exceptions::TitleNotFound if result.blank?
       result
     end
   end
