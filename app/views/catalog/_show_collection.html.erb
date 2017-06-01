@@ -14,6 +14,7 @@
           <%= t 'arclight.views.show.no_contents' %>
         </a>
       </li>
+      <%= render partial: 'collection_downloads', locals: { downloads: collection_downloads(document) } %>
     </ul>
     <div class='tab-content'>
       <div class='tab-pane active' id='overview' role='tabpanel'>

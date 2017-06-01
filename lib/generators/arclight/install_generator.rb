@@ -51,5 +51,9 @@ module Arclight
     def add_repository_config
       copy_file 'config/repositories.yml' unless File.exist?('config/repositories.yml')
     end
+
+    def add_download_config
+      copy_file 'config/downloads.yml' unless File.exist?('config/downloads.yml')
+    end
   end
 end
