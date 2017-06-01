@@ -233,6 +233,13 @@ RSpec.describe 'Collection Page', type: :feature do
         expect(page).to have_css '#overview', visible: true
         expect(page).to have_css '#contents', visible: false
       end
+      it 'clicking online contents toggles visibility', js: true do
+        expect(page).to have_css '#overview', visible: true
+        expect(page).to have_css '#online-content', visible: false
+        click_link 'Online content'
+        expect(page).to have_css '#overview', visible: false
+        expect(page).to have_css '#online-content', visible: true
+      end
       it 'contents contain linked level 1 components' do
         within '#contents' do
           click_link 'Series I: Administrative Records, 1902-1976'
