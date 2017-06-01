@@ -24,8 +24,11 @@ RSpec.describe Arclight::NormalizedId do
   context 'when the id is nil' do
     let(:id) { nil }
 
-    it 'returns an empty string' do
-      expect(normalized_id).to eq ''
+    it do
+      expect { normalized_id }.to raise_error(
+        Arclight::Exceptions::IDNotFound,
+        'id must be present for all documents and components'
+      )
     end
   end
 end

@@ -81,23 +81,22 @@ module Arclight
 
     def normalized_component_title(node)
       data = extract_title_and_dates(node)
-      normalize_title(data, normalized_component_id(node))
+      normalize_title(data)
     end
 
     def normalized_collection_title(node)
       data = extract_title_and_dates(node, '//archdesc/')
-      normalize_title(data, normalized_collection_id(node))
+      normalize_title(data)
     end
 
-    def normalize_title(data, id)
+    def normalize_title(data)
       Arclight::NormalizedTitle.new(
         data[:title],
         Arclight::NormalizedDate.new(
           data[:unitdate_inclusive],
           data[:unitdate_bulk],
           data[:unitdate_other]
-        ).to_s,
-        id.to_s
+        ).to_s
       ).to_s
     end
 

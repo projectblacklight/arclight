@@ -84,7 +84,7 @@ module Arclight
 
     def add_normalized_title(solr_doc)
       dates = Arclight::NormalizedDate.new(unitdate_inclusive.first, unitdate_bulk.first, unitdate_other.first).to_s
-      title = Arclight::NormalizedTitle.new(solr_doc['title_ssm'].try(:first), dates, solr_doc['id'].to_s).to_s
+      title = Arclight::NormalizedTitle.new(solr_doc['title_ssm'].try(:first), dates).to_s
       solr_doc['normalized_title_ssm'] = [title]
       solr_doc['normalized_date_ssm'] = [dates]
       title
