@@ -80,6 +80,7 @@
         if (showDocs.length > 0) {
           $el.trigger('navigation.contains.elements');
         }
+        Blacklight.do_bookmark_toggle_behavior();
       });
     }
   };
