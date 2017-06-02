@@ -61,11 +61,20 @@ RSpec.describe 'Indexing Custom Component', type: :feature do
     end
 
     describe '#places' do
-      it 'has a place for the given component' do
+      it 'has places for the given component' do
         doc1 = components.find do |c|
           c.to_solr('id' => 'abc123')['ref_ssm'] == ['aspace_843e8f9f22bac69872d0802d6fffbb04']
         end.to_solr('id' => 'abc123')
         expect(doc1['places_ssim']).to eq ['Popes Creek (Md.)']
+      end
+    end
+
+    describe '#names' do
+      it 'has names for the given component' do
+        doc1 = components.find do |c|
+          c.to_solr('id' => 'abc123')['ref_ssm'] == ['aspace_843e8f9f22bac69872d0802d6fffbb04']
+        end.to_solr('id' => 'abc123')
+        expect(doc1['names_ssim'].last).to eq "Robertson's Crab House"
       end
     end
 

@@ -124,6 +124,7 @@
          parent_access_restrict_ssm,
          parent_access_terms_ssm,
          names_coll_ssim
+         places_ssim
        </str>
 
        <str name="facet">true</str>

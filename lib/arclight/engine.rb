@@ -35,6 +35,7 @@ module Arclight
       component_field
       online_field
       component_terms_field
+      component_indexed_terms_field
     ]
 
     initializer 'arclight.fields' do

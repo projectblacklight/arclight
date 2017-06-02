@@ -45,6 +45,7 @@ en:
           indexed_terms_field: 'Indexed Terms'
           admin_info_field: 'Administrative Information'
           component_field: 'About this %{level}'
+          component_indexed_terms_field: 'Indexed Terms'
           collection_context_field: 'Collection Context'
         our_collections: 'Our Collections'
         download:
