@@ -1,0 +1,17 @@
+<% if document.digital_objects.present? %>
+  <%= render_document_partial(document, 'arclight_viewer') %>
+<% elsif document.online_content? %>
+  <%= content_tag(
+    :div, '',
+    class: 'al-contents',
+    data: {
+      arclight: {
+        path: search_catalog_path,
+        name: document.collection_name,
+        access: 'online',
+        view: 'online_contents',
+        search_field: 'within_collection'
+      }
+    }
+  ) %>
+<% end %>

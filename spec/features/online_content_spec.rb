@@ -34,6 +34,20 @@ RSpec.describe 'Online Content', type: :feature do
       end
     end
 
+    context 'a collection w/o digital objects at the collection level' do
+      let(:doc_id) { 'a0011-xml' }
+
+      it 'renders a flat list of the child components with online content', js: true do
+        click_link('Online content')
+
+        within('.documents-online_contents') do
+          expect(page).to have_css('article', count: 1)
+
+          expect(page).to have_css('.document-title-heading', text: 'Box 1: Photograph Album')
+        end
+      end
+    end
+
     context 'no content' do
       let(:doc_id) { 'aoa271aspace_a951375d104030369a993ff943f61a77' }
 

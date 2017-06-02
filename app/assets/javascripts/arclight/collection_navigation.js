@@ -61,9 +61,11 @@
         url: data.arclight.path,
         data: {
           'f[component_level_isim][]': data.arclight.level,
+          'f[has_online_content_ssim][]': data.arclight.access,
           'f[collection_sim][]': data.arclight.name,
           'f[parent_ssi][]': data.arclight.parent,
-          view: 'hierarchy'
+          search_field: data.arclight.search_field,
+          view: data.arclight.view || 'hierarchy'
         }
       }).done(function (response) {
         var resp = $.parseHTML(response);

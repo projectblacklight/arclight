@@ -1,4 +1,5 @@
-.documents-hierarchy {
+.documents-hierarchy,
+.documents-online_contents {
   .document-title-heading {
     font-size: $font-size-h5;
   }
@@ -125,8 +126,11 @@
     font-size: $font-size-h5;
   }
 
-  .documents-hierarchy .documentHeader {
-    margin-top: 1.5rem;
+  .documents-hierarchy,
+  .documents-online_contents {
+    .documentHeader {
+      margin-top: 1.5rem;
+    }
   }
 
   // Top-level context
