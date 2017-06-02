@@ -6,7 +6,7 @@ module Arclight
   class DigitalObject
     attr_reader :label, :href
     def initialize(label:, href:)
-      @label = label
+      @label = label.present? ? label : href
       @href = href
     end
 
@@ -17,6 +17,10 @@ module Arclight
     def self.from_json(json)
       object_data = JSON.parse(json)
       new(label: object_data['label'], href: object_data['href'])
+    end
+
+    def ==(other)
+      href == other.href && label == other.label
     end
   end
 end

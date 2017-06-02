@@ -177,17 +177,6 @@ RSpec.describe 'Collection Page', type: :feature do
         end
       end
 
-      it 'has an online card' do
-        within('#accordion') do
-          expect(page).to have_css('h3', text: 'Online')
-          # Blacklight renders the dt and it is not necessary in our display
-          expect(page).to have_css('dt', visible: false)
-
-          expect(page).to have_css('.al-digital-object-label', text: 'History slideshow')
-          expect(page).to have_css('.btn-primary', text: 'Open viewer')
-        end
-      end
-
       it 'has a terms and conditions card' do
         within '#accordion' do
           expect(page).to have_css '.card-header h3', text: 'Terms & Conditions'
@@ -228,6 +217,34 @@ RSpec.describe 'Collection Page', type: :feature do
     end
   end
 
+  describe 'tabbed display' do
+    context 'collection has online content', js: true do
+      it 'clicking contents toggles visibility' do
+        click_link 'Contents'
+        expect(page).to have_css '#contents', visible: true
+        expect(page).to have_css '#overview', visible: false
+        click_link 'Overview'
+        expect(page).to have_css '#overview', visible: true
+        expect(page).to have_css '#contents', visible: false
+      end
+      it 'clicking online contents toggles visibility' do
+        expect(page).to have_css '#overview', visible: true
+        expect(page).to have_css '#online-content', visible: false
+        click_link 'Online content'
+        expect(page).to have_css '#overview', visible: false
+        expect(page).to have_css '#online-content', visible: true
+      end
+    end
+
+    context 'collection has no online content' do
+      let(:doc_id) { 'm0198-xml' }
+
+      it 'displays a disabled tab' do
+        expect(page).to have_css 'a.nav-link.disabled', text: 'No online content'
+      end
+    end
+  end
+
   describe 'overview and contents' do
     it 'contents are not visible by default' do
       expect(page).to have_css '#contents', visible: false
@@ -237,13 +254,6 @@ RSpec.describe 'Collection Page', type: :feature do
     end
     describe 'interactions', js: true do
       before { click_link 'Contents' }
-      it 'clicking contents toggles visibility' do
-        expect(page).to have_css '#contents', visible: true
-        expect(page).to have_css '#overview', visible: false
-        click_link 'Overview'
-        expect(page).to have_css '#overview', visible: true
-        expect(page).to have_css '#contents', visible: false
-      end
       it 'contents contain linked level 1 components' do
         within '#contents' do
           click_link 'Series I: Administrative Records, 1902-1976'

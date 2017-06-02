@@ -3,6 +3,30 @@
     <%= render partial: 'show_component_sidebar' %>
   </div>
   <div class='col-md-9'>
-    <%= render 'component_overview' %>
+    <ul class='nav nav-pills' role='tablist'>
+      <li class='nav-item'>
+        <a class='nav-link active' data-toggle='pill' href='#overview' role='tab'>
+          <%= t 'arclight.views.show.overview' %>
+        </a>
+      </li>
+      <li class='nav-item'>
+        <a class='nav-link <%= 'disabled' unless document.online_content? %>' data-toggle='pill' href='#online-content' role='tab' data-arclight-online-content-tab='true'>
+          <% if document.online_content? %>
+            <%= t 'arclight.views.show.online_content' %>
+          <% else %>
+            <%= t 'arclight.views.show.no_online_content' %>
+          <% end %>
+        </a>
+      </li>
+    </ul>
+    <div class='tab-content'>
+      <div class='tab-pane active' id='overview' role='tabpanel'>
+        <%= render 'component_overview' %>
+      </div>
+      <div class='tab-pane' id='online-content' role='tabpanel'>
+        <%= render_document_partial(document, 'arclight_viewer') %>
+      </div>
+    </div>
   </div>
+
 </div>

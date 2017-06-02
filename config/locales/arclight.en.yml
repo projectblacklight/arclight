@@ -3,9 +3,6 @@ en:
     masthead_heading: 'Archival Collections at Institution'
     date_range_histogram:
       show_hide: 'Show/hide date distribution'
-    digital_objects:
-      sidebar_section:
-        link: 'Open viewer'
     hierarchy:
       view_all: 'View'
       scope_and_contents: 'Scope and Contents'
@@ -28,12 +25,13 @@ en:
       show:
         collection_id: 'Collection ID: %{id}'
         overview: 'Overview'
+        online_content: 'Online content'
+        no_online_content: 'No online content'
         no_contents: 'No content inventory'
         search_within: 'Search within this collection'
         navigation_sidebar:
           title: 'Navigation overview'
         context_sidebar:
-          online_field: 'Online'
           in_person_field: 'In person'
           terms_field: 'Terms & Conditions'
           cite_field: 'How to cite this collection'

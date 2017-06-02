@@ -17,17 +17,61 @@ RSpec.describe Arclight::Viewers::OEmbed do
         expect(resource).to be_a Arclight::DigitalObject
       end
     end
+  end
 
-    context 'pattern blacklist' do
+  describe '#embeddable?' do
+    context 'all objects are theoretically embeddable' do
       let(:document) do
         SolrDocument.new(
-          digital_objects_ssm: [{ href: 'http://example.com/content.pdf' }.to_json]
+          digital_objects_ssm: [
+            { href: 'http://example.com' }.to_json,
+            { href: 'http://example.com/content' }.to_json
+          ]
         )
       end
 
-      it 'rejects urls that match the configured patterns' do
-        expect(viewer.resources).to be_empty
+      it 'is true when the object is first' do
+        expect(viewer.embeddable?(document.digital_objects.first)).to be true
       end
+
+      it 'is false for subsequent objects' do
+        expect(viewer.embeddable?(document.digital_objects.last)).to be false
+      end
+    end
+
+    context 'object is not embeddable due to exclude patterns' do
+      let(:document) do
+        SolrDocument.new(
+          digital_objects_ssm: [
+            { href: 'http://example.com/content.pdf' }.to_json
+          ]
+        )
+      end
+
+      it 'is false when url matches exclude patterns' do
+        expect(viewer.embeddable?(document.digital_objects.first)).to be false
+      end
+    end
+  end
+
+  describe '#attributes_for' do
+    let(:document) do
+      SolrDocument.new(
+        digital_objects_ssm: [
+          { href: 'http://example.com' }.to_json,
+          { href: 'http://example.com/content.pdf' }.to_json
+        ]
+      )
+    end
+
+    it 'returns a hash with oembed information' do
+      attributes = viewer.attributes_for(document.digital_objects.first)
+      expect(attributes[:'data-arclight-oembed']).to eq true
+    end
+
+    it 'returns an empty hash for non-embeddable objects' do
+      attributes = viewer.attributes_for(document.digital_objects.last)
+      expect(attributes).to be_empty
     end
   end
 

@@ -193,7 +193,6 @@ class CatalogController < ApplicationController
     ]
 
     config.show.context_sidebar_items = [
-      :online_field,
       :in_person_field,
       :terms_field,
       :cite_field
@@ -204,7 +203,6 @@ class CatalogController < ApplicationController
     ]
 
     config.show.component_sidebar_items = [
-      :online_field,
       :in_person_field,
       :component_terms_field,
       :cite_field
@@ -239,9 +237,6 @@ class CatalogController < ApplicationController
     config.add_summary_field 'extent_ssm', label: 'Extent'
     config.add_summary_field 'language_ssm', label: 'Language'
     config.add_summary_field 'prefercite_ssm', label: 'Preferred citation'
-
-    # Collection Show Page - Online Section
-    config.add_online_field 'digital_objects_ssm', label: 'Access this item', helper_method: :context_sidebar_digital_object
 
     # Collection Show Page - In Person Section
     config.add_in_person_field 'id', if: :before_you_visit_note_present, label: 'Before you visit', helper_method: :context_sidebar_visit_note # Using ID because we know it will always exist
@@ -304,8 +299,6 @@ class CatalogController < ApplicationController
       config.view_config(:show).document_actions.delete(action)
     end
 
-    # Insert the viewer between the header and the content
-    config.show.partials.insert(1, :arclight_viewer)
     # Insert the breadcrumbs at the beginning
     config.show.partials.unshift(:show_breadcrumbs)
 

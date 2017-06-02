@@ -7,11 +7,13 @@ RSpec.describe 'Component Page', type: :feature do
 
   before { visit solr_document_path(id: doc_id) }
 
-  describe 'Viewer section' do
-    let(:doc_id) { 'a0011-xmlaspace_ref6_lx4' }
-
-    it 'renders digital object viewer initialization markup' do
-      expect(page).to have_css('.al-oembed-viewer[data-arclight-oembed-url="http://purl.stanford.edu/kc844kt2526"]')
+  describe 'tabbed display' do
+    it 'clicking contents toggles visibility', js: true do
+      expect(page).to have_css '#overview', visible: true
+      expect(page).to have_css '#online-content', visible: false
+      click_link 'Online content'
+      expect(page).to have_css '#overview', visible: false
+      expect(page).to have_css '#online-content', visible: true
     end
   end
 
@@ -37,20 +39,6 @@ RSpec.describe 'Component Page', type: :feature do
   end
 
   describe 'sidebar' do
-    it 'includes an online section when the component includes a DAO' do
-      within('.al-sticky-sidebar') do
-        expect(page).to have_css('h3', text: 'Online')
-        # Blacklight renders the dt and it is not necessary in our display
-        expect(page).to have_css('dt', visible: false)
-
-        expect(page).to have_css('.al-digital-object', count: 2)
-
-        expect(page).to have_css('.al-digital-object-label', text: 'Folder of digitized stuff')
-        expect(page).to have_css('.al-digital-object-label', text: /^Letter from Christian B\. Anfinsen/)
-        expect(page).to have_css('.btn-primary', text: 'Open viewer', count: 2)
-      end
-    end
-
     describe 'context_sidebar' do
       context 'that has restrictions and terms of access' do
         it 'has a terms and conditions card' do
