@@ -19,6 +19,9 @@ RSpec.describe 'Home Page', type: :feature do
   it 'does not have a search-navbar' do
     expect(page).not_to have_css '#search-navbar'
   end
+  it 'has a title of Arclight' do
+    expect(page.body).to include('<title>Arclight</title>')
+  end
   context 'search dropdown' do
     it 'has all fields' do
       within('.search-field') do
