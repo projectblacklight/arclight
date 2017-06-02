@@ -10,7 +10,7 @@
         </a>
       </li>
       <li class='nav-item'>
-        <a class='nav-link <%= 'disabled' unless document.online_content? %>' data-toggle='pill' href='#online-content' role='tab'>
+        <a class='nav-link <%= 'disabled' unless document.online_content? %>' data-toggle='pill' href='#online-content' role='tab' data-arclight-online-content-tab='true'>
           <% if document.online_content? %>
             <%= t 'arclight.views.show.online_content' %>
           <% else %>
