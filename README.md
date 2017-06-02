@@ -49,39 +49,7 @@ Some pages include an inline view tab to the right of an item which will expand 
 
 See the [ArcLight demo](https://arclight-demo.projectblacklight.org/) and [ArcLight MVP Wiki](https://github.com/sul-dlss/arclight/wiki) for usage.
 
-**Arclight Major Features**
-
-* Searching
-  * Global search by keyword, name, place, subject or title
-  * On search results page, sidebar facets for refining search results by collection, creator, date range, level, name, repository, place, subject, or access
-  * On search results page, sorting by relevance, data (ascending or descending), creator (A-Z or Z-A), and title (A-Z or Z-A)
-  * On search results page, option to select items per page (default 10, 20, 50 or 100)
-  * On search results page, buttons to select full or compact view of results
-  * Search within collection
-* Navigation
-  * Global access to *Repositories* and *Collections*
-  * Global access to *Start Over* and *Back to Search* (when applicable)
-  * Breadcrumb navigation from *Home* page to the current page
-  * Headings with item title and dates, repository, and online content flag
-  * Sidebar *Navigation overview* when viewing collection Overview
-  * Bookmarking of component items
-  * Global Bookmarks and History link respectively show any bookmarks that are set and a history of recent searches
-* Repositories Page
-  * Lists all the repositories available at given institution
-  * Shows a title, location, email address, collection count and description for each repository
-  * Include a *View more* button link that displays more details about the repository's collections
-* Collection Pages: Overview and Contents Tabs
-  * Collection pages have *Overview* and *Contents* tabs; *Contents* shows only when children items are available.
-  * On the Overview tab, the collection page displays sections for *summary, access and use, background, related, and indexed terms*
-  * *Indexed Terms* phrases link to facet searches on those phrases.
-  * Sidebar display of *Online* status, *In person* location information, *Terms & Conditions* item restrictions and terms of access, *How to cite this collection* preferred citation information
-  * On the Contents tab, all the collection subitems at the next level can be reviewed. Selecting an item provides an view of that item's metadata. Subitem levels are headings that may display a link on the right side to show
-* Component Pages
-  * Navigation to component pages is via search or the Contents tab on collection pages.
-  * The component side display is similar to the collection one although the is no sidebar navigation section or search with section
-  * Component pages identify their level (e.g., series, file, etc.) in a heading and allow bookmarking with a checkbox in the header
-  * These pages also show a *Collection Context* section with a collection heading and highlighting of the current component below it; several sibling components are also shown if they are present
-  * In addition the component heading in the *Collection Context* section displays the number of children components directly below the current component.
+See [Arclight Major Features](https://github.com/sul-dlss/arclight/wiki/Arclight-Major-Features) for a list of features.
 
 ## Resources
 
