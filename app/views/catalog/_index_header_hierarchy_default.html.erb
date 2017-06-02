@@ -12,6 +12,11 @@
   </h3>
 
   <div class="al-hierarchy-side-content float-right <%= side_content ? 'col-md-3' : 'col' %> ">
+    <% unless hierarchy_component_context? %>
+      <div class="index-document-functions">
+        <%= render partial: 'catalog/bookmark_control', locals: { document: document } %>
+      </div>
+    <% end %>
     <% if requestable %>
       <%= render partial: 'arclight/requests/google_form', locals: { document: document } %>
     <% end %>

@@ -288,6 +288,9 @@ RSpec.describe 'Collection Page', type: :feature do
           )
         end
       end
+      it 'has bookmark controls' do
+        expect(page).to have_css 'form.bookmark-toggle', count: 7
+      end
 
       it 'clicking contents does not change the session results view context' do
         visit search_catalog_path q: '', search_field: 'all_fields'
