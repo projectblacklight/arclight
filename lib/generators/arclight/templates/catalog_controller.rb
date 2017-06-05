@@ -329,6 +329,12 @@ class CatalogController < ApplicationController
     config.view.hierarchy.partials = config.index.partials.dup
     config.view.hierarchy.partials.delete(:index_breadcrumb)
 
+    ##
+    # Hierarchy Index View
+    config.view.online_contents
+    config.view.online_contents.display_control = false
+    config.view.online_contents.partials = config.view.hierarchy.partials.dup
+
     # #
     # Compact index view
     config.view.compact

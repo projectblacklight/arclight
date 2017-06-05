@@ -15,8 +15,8 @@
         </a>
       </li>
       <li class='nav-item'>
-        <a class='nav-link <%= 'disabled' unless document.digital_objects.present? %>' data-toggle='pill' href='#online-content' role='tab' data-arclight-online-content-tab='true'>
-          <% if document.digital_objects.present? %>
+        <a class='nav-link <%= 'disabled' unless document.digital_objects.present? || document.online_content? %>' data-toggle='pill' href='#online-content' role='tab' data-arclight-online-content-tab='true'>
+          <% if document.digital_objects.present? || document.online_content? %>
             <%= t 'arclight.views.show.online_content' %>
           <% else %>
             <%= t 'arclight.views.show.no_online_content' %>
@@ -33,7 +33,7 @@
         <%= render 'collection_contents' %>
       </div>
       <div class='tab-pane' id='online-content' role='tabpanel'>
-         <%= render_document_partial(document, 'arclight_viewer') %>
+        <%= render partial: 'collection_online_contents', locals: { document: document }  %>
       </div>
     </div>
   </div>
