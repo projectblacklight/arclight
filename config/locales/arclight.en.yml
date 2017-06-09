@@ -7,7 +7,7 @@ en:
       view_all: 'View'
       scope_and_contents: 'Scope and Contents'
     request:
-      container: 'Request container(s)'
+      container: 'Request'
     routes:
       home: 'Home'
       collections: 'Collections'

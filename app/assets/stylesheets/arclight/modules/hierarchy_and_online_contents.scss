@@ -24,6 +24,11 @@
     text-align: right;
   }
 
+  .bookmark-toggle,
+  .al-request-form {
+    font-size: $font-size-sm;
+  }
+
   // Component title + children badge
   .documentHeader {
     border-bottom: $border-width dashed #ccc;
