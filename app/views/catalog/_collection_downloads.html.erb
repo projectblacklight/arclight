@@ -1,17 +1,15 @@
 <% if downloads.present? && (downloads[:pdf].present? || downloads[:ead].present?) %>
-<li>
-  <div class='dropdown'>
-    <button class='btn btn-secondary dropdown-toggle' type="button" id="download-dropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-      <%= t 'arclight.views.show.download.default' %>
-    </button>
-    <div class="dropdown-menu" aria-labelledby="download-dropdown">
-      <% if downloads[:pdf].present? %>
-        <a class="dropdown-item" href="<%= downloads[:pdf][:href] %>"><%= t('arclight.views.show.download.pdf', size: downloads[:pdf][:size]) %></a>
-      <% end %>
-      <% if downloads[:ead].present? %>
-        <a class="dropdown-item" href="<%= downloads[:ead][:href] %>"><%= t('arclight.views.show.download.ead', size: downloads[:ead][:size]) %></a>
-      <% end  %>
-    </div>
+<div class='dropdown al-collection-actions-menu'>
+  <button class='btn btn-secondary btn-sm dropdown-toggle' type="button" id="download-dropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+    <%= t 'arclight.views.show.download.default' %>
+  </button>
+  <div class="dropdown-menu dropdown-menu-right" aria-labelledby="download-dropdown">
+    <% if downloads[:pdf].present? %>
+      <a class="dropdown-item" href="<%= downloads[:pdf][:href] %>"><%= t('arclight.views.show.download.pdf', size: downloads[:pdf][:size]) %></a>
+    <% end %>
+    <% if downloads[:ead].present? %>
+      <a class="dropdown-item" href="<%= downloads[:ead][:href] %>"><%= t('arclight.views.show.download.ead', size: downloads[:ead][:size]) %></a>
+    <% end  %>
   </div>
-</li>
+</div>
 <% end %>
