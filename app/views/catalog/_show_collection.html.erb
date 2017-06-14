@@ -3,28 +3,36 @@
     <%= render partial: 'show_sidebar' %>
   </div>
   <div class='col-md-9'>
-    <ul class='nav nav-pills' role='tablist'>
-      <li class='nav-item'>
-        <a class='nav-link active' data-toggle='pill' href='#overview' role='tab'>
-          <%= t 'arclight.views.show.overview' %>
-        </a>
-      </li>
-      <li class='nav-item'>
-        <a class='nav-link disabled' data-toggle='pill' href='#contents' role='tab' data-hierarchy-enable-me='true'>
-          <%= t 'arclight.views.show.no_contents' %>
-        </a>
-      </li>
-      <li class='nav-item'>
-        <a class='nav-link <%= 'disabled' unless document.digital_objects.present? || document.online_content? %>' data-toggle='pill' href='#online-content' role='tab' data-arclight-online-content-tab='true'>
-          <% if document.digital_objects.present? || document.online_content? %>
-            <%= t 'arclight.views.show.online_content' %>
-          <% else %>
-            <%= t 'arclight.views.show.no_online_content' %>
-          <% end %>
-        </a>
-      </li>
-      <%= render partial: 'collection_downloads', locals: { downloads: collection_downloads(document) } %>
-    </ul>
+    <div class='row'>
+      <div class='col-lg-9'>
+        <ul class='nav nav-pills' role='tablist'>
+          <li class='nav-item'>
+            <a class='nav-link active' data-toggle='pill' href='#overview' role='tab'>
+              <%= t 'arclight.views.show.overview' %>
+            </a>
+          </li>
+          <li class='nav-item'>
+            <a class='nav-link disabled' data-toggle='pill' href='#contents' role='tab' data-hierarchy-enable-me='true'>
+              <%= t 'arclight.views.show.no_contents' %>
+            </a>
+          </li>
+          <li class='nav-item'>
+            <a class='nav-link <%= 'disabled' unless document.digital_objects.present? || document.online_content? %>' data-toggle='pill' href='#online-content' role='tab' data-arclight-online-content-tab='true'>
+              <% if document.digital_objects.present? || document.online_content? %>
+                <%= t 'arclight.views.show.online_content' %>
+              <% else %>
+                <%= t 'arclight.views.show.no_online_content' %>
+              <% end %>
+            </a>
+          </li>
+        </ul>
+      </div>
+
+      <div class='col'>
+        <%= render partial: 'collection_downloads', locals: { downloads: collection_downloads(document) } %>
+      </div>
+    </div>
+
     <div class='tab-content'>
       <div class='tab-pane active' id='overview' role='tabpanel'>
         <%= render 'collection_overview' %>
