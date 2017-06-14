@@ -20,14 +20,27 @@
   }
 }
 
-.al-document-title-bar {
-  .toggle-bookmark {
-    @media (min-width: 576px) and (max-width: 991px) {
-      padding-right: $spacer;
-    }
-  }
+.bookmark-toggle .toggle-bookmark {
+  display: inline;
+  margin-bottom: 0;
+  white-space: nowrap;
 }
 
-.bookmark-toggle .toggle-bookmark {
-  margin-bottom: 0;
+.bookmark-toggle,
+.al-request-form {
+  display: inline;
+  float: right;
+}
+
+.al-request-form .al-request-button {
+  font-weight: 600;
+  line-height: 1;
+
+    @media (min-width: 1200px) {
+      margin-right: ($spacer / 2);
+    }
+
+  &:before {
+    content: "\0229F";
+  }
 }
