@@ -9,6 +9,7 @@
     <% end %>
     <% counter = document_counter_with_offset(document_counter) %>
     <%= link_to_document document, document_show_link_field(document), counter: counter %>
+    <%= render_document_partial(document, 'arclight_online_content_indicator') %>
   </h3>
 
   <div class="al-hierarchy-side-content float-right <%= side_content ? 'col-md-4' : 'col' %> ">

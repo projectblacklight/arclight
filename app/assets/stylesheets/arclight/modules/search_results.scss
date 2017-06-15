@@ -1,4 +1,8 @@
 .documents-list {
+  .badge {
+    float: right;
+  }
+
   // Result item header
   .al-document-title-bar {
     background-color: $gray-lighter;
