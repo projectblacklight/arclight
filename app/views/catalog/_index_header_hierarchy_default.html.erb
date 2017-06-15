@@ -9,17 +9,6 @@
     <% counter = document_counter_with_offset(document_counter) %>
     <%= link_to_document document, document_show_link_field(document), counter: counter %>
     <%= render_document_partial(document, 'arclight_online_content_indicator') %>
-  </h3>
-
-  <div class="al-hierarchy-side-content float-right col">
-    <% unless hierarchy_component_context? %>
-      <div class="index-document-functions">
-        <%= render partial: 'catalog/bookmark_control', locals: { document: document } %>
-      </div>
-    <% end %>
-    <% if requestable %>
-      <%= render partial: 'arclight/requests/google_form', locals: { document: document } %>
-    <% end %>
     <% if document.children? %>
       <div class='al-hierarchy-children-status'>
         <span class='badge badge-default al-number-of-children-badge'>
@@ -37,6 +26,17 @@
           <% end %>
         </span>
       </div>
+    <% end %>
+  </h3>
+
+  <div class="al-hierarchy-side-content float-right col">
+    <% unless hierarchy_component_context? %>
+      <div class="index-document-functions">
+        <%= render partial: 'catalog/bookmark_control', locals: { document: document } %>
+      </div>
+    <% end %>
+    <% if requestable %>
+      <%= render partial: 'arclight/requests/google_form', locals: { document: document } %>
     <% end %>
   </div>
 </header>

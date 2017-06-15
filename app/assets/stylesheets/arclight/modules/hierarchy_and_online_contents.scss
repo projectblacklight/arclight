@@ -21,7 +21,9 @@
   }
 
   .al-hierarchy-children-status {
-    text-align: right;
+    font-size: $font-size-h6;
+    margin-top: 6px;
+    text-align: left;
   }
 
   .bookmark-toggle,
@@ -79,26 +81,26 @@
     .blacklight-subseries .document-title-heading,
     .al-hierarchy-level-1 .blacklight-file .document-title-heading,
     .al-hierarchy-level-1 .blacklight-otherlevel .document-title-heading {
-      border-left: ($border-width * 2) solid #999;
       padding-left: 10px;
+
+      &:before {
+        color: $gray-light;
+        content: "\027E9";
+        padding-right: 3px;
+      }
     }
 
     .al-hierarchy-level-2 .document-title-heading,
     .al-hierarchy-level-2 .blacklight-file .document-title-heading {
-      border-left: 0;
-      padding-left: 0;
-
       &:before {
-        color: $gray-light;
-        content: "\a6";
-        padding-right: 6px;
+        content: "\027E9 \027E9";
       }
     }
 
     .al-hierarchy-level-3 .document-title-heading,
     .al-hierarchy-level-3 .blacklight-file .document-title-heading {
       &:before {
-        content: "\205D";
+        content: "\027E9 \027E9 \027E9";
       }
     }
   }
@@ -167,10 +169,10 @@
 @mixin hierarchy-levels {
   @for $i from 1 through 12 {
     .al-hierarchy-level-#{$i} {
-      margin-left: 10px;
+      margin-left: 20px;
       // provides for n indention
       &.extra-indent {
-        margin-left: ($i * 10) + px;
+        margin-left: ($i * 20) + px;
       }
     }
   }
