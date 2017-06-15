@@ -1,7 +1,6 @@
 <header class="documentHeader row" data-document-id="<%= document.id %>">
   <% requestable = item_requestable?('', { document: document }) %>
-  <% side_content = document.children? || requestable %>
-  <h3 class="index_title document-title-heading <%= side_content ? 'col-md-8' : 'col-md-12' %> ">
+  <h3 class="index_title document-title-heading col-md-8">
     <% if document.containers.present? %>
       <span class="document-title-containers">
         <%= document.containers.join(', ') %>:
@@ -11,7 +10,7 @@
     <%= link_to_document document, document_show_link_field(document), counter: counter %>
   </h3>
 
-  <div class="al-hierarchy-side-content float-right <%= side_content ? 'col-md-4' : 'col' %> ">
+  <div class="al-hierarchy-side-content float-right col">
     <% unless hierarchy_component_context? %>
       <div class="index-document-functions">
         <%= render partial: 'catalog/bookmark_control', locals: { document: document } %>
