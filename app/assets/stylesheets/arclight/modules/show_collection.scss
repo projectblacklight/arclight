@@ -59,6 +59,10 @@
     padding: 3px $result-item-body-padding;
   }
 
+  .badge {
+    float: right;
+  }
+
   h1 {
     font-size: $font-size-h4;
     margin-bottom: $spacer;

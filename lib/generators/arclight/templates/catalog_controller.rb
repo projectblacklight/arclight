@@ -227,7 +227,7 @@ class CatalogController < ApplicationController
       two_words_connector: '<br/>',
       last_word_connector: '<br/>'
     }
-    
+
     # Collection Show Page - Indexed Terms Section
     config.add_component_indexed_terms_field 'access_subjects_ssim', label: 'Subjects', :link_to_facet => true, separator_options: {
       words_connector: '<br/>',
@@ -328,6 +328,7 @@ class CatalogController < ApplicationController
     config.view.hierarchy.display_control = false
     config.view.hierarchy.partials = config.index.partials.dup
     config.view.hierarchy.partials.delete(:index_breadcrumb)
+    config.view.hierarchy.partials.delete(:arclight_online_content_indicator)
 
     ##
     # Hierarchy Index View
