@@ -45,6 +45,7 @@ module Arclight
       add_date_ranges(solr_doc)
       add_normalized_title(solr_doc)
       resolve_repository(solr_doc)
+      add_digital_content(prefix: 'c', solr_doc: solr_doc)
       add_digital_content(prefix: 'c/did', solr_doc: solr_doc)
     end
 

@@ -3,13 +3,14 @@
 require 'spec_helper'
 
 RSpec.describe 'Indexing Custom Component', type: :feature do
+  let(:fixture) { 'spec/fixtures/ead/nlm/alphaomegaalpha.xml' }
   let(:components) do # an Array<Arclight::CustomComponent>
     options = { component: Arclight::CustomComponent }
     ENV['SOLR_URL'] = Blacklight.connection_config[:url]
     indexer = Arclight::Indexer.new(options) # `initialize` requires a solr connection
 
     components = []
-    indexer.components('spec/fixtures/ead/nlm/alphaomegaalpha.xml').each do |node|
+    indexer.components(fixture).each do |node|
       components << indexer.send(:om_component_from_node, node) # private method :(
     end
     components
@@ -177,6 +178,15 @@ RSpec.describe 'Indexing Custom Component', type: :feature do
       it 'does not include the field of there is no dao for the component' do
         doc = components[2].to_solr('id' => 'abc123')
         expect(doc).not_to include 'digital_objects_ssm'
+      end
+
+      context 'a dao that exists as the direct child of a component' do
+        let(:fixture) { 'spec/fixtures/ead/sample/large-components-list.xml' }
+
+        it 'has the digital object data indexed' do
+          doc = components[0].to_solr('id' => 'abc123')
+          expect(doc).to have_key 'digital_objects_ssm'
+        end
       end
     end
 

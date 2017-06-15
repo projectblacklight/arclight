@@ -39,6 +39,8 @@
         <did>
           <unittitle>File 1</unittitle>
         </did>
+        <dao xlink:actuate="onRequest" xlink:href="https://purl.stanford.edu/zr891kq4418" xlink:show="new" xlink:title="1st Street Arcade San Francisco">
+        </dao>
         <c id="aspace_b1967abc9e71c4ae46b4fd4389e7e055" level="item">
           <did>
             <unittitle>Item AA001</unittitle>
