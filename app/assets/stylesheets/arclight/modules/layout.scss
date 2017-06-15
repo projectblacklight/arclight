@@ -26,21 +26,27 @@
   white-space: nowrap;
 }
 
-.bookmark-toggle,
-.al-request-form {
+.bookmark-toggle {
   display: inline;
   float: right;
 }
 
-.al-request-form .al-request-button {
-  font-weight: 600;
-  line-height: 1;
+.al-hierarchy-side-content {
+  .al-request-form {
+    display: inline;
+    float: right;
+  }
 
-    @media (min-width: 1200px) {
-      margin-right: ($spacer / 2);
+  .al-request-button {
+    font-weight: 600;
+    line-height: 1;
+
+      @media (min-width: 1200px) {
+        margin-right: ($spacer / 2);
+      }
+
+    &:before {
+      content: "\0229F";
     }
-
-  &:before {
-    content: "\0229F";
   }
 }
