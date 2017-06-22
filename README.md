@@ -72,7 +72,7 @@ See [Arclight Major Features](https://github.com/sul-dlss/arclight/wiki/Arclight
   * [Jennifer Vine](https://github.com/jvine)
   * [Jessie Keck](https://github.com/jkeck)
   * [Mark Matienzo](https://github.com/anarchivist)
-* University of Michagan
+* University of Michigan
   * [Gordon Leacock](https://github.com/gordonleacock)
 
 ## Development
