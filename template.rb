@@ -6,6 +6,7 @@ gem 'blacklight', github: 'projectblacklight/blacklight'
 gem 'blacklight_range_limit', github: 'projectblacklight/blacklight_range_limit', branch: 'blacklight-7'
 
 gem 'arclight', github: 'sul-dlss/arclight'
+gem 'solr_ead', github: 'awead/solr_ead', branch:'bundler-1.15-fix'
 
 run 'bundle install'
 
