@@ -29,5 +29,5 @@ before_script:
   - find spec/fixtures/ead -name '*.xml' | xargs xmllint --noout --schema spec/fixtures/xsd/ead.xsd
 addons:
   apt:
-    sources:
-      - libxml2-utils
+    packages:
+    - libxml2-utils
