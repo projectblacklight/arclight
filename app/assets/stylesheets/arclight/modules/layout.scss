@@ -36,17 +36,18 @@
     display: inline;
     float: right;
   }
+}
 
-  .al-request-button {
+.al-request-button {
+  &.btn-link {
     font-weight: 600;
     line-height: 1;
-
-      @media (min-width: 1200px) {
-        margin-right: ($spacer / 2);
-      }
-
-    &:before {
-      content: "\0229F";
+  }
+    @media (min-width: 1200px) {
+      margin-right: ($spacer / 2);
     }
+
+  &:before {
+    content: "\0229F";
   }
 }
