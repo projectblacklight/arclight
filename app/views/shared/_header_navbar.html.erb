@@ -15,20 +15,18 @@
 
 <% if controller_name == 'catalog' && !has_search_parameters? && action_name == 'index' %>
   <div class='al-homepage-masthead jumbotron'>
-    <div class='row'>
-      <div class='col-md-8 ml-auto'>
-        <h1 class='text-center'><%= t('arclight.masthead_heading') %></h1>
-      </div>
+    <div class='d-flex justify-content-center'>
+      <h1 class='text-center'><%= t('arclight.masthead_heading') %></h1>
     </div>
-    <div class='row'>
-      <div class='col-md-6 ml-auto'>
+    <div class='row justify-content-md-center'>
+      <div class='col-md-6 col-sm-12'>
         <div class='navbar-search'>
           <%= render_search_bar %>
         </div>
       </div>
     </div>
-    <nav class="navbar" role="navigation">
-      <ul class="nav justify-content-center">
+    <nav class="navbar justify-content-center" role="navigation">
+      <ul class="nav">
         <%= render 'shared/main_menu_links' %>
       </ul>
     </nav>
