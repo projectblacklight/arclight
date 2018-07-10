@@ -32,10 +32,6 @@ module Arclight
     def assets
       copy_file 'arclight.scss', 'app/assets/stylesheets/arclight.scss'
       copy_file 'arclight.js', 'app/assets/javascripts/arclight.js'
-      inject_into_file 'app/assets/javascripts/application.js', after: '//= require blacklight/blacklight' do
-        "\n//= require bootstrap/scrollspy\n" \
-        "\n//= require bootstrap/tab\n"
-      end
     end
 
     def add_arclight_search_behavior
