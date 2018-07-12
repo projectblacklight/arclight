@@ -5,8 +5,6 @@ require 'engine_cart/rake_task'
 require 'rspec/core/rake_task'
 require 'arclight'
 
-EngineCart.fingerprint_proc = EngineCart.rails_fingerprint_proc
-
 desc 'Run test suite'
 task ci: %w[arclight:generate] do
   SolrWrapper.wrap do |solr|
