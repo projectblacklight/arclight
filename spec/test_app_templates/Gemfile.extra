@@ -1,2 +1,1 @@
-gem 'blacklight', github: 'projectblacklight/blacklight', branch: 'master'
-gem 'blacklight_range_limit', github: 'projectblacklight/blacklight_range_limit', branch: 'blacklight-7'
+gem 'blacklight_range_limit', '7.0.0.rc2'
