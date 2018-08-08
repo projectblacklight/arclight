@@ -9,6 +9,13 @@
           <%= t 'arclight.views.show.overview' %>
         </a>
       </li>
+      <% if document.children? %>
+        <li class='nav-item'>
+              <a class='nav-link disabled' data-toggle='pill' href='#contents' role='tab' data-hierarchy-enable-me='true'>
+                <%= t 'arclight.views.show.no_contents' %>
+              </a>
+        </li>
+      <% end %>
       <li class='nav-item'>
         <a class='nav-link <%= 'disabled' unless document.online_content? %>' data-toggle='pill' href='#online-content' role='tab' data-arclight-online-content-tab='true'>
           <% if document.online_content? %>
@@ -22,6 +29,9 @@
     <div class='tab-content'>
       <div class='tab-pane active' id='overview' role='tabpanel'>
         <%= render 'component_overview' %>
+      </div>
+      <div class='tab-pane' id='contents' role='tabpanel'>
+        <%= render 'component_contents' %>
       </div>
       <div class='tab-pane' id='online-content' role='tabpanel'>
         <%= render_document_partial(document, 'arclight_viewer') %>
