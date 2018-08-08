@@ -1,0 +1,16 @@
+<% document ||= @document %>
+<% @sub_level ||= document.component_level + 1 %>
+
+
+<h2 class="sr-only">Component inventory</h2>
+	<div class="component-level-only">
+	<%= content_tag(
+	  :div, '',
+	  class: 'al-contents',
+	  data: {
+	    arclight: {
+	      hierarchy: true, level: @sub_level, path: search_catalog_path, name: document.collection_name, parent: document.reference
+	    }
+	  }
+	) %>
+	</div>
