@@ -4,8 +4,6 @@ ENV['RAILS_ENV'] ||= 'test'
 ENV['REPOSITORY_FILE'] ||= 'spec/fixtures/config/repositories.yml'
 
 require 'simplecov'
-require 'coveralls'
-SimpleCov.formatter = Coveralls::SimpleCov::Formatter
 SimpleCov.start do
   add_filter '/.internal_test_app/'
   add_filter '/spec/'
