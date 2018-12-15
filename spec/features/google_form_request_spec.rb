@@ -7,7 +7,6 @@ describe 'Google Form Request', type: :feature, js: true do
     context 'repository is requestable' do
       it 'form is present with filled out values' do
         visit solr_document_path 'aoa271aspace_843e8f9f22bac69872d0802d6fffbb04'
-        click_on 'In person'
 
         within '.al-sticky-sidebar form' do
           expect(page).to have_css(
