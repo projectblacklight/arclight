@@ -39,7 +39,7 @@ module ArclightHelper
   end
 
   def collection_count
-    facets_from_request.find { |f| f.name == 'collection_sim' }.try(:items).try(:count)
+    @response.response['numFound']
   end
 
   ##
