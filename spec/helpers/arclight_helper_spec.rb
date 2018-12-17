@@ -72,26 +72,19 @@ RSpec.describe ArclightHelper, type: :helper do
     end
   end
   describe '#collection_count' do
-    let(:facets_from_request) do
-      [
-        Blacklight::Solr::Response::Facets::FacetField.new('collection_sim', [1, 2]),
-        Blacklight::Solr::Response::Facets::FacetField.new('cool_factor', [1])
-      ]
-    end
-
     context 'when there are items' do
-      before do
-        allow(helper).to receive(:facets_from_request).and_return(facets_from_request)
-      end
-      it 'returns the item count from a selected Blacklight::Solr::Response::Facets::FacetField' do
+      it 'returns the item count from the Blacklight::Solr::Response' do
+        assign(:response, instance_double('Response', response: { 'numFound' => 2 }))
+
         expect(helper.collection_count).to eq 2
       end
     end
+
     context 'when there are no items' do
-      before do
-        allow(helper).to receive(:facets_from_request).and_return([])
+      it do
+        assign(:response, instance_double('Response', response: {}))
+        expect(helper.collection_count).to be_nil
       end
-      it { expect(helper.collection_count).to be_nil }
     end
   end
 
