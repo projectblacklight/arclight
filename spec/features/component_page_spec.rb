@@ -15,6 +15,18 @@ RSpec.describe 'Component Page', type: :feature do
       expect(page).to have_css '#overview', visible: false
       expect(page).to have_css '#online-content', visible: true
     end
+
+    describe 'contents tab', js: true do
+      let(:doc_id) { 'aoa271aspace_563a320bb37d24a9e1e6f7bf95b52671' }
+
+      it 'is present and accessible' do
+        expect(page).to have_css('li.nav-item a', text: 'Contents', visible: true)
+        click_link 'Contents'
+        expect(page).to have_css '#overview', visible: false
+        expect(page).to have_css '#contents', visible: true
+        expect(page).to have_css '#online-content', visible: false
+      end
+    end
   end
 
   describe 'Component section heading' do
