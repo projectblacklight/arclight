@@ -7,28 +7,21 @@ module Arclight
   # @see http://www2.archivists.org/standards/DACS/part_I/chapter_2/4_date
   class NormalizedDate
     # @param [String | Array<String>] `inclusive` from the `unitdate`
-    # @param [String] `bulk` from the `unitdate`
-    # @param [String] `other` from the `unitdate` when type is not specified
-    def initialize(inclusiveHash, bulkHash = nil, otherHash = nil)
-      @inclusive = []
-      @bulk = []
-      @other = []
-      inclusiveHash.each do |inclusive|
-        if inclusive.is_a? Array # of YYYY-YYYY for ranges
-          @inclusive << YearRange.new(inclusive.include?('/') ? inclusive : inclusive.map { |v| v.tr('-', '/') }).to_s
-        elsif inclusive.present?
-          @inclusive << inclusive.strip
+    # @param [Array<String>] `bulk` from the `unitdate`
+    # @param [Array<String>] `other` from the `unitdate` when type is not specified
+    def initialize(inclusive, bulk = [], other = [])
+      @inclusive = (inclusive || []).map do |inclusive_text|
+        if inclusive_text.is_a? Array # of YYYY-YYYY for ranges
+          # NOTE: This code is not routable AFAICT in actual indexing.
+          # We pass arrays of strings (or xml nodes) here, and never a multidimensional array
+          year_range(inclusive_text)
+        elsif inclusive_text.present?
+          inclusive_text.strip
         end
-      end
-      bulkHash.each do |bulk|
-        @bulk << bulk.strip if bulk.present?
-      end
-      otherHash.each do |other|
-        @other << other.strip if other.present?
-      end
-      @inclusive = @inclusive.join(", ")
-      @bulk = @bulk.join(", ")
-      @other = @other.join(", ")
+      end&.join(', ')
+
+      @bulk = Array.wrap(bulk).compact.map(&:strip).join(', ')
+      @other = Array.wrap(other).compact.map(&:strip).join(', ')
     end
 
     # @return [String] the normalized title/date
@@ -39,6 +32,10 @@ module Arclight
     private
 
     attr_reader :inclusive, :bulk, :other
+
+    def year_range(date_array)
+      YearRange.new(date_array.include?('/') ? date_array : date_array.map { |v| v.tr('-', '/') }).to_s
+    end
 
     # @see http://www2.archivists.org/standards/DACS/part_I/chapter_2/4_date for rules
     def normalize

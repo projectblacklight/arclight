@@ -5,7 +5,7 @@ require 'spec_helper'
 RSpec.describe Arclight::NormalizedDate do
   subject(:normalized_date) { described_class.new(date_inclusive, date_bulk, date_other).to_s }
 
-  let(:date_inclusive) { '1990-2000' }
+  let(:date_inclusive) { ['1990-2000'] }
   let(:date_bulk) { '1999-2005' }
   let(:date_other) { nil }
 
@@ -13,11 +13,21 @@ RSpec.describe Arclight::NormalizedDate do
     it 'joins dates' do
       expect(normalized_date).to eq '1990-2000, bulk 1999-2005'
     end
+
+    context 'multiple normalized dates' do
+      let(:date_inclusive) { %w[1990 1992] }
+
+      it 'are joined w/ a comma' do
+        expect(normalized_date).to eq '1990, 1992, bulk 1999-2005'
+      end
+    end
   end
 
   context 'with special case dates' do
+    # NOTE: This test is the only place where the code that exercises this is routable
+    # This has to be a multidimensional array, and the resulting XML nodes sent in are always flat
     context 'multiples' do
-      let(:date_inclusive) { %w[1990-2000 2001-2002 2004] }
+      let(:date_inclusive) { [%w[1990-2000 2001-2002 2004]] }
       let(:date_bulk) { '1990-2004' }
 
       it 'uses compressed joined years' do
