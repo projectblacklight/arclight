@@ -4,6 +4,7 @@ notifications:
   email: false
 rvm:
   - 2.5.1
+  - 2.6.0
 jdk:
   - oraclejdk8
 
