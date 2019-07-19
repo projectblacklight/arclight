@@ -30,12 +30,13 @@ Gem::Specification.new do |spec|
 
   spec.add_development_dependency 'bundler', '> 1.14'
   spec.add_development_dependency 'capybara'
-  spec.add_development_dependency 'chromedriver-helper'
   spec.add_development_dependency 'engine_cart'
   spec.add_development_dependency 'rake', '~> 12.0'
   spec.add_development_dependency 'rubocop', '~> 0.48.1'
   spec.add_development_dependency 'rubocop-rspec', '~> 1.15.0'
   spec.add_development_dependency 'rspec-rails', '~> 3.0'
+  spec.add_development_dependency 'selenium-webdriver'
   spec.add_development_dependency 'simplecov'
   spec.add_development_dependency 'solr_wrapper'
+  spec.add_development_dependency 'webdrivers'
 end
