@@ -3,8 +3,8 @@ language: ruby
 notifications:
   email: false
 rvm:
-  - 2.5.1
-  - 2.6.0
+  - 2.5.5
+  - 2.6.3
 jdk:
   - oraclejdk9
 
