@@ -3,10 +3,10 @@ language: ruby
 notifications:
   email: false
 rvm:
-  - 2.5.1
-  - 2.6.0
+  - 2.5.5
+  - 2.6.3
 jdk:
-  - oraclejdk8
+  - oraclejdk9
 
 before_script:
   - find spec/fixtures/ead -name '*.xml' | xargs xmllint --noout --schema spec/fixtures/xsd/ead.xsd
