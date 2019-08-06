@@ -15,6 +15,8 @@ EngineCart.load_application!
 require 'rspec/rails'
 
 require 'selenium-webdriver'
+require 'webdrivers'
+
 Capybara.javascript_driver = :selenium_chrome_headless
 
 Capybara.default_max_wait_time = 15 # our ajax responses are sometimes slow
