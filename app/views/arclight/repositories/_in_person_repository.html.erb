@@ -1,6 +1,6 @@
 <div class='al-in-person-repository-name'>
   <% if repository.thumbnail_url %>
-    <%= image_tag repository.thumbnail_url, alt: repository.name, class: 'img-fluid float-left' %>
+    <%= image_tag repository.thumbnail_url, alt: '', class: 'img-fluid float-left' %>
   <% end %>
   <div>
     <%= link_to(repository.name, arclight_engine.repository_path(repository.slug)) %>
