@@ -1,7 +1,7 @@
-[![Build Status](https://travis-ci.org/sul-dlss/arclight.svg?branch=master)](https://travis-ci.org/sul-dlss/arclight)
+[![Build Status](https://travis-ci.org/projectblacklight/arclight.svg?branch=master)](https://travis-ci.org/projectblacklight/arclight)
 [![Code Climate Test Coverage](https://codeclimate.com/github/sul-dlss/arclight/badges/coverage.svg)](https://codeclimate.com/github/sul-dlss/arclight/coverage)
 
-# Arclight
+# ArcLight
 
 A Rails engine supporting discovery of archival materials.
 
