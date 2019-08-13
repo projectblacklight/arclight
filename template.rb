@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 gem 'arclight', github: 'sul-dlss/arclight'
-gem 'blacklight_range_limit', '7.0.0.rc2'
+gem 'blacklight_range_limit', '~> 7.1'
 
 run 'bundle install'
 
