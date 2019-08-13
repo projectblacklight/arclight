@@ -72,7 +72,7 @@ module Arclight
     end
 
     def component_level
-      first('component_level_isim')
+      first('component_level_isim') || 0
     end
 
     def level
