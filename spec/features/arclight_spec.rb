@@ -20,7 +20,7 @@ RSpec.describe 'Arclight', type: :feature do
   describe 'Search history' do
     it 'successfully navigates' do
       visit blacklight.search_history_path
-      expect(page).to have_css 'h3', text: 'You have no search history'
+      expect(page).to have_css 'h2', text: 'You have no search history'
     end
   end
 end
