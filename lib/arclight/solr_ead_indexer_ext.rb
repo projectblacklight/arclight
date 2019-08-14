@@ -102,16 +102,12 @@ module Arclight
 
     # TODO: these xpaths should be DRY'd up -- they're in both terminologies
     def extract_title_and_dates(node, prefix = nil)
-      data = {
-        title:              node.at_xpath("#{prefix}did/unittitle"),
-        unitdate_inclusive: node.at_xpath("#{prefix}did/unitdate[@type=\"inclusive\"]"),
-        unitdate_bulk:      node.at_xpath("#{prefix}did/unitdate[@type=\"bulk\"]"),
-        unitdate_other:     node.at_xpath("#{prefix}did/unitdate[not(@type)]")
+      {
+        title:              node.at_xpath("#{prefix}did/unittitle").try(:text),
+        unitdate_inclusive: node.xpath("#{prefix}did/unitdate[@type=\"inclusive\"]").map(&:text),
+        unitdate_bulk:      node.xpath("#{prefix}did/unitdate[@type=\"bulk\"]").map(&:text),
+        unitdate_other:     node.xpath("#{prefix}did/unitdate[not(@type)]").map(&:text)
       }
-      data.each do |k, v|
-        data[k] = v.text if v
-      end
-      data
     end
 
     def normalized_component_id(node)
