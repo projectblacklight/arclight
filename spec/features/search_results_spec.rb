@@ -106,7 +106,7 @@ RSpec.describe 'Search results', type: :feature do
         within('.blacklight-names_ssim') do
           expect(page).to have_css('h3 a', text: 'Names')
           expect(page).to have_css('li .facet-label', text: 'Root, William Webster, 1867-1932', visible: false)
-          expect(page).to have_css('li .facet-label', text: 'Stanford, Leland', visible: false)
+          expect(page).to have_css('li .facet-label', text: 'Stanford University', visible: false)
         end
 
         within('.blacklight-repository_sim') do
