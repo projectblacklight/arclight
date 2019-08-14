@@ -13,18 +13,8 @@ AllCops:
 Rails:
   Enabled: true
 
-Metrics/LineLength:
-  Max: 120
-  Exclude:
-    - 'Gemfile'
-    - 'lib/arclight/custom_document.rb'  # XPaths get long
-    - 'lib/arclight/custom_component.rb' # XPaths get long
-
-Metrics/ModuleLength:
-  Max: 120
-
-Metrics/ClassLength:
-  Max: 120
+Bundler/DuplicatedGem:
+  Enabled: false
 
 Metrics/BlockLength:
   Exclude:
@@ -32,10 +22,27 @@ Metrics/BlockLength:
     - 'arclight.gemspec'
     - 'spec/**/*'
     - 'lib/arclight/custom_document.rb'
+    - 'lib/generators/arclight/templates/catalog_controller.rb'
+
+Metrics/ClassLength:
+  Max: 120
+  Exclude:
+    - 'lib/generators/arclight/templates/catalog_controller.rb'
+
+Metrics/LineLength:
+  Max: 120
+  Exclude:
+    - 'Gemfile'
+    - 'lib/arclight/custom_document.rb'  # XPaths get long
+    - 'lib/arclight/custom_component.rb' # XPaths get long
+    - 'lib/generators/arclight/templates/catalog_controller.rb'
 
 Metrics/MethodLength:
   Exclude:
     - 'lib/arclight/custom_document.rb' # arclight_field_definitions too long
+
+Metrics/ModuleLength:
+  Max: 120
 
 Performance/RegexpMatch:
   Enabled: false
@@ -61,6 +68,6 @@ Style/Documentation:
   Exclude:
     - 'spec/**/*'
     - 'lib/arclight.rb'
+    - 'lib/generators/arclight/templates/catalog_controller.rb'
 
-Bundler/DuplicatedGem:
-  Enabled: false
+
