@@ -85,6 +85,7 @@ Ensure Solr and Rails are _not_ running (ports 8983 and 3000 respectively), then
 ```sh
 $ bundle exec rake
 ```
+If you find that the tests are failing when you run them on a Linux computer, you might need to install Google Chrome so the Selenium testing framework can run properly.
 
 ### Run a development server
 
