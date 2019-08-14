@@ -1,6 +1,6 @@
 # frozen_string_literal: true
-class CatalogController < ApplicationController
 
+class CatalogController < ApplicationController
   include Blacklight::Catalog
   include Arclight::Catalog
   include Arclight::FieldConfigHelpers
@@ -21,31 +21,31 @@ class CatalogController < ApplicationController
     }
 
     # solr path which will be added to solr base url before the other solr params.
-    #config.solr_path = 'select'
+    # config.solr_path = 'select'
 
     # items to show per page, each number in the array represent another option to choose from.
-    #config.per_page = [10,20,50,100]
+    # config.per_page = [10,20,50,100]
 
-    ## Default parameters to send on single-document requests to Solr. These settings are the Blackligt defaults (see SearchHelper#solr_doc_params) or
+    ## Default parameters to send on single-document requests to Solr. These settings are the Blacklight defaults (see SearchHelper#solr_doc_params) or
     ## parameters included in the Blacklight-jetty document requestHandler.
     #
-    #config.default_document_solr_params = {
+    # config.default_document_solr_params = {
     #  qt: 'document',
     #  ## These are hard-coded in the blacklight 'document' requestHandler
     #  # fl: '*',
     #  # rows: 1,
     #  # q: '{!term f=id v=$id}'
-    #}
+    # }
 
     # solr field configuration for search results/index views
     config.index.title_field = 'normalized_title_ssm'
     config.index.display_type_field = 'level_ssm'
-    #config.index.thumbnail_field = 'thumbnail_path_ss'
+    # config.index.thumbnail_field = 'thumbnail_path_ss'
 
     # solr field configuration for document/show views
-    #config.show.title_field = 'title_display'
-    #config.show.display_type_field = 'format'
-    #config.show.thumbnail_field = 'thumbnail_path_ss'
+    # config.show.title_field = 'title_display'
+    # config.show.display_type_field = 'format'
+    # config.show.thumbnail_field = 'thumbnail_path_ss'
 
     config.add_results_document_tool(:bookmark, partial: 'bookmark_control', if: :render_bookmarks_control?)
 
@@ -93,7 +93,7 @@ class CatalogController < ApplicationController
     config.add_facet_field 'names_ssim', label: 'Names'
     config.add_facet_field 'repository_sim', label: 'Repository'
     config.add_facet_field 'geogname_sim', label: 'Place'
-    config.add_facet_field 'places_ssim', label: 'Places', show:false
+    config.add_facet_field 'places_ssim', label: 'Places', show: false
     config.add_facet_field 'access_subjects_ssim', label: 'Subject'
 
     # Have BL send all facet field names to Solr, which has been the default
@@ -198,29 +198,29 @@ class CatalogController < ApplicationController
     config.index.partials.insert(0, :index_breadcrumb)
     config.index.partials.insert(0, :arclight_document_index_header)
 
-    config.show.metadata_partials = [
-      :summary_field,
-      :access_field,
-      :background_field,
-      :related_field,
-      :indexed_terms_field
+    config.show.metadata_partials = %i[
+      summary_field
+      access_field
+      background_field
+      related_field
+      indexed_terms_field
     ]
 
-    config.show.context_sidebar_items = [
-      :in_person_field,
-      :terms_field,
-      :cite_field
+    config.show.context_sidebar_items = %i[
+      in_person_field
+      terms_field
+      cite_field
     ]
 
-    config.show.component_metadata_partials = [
-      :component_field,
-      :component_indexed_terms_field
+    config.show.component_metadata_partials = %i[
+      component_field
+      component_indexed_terms_field
     ]
 
-    config.show.component_sidebar_items = [
-      :in_person_field,
-      :component_terms_field,
-      :cite_field
+    config.show.component_sidebar_items = %i[
+      in_person_field
+      component_terms_field
+      cite_field
     ]
 
     # Component Show Page - Metadata Section
@@ -243,7 +243,7 @@ class CatalogController < ApplicationController
     }
 
     # Collection Show Page - Indexed Terms Section
-    config.add_component_indexed_terms_field 'access_subjects_ssim', label: 'Subjects', :link_to_facet => true, separator_options: {
+    config.add_component_indexed_terms_field 'access_subjects_ssim', label: 'Subjects', link_to_facet: true, separator_options: {
       words_connector: '<br/>',
       two_words_connector: '<br/>',
       last_word_connector: '<br/>'
@@ -255,7 +255,7 @@ class CatalogController < ApplicationController
       last_word_connector: '<br/>'
     }, helper_method: :link_to_name_facet
 
-    config.add_component_indexed_terms_field 'places_ssim', label: 'Places', :link_to_facet => true, separator_options: {
+    config.add_component_indexed_terms_field 'places_ssim', label: 'Places', link_to_facet: true, separator_options: {
       words_connector: '<br/>',
       two_words_connector: '<br/>',
       last_word_connector: '<br/>'
@@ -266,7 +266,7 @@ class CatalogController < ApplicationController
     config.add_component_terms_field 'parent_access_terms_ssm', label: 'Terms of Access'
 
     # Collection Show Page - Summary Section
-    config.add_summary_field 'creators_ssim', label: 'Creator', :link_to_facet => true
+    config.add_summary_field 'creators_ssim', label: 'Creator', link_to_facet: true
     config.add_summary_field 'abstract_ssm', label: 'Abstract'
     config.add_summary_field 'extent_ssm', label: 'Extent'
     config.add_summary_field 'language_ssm', label: 'Language'
@@ -304,7 +304,7 @@ class CatalogController < ApplicationController
     config.add_related_field 'originalsloc_ssm', label: 'Location of originals', helper_method: :paragraph_separator
 
     # Collection Show Page - Indexed Terms Section
-    config.add_indexed_terms_field 'access_subjects_ssim', label: 'Subjects', :link_to_facet => true, separator_options: {
+    config.add_indexed_terms_field 'access_subjects_ssim', label: 'Subjects', link_to_facet: true, separator_options: {
       words_connector: '<br/>',
       two_words_connector: '<br/>',
       last_word_connector: '<br/>'
@@ -316,7 +316,7 @@ class CatalogController < ApplicationController
       last_word_connector: '<br/>'
     }, helper_method: :link_to_name_facet
 
-    config.add_indexed_terms_field 'places_ssim', label: 'Places', :link_to_facet => true, separator_options: {
+    config.add_indexed_terms_field 'places_ssim', label: 'Places', link_to_facet: true, separator_options: {
       words_connector: '<br/>',
       two_words_connector: '<br/>',
       last_word_connector: '<br/>'
