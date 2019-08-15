@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
 module Arclight
-
   ##
   # A module to add set locales that is sent to application controller
   module LocaleBehavior
