@@ -97,9 +97,17 @@ compose 'components', ->(record, accumulator, context) { accumulator.concat reco
     accumulator.replace([accumulator.length])
   end
 
-  to_field 'ref_ssm', extract_xpath('./@id')
-  to_field 'level_ssm', extract_xpath('./@level')
-  to_field 'level_sim', extract_xpath('./@level')
+  to_field 'ref_ssm' do |record, accumulator|
+    accumulator << record.attribute('id')
+  end
+
+  to_field 'level_ssm' do |record, accumulator|
+    accumulator << record.attribute('level')
+  end
+
+  to_field 'level_sim' do |record, accumulator|
+    accumulator << record.attribute('level')
+  end
   to_field 'userestrict_ssm', extract_xpath('xmlns:userestrict/xmlns:p')
   # to_field 'parent_access_restrict_ssm'
   # to_field 'parent_access_terms_ssm'
