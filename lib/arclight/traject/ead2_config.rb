@@ -82,16 +82,21 @@ compose 'components', ->(record, accumulator, context) { accumulator.concat reco
   to_field 'collection_ssm', extract_xpath('/xmlns:ead/xmlns:archdesc/xmlns:did/xmlns:unittitle')
   to_field 'collection_sim', extract_xpath('/xmlns:ead/xmlns:archdesc/xmlns:did/xmlns:unittitle')
 
-  # to_field 'extent_ssm'
-  # to_field 'abstract_ssm'
+  to_field 'extent_ssm', extract_xpath('./xmlns:did/xmlns:physdesc/xmlns:extent')
+  to_field 'abstract_ssm', extract_xpath('./xmlns:did/xmlns:abstract')
   to_field 'scopecontent_ssm', extract_xpath('./xmlns:scopecontent/xmlns:p')
   # to_field 'creator_ssm'
   # to_field 'creator_ssim'
   # to_field 'creators_ssim'
   # to_field 'creator_sort'
   # to_field 'collection_creator_ssm'
-  # to_field 'has_online_content_ssim'
-  # to_field 'child_component_count_isim'
+  to_field 'has_online_content_ssim', extract_xpath('./xmlns:dao[@href]') do |_record, accumulator|
+    accumulator.replace([accumulator.any?])
+  end
+  to_field 'child_component_count_isim', extract_xpath('xmlns:c') do |_record, accumulator|
+    accumulator.replace([accumulator.length])
+  end
+
   to_field 'ref_ssm', extract_xpath('./@id')
   to_field 'level_ssm', extract_xpath('./@level')
   to_field 'level_sim', extract_xpath('./@level')
@@ -121,16 +126,16 @@ compose 'components', ->(record, accumulator, context) { accumulator.concat reco
   # to_field 'access_subjects_ssim'
   # to_field 'access_subjects_ssm'
   to_field 'language_ssm', extract_xpath('xmlns:did/xmlns:langmaterial')
-  to_field 'accessrestrict_ssm', extract_xpath('xmlns:accessrestrict/xmlns:p')
-  # to_field 'prefercite_ssm'
+  to_field 'accessrestrict_ssm', extract_xpath('xmlns:accessrestrict/*[local-name()!="head"]')
+  to_field 'prefercite_ssm', extract_xpath('xmlns:prefercite/*[local-name()!="head"]')
   # to_field 'containers_ssim'
-  # to_field 'bioghist_ssm'
-  to_field 'acqinfo_ssm', extract_xpath('xmlns:acqinfo/xmlns:p')
-  to_field 'relatedmaterial_ssm', extract_xpath('xmlns:relatedmaterial/xmlns:p')
-  to_field 'separatedmaterial_ssm', extract_xpath('xmlns:separatedmaterial_ssm/xmlns:p')
-  # to_field 'otherfindaid_ssm'
-  to_field 'altformavail_ssm', extract_xpath('xmlns:altformavail/xmlns:p')
-  to_field 'originalsloc_ssm', extract_xpath('xmlns:originalsloc/xmlns:p')
+  to_field 'bioghist_ssm', extract_xpath('xmlns:bioghist/*[local-name()!="head"]')
+  to_field 'acqinfo_ssm', extract_xpath('xmlns:acqinfo/*[local-name()!="head"]')
+  to_field 'relatedmaterial_ssm', extract_xpath('xmlns:relatedmaterial/*[local-name()!="head"]')
+  to_field 'separatedmaterial_ssm', extract_xpath('xmlns:separatedmaterial/*[local-name()!="head"]')
+  to_field 'otherfindaid_ssm', extract_xpath('xmlns:otherfindaid/*[local-name()!="head"]')
+  to_field 'altformavail_ssm', extract_xpath('xmlns:altformavail/*[local-name()!="head"]')
+  to_field 'originalsloc_ssm', extract_xpath('xmlns:originalsloc/*[local-name()!="head"]')
   # to_field 'names_coll_ssim'
 end
 
