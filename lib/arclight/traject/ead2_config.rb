@@ -33,6 +33,10 @@ to_field 'normalized_title_ssm' do |record, accumulator, context|
   accumulator << Arclight::NormalizedTitle.new(title, dates).to_s
 end
 
+to_field 'normalized_date_ssm' do |record, accumulator, context|
+  accumulator << Arclight::NormalizedDate.new(context.output_hash['unitdate_inclusive_ssim'], context.output_hash['unitdate_bulk_ssim'], context.output_hash['unitdate_other_ssim']).to_s
+end
+
 # Each component child document
 # <c> <c01> <c12>
 compose 'components', ->(record, accumulator, context) { accumulator.concat record.xpath("//*[is_component(.)]", NokogiriXpathExtensions.new())} do
@@ -60,7 +64,32 @@ compose 'components', ->(record, accumulator, context) { accumulator.concat reco
     accumulator << Arclight::NormalizedTitle.new(title, dates).to_s
   end
 
-  to_field 'component_level_isim', literal(0)
+  to_field 'normalized_date_ssm' do |record, accumulator, context|
+    accumulator << Arclight::NormalizedDate.new(context.output_hash['unitdate_inclusive_ssim'], context.output_hash['unitdate_bulk_ssim'], context.output_hash['unitdate_other_ssim']).to_s
+  end
+
+  to_field 'component_level_isim' do |record, accumulator|
+    accumulator << 1 + record.ancestors.count { |node| node.name == 'c' }
+  end
+
+  # to_field 'parent_ids'
+  # to_field 'parent_labels'
+  # to_field 'unitid_ssm'
+  # to_field 'repository_ssm'
+  # to_field 'collection_ssm'
+  # to_field 'extent_ssm'
+  # to_field 'abstract_ssm'
+  # to_field 'scopecontent_ssm'
+  # to_field 'creator_ssm'
+  # to_field 'collection_creator_ssm'
+  # to_field 'has_online_content_ssim'
+  # to_field 'child_component_count_isim'
+  # to_field 'ref_ssm'
+  # to_field 'level_ssm'
+  # to_field 'userestrict_ssm'
+  # to_field 'parent_access_restrict_ssm'
+  # to_field 'parent_access_terms_ssm'
+  # to_field 'digital_objects_ssm'
 end
 
 
