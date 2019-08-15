@@ -21,13 +21,13 @@ namespace :arclight do
     raise 'Please specify your EAD document, ex. FILE=<path/to/ead.xml>' unless ENV['FILE']
     indexer = load_indexer
     print "Loading #{ENV['FILE']} into index...\n"
-    if ENV['TRAJECT']
-      elapsed_time = Benchmark.realtime { 
-        `bundle exec traject -u #{ENV['SOLR_URL']} -i xml -c lib/arclight/traject/ead2_config.rb #{ENV['FILE']}`
-      }
-    else
-      elapsed_time = Benchmark.realtime { indexer.update(ENV['FILE']) }
-    end
+    elapsed_time = if ENV['TRAJECT']
+                     Benchmark.realtime { 
+                       `bundle exec traject -u #{ENV['SOLR_URL']} -i xml -c lib/arclight/traject/ead2_config.rb #{ENV['FILE']}`
+                     }
+                   else
+                     Benchmark.realtime { indexer.update(ENV['FILE']) }
+                   end
     print "Indexed #{ENV['FILE']} (in #{elapsed_time.round(3)} secs).\n"
   end
 

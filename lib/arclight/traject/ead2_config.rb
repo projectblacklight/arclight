@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'traject'
 require 'traject/nokogiri_reader'
 require 'traject_plus'
@@ -8,20 +10,21 @@ require 'active_support/core_ext/array/wrap'
 require 'arclight/digital_object'
 require 'arclight/year_range'
 
+# rubocop:disable Style/MixinUsage
 extend TrajectPlus::Macros
+# rubocop:enable Style/MixinUsage
 
 settings do
-  provide "nokogiri.namespaces",  {
-    "xmlns" => "urn:isbn:1-931666-22-9",
-  }
-  provide "solr_writer.commit_on_close", "true"
+  provide 'nokogiri.namespaces',
+          'xmlns' => 'urn:isbn:1-931666-22-9'
+  provide 'solr_writer.commit_on_close', 'true'
 end
 
 # Top level
-to_field 'id', extract_xpath("//xmlns:eadid"), strip, gsub('.', '-')
-to_field 'title_ssm', extract_xpath("//xmlns:archdesc/xmlns:did/xmlns:unittitle")
-to_field 'title_teim', extract_xpath("//xmlns:archdesc/xmlns:did/xmlns:unittitle")
-to_field 'ead_ssi' do |record, accumulator, context|
+to_field 'id', extract_xpath('//xmlns:eadid'), strip, gsub('.', '-')
+to_field 'title_ssm', extract_xpath('//xmlns:archdesc/xmlns:did/xmlns:unittitle')
+to_field 'title_teim', extract_xpath('//xmlns:archdesc/xmlns:did/xmlns:unittitle')
+to_field 'ead_ssi' do |_record, accumulator, context|
   accumulator << context.output_hash['id'].first
 end
 
@@ -29,19 +32,28 @@ to_field 'unitdate_bulk_ssim', extract_xpath('//xmlns:archdesc/xmlns:did/xmlns:u
 to_field 'unitdate_inclusive_ssim', extract_xpath('//xmlns:archdesc/xmlns:did/xmlns:unitdate[@type="inclusive"]')
 to_field 'unitdate_other_ssim', extract_xpath('//xmlns:archdesc/xmlns:did/xmlns:unitdate[not(@type)]')
 
-to_field 'normalized_title_ssm' do |record, accumulator, context|
-  dates = Arclight::NormalizedDate.new(context.output_hash['unitdate_inclusive_ssim'], context.output_hash['unitdate_bulk_ssim'], context.output_hash['unitdate_other_ssim']).to_s
+to_field 'normalized_title_ssm' do |_record, accumulator, context|
+  dates = Arclight::NormalizedDate.new(
+    context.output_hash['unitdate_inclusive_ssim'],
+    context.output_hash['unitdate_bulk_ssim'],
+    context.output_hash['unitdate_other_ssim']
+  ).to_s
   title = context.output_hash['title_ssm'].first
   accumulator << Arclight::NormalizedTitle.new(title, dates).to_s
 end
 
-to_field 'normalized_date_ssm' do |record, accumulator, context|
-  accumulator << Arclight::NormalizedDate.new(context.output_hash['unitdate_inclusive_ssim'], context.output_hash['unitdate_bulk_ssim'], context.output_hash['unitdate_other_ssim']).to_s
+to_field 'normalized_date_ssm' do |_record, accumulator, context|
+  accumulator << Arclight::NormalizedDate.new(
+    context.output_hash['unitdate_inclusive_ssim'],
+    context.output_hash['unitdate_bulk_ssim'],
+    context.output_hash['unitdate_other_ssim']
+  ).to_s
 end
 
 # Each component child document
 # <c> <c01> <c12>
-compose 'components', ->(record, accumulator, context) { accumulator.concat record.xpath("//*[is_component(.)]", NokogiriXpathExtensions.new())} do
+# rubocop:disable Metrics/BlockLength
+compose 'components', ->(record, accumulator, _context) { accumulator.concat record.xpath('//*[is_component(.)]', NokogiriXpathExtensions.new) } do
   to_field 'id' do |record, accumulator, context|
     accumulator << [
       context.clipboard[:parent].output_hash['id'],
@@ -49,25 +61,33 @@ compose 'components', ->(record, accumulator, context) { accumulator.concat reco
     ].join('')
   end
 
-  to_field 'ead_ssi' do |record, accumulator, context|
+  to_field 'ead_ssi' do |_record, accumulator, context|
     accumulator << context.output_hash['id'].first
   end
 
-  to_field 'title_ssm', extract_xpath("./xmlns:did/xmlns:unittitle")
-  to_field 'title_teim', extract_xpath("./xmlns:did/xmlns:unittitle")
+  to_field 'title_ssm', extract_xpath('./xmlns:did/xmlns:unittitle')
+  to_field 'title_teim', extract_xpath('./xmlns:did/xmlns:unittitle')
 
   to_field 'unitdate_bulk_ssim', extract_xpath('./xmlns:did/xmlns:unitdate[@type="bulk"]')
   to_field 'unitdate_inclusive_ssim', extract_xpath('./xmlns:did/xmlns:unitdate[@type="inclusive"]')
   to_field 'unitdate_other_ssim', extract_xpath('./xmlns:did/xmlns:unitdate[not(@type)]')
 
-  to_field 'normalized_title_ssm' do |record, accumulator, context|
-    dates = Arclight::NormalizedDate.new(context.output_hash['unitdate_inclusive_ssim'], context.output_hash['unitdate_bulk_ssim'], context.output_hash['unitdate_other_ssim']).to_s
+  to_field 'normalized_title_ssm' do |_record, accumulator, context|
+    dates = Arclight::NormalizedDate.new(
+      context.output_hash['unitdate_inclusive_ssim'],
+      context.output_hash['unitdate_bulk_ssim'],
+      context.output_hash['unitdate_other_ssim']
+    ).to_s
     title = context.output_hash['title_ssm'].first
     accumulator << Arclight::NormalizedTitle.new(title, dates).to_s
   end
 
-  to_field 'normalized_date_ssm' do |record, accumulator, context|
-    accumulator << Arclight::NormalizedDate.new(context.output_hash['unitdate_inclusive_ssim'], context.output_hash['unitdate_bulk_ssim'], context.output_hash['unitdate_other_ssim']).to_s
+  to_field 'normalized_date_ssm' do |_record, accumulator, context|
+    accumulator << Arclight::NormalizedDate.new(
+      context.output_hash['unitdate_inclusive_ssim'],
+      context.output_hash['unitdate_bulk_ssim'],
+      context.output_hash['unitdate_other_ssim']
+    ).to_s
   end
 
   to_field 'component_level_isim' do |record, accumulator|
@@ -113,7 +133,8 @@ compose 'components', ->(record, accumulator, context) { accumulator.concat reco
   # to_field 'parent_access_terms_ssm'
   to_field 'digital_objects_ssm', extract_xpath('./xmlns:dao') do |record, accumulator|
     accumulator.concat(record.xpath('./xmlns:dao', xmlns: 'urn:isbn:1-931666-22-9').map do |dao|
-      label = dao.attributes['title']&.value || dao.xpath('xmlns:daodesc/xmlns:p', xmlns: 'urn:isbn:1-931666-22-9')&.text
+      label = dao.attributes['title']&.value ||
+        dao.xpath('xmlns:daodesc/xmlns:p', xmlns: 'urn:isbn:1-931666-22-9')&.text
       href = (dao.attributes['href'] || dao.attributes['xlink:href'])&.value
       Arclight::DigitalObject.new(label: label, href: href).to_json
     end.to_a)
@@ -146,18 +167,22 @@ compose 'components', ->(record, accumulator, context) { accumulator.concat reco
   to_field 'originalsloc_ssm', extract_xpath('xmlns:originalsloc/*[local-name()!="head"]')
   # to_field 'names_coll_ssim'
 end
-
+# rubocop:enable Metrics/BlockLength
 
 each_record do |_record, context|
   context.output_hash['components'] &&= context.output_hash['components'].select { |c| c.keys.any? }
 end
 
+##
+# Used for evaluating xpath components to find
 class NokogiriXpathExtensions
-  def is_component node_set
+  # rubocop:disable Naming/PredicateName, Style/FormatString
+  def is_component(node_set)
     node_set.find_all do |node|
-      component_elements = (1..12).map { |i| "c#{'%02d' % i}"}
+      component_elements = (1..12).map { |i| "c#{'%02d' % i}" }
       component_elements.push 'c'
       component_elements.include? node.name
     end
   end
+  # rubocop:enable Naming/PredicateName, Style/FormatString
 end

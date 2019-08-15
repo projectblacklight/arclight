@@ -1,6 +1,8 @@
+# frozen_string_literal: true
+
 require 'spec_helper'
 
-describe 'EAD 2 traject indexing' do
+describe 'EAD 2 traject indexing', type: :feature do
   subject(:result) do
     indexer.map_record(record)
   end
@@ -25,7 +27,7 @@ describe 'EAD 2 traject indexing' do
       expect(result['id'].first).to eq 'a0011-xml'
     end
     it 'title' do
-      ['title_ssm', 'title_teim'].each do |field|
+      %w[title_ssm title_teim].each do |field|
         expect(result[field]).to include 'Stanford University student life photograph album'
       end
     end
@@ -35,6 +37,7 @@ describe 'EAD 2 traject indexing' do
       end
     end
   end
+
   describe 'large component list' do
     let(:record) do
       Traject::NokogiriReader.new(
@@ -48,6 +51,5 @@ describe 'EAD 2 traject indexing' do
     it 'selects the components' do
       expect(result['components'].length).to eq 404
     end
-    
   end
 end
