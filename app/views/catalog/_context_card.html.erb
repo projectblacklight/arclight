@@ -17,7 +17,7 @@
               <%= generic_render_document_field_label(field_accessor, document, field: field_name) %>
             </dt>
             <dd class="blacklight-<%= field_name.parameterize %>">
-              <%= doc_presenter.field_value field_name %>
+              <%= doc_presenter.field_value field %>
             </dd>
           <% end %>
         <% end %>

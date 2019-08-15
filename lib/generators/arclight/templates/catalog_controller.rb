@@ -44,7 +44,7 @@ class CatalogController < ApplicationController
 
     # solr field configuration for document/show views
     # config.show.title_field = 'title_display'
-    # config.show.display_type_field = 'format'
+    config.show.display_type_field = 'level_ssm'
     # config.show.thumbnail_field = 'thumbnail_path_ss'
 
     config.add_results_document_tool(:bookmark, partial: 'bookmark_control', if: :render_bookmarks_control?)
