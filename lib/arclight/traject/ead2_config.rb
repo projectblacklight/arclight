@@ -72,8 +72,8 @@ compose 'components', ->(record, accumulator, context) { accumulator.concat reco
     accumulator << 1 + record.ancestors.count { |node| node.name == 'c' }
   end
 
-  # to_field 'parent_ids'
-  # to_field 'parent_labels'
+  # to_field 'parent_ssm'
+  # to_field 'parent_unittitles_ssm'
   # to_field 'unitid_ssm'
   # to_field 'repository_ssm'
   # to_field 'collection_ssm'
