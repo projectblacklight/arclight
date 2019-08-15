@@ -5,6 +5,8 @@ require 'traject_plus/macros'
 require 'arclight/normalized_date'
 require 'arclight/normalized_title'
 require 'active_support/core_ext/array/wrap'
+require 'arclight/digital_object'
+require 'arclight/year_range'
 
 extend TrajectPlus::Macros
 
@@ -96,8 +98,22 @@ compose 'components', ->(record, accumulator, context) { accumulator.concat reco
   to_field 'userestrict_ssm', extract_xpath('xmlns:userestrict/xmlns:p')
   # to_field 'parent_access_restrict_ssm'
   # to_field 'parent_access_terms_ssm'
-  # to_field 'digital_objects_ssm'
-  # to_field 'date_range_sim'
+  to_field 'digital_objects_ssm', extract_xpath('./xmlns:dao') do |record, accumulator|
+    accumulator.concat(record.xpath('./xmlns:dao', xmlns: 'urn:isbn:1-931666-22-9').map do |dao|
+      label = dao.attributes['title']&.value || dao.xpath('xmlns:daodesc/xmlns:p', xmlns: 'urn:isbn:1-931666-22-9')&.text
+      href = (dao.attributes['href'] || dao.attributes['xlink:href'])&.value
+      Arclight::DigitalObject.new(label: label, href: href).to_json
+    end.to_a)
+  end
+
+  to_field 'date_range_sim', extract_xpath('./xmlns:did/xmlns:unitdate/@normal') do |_record, accumulator|
+    range = Arclight::YearRange.new
+    next range.years if accumulator.blank?
+
+    range << range.parse_ranges(accumulator)
+    accumulator.replace range.years
+  end
+
   # to_field 'names_ssim'
   # to_field 'geogname_sim'
   # to_field 'geogname_ssm'
