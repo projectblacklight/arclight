@@ -76,6 +76,7 @@ compose 'components', ->(record, accumulator, context) { accumulator.concat reco
   # to_field 'parent_unittitles_ssm'
   to_field 'unitid_ssm', extract_xpath('./xmlns:did/xmlns:unitid')
   # to_field 'repository_ssm'
+  # to_field 'repository_sim'
   to_field 'collection_ssm', extract_xpath('/xmlns:ead/xmlns:archdesc/xmlns:did/xmlns:unittitle')
   to_field 'collection_sim', extract_xpath('/xmlns:ead/xmlns:archdesc/xmlns:did/xmlns:unittitle')
 
@@ -92,20 +93,19 @@ compose 'components', ->(record, accumulator, context) { accumulator.concat reco
   to_field 'ref_ssm', extract_xpath('./@id')
   to_field 'level_ssm', extract_xpath('./@level')
   to_field 'level_sim', extract_xpath('./@level')
-  # to_field 'userestrict_ssm'
+  to_field 'userestrict_ssm', extract_xpath('xmlns:userestrict/xmlns:p')
   # to_field 'parent_access_restrict_ssm'
   # to_field 'parent_access_terms_ssm'
   # to_field 'digital_objects_ssm'
   # to_field 'date_range_sim'
   # to_field 'names_ssim'
-  # to_field 'repository_sim'
   # to_field 'geogname_sim'
+  # to_field 'geogname_ssm'
   # to_field 'places_ssim'
   # to_field 'access_subjects_ssim'
+  # to_field 'access_subjects_ssm'
   to_field 'language_ssm', extract_xpath('xmlns:did/xmlns:langmaterial')
   to_field 'accessrestrict_ssm', extract_xpath('xmlns:accessrestrict/xmlns:p')
-  # to_field 'geogname_ssm'
-  # to_field 'access_subjects_ssm'
   # to_field 'prefercite_ssm'
   # to_field 'containers_ssim'
   # to_field 'bioghist_ssm'
