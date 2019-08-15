@@ -1,0 +1,67 @@
+de:
+  arclight:
+    masthead_heading: 'Archivsammlungen in der Institution'
+    date_range_histogram:
+      show_hide: 'Datumsverteilung ein- / ausblenden'
+    hierarchy:
+      view_all: 'Aussicht'
+      scope_and_contents: 'Geltungsbereich und Inhalt'
+    request:
+      container: 'Anfordern'
+    routes:
+      home: 'Zuhause'
+      collections: 'Sammlungen'
+      repositories: 'Repositories'
+      search_results: 'Suchergebnisse'
+    toolbar:
+      language_switch: 'Sprache wechseln'
+    views:
+      index:
+        number_of_children:
+          zero: 'Keine Kinder'
+          one: '1 Kind'
+          other: '%{count} Kinder'
+        collection_search:
+          count: 'Sammlung'
+      online_content_indicator: 'Online-Inhalte'
+      show:
+        collection_id: 'ID der Sammlung: %{id}'
+        overview: 'Überblick'
+        online_content: 'Online-Inhalte'
+        no_online_content: 'Kein Online-Inhalt'
+        no_contents: 'Kein Inhaltsinventar'
+        search_within: 'Suchen Sie in dieser Sammlung'
+        navigation_sidebar:
+          title: 'Navigationsübersicht'
+        context_sidebar:
+          in_person_field: 'Persönlich'
+          terms_field: 'Terms & Bedingungen'
+          cite_field: 'Wie zitiere ich diese Sammlung'
+          component_terms_field: "Terms & Bedingungen"
+        sections:
+          summary_field: 'Zusammenfassung'
+          access_field: 'Zugang und Nutzung'
+          background_field: 'Hintergrund'
+          scope_and_arrangement_field: 'Umfang und Anordnung'
+          related_field: 'verbunden'
+          indexed_terms_field: 'Indizierte Begriffe'
+          admin_info_field: 'Administrative Informationen'
+          component_field: 'Darüber %{level}'
+          component_indexed_terms_field: 'Indizierte Begriffe'
+          collection_context_field: 'Sammlungskontext'
+        our_collections: 'Unsere Kollektionen'
+        download:
+          default: 'Herunterladen'
+          pdf: 'Sammlung PDF (%{size})'
+          ead: 'Sammlung EAD (%{size})'
+      repositories:
+        number_of_collections:
+          zero: 'Keine Sammlungen'
+          one: '1 Sammlung'
+          other: '%{count} Sammlungen'
+        view_more: 'Mehr sehen'
+        view_all_collections: 'Alle unsere Kollektionen anzeigen'
+    breadcrumb_separator: ' » '
+    truncation:
+      view_more: 'mehr sehen ▶'
+      view_less: 'weniger anzeigen ▼'
