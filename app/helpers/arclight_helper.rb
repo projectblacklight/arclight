@@ -170,4 +170,17 @@ module ArclightHelper
   def generic_render_document_field_label(config_field, document, field: field_name)
     send(:"render_document_#{config_field}_label", document, field: field)
   end
+
+  # Add translations for the user to select
+  def available_translations
+    {
+      'de' => 'Deutsch',
+      'en' => 'English',
+      'es' => 'Español',
+      'fr' => 'Français',
+      'it' => 'Italiano',
+      'pt-BR' => 'Português do Brasil',
+      'zh' => '中文'
+    }
+  end
 end

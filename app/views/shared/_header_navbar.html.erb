@@ -8,6 +8,7 @@
     
 
     <div class="collapse navbar-collapse justify-content-md-end" id="user-util-collapse">
+      <%= render 'shared/locale_picker' if available_translations.size > 1 %>
       <%= render 'shared/user_util_links' %>
     </div>
   </div>
