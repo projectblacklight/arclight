@@ -51,5 +51,9 @@ module Arclight
     initializer 'arclight.views' do
       Blacklight::Configuration.default_values[:view].hierarchy
     end
+
+    config.after_initialize do
+      ::ApplicationController.send :include, Arclight::LocaleBehavior
+    end
   end
 end
