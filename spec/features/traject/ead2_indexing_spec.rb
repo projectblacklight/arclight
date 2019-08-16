@@ -25,11 +25,19 @@ describe 'EAD 2 traject indexing', type: :feature do
   describe 'solr fields' do
     it 'id' do
       expect(result['id'].first).to eq 'a0011-xml'
+      expect(result['ead_ssi'].first).to eq 'a0011-xml'
     end
     it 'title' do
       %w[title_ssm title_teim].each do |field|
         expect(result[field]).to include 'Stanford University student life photograph album'
       end
+      expect(result['normalized_title_ssm']).to include 'Stanford University student life photograph album, circa 1900-1906'
+    end
+    it 'dates' do
+      expect(result['normalized_date_ssm']).to include 'circa 1900-1906'
+      expect(result['unitdate_bulk_ssim']).to be_nil
+      expect(result['unitdate_inclusive_ssim']).to include 'circa 1900-1906'
+      expect(result['unitdate_other_ssim']).to be_nil
     end
     describe 'components' do
       it 'id' do
