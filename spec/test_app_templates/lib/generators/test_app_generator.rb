@@ -26,4 +26,10 @@ class TestAppGenerator < Rails::Generators::Base
   def install_engine
     generate 'arclight:install'
   end
+
+  def add_test_locales
+    initializer 'test_locale_configuration.rb' do
+      'Blacklight::LocalePicker::Engine.config.available_locales = [:en, :es]'
+    end
+  end
 end
