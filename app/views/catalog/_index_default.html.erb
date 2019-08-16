@@ -6,7 +6,7 @@
   <%= document.extent %>
 <% end if document.extent %>
 
-<%= content_tag('div', class: 'al-document-abstract-or-scope', title: document.abstract_or_scope) do %>
+<%= content_tag('div', class: 'al-document-abstract-or-scope') do %>
   <%= content_tag('div', 'data-arclight-truncate' => true) do %>
     <%= document.abstract_or_scope %>
   <% end %>
