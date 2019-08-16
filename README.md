@@ -50,6 +50,19 @@ See the [ArcLight demo](https://arclight-demo.projectblacklight.org/) and [ArcLi
 
 See [Arclight Major Features](https://github.com/sul-dlss/arclight/wiki/Arclight-Major-Features) for a list of features.
 
+### Traject indexing of EAD content
+[Traject](https://github.com/traject/traject) is a proposed way forward for migrating indexing. An EAD2 can be indexed by doing the following:
+
+```sh
+bundle exec traject -u http://127.0.0.1:8983/solr/blacklight-core -i xml -c lib/arclight/traject/ead2_config.rb spec/fixtures/ead/sample/large-components-list.xml
+```
+
+Or pass the `TRAJECT=true` env variable to current indexing tasks.
+
+```sh
+TRAJECT=true bundle exec rake arclight:seed
+end
+
 ## Resources
 
 * General
