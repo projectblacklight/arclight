@@ -28,6 +28,14 @@ to_field 'ead_ssi' do |_record, accumulator, context|
   accumulator << context.output_hash['id'].first
 end
 
+to_field 'level_ssm' do |record, accumulator|
+  accumulator << record.at_xpath('//xmlns:archdesc').attribute('level').value
+end
+
+to_field 'level_sim' do |record, accumulator|
+  accumulator << record.at_xpath('//xmlns:archdesc').attribute('level').value&.capitalize
+end
+
 to_field 'unitdate_bulk_ssim', extract_xpath('//xmlns:archdesc/xmlns:did/xmlns:unitdate[@type="bulk"]')
 to_field 'unitdate_inclusive_ssim', extract_xpath('//xmlns:archdesc/xmlns:did/xmlns:unitdate[@type="inclusive"]')
 to_field 'unitdate_other_ssim', extract_xpath('//xmlns:archdesc/xmlns:did/xmlns:unitdate[not(@type)]')
