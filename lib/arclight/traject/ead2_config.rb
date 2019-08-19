@@ -79,6 +79,25 @@ to_field 'repository_sim' do |_record, accumulator, context|
   accumulator << context.clipboard[:repository]
 end
 
+to_field 'creator_ssm', extract_xpath("//xmlns:archdesc/xmlns:did/xmlns:origination[@label='creator']")
+to_field 'creator_ssim', extract_xpath("//xmlns:archdesc/xmlns:did/xmlns:origination[@label='creator']")
+to_field 'creator_sort' do |record, accumulator|
+  accumulator << record.xpath("//xmlns:archdesc/xmlns:did/xmlns:origination[@label='creator']").map { |c| c.text.strip }.join(', ')
+end
+
+to_field 'creator_persname_ssm', extract_xpath("//xmlns:archdesc/xmlns:did/xmlns:origination[@label='creator']/xmlns:persname")
+to_field 'creator_persname_ssim', extract_xpath("//xmlns:archdesc/xmlns:did/xmlns:origination[@label='creator']/xmlns:persname")
+to_field 'creator_corpname_ssm', extract_xpath("//xmlns:archdesc/xmlns:did/xmlns:origination[@label='creator']/xmlns:corpname")
+to_field 'creator_corpname_ssim', extract_xpath("//xmlns:archdesc/xmlns:did/xmlns:origination[@label='creator']/xmlns:corpname")
+to_field 'creator_famname_ssm', extract_xpath("//xmlns:archdesc/xmlns:did/xmlns:origination[@label='creator']/xmlns:famname")
+to_field 'creator_famname_ssim', extract_xpath("//xmlns:archdesc/xmlns:did/xmlns:origination[@label='creator']/xmlns:famname")
+
+to_field 'creators_ssim' do |_record, accumulator, context|
+  accumulator.concat context.output_hash['creator_persname_ssm'] if context.output_hash['creator_persname_ssm']
+  accumulator.concat context.output_hash['creator_corpname_ssm'] if context.output_hash['creator_corpname_ssm']
+  accumulator.concat context.output_hash['creator_famname_ssm'] if context.output_hash['creator_famname_ssm']
+end
+
 # Each component child document
 # <c> <c01> <c12>
 # rubocop:disable Metrics/BlockLength
@@ -167,11 +186,15 @@ compose 'components', ->(record, accumulator, _context) { accumulator.concat rec
   to_field 'extent_ssm', extract_xpath('./xmlns:did/xmlns:physdesc/xmlns:extent')
   to_field 'abstract_ssm', extract_xpath('./xmlns:did/xmlns:abstract')
   to_field 'scopecontent_ssm', extract_xpath('./xmlns:scopecontent/xmlns:p')
-  # to_field 'creator_ssm'
-  # to_field 'creator_ssim'
-  # to_field 'creators_ssim'
-  # to_field 'creator_sort'
-  # to_field 'collection_creator_ssm'
+  to_field 'creator_ssm', extract_xpath("./xmlns:did/xmlns:origination[@label='creator']")
+  to_field 'creator_ssim', extract_xpath("./xmlns:did/xmlns:origination[@label='creator']")
+  to_field 'creators_ssim', extract_xpath("./xmlns:did/xmlns:origination[@label='creator']")
+  to_field 'creator_sort' do |record, accumulator|
+    accumulator << record.xpath("./xmlns:did/xmlns:origination[@label='creator']").map(&:text).join(', ')
+  end
+  to_field 'collection_creator_ssm' do |_record, accumulator, context|
+    accumulator.concat Array.wrap(context.clipboard[:parent].output_hash['creator_ssm'])
+  end
   to_field 'has_online_content_ssim', extract_xpath('./xmlns:dao[@href]') do |_record, accumulator|
     accumulator.replace([accumulator.any?])
   end

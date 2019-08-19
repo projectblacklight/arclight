@@ -63,6 +63,11 @@ describe 'EAD 2 traject indexing', type: :feature do
     it 'unitid' do
       expect(result['unitid_ssm']).to eq ['A0011']
     end
+    it 'creator' do
+      %w[creator_ssm creator_ssim creator_corpname_ssm creator_corpname_ssim creators_ssim creator_sort].each do |field|
+        expect(result[field]).to eq ['Stanford University']
+      end
+    end
     describe 'components' do
       let(:first_component) { result['components'].first }
 
@@ -82,6 +87,11 @@ describe 'EAD 2 traject indexing', type: :feature do
       it 'collection has normalized title' do
         %w[collection_sim collection_ssm].each do |field|
           expect(first_component[field]).to include 'Stanford University student life photograph album, circa 1900-1906'
+        end
+      end
+      it 'creator' do
+        %w[collection_creator_ssm].each do |field|
+          expect(first_component[field]).to eq ['Stanford University']
         end
       end
     end
