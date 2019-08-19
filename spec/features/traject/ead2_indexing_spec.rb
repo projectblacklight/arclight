@@ -83,9 +83,16 @@ describe 'EAD 2 traject indexing', type: :feature do
           expect(first_component[field]).to include 'Stanford University Libraries. Special Collections and University Archives'
         end
       end
+
       it 'geogname' do
         %w[geogname_sim geogname_ssm].each do |field|
           expect(result['components'].first[field]).to be_nil
+        end
+      end
+
+      it 'collection has normalized title' do
+        %w[collection_sim collection_ssm].each do |field|
+          expect(first_component[field]).to include 'Stanford University student life photograph album, circa 1900-1906'
         end
       end
     end
