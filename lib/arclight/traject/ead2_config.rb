@@ -9,6 +9,7 @@ require 'arclight/normalized_title'
 require 'active_support/core_ext/array/wrap'
 require 'arclight/digital_object'
 require 'arclight/year_range'
+require 'arclight/repository'
 
 # rubocop:disable Style/MixinUsage
 extend TrajectPlus::Macros
@@ -18,6 +19,15 @@ settings do
   provide 'nokogiri.namespaces',
           'xmlns' => 'urn:isbn:1-931666-22-9'
   provide 'solr_writer.commit_on_close', 'true'
+  provide 'repository', ENV['REPOSITORY_ID']
+end
+
+each_record do |_record, context|
+  next unless settings['repository']
+
+  context.clipboard[:repository] = Arclight::Repository.find_by(
+    slug: settings['repository']
+  ).name
 end
 
 # Top level
@@ -48,6 +58,14 @@ to_field 'normalized_date_ssm' do |_record, accumulator, context|
     context.output_hash['unitdate_bulk_ssim'],
     context.output_hash['unitdate_other_ssim']
   ).to_s
+end
+
+to_field 'repository_ssm' do |_record, accumulator, context|
+  accumulator << context.clipboard[:repository]
+end
+
+to_field 'repository_sim' do |_record, accumulator, context|
+  accumulator << context.clipboard[:repository]
 end
 
 # Each component child document
@@ -97,8 +115,12 @@ compose 'components', ->(record, accumulator, _context) { accumulator.concat rec
   # to_field 'parent_ssm'
   # to_field 'parent_unittitles_ssm'
   to_field 'unitid_ssm', extract_xpath('./xmlns:did/xmlns:unitid')
-  # to_field 'repository_ssm'
-  # to_field 'repository_sim'
+  to_field 'repository_ssm' do |_record, accumulator, context|
+    accumulator << context.clipboard[:parent].clipboard[:repository]
+  end
+  to_field 'repository_sim' do |_record, accumulator, context|
+    accumulator << context.clipboard[:parent].clipboard[:repository]
+  end
   to_field 'collection_ssm', extract_xpath('/xmlns:ead/xmlns:archdesc/xmlns:did/xmlns:unittitle')
   to_field 'collection_sim', extract_xpath('/xmlns:ead/xmlns:archdesc/xmlns:did/xmlns:unittitle')
 
