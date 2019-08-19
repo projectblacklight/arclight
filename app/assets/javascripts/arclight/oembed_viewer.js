@@ -11,12 +11,9 @@ Blacklight.onLoad(function () {
 
     $viewerElements.each(function (i, element) {
       var $el = $(element);
-      var possible_iframe = $(element).find('iframe')
-      if (possible_iframe && possible_iframe.length > 0) {
-        var iframe = possible_iframe[0]
-        if (iframe.contentWindow) {
-            return
-        }
+      var loadedAttr = $el.attr('loaded')
+      if (loadedAttr && loadedAttr === 'loaded') {
+        return
       }
       var data = $el.data();
       var resourceUrl = data.arclightOembedUrl;
@@ -38,6 +35,7 @@ Blacklight.onLoad(function () {
             $el.hide()
                .html(oEmbedResponse.html)
                .fadeIn(500);
+            $el.attr('loaded', 'loaded')
           }
         });
       });
