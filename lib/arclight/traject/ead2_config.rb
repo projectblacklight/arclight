@@ -6,6 +6,7 @@ require 'traject_plus'
 require 'traject_plus/macros'
 require 'arclight/normalized_date'
 require 'arclight/normalized_title'
+require 'active_model/conversion' ## Needed for Arclight::Repository
 require 'active_support/core_ext/array/wrap'
 require 'arclight/digital_object'
 require 'arclight/year_range'
