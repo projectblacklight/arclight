@@ -68,6 +68,11 @@ describe 'EAD 2 traject indexing', type: :feature do
         expect(result[field]).to eq ['Stanford University']
       end
     end
+
+    it 'places' do
+      expect(result['places_ssim']).to eq ['Yosemite National Park (Calif.)']
+    end
+
     describe 'components' do
       let(:first_component) { result['components'].first }
 
