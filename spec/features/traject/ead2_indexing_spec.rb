@@ -66,10 +66,15 @@ describe 'EAD 2 traject indexing', type: :feature do
         expect(result[field]).to include 'Stanford University Libraries. Special Collections and University Archives'
       end
     end
+
     it 'geogname' do
       %w[geogname_sim geogname_ssm].each do |field|
         expect(result[field]).to include 'Yosemite National Park (Calif.)'
       end
+    end
+
+    it 'unitid' do
+      expect(result['unitid_ssm']).to eq ['A0011']
     end
 
     describe 'components' do
