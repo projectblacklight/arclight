@@ -1,11 +1,12 @@
 Blacklight.onLoad(function () {
   'use strict';
+
   var onlineContentTabSelector = '[data-arclight-online-content-tab="true"]';
   var oEmbedViewerSelector = '[data-arclight-oembed="true"]';
 
-  $(onlineContentTabSelector).on('shown.bs.tab', function() {
+  $(onlineContentTabSelector).on('shown.bs.tab', function () {
     var $viewerElements = $(oEmbedViewerSelector);
-    if($viewerElements.length === 0) {
+    if ($viewerElements.length === 0) {
       return;
     }
 
@@ -20,17 +21,17 @@ Blacklight.onLoad(function () {
         var links = $('<div>' + response.match(/<link .*>/g).join('') + '</div>'); // Parse out link elements so image assets are not loaded
         var oEmbedEndPoint = links.find('link[rel="alternate"][type="application/json+oembed"]').prop('href');
 
-        if(!oEmbedEndPoint || oEmbedEndPoint.length === 0) {
+        if (!oEmbedEndPoint || oEmbedEndPoint.length === 0) {
           return;
         }
 
         $.ajax({
           url: oEmbedEndPoint
         }).done(function (oEmbedResponse) {
-          if(oEmbedResponse.html) {
+          if (oEmbedResponse.html) {
             $el.hide()
-               .html(oEmbedResponse.html)
-               .fadeIn(500);
+              .html(oEmbedResponse.html)
+              .fadeIn(500);
           }
         });
       });
