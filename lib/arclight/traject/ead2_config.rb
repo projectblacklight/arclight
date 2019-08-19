@@ -125,7 +125,15 @@ compose 'components', ->(record, accumulator, _context) { accumulator.concat rec
     accumulator << 1 + record.ancestors.count { |node| node.name == 'c' }
   end
 
-  # to_field 'parent_ssm'
+  to_field 'parent_ssm' do |record, accumulator, context|
+    accumulator << context.clipboard[:parent].output_hash['id'].first
+    accumulator.concat NokogiriXpathExtensions.new.is_component(record.ancestors).map { |n| n.attribute('id').value }
+  end
+
+  to_field 'parent_ssi' do |_record, accumulator, context|
+    accumulator << context.output_hash['parent_ssm'].last
+  end
+
   # to_field 'parent_unittitles_ssm'
   to_field 'unitid_ssm', extract_xpath('./xmlns:did/xmlns:unitid')
   to_field 'repository_ssm' do |_record, accumulator, context|
