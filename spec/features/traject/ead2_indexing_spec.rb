@@ -111,6 +111,10 @@ describe 'EAD 2 traject indexing', type: :feature do
         expect(nested_component['parent_ssm']).to eq %w[lc0100 aspace_327a75c226d44aa1a769edb4d2f13c6e]
         expect(nested_component['parent_ssi']).to eq ['aspace_327a75c226d44aa1a769edb4d2f13c6e']
       end
+
+      it 'parent_unittitles' do
+        expect(nested_component['parent_unittitles_ssm']).to eq ['Large collection sample, 1843-1872', 'File 1']
+      end
     end
   end
 
