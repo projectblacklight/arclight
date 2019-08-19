@@ -60,6 +60,9 @@ describe 'EAD 2 traject indexing', type: :feature do
         expect(result[field]).to include 'Stanford University Libraries. Special Collections and University Archives'
       end
     end
+    it 'unitid' do
+      expect(result['unitid_ssm']).to eq ['A0011']
+    end
     describe 'components' do
       let(:first_component) { result['components'].first }
 
