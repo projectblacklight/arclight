@@ -12,8 +12,13 @@ Blacklight.onLoad(function () {
 
     $viewerElements.each(function (i, element) {
       var $el = $(element);
+      var loadedAttr = $el.attr('loaded');
       var data = $el.data();
       var resourceUrl = data.arclightOembedUrl;
+      if (loadedAttr && loadedAttr === 'loaded') {
+        return;
+      }
+
       $.ajax({
         url: resourceUrl,
         dataType: 'html'
@@ -30,8 +35,9 @@ Blacklight.onLoad(function () {
         }).done(function (oEmbedResponse) {
           if (oEmbedResponse.html) {
             $el.hide()
-              .html(oEmbedResponse.html)
-              .fadeIn(500);
+               .html(oEmbedResponse.html)
+               .fadeIn(500);
+            $el.attr('loaded', 'loaded');
           }
         });
       });
