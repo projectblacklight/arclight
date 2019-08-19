@@ -45,6 +45,10 @@ describe 'EAD 2 traject indexing', type: :feature do
       end
       expect(result['normalized_title_ssm']).to include 'Stanford University student life photograph album, circa 1900-1906'
     end
+    it 'level' do
+      expect(result['level_ssm']).to eq ['collection']
+      expect(result['level_sim']).to eq ['Collection']
+    end
     it 'dates' do
       expect(result['normalized_date_ssm']).to include 'circa 1900-1906'
       expect(result['unitdate_bulk_ssim']).to be_nil
