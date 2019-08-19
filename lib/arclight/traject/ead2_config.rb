@@ -152,8 +152,12 @@ compose 'components', ->(record, accumulator, _context) { accumulator.concat rec
   to_field 'repository_sim' do |_record, accumulator, context|
     accumulator << context.clipboard[:parent].clipboard[:repository]
   end
-  to_field 'collection_ssm', extract_xpath('/xmlns:ead/xmlns:archdesc/xmlns:did/xmlns:unittitle')
-  to_field 'collection_sim', extract_xpath('/xmlns:ead/xmlns:archdesc/xmlns:did/xmlns:unittitle')
+  to_field 'collection_ssm' do |_record, accumulator, context|
+    accumulator.concat context.clipboard[:parent].output_hash['normalized_title_ssm']
+  end
+  to_field 'collection_sim' do |_record, accumulator, context|
+    accumulator.concat context.clipboard[:parent].output_hash['normalized_title_ssm']
+  end
 
   to_field 'extent_ssm', extract_xpath('./xmlns:did/xmlns:physdesc/xmlns:extent')
   to_field 'abstract_ssm', extract_xpath('./xmlns:did/xmlns:abstract')
