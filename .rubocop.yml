@@ -1,5 +1,8 @@
 require: rubocop-rspec
 
+inherit_from:
+  - .rubocop_todo.yml
+
 AllCops:
   Exclude:
     - '.internal_test_app/**/*'
@@ -12,55 +15,6 @@ AllCops:
 
 Rails:
   Enabled: true
-
-Metrics/LineLength:
-  Max: 120
-  Exclude:
-    - 'Gemfile'
-    - 'lib/arclight/custom_document.rb'  # XPaths get long
-    - 'lib/arclight/custom_component.rb' # XPaths get long
-
-Metrics/ModuleLength:
-  Max: 120
-
-Metrics/ClassLength:
-  Max: 120
-
-Metrics/BlockLength:
-  Exclude:
-    - !ruby/regexp /\.rake$/
-    - 'arclight.gemspec'
-    - 'spec/**/*'
-    - 'lib/arclight/custom_document.rb'
-
-Metrics/MethodLength:
-  Exclude:
-    - 'lib/arclight/custom_document.rb' # arclight_field_definitions too long
-
-Performance/RegexpMatch:
-  Enabled: false
-
-Rails/OutputSafety:
-  Exclude:
-    - 'app/controllers/concerns/arclight/field_config_helpers.rb' # html_safe needs to be called to mimic BL JOIN behavior
-
-RSpec/ExampleLength:
-  Enabled: false
-
-RSpec/FilePath:
-  Exclude:
-    - 'spec/lib/arclight/viewers/oembed_spec.rb' # Default file path is o_embed, and that looks weird
-
-RSpec/MultipleExpectations:
-  Enabled: false
-
-RSpec/NestedGroups:
-  Max: 4
-
-Style/Documentation:
-  Exclude:
-    - 'spec/**/*'
-    - 'lib/arclight.rb'
 
 Bundler/DuplicatedGem:
   Enabled: false

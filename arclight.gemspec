@@ -23,10 +23,12 @@ Gem::Specification.new do |spec|
   spec.executables   = spec.files.grep(%r{^exe/}) { |f| File.basename(f) }
   spec.require_paths = ['lib']
 
-  spec.add_dependency 'blacklight', '7.0.0.rc1'
-  spec.add_dependency 'blacklight_range_limit', '7.0.0.rc2'
+  spec.add_dependency 'blacklight', '~> 7.0', '>= 7.0.1'
+  spec.add_dependency 'blacklight_range_limit', '~> 7.1'
   spec.add_dependency 'rails', '~> 5.0'
   spec.add_dependency 'solr_ead'
+  spec.add_dependency 'traject', '~> 3.0'
+  spec.add_dependency 'traject_plus'
 
   spec.add_development_dependency 'bundler', '> 1.14'
   spec.add_development_dependency 'capybara'
