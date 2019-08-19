@@ -75,6 +75,11 @@ describe 'EAD 2 traject indexing', type: :feature do
     describe 'components' do
       let(:first_component) { result['components'].first }
 
+      it 'ref' do
+        %w[ref_ssm ref_ssi].each do |field|
+          expect(first_component[field]).to include 'aspace_ref6_lx4'
+        end
+      end
       it 'id' do
         expect(first_component).to include 'id' => ['a0011-xmlaspace_ref6_lx4']
       end

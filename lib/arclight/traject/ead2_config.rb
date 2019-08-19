@@ -88,6 +88,9 @@ compose 'components', ->(record, accumulator, _context) { accumulator.concat rec
   to_field 'ref_ssi' do |record, accumulator|
     accumulator << record.attribute('id')&.value&.strip&.gsub('.', '-')
   end
+  to_field 'ref_ssm' do |_record, accumulator, context|
+    accumulator.concat context.output_hash['ref_ssi']
+  end
 
   to_field 'id' do |_record, accumulator, context|
     accumulator << [
