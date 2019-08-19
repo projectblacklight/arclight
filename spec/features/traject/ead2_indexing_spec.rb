@@ -7,19 +7,25 @@ describe 'EAD 2 traject indexing', type: :feature do
     indexer.map_record(record)
   end
 
-  let(:record) do
-    Traject::NokogiriReader.new(
-      File.read(
-        Arclight::Engine.root.join('spec', 'fixtures', 'ead', 'sul-spec', 'a0011.xml')
-      ).to_s,
-      {}
-    ).to_a.first
-  end
-
   let(:indexer) do
     Traject::Indexer::NokogiriIndexer.new.tap do |i|
       i.load_config_file(Arclight::Engine.root.join('lib/arclight/traject/ead2_config.rb'))
     end
+  end
+  let(:fixture_path) do
+    Arclight::Engine.root.join('spec', 'fixtures', 'ead', 'sul-spec', 'a0011.xml')
+  end
+  let(:fixture_file) do
+    File.read(fixture_path)
+  end
+  let(:nokogiri_reader) do
+    Traject::NokogiriReader.new(fixture_file.to_s, {})
+  end
+  let(:records) do
+    nokogiri_reader.to_a
+  end
+  let(:record) do
+    records.first
   end
 
   before do
@@ -62,7 +68,6 @@ describe 'EAD 2 traject indexing', type: :feature do
       end
       it 'repository' do
         %w[repository_sim repository_ssm].each do |field|
-          # byebug
           expect(result['components'].first[field]).to include 'Stanford University Libraries. Special Collections and University Archives'
         end
       end
@@ -70,17 +75,92 @@ describe 'EAD 2 traject indexing', type: :feature do
   end
 
   describe 'large component list' do
-    let(:record) do
-      Traject::NokogiriReader.new(
-        File.read(
-          Arclight::Engine.root.join('spec', 'fixtures', 'ead', 'sample', 'large-components-list.xml')
-        ).to_s,
-        {}
-      ).to_a.first
+    let(:fixture_path) do
+      Arclight::Engine.root.join('spec', 'fixtures', 'ead', 'sample', 'large-components-list.xml')
     end
 
     it 'selects the components' do
       expect(result['components'].length).to eq 404
+    end
+  end
+
+  describe 'for control access elements' do
+    let(:fixture_path) do
+      Arclight::Engine.root.join('spec', 'fixtures', 'ead', 'nlm', 'alphaomegaalpha.xml')
+    end
+
+    it 'indexes the values as controlled vocabulary terms' do
+      expect(result).to include 'components'
+      expect(result['components']).not_to be_empty
+      first_component = result['components'].first
+
+      expect(first_component).to include 'access_subjects_ssim'
+      expect(first_component['access_subjects_ssim']).to contain_exactly(
+        'Alpha Omega Alpha',
+        'Bierring, Walter L. (Walter Lawrence), 1868-1961',
+        'Fraternizing',
+        'Medicine',
+        'Minutes',
+        'Mindanao Island (Philippines)',
+        'Owner of the reel of yellow nylon rope',
+        'Photographs',
+        'Popes Creek (Md.)',
+        'Records',
+        'Robertson\'s Crab House',
+        'Root, William Webster, 1867-1932',
+        'Societies',
+        'Speeches'
+      )
+
+      expect(first_component).to include 'access_subjects_ssm'
+      expect(first_component['access_subjects_ssm']).to contain_exactly(
+        'Alpha Omega Alpha',
+        'Bierring, Walter L. (Walter Lawrence), 1868-1961',
+        'Fraternizing',
+        'Medicine',
+        'Minutes',
+        'Mindanao Island (Philippines)',
+        'Owner of the reel of yellow nylon rope',
+        'Photographs',
+        'Popes Creek (Md.)',
+        'Records',
+        'Robertson\'s Crab House',
+        'Root, William Webster, 1867-1932',
+        'Societies',
+        'Speeches'
+      )
+    end
+
+    context 'with nested controlaccess elements' do
+      let(:fixture_path) do
+        Arclight::Engine.root.join('spec', 'fixtures', 'ead', 'ncaids544-id-test.xml')
+      end
+
+      it 'indexes the values as controlled vocabulary terms' do
+        expect(result).to include 'components'
+        expect(result['components']).not_to be_empty
+        first_component = result['components'].first
+
+        expect(first_component).to include 'access_subjects_ssim'
+        expect(first_component['access_subjects_ssim']).to contain_exactly(
+          'Acquired Immunodeficiency Syndrome',
+          'African Americans',
+          'Homosexuality',
+          'Human Immunodeficiency Virus',
+          'Public Health',
+          'United States. Presidential Commission on the Human Immunodeficiency Virus  Epidemic'
+        )
+
+        expect(first_component).to include 'access_subjects_ssm'
+        expect(first_component['access_subjects_ssm']).to contain_exactly(
+          'Acquired Immunodeficiency Syndrome',
+          'African Americans',
+          'Homosexuality',
+          'Human Immunodeficiency Virus',
+          'Public Health',
+          'United States. Presidential Commission on the Human Immunodeficiency Virus  Epidemic'
+        )
+      end
     end
   end
 end
