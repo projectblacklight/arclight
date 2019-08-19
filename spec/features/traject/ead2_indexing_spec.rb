@@ -22,7 +22,19 @@ describe 'EAD 2 traject indexing', type: :feature do
     end
   end
 
+  before do
+    ENV['REPOSITORY_ID'] = nil
+  end
+
+  after do # ensure we reset these otherwise other tests will fail
+    ENV['REPOSITORY_ID'] = nil
+  end
+
   describe 'solr fields' do
+    before do
+      ENV['REPOSITORY_ID'] = 'sul-spec'
+    end
+
     it 'id' do
       expect(result['id'].first).to eq 'a0011-xml'
       expect(result['ead_ssi'].first).to eq 'a0011-xml'
@@ -39,9 +51,20 @@ describe 'EAD 2 traject indexing', type: :feature do
       expect(result['unitdate_inclusive_ssim']).to include 'circa 1900-1906'
       expect(result['unitdate_other_ssim']).to be_nil
     end
+    it 'repository' do
+      %w[repository_sim repository_ssm].each do |field|
+        expect(result[field]).to include 'Stanford University Libraries. Special Collections and University Archives'
+      end
+    end
     describe 'components' do
       it 'id' do
         expect(result['components'].first).to include 'id' => ['a0011-xmlaspace_ref6_lx4']
+      end
+      it 'repository' do
+        %w[repository_sim repository_ssm].each do |field|
+          # byebug
+          expect(result['components'].first[field]).to include 'Stanford University Libraries. Special Collections and University Archives'
+        end
       end
     end
   end
