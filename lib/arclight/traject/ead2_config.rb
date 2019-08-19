@@ -81,10 +81,14 @@ end
 # <c> <c01> <c12>
 # rubocop:disable Metrics/BlockLength
 compose 'components', ->(record, accumulator, _context) { accumulator.concat record.xpath('//*[is_component(.)]', NokogiriXpathExtensions.new) } do
-  to_field 'id' do |record, accumulator, context|
+  to_field 'ref_ssi' do |record, accumulator|
+    accumulator << record.attribute('id')&.value&.strip&.gsub('.', '-')
+  end
+
+  to_field 'id' do |_record, accumulator, context|
     accumulator << [
       context.clipboard[:parent].output_hash['id'],
-      record.attribute('id')&.value&.strip&.gsub('.', '-')
+      context.output_hash['ref_ssi']
     ].join('')
   end
 
@@ -130,7 +134,17 @@ compose 'components', ->(record, accumulator, _context) { accumulator.concat rec
     accumulator << context.output_hash['parent_ssm'].last
   end
 
-  # to_field 'parent_unittitles_ssm'
+  to_field 'parent_unittitles_ssm' do |_record, accumulator, context|
+    ## Top level document
+    accumulator.concat context.clipboard[:parent].output_hash['normalized_title_ssm']
+    ## Other components
+    context.output_hash['parent_ssm']&.drop(1)&.each do |id|
+      accumulator.concat Array
+        .wrap(context.clipboard[:parent].output_hash['components'])
+        .find { |c| c['ref_ssi'] == [id] }&.[]('normalized_title_ssm')
+    end
+  end
+
   to_field 'unitid_ssm', extract_xpath('./xmlns:did/xmlns:unitid')
   to_field 'repository_ssm' do |_record, accumulator, context|
     accumulator << context.clipboard[:parent].clipboard[:repository]
