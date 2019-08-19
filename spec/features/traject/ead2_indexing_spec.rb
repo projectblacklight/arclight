@@ -73,12 +73,14 @@ describe 'EAD 2 traject indexing', type: :feature do
     end
 
     describe 'components' do
+      let(:first_component) { result['components'].first }
+
       it 'id' do
-        expect(result['components'].first).to include 'id' => ['a0011-xmlaspace_ref6_lx4']
+        expect(first_component).to include 'id' => ['a0011-xmlaspace_ref6_lx4']
       end
       it 'repository' do
         %w[repository_sim repository_ssm].each do |field|
-          expect(result['components'].first[field]).to include 'Stanford University Libraries. Special Collections and University Archives'
+          expect(first_component[field]).to include 'Stanford University Libraries. Special Collections and University Archives'
         end
       end
       it 'geogname' do
@@ -96,6 +98,14 @@ describe 'EAD 2 traject indexing', type: :feature do
 
     it 'selects the components' do
       expect(result['components'].length).to eq 404
+    end
+
+    context 'when nested component' do
+      let(:nested_component) { result['components'].find { |c| c['id'] == ['lc0100aspace_32ad9025a3a286358baeae91b5d7696e'] } }
+
+      it 'correctly determines component level' do
+        expect(nested_component['component_level_isim']).to eq [2]
+      end
     end
   end
 
