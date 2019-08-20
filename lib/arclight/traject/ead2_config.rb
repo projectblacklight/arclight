@@ -76,6 +76,10 @@ to_field 'repository_sim' do |_record, accumulator, context|
   accumulator << context.clipboard[:repository]
 end
 
+to_field 'geogname_ssm', extract_xpath('//xmlns:archdesc/xmlns:controlaccess/xmlns:geogname')
+
+to_field 'geogname_sim', extract_xpath('//xmlns:archdesc/xmlns:controlaccess/xmlns:geogname')
+
 # Each component child document
 # <c> <c01> <c12>
 # rubocop:disable Metrics/BlockLength
@@ -179,8 +183,8 @@ compose 'components', ->(record, accumulator, _context) { accumulator.concat rec
   end
 
   # to_field 'names_ssim'
-  # to_field 'geogname_sim'
-  # to_field 'geogname_ssm'
+  to_field 'geogname_sim', extract_xpath('./xmlns:controlaccess/xmlns:geogname')
+  to_field 'geogname_ssm', extract_xpath('./xmlns:controlaccess/xmlns:geogname')
   # to_field 'places_ssim'
 
   # Indexes the controlled terms for archival description into the access_subject field
