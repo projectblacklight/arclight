@@ -66,6 +66,12 @@ describe 'EAD 2 traject indexing', type: :feature do
         expect(result[field]).to include 'Stanford University Libraries. Special Collections and University Archives'
       end
     end
+    it 'geogname' do
+      %w[geogname_sim geogname_ssm].each do |field|
+        expect(result[field]).to include 'Yosemite National Park (Calif.)'
+      end
+    end
+
     describe 'components' do
       it 'id' do
         expect(result['components'].first).to include 'id' => ['a0011-xmlaspace_ref6_lx4']
@@ -73,6 +79,11 @@ describe 'EAD 2 traject indexing', type: :feature do
       it 'repository' do
         %w[repository_sim repository_ssm].each do |field|
           expect(result['components'].first[field]).to include 'Stanford University Libraries. Special Collections and University Archives'
+        end
+      end
+      it 'geogname' do
+        %w[geogname_sim geogname_ssm].each do |field|
+          expect(result['components'].first[field]).to be_nil
         end
       end
     end
@@ -133,6 +144,15 @@ describe 'EAD 2 traject indexing', type: :feature do
         'Societies',
         'Speeches'
       )
+    end
+
+    it 'indexes geognames' do
+      component = result['components'].find { |d| d['id'] == ['aoa271aspace_843e8f9f22bac69872d0802d6fffbb04'] }
+      expect(component).to include 'geogname_sim'
+      expect(component['geogname_sim']).to include('Popes Creek (Md.)')
+
+      expect(component).to include 'geogname_ssm'
+      expect(component['geogname_ssm']).to include('Popes Creek (Md.)')
     end
 
     context 'with nested controlaccess elements' do
