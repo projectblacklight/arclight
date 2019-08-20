@@ -1,15 +1,31 @@
 # frozen_string_literal: true
 
+# rubocop:disable ModuleLength
+
 ##
 # Generic Helpers used in Arclight
 module ArclightHelper
   ##
   # @param [SolrDocument]
-  def parents_to_links(document)
-    safe_join(Arclight::Parents.from_solr_document(document).as_parents.map do |parent|
-      link_to parent.label, solr_document_path(parent.global_id)
-    end, t('arclight.breadcrumb_separator'))
+  # rubocop:disable MethodLength
+  # rubocop:disable AbcSize
+  def parents_to_links(document, final_title = '')
+    links = ''
+    levelno = 1
+    Arclight::Parents.from_solr_document(document).as_parents.map do |parent|
+      links += "<div class='bc_line, t1'>" + t('arclight.breadcrumb_separator')
+      links += ERB::Util.unwrapped_html_escape(link_to(parent.label, solr_document_path(parent.global_id)))
+      levelno += 1
+    end
+    unless final_title.empty?
+      links += "<div class='bc_line, t2'>" + t('arclight.breadcrumb_separator') + ERB::Util.unwrapped_html_escape(final_title)
+      levelno += 1
+    end
+    levelno.times { links += '</div>' }
+    links.html_safe
   end
+  # rubocop:enable MethodLength
+  # rubocop:enable AbcSize
 
   def repository_collections_path(repository)
     search_action_url(
@@ -171,3 +187,4 @@ module ArclightHelper
     send(:"render_document_#{config_field}_label", document, field: field)
   end
 end
+# rubocop:enable ModuleLength

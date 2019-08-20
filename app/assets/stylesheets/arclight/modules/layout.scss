@@ -2,6 +2,10 @@
 .al-show-breadcrumb {
   font-size: $font-size-sm;
   margin-bottom: $spacer;
+  .bc_line {
+      position: relative;
+      left: 10px;
+    }
 }
 
 // Collapse arrow indicators
