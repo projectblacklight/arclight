@@ -182,8 +182,33 @@ compose 'components', ->(record, accumulator, _context) { accumulator.concat rec
   # to_field 'geogname_sim'
   # to_field 'geogname_ssm'
   # to_field 'places_ssim'
-  # to_field 'access_subjects_ssim'
-  # to_field 'access_subjects_ssm'
+
+  # Indexes the controlled terms for archival description into the access_subject field
+  # Please see https://www.loc.gov/ead/tglib/elements/controlaccess.html
+  to_field 'access_subjects_ssim', extract_xpath('//xmlns:controlaccess/xmlns:corpname')
+  to_field 'access_subjects_ssim', extract_xpath('//xmlns:controlaccess/xmlns:famname')
+  to_field 'access_subjects_ssim', extract_xpath('//xmlns:controlaccess/xmlns:function')
+  to_field 'access_subjects_ssim', extract_xpath('//xmlns:controlaccess/xmlns:genreform')
+  to_field 'access_subjects_ssim', extract_xpath('//xmlns:controlaccess/xmlns:geogname')
+  to_field 'access_subjects_ssim', extract_xpath('//xmlns:controlaccess/xmlns:name')
+  to_field 'access_subjects_ssim', extract_xpath('//xmlns:controlaccess/xmlns:note')
+  to_field 'access_subjects_ssim', extract_xpath('//xmlns:controlaccess/xmlns:occupation')
+  to_field 'access_subjects_ssim', extract_xpath('//xmlns:controlaccess/xmlns:persname')
+  to_field 'access_subjects_ssim', extract_xpath('//xmlns:controlaccess/xmlns:subject')
+  to_field 'access_subjects_ssim', extract_xpath('//xmlns:controlaccess/xmlns:title')
+
+  to_field 'access_subjects_ssm', extract_xpath('//xmlns:controlaccess/xmlns:corpname')
+  to_field 'access_subjects_ssm', extract_xpath('//xmlns:controlaccess/xmlns:famname')
+  to_field 'access_subjects_ssm', extract_xpath('//xmlns:controlaccess/xmlns:function')
+  to_field 'access_subjects_ssm', extract_xpath('//xmlns:controlaccess/xmlns:genreform')
+  to_field 'access_subjects_ssm', extract_xpath('//xmlns:controlaccess/xmlns:geogname')
+  to_field 'access_subjects_ssm', extract_xpath('//xmlns:controlaccess/xmlns:name')
+  to_field 'access_subjects_ssm', extract_xpath('//xmlns:controlaccess/xmlns:note')
+  to_field 'access_subjects_ssm', extract_xpath('//xmlns:controlaccess/xmlns:occupation')
+  to_field 'access_subjects_ssm', extract_xpath('//xmlns:controlaccess/xmlns:persname')
+  to_field 'access_subjects_ssm', extract_xpath('//xmlns:controlaccess/xmlns:subject')
+  to_field 'access_subjects_ssm', extract_xpath('//xmlns:controlaccess/xmlns:title')
+
   to_field 'language_ssm', extract_xpath('xmlns:did/xmlns:langmaterial')
   to_field 'accessrestrict_ssm', extract_xpath('xmlns:accessrestrict/*[local-name()!="head"]')
   to_field 'prefercite_ssm', extract_xpath('xmlns:prefercite/*[local-name()!="head"]')
