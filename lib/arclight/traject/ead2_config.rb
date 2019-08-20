@@ -104,6 +104,21 @@ end
 
 to_field 'places_ssim', extract_xpath('//xmlns:archdesc/xmlns:controlaccess/xmlns:geogname')
 
+
+# Indexes the controlled terms for archival description into the access_subject field
+# Please see https://www.loc.gov/ead/tglib/elements/controlaccess.html
+to_field 'access_subjects_ssim', extract_xpath('//xmlns:archdesc/xmlns:controlaccess', to_text: false) do |_record, accumulator|
+  accumulator.map! do |element|
+    %w[corpname famname function genreform geogname name note occupation persname subject title].map do |selector|
+      element.xpath(".//xmlns:#{selector}").map(&:text)
+    end
+  end.flatten!
+end
+
+to_field 'access_subjects_ssm' do |_record, accumulator, context|
+  accumulator.concat Array.wrap(context.output_hash['access_subjects_ssim'])
+end
+
 # Each component child document
 # <c> <c01> <c12>
 # rubocop:disable Metrics/BlockLength
@@ -246,29 +261,17 @@ compose 'components', ->(record, accumulator, _context) { accumulator.concat rec
 
   # Indexes the controlled terms for archival description into the access_subject field
   # Please see https://www.loc.gov/ead/tglib/elements/controlaccess.html
-  to_field 'access_subjects_ssim', extract_xpath('//xmlns:controlaccess/xmlns:corpname')
-  to_field 'access_subjects_ssim', extract_xpath('//xmlns:controlaccess/xmlns:famname')
-  to_field 'access_subjects_ssim', extract_xpath('//xmlns:controlaccess/xmlns:function')
-  to_field 'access_subjects_ssim', extract_xpath('//xmlns:controlaccess/xmlns:genreform')
-  to_field 'access_subjects_ssim', extract_xpath('//xmlns:controlaccess/xmlns:geogname')
-  to_field 'access_subjects_ssim', extract_xpath('//xmlns:controlaccess/xmlns:name')
-  to_field 'access_subjects_ssim', extract_xpath('//xmlns:controlaccess/xmlns:note')
-  to_field 'access_subjects_ssim', extract_xpath('//xmlns:controlaccess/xmlns:occupation')
-  to_field 'access_subjects_ssim', extract_xpath('//xmlns:controlaccess/xmlns:persname')
-  to_field 'access_subjects_ssim', extract_xpath('//xmlns:controlaccess/xmlns:subject')
-  to_field 'access_subjects_ssim', extract_xpath('//xmlns:controlaccess/xmlns:title')
+  to_field 'access_subjects_ssim', extract_xpath('./xmlns:controlaccess', to_text: false) do |_record, accumulator|
+    accumulator.map! do |element|
+      %w[corpname famname function genreform geogname name note occupation persname subject title].map do |selector|
+        element.xpath(".//xmlns:#{selector}").map(&:text)
+      end
+    end.flatten!
+  end
 
-  to_field 'access_subjects_ssm', extract_xpath('//xmlns:controlaccess/xmlns:corpname')
-  to_field 'access_subjects_ssm', extract_xpath('//xmlns:controlaccess/xmlns:famname')
-  to_field 'access_subjects_ssm', extract_xpath('//xmlns:controlaccess/xmlns:function')
-  to_field 'access_subjects_ssm', extract_xpath('//xmlns:controlaccess/xmlns:genreform')
-  to_field 'access_subjects_ssm', extract_xpath('//xmlns:controlaccess/xmlns:geogname')
-  to_field 'access_subjects_ssm', extract_xpath('//xmlns:controlaccess/xmlns:name')
-  to_field 'access_subjects_ssm', extract_xpath('//xmlns:controlaccess/xmlns:note')
-  to_field 'access_subjects_ssm', extract_xpath('//xmlns:controlaccess/xmlns:occupation')
-  to_field 'access_subjects_ssm', extract_xpath('//xmlns:controlaccess/xmlns:persname')
-  to_field 'access_subjects_ssm', extract_xpath('//xmlns:controlaccess/xmlns:subject')
-  to_field 'access_subjects_ssm', extract_xpath('//xmlns:controlaccess/xmlns:title')
+  to_field 'access_subjects_ssm' do |_record, accumulator, context|
+    accumulator.concat Array.wrap(context.output_hash['access_subjects_ssim'])
+  end
 
   to_field 'language_ssm', extract_xpath('xmlns:did/xmlns:langmaterial')
   to_field 'accessrestrict_ssm', extract_xpath('xmlns:accessrestrict/*[local-name()!="head"]')
