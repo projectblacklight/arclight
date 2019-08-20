@@ -159,13 +159,9 @@ describe 'EAD 2 traject indexing', type: :feature do
       %w[access_subjects_ssm access_subjects_ssim].each do |field|
         expect(result).to include field
         expect(result[field]).to contain_exactly(
-          'Alpha Omega Alpha',
-          'Bierring, Walter L. (Walter Lawrence), 1868-1961',
           'Fraternizing',
           'Medicine',
-          'Mindanao Island (Philippines)',
           'Photographs',
-          'Root, William Webster, 1867-1932',
           'Societies'
         )
       end
@@ -194,25 +190,16 @@ describe 'EAD 2 traject indexing', type: :feature do
       end
 
       it 'indexes the values as controlled vocabulary terms' do
-        expect(result).to include 'access_subjects_ssim'
-        expect(result['access_subjects_ssim']).to contain_exactly(
-          'Acquired Immunodeficiency Syndrome',
-          'African Americans',
-          'Homosexuality',
-          'Human Immunodeficiency Virus',
-          'Public Health',
-          'United States. Presidential Commission on the Human Immunodeficiency Virus  Epidemic'
-        )
-
-        expect(result).to include 'access_subjects_ssm'
-        expect(result['access_subjects_ssm']).to contain_exactly(
-          'Acquired Immunodeficiency Syndrome',
-          'African Americans',
-          'Homosexuality',
-          'Human Immunodeficiency Virus',
-          'Public Health',
-          'United States. Presidential Commission on the Human Immunodeficiency Virus  Epidemic'
-        )
+        %w[access_subjects_ssm access_subjects_ssim].each do |field|
+          expect(result).to include field
+          expect(result[field]).to contain_exactly(
+            'Acquired Immunodeficiency Syndrome',
+            'African Americans',
+            'Homosexuality',
+            'Human Immunodeficiency Virus',
+            'Public Health'
+          )
+        end
       end
     end
   end
