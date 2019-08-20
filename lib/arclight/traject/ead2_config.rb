@@ -100,6 +100,8 @@ end
 
 to_field 'places_ssim', extract_xpath('//xmlns:archdesc/xmlns:controlaccess/xmlns:geogname')
 
+to_field 'access_restrict_ssm', extract_xpath('//xmlns:archdesc/xmlns:accessrestrict/xmlns:p')
+
 # Each component child document
 # <c> <c01> <c12>
 # rubocop:disable Metrics/BlockLength
@@ -216,7 +218,11 @@ compose 'components', ->(record, accumulator, _context) { accumulator.concat rec
     accumulator << record.attribute('level')
   end
   to_field 'userestrict_ssm', extract_xpath('xmlns:userestrict/xmlns:p')
-  # to_field 'parent_access_restrict_ssm'
+  
+  to_field 'parent_access_restrict_ssm' do |record, accumulator, context|
+    accumulator << context.clipboard[:parent]&.output_hash['access_restrict_ssm']&.first
+  end
+
   # to_field 'parent_access_terms_ssm'
   to_field 'digital_objects_ssm', extract_xpath('./xmlns:dao') do |record, accumulator|
     accumulator.concat(record.xpath('./xmlns:dao', xmlns: 'urn:isbn:1-931666-22-9').map do |dao|

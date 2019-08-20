@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require 'spec_helper'
+require 'byebug'
 
 describe 'EAD 2 traject indexing', type: :feature do
   subject(:result) do
@@ -130,6 +131,29 @@ describe 'EAD 2 traject indexing', type: :feature do
 
       it 'parent_unittitles' do
         expect(nested_component['parent_unittitles_ssm']).to eq ['Large collection sample, 1843-1872', 'File 1']
+      end
+    end
+  end
+
+  describe 'alphaomegaalpha list' do
+    let(:record) do
+      Traject::NokogiriReader.new(
+        File.read(
+          Arclight::Engine.root.join('spec', 'fixtures', 'ead', 'nlm', 'alphaomegaalpha.xml')
+        ).to_s,
+        {}
+      ).to_a.first
+    end
+
+    it 'selects the components' do
+      expect(result['components'].length).to eq 37
+    end
+
+    context 'when nested component' do
+      let(:nested_component) { result['components'].find { |c| c['ref_ssi'] == ['aspace_72f14d6c32e142baa3eeafdb6e4d69be'] } }
+      it 'parent' do
+        expect(nested_component['parent_ssm']).to eq %w[aoa271]
+        expect(nested_component['parent_access_restrict_ssm']).to eq ['No restrictions on access.']
       end
     end
   end
