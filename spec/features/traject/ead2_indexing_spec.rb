@@ -150,10 +150,19 @@ describe 'EAD 2 traject indexing', type: :feature do
     end
 
     context 'when nested component' do
-      let(:nested_component) { result['components'].find { |c| c['ref_ssi'] == ['aspace_72f14d6c32e142baa3eeafdb6e4d69be'] } }
-      it 'parent' do
-        expect(nested_component['parent_ssm']).to eq %w[aoa271]
-        expect(nested_component['parent_access_restrict_ssm']).to eq ['No restrictions on access.']
+      let(:access_restrict_component) { result['components'].find { |c| c['ref_ssi'] == ['aspace_72f14d6c32e142baa3eeafdb6e4d69be'] } }
+      let(:access_terms_component) { result['components'].find { |c| c['ref_ssi'] == ['aspace_563a320bb37d24a9e1e6f7bf95b52671'] } }
+
+      it 'parent access restrict' do
+        expect(access_restrict_component['parent_ssm']).to eq %w[aoa271]
+        expect(access_restrict_component['parent_access_restrict_ssm']).to eq ['No restrictions on access.']
+
+      end
+
+      it 'parent access terms' do
+        pp access_terms_component
+        expect(access_terms_component['parent_ssm']).to eq %w[aoa271]
+        expect(access_terms_component['parent_access_terms_ssm']).to eq ["Copyright was transferred to the public domain. Contact the Reference Staff for details\n        regarding rights."]
       end
     end
   end
