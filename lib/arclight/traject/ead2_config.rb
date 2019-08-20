@@ -98,6 +98,8 @@ to_field 'creators_ssim' do |_record, accumulator, context|
   accumulator.concat context.output_hash['creator_famname_ssm'] if context.output_hash['creator_famname_ssm']
 end
 
+to_field 'places_ssim', extract_xpath('//xmlns:archdesc/xmlns:controlaccess/xmlns:geogname')
+
 # Each component child document
 # <c> <c01> <c12>
 # rubocop:disable Metrics/BlockLength
@@ -236,7 +238,9 @@ compose 'components', ->(record, accumulator, _context) { accumulator.concat rec
   # to_field 'names_ssim'
   # to_field 'geogname_sim'
   # to_field 'geogname_ssm'
-  # to_field 'places_ssim'
+
+  to_field 'places_ssim', extract_xpath('xmlns:controlaccess/xmlns:geogname')
+
   # to_field 'access_subjects_ssim'
   # to_field 'access_subjects_ssm'
   to_field 'language_ssm', extract_xpath('xmlns:did/xmlns:langmaterial')
