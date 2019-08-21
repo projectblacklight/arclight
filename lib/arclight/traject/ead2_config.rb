@@ -117,6 +117,10 @@ to_field 'access_subjects_ssm' do |_record, accumulator, context|
   accumulator.concat Array.wrap(context.output_hash['access_subjects_ssim'])
 end
 
+to_field 'has_online_content_ssim', extract_xpath('.//xmlns:dao') do |_record, accumulator|
+  accumulator.replace([accumulator.any?])
+end
+
 # Each component child document
 # <c> <c01> <c12>
 # rubocop:disable Metrics/BlockLength
@@ -214,7 +218,7 @@ compose 'components', ->(record, accumulator, _context) { accumulator.concat rec
   to_field 'collection_creator_ssm' do |_record, accumulator, context|
     accumulator.concat Array.wrap(context.clipboard[:parent].output_hash['creator_ssm'])
   end
-  to_field 'has_online_content_ssim', extract_xpath('./xmlns:dao[@href]') do |_record, accumulator|
+  to_field 'has_online_content_ssim', extract_xpath('.//xmlns:dao') do |_record, accumulator|
     accumulator.replace([accumulator.any?])
   end
   to_field 'child_component_count_isim', extract_xpath('xmlns:c') do |_record, accumulator|
@@ -236,7 +240,7 @@ compose 'components', ->(record, accumulator, _context) { accumulator.concat rec
   # to_field 'parent_access_restrict_ssm'
   # to_field 'parent_access_terms_ssm'
   to_field 'digital_objects_ssm', extract_xpath('./xmlns:dao') do |record, accumulator|
-    accumulator.concat(record.xpath('./xmlns:dao', xmlns: 'urn:isbn:1-931666-22-9').map do |dao|
+    accumulator.concat(record.xpath('.//xmlns:dao', xmlns: 'urn:isbn:1-931666-22-9').map do |dao|
       label = dao.attributes['title']&.value ||
         dao.xpath('xmlns:daodesc/xmlns:p', xmlns: 'urn:isbn:1-931666-22-9')&.text
       href = (dao.attributes['href'] || dao.attributes['xlink:href'])&.value

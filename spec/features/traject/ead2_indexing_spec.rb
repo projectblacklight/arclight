@@ -87,6 +87,11 @@ describe 'EAD 2 traject indexing', type: :feature do
       expect(result['places_ssim']).to eq ['Yosemite National Park (Calif.)']
     end
 
+    it 'has_online_content' do
+      pp result
+      expect(result['has_online_content_ssim']).to eq [true]
+    end
+
     describe 'components' do
       let(:first_component) { result['components'].first }
 
@@ -102,6 +107,16 @@ describe 'EAD 2 traject indexing', type: :feature do
         %w[repository_sim repository_ssm].each do |field|
           expect(first_component[field]).to include 'Stanford University Libraries. Special Collections and University Archives'
         end
+      end
+
+      it 'has_online_content' do
+        expect(first_component['has_online_content_ssim']).to eq([true])
+      end
+
+      it 'digital_objects' do
+        # rubocop:disable Style/StringLiterals
+        expect(first_component['digital_objects_ssm']).to eq(["{\"label\":\"Photograph Album\",\"href\":\"http://purl.stanford.edu/kc844kt2526\"}"])
+        # rubocop:enable Style/StringLiterals
       end
 
       it 'geogname' do
