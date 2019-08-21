@@ -265,6 +265,8 @@ compose 'components', ->(record, accumulator, _context) { accumulator.concat rec
   to_field 'geogname_ssm', extract_xpath('./xmlns:controlaccess/xmlns:geogname')
   to_field 'places_ssim', extract_xpath('xmlns:controlaccess/xmlns:geogname')
 
+  # Indexes the controlled terms for archival description into the access_subject field
+  # Please see https://www.loc.gov/ead/tglib/elements/controlaccess.html
   # Indexes only specified controlled terms for archival description into the access_subject field
   to_field 'access_subjects_ssim', extract_xpath('./xmlns:controlaccess', to_text: false) do |_record, accumulator|
     accumulator.map! do |element|
@@ -275,7 +277,7 @@ compose 'components', ->(record, accumulator, _context) { accumulator.concat rec
   end
 
   to_field 'access_subjects_ssm' do |_record, accumulator, context|
-    accumulator.concat Array.wrap(context.output_hash['access_subjects_ssim'])
+    accumulator.concat(context.output_hash.fetch('access_subjects_ssim', []))
   end
 
   # Indexes the acquisition group information into the notes field
