@@ -83,7 +83,6 @@ to_field 'geogname_ssm', extract_xpath('//xmlns:archdesc/xmlns:controlaccess/xml
 
 to_field 'geogname_sim', extract_xpath('//xmlns:archdesc/xmlns:controlaccess/xmlns:geogname')
 
-
 to_field 'creator_ssm', extract_xpath("//xmlns:archdesc/xmlns:did/xmlns:origination[@label='creator']")
 to_field 'creator_ssim', extract_xpath("//xmlns:archdesc/xmlns:did/xmlns:origination[@label='creator']")
 to_field 'creator_sort' do |record, accumulator|
@@ -293,7 +292,7 @@ end
 ##
 # Used for evaluating xpath components to find
 class NokogiriXpathExtensions
-  # rubocop:disable Naming/PredicateName, Style/FormatString
+  # rubocop:disable Style/PredicateName, Style/FormatString
   def is_component(node_set)
     node_set.find_all do |node|
       component_elements = (1..12).map { |i| "c#{'%02d' % i}" }
@@ -301,5 +300,5 @@ class NokogiriXpathExtensions
       component_elements.include? node.name
     end
   end
-  # rubocop:enable Naming/PredicateName, Style/FormatString
+  # rubocop:enable Style/PredicateName, Style/FormatString
 end
