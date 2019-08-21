@@ -124,7 +124,7 @@
         // Add a highlight class for the article matching the highlight id
         if (that.data.arclight.highlightId) {
           // This should be removed from the global scope
-          newDocs = convertDocsForContext(that.data.arclight.highlightId, that.$doc);
+          newDocs = convertDocsForContext(that.data.arclight.highlightId, this.$doc);
         }
 
         // Ensure that the pagination elements are added to the AJAX-loaded
