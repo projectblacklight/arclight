@@ -114,7 +114,9 @@ describe 'EAD 2 traject indexing', type: :feature do
       end
 
       it 'digital_objects' do
+        # rubocop:disable Style/StringLiterals
         expect(first_component['digital_objects_ssm']).to eq(["{\"label\":\"Photograph Album\",\"href\":\"http://purl.stanford.edu/kc844kt2526\"}"])
+        # rubocop:enable Style/StringLiterals
       end
 
       it 'geogname' do
