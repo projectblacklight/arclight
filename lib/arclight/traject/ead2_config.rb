@@ -278,6 +278,14 @@ compose 'components', ->(record, accumulator, _context) { accumulator.concat rec
     accumulator.concat Array.wrap(context.output_hash['access_subjects_ssim'])
   end
 
+  # Indexes the acquisition group information into the notes field
+  # Please see https://www.loc.gov/ead/tglib/elements/acqinfo.html
+  to_field 'acqinfo_ssim', extract_xpath('//xmlns:acqinfo/xmlns:note')
+  to_field 'acqinfo_ssim', extract_xpath('//xmlns:acqinfo/xmlns:p')
+  to_field 'acqinfo_ssm' do |_record, accumulator, context|
+    accumulator.concat(context.output_hash.fetch('acqinfo_ssim', []))
+  end
+
   to_field 'language_ssm', extract_xpath('xmlns:did/xmlns:langmaterial')
   to_field 'accessrestrict_ssm', extract_xpath('xmlns:accessrestrict/*[local-name()!="head"]')
   to_field 'prefercite_ssm', extract_xpath('xmlns:prefercite/*[local-name()!="head"]')

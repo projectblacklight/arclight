@@ -230,5 +230,27 @@ describe 'EAD 2 traject indexing', type: :feature do
         end
       end
     end
+
+    describe 'for documents with <acqinfo> elements' do
+      let(:fixture_path) do
+        Arclight::Engine.root.join('spec', 'fixtures', 'ead', 'nlm', 'alphaomegaalpha.xml')
+      end
+
+      it 'indexes the values as controlled vocabulary terms' do
+        expect(result).to include 'components'
+        expect(result['components']).not_to be_empty
+        first_component = result['components'].first
+
+        expect(first_component).to include 'acqinfo_ssim'
+        expect(first_component['acqinfo_ssim']).to contain_exactly(
+          'Donated by Alpha Omega Alpha.'
+        )
+
+        expect(first_component).to include 'acqinfo_ssm'
+        expect(first_component['acqinfo_ssm']).to contain_exactly(
+          'Donated by Alpha Omega Alpha.'
+        )
+      end
+    end
   end
 end
