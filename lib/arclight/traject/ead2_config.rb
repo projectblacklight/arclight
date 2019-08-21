@@ -123,7 +123,6 @@ end
 
 # Each component child document
 # <c> <c01> <c12>
-# rubocop:disable Metrics/BlockLength
 compose 'components', ->(record, accumulator, _context) { accumulator.concat record.xpath('//*[is_component(.)]', NokogiriXpathExtensions.new) } do
   to_field 'ref_ssi' do |record, accumulator|
     accumulator << record.attribute('id')&.value&.strip&.gsub('.', '-')
@@ -291,7 +290,6 @@ compose 'components', ->(record, accumulator, _context) { accumulator.concat rec
   to_field 'originalsloc_ssm', extract_xpath('xmlns:originalsloc/*[local-name()!="head"]')
   # to_field 'names_coll_ssim'
 end
-# rubocop:enable Metrics/BlockLength
 
 each_record do |_record, context|
   context.output_hash['components'] &&= context.output_hash['components'].select { |c| c.keys.any? }
@@ -300,7 +298,7 @@ end
 ##
 # Used for evaluating xpath components to find
 class NokogiriXpathExtensions
-  # rubocop:disable Style/PredicateName, Style/FormatString
+  # rubocop:disable Naming/PredicateName, Style/FormatString
   def is_component(node_set)
     node_set.find_all do |node|
       component_elements = (1..12).map { |i| "c#{'%02d' % i}" }
@@ -308,5 +306,5 @@ class NokogiriXpathExtensions
       component_elements.include? node.name
     end
   end
-  # rubocop:enable Style/PredicateName, Style/FormatString
+  # rubocop:enable Naming/PredicateName, Style/FormatString
 end
