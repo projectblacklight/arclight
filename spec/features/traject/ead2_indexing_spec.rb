@@ -66,24 +66,58 @@ describe 'EAD 2 traject indexing', type: :feature do
         expect(result[field]).to include 'Stanford University Libraries. Special Collections and University Archives'
       end
     end
+
     it 'geogname' do
       %w[geogname_sim geogname_ssm].each do |field|
         expect(result[field]).to include 'Yosemite National Park (Calif.)'
       end
     end
 
+    it 'unitid' do
+      expect(result['unitid_ssm']).to eq ['A0011']
+    end
+
+    it 'creator' do
+      %w[creator_ssm creator_ssim creator_corpname_ssm creator_corpname_ssim creators_ssim creator_sort].each do |field|
+        expect(result[field]).to eq ['Stanford University']
+      end
+    end
+
+    it 'places' do
+      expect(result['places_ssim']).to eq ['Yosemite National Park (Calif.)']
+    end
+
     describe 'components' do
+      let(:first_component) { result['components'].first }
+
+      it 'ref' do
+        %w[ref_ssm ref_ssi].each do |field|
+          expect(first_component[field]).to include 'aspace_ref6_lx4'
+        end
+      end
       it 'id' do
-        expect(result['components'].first).to include 'id' => ['a0011-xmlaspace_ref6_lx4']
+        expect(first_component).to include 'id' => ['a0011-xmlaspace_ref6_lx4']
       end
       it 'repository' do
         %w[repository_sim repository_ssm].each do |field|
-          expect(result['components'].first[field]).to include 'Stanford University Libraries. Special Collections and University Archives'
+          expect(first_component[field]).to include 'Stanford University Libraries. Special Collections and University Archives'
         end
       end
+
       it 'geogname' do
         %w[geogname_sim geogname_ssm].each do |field|
           expect(result['components'].first[field]).to be_nil
+        end
+      end
+
+      it 'collection has normalized title' do
+        %w[collection_sim collection_ssm].each do |field|
+          expect(first_component[field]).to include 'Stanford University student life photograph album, circa 1900-1906'
+        end
+      end
+      it 'creator' do
+        %w[collection_creator_ssm].each do |field|
+          expect(first_component[field]).to eq ['Stanford University']
         end
       end
     end
@@ -96,6 +130,23 @@ describe 'EAD 2 traject indexing', type: :feature do
 
     it 'selects the components' do
       expect(result['components'].length).to eq 404
+    end
+
+    context 'when nested component' do
+      let(:nested_component) { result['components'].find { |c| c['id'] == ['lc0100aspace_32ad9025a3a286358baeae91b5d7696e'] } }
+
+      it 'correctly determines component level' do
+        expect(nested_component['component_level_isim']).to eq [2]
+      end
+
+      it 'parent' do
+        expect(nested_component['parent_ssm']).to eq %w[lc0100 aspace_327a75c226d44aa1a769edb4d2f13c6e]
+        expect(nested_component['parent_ssi']).to eq ['aspace_327a75c226d44aa1a769edb4d2f13c6e']
+      end
+
+      it 'parent_unittitles' do
+        expect(nested_component['parent_unittitles_ssm']).to eq ['Large collection sample, 1843-1872', 'File 1']
+      end
     end
   end
 
