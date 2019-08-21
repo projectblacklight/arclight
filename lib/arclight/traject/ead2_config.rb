@@ -219,7 +219,6 @@ compose 'components', ->(record, accumulator, _context) { accumulator.concat rec
   to_field 'level_sim' do |record, accumulator|
     accumulator << record.attribute('level')
   end
-  to_field 'userestrict_ssm', extract_xpath('xmlns:userestrict/xmlns:p')
 
   to_field 'accessrestrict_ssm', extract_xpath('./xmlns:accessrestrict/xmlns:p')
   
@@ -240,9 +239,9 @@ compose 'components', ->(record, accumulator, _context) { accumulator.concat rec
     accumulator.concat Array.wrap(context.clipboard[:parent]&.output_hash['accessrestrict_ssm'])
   end
 
-  to_field 'parent_access_terms_ssm' do |record, accumulator, context|
-    accumulator << context.clipboard[:parent]&.output_hash['access_terms_ssm']&.first
-  end
+  to_field 'userestrict_ssm', extract_xpath('xmlns:userestrict/xmlns:p')
+
+  to_field 'parent_access_terms_ssm', extract_xpath('xmlns:userestrict/xmlns:p')
 
   to_field 'digital_objects_ssm', extract_xpath('./xmlns:dao') do |record, accumulator|
     accumulator.concat(record.xpath('./xmlns:dao', xmlns: 'urn:isbn:1-931666-22-9').map do |dao|
