@@ -214,7 +214,7 @@ describe 'EAD 2 traject indexing', type: :feature do
 
     context 'with nested controlaccess elements' do
       let(:fixture_path) do
-        Arclight::Engine.root.join('spec', 'fixtures', 'ead', 'ncaids544-id-test.xml')
+        Arclight::Engine.root.join('spec', 'fixtures', 'ead', 'nlm', 'ncaids544-id-test.xml')
       end
 
       it 'indexes the values as controlled vocabulary terms' do
