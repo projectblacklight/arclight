@@ -156,45 +156,23 @@ describe 'EAD 2 traject indexing', type: :feature do
     end
 
     it 'indexes the values as controlled vocabulary terms' do
-      expect(result).to include 'components'
-      expect(result['components']).not_to be_empty
-      first_component = result['components'].first
+      %w[access_subjects_ssm access_subjects_ssim].each do |field|
+        expect(result).to include field
+        expect(result[field]).to contain_exactly(
+          'Fraternizing',
+          'Medicine',
+          'Photographs',
+          'Societies'
+        )
+      end
+    end
 
-      expect(first_component).to include 'access_subjects_ssim'
-      expect(first_component['access_subjects_ssim']).to contain_exactly(
-        'Alpha Omega Alpha',
-        'Bierring, Walter L. (Walter Lawrence), 1868-1961',
-        'Fraternizing',
-        'Medicine',
-        'Minutes',
-        'Mindanao Island (Philippines)',
-        'Owner of the reel of yellow nylon rope',
-        'Photographs',
-        'Popes Creek (Md.)',
-        'Records',
-        'Robertson\'s Crab House',
-        'Root, William Webster, 1867-1932',
-        'Societies',
-        'Speeches'
-      )
-
-      expect(first_component).to include 'access_subjects_ssm'
-      expect(first_component['access_subjects_ssm']).to contain_exactly(
-        'Alpha Omega Alpha',
-        'Bierring, Walter L. (Walter Lawrence), 1868-1961',
-        'Fraternizing',
-        'Medicine',
-        'Minutes',
-        'Mindanao Island (Philippines)',
-        'Owner of the reel of yellow nylon rope',
-        'Photographs',
-        'Popes Creek (Md.)',
-        'Records',
-        'Robertson\'s Crab House',
-        'Root, William Webster, 1867-1932',
-        'Societies',
-        'Speeches'
-      )
+    it 'control access within a component' do
+      component = result['components'].find { |c| c['id'] == ['aoa271aspace_81c806b82a14c3c79d395bbd383b886f'] }
+      %w[access_subjects_ssm access_subjects_ssim].each do |field|
+        expect(component).to include field
+        expect(component[field]).to contain_exactly 'Minutes'
+      end
     end
 
     it 'indexes geognames' do
@@ -212,29 +190,16 @@ describe 'EAD 2 traject indexing', type: :feature do
       end
 
       it 'indexes the values as controlled vocabulary terms' do
-        expect(result).to include 'components'
-        expect(result['components']).not_to be_empty
-        first_component = result['components'].first
-
-        expect(first_component).to include 'access_subjects_ssim'
-        expect(first_component['access_subjects_ssim']).to contain_exactly(
-          'Acquired Immunodeficiency Syndrome',
-          'African Americans',
-          'Homosexuality',
-          'Human Immunodeficiency Virus',
-          'Public Health',
-          'United States. Presidential Commission on the Human Immunodeficiency Virus  Epidemic'
-        )
-
-        expect(first_component).to include 'access_subjects_ssm'
-        expect(first_component['access_subjects_ssm']).to contain_exactly(
-          'Acquired Immunodeficiency Syndrome',
-          'African Americans',
-          'Homosexuality',
-          'Human Immunodeficiency Virus',
-          'Public Health',
-          'United States. Presidential Commission on the Human Immunodeficiency Virus  Epidemic'
-        )
+        %w[access_subjects_ssm access_subjects_ssim].each do |field|
+          expect(result).to include field
+          expect(result[field]).to contain_exactly(
+            'Acquired Immunodeficiency Syndrome',
+            'African Americans',
+            'Homosexuality',
+            'Human Immunodeficiency Virus',
+            'Public Health'
+          )
+        end
       end
     end
   end
