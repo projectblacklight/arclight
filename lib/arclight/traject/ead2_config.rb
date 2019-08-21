@@ -273,7 +273,11 @@ compose 'components', ->(record, accumulator, _context) { accumulator.concat rec
   to_field 'language_ssm', extract_xpath('xmlns:did/xmlns:langmaterial')
   to_field 'accessrestrict_ssm', extract_xpath('xmlns:accessrestrict/*[local-name()!="head"]')
   to_field 'prefercite_ssm', extract_xpath('xmlns:prefercite/*[local-name()!="head"]')
-  # to_field 'containers_ssim'
+  to_field 'containers_ssim' do |record, accumulator|
+    record.xpath('//xmlns:container').each do |node|
+      accumulator << [node.attribute('type'), node.text].join(' ').strip
+    end
+  end
   to_field 'bioghist_ssm', extract_xpath('xmlns:bioghist/*[local-name()!="head"]')
   to_field 'acqinfo_ssm', extract_xpath('xmlns:acqinfo/*[local-name()!="head"]')
   to_field 'relatedmaterial_ssm', extract_xpath('xmlns:relatedmaterial/*[local-name()!="head"]')

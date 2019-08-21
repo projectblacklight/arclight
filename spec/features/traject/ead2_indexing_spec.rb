@@ -120,6 +120,11 @@ describe 'EAD 2 traject indexing', type: :feature do
           expect(first_component[field]).to eq ['Stanford University']
         end
       end
+
+      it 'containers' do
+        component = result['components'].find { |c| c['ref_ssi'] == ['aspace_ref6_lx4'] }
+        expect(component['containers_ssim']).to eq ['box 1']
+      end
     end
   end
 
