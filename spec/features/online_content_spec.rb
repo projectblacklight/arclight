@@ -41,7 +41,7 @@ RSpec.describe 'Online Content', type: :feature do
         click_link('Online content')
 
         within('.documents-online_contents') do
-          expect(page).to have_css('article', count: 1)
+          expect(page).to have_css('article', count: 10)
 
           expect(page).to have_css('.document-title-heading', text: 'Box 1: Photograph Album')
         end
