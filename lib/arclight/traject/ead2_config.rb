@@ -282,7 +282,7 @@ compose 'components', ->(record, accumulator, _context) { accumulator.concat rec
   to_field 'accessrestrict_ssm', extract_xpath('xmlns:accessrestrict/*[local-name()!="head"]')
   to_field 'prefercite_ssm', extract_xpath('xmlns:prefercite/*[local-name()!="head"]')
   to_field 'containers_ssim' do |record, accumulator|
-    record.xpath('//xmlns:container').each do |node|
+    record.xpath('.//xmlns:container').each do |node|
       accumulator << [node.attribute('type'), node.text].join(' ').strip
     end
   end
