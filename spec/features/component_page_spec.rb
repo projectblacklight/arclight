@@ -131,6 +131,19 @@ RSpec.describe 'Component Page', type: :feature do
       end
     end
     context 'siblings and highlighted self' do
+      it 'does not link to itself' do
+        within '#collection-context' do
+          within '.al-contents' do
+            expect(page).not_to have_css(
+              'article.al-hierarchy-highlight h3 a'
+            )
+            expect(page).to have_css(
+              'article.al-hierarchy-highlight h3',
+              text: /"A brief account of the origin/
+            )
+          end
+        end
+      end
       it 'has next 2 siblings -- i.e., at beginning' do
         within '#collection-context' do
           within '.al-contents' do

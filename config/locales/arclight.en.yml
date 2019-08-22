@@ -2,7 +2,8 @@ en:
   arclight:
     masthead_heading: 'Archival Collections at Institution'
     date_range_histogram:
-      show_hide: 'Show/hide date distribution'
+      show: 'Show date distribution'
+      hide: 'Hide date distribution'
     hierarchy:
       view_all: 'View'
       scope_and_contents: 'Scope and Contents'

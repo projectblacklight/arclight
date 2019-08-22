@@ -19,6 +19,20 @@ module Arclight
       end
     end
 
+    def install_blacklight_locale_picker
+      gem 'blacklight-locale_picker'
+
+      Bundler.with_clean_env do
+        run 'bundle install'
+      end
+
+      generate 'blacklight:locale_picker:install'
+
+      inject_into_file 'app/helpers/application_helper.rb', after: 'include Blacklight::LocalePicker::LocaleHelper' do
+        "\n\n  def additional_locale_routing_scopes\n    [blacklight, arclight_engine]\n  end"
+      end
+    end
+
     def install_blacklight_range_limit
       generate 'blacklight_range_limit:install'
     end

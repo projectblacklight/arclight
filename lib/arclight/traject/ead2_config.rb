@@ -79,6 +79,10 @@ to_field 'repository_sim' do |_record, accumulator, context|
   accumulator << context.clipboard[:repository]
 end
 
+to_field 'geogname_ssm', extract_xpath('//xmlns:archdesc/xmlns:controlaccess/xmlns:geogname')
+
+to_field 'geogname_sim', extract_xpath('//xmlns:archdesc/xmlns:controlaccess/xmlns:geogname')
+
 to_field 'creator_ssm', extract_xpath("//xmlns:archdesc/xmlns:did/xmlns:origination[@label='creator']")
 to_field 'creator_ssim', extract_xpath("//xmlns:archdesc/xmlns:did/xmlns:origination[@label='creator']")
 to_field 'creator_sort' do |record, accumulator|
@@ -104,9 +108,25 @@ to_field 'accessrestrict_ssm', extract_xpath('//xmlns:archdesc/xmlns:accessrestr
 
 to_field 'access_terms_ssm', extract_xpath('//xmlns:archdesc/xmlns:userestrict/xmlns:p')
 
+# Indexes only specified controlled terms for archival description into the access_subject field
+to_field 'access_subjects_ssim', extract_xpath('//xmlns:archdesc/xmlns:controlaccess', to_text: false) do |_record, accumulator|
+  accumulator.map! do |element|
+    %w[subject function occupation genreform].map do |selector|
+      element.xpath(".//xmlns:#{selector}").map(&:text)
+    end
+  end.flatten!
+end
+
+to_field 'access_subjects_ssm' do |_record, accumulator, context|
+  accumulator.concat Array.wrap(context.output_hash['access_subjects_ssim'])
+end
+
+to_field 'has_online_content_ssim', extract_xpath('.//xmlns:dao') do |_record, accumulator|
+  accumulator.replace([accumulator.any?])
+end
+
 # Each component child document
 # <c> <c01> <c12>
-# rubocop:disable Metrics/BlockLength
 compose 'components', ->(record, accumulator, _context) { accumulator.concat record.xpath('//*[is_component(.)]', NokogiriXpathExtensions.new) } do
   to_field 'ref_ssi' do |record, accumulator|
     accumulator << record.attribute('id')&.value&.strip&.gsub('.', '-')
@@ -201,7 +221,7 @@ compose 'components', ->(record, accumulator, _context) { accumulator.concat rec
   to_field 'collection_creator_ssm' do |_record, accumulator, context|
     accumulator.concat Array.wrap(context.clipboard[:parent].output_hash['creator_ssm'])
   end
-  to_field 'has_online_content_ssim', extract_xpath('./xmlns:dao[@href]') do |_record, accumulator|
+  to_field 'has_online_content_ssim', extract_xpath('.//xmlns:dao') do |_record, accumulator|
     accumulator.replace([accumulator.any?])
   end
   to_field 'child_component_count_isim', extract_xpath('xmlns:c') do |_record, accumulator|
@@ -248,7 +268,7 @@ compose 'components', ->(record, accumulator, _context) { accumulator.concat rec
   end
 
   to_field 'digital_objects_ssm', extract_xpath('./xmlns:dao') do |record, accumulator|
-    accumulator.concat(record.xpath('./xmlns:dao', xmlns: 'urn:isbn:1-931666-22-9').map do |dao|
+    accumulator.concat(record.xpath('.//xmlns:dao', xmlns: 'urn:isbn:1-931666-22-9').map do |dao|
       label = dao.attributes['title']&.value ||
         dao.xpath('xmlns:daodesc/xmlns:p', xmlns: 'urn:isbn:1-931666-22-9')&.text
       href = (dao.attributes['href'] || dao.attributes['xlink:href'])&.value
@@ -265,17 +285,31 @@ compose 'components', ->(record, accumulator, _context) { accumulator.concat rec
   end
 
   # to_field 'names_ssim'
-  # to_field 'geogname_sim'
-  # to_field 'geogname_ssm'
-
+  to_field 'geogname_sim', extract_xpath('./xmlns:controlaccess/xmlns:geogname')
+  to_field 'geogname_ssm', extract_xpath('./xmlns:controlaccess/xmlns:geogname')
   to_field 'places_ssim', extract_xpath('xmlns:controlaccess/xmlns:geogname')
 
-  # to_field 'access_subjects_ssim'
-  # to_field 'access_subjects_ssm'
+  # Indexes only specified controlled terms for archival description into the access_subject field
+  to_field 'access_subjects_ssim', extract_xpath('./xmlns:controlaccess', to_text: false) do |_record, accumulator|
+    accumulator.map! do |element|
+      %w[subject function occupation genreform].map do |selector|
+        element.xpath(".//xmlns:#{selector}").map(&:text)
+      end
+    end.flatten!
+  end
+
+  to_field 'access_subjects_ssm' do |_record, accumulator, context|
+    accumulator.concat Array.wrap(context.output_hash['access_subjects_ssim'])
+  end
+
   to_field 'language_ssm', extract_xpath('xmlns:did/xmlns:langmaterial')
   to_field 'accessrestrict_ssm', extract_xpath('xmlns:accessrestrict/*[local-name()!="head"]')
   to_field 'prefercite_ssm', extract_xpath('xmlns:prefercite/*[local-name()!="head"]')
-  # to_field 'containers_ssim'
+  to_field 'containers_ssim' do |record, accumulator|
+    record.xpath('//xmlns:container').each do |node|
+      accumulator << [node.attribute('type'), node.text].join(' ').strip
+    end
+  end
   to_field 'bioghist_ssm', extract_xpath('xmlns:bioghist/*[local-name()!="head"]')
   to_field 'acqinfo_ssm', extract_xpath('xmlns:acqinfo/*[local-name()!="head"]')
   to_field 'relatedmaterial_ssm', extract_xpath('xmlns:relatedmaterial/*[local-name()!="head"]')
@@ -285,7 +319,6 @@ compose 'components', ->(record, accumulator, _context) { accumulator.concat rec
   to_field 'originalsloc_ssm', extract_xpath('xmlns:originalsloc/*[local-name()!="head"]')
   # to_field 'names_coll_ssim'
 end
-# rubocop:enable Metrics/BlockLength
 
 each_record do |_record, context|
   context.output_hash['components'] &&= context.output_hash['components'].select { |c| c.keys.any? }

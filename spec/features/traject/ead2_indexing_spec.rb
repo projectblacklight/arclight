@@ -7,19 +7,25 @@ describe 'EAD 2 traject indexing', type: :feature do
     indexer.map_record(record)
   end
 
-  let(:record) do
-    Traject::NokogiriReader.new(
-      File.read(
-        Arclight::Engine.root.join('spec', 'fixtures', 'ead', 'sul-spec', 'a0011.xml')
-      ).to_s,
-      {}
-    ).to_a.first
-  end
-
   let(:indexer) do
     Traject::Indexer::NokogiriIndexer.new.tap do |i|
       i.load_config_file(Arclight::Engine.root.join('lib/arclight/traject/ead2_config.rb'))
     end
+  end
+  let(:fixture_path) do
+    Arclight::Engine.root.join('spec', 'fixtures', 'ead', 'sul-spec', 'a0011.xml')
+  end
+  let(:fixture_file) do
+    File.read(fixture_path)
+  end
+  let(:nokogiri_reader) do
+    Traject::NokogiriReader.new(fixture_file.to_s, {})
+  end
+  let(:records) do
+    nokogiri_reader.to_a
+  end
+  let(:record) do
+    records.first
   end
 
   before do
@@ -60,9 +66,17 @@ describe 'EAD 2 traject indexing', type: :feature do
         expect(result[field]).to include 'Stanford University Libraries. Special Collections and University Archives'
       end
     end
+
+    it 'geogname' do
+      %w[geogname_sim geogname_ssm].each do |field|
+        expect(result[field]).to include 'Yosemite National Park (Calif.)'
+      end
+    end
+
     it 'unitid' do
       expect(result['unitid_ssm']).to eq ['A0011']
     end
+
     it 'creator' do
       %w[creator_ssm creator_ssim creator_corpname_ssm creator_corpname_ssim creators_ssim creator_sort].each do |field|
         expect(result[field]).to eq ['Stanford University']
@@ -71,6 +85,11 @@ describe 'EAD 2 traject indexing', type: :feature do
 
     it 'places' do
       expect(result['places_ssim']).to eq ['Yosemite National Park (Calif.)']
+    end
+
+    it 'has_online_content' do
+      pp result
+      expect(result['has_online_content_ssim']).to eq [true]
     end
 
     describe 'components' do
@@ -89,6 +108,23 @@ describe 'EAD 2 traject indexing', type: :feature do
           expect(first_component[field]).to include 'Stanford University Libraries. Special Collections and University Archives'
         end
       end
+
+      it 'has_online_content' do
+        expect(first_component['has_online_content_ssim']).to eq([true])
+      end
+
+      it 'digital_objects' do
+        # rubocop:disable Style/StringLiterals
+        expect(first_component['digital_objects_ssm']).to eq(["{\"label\":\"Photograph Album\",\"href\":\"http://purl.stanford.edu/kc844kt2526\"}"])
+        # rubocop:enable Style/StringLiterals
+      end
+
+      it 'geogname' do
+        %w[geogname_sim geogname_ssm].each do |field|
+          expect(result['components'].first[field]).to be_nil
+        end
+      end
+
       it 'collection has normalized title' do
         %w[collection_sim collection_ssm].each do |field|
           expect(first_component[field]).to include 'Stanford University student life photograph album, circa 1900-1906'
@@ -99,17 +135,17 @@ describe 'EAD 2 traject indexing', type: :feature do
           expect(first_component[field]).to eq ['Stanford University']
         end
       end
+
+      it 'containers' do
+        component = result['components'].find { |c| c['ref_ssi'] == ['aspace_ref6_lx4'] }
+        expect(component['containers_ssim']).to eq ['box 1']
+      end
     end
   end
 
   describe 'large component list' do
-    let(:record) do
-      Traject::NokogiriReader.new(
-        File.read(
-          Arclight::Engine.root.join('spec', 'fixtures', 'ead', 'sample', 'large-components-list.xml')
-        ).to_s,
-        {}
-      ).to_a.first
+    let(:fixture_path) do
+      Arclight::Engine.root.join('spec', 'fixtures', 'ead', 'sample', 'large-components-list.xml')
     end
 
     it 'selects the components' do
@@ -148,7 +184,6 @@ describe 'EAD 2 traject indexing', type: :feature do
       expect(result['components'].length).to eq 37
     end
 
-
     context 'when nested component' do
       let(:self_access_restrict_component) { result['components'].find { |c| c['ref_ssi'] == ['aspace_dba76dab6f750f31aa5fc73e5402e71d'] } }
       let(:parent_access_restrict_component) { result['components'].find { |c| c['ref_ssi']== ['aspace_72f14d6c32e142baa3eeafdb6e4d69be'] } }
@@ -172,6 +207,60 @@ describe 'EAD 2 traject indexing', type: :feature do
       it 'gets access terms from document if self or parent does not have terms' do
         expect(parent_access_terms_component['parent_ssm']).to eq %w[aoa271]
         expect(parent_access_terms_component['parent_access_terms_ssm']).to eq ["Copyright was transferred to the public domain. Contact the Reference Staff for details\n        regarding rights."]
+      end
+    end
+  end
+   
+  describe 'for control access elements' do
+    let(:fixture_path) do
+      Arclight::Engine.root.join('spec', 'fixtures', 'ead', 'nlm', 'alphaomegaalpha.xml')
+    end
+
+    it 'indexes the values as controlled vocabulary terms' do
+      %w[access_subjects_ssm access_subjects_ssim].each do |field|
+        expect(result).to include field
+        expect(result[field]).to contain_exactly(
+          'Fraternizing',
+          'Medicine',
+          'Photographs',
+          'Societies'
+        )
+      end
+    end
+
+    it 'control access within a component' do
+      component = result['components'].find { |c| c['id'] == ['aoa271aspace_81c806b82a14c3c79d395bbd383b886f'] }
+      %w[access_subjects_ssm access_subjects_ssim].each do |field|
+        expect(component).to include field
+        expect(component[field]).to contain_exactly 'Minutes'
+      end
+    end
+
+    it 'indexes geognames' do
+      component = result['components'].find { |d| d['id'] == ['aoa271aspace_843e8f9f22bac69872d0802d6fffbb04'] }
+      expect(component).to include 'geogname_sim'
+      expect(component['geogname_sim']).to include('Popes Creek (Md.)')
+
+      expect(component).to include 'geogname_ssm'
+      expect(component['geogname_ssm']).to include('Popes Creek (Md.)')
+    end
+
+    context 'with nested controlaccess elements' do
+      let(:fixture_path) do
+        Arclight::Engine.root.join('spec', 'fixtures', 'ead', 'ncaids544-id-test.xml')
+      end
+
+      it 'indexes the values as controlled vocabulary terms' do
+        %w[access_subjects_ssm access_subjects_ssim].each do |field|
+          expect(result).to include field
+          expect(result[field]).to contain_exactly(
+            'Acquired Immunodeficiency Syndrome',
+            'African Americans',
+            'Homosexuality',
+            'Human Immunodeficiency Virus',
+            'Public Health'
+          )
+        end
       end
     end
   end

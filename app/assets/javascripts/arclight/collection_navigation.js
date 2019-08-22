@@ -9,12 +9,15 @@
     var $currentDoc;
     var $previousDocs;
     var $nextDocs;
-    var headers = $doc.find('article header[data-document-id="' + id + '"]')
-    if (headers.length == 0) {
+    var headers = $doc.find('article header[data-document-id="' + id + '"]');
+    if (headers.length === 0) {
       $.error('Document is missing id=' + id);
     }
     $currentDoc = $(headers[0].parentNode); // need article element
     $currentDoc.addClass('al-hierarchy-highlight');
+
+    // Unlink the current component - just show the title
+    $currentDoc.find('a').contents().unwrap();
 
     // We want to show 0-1 or 0-2 siblings depending on where highlighted component is
     $previousDocs = $currentDoc.prevUntil().slice(0, 2);
