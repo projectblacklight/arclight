@@ -226,7 +226,6 @@ compose 'components', ->(record, accumulator, _context) { accumulator.concat rec
 
   to_field 'parent_access_restrict_ssm' do |record, accumulator, context|
     next unless context.output_hash['accessrestrict_ssm'].nil?
-
     context.output_hash['parent_ssm']&.each do |id|
       accumulator.concat Array
         .wrap(context.clipboard[:parent]&.output_hash['components'])
@@ -242,6 +241,11 @@ compose 'components', ->(record, accumulator, _context) { accumulator.concat rec
   to_field 'userestrict_ssm', extract_xpath('xmlns:userestrict/xmlns:p')
 
   to_field 'parent_access_terms_ssm', extract_xpath('xmlns:userestrict/xmlns:p')
+
+  to_field 'parent_access_terms_ssm' do |record, accumulator, context|
+    next unless context.output_hash['parent_access_terms_ssm'].nil?
+    accumulator << context.clipboard[:parent]&.output_hash['access_terms_ssm']&.first
+  end
 
   to_field 'digital_objects_ssm', extract_xpath('./xmlns:dao') do |record, accumulator|
     accumulator.concat(record.xpath('./xmlns:dao', xmlns: 'urn:isbn:1-931666-22-9').map do |dao|
