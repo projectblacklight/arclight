@@ -6,6 +6,12 @@
 
 .breadcrumb-item {
   flex: 1 0 100%;
+
+  + .breadcrumb-item.al-bc-item {
+    &::before {
+      content: '»';
+    }
+  }
 }
 
 @for $i from 1 to 12 {
