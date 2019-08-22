@@ -5,6 +5,8 @@ require 'engine_cart/rake_task'
 require 'rspec/core/rake_task'
 require 'arclight'
 
+class DependencyNotInstalled < StandardError; end
+
 desc 'Run test suite'
 task ci: %w[arclight:generate] do
   SolrWrapper.wrap do |solr|
@@ -20,7 +22,9 @@ end
 
 desc 'Run Eslint'
 task :eslint do
-  system './node_modules/.bin/eslint app/assets/javascripts'
+  raise DependencyNotInstalled, 'ESLint not found.  Please run yarn install.' unless File.exist?('./node_modules/.bin/eslint')
+
+  exit 1 unless system './node_modules/.bin/eslint app/assets/javascripts'
 end
 
 namespace :arclight do
