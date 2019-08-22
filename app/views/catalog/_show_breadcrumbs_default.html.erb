@@ -5,3 +5,13 @@
   <%= t('arclight.breadcrumb_separator') %>
   <%= safe_join([parents_to_links(document), document.normalized_title].reject(&:empty?), t('arclight.breadcrumb_separator'))  %>
 </div>
+<nav aria-label="breadcrumb">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item"><a href="#">Home</a></li>
+    <li class="breadcrumb-item"><a href="#">C01</a></li>
+    <li class="breadcrumb-item"><a href="#">C02</a></li>
+    <li class="breadcrumb-item"><a href="#">C03</a></li>
+    <li class="breadcrumb-item"><a href="#">C04</a></li>
+    <li class="breadcrumb-item active" aria-current="page">Data</li>
+  </ol>
+</nav>

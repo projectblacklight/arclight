@@ -4,6 +4,16 @@
   margin-bottom: $spacer;
 }
 
+.breadcrumb-item {
+  flex: 1 0 100%;
+}
+
+@for $i from 1 to 12 {
+  .breadcrumb-item+.breadcrumb-item:nth-child(#{$i}) {
+    padding-left: ($i - 1) * 10px;
+  }
+}
+
 // Collapse arrow indicators
 .al-toggle-view-more,
 .al-toggle-view-all {
