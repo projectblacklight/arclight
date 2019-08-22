@@ -241,19 +241,20 @@ compose 'components', ->(record, accumulator, _context) { accumulator.concat rec
   end
 
   to_field 'accessrestrict_ssm', extract_xpath('./xmlns:accessrestrict/xmlns:p')
-  
+
   to_field 'parent_access_restrict_ssm', extract_xpath('./xmlns:accessrestrict/xmlns:p')
 
-  to_field 'parent_access_restrict_ssm' do |record, accumulator, context|
+  to_field 'parent_access_restrict_ssm' do |_record, accumulator, context|
     next unless context.output_hash['accessrestrict_ssm'].nil?
+
     context.output_hash['parent_ssm']&.each do |id|
       accumulator.concat Array
         .wrap(context.clipboard[:parent]&.output_hash['components'])
-        .select { |c| c['ref_ssi'] == [id] }.map { |c| c['accessrestrict_ssm']}
+        .select { |c| c['ref_ssi'] == [id] }.map { |c| c['accessrestrict_ssm'] }
     end
   end
 
-  to_field 'parent_access_restrict_ssm' do |record, accumulator, context|
+  to_field 'parent_access_restrict_ssm' do |_record, accumulator, context|
     next unless context.output_hash['parent_access_restrict_ssm'].nil?
     accumulator.concat Array.wrap(context.clipboard[:parent]&.output_hash['accessrestrict_ssm'])
   end
@@ -261,7 +262,16 @@ compose 'components', ->(record, accumulator, _context) { accumulator.concat rec
   to_field 'userestrict_ssm', extract_xpath('xmlns:userestrict/xmlns:p')
 
   to_field 'parent_access_terms_ssm', extract_xpath('xmlns:userestrict/xmlns:p')
-
+  
+  to_field 'parent_access_terms_ssm' do |record, accumulator, context|
+    next unless context.output_hash['userestrict_ssm'].nil?
+    context.output_hash['parent_ssm']&.each do |id|
+      accumulator.concat Array
+        .wrap(context.clipboard[:parent]&.output_hash['components'])
+        .select { |c| c['ref_ssi'] == [id] }.map { |c| c['userestrict_ssm']}
+    end
+  end
+  
   to_field 'parent_access_terms_ssm' do |record, accumulator, context|
     next unless context.output_hash['parent_access_terms_ssm'].nil?
     accumulator << context.clipboard[:parent]&.output_hash['access_terms_ssm']&.first
