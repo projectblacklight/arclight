@@ -234,12 +234,21 @@ compose 'components', ->(record, accumulator, _context) { accumulator.concat rec
   end
 
   to_field 'level_ssm' do |record, accumulator|
-    accumulator << record.attribute('level')
+    level = record.attribute('level')&.value
+    other_level = record.attribute('otherlevel')&.value
+
+    accumulator << if level == 'otherlevel'
+                     alternative_level = other_level if other_level
+                     alternative_level.present? ? alternative_level : 'Other'
+                   elsif level.present?
+                     level&.capitalize
+                   end
   end
 
-  to_field 'level_sim' do |record, accumulator|
-    accumulator << record.attribute('level')
+  to_field 'level_sim' do |_record, accumulator, context|
+    accumulator << context.output_hash['level_ssm']&.map(&:capitalize)
   end
+
   to_field 'userestrict_ssm', extract_xpath('xmlns:userestrict/xmlns:p')
   # to_field 'parent_access_restrict_ssm'
   # to_field 'parent_access_terms_ssm'
