@@ -14,6 +14,7 @@ sample:
   thumbnail_url: 'http://example.com/thumbnail_ABC.jpg'
   google_request_url: 'https://docs.google.com/abc123'
   google_request_mappings: 'collection_name=abc&eadid=123'
+  downstream_defined_field: 'Custom Data From Consumer'
 sul-spec:
   name: 'Stanford University Libraries. Special Collections and University Archives'
   visit_note: 'Special Collections and University Archives materials are stored offsite and must be paged 36 hours in advance.'

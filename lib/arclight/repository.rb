@@ -7,31 +7,14 @@ module Arclight
   class Repository
     include ActiveModel::Conversion # for to_partial_path
 
-    FIELDS = %i[name
-                description
-                visit_note
-                building
-                address1
-                address2
-                city
-                state
-                zip
-                country
-                phone
-                contact_info
-                thumbnail_url
-                google_request_url
-                google_request_mappings
-                collection_count].freeze
-
-    attr_accessor :slug, *FIELDS
+    attr_accessor :slug, :collection_count
 
     # @param [String] `slug` the unique identifier for the repository
     # @param [Hash] `data`
     def initialize(slug, data = {})
       @slug = slug
-      FIELDS.each do |field|
-        value = data[field.to_s]
+      data.each do |field, value|
+        self.class.attr_accessor field.to_sym
         send("#{field}=", value) if value.present?
       end
     end
