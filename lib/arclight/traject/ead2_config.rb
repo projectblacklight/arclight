@@ -35,9 +35,7 @@ end
 to_field 'id', extract_xpath('//xmlns:eadid'), strip, gsub('.', '-')
 to_field 'title_ssm', extract_xpath('//xmlns:archdesc/xmlns:did/xmlns:unittitle')
 to_field 'title_teim', extract_xpath('//xmlns:archdesc/xmlns:did/xmlns:unittitle')
-to_field 'ead_ssi' do |_record, accumulator, context|
-  accumulator << context.output_hash['id'].first
-end
+to_field 'ead_ssi', extract_xpath('//xmlns:eadid')
 
 to_field 'level_ssm' do |record, accumulator|
   accumulator << record.at_xpath('//xmlns:archdesc').attribute('level').value
@@ -139,7 +137,7 @@ compose 'components', ->(record, accumulator, _context) { accumulator.concat rec
   end
 
   to_field 'ead_ssi' do |_record, accumulator, context|
-    accumulator << context.output_hash['id'].first
+    accumulator << context.clipboard[:parent].output_hash['ead_ssi'].first
   end
 
   to_field 'title_ssm', extract_xpath('./xmlns:did/xmlns:unittitle')

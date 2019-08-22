@@ -43,7 +43,7 @@ describe 'EAD 2 traject indexing', type: :feature do
 
     it 'id' do
       expect(result['id'].first).to eq 'a0011-xml'
-      expect(result['ead_ssi'].first).to eq 'a0011-xml'
+      expect(result['ead_ssi'].first).to eq 'a0011.xml'
     end
     it 'title' do
       %w[title_ssm title_teim].each do |field|
@@ -101,6 +101,9 @@ describe 'EAD 2 traject indexing', type: :feature do
       end
       it 'id' do
         expect(first_component).to include 'id' => ['a0011-xmlaspace_ref6_lx4']
+      end
+      it 'ead_ssi should be parents' do
+        expect(first_component['ead_ssi']).to eq result['ead_ssi']
       end
       it 'repository' do
         %w[repository_sim repository_ssm].each do |field|
