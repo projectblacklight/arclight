@@ -88,7 +88,6 @@ describe 'EAD 2 traject indexing', type: :feature do
     end
 
     it 'has_online_content' do
-      pp result
       expect(result['has_online_content_ssim']).to eq [true]
     end
 
