@@ -273,7 +273,7 @@ compose 'components', ->(record, accumulator, _context) { accumulator.concat rec
         .select { |c| c['ref_ssi'] == [id] }.map { |c| c['userestrict_ssm'] }
     end
   end
-  
+
   to_field 'parent_access_terms_ssm' do |_record, accumulator, context|
     next unless context.output_hash['parent_access_terms_ssm'].nil?
 
