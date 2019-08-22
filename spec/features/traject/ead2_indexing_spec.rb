@@ -91,6 +91,12 @@ describe 'EAD 2 traject indexing', type: :feature do
       expect(result['has_online_content_ssim']).to eq [true]
     end
 
+    it 'collection has normalized_title' do
+      %w[collection_ssm collection_sim].each do |field|
+        expect(result[field]).to include 'Stanford University student life photograph album, circa 1900-1906'
+      end
+    end
+
     describe 'components' do
       let(:first_component) { result['components'].first }
 
