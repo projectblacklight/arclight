@@ -12,6 +12,8 @@ require 'arclight/digital_object'
 require 'arclight/year_range'
 require 'arclight/repository'
 
+NAME_ELEMENTS = %w[corpname famname name persname].freeze
+
 # rubocop:disable Style/MixinUsage
 extend TrajectPlus::Macros
 # rubocop:enable Style/MixinUsage
@@ -137,7 +139,7 @@ end
 
 to_field 'names_coll_ssim', extract_xpath('/xmlns:ead/xmlns:archdesc[@level="collection"]/xmlns:controlaccess', to_text: false) do |_record, accumulator|
   accumulator.map! do |element|
-    %w[corpname famname name persname].map do |selector|
+    NAME_ELEMENTS.map do |selector|
       element.xpath(".//xmlns:#{selector}").map(&:text)
     end
   end.flatten!
