@@ -1,66 +1,67 @@
+---
 en:
   arclight:
-    masthead_heading: 'Archival Collections at Institution'
+    breadcrumb_separator: " » "
     date_range_histogram:
-      show: 'Show date distribution'
-      hide: 'Hide date distribution'
+      hide: Hide date distribution
+      show: Show date distribution
     hierarchy:
-      view_all: 'View'
-      scope_and_contents: 'Scope and Contents'
+      scope_and_contents: Scope and Contents
+      view_all: View
+    masthead_heading: Archival Collections at Institution
     request:
-      container: 'Request'
+      container: Request
     routes:
-      home: 'Home'
-      collections: 'Collections'
-      repositories: 'Repositories'
-      search_results: 'Search results'
+      collections: Collections
+      home: Home
+      repositories: Repositories
+      search_results: Search results
+    truncation:
+      view_less: view less ▼
+      view_more: view more ▶
     views:
       index:
-        number_of_children:
-          zero: 'No children'
-          one: '1 child'
-          other: '%{count} children'
         collection_search:
-          count: 'collection'
-      online_content_indicator: 'online content'
-      show:
-        collection_id: 'Collection ID: %{id}'
-        overview: 'Overview'
-        online_content: 'Online content'
-        no_online_content: 'No online content'
-        no_contents: 'No content inventory'
-        search_within: 'Search within this collection'
-        navigation_sidebar:
-          title: 'Navigation overview'
-        context_sidebar:
-          in_person_field: 'In person'
-          terms_field: 'Terms & Conditions'
-          cite_field: 'How to cite this collection'
-          component_terms_field: "Terms & Conditions"
-        sections:
-          summary_field: 'Summary'
-          access_field: 'Access and Use'
-          background_field: 'Background'
-          scope_and_arrangement_field: 'Scope and Arrangement'
-          related_field: 'Related'
-          indexed_terms_field: 'Indexed Terms'
-          admin_info_field: 'Administrative Information'
-          component_field: 'About this %{level}'
-          component_indexed_terms_field: 'Indexed Terms'
-          collection_context_field: 'Collection Context'
-        our_collections: 'Our Collections'
-        download:
-          default: 'Download'
-          pdf: 'Collection PDF (%{size})'
-          ead: 'Collection EAD (%{size})'
+          count: collection
+        number_of_children:
+          one: 1 child
+          other: "%{count} children"
+          zero: No children
+      online_content_indicator: online content
       repositories:
         number_of_collections:
-          zero: 'No collections'
-          one: '1 collection'
-          other: '%{count} collections'
-        view_more: 'View more'
-        view_all_collections: 'View all of our collections'
-    breadcrumb_separator: ' » '
-    truncation:
-      view_more: 'view more ▶'
-      view_less: 'view less ▼'
+          one: 1 collection
+          other: "%{count} collections"
+          zero: No collections
+        view_all_collections: View all of our collections
+        view_more: View more
+      show:
+        collection_id: 'Collection ID: %{id}'
+        context_sidebar:
+          cite_field: How to cite this collection
+          component_terms_field: Terms & Conditions
+          in_person_field: In person
+          terms_field: Terms & Conditions
+        download:
+          default: Download
+          ead: Collection EAD (%{size})
+          pdf: Collection PDF (%{size})
+        navigation_sidebar:
+          title: Navigation overview
+        no_contents: No content inventory
+        no_online_content: No online content
+        online_content: Online content
+        our_collections: Our Collections
+        overview: Overview
+        search_within: Search within this collection
+        sections:
+          access_field: Access and Use
+          admin_info_field: Administrative Information
+          background_field: Background
+          collection_context_field: Collection Context
+          component_field: About this %{level}
+          component_indexed_terms_field: Indexed Terms
+          indexed_terms_field: Indexed Terms
+          related_field: Related
+          scope_and_arrangement_field: Scope and Arrangement
+          summary_field: Summary
