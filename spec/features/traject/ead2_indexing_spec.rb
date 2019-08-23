@@ -178,6 +178,17 @@ describe 'EAD 2 traject indexing', type: :feature do
     end
   end
 
+  describe 'containers in a component' do
+    let(:fixture_path) do
+      Arclight::Engine.root.join('spec', 'fixtures', 'ead', 'nlm', 'alphaomegaalpha.xml')
+    end
+
+    it 'only indexes containers within a given component' do
+      component = result['components'].find { |c| c['id'] == ['aoa271aspace_843e8f9f22bac69872d0802d6fffbb04'] }
+      expect(component['containers_ssim']).to eq ['box 1', 'folder 1']
+    end
+  end
+
   describe 'for control access elements' do
     let(:fixture_path) do
       Arclight::Engine.root.join('spec', 'fixtures', 'ead', 'nlm', 'alphaomegaalpha.xml')
