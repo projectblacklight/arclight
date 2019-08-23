@@ -4,6 +4,11 @@
   margin-bottom: $spacer;
 }
 
+.al-show-breadcrumb .breadcrumb {
+  background-color: transparent;
+  padding: 0;
+}
+
 .breadcrumb-item {
   flex: 1 0 100%;
 
