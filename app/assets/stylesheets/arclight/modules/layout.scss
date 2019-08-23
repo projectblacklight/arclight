@@ -19,7 +19,7 @@
   }
 }
 
-@for $i from 1 to 12 {
+@for $i from 1 to 14 {
   .breadcrumb-item+.breadcrumb-item:nth-child(#{$i}) {
     padding-left: ($i - 1) * 10px;
   }
