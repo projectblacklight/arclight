@@ -280,10 +280,10 @@ compose 'components', ->(record, accumulator, _context) { accumulator.concat rec
 
   # Indexes the acquisition group information into the notes field
   # Please see https://www.loc.gov/ead/tglib/elements/acqinfo.html
-  to_field 'acqinfo_ssim', extract_xpath('xmlns:acqinfo/xmlns:note')
-  to_field 'acqinfo_ssim', extract_xpath('xmlns:acqinfo/xmlns:p')
-  to_field 'acqinfo_ssim', extract_xpath('xmlns:descgrp/xmlns:acqinfo/xmlns:note')
-  to_field 'acqinfo_ssim', extract_xpath('xmlns:descgrp/xmlns:acqinfo/xmlns:p')
+  to_field 'acqinfo_ssim', extract_xpath('./xmlns:acqinfo/xmlns:note')
+  to_field 'acqinfo_ssim', extract_xpath('./xmlns:acqinfo/xmlns:p')
+  to_field 'acqinfo_ssim', extract_xpath('./xmlns:descgrp/xmlns:acqinfo/xmlns:note')
+  to_field 'acqinfo_ssim', extract_xpath('./xmlns:descgrp/xmlns:acqinfo/xmlns:p')
   to_field 'acqinfo_ssm' do |_record, accumulator, context|
     accumulator.concat(context.output_hash.fetch('acqinfo_ssim', []))
   end
