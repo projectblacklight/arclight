@@ -284,6 +284,10 @@ compose 'components', ->(record, accumulator, _context) { accumulator.concat rec
   to_field 'acqinfo_ssim', extract_xpath('/xmlns:ead/xmlns:archdesc/xmlns:acqinfo/xmlns:p')
   to_field 'acqinfo_ssim', extract_xpath('/xmlns:ead/xmlns:archdesc/xmlns:descgrp/xmlns:acqinfo/xmlns:note')
   to_field 'acqinfo_ssim', extract_xpath('/xmlns:ead/xmlns:archdesc/xmlns:descgrp/xmlns:acqinfo/xmlns:p')
+  to_field 'acqinfo_ssim', extract_xpath('./xmlns:acqinfo/xmlns:note')
+  to_field 'acqinfo_ssim', extract_xpath('./xmlns:acqinfo/xmlns:p')
+  to_field 'acqinfo_ssim', extract_xpath('./xmlns:descgrp/xmlns:acqinfo/xmlns:note')
+  to_field 'acqinfo_ssim', extract_xpath('./xmlns:descgrp/xmlns:acqinfo/xmlns:p')
   to_field 'acqinfo_ssm' do |_record, accumulator, context|
     accumulator.concat(context.output_hash.fetch('acqinfo_ssim', []))
   end
