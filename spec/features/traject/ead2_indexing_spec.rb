@@ -148,6 +148,22 @@ describe 'EAD 2 traject indexing', type: :feature do
         component = result['components'].find { |c| c['ref_ssi'] == ['aspace_ref6_lx4'] }
         expect(component['containers_ssim']).to eq ['box 1']
       end
+
+      describe 'levels' do
+        let(:fixture_path) do
+          Arclight::Engine.root.join('spec', 'fixtures', 'ead', 'nlm', 'alphaomegaalpha.xml')
+        end
+        let(:level_component) { result['components'].find { |c| c['ref_ssi'] == ['aspace_a951375d104030369a993ff943f61a77'] } }
+        let(:other_level_component) { result['components'].find { |c| c['ref_ssi'] == ['aspace_e6db65d47e891d61d69c2798c68a8f02'] } }
+
+        it 'is the level Capitalized' do
+          expect(level_component['level_ssm']).to eq(['Series'])
+        end
+
+        it 'is the otherlevel attribute when the level attribute is "otherlevel"' do
+          expect(other_level_component['level_ssm']).to eq(['Binder'])
+        end
+      end
     end
   end
 
