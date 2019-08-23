@@ -126,6 +126,15 @@ to_field 'has_online_content_ssim', extract_xpath('.//xmlns:dao') do |_record, a
   accumulator.replace([accumulator.any?])
 end
 
+to_field 'date_range_sim', extract_xpath('.//xmlns:did/xmlns:unitdate/@normal', to_text: false) do |_record, accumulator|
+  range = Arclight::YearRange.new
+  next range.years if accumulator.blank?
+
+  ranges = accumulator.map(&:to_s)
+  range << range.parse_ranges(ranges)
+  accumulator.replace range.years
+end
+
 # Each component child document
 # <c> <c01> <c12>
 compose 'components', ->(record, accumulator, _context) { accumulator.concat record.xpath('//*[is_component(.)]', NokogiriXpathExtensions.new) } do
@@ -261,11 +270,12 @@ compose 'components', ->(record, accumulator, _context) { accumulator.concat rec
     end.to_a)
   end
 
-  to_field 'date_range_sim', extract_xpath('./xmlns:did/xmlns:unitdate/@normal') do |_record, accumulator|
+  to_field 'date_range_sim', extract_xpath('.//xmlns:did/xmlns:unitdate/@normal', to_text: false) do |_record, accumulator|
     range = Arclight::YearRange.new
     next range.years if accumulator.blank?
 
-    range << range.parse_ranges(accumulator)
+    ranges = accumulator.map(&:to_s)
+    range << range.parse_ranges(ranges)
     accumulator.replace range.years
   end
 

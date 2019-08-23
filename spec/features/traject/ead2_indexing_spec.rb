@@ -61,6 +61,15 @@ describe 'EAD 2 traject indexing', type: :feature do
       expect(result['unitdate_inclusive_ssim']).to include 'circa 1900-1906'
       expect(result['unitdate_other_ssim']).to be_nil
     end
+
+    it 'creates date_range_sim' do
+      date_range = result['date_range_sim']
+      expect(date_range).to be_an Array
+      expect(date_range.length).to eq 7
+      expect(date_range.first).to eq 1900
+      expect(date_range.last).to eq 1906
+    end
+
     it 'repository' do
       %w[repository_sim repository_ssm].each do |field|
         expect(result[field]).to include 'Stanford University Libraries. Special Collections and University Archives'
@@ -237,6 +246,15 @@ describe 'EAD 2 traject indexing', type: :feature do
 
       expect(component).to include 'geogname_ssm'
       expect(component['geogname_ssm']).to include('Popes Creek (Md.)')
+    end
+
+    it 'creates date_range_sim' do
+      component = result['components'].find { |d| d['id'] == ['aoa271aspace_563a320bb37d24a9e1e6f7bf95b52671'] }
+      date_range = component['date_range_sim']
+      expect(date_range).to be_an Array
+      expect(date_range.length).to eq 75
+      expect(date_range.first).to eq 1902
+      expect(date_range.last).to eq 1976
     end
 
     context 'with nested controlaccess elements' do
