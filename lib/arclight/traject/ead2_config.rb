@@ -35,9 +35,7 @@ end
 to_field 'id', extract_xpath('//xmlns:eadid'), strip, gsub('.', '-')
 to_field 'title_ssm', extract_xpath('//xmlns:archdesc/xmlns:did/xmlns:unittitle')
 to_field 'title_teim', extract_xpath('//xmlns:archdesc/xmlns:did/xmlns:unittitle')
-to_field 'ead_ssi' do |_record, accumulator, context|
-  accumulator << context.output_hash['id'].first
-end
+to_field 'ead_ssi', extract_xpath('//xmlns:eadid')
 
 to_field 'level_ssm' do |record, accumulator|
   accumulator << record.at_xpath('//xmlns:archdesc').attribute('level').value
@@ -69,6 +67,13 @@ to_field 'normalized_date_ssm' do |_record, accumulator, context|
     context.output_hash['unitdate_bulk_ssim'],
     context.output_hash['unitdate_other_ssim']
   ).to_s
+end
+
+to_field 'collection_ssm' do |_record, accumulator, context|
+  accumulator.concat context.output_hash.fetch('normalized_title_ssm', [])
+end
+to_field 'collection_sim' do |_record, accumulator, context|
+  accumulator.concat context.output_hash.fetch('normalized_title_ssm', [])
 end
 
 to_field 'repository_ssm' do |_record, accumulator, context|
@@ -143,7 +148,7 @@ compose 'components', ->(record, accumulator, _context) { accumulator.concat rec
   end
 
   to_field 'ead_ssi' do |_record, accumulator, context|
-    accumulator << context.output_hash['id'].first
+    accumulator << context.clipboard[:parent].output_hash['ead_ssi'].first
   end
 
   to_field 'title_ssm', extract_xpath('./xmlns:did/xmlns:unittitle')
@@ -233,11 +238,19 @@ compose 'components', ->(record, accumulator, _context) { accumulator.concat rec
   end
 
   to_field 'level_ssm' do |record, accumulator|
-    accumulator << record.attribute('level')
+    level = record.attribute('level')&.value
+    other_level = record.attribute('otherlevel')&.value
+
+    accumulator << if level == 'otherlevel'
+                     alternative_level = other_level if other_level
+                     alternative_level.present? ? alternative_level : 'Other'
+                   elsif level.present?
+                     level&.capitalize
+                   end
   end
 
-  to_field 'level_sim' do |record, accumulator|
-    accumulator << record.attribute('level')
+  to_field 'level_sim' do |_record, accumulator, context|
+    accumulator << context.output_hash['level_ssm']&.map(&:capitalize)
   end
 
   to_field 'accessrestrict_ssm', extract_xpath('./xmlns:accessrestrict/xmlns:p')
@@ -319,7 +332,7 @@ compose 'components', ->(record, accumulator, _context) { accumulator.concat rec
   to_field 'accessrestrict_ssm', extract_xpath('xmlns:accessrestrict/*[local-name()!="head"]')
   to_field 'prefercite_ssm', extract_xpath('xmlns:prefercite/*[local-name()!="head"]')
   to_field 'containers_ssim' do |record, accumulator|
-    record.xpath('//xmlns:container').each do |node|
+    record.xpath('.//xmlns:container').each do |node|
       accumulator << [node.attribute('type'), node.text].join(' ').strip
     end
   end

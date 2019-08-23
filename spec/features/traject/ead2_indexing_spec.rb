@@ -43,7 +43,7 @@ describe 'EAD 2 traject indexing', type: :feature do
 
     it 'id' do
       expect(result['id'].first).to eq 'a0011-xml'
-      expect(result['ead_ssi'].first).to eq 'a0011-xml'
+      expect(result['ead_ssi'].first).to eq 'a0011.xml'
     end
     it 'title' do
       %w[title_ssm title_teim].each do |field|
@@ -91,6 +91,12 @@ describe 'EAD 2 traject indexing', type: :feature do
       expect(result['has_online_content_ssim']).to eq [true]
     end
 
+    it 'collection has normalized_title' do
+      %w[collection_ssm collection_sim].each do |field|
+        expect(result[field]).to include 'Stanford University student life photograph album, circa 1900-1906'
+      end
+    end
+
     describe 'components' do
       let(:first_component) { result['components'].first }
 
@@ -101,6 +107,9 @@ describe 'EAD 2 traject indexing', type: :feature do
       end
       it 'id' do
         expect(first_component).to include 'id' => ['a0011-xmlaspace_ref6_lx4']
+      end
+      it 'ead_ssi should be parents' do
+        expect(first_component['ead_ssi']).to eq result['ead_ssi']
       end
       it 'repository' do
         %w[repository_sim repository_ssm].each do |field|
@@ -138,6 +147,22 @@ describe 'EAD 2 traject indexing', type: :feature do
       it 'containers' do
         component = result['components'].find { |c| c['ref_ssi'] == ['aspace_ref6_lx4'] }
         expect(component['containers_ssim']).to eq ['box 1']
+      end
+
+      describe 'levels' do
+        let(:fixture_path) do
+          Arclight::Engine.root.join('spec', 'fixtures', 'ead', 'nlm', 'alphaomegaalpha.xml')
+        end
+        let(:level_component) { result['components'].find { |c| c['ref_ssi'] == ['aspace_a951375d104030369a993ff943f61a77'] } }
+        let(:other_level_component) { result['components'].find { |c| c['ref_ssi'] == ['aspace_e6db65d47e891d61d69c2798c68a8f02'] } }
+
+        it 'is the level Capitalized' do
+          expect(level_component['level_ssm']).to eq(['Series'])
+        end
+
+        it 'is the otherlevel attribute when the level attribute is "otherlevel"' do
+          expect(other_level_component['level_ssm']).to eq(['Binder'])
+        end
       end
     end
   end
@@ -207,6 +232,17 @@ describe 'EAD 2 traject indexing', type: :feature do
         expect(parent_access_terms_component['parent_access_terms_ssm'])
           .to eq ["Copyright was transferred to the public domain. Contact the Reference Staff for details\n        regarding rights."]
       end
+    end
+  end
+
+  describe 'containers in a component' do
+    let(:fixture_path) do
+      Arclight::Engine.root.join('spec', 'fixtures', 'ead', 'nlm', 'alphaomegaalpha.xml')
+    end
+
+    it 'only indexes containers within a given component' do
+      component = result['components'].find { |c| c['id'] == ['aoa271aspace_843e8f9f22bac69872d0802d6fffbb04'] }
+      expect(component['containers_ssim']).to eq ['box 1', 'folder 1']
     end
   end
 

@@ -100,4 +100,12 @@ RSpec.describe Arclight::Repository do
       expect(repo.city_state_zip_country).to eq 'My City, My State 12345'
     end
   end
+
+  describe 'extension' do
+    let(:repo) { described_class.find_by(slug: 'sample') }
+
+    it 'is possible' do
+      expect(repo.downstream_defined_field).to eq 'Custom Data From Consumer'
+    end
+  end
 end
