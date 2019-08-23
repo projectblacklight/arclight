@@ -265,8 +265,6 @@ compose 'components', ->(record, accumulator, _context) { accumulator.concat rec
   to_field 'geogname_ssm', extract_xpath('./xmlns:controlaccess/xmlns:geogname')
   to_field 'places_ssim', extract_xpath('xmlns:controlaccess/xmlns:geogname')
 
-  # Indexes the controlled terms for archival description into the access_subject field
-  # Please see https://www.loc.gov/ead/tglib/elements/controlaccess.html
   # Indexes only specified controlled terms for archival description into the access_subject field
   to_field 'access_subjects_ssim', extract_xpath('./xmlns:controlaccess', to_text: false) do |_record, accumulator|
     accumulator.map! do |element|
@@ -282,8 +280,10 @@ compose 'components', ->(record, accumulator, _context) { accumulator.concat rec
 
   # Indexes the acquisition group information into the notes field
   # Please see https://www.loc.gov/ead/tglib/elements/acqinfo.html
-  to_field 'acqinfo_ssim', extract_xpath('//xmlns:acqinfo/xmlns:note')
-  to_field 'acqinfo_ssim', extract_xpath('//xmlns:acqinfo/xmlns:p')
+  to_field 'acqinfo_ssim', extract_xpath('/xmlns:ead/xmlns:archdesc/xmlns:acqinfo/xmlns:note')
+  to_field 'acqinfo_ssim', extract_xpath('/xmlns:ead/xmlns:archdesc/xmlns:acqinfo/xmlns:p')
+  to_field 'acqinfo_ssim', extract_xpath('/xmlns:ead/xmlns:archdesc/xmlns:descgrp/xmlns:acqinfo/xmlns:note')
+  to_field 'acqinfo_ssim', extract_xpath('/xmlns:ead/xmlns:archdesc/xmlns:descgrp/xmlns:acqinfo/xmlns:p')
   to_field 'acqinfo_ssm' do |_record, accumulator, context|
     accumulator.concat(context.output_hash.fetch('acqinfo_ssim', []))
   end
@@ -297,7 +297,6 @@ compose 'components', ->(record, accumulator, _context) { accumulator.concat rec
     end
   end
   to_field 'bioghist_ssm', extract_xpath('xmlns:bioghist/*[local-name()!="head"]')
-  to_field 'acqinfo_ssm', extract_xpath('xmlns:acqinfo/*[local-name()!="head"]')
   to_field 'relatedmaterial_ssm', extract_xpath('xmlns:relatedmaterial/*[local-name()!="head"]')
   to_field 'separatedmaterial_ssm', extract_xpath('xmlns:separatedmaterial/*[local-name()!="head"]')
   to_field 'otherfindaid_ssm', extract_xpath('xmlns:otherfindaid/*[local-name()!="head"]')
