@@ -135,6 +135,14 @@ to_field 'date_range_sim', extract_xpath('.//xmlns:did/xmlns:unitdate/@normal', 
   accumulator.replace range.years
 end
 
+to_field 'names_coll_ssim', extract_xpath('/xmlns:ead/xmlns:archdesc[@level="collection"]/xmlns:controlaccess', to_text: false) do |_record, accumulator|
+  accumulator.map! do |element|
+    %w[corpname famname name persname].map do |selector|
+      element.xpath(".//xmlns:#{selector}").map(&:text)
+    end
+  end.flatten!
+end
+
 # Each component child document
 # <c> <c01> <c12>
 compose 'components', ->(record, accumulator, _context) { accumulator.concat record.xpath('//*[is_component(.)]', NokogiriXpathExtensions.new) } do
@@ -321,7 +329,6 @@ compose 'components', ->(record, accumulator, _context) { accumulator.concat rec
   to_field 'otherfindaid_ssm', extract_xpath('xmlns:otherfindaid/*[local-name()!="head"]')
   to_field 'altformavail_ssm', extract_xpath('xmlns:altformavail/*[local-name()!="head"]')
   to_field 'originalsloc_ssm', extract_xpath('xmlns:originalsloc/*[local-name()!="head"]')
-  # to_field 'names_coll_ssim'
 end
 
 each_record do |_record, context|
