@@ -79,9 +79,6 @@ Materials stored onsite. <corpname>History of Medicine Division. National Librar
 <abstract label="Abstract:">Briefing books, hearing and meeting transcripts, reports, and press clippings document the activities of the National Commission on Acquired Immune Deficiency Syndrome.  Materials cover all but the last year of the Commission's existence.  The majority of the collection consists of briefing books, and hearing and meeting transcripts of the National Commission.</abstract>
 </did>
 <descgrp type="admininfo">
-<acqinfo encodinganalog="541">
-<head>Provenance</head><p>Gift, John L. Parascandola, PHS Historian's Office, 3/1/1994, Acc. #812. Gift, Donald Goldman, Acc. #2005-21.</p>
-</acqinfo>
 <accessrestrict encodinganalog="506">
 <head>Access Restrictions</head>
 <p>No restrictions on access.</p>
@@ -199,6 +196,11 @@ Series I: Presidential Commission On The Human Immunodeficiency Virus Epidemic,
 <scopecontent>
 <p>This series contains transcripts of hearings and two reports from the first instance of the commission. The hearing transcripts cover topics such as IV drug abuse, social, legal, financial, ethical, and safety issues concerning AIDS.</p>
 </scopecontent>
+<descgrp type="admininfo">
+<acqinfo encodinganalog="541">
+<head>Provenance</head><p>Gift, John L. Parascandola, PHS Historian's Office, 3/1/1994, Acc. #812. Gift, Donald Goldman, Acc. #2005-21.</p>
+</acqinfo>
+</descgrp>
 <c02 id="d0e452" level="subseries">
 <did>
   <unitid type="digirepo">101083016Y2</unitid>
