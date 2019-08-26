@@ -1,4 +1,4 @@
-<header class="documentHeader row" data-document-id="<%= document.id %>">
+<div class="documentHeader row" data-document-id="<%= document.id %>">
   <% requestable = item_requestable?('', { document: document }) %>
   <h3 class="index_title document-title-heading col-md-8">
     <% if document.containers.present? %>
@@ -39,4 +39,4 @@
       <%= render partial: 'arclight/requests/google_form', locals: { document: document } %>
     <% end %>
   </div>
-</header>
+</div>

@@ -9,7 +9,7 @@
     var $currentDoc;
     var $previousDocs;
     var $nextDocs;
-    var headers = $doc.find('article header[data-document-id="' + id + '"]');
+    var headers = $doc.find('article div[data-document-id="' + id + '"]');
     if (headers.length === 0) {
       $.error('Document is missing id=' + id);
     }
