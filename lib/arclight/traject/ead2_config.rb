@@ -137,12 +137,10 @@ to_field 'date_range_sim', extract_xpath('.//xmlns:did/xmlns:unitdate/@normal', 
   accumulator.replace range.years
 end
 
-to_field 'names_coll_ssim', extract_xpath('/xmlns:ead/xmlns:archdesc[@level="collection"]/xmlns:controlaccess', to_text: false) do |_record, accumulator|
-  accumulator.map! do |element|
-    NAME_ELEMENTS.map do |selector|
-      element.xpath(".//xmlns:#{selector}").map(&:text)
-    end
-  end.flatten!
+NAME_ELEMENTS.map do |selector|
+  to_field 'names_coll_ssim', extract_xpath("/xmlns:ead/xmlns:archdesc/xmlns:controlaccess/xmlns:#{selector}")
+  to_field 'names_ssim', extract_xpath("//xmlns:#{selector}")
+  to_field "#{selector}_ssm", extract_xpath("//xmlns:#{selector}")
 end
 
 # Each component child document
@@ -289,7 +287,11 @@ compose 'components', ->(record, accumulator, _context) { accumulator.concat rec
     accumulator.replace range.years
   end
 
-  # to_field 'names_ssim'
+  NAME_ELEMENTS.map do |selector|
+    to_field 'names_ssim', extract_xpath("./xmlns:controlaccess/xmlns:#{selector}")
+    to_field "#{selector}_ssm", extract_xpath(".//xmlns:#{selector}")
+  end
+
   to_field 'geogname_sim', extract_xpath('./xmlns:controlaccess/xmlns:geogname')
   to_field 'geogname_ssm', extract_xpath('./xmlns:controlaccess/xmlns:geogname')
   to_field 'places_ssim', extract_xpath('xmlns:controlaccess/xmlns:geogname')
