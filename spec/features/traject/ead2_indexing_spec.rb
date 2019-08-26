@@ -231,6 +231,14 @@ describe 'EAD 2 traject indexing', type: :feature do
       end
     end
 
+    it 'indexes collection-level names' do
+      expect(result['names_coll_ssim']).to contain_exactly(
+        'Alpha Omega Alpha',
+        'Root, William Webster, 1867-1932',
+        'Bierring, Walter L. (Walter Lawrence), 1868-1961'
+      )
+    end
+
     it 'control access within a component' do
       component = result['components'].find { |c| c['id'] == ['aoa271aspace_81c806b82a14c3c79d395bbd383b886f'] }
       %w[access_subjects_ssm access_subjects_ssim].each do |field|
