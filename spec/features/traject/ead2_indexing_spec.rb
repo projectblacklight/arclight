@@ -203,6 +203,61 @@ describe 'EAD 2 traject indexing', type: :feature do
     end
   end
 
+  describe 'searchable notes' do
+    let(:fixture_path) do
+      Arclight::Engine.root.join('spec', 'fixtures', 'ead', 'nlm', 'alphaomegaalpha.xml')
+    end
+
+    it '#bioghist' do
+      expect(result['bioghist_ssm'].first).to match(/^Alpha Omega Alpha Honor Medical Society was founded/)
+      expect(result['bioghist_heading_ssm'].first).to match(/^Historical Note/)
+    end
+
+    it '#relatedmaterial' do
+      expect(result['relatedmaterial_ssm'].first).to match(/^An unprocessed collection includes/)
+    end
+
+    it 'abstract' do
+      expect(result['abstract_ssm'].first).to match(/^Alpha Omega Alpha Honor Medical Society/)
+    end
+
+    it '#separatedmaterial' do
+      expect(result['separatedmaterial_ssm'].first).to match(/^Birth, Apollonius of Perga brain/)
+    end
+
+    it '#otherfindaid' do
+      expect(result['otherfindaid_ssm'].first).to match(/^Li Europan lingues es membres del/)
+    end
+
+    it '#altformavail' do
+      expect(result['altformavail_ssm'].first).to match(/^Rig Veda a mote of dust suspended/)
+    end
+
+    it '#originalsloc' do
+      expect(result['originalsloc_ssm'].first).to match(/^Something incredible is waiting/)
+    end
+
+    it '#arrangement' do
+      expect(result['arrangement_ssm'].first).to eq 'Arranged into seven series.'
+    end
+
+    it '#acqinfo' do
+      expect(result['acqinfo_ssm'].first).to eq 'Donated by Alpha Omega Alpha.'
+    end
+
+    it '#appraisal' do
+      expect(result['appraisal_ssm'].first).to match(/^Corpus callosum something incredible/)
+    end
+
+    it '#custodhist' do
+      expect(result['custodhist_ssm'].first).to eq 'Maintained by Alpha Omega Alpha and the family of William Root.'
+    end
+
+    it '#processinfo' do
+      expect(result['processinfo_ssm'].first).to match(/^Processed in 2001\. Descended from astronomers\./)
+    end
+  end
+
   describe 'containers in a component' do
     let(:fixture_path) do
       Arclight::Engine.root.join('spec', 'fixtures', 'ead', 'nlm', 'alphaomegaalpha.xml')

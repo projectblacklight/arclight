@@ -16,6 +16,36 @@ require 'arclight/repository'
 extend TrajectPlus::Macros
 # rubocop:enable Style/MixinUsage
 
+SEARCHABLE_NOTES_FIELDS = %w[
+  accessrestrict
+  accruals
+  acqinfo
+  altformavail
+  appraisal
+  arrangement
+  bibliography
+  bioghist
+  custodhist
+  fileplan
+  note
+  odd
+  originalsloc
+  otherfindaid
+  phystech
+  prefercite
+  processinfo
+  relatedmaterial
+  scopecontent
+  separatedmaterial
+  userestrict
+].freeze
+
+DID_SEARCHABLE_NOTES_FIELDS = %w[
+  abstract
+  materialspec
+  physloc
+].freeze
+
 settings do
   provide 'nokogiri.namespaces',
           'xmlns' => 'urn:isbn:1-931666-22-9'
@@ -135,6 +165,13 @@ to_field 'date_range_sim', extract_xpath('.//xmlns:did/xmlns:unitdate/@normal', 
   accumulator.replace range.years
 end
 
+SEARCHABLE_NOTES_FIELDS.map do |selector|
+  to_field "#{selector}_ssm", extract_xpath("//xmlns:archdesc/xmlns:#{selector}/*[local-name()!='head']")
+  to_field "#{selector}_heading_ssm", extract_xpath("//xmlns:archdesc/xmlns:#{selector}/xmlns:head")
+end
+DID_SEARCHABLE_NOTES_FIELDS.map do |selector|
+  to_field "#{selector}_ssm", extract_xpath("//xmlns:did/xmlns:#{selector}")
+end
 # Each component child document
 # <c> <c01> <c12>
 compose 'components', ->(record, accumulator, _context) { accumulator.concat record.xpath('//*[is_component(.)]', NokogiriXpathExtensions.new) } do
@@ -220,8 +257,6 @@ compose 'components', ->(record, accumulator, _context) { accumulator.concat rec
   end
 
   to_field 'extent_ssm', extract_xpath('./xmlns:did/xmlns:physdesc/xmlns:extent')
-  to_field 'abstract_ssm', extract_xpath('./xmlns:did/xmlns:abstract')
-  to_field 'scopecontent_ssm', extract_xpath('./xmlns:scopecontent/xmlns:p')
   to_field 'creator_ssm', extract_xpath("./xmlns:did/xmlns:origination[@label='creator']")
   to_field 'creator_ssim', extract_xpath("./xmlns:did/xmlns:origination[@label='creator']")
   to_field 'creators_ssim', extract_xpath("./xmlns:did/xmlns:origination[@label='creator']")
@@ -258,7 +293,6 @@ compose 'components', ->(record, accumulator, _context) { accumulator.concat rec
     accumulator << context.output_hash['level_ssm']&.map(&:capitalize)
   end
 
-  to_field 'userestrict_ssm', extract_xpath('xmlns:userestrict/xmlns:p')
   # to_field 'parent_access_restrict_ssm'
   # to_field 'parent_access_terms_ssm'
   to_field 'digital_objects_ssm', extract_xpath('./xmlns:dao') do |record, accumulator|
@@ -298,21 +332,20 @@ compose 'components', ->(record, accumulator, _context) { accumulator.concat rec
   end
 
   to_field 'language_ssm', extract_xpath('xmlns:did/xmlns:langmaterial')
-  to_field 'accessrestrict_ssm', extract_xpath('xmlns:accessrestrict/*[local-name()!="head"]')
-  to_field 'prefercite_ssm', extract_xpath('xmlns:prefercite/*[local-name()!="head"]')
   to_field 'containers_ssim' do |record, accumulator|
     record.xpath('.//xmlns:container').each do |node|
       accumulator << [node.attribute('type'), node.text].join(' ').strip
     end
   end
-  to_field 'bioghist_ssm', extract_xpath('xmlns:bioghist/*[local-name()!="head"]')
-  to_field 'acqinfo_ssm', extract_xpath('xmlns:acqinfo/*[local-name()!="head"]')
-  to_field 'relatedmaterial_ssm', extract_xpath('xmlns:relatedmaterial/*[local-name()!="head"]')
-  to_field 'separatedmaterial_ssm', extract_xpath('xmlns:separatedmaterial/*[local-name()!="head"]')
-  to_field 'otherfindaid_ssm', extract_xpath('xmlns:otherfindaid/*[local-name()!="head"]')
-  to_field 'altformavail_ssm', extract_xpath('xmlns:altformavail/*[local-name()!="head"]')
-  to_field 'originalsloc_ssm', extract_xpath('xmlns:originalsloc/*[local-name()!="head"]')
   # to_field 'names_coll_ssim'
+  SEARCHABLE_NOTES_FIELDS.map do |selector|
+    to_field "#{selector}_ssm", extract_xpath(".//xmlns:#{selector}/*[local-name()!='head']")
+    to_field "#{selector}_heading_ssm", extract_xpath(".//xmlns:archdesc/xmlns:#{selector}/xmlns:head")
+  end
+  DID_SEARCHABLE_NOTES_FIELDS.map do |selector|
+    to_field "#{selector}_ssm", extract_xpath(".//xmlns:did/xmlns:#{selector}")
+  end
+  to_field 'did_note_ssm', extract_xpath('.//xmlns:did/xmlns:note')
 end
 
 each_record do |_record, context|
