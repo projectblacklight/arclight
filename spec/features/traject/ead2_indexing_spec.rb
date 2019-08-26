@@ -2,7 +2,7 @@
 
 require 'spec_helper'
 
-describe 'EAD 2 traject indexing', type: :feature do # rubocop:disable Metrics/BlockLength
+describe 'EAD 2 traject indexing', type: :feature do
   subject(:result) do
     indexer.map_record(record)
   end
