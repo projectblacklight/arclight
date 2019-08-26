@@ -1,7 +1,20 @@
 <div class='al-show-breadcrumb'>
-  <%= link_to t('arclight.routes.home'), root_path %>
-  <%= t('arclight.breadcrumb_separator') %>
-  <%= link_to t('arclight.routes.collections'), arclight_engine.collections_path %>
-  <%= t('arclight.breadcrumb_separator') %>
-  <%= safe_join([parents_to_links(document), document.normalized_title].reject(&:empty?), t('arclight.breadcrumb_separator'))  %>
+  <nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item al-bc-item">
+        <%= link_to t('arclight.routes.home'), root_path %>
+      </li>
+      <li class="breadcrumb-item al-bc-item">
+        <%= link_to t('arclight.routes.collections'), arclight_engine.collections_path %>
+      </li>
+      <% Arclight::Parents.from_solr_document(document).as_parents.map do |parent| %>
+        <%= content_tag :li, class: 'breadcrumb-item al-bc-item' do %>
+          <%= link_to parent.label, solr_document_path(parent.global_id) %>
+        <% end %>
+      <% end %>
+      <li class="breadcrumb-item al-bc-item active" aria-current="page">
+        <%= document.normalized_title %>
+      </li>
+    </ol>
+  </nav>
 </div>

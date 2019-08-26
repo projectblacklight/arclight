@@ -4,6 +4,27 @@
   margin-bottom: $spacer;
 }
 
+.al-show-breadcrumb .breadcrumb {
+  background-color: transparent;
+  padding: 0;
+}
+
+.breadcrumb-item {
+  flex: 1 0 100%;
+
+  + .breadcrumb-item.al-bc-item {
+    &::before {
+      content: '»';
+    }
+  }
+}
+
+@for $i from 1 to 14 {
+  .breadcrumb-item+.breadcrumb-item:nth-child(#{$i}) {
+    padding-left: ($i - 1) * 10px;
+  }
+}
+
 // Collapse arrow indicators
 .al-toggle-view-more,
 .al-toggle-view-all {
