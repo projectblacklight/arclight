@@ -209,27 +209,27 @@ describe 'EAD 2 traject indexing', type: :feature do
     end
 
     context 'when nested component' do
-      let(:self_access_restrict_component) { result['components'].find { |c| c['ref_ssi'] == ['aspace_dba76dab6f750f31aa5fc73e5402e71d'] } }
-      let(:parent_access_restrict_component) { result['components'].find { |c| c['ref_ssi'] == ['aspace_72f14d6c32e142baa3eeafdb6e4d69be'] } }
-      let(:self_access_terms_component) { result['components'].find { |c| c['ref_ssi'] == ['aspace_72f14d6c32e142baa3eeafdb6e4d69be'] } }
-      let(:parent_access_terms_component) { result['components'].find { |c| c['ref_ssi'] == ['aspace_dba76dab6f750f31aa5fc73e5402e71d'] } }
+      let(:component_with_access_restrict) { result['components'].find { |c| c['ref_ssi'] == ['aspace_dba76dab6f750f31aa5fc73e5402e71d'] } }
+      let(:component_where_parent_has_access_restrict) { result['components'].find { |c| c['ref_ssi'] == ['aspace_72f14d6c32e142baa3eeafdb6e4d69be'] } }
+      let(:component_with_access_terms) { result['components'].find { |c| c['ref_ssi'] == ['aspace_72f14d6c32e142baa3eeafdb6e4d69be'] } }
+      let(:component_where_parent_has_access_terms) { result['components'].find { |c| c['ref_ssi'] == ['aspace_dba76dab6f750f31aa5fc73e5402e71d'] } }
 
       it 'has access restrict' do
-        expect(self_access_restrict_component['parent_access_restrict_ssm']).to eq ['Restricted until 2018.']
+        expect(component_with_access_restrict['parent_access_restrict_ssm']).to eq ['Restricted until 2018.']
       end
 
-      it 'gets access restrict from parent if it does not have terms' do
-        expect(parent_access_restrict_component['parent_ssm']).to eq %w[aoa271]
-        expect(parent_access_restrict_component['parent_access_restrict_ssm']).to eq ['No restrictions on access.']
+      it 'gets access restrict from parent if component does not have terms' do
+        expect(component_where_parent_has_access_restrict['parent_ssm']).to eq %w[aoa271]
+        expect(component_where_parent_has_access_restrict['parent_access_restrict_ssm']).to eq ['No restrictions on access.']
       end
 
       it 'has access terms' do
-        expect(self_access_terms_component['parent_access_terms_ssm']).to eq ['Original photographs must be handled using gloves.']
+        expect(component_with_access_terms['parent_access_terms_ssm']).to eq ['Original photographs must be handled using gloves.']
       end
 
-      it 'gets access terms from document if self or parent does not have terms' do
-        expect(parent_access_terms_component['parent_ssm']).to eq %w[aoa271]
-        expect(parent_access_terms_component['parent_access_terms_ssm'])
+      it 'gets access terms from parent if component does not have terms' do
+        expect(component_where_parent_has_access_terms['parent_ssm']).to eq %w[aoa271]
+        expect(component_where_parent_has_access_terms['parent_access_terms_ssm'])
           .to eq ["Copyright was transferred to the public domain. Contact the Reference Staff for details\n        regarding rights."]
       end
     end
