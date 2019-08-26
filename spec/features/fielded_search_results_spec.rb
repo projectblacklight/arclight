@@ -61,7 +61,7 @@ RSpec.describe 'Field-based search results', type: :feature do
 
     context '#keyword' do
       it 'does a narrow search that has 1 hit' do
-        visit search_catalog_path q: 'a brief account', search_field: 'keyword'
+        visit search_catalog_path q: '"a brief account"', search_field: 'keyword'
         expect(page).to have_css '.index_title', count: 1
         within('.document-position-0') do
           expect(page).to have_css '.index_title', text: /A brief account/

@@ -12,6 +12,8 @@ require 'arclight/digital_object'
 require 'arclight/year_range'
 require 'arclight/repository'
 
+NAME_ELEMENTS = %w[corpname famname name persname].freeze
+
 # rubocop:disable Style/MixinUsage
 extend TrajectPlus::Macros
 # rubocop:enable Style/MixinUsage
@@ -172,6 +174,14 @@ end
 DID_SEARCHABLE_NOTES_FIELDS.map do |selector|
   to_field "#{selector}_ssm", extract_xpath("//xmlns:did/xmlns:#{selector}")
 end
+to_field 'names_coll_ssim', extract_xpath('/xmlns:ead/xmlns:archdesc[@level="collection"]/xmlns:controlaccess', to_text: false) do |_record, accumulator|
+  accumulator.map! do |element|
+    NAME_ELEMENTS.map do |selector|
+      element.xpath(".//xmlns:#{selector}").map(&:text)
+    end
+  end.flatten!
+end
+
 # Each component child document
 # <c> <c01> <c12>
 compose 'components', ->(record, accumulator, _context) { accumulator.concat record.xpath('//*[is_component(.)]', NokogiriXpathExtensions.new) } do
@@ -328,7 +338,17 @@ compose 'components', ->(record, accumulator, _context) { accumulator.concat rec
   end
 
   to_field 'access_subjects_ssm' do |_record, accumulator, context|
-    accumulator.concat Array.wrap(context.output_hash['access_subjects_ssim'])
+    accumulator.concat(context.output_hash.fetch('access_subjects_ssim', []))
+  end
+
+  # Indexes the acquisition group information into the notes field
+  # Please see https://www.loc.gov/ead/tglib/elements/acqinfo.html
+  to_field 'acqinfo_ssim', extract_xpath('/xmlns:ead/xmlns:archdesc/xmlns:acqinfo/*[local-name()!="head"]')
+  to_field 'acqinfo_ssim', extract_xpath('/xmlns:ead/xmlns:archdesc/xmlns:descgrp/xmlns:acqinfo/*[local-name()!="head"]')
+  to_field 'acqinfo_ssim', extract_xpath('./xmlns:acqinfo/*[local-name()!="head"]')
+  to_field 'acqinfo_ssim', extract_xpath('./xmlns:descgrp/xmlns:acqinfo/*[local-name()!="head"]')
+  to_field 'acqinfo_ssm' do |_record, accumulator, context|
+    accumulator.concat(context.output_hash.fetch('acqinfo_ssim', []))
   end
 
   to_field 'language_ssm', extract_xpath('xmlns:did/xmlns:langmaterial')
@@ -337,7 +357,6 @@ compose 'components', ->(record, accumulator, _context) { accumulator.concat rec
       accumulator << [node.attribute('type'), node.text].join(' ').strip
     end
   end
-  # to_field 'names_coll_ssim'
   SEARCHABLE_NOTES_FIELDS.map do |selector|
     to_field "#{selector}_ssm", extract_xpath(".//xmlns:#{selector}/*[local-name()!='head']")
     to_field "#{selector}_heading_ssm", extract_xpath(".//xmlns:archdesc/xmlns:#{selector}/xmlns:head")
@@ -346,6 +365,7 @@ compose 'components', ->(record, accumulator, _context) { accumulator.concat rec
     to_field "#{selector}_ssm", extract_xpath(".//xmlns:did/xmlns:#{selector}")
   end
   to_field 'did_note_ssm', extract_xpath('.//xmlns:did/xmlns:note')
+
 end
 
 each_record do |_record, context|
