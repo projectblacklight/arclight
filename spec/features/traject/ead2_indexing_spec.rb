@@ -239,12 +239,18 @@ describe 'EAD 2 traject indexing', type: :feature do
       )
     end
 
-    it 'control access within a component' do
+    it 'indexes controlaccess subjects within a component' do
       component = result['components'].find { |c| c['id'] == ['aoa271aspace_81c806b82a14c3c79d395bbd383b886f'] }
       %w[access_subjects_ssm access_subjects_ssim].each do |field|
         expect(component).to include field
         expect(component[field]).to contain_exactly 'Minutes'
       end
+    end
+
+    it 'indexes controlaccess names within a component' do
+      component = result['components'].find { |c| c['id'] == ['aoa271aspace_843e8f9f22bac69872d0802d6fffbb04'] }
+      expect(component).to include 'names_ssim'
+      expect(component['names_ssim']).to include('Robertson\'s Crab House')
     end
 
     it 'indexes geognames' do
