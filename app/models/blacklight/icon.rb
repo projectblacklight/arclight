@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 module Blacklight
+  ##
+  # Blacklight icons - add support for aria-hidden = true attribute for accessibility
   class Icon
     attr_reader :icon_name
     ##
@@ -54,6 +56,5 @@ module Blacklight
     def classes
       " blacklight-icons #{@classes} ".strip
     end
-
   end
 end
