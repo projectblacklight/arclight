@@ -9,31 +9,6 @@ RSpec.describe 'Collection Page', type: :feature do
     visit solr_document_path(id: doc_id)
   end
 
-  describe 'arclight document header' do
-    it 'includes a div with the repository and collection ID' do
-      within('.al-document-title-bar') do
-        expect(page).to have_content 'National Library of Medicine. History of Medicine Division'
-        expect(page).to have_content 'Collection ID: MS C 271'
-      end
-    end
-  end
-
-  describe 'online content indicator' do
-    context 'when there is online content available' do
-      it 'is rendered' do
-        expect(page).to have_css('.badge-success', text: 'online content')
-      end
-    end
-
-    context 'when there is no online content avilable' do
-      let(:doc_id) { 'm0198-xml' }
-
-      it 'is not rendered' do
-        expect(page).not_to have_css('.badge-success', text: 'online content')
-      end
-    end
-  end
-
   describe 'custom metadata sections' do
     it 'summary has configured metadata' do
       within '#summary' do

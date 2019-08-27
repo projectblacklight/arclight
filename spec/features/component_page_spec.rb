@@ -29,22 +29,10 @@ RSpec.describe 'Component Page', type: :feature do
     end
   end
 
-  describe 'Component section heading' do
-    it 'includes the level' do
-      expect(page).to have_css('h3.al-show-sub-heading', text: 'About this file')
-    end
-  end
-
   describe 'label/title' do
     it 'does not double escape entities in the heading' do
       expect(page).to have_css('h1', text: /^"A brief account of the origin of/)
       expect(page).not_to have_css('h1', text: /^&quot;A brief account of the origin of/)
-    end
-  end
-
-  describe 'Indexed Terms section heading' do
-    it 'includes the heading text' do
-      expect(page).to have_css('h3.al-show-sub-heading', text: 'Indexed Terms')
     end
   end
 
@@ -111,12 +99,6 @@ RSpec.describe 'Component Page', type: :feature do
   end
 
   describe 'collection context', js: true do
-    it 'has a linkable collection title' do
-      within '#collection-context' do
-        expect(page).to have_css 'a[href="/catalog/aoa271"]', text: 'Alpha Omega Alpha Archives, 1894-1992'
-        expect(page).to have_css 'h1'
-      end
-    end
     it 'has ancestor component with badge having children count' do
       within '#collection-context' do
         within '.al-hierarchy-level-0' do

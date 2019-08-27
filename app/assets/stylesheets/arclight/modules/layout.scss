@@ -6,22 +6,25 @@
 
 .al-show-breadcrumb .breadcrumb {
   background-color: transparent;
+  margin-bottom: 0;
   padding: 0;
 }
+
+.al-show-breadcrumb h1 { font-size: 1.5rem; }
 
 .breadcrumb-item {
   flex: 1 0 100%;
 
-  + .breadcrumb-item.al-bc-item {
+  &.al-bc-item {
     &::before {
-      content: '»';
+      content: '»' !important;
     }
   }
 }
 
 @for $i from 1 to 14 {
-  .breadcrumb-item+.breadcrumb-item:nth-child(#{$i}) {
-    padding-left: ($i - 1) * 10px;
+  .breadcrumb-item.breadcrumb-item-#{$i} {
+    padding-left: ($i - 1) * 10px !important;
   }
 }
 

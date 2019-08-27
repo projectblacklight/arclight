@@ -25,7 +25,7 @@ describe 'Document Tools', type: :feature do
     context 'for compontents' do
       let(:doc_id) { 'm0198-xmlaspace_ref11_d0s' }
 
-      it 'renders the bookmark option' do
+      pending 'renders the bookmark option' do
         expect(page).to have_css('.al-document-title-bar form.bookmark-toggle')
       end
     end
