@@ -365,7 +365,6 @@ compose 'components', ->(record, accumulator, _context) { accumulator.concat rec
     to_field "#{selector}_ssm", extract_xpath(".//xmlns:did/xmlns:#{selector}")
   end
   to_field 'did_note_ssm', extract_xpath('.//xmlns:did/xmlns:note')
-
 end
 
 each_record do |_record, context|

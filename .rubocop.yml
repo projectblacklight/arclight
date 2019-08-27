@@ -13,6 +13,11 @@ AllCops:
   TargetRubyVersion: 2.4
   DisplayCopNames: true
 
+Metrics/BlockLength:
+  Exclude:
+    - 'spec/features/traject/ead2_indexing_spec.rb'
+
+
 Rails:
   Enabled: true
 
