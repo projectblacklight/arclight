@@ -22,7 +22,6 @@ RSpec.describe 'Item breadcrumb', type: :feature do
   end
   it 'show page breadcrumbs' do
     visit solr_document_path id: 'aoa271aspace_e8755922a9336970292ca817983e7139'
-    expect(page).to have_css 'li.breadcrumb-item.al-bc-item', count: 7
     expect(page).to have_css 'li.breadcrumb-item.al-bc-item a', count: 6
   end
 end
