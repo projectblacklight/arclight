@@ -41,14 +41,6 @@ SEARCHABLE_NOTES_FIELDS = %w[
   userestrict
 ].freeze
 
-SEARCHABLE_NOTES_TEIM_FIELDS = %w[
-  accessrestrict
-  altformavail
-  prefercite
-  scopecontent
-  userestrict
-].freeze
-
 DID_SEARCHABLE_NOTES_FIELDS = %w[
   abstract
   materialspec
@@ -203,10 +195,9 @@ end
 SEARCHABLE_NOTES_FIELDS.map do |selector|
   to_field "#{selector}_ssm", extract_xpath("//xmlns:archdesc/xmlns:#{selector}/*[local-name()!='head']")
   to_field "#{selector}_heading_ssm", extract_xpath("//xmlns:archdesc/xmlns:#{selector}/xmlns:head") unless selector == 'prefercite'
-end
-SEARCHABLE_NOTES_TEIM_FIELDS.map do |selector|
   to_field "#{selector}_teim", extract_xpath("//xmlns:archdesc/xmlns:#{selector}/*[local-name()!='head']")
 end
+
 DID_SEARCHABLE_NOTES_FIELDS.map do |selector|
   to_field "#{selector}_ssm", extract_xpath("//xmlns:did/xmlns:#{selector}")
 end

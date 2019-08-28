@@ -212,6 +212,7 @@ describe 'EAD 2 traject indexing', type: :feature do
 
     it '#bioghist' do
       expect(result['bioghist_ssm'].first).to match(/^Alpha Omega Alpha Honor Medical Society was founded/)
+      expect(result['bioghist_teim'].second).to match(/Hippocratic oath/)
       expect(result['bioghist_heading_ssm'].first).to match(/^Historical Note/)
     end
 
