@@ -19,9 +19,7 @@ extend TrajectPlus::Macros
 # rubocop:enable Style/MixinUsage
 
 SEARCHABLE_NOTES_FIELDS = %w[
-  accessrestrict
   accruals
-  acqinfo
   altformavail
   appraisal
   arrangement
@@ -39,7 +37,6 @@ SEARCHABLE_NOTES_FIELDS = %w[
   relatedmaterial
   scopecontent
   separatedmaterial
-  userestrict
 ].freeze
 
 SEARCHABLE_NOTES_TEIM_FIELDS = %w[
@@ -48,7 +45,7 @@ SEARCHABLE_NOTES_TEIM_FIELDS = %w[
   prefercite
   scopecontent
   userestrict
-]
+].freeze
 
 DID_SEARCHABLE_NOTES_FIELDS = %w[
   abstract
@@ -144,8 +141,8 @@ to_field 'creator_corpname_ssim', extract_xpath("//xmlns:archdesc/xmlns:did/xmln
 to_field 'creator_famname_ssm', extract_xpath("//xmlns:archdesc/xmlns:did/xmlns:origination[@label='creator']/xmlns:famname")
 to_field 'creator_famname_ssim', extract_xpath("//xmlns:archdesc/xmlns:did/xmlns:origination[@label='creator']/xmlns:famname")
 
-to_field 'persname_sim', extract_xpath("//xmlns:persname")
-to_field 'persname_ssm', extract_xpath("//xmlns:persname")
+to_field 'persname_sim', extract_xpath('//xmlns:persname')
+to_field 'persname_ssm', extract_xpath('//xmlns:persname')
 
 to_field 'creators_ssim' do |_record, accumulator, context|
   accumulator.concat context.output_hash['creator_persname_ssm'] if context.output_hash['creator_persname_ssm']
@@ -160,6 +157,16 @@ to_field 'places_ssm', extract_xpath('//xmlns:archdesc/xmlns:controlaccess/xmlns
 to_field 'accessrestrict_ssm', extract_xpath('//xmlns:archdesc/xmlns:accessrestrict/xmlns:p')
 
 to_field 'access_terms_ssm', extract_xpath('//xmlns:archdesc/xmlns:userestrict/xmlns:p')
+
+# Indexes the acquisition group information into the notes field
+# Please see https://www.loc.gov/ead/tglib/elements/acqinfo.html
+to_field 'acqinfo_ssim', extract_xpath('/xmlns:ead/xmlns:archdesc/xmlns:acqinfo/*[local-name()!="head"]')
+to_field 'acqinfo_ssim', extract_xpath('/xmlns:ead/xmlns:archdesc/xmlns:descgrp/xmlns:acqinfo/*[local-name()!="head"]')
+to_field 'acqinfo_ssim', extract_xpath('./xmlns:acqinfo/*[local-name()!="head"]')
+to_field 'acqinfo_ssim', extract_xpath('./xmlns:descgrp/xmlns:acqinfo/*[local-name()!="head"]')
+to_field 'acqinfo_ssm' do |_record, accumulator, context|
+  accumulator.concat(context.output_hash.fetch('acqinfo_ssim', []))
+end
 
 # Indexes only specified controlled terms for archival description into the access_subject field
 to_field 'access_subjects_ssim', extract_xpath('//xmlns:archdesc/xmlns:controlaccess', to_text: false) do |_record, accumulator|
@@ -196,13 +203,6 @@ SEARCHABLE_NOTES_TEIM_FIELDS.map do |selector|
 end
 DID_SEARCHABLE_NOTES_FIELDS.map do |selector|
   to_field "#{selector}_ssm", extract_xpath("//xmlns:did/xmlns:#{selector}")
-end
-to_field 'names_coll_ssim', extract_xpath('/xmlns:ead/xmlns:archdesc[@level="collection"]/xmlns:controlaccess', to_text: false) do |_record, accumulator|
-  accumulator.map! do |element|
-    NAME_ELEMENTS.map do |selector|
-      element.xpath(".//xmlns:#{selector}").map(&:text)
-    end
-  end.flatten!
 end
 NAME_ELEMENTS.map do |selector|
   to_field 'names_coll_ssim', extract_xpath("/xmlns:ead/xmlns:archdesc/xmlns:controlaccess/xmlns:#{selector}")
