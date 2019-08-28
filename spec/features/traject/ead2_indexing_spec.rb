@@ -58,7 +58,7 @@ describe 'EAD 2 traject indexing', type: :feature do
     it 'dates' do
       expect(result['normalized_date_ssm']).to include 'circa 1900-1906'
       expect(result['unitdate_bulk_ssim']).to be_nil
-      expect(result['unitdate_inclusive_ssim']).to include 'circa 1900-1906'
+      expect(result['unitdate_inclusive_ssm']).to include 'circa 1900-1906'
       expect(result['unitdate_other_ssim']).to be_nil
     end
 

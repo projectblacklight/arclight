@@ -33,6 +33,14 @@ describe 'EAD 2 traject indexing', type: :feature do
       records.first
     end
 
+    before do
+      ENV['REPOSITORY_ID'] = 'sul-spec'
+    end
+
+    after do
+      ENV['REPOSITORY_ID'] = nil
+    end
+
     it 'the outputs should be the same' do
       pending('traject work still in progress')
       expect(result).to eq solr_ead_result
