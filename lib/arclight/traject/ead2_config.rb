@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+require 'logger'
 require 'traject'
 require 'traject/nokogiri_reader'
 require 'traject_plus'
@@ -61,6 +62,7 @@ settings do
           'xmlns' => 'urn:isbn:1-931666-22-9'
   provide 'solr_writer.commit_on_close', 'true'
   provide 'repository', ENV['REPOSITORY_ID']
+  provide 'logger', Logger.new($stderr)
 end
 
 each_record do |_record, context|
@@ -224,9 +226,17 @@ to_field 'language_ssm', extract_xpath('//xmlns:did/xmlns:langmaterial')
 # Each component child document
 # <c> <c01> <c12>
 compose 'components', ->(record, accumulator, _context) { accumulator.concat record.xpath('//*[is_component(.)]', NokogiriXpathExtensions.new) } do
-  to_field 'ref_ssi' do |record, accumulator|
+  to_field 'ref_ssi' do |record, accumulator, context|
     accumulator << if record.attribute('id').blank?
-                     Arclight::MissingIdStrategy.selected.new(record).to_hexdigest
+                     strategy = Arclight::MissingIdStrategy.selected
+                     hexdigest = strategy.new(record).to_hexdigest
+                     parent_id = context.clipboard[:parent].output_hash['id'].first
+                     logger.warn('MISSING ID WARNING') do
+                       [
+                         "A component in #{parent_id} did not have and ID so one was minted using the #{strategy} strategy.",
+                         "The ID of this document will be #{parent_id}#{hexdigest}."
+                       ].join(' ')
+                     end
                    else
                      record.attribute('id')&.value&.strip&.gsub('.', '-')
                    end
