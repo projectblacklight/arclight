@@ -399,6 +399,12 @@ describe 'EAD 2 traject indexing', type: :feature do
         expect(component['persname_ssm']).to include 'Anfinsen, Christian B.'
       end
     end
+  end
+
+  describe 'geognames' do
+    let(:fixture_path) do
+      Arclight::Engine.root.join('spec', 'fixtures', 'ead', 'nlm', 'alphaomegaalpha.xml')
+    end
 
     it 'indexes geognames' do
       component = result['components'].find { |d| d['id'] == ['aoa271aspace_843e8f9f22bac69872d0802d6fffbb04'] }
@@ -407,6 +413,12 @@ describe 'EAD 2 traject indexing', type: :feature do
 
       expect(component).to include 'geogname_ssm'
       expect(component['geogname_ssm']).to include('Popes Creek (Md.)')
+    end
+  end
+
+  describe 'date ranges' do
+    let(:fixture_path) do
+      Arclight::Engine.root.join('spec', 'fixtures', 'ead', 'nlm', 'alphaomegaalpha.xml')
     end
 
     it 'creates date_range_sim' do
@@ -417,10 +429,32 @@ describe 'EAD 2 traject indexing', type: :feature do
       expect(date_range.first).to eq 1902
       expect(date_range.last).to eq 1976
     end
+  end
 
-    describe 'for documents with <acqinfo> elements' do
+  describe 'for documents with <acqinfo> elements' do
+    let(:fixture_path) do
+      Arclight::Engine.root.join('spec', 'fixtures', 'ead', 'nlm', 'alphaomegaalpha.xml')
+    end
+
+    it 'indexes the values as stored facetable strings and multiple displayable strings' do
+      expect(result).to include 'components'
+      expect(result['components']).not_to be_empty
+      first_component = result['components'].first
+
+      expect(first_component).to include 'acqinfo_ssim'
+      expect(first_component['acqinfo_ssim']).to contain_exactly(
+        'Donated by Alpha Omega Alpha.'
+      )
+
+      expect(first_component).to include 'acqinfo_ssm'
+      expect(first_component['acqinfo_ssm']).to contain_exactly(
+        'Donated by Alpha Omega Alpha.'
+      )
+    end
+
+    context 'when documents have <acqinfo> elements within <descgrp> elements' do
       let(:fixture_path) do
-        Arclight::Engine.root.join('spec', 'fixtures', 'ead', 'nlm', 'alphaomegaalpha.xml')
+        Arclight::Engine.root.join('spec', 'fixtures', 'ead', 'nlm', 'ncaids544-id-test.xml')
       end
 
       it 'indexes the values as stored facetable strings and multiple displayable strings' do
@@ -430,35 +464,13 @@ describe 'EAD 2 traject indexing', type: :feature do
 
         expect(first_component).to include 'acqinfo_ssim'
         expect(first_component['acqinfo_ssim']).to contain_exactly(
-          'Donated by Alpha Omega Alpha.'
+          "Gift, John L. Parascandola, PHS Historian's Office, 3/1/1994, Acc. #812. Gift, Donald Goldman, Acc. #2005-21."
         )
 
         expect(first_component).to include 'acqinfo_ssm'
         expect(first_component['acqinfo_ssm']).to contain_exactly(
-          'Donated by Alpha Omega Alpha.'
+          "Gift, John L. Parascandola, PHS Historian's Office, 3/1/1994, Acc. #812. Gift, Donald Goldman, Acc. #2005-21."
         )
-      end
-
-      context 'when documents have <acqinfo> elements within <descgrp> elements' do
-        let(:fixture_path) do
-          Arclight::Engine.root.join('spec', 'fixtures', 'ead', 'nlm', 'ncaids544-id-test.xml')
-        end
-
-        it 'indexes the values as stored facetable strings and multiple displayable strings' do
-          expect(result).to include 'components'
-          expect(result['components']).not_to be_empty
-          first_component = result['components'].first
-
-          expect(first_component).to include 'acqinfo_ssim'
-          expect(first_component['acqinfo_ssim']).to contain_exactly(
-            "Gift, John L. Parascandola, PHS Historian's Office, 3/1/1994, Acc. #812. Gift, Donald Goldman, Acc. #2005-21."
-          )
-
-          expect(first_component).to include 'acqinfo_ssm'
-          expect(first_component['acqinfo_ssm']).to contain_exactly(
-            "Gift, John L. Parascandola, PHS Historian's Office, 3/1/1994, Acc. #812. Gift, Donald Goldman, Acc. #2005-21."
-          )
-        end
       end
     end
   end
