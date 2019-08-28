@@ -308,6 +308,11 @@ describe 'EAD 2 traject indexing', type: :feature do
       component = result['components'].find { |c| c['id'] == ['aoa271aspace_843e8f9f22bac69872d0802d6fffbb04'] }
       expect(component['containers_ssim']).to eq ['box 1', 'folder 1']
     end
+
+    it 'only indexes containers at the same level of the component' do
+      component = result['components'].find { |c| c['id'] == ['aoa271aspace_563a320bb37d24a9e1e6f7bf95b52671'] }
+      expect(component['containers_ssim']).to be_nil
+    end
   end
 
   describe 'subject elements' do
