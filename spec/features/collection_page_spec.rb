@@ -172,26 +172,6 @@ RSpec.describe 'Collection Page', type: :feature do
     end
   end
 
-  describe 'search within' do
-    it 'has only items from this collection' do
-      within('.al-sticky-sidebar') do
-        click_button 'Search'
-      end
-      within '#facet-collection_sim' do
-        expect(page).to have_css 'li', count: 1
-      end
-    end
-
-    it 'does not include the collection record' do
-      within('.al-sticky-sidebar') do
-        click_button 'Search'
-      end
-
-      expect(page).not_to have_css('h3.index_title', text: /Alpha Omega Alpha Archives/)
-      expect(page).to have_css('.page-entries', text: '1 - 10 of 37')
-    end
-  end
-
   describe 'tabbed display' do
     context 'collection has online content', js: true do
       it 'clicking contents toggles visibility' do
