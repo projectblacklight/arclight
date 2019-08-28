@@ -36,6 +36,7 @@ en:
         view_all_collections: View all of our collections
         view_more: View more
       show:
+        access: Access
         collection_id: 'Collection ID: %{id}'
         context_sidebar:
           cite_field: How to cite this collection

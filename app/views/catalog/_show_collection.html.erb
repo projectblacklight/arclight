@@ -25,6 +25,11 @@
               <% end %>
             </a>
           </li>
+          <li class='nav-item'>
+            <a class='nav-link' data-toggle='pill' href='#access' role='tab'>
+              <%= t 'arclight.views.show.access' %>
+            </a>
+          </li>
         </ul>
       </div>
 
@@ -42,6 +47,14 @@
       </div>
       <div class='tab-pane' id='online-content' role='tabpanel'>
         <%= render partial: 'collection_online_contents', locals: { document: document }  %>
+      </div>
+      <div class='tab-pane' id='access' role='tabpanel'>
+        <% unless blacklight_config.show.component_sidebar_items.nil? %>
+          <% items = blacklight_config.show.component_sidebar_items.select { |i|  fields_have_content?(@document, i) }  %>
+          <% items.each_with_index do |item, index| %>
+            <%= render partial: 'access_contents', locals: { document: @document, field_accessor: item, card_index: index} %>
+          <% end %>
+        <% end %>
       </div>
     </div>
   </div>
