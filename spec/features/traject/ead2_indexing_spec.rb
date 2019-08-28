@@ -167,10 +167,12 @@ describe 'EAD 2 traject indexing', type: :feature do
 
         it 'is the level Capitalized' do
           expect(level_component['level_ssm']).to eq(['Series'])
+          expect(level_component['level_sim']).to eq(['Series'])
         end
 
         it 'is the otherlevel attribute when the level attribute is "otherlevel"' do
           expect(other_level_component['level_ssm']).to eq(['Binder'])
+          expect(other_level_component['level_sim']).to eq(['Binder'])
         end
       end
     end
