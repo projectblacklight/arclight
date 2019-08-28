@@ -11,6 +11,7 @@ require 'active_support/core_ext/array/wrap'
 require 'arclight/digital_object'
 require 'arclight/year_range'
 require 'arclight/repository'
+require 'arclight/missing_id_strategy'
 
 NAME_ELEMENTS = %w[corpname famname name persname].freeze
 
@@ -224,7 +225,11 @@ to_field 'language_ssm', extract_xpath('//xmlns:did/xmlns:langmaterial')
 # <c> <c01> <c12>
 compose 'components', ->(record, accumulator, _context) { accumulator.concat record.xpath('//*[is_component(.)]', NokogiriXpathExtensions.new) } do
   to_field 'ref_ssi' do |record, accumulator|
-    accumulator << record.attribute('id')&.value&.strip&.gsub('.', '-')
+    accumulator << if record.attribute('id').blank?
+                     Arclight::MissingIdStrategy.selected.new(record).to_hexdigest
+                   else
+                     record.attribute('id')&.value&.strip&.gsub('.', '-')
+                   end
   end
   to_field 'ref_ssm' do |_record, accumulator, context|
     accumulator.concat context.output_hash['ref_ssi']
