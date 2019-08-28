@@ -89,7 +89,9 @@ Metrics/AbcSize:
 # ExcludedMethods: refine
 Metrics/BlockLength:
   Max: 278
-
+  Exclude:
+    - 'spec/features/traject/ead2_indexing_spec.rb'
+    
 # Offense count: 1
 # Configuration parameters: CountComments, ExcludedMethods.
 Metrics/MethodLength:

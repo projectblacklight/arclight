@@ -2,7 +2,7 @@
 
 require 'spec_helper'
 
-describe 'EAD 2 traject indexing', type: :feature do
+describe 'EAD 2 traject indexing', type: :feature do # rubocop:disable Metrics/BlockLength
   subject(:result) do
     indexer.map_record(record)
   end
@@ -258,6 +258,47 @@ describe 'EAD 2 traject indexing', type: :feature do
     end
   end
 
+  describe 'alphaomegaalpha list' do
+    let(:record) do
+      Traject::NokogiriReader.new(
+        File.read(
+          Arclight::Engine.root.join('spec', 'fixtures', 'ead', 'nlm', 'alphaomegaalpha.xml')
+        ).to_s,
+        {}
+      ).to_a.first
+    end
+
+    it 'selects the components' do
+      expect(result['components'].length).to eq 37
+    end
+
+    context 'when nested component' do
+      let(:component_with_access_restrict) { result['components'].find { |c| c['ref_ssi'] == ['aspace_dba76dab6f750f31aa5fc73e5402e71d'] } }
+      let(:component_where_parent_has_access_restrict) { result['components'].find { |c| c['ref_ssi'] == ['aspace_72f14d6c32e142baa3eeafdb6e4d69be'] } }
+      let(:component_with_access_terms) { result['components'].find { |c| c['ref_ssi'] == ['aspace_72f14d6c32e142baa3eeafdb6e4d69be'] } }
+      let(:component_where_parent_has_access_terms) { result['components'].find { |c| c['ref_ssi'] == ['aspace_dba76dab6f750f31aa5fc73e5402e71d'] } }
+
+      it 'has access restrict' do
+        expect(component_with_access_restrict['parent_access_restrict_ssm']).to eq ['Restricted until 2018.']
+      end
+
+      it 'gets access restrict from parent if component does not have terms' do
+        expect(component_where_parent_has_access_restrict['parent_ssm']).to eq %w[aoa271]
+        expect(component_where_parent_has_access_restrict['parent_access_restrict_ssm']).to eq ['No restrictions on access.']
+      end
+
+      it 'has access terms' do
+        expect(component_with_access_terms['parent_access_terms_ssm']).to eq ['Original photographs must be handled using gloves.']
+      end
+
+      it 'gets access terms from parent if component does not have terms' do
+        expect(component_where_parent_has_access_terms['parent_ssm']).to eq %w[aoa271]
+        expect(component_where_parent_has_access_terms['parent_access_terms_ssm'])
+          .to eq ["Copyright was transferred to the public domain. Contact the Reference Staff for details\n        regarding rights."]
+      end
+    end
+  end
+
   describe 'containers in a component' do
     let(:fixture_path) do
       Arclight::Engine.root.join('spec', 'fixtures', 'ead', 'nlm', 'alphaomegaalpha.xml')
@@ -269,7 +310,7 @@ describe 'EAD 2 traject indexing', type: :feature do
     end
   end
 
-  describe 'for control access elements' do
+  describe 'subject elements' do
     let(:fixture_path) do
       Arclight::Engine.root.join('spec', 'fixtures', 'ead', 'nlm', 'alphaomegaalpha.xml')
     end
@@ -286,19 +327,69 @@ describe 'EAD 2 traject indexing', type: :feature do
       end
     end
 
-    it 'indexes collection-level names' do
-      expect(result['names_coll_ssim']).to contain_exactly(
-        'Alpha Omega Alpha',
-        'Root, William Webster, 1867-1932',
-        'Bierring, Walter L. (Walter Lawrence), 1868-1961'
-      )
-    end
-
-    it 'control access within a component' do
+    it 'indexes controlaccess subjects within a component' do
       component = result['components'].find { |c| c['id'] == ['aoa271aspace_81c806b82a14c3c79d395bbd383b886f'] }
       %w[access_subjects_ssm access_subjects_ssim].each do |field|
         expect(component).to include field
         expect(component[field]).to contain_exactly 'Minutes'
+      end
+    end
+
+    context 'with nested controlaccess subject elements' do
+      let(:fixture_path) do
+        Arclight::Engine.root.join('spec', 'fixtures', 'ead', 'nlm', 'ncaids544-id-test.xml')
+      end
+
+      it 'indexes the values as controlled vocabulary terms' do
+        %w[access_subjects_ssm access_subjects_ssim].each do |field|
+          expect(result).to include field
+          expect(result[field]).to contain_exactly(
+            'Acquired Immunodeficiency Syndrome',
+            'African Americans',
+            'Homosexuality',
+            'Human Immunodeficiency Virus',
+            'Public Health'
+          )
+        end
+      end
+    end
+  end
+
+  describe 'name elements' do
+    let(:fixture_path) do
+      Arclight::Engine.root.join('spec', 'fixtures', 'ead', 'nlm', 'alphaomegaalpha.xml')
+    end
+
+    describe 'collection-level' do
+      it 'indexes collection-level <controlaccess> names in their own field' do
+        expect(result['names_coll_ssim']).to contain_exactly(
+          'Alpha Omega Alpha',
+          'Root, William Webster, 1867-1932',
+          'Bierring, Walter L. (Walter Lawrence), 1868-1961'
+        )
+      end
+
+      it 'indexes all names at any level in a shared names field' do
+        expect(result['names_ssim']).to include 'Root, William Webster, 1867-1932'
+        expect(result['names_ssim']).to include 'Robertson\'s Crab House'
+      end
+      it 'indexes all names at any level in a type-specific name field' do
+        expect(result['persname_ssm']).to include 'Anfinsen, Christian B.'
+        expect(result['corpname_ssm']).to include 'Robertson\'s Crab House'
+      end
+    end
+
+    describe 'component-level' do
+      it 'indexes <controlaccess> names in a shared names field' do
+        component = result['components'].find { |c| c['id'] == ['aoa271aspace_843e8f9f22bac69872d0802d6fffbb04'] }
+        expect(component).to include 'names_ssim'
+        expect(component['names_ssim']).to include 'Robertson\'s Crab House'
+      end
+
+      it 'indexes names in fields for specific name types, regardless of <controlaccess>' do
+        component = result['components'].find { |c| c['id'] == ['aoa271aspace_843e8f9f22bac69872d0802d6fffbb04'] }
+        expect(component['corpname_ssm']).to include 'Robertson\'s Crab House'
+        expect(component['persname_ssm']).to include 'Anfinsen, Christian B.'
       end
     end
 
@@ -318,25 +409,6 @@ describe 'EAD 2 traject indexing', type: :feature do
       expect(date_range.length).to eq 75
       expect(date_range.first).to eq 1902
       expect(date_range.last).to eq 1976
-    end
-
-    context 'with nested controlaccess elements' do
-      let(:fixture_path) do
-        Arclight::Engine.root.join('spec', 'fixtures', 'ead', 'nlm', 'ncaids544-id-test.xml')
-      end
-
-      it 'indexes the values as controlled vocabulary terms' do
-        %w[access_subjects_ssm access_subjects_ssim].each do |field|
-          expect(result).to include field
-          expect(result[field]).to contain_exactly(
-            'Acquired Immunodeficiency Syndrome',
-            'African Americans',
-            'Homosexuality',
-            'Human Immunodeficiency Virus',
-            'Public Health'
-          )
-        end
-      end
     end
 
     describe 'for documents with <acqinfo> elements' do

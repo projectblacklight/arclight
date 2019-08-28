@@ -157,6 +157,10 @@ to_field 'places_sim', extract_xpath('//xmlns:archdesc/xmlns:controlaccess/xmlns
 to_field 'places_ssim', extract_xpath('//xmlns:archdesc/xmlns:controlaccess/xmlns:geogname')
 to_field 'places_ssm', extract_xpath('//xmlns:archdesc/xmlns:controlaccess/xmlns:geogname')
 
+to_field 'accessrestrict_ssm', extract_xpath('//xmlns:archdesc/xmlns:accessrestrict/xmlns:p')
+
+to_field 'access_terms_ssm', extract_xpath('//xmlns:archdesc/xmlns:userestrict/xmlns:p')
+
 # Indexes only specified controlled terms for archival description into the access_subject field
 to_field 'access_subjects_ssim', extract_xpath('//xmlns:archdesc/xmlns:controlaccess', to_text: false) do |_record, accumulator|
   accumulator.map! do |element|
@@ -199,6 +203,11 @@ to_field 'names_coll_ssim', extract_xpath('/xmlns:ead/xmlns:archdesc[@level="col
       element.xpath(".//xmlns:#{selector}").map(&:text)
     end
   end.flatten!
+end
+NAME_ELEMENTS.map do |selector|
+  to_field 'names_coll_ssim', extract_xpath("/xmlns:ead/xmlns:archdesc/xmlns:controlaccess/xmlns:#{selector}")
+  to_field 'names_ssim', extract_xpath("//xmlns:#{selector}")
+  to_field "#{selector}_ssm", extract_xpath("//xmlns:#{selector}")
 end
 
 to_field 'language_sim', extract_xpath('//xmlns:did/xmlns:langmaterial')
@@ -326,8 +335,46 @@ compose 'components', ->(record, accumulator, _context) { accumulator.concat rec
     accumulator << context.output_hash['level_ssm']&.map(&:capitalize)
   end
 
-  # to_field 'parent_access_restrict_ssm'
-  # to_field 'parent_access_terms_ssm'
+  to_field 'accessrestrict_ssm', extract_xpath('./xmlns:accessrestrict/xmlns:p')
+
+  to_field 'parent_access_restrict_ssm', extract_xpath('./xmlns:accessrestrict/xmlns:p')
+
+  to_field 'parent_access_restrict_ssm' do |_record, accumulator, context|
+    next unless context.output_hash['accessrestrict_ssm'].nil?
+
+    context.output_hash['parent_ssm']&.each do |id|
+      accumulator.concat Array
+        .wrap(context.clipboard[:parent]&.output_hash&.[]('components'))
+        .select { |c| c['ref_ssi'] == [id] }.map { |c| c['accessrestrict_ssm'] }
+    end
+  end
+
+  to_field 'parent_access_restrict_ssm' do |_record, accumulator, context|
+    next unless context.output_hash['parent_access_restrict_ssm'].nil?
+
+    accumulator.concat Array.wrap(context.clipboard[:parent]&.output_hash&.[]('accessrestrict_ssm'))
+  end
+
+  to_field 'userestrict_ssm', extract_xpath('xmlns:userestrict/xmlns:p')
+
+  to_field 'parent_access_terms_ssm', extract_xpath('xmlns:userestrict/xmlns:p')
+
+  to_field 'parent_access_terms_ssm' do |_record, accumulator, context|
+    next unless context.output_hash['userestrict_ssm'].nil?
+
+    context.output_hash['parent_ssm']&.each do |id|
+      accumulator.concat Array
+        .wrap(context.clipboard[:parent]&.output_hash&.[]('components'))
+        .select { |c| c['ref_ssi'] == [id] }.map { |c| c['userestrict_ssm'] }
+    end
+  end
+
+  to_field 'parent_access_terms_ssm' do |_record, accumulator, context|
+    next unless context.output_hash['parent_access_terms_ssm'].nil?
+
+    accumulator << context.clipboard[:parent]&.output_hash&.[]('access_terms_ssm')&.first
+  end
+
   to_field 'digital_objects_ssm', extract_xpath('./xmlns:dao') do |record, accumulator|
     accumulator.concat(record.xpath('.//xmlns:dao', xmlns: 'urn:isbn:1-931666-22-9').map do |dao|
       label = dao.attributes['title']&.value ||
@@ -346,7 +393,11 @@ compose 'components', ->(record, accumulator, _context) { accumulator.concat rec
     accumulator.replace range.years
   end
 
-  # to_field 'names_ssim'
+  NAME_ELEMENTS.map do |selector|
+    to_field 'names_ssim', extract_xpath("./xmlns:controlaccess/xmlns:#{selector}")
+    to_field "#{selector}_ssm", extract_xpath(".//xmlns:#{selector}")
+  end
+
   to_field 'geogname_sim', extract_xpath('./xmlns:controlaccess/xmlns:geogname')
   to_field 'geogname_ssm', extract_xpath('./xmlns:controlaccess/xmlns:geogname')
   to_field 'places_ssim', extract_xpath('xmlns:controlaccess/xmlns:geogname')
