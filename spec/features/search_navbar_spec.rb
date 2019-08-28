@@ -13,7 +13,7 @@ RSpec.describe 'Search Navbar', type: :feature do
     it 'is active when collection search is activated' do
       visit search_catalog_path f: { level_sim: ['Collection'] }, search_field: 'all_fields'
       within '.navbar-search' do
-        expect(page).to have_css 'li.nav-item.active', text: 'Collections'
+        expect(page).not_to have_css 'li.nav-item.active', text: 'Collections'
       end
     end
   end

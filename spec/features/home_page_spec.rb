@@ -16,12 +16,19 @@ RSpec.describe 'Home Page', type: :feature do
   it 'does not have content' do
     expect(page).not_to have_css '#content'
   end
-  it 'does not have a search-navbar' do
-    expect(page).not_to have_css '#search-navbar'
+  it 'does have a navbar-nav' do
+    expect(page).to have_css '.navbar-nav'
+  end
+  it 'has a Respository link' do
+    expect(page).to have_css '.nav-link', text: 'Repositories'
+  end
+  it 'has a Collections link' do
+    expect(page).to have_css '.nav-link', text: 'Collections'
   end
   it 'has a title of Arclight' do
     expect(page.body).to include('<title>Arclight</title>')
   end
+
   context 'search dropdown' do
     it 'has all fields' do
       within('.search-field') do
