@@ -339,7 +339,9 @@ compose 'components', ->(record, accumulator, _context) { accumulator.concat rec
   end
 
   to_field 'level_sim' do |_record, accumulator, context|
-    accumulator << context.output_hash['level_ssm']&.map(&:capitalize)
+    next unless context.output_hash['level_ssm']
+
+    accumulator.concat context.output_hash['level_ssm']&.map(&:capitalize)
   end
 
   to_field 'parent_access_restrict_ssm', extract_xpath('./xmlns:accessrestrict/xmlns:p')
