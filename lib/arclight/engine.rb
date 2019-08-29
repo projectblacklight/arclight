@@ -2,6 +2,7 @@
 
 require 'blacklight'
 require 'traject'
+require 'active_model'
 require 'arclight/exceptions'
 require 'arclight/normalized_date'
 require 'arclight/normalized_id'
