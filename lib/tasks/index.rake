@@ -22,7 +22,7 @@ namespace :arclight do
     print "Loading #{ENV['FILE']} into index...\n"
     load_indexer # a leftover construct from solr_ead. Likely will need to be removed/modified when we remove that
     elapsed_time = Benchmark.realtime { 
-      `bundle exec traject -u #{ENV['SOLR_URL']} -i xml -c lib/arclight/traject/ead2_config.rb #{ENV['FILE']}`
+      `bundle exec traject -u #{ENV['SOLR_URL']} -i xml -c #{Arclight::Engine.root}/lib/arclight/traject/ead2_config.rb #{ENV['FILE']}`
     }
     print "Indexed #{ENV['FILE']} (in #{elapsed_time.round(3)} secs).\n"
   end
