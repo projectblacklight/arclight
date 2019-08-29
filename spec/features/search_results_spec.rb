@@ -105,8 +105,8 @@ RSpec.describe 'Search results', type: :feature do
 
         within('.blacklight-names_ssim') do
           expect(page).to have_css('h3 a', text: 'Names')
-          expect(page).to have_css('li .facet-label', text: 'Root, William Webster, 1867-1932', visible: false)
-          expect(page).to have_css('li .facet-label', text: 'Stanford University', visible: false)
+          expect(page).to have_css('li .facet-label', text: 'Department of Special Collections and University Archives', visible: false)
+          expect(page).to have_css('li .facet-label', text: '1118 Badger Vine Special Collections', visible: false)
         end
 
         within('.blacklight-repository_sim') do
@@ -122,11 +122,9 @@ RSpec.describe 'Search results', type: :feature do
 
         within('.blacklight-access_subjects_ssim') do
           expect(page).to have_css('h3 a', text: 'Subject')
-          expect(page).to have_css('li .facet-label', text: 'Societies', visible: false)
           expect(page).to have_css('li .facet-label', text: 'Fraternizing', visible: false)
           expect(page).to have_css('li .facet-label', text: 'Photographs', visible: false)
           expect(page).to have_css('li .facet-label', text: 'Medicine', visible: false)
-          expect(page).to have_css('li .facet-label', text: 'Records', visible: false)
         end
 
         within('.blacklight-has_online_content_ssim') do
