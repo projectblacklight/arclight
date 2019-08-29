@@ -19,15 +19,11 @@ namespace :arclight do
   desc 'Index an EAD document, use FILE=<path/to/ead.xml> and REPOSITORY_ID=<myid>'
   task :index do
     raise 'Please specify your EAD document, ex. FILE=<path/to/ead.xml>' unless ENV['FILE']
-    indexer = load_indexer
     print "Loading #{ENV['FILE']} into index...\n"
-    elapsed_time = if ENV['TRAJECT']
-                     Benchmark.realtime { 
-                       `bundle exec traject -u #{ENV['SOLR_URL']} -i xml -c lib/arclight/traject/ead2_config.rb #{ENV['FILE']}`
-                     }
-                   else
-                     Benchmark.realtime { indexer.update(ENV['FILE']) }
-                   end
+    load_indexer # a leftover construct from solr_ead. Likely will need to be removed/modified when we remove that
+    elapsed_time = Benchmark.realtime { 
+      `bundle exec traject -u #{ENV['SOLR_URL']} -i xml -c lib/arclight/traject/ead2_config.rb #{ENV['FILE']}`
+    }
     print "Indexed #{ENV['FILE']} (in #{elapsed_time.round(3)} secs).\n"
   end
 
