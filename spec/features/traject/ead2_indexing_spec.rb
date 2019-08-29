@@ -212,6 +212,7 @@ describe 'EAD 2 traject indexing', type: :feature do
 
     it '#bioghist' do
       expect(result['bioghist_ssm'].first).to match(/^Alpha Omega Alpha Honor Medical Society was founded/)
+      expect(result['bioghist_teim'].second).to match(/Hippocratic oath/)
       expect(result['bioghist_heading_ssm'].first).to match(/^Historical Note/)
     end
 
@@ -279,6 +280,7 @@ describe 'EAD 2 traject indexing', type: :feature do
       let(:component_where_parent_has_access_restrict) { result['components'].find { |c| c['ref_ssi'] == ['aspace_72f14d6c32e142baa3eeafdb6e4d69be'] } }
       let(:component_with_access_terms) { result['components'].find { |c| c['ref_ssi'] == ['aspace_72f14d6c32e142baa3eeafdb6e4d69be'] } }
       let(:component_where_parent_has_access_terms) { result['components'].find { |c| c['ref_ssi'] == ['aspace_dba76dab6f750f31aa5fc73e5402e71d'] } }
+      let(:component_with_many_parents) { result['components'].find { |c| c['ref_ssi'] == ['aspace_f934f1add34289f28bd0feb478e68275'] } }
 
       it 'has access restrict' do
         expect(component_with_access_restrict['parent_access_restrict_ssm']).to eq ['Restricted until 2018.']
@@ -297,6 +299,23 @@ describe 'EAD 2 traject indexing', type: :feature do
         expect(component_where_parent_has_access_terms['parent_ssm']).to eq %w[aoa271]
         expect(component_where_parent_has_access_terms['parent_access_terms_ssm'])
           .to eq ["Copyright was transferred to the public domain. Contact the Reference Staff for details\n        regarding rights."]
+      end
+
+      it 'parent_unittitles should be displayable and searchable' do
+        component = result['components'].find { |c| c['id'] == ['aoa271aspace_563a320bb37d24a9e1e6f7bf95b52671'] }
+        %w[parent_unittitles_ssm parent_unittitles_teim].each do |field|
+          expect(component[field]).to contain_exactly(
+            'Alpha Omega Alpha Archives, 1894-1992'
+          )
+        end
+      end
+
+      it 'parents are correctly ordered' do
+        expect(component_with_many_parents['parent_ssm']).to eq %w[
+          aoa271
+          aspace_563a320bb37d24a9e1e6f7bf95b52671
+          aspace_238a0567431f36f49acea49ef576d408
+        ]
       end
     end
   end

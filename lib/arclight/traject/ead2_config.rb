@@ -41,14 +41,6 @@ SEARCHABLE_NOTES_FIELDS = %w[
   userestrict
 ].freeze
 
-SEARCHABLE_NOTES_TEIM_FIELDS = %w[
-  accessrestrict
-  altformavail
-  prefercite
-  scopecontent
-  userestrict
-].freeze
-
 DID_SEARCHABLE_NOTES_FIELDS = %w[
   abstract
   materialspec
@@ -203,10 +195,9 @@ end
 SEARCHABLE_NOTES_FIELDS.map do |selector|
   to_field "#{selector}_ssm", extract_xpath("//xmlns:archdesc/xmlns:#{selector}/*[local-name()!='head']")
   to_field "#{selector}_heading_ssm", extract_xpath("//xmlns:archdesc/xmlns:#{selector}/xmlns:head") unless selector == 'prefercite'
-end
-SEARCHABLE_NOTES_TEIM_FIELDS.map do |selector|
   to_field "#{selector}_teim", extract_xpath("//xmlns:archdesc/xmlns:#{selector}/*[local-name()!='head']")
 end
+
 DID_SEARCHABLE_NOTES_FIELDS.map do |selector|
   to_field "#{selector}_ssm", extract_xpath("//xmlns:did/xmlns:#{selector}")
 end
@@ -255,7 +246,7 @@ compose 'components', ->(record, accumulator, _context) { accumulator.concat rec
       context.output_hash['unitdate_bulk_ssim'],
       context.output_hash['unitdate_other_ssim']
     ).to_s
-    title = context.output_hash['title_ssm'].first
+    title = context.output_hash['title_ssm']&.first
     accumulator << Arclight::NormalizedTitle.new(title, dates).to_s
   end
 
@@ -273,7 +264,7 @@ compose 'components', ->(record, accumulator, _context) { accumulator.concat rec
 
   to_field 'parent_ssm' do |record, accumulator, context|
     accumulator << context.clipboard[:parent].output_hash['id'].first
-    accumulator.concat NokogiriXpathExtensions.new.is_component(record.ancestors).map { |n| n.attribute('id').value }
+    accumulator.concat NokogiriXpathExtensions.new.is_component(record.ancestors).reverse.map { |n| n.attribute('id').value }
   end
 
   to_field 'parent_ssi' do |_record, accumulator, context|
@@ -289,6 +280,9 @@ compose 'components', ->(record, accumulator, _context) { accumulator.concat rec
         .wrap(context.clipboard[:parent].output_hash['components'])
         .find { |c| c['ref_ssi'] == [id] }&.[]('normalized_title_ssm')
     end
+  end
+  to_field 'parent_unittitles_teim' do |_record, accumulator, context|
+    accumulator.concat context.output_hash['parent_unittitles_ssm']
   end
 
   to_field 'unitid_ssm', extract_xpath('./xmlns:did/xmlns:unitid')
@@ -439,6 +433,7 @@ compose 'components', ->(record, accumulator, _context) { accumulator.concat rec
   SEARCHABLE_NOTES_FIELDS.map do |selector|
     to_field "#{selector}_ssm", extract_xpath(".//xmlns:#{selector}/*[local-name()!='head']")
     to_field "#{selector}_heading_ssm", extract_xpath(".//xmlns:archdesc/xmlns:#{selector}/xmlns:head")
+    to_field "#{selector}_teim", extract_xpath(".//xmlns:#{selector}/*[local-name()!='head']")
   end
   DID_SEARCHABLE_NOTES_FIELDS.map do |selector|
     to_field "#{selector}_ssm", extract_xpath(".//xmlns:did/xmlns:#{selector}")
