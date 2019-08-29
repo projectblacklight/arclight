@@ -299,6 +299,15 @@ describe 'EAD 2 traject indexing', type: :feature do
         expect(component_where_parent_has_access_terms['parent_access_terms_ssm'])
           .to eq ["Copyright was transferred to the public domain. Contact the Reference Staff for details\n        regarding rights."]
       end
+
+      it 'parent_unittitles should be displayable and searchable' do
+        component = result['components'].find { |c| c['id'] == ['aoa271aspace_563a320bb37d24a9e1e6f7bf95b52671'] }
+        %w[parent_unittitles_ssm parent_unittitles_teim].each do |field|
+          expect(component[field]).to contain_exactly(
+            'Alpha Omega Alpha Archives, 1894-1992'
+          )
+        end
+      end
     end
   end
 
