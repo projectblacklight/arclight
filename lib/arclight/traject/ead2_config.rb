@@ -264,7 +264,7 @@ compose 'components', ->(record, accumulator, _context) { accumulator.concat rec
 
   to_field 'parent_ssm' do |record, accumulator, context|
     accumulator << context.clipboard[:parent].output_hash['id'].first
-    accumulator.concat NokogiriXpathExtensions.new.is_component(record.ancestors).map { |n| n.attribute('id').value }
+    accumulator.concat NokogiriXpathExtensions.new.is_component(record.ancestors).reverse.map { |n| n.attribute('id').value }
   end
 
   to_field 'parent_ssi' do |_record, accumulator, context|
