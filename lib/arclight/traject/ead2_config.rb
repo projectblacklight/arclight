@@ -246,7 +246,7 @@ compose 'components', ->(record, accumulator, _context) { accumulator.concat rec
       context.output_hash['unitdate_bulk_ssim'],
       context.output_hash['unitdate_other_ssim']
     ).to_s
-    title = context.output_hash['title_ssm'].first
+    title = context.output_hash['title_ssm']&.first
     accumulator << Arclight::NormalizedTitle.new(title, dates).to_s
   end
 
