@@ -433,6 +433,7 @@ compose 'components', ->(record, accumulator, _context) { accumulator.concat rec
   SEARCHABLE_NOTES_FIELDS.map do |selector|
     to_field "#{selector}_ssm", extract_xpath(".//xmlns:#{selector}/*[local-name()!='head']")
     to_field "#{selector}_heading_ssm", extract_xpath(".//xmlns:archdesc/xmlns:#{selector}/xmlns:head")
+    to_field "#{selector}_teim", extract_xpath(".//xmlns:#{selector}/*[local-name()!='head']")
   end
   DID_SEARCHABLE_NOTES_FIELDS.map do |selector|
     to_field "#{selector}_ssm", extract_xpath(".//xmlns:did/xmlns:#{selector}")
