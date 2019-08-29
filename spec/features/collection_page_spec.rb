@@ -115,61 +115,62 @@ RSpec.describe 'Collection Page', type: :feature do
       end
     end
   end
+  
+
   describe 'navigation bar' do
-    it 'has configured links' do
-      within '.al-sidebar-navigation-overview' do
-        expect(page).to have_css 'a[href="#summary"]', text: 'Summary'
-        expect(page).to have_css 'a[href="#access-and-use"]', text: 'Access and Use'
-        expect(page).to have_css 'a[href="#background"]', text: 'Background'
-        expect(page).to have_css 'a[href="#related"]', text: 'Related'
-        expect(page).to have_css 'a[href="#indexed-terms"]', text: 'Indexed Terms'
-      end
-    end
+    # it 'has configured links' do
+    #   within '.al-sidebar-navigation-overview' do
+    #     expect(page).to have_css 'a[href="#summary"]', text: 'Summary'
+    #     expect(page).to have_css 'a[href="#access-and-use"]', text: 'Access and Use'
+    #     expect(page).to have_css 'a[href="#background"]', text: 'Background'
+    #     expect(page).to have_css 'a[href="#related"]', text: 'Related'
+    #     expect(page).to have_css 'a[href="#indexed-terms"]', text: 'Indexed Terms'
+    #   end
+    # end
 
-    context 'for sections that do not have metadata' do
-      let(:doc_id) { 'm0198-xml' }
+    # context 'for sections that do not have metadata' do
+    #   let(:doc_id) { 'm0198-xml' }
 
-      it 'does not include links to those sections' do
-        within '.al-sidebar-navigation-overview' do
-          expect(page).not_to have_css 'a[href="#related"]', text: 'Related'
-        end
-      end
-    end
+    #   it 'does not include links to those sections' do
+    #     within '.al-sidebar-navigation-overview' do
+    #       expect(page).not_to have_css 'a[href="#related"]', text: 'Related'
+    #     end
+    #   end
+    # end
 
-    describe 'context_sidebar' do
-      context 'that has a visitation note' do
-        let(:doc_id) { 'm0198-xml' }
+    # describe 'context_sidebar' do
+    #   context 'that has a visitation note' do
+    #     let(:doc_id) { 'm0198-xml' }
 
-        it 'has an in person card' do
-          within '#accordion' do
-            expect(page).to have_css '.card-header h3', text: 'In person'
-            expect(page).to have_css '.card-body dt', text: 'Before you visit:'
-            expect(page).to have_css '.card-body dd', text: /materials are stored offsite and must be paged/
-            expect(page).to have_css '.card-body dt', text: 'Location of this collection:'
-            expect(page).to have_css '.card-body dd a', text: /Special Collections and University Archives/
-            expect(page).to have_css '.card-body dd .al-repository-contact-building', text: 'Green Library'
-          end
-        end
-      end
+    #     it 'has an in person card' do
+    #       within '#accordion' do
+    #         expect(page).to have_css '.card-header h3', text: 'In person'
+    #         expect(page).to have_css '.card-body dt', text: 'Before you visit:'
+    #         expect(page).to have_css '.card-body dd', text: /materials are stored offsite and must be paged/
+    #         expect(page).to have_css '.card-body dt', text: 'Location of this collection:'
+    #         expect(page).to have_css '.card-body dd a', text: /Special Collections and University Archives/
+    #         expect(page).to have_css '.card-body dd .al-repository-contact-building', text: 'Green Library'
+    #       end
+    #     end
+    #   end
+    # end
 
-      it 'has a terms and conditions card' do
-        within '#accordion' do
-          expect(page).to have_css '.card-header h3', text: 'Terms & Conditions'
-          expect(page).to have_css '.card-body dt', text: 'Restrictions:'
-          expect(page).to have_css '.card-body dd', text: 'No restrictions on access.'
-          expect(page).to have_css '.card-body dt', text: 'Terms of Access:'
-          expect(page).to have_css '.card-body dd', text: /^Copyright was transferred/
-        end
-      end
+    # it 'has a terms and conditions card' do
+    #   within '#accordion' do
+    #     expect(page).to have_css '.card-header h3', text: 'Terms & Conditions'
+    #     expect(page).to have_css '.card-body dt', text: 'Restrictions:'
+    #     expect(page).to have_css '.card-body dd', text: 'No restrictions on access.'
+    #     expect(page).to have_css '.card-body dt', text: 'Terms of Access:'
+    #     expect(page).to have_css '.card-body dd', text: /^Copyright was transferred/
+    #   end
+    # end
 
-      it 'has a how to cite card' do
-        within '#accordion' do
-          expect(page).to have_css '.card-header h3', text: 'How to cite this collection'
-          expect(page).to have_css '.card-body dt', text: 'Preferred citation'
-          expect(page).to have_css '.card-body dd', text: /Omega Alpha Archives\. 1894-1992/
-        end
-      end
-    end
+    # it 'has a how to cite card' do
+    #   within '#accordion' do
+    #     expect(page).to have_css '.card-header h3', text: 'How to cite this collection'
+    #     expect(page).to have_css '.card-body dt', text: 'Preferred citation'
+    #     expect(page).to have_css '.card-body dd', text: /Omega Alpha Archives\. 1894-1992/
+    #   end
   end
 
   describe 'tabbed display' do
@@ -178,9 +179,15 @@ RSpec.describe 'Collection Page', type: :feature do
         click_link 'Contents'
         expect(page).to have_css '#contents', visible: true
         expect(page).to have_css '#overview', visible: false
+        expect(page).to have_css '#access', visible: false
         click_link 'Overview'
         expect(page).to have_css '#overview', visible: true
         expect(page).to have_css '#contents', visible: false
+        expect(page).to have_css '#access', visible: false
+        click_link 'Access'
+        expect(page).to have_css '#overview', visible: false
+        expect(page).to have_css '#contents', visible: false
+        expect(page).to have_css '#access', visible: true
       end
       it 'clicking online contents toggles visibility' do
         expect(page).to have_css '#overview', visible: true
@@ -188,6 +195,38 @@ RSpec.describe 'Collection Page', type: :feature do
         click_link 'Online content'
         expect(page).to have_css '#overview', visible: false
         expect(page).to have_css '#online-content', visible: true
+      end
+    end
+    context 'access tab has visitation notes', js: true do
+      let(:doc_id) { 'm0198-xml' }
+
+      it 'has visitation notes' do
+        click_link 'Access'
+        expect(page).to have_css 'dt', text: 'BEFORE YOU VISIT:', visible: true
+        expect(page).to have_css 'dd', text: /materials are stored offsite and must be paged/, visible: true
+        expect(page).to have_css 'dt', text: 'LOCATION OF THIS COLLECTION:', visible: true
+        expect(page).to have_css 'dd a', text: /Special Collections and University Archives/, visible: true
+        expect(page).to have_css 'dd .al-repository-contact-building', text: 'Green Library', visible: true
+      end
+    end
+
+    context 'access tab has terms and conditions', js: true do
+      let(:doc_id) { 'aoa271' }
+
+      it 'has a restrictions and access' do
+        expect(page).to have_css 'dt', text: 'RESTRICTIONS:'
+        expect(page).to have_css 'dd', text: 'No restrictions on access.'
+        expect(page).to have_css 'dt', text: 'TERMS OF ACCESS:'
+        expect(page).to have_css 'dd', text: /^Copyright was transferred/
+      end
+    end
+
+    context 'access tab has citations', js: true do
+      let(:doc_id) { 'aoa271' }
+
+      it 'has citations' do
+        expect(page).to have_css 'dt', text: 'PREFERRED CITATION:'
+        expect(page).to have_css 'dd', text: /Omega Alpha Archives\. 1894-1992/
       end
     end
 
