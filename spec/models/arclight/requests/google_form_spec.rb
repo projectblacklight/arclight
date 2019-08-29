@@ -7,8 +7,8 @@ RSpec.describe Arclight::Requests::GoogleForm do
 
   let(:config) do
     instance_double 'Arclight::Repository',
-                    google_request_url: 'https://docs.google.com/abc123',
-                    google_request_mappings: 'collection_name=abc&eadid=123'
+                    request_url_for_type: 'https://docs.google.com/abc123',
+                    request_mappings_for_type: 'collection_name=abc&eadid=123'
   end
   let(:document) { instance_double 'Blacklight::SolrDocument', repository_config: config }
   let(:presenter) { instance_double 'Arclight::ShowPresenter', heading: 'Indiana Jones and the Last Crusade' }

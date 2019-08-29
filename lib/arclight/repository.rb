@@ -29,8 +29,8 @@ module Arclight
     def request_config_present?
       return false unless request_types
       request_configs = request_types.map { |_k, v| v }
-      request_configs[0]&.fetch('request_url') &&
-        request_configs[0]&.fetch('request_mappings')
+      request_configs[0]&.fetch('request_url').present? &&
+        request_configs[0]&.fetch('request_mappings').present?
     end
 
     def request_config_present_for_type?(type)

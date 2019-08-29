@@ -12,8 +12,10 @@ sample:
   phone: '123-456-7890'
   contact_info: 'My Contact Info'
   thumbnail_url: 'http://example.com/thumbnail_ABC.jpg'
-  google_request_url: 'https://docs.google.com/abc123'
-  google_request_mappings: 'collection_name=abc&eadid=123'
+  request_types:
+      google_form:
+          request_url: 'https://docs.google.com/abc123'
+          request_mappings: 'collection_name=abc&eadid=123'
   downstream_defined_field: 'Custom Data From Consumer'
 sul-spec:
   name: 'Stanford University Libraries. Special Collections and University Archives'
