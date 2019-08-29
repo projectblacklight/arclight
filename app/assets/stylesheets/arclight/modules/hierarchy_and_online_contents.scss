@@ -54,7 +54,8 @@
   // Series level
   .blacklight-series .document-title-heading,
   .blacklight-file .document-title-heading,
-  .blacklight-otherlevel .document-title-heading {
+  .blacklight-binder .document-title-heading,
+  .blacklight-other .document-title-heading {
     font-size: $h5-font-size;
     font-weight: 400;
     margin-bottom: ($spacer / 2);
@@ -69,7 +70,8 @@
     // Additional for levels below series
     .blacklight-subseries .document-title-heading,
     .blacklight-file .document-title-heading,
-    .blacklight-otherlevel .document-title-heading {
+    .blacklight-binder .document-title-heading,
+    .blacklight-other .document-title-heading {
       font-size: $h6-font-size;
 
       .documentHeader {
@@ -80,7 +82,8 @@
     // Icongraphy for each level
     .blacklight-subseries .document-title-heading,
     .al-hierarchy-level-1 .blacklight-file .document-title-heading,
-    .al-hierarchy-level-1 .blacklight-otherlevel .document-title-heading {
+    .al-hierarchy-level-1 .blacklight-binder .document-title-heading,
+    .al-hierarchy-level-1 .blacklight-other .document-title-heading {
       padding-left: 10px;
 
       &:before {

@@ -229,7 +229,7 @@ RSpec.describe 'Collection Page', type: :feature do
         within '#contents' do
           within '.document-position-0' do
             click_link 'View'
-            within '.blacklight-otherlevel.document-position-3' do
+            within '.blacklight-other.document-position-3' do
               expect(page).to have_css '.document-title-containers', text: /Box 1, Folder 4\-5/
             end
             expect(page).to have_css 'a', text: 'Reports'
