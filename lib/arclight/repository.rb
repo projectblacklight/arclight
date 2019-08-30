@@ -26,6 +26,32 @@ module Arclight
       [city, state_zip, country].compact.join(', ')
     end
 
+    def request_config_present?
+      return false unless request_types
+      request_configs = request_types.map { |_k, v| v }
+      request_configs[0]&.fetch('request_url').present? &&
+        request_configs[0]&.fetch('request_mappings').present?
+    end
+
+    def request_config_present_for_type?(type)
+      return false unless type && request_config_present?
+      config = request_types[type]
+      config&.fetch('request_url').present? &&
+        config&.fetch('request_mappings').present?
+    end
+
+    def request_url_for_type(type)
+      return nil unless type && request_config_present_for_type?(type)
+      config = request_types.fetch(type)
+      config.fetch('request_url')
+    end
+
+    def request_mappings_for_type(type)
+      return nil unless type && request_config_present_for_type?(type)
+      config = request_types.fetch(type)
+      config.fetch('request_mappings')
+    end
+
     # Load repository information from a YAML file
     #
     # @param [String] `filename`

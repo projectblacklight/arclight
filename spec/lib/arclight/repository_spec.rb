@@ -77,11 +77,22 @@ RSpec.describe Arclight::Repository do
       it '#thumbnail_url' do
         expect(repo.thumbnail_url).to eq 'http://example.com/thumbnail_ABC.jpg'
       end
-      it '#google_request_url' do
-        expect(repo.google_request_url).to eq 'https://docs.google.com/abc123'
+    end
+    context 'methods' do
+      it '#request_config_present?' do
+        expect(repo.request_config_present?).to be true
       end
-      it '#google_request_mappings' do
-        expect(repo.google_request_mappings).to eq 'collection_name=abc&eadid=123'
+      it '#request_config_present_for_type? is present' do
+        expect(repo.request_config_present_for_type?('google_form')).to be true
+      end
+      it '#request_config_present_for_type? is not present' do
+        expect(repo.request_config_present_for_type?('fake_type')).to be false
+      end
+      it '#request_url_for_type' do
+        expect(repo.request_url_for_type('google_form')).to eq 'https://docs.google.com/abc123'
+      end
+      it '#request_mappings_for_type' do
+        expect(repo.request_mappings_for_type('google_form')).to eq 'collection_name=abc&eadid=123'
       end
     end
   end

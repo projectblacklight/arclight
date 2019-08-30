@@ -33,8 +33,7 @@ module Arclight
 
     def request_config_present(var, document)
       repository_config_present(var, document) &&
-        document.repository_config.google_request_url.present? &&
-        document.repository_config.google_request_mappings.present?
+        document.repository_config.request_config_present?
     end
 
     def context_sidebar_repository(args)
