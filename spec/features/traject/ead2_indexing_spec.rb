@@ -271,6 +271,23 @@ describe 'EAD 2 traject indexing', type: :feature do
       ).to_a.first
     end
 
+    it 'extent at the collection level' do
+      %w[extent_ssm extent_teim].each do |field|
+        expect(result[field]).to contain_exactly(
+          "15.0 linear feet (36 boxes + oversize\n          folder)"
+        )
+      end
+    end
+
+    it 'extent at the component level' do
+      component = result['components'].find { |c| c['ref_ssi'] == ['aspace_a951375d104030369a993ff943f61a77'] }
+      %w[extent_ssm extent_teim].each do |field|
+        expect(component[field]).to contain_exactly(
+          "1.5 Linear\n              Feet"
+        )
+      end
+    end
+
     it 'selects the components' do
       expect(result['components'].length).to eq 37
     end
