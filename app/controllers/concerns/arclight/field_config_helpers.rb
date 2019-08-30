@@ -13,6 +13,7 @@ module Arclight
         helper_method :repository_config_present
         helper_method :request_config_present
         helper_method :context_sidebar_repository
+        helper_method :access_repository_contact
         helper_method :before_you_visit_note_present
         helper_method :context_sidebar_visit_note
         helper_method :context_sidebar_containers_request
@@ -41,6 +42,15 @@ module Arclight
       document = args[:document]
       ApplicationController.renderer.render(
         'arclight/repositories/_in_person_repository',
+        layout: false,
+        locals: { repository: document.repository_config }
+      )
+    end
+
+    def access_repository_contact(args)
+      document = args[:document]
+      ApplicationController.renderer.render(
+        'arclight/repositories/_repository_contact',
         layout: false,
         locals: { repository: document.repository_config }
       )

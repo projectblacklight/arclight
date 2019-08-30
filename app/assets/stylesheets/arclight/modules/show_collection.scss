@@ -42,7 +42,6 @@
 #access {
   dl dt {
     font-size: $font-size-sm;
-    margin-top: 4px;
   }
 
   dl dd {
@@ -58,7 +57,8 @@
   }
 
   .al-in-person-repository-name,
-  .al-in-person-repository-location {
+  .al-in-person-repository-location,
+  .al-in-person-repository-contact {
     font-size: $font-size-sm;
     line-height: 1.25;
   }
