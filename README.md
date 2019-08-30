@@ -1,4 +1,5 @@
 [![Build Status](https://travis-ci.org/projectblacklight/arclight.svg?branch=master)](https://travis-ci.org/projectblacklight/arclight)
+[![All Contributors](https://img.shields.io/badge/all_contributors-17-orange.svg?style=flat-square)](CONTRIBUTORS.md)
 [![Code Climate Test Coverage](https://codeclimate.com/github/sul-dlss/arclight/badges/coverage.svg)](https://codeclimate.com/github/sul-dlss/arclight/coverage)
 
 # ArcLight
@@ -77,18 +78,9 @@ TRAJECT=true bundle exec rake arclight:seed
   * [MVP sprint demo videos](https://www.youtube.com/playlist?list=PLMdUaIJ0G8QgbuDCUVvFhTSTO96N37lRA)
   * [Project overview](https://wiki.duraspace.org/display/samvera/ArcLight+MVP)
 
-## ArcLight MVP Development team
+## Contributors
 
-* Stanford University
-  * [Camille Villa](https://github.com/camillevilla)
-  * [Darren Hardy](https://github.com/drh-stanford)
-  * [Gary Geisler](https://github.com/ggeisler)
-  * [Jack Reed](https://github.com/mejackreed)
-  * [Jennifer Vine](https://github.com/jvine)
-  * [Jessie Keck](https://github.com/jkeck)
-  * [Mark Matienzo](https://github.com/anarchivist)
-* University of Michigan
-  * [Gordon Leacock](https://github.com/gordonleacock)
+See the [CONTRIBUTORS](CONTRIBUTORS.md) file.
 
 ## Development
 
