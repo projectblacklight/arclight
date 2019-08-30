@@ -1,19 +1,13 @@
 # frozen_string_literal: true
 
 require 'blacklight'
-require 'solr_ead'
 require 'traject'
+require 'active_model'
 require 'arclight/exceptions'
 require 'arclight/normalized_date'
 require 'arclight/normalized_id'
 require 'arclight/normalized_title'
 require 'arclight/digital_object'
-require 'arclight/shared_indexing_behavior'
-require 'arclight/shared_terminology_behavior'
-require 'arclight/custom_document'
-require 'arclight/custom_component'
-require 'arclight/solr_ead_indexer_ext'
-require 'arclight/indexer'
 require 'arclight/viewer'
 
 module Arclight

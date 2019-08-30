@@ -12,6 +12,5 @@ Dir.glob('./tasks/*.rake').each { |f| load f }
 Dir.glob('./lib/tasks/*.rake').each { |f| load f }
 
 require 'engine_cart/rake_task'
-require 'solr_ead'
 
 task default: %i[rubocop eslint ci]

@@ -4,7 +4,7 @@ require 'arclight'
 require 'benchmark'
 
 ##
-# Environment variables for indexing:
+# Environment variables and information for indexing:
 #
 # REPOSITORY_ID for the repository id/slug to load repository data from
 # your configuration (default: none).
@@ -12,7 +12,8 @@ require 'benchmark'
 # REPOSITORY_FILE for the YAML file of your repository configuration
 # (default: config/repositories.yml).
 #
-# SOLR_URL for the location of your Solr instance
+# Blacklight default connection for the location of your Solr instance, SOLR_URL
+# as a backup
 # (default: http://127.0.0.1:8983/solr/blacklight-core)
 #
 namespace :arclight do
@@ -20,9 +21,13 @@ namespace :arclight do
   task :index do
     raise 'Please specify your EAD document, ex. FILE=<path/to/ead.xml>' unless ENV['FILE']
     print "Loading #{ENV['FILE']} into index...\n"
-    load_indexer # a leftover construct from solr_ead. Likely will need to be removed/modified when we remove that
+    solr_url = begin
+                 Blacklight.default_index.connection.base_uri
+               rescue StandardError
+                 ENV['SOLR_URL'] || 'http://127.0.0.1:8983/solr/blacklight-core'
+               end
     elapsed_time = Benchmark.realtime { 
-      `bundle exec traject -u #{ENV['SOLR_URL']} -i xml -c #{Arclight::Engine.root}/lib/arclight/traject/ead2_config.rb #{ENV['FILE']}`
+      `bundle exec traject -u #{solr_url} -i xml -c #{Arclight::Engine.root}/lib/arclight/traject/ead2_config.rb #{ENV['FILE']}`
     }
     print "Indexed #{ENV['FILE']} (in #{elapsed_time.round(3)} secs).\n"
   end
@@ -69,21 +74,9 @@ namespace :arclight do
   end
 
   desc 'Destroy all documents in the index'
-  task :destroy_index_docs do
+  task destroy_index_docs: :environment do
     puts 'Deleting all documents from index...'
-    indexer = load_indexer
-    indexer.delete_all
+    Blacklight.default_index.connection.delete_by_query('*:*')
+    Blacklight.default_index.connection.commit
   end
-end
-
-def load_indexer
-  # hardcoded since we don't have access to Blacklight.connection_config[:url] here
-  ENV['SOLR_URL'] ||= 'http://127.0.0.1:8983/solr/blacklight-core'
-
-  options = {
-    document: Arclight::CustomDocument,
-    component: Arclight::CustomComponent
-  }
-
-  Arclight::Indexer.new(options)
 end
