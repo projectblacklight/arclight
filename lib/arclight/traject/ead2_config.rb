@@ -49,6 +49,8 @@ DID_SEARCHABLE_NOTES_FIELDS = %w[
   physloc
 ].freeze
 
+NG_XPATH_EXTENSIONS = NokogiriXpathExtensions.new
+
 settings do
   provide 'nokogiri.namespaces',
           'xmlns' => 'urn:isbn:1-931666-22-9'
@@ -216,7 +218,7 @@ to_field 'language_ssm', extract_xpath('//xmlns:did/xmlns:langmaterial')
 
 # Each component child document
 # <c> <c01> <c12>
-compose 'components', ->(record, accumulator, _context) { accumulator.concat record.xpath('//*[is_component(.)]', NokogiriXpathExtensions.new) } do
+compose 'components', ->(record, accumulator, _context) { accumulator.concat record.xpath('//*[is_component(.)]', NG_XPATH_EXTENSIONS) } do
   to_field 'ref_ssi' do |record, accumulator, context|
     accumulator << if record.attribute('id').blank?
                      strategy = Arclight::MissingIdStrategy.selected
@@ -279,7 +281,7 @@ compose 'components', ->(record, accumulator, _context) { accumulator.concat rec
 
   to_field 'parent_ssm' do |record, accumulator, context|
     accumulator << context.clipboard[:parent].output_hash['id'].first
-    accumulator.concat NokogiriXpathExtensions.new.is_component(record.ancestors).reverse.map { |n| n.attribute('id').value }
+    accumulator.concat NG_XPATH_EXTENSIONS.is_component(record.ancestors).reverse.map { |n| n.attribute('id').value }
   end
 
   to_field 'parent_ssi' do |_record, accumulator, context|
