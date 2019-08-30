@@ -24,7 +24,7 @@ RSpec.describe 'Collection Page', type: :feature do
     end
     it 'access and use has configured metadata' do
       within '#access-and-use' do
-        expect(page).to have_css('dt', text: 'Conditions Governing Access')
+        expect(page).to have_css('dt', text: 'Conditions Governing Access:')
         expect(page).to have_css('dd', text: 'No restrictions on access.')
         expect(page).to have_css('dt', text: 'Terms Of Use')
         expect(page).to have_css('dd', text: /Copyright was transferred/)
@@ -157,6 +157,7 @@ RSpec.describe 'Collection Page', type: :feature do
       let(:doc_id) { 'aoa271' }
 
       it 'has a restrictions and access' do
+        click_link 'Access'
         expect(page).to have_css 'dt', text: 'RESTRICTIONS:'
         expect(page).to have_css 'dd', text: 'No restrictions on access.'
         expect(page).to have_css 'dt', text: 'TERMS OF ACCESS:'
@@ -168,8 +169,20 @@ RSpec.describe 'Collection Page', type: :feature do
       let(:doc_id) { 'aoa271' }
 
       it 'has citations' do
+        click_link 'Access'
         expect(page).to have_css 'dt', text: 'PREFERRED CITATION:'
         expect(page).to have_css 'dd', text: /Omega Alpha Archives\. 1894-1992/
+      end
+    end
+
+    context 'access tab has contact', js: true do
+      let(:doc_id) { 'a0011-xml'}
+
+      it 'has contacts' do
+        save_and_open_page(path = nil)
+        click_link 'Access'
+        expect(page).to have_css 'dt', text: 'CONTACT:'
+        expect(page).to have_css 'dd', text: /specialcollections@stanford.edu/
       end
     end
 
