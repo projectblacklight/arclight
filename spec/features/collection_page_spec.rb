@@ -176,10 +176,9 @@ RSpec.describe 'Collection Page', type: :feature do
     end
 
     context 'access tab has contact', js: true do
-      let(:doc_id) { 'a0011-xml'}
+      let(:doc_id) { 'a0011-xml' }
 
       it 'has contacts' do
-        save_and_open_page(path = nil)
         click_link 'Access'
         expect(page).to have_css 'dt', text: 'CONTACT:'
         expect(page).to have_css 'dd', text: /specialcollections@stanford.edu/

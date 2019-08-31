@@ -203,7 +203,7 @@ RSpec.describe 'Component Page', type: :feature do
     end
   end
 
-  describe 'access tab', js: true do    
+  describe 'access tab', js: true do
     it 'has visitation notes' do
       click_link 'Access'
       expect(page).to have_css 'dt', text: 'LOCATION OF THIS COLLECTION:'
