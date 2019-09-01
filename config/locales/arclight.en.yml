@@ -47,6 +47,8 @@ en:
         online_content: Online content
         our_collections: Our Collections
         overview: Overview
+        overview_nav:
+          title: Collection overview navigation
         sections:
           access_field: Access and Use
           admin_info_field: Administrative Information

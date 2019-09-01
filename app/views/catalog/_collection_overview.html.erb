@@ -1,7 +1,15 @@
-<h2 class="sr-only">Collection description</h2>
-<% unless blacklight_config.show.metadata_partials.nil? %>
-  <% blacklight_config.show.metadata_partials.each do |metadata| %>
-    <% next unless fields_have_content?(@document, metadata) %>
-    <%= render partial: 'custom_metadata', locals: { document: @document, field_accessor: metadata } %>
-  <% end %>
-<% end %>
+<div class="row">
+  <div class="col-md-3 order-md-10">
+    <%= render partial: 'collection_overview_nav' %>
+  </div>
+
+  <div class="col-md-9 order-md-1">
+    <h2 class="sr-only">Collection description</h2>
+    <% unless blacklight_config.show.metadata_partials.nil? %>
+      <% blacklight_config.show.metadata_partials.each do |metadata| %>
+        <% next unless fields_have_content?(@document, metadata) %>
+        <%= render partial: 'custom_metadata', locals: { document: @document, field_accessor: metadata } %>
+      <% end %>
+    <% end %>
+  </div>
+</div>
