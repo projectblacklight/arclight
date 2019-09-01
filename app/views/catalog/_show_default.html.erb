@@ -39,8 +39,8 @@
         <%= render_document_partial(document, 'arclight_viewer') %>
       </div>
       <div class='tab-pane' id='access' role='tabpanel'>
-        <% unless blacklight_config.show.component_sidebar_items.nil? %>
-          <% items = blacklight_config.show.component_sidebar_items.select { |i|  fields_have_content?(@document, i) }  %>
+        <% unless blacklight_config.show.component_access_tab_items.nil? %>
+          <% items = blacklight_config.show.component_access_tab_items.select { |i|  fields_have_content?(@document, i) }  %>
           <% items.each_with_index do |item, index| %>
             <%= render partial: 'access_contents', locals: { document: @document, field_accessor: item, card_index: index} %>
           <% end %>

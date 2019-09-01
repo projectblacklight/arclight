@@ -206,7 +206,7 @@ class CatalogController < ApplicationController
       indexed_terms_field
     ]
 
-    config.show.context_sidebar_items = %i[
+    config.show.context_access_tab_items = %i[
       terms_field
       cite_field
       in_person_field
@@ -218,7 +218,7 @@ class CatalogController < ApplicationController
       component_indexed_terms_field
     ]
 
-    config.show.component_sidebar_items = %i[
+    config.show.component_access_tab_items = %i[
       component_terms_field
       cite_field
       in_person_field
@@ -276,8 +276,8 @@ class CatalogController < ApplicationController
     config.add_summary_field 'prefercite_ssm', label: 'Preferred citation'
 
     # Collection and Component Show Page Access Tab - In Person Section
-    config.add_in_person_field 'repository_ssm', if: :repository_config_present, label: 'Location of this collection', helper_method: :context_sidebar_repository
-    config.add_in_person_field 'id', if: :before_you_visit_note_present, label: 'Before you visit', helper_method: :context_sidebar_visit_note # Using ID because we know it will always exist    
+    config.add_in_person_field 'repository_ssm', if: :repository_config_present, label: 'Location of this collection', helper_method: :context_access_tab_repository
+    config.add_in_person_field 'id', if: :before_you_visit_note_present, label: 'Before you visit', helper_method: :context_access_tab_visit_note # Using ID because we know it will always exist    
 
     # Collection Show Page Access Tab - Terms and Condition Section
     config.add_terms_field 'accessrestrict_ssm', label: 'Restrictions'

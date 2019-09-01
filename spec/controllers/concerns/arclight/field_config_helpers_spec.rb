@@ -50,9 +50,9 @@ RSpec.describe Arclight::FieldConfigHelpers do
     end
   end
 
-  describe '#context_sidebar_repository' do
+  describe '#context_access_tab_repository' do
     it 'renders the in_person_repository partial' do
-      content = Capybara.string(helper.context_sidebar_repository(document: document_with_repository))
+      content = Capybara.string(helper.context_access_tab_repository(document: document_with_repository))
       expect(content).to have_css('.al-in-person-repository-name', text: 'My Repository')
       expect(content).to have_css('address .al-repository-contact-building', text: 'My Building')
     end
@@ -78,9 +78,9 @@ RSpec.describe Arclight::FieldConfigHelpers do
     end
   end
 
-  describe '#context_sidebar_visit_note' do
+  describe '#context_access_visit_note' do
     it 'is returns the visit note' do
-      content = helper.context_sidebar_visit_note(document: document_with_repository)
+      content = helper.context_access_visit_note(document: document_with_repository)
       expect(content).to eq 'Containers are stored offsite and must be pages 2 to 3 days in advance'
     end
   end
