@@ -31,24 +31,23 @@
       </div>
     </div>
 
-    <div class='tab-content'>
-      <div class='tab-pane active' id='overview' role='tabpanel'>
-        <%= render 'collection_overview' %>
-      </div>
-      <div class='tab-pane' id='contents' role='tabpanel'>
-        <%= render 'collection_contents' %>
-      </div>
-      <div class='tab-pane' id='online-content' role='tabpanel'>
-        <%= render partial: 'collection_online_contents', locals: { document: document }  %>
-      </div>
-      <div class='tab-pane' id='access' role='tabpanel'>
-        <% unless blacklight_config.show.context_access_tab_items.nil? %>
-          <% items = blacklight_config.show.context_access_tab_items.select { |i|  fields_have_content?(@document, i) }  %>
-          <% items.each_with_index do |item, index| %>
-            <%= render partial: 'access_contents', locals: { document: @document, field_accessor: item, card_index: index} %>
-          <% end %>
+  <div class='tab-content'>
+    <div class='tab-pane active' id='overview' role='tabpanel'>
+      <%= render 'collection_overview' %>
+    </div>
+    <div class='tab-pane' id='contents' role='tabpanel'>
+      <%= render 'collection_contents' %>
+    </div>
+    <div class='tab-pane' id='online-content' role='tabpanel'>
+      <%= render partial: 'collection_online_contents', locals: { document: document }  %>
+    </div>
+    <div class='tab-pane' id='access' role='tabpanel'>
+      <% unless blacklight_config.show.context_access_tab_items.nil? %>
+        <% items = blacklight_config.show.context_access_tab_items.select { |i|  fields_have_content?(@document, i) }  %>
+        <% items.each_with_index do |item, index| %>
+          <%= render partial: 'access_contents', locals: { document: @document, field_accessor: item, card_index: index} %>
         <% end %>
-      </div>
+      <% end %>
     </div>
   </div>
 </div>
