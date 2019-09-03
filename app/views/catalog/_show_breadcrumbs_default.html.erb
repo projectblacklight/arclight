@@ -1,21 +1,6 @@
-<% parents = Arclight::Parents.from_solr_document(document).as_parents %>
-<div class='al-show-breadcrumb'>
-  <nav aria-label="breadcrumb">
-    <ol class="breadcrumb">
-      <li class="breadcrumb-item breadcrumb-item-1">
-        <%= link_to t('arclight.routes.home'), root_path %>
-      </li>
-      <li class="breadcrumb-item breadcrumb-item-2 al-bc-item">
-        <%= link_to t('arclight.routes.collections'), arclight_engine.collections_path %>
-      </li>
-      <% parents.each_with_index.map do |parent, index| %>
-        <%= content_tag :li, class: "breadcrumb-item breadcrumb-item-#{index + 3} al-bc-item" do %>
-          <%= link_to parent.label, solr_document_path(parent.global_id) %>
-        <% end %>
-      <% end %>
-    </ol>
-    <h1 class="breadcrumb-item breadcrumb-item-<%= parents.length + 3 %> al-bc-item">
-      <%= document.normalized_title %>
-    </h1>
-  </nav>
+<div class='row'>
+  <div class='al-show-breadcrumb col-md-9'>
+    <%= render partial: 'shared/show_breadcrumbs', locals: {document: document} %>
+  </div>
+  <%= render_document_partial(document, :show_actions_box) %>
 </div>

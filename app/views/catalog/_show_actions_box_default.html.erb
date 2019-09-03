@@ -1,0 +1,18 @@
+<div class='al-show-actions-box col-md-3'>
+
+  <div class='al-collection-id'>
+    <%= t(:'arclight.views.show.collection_id', id: document.unitid) %>
+    <% if document.containers.present? %>
+      <span>| <%= document.containers.join(', ') %></span>
+    <% end %>
+  </div>
+
+  <div class='mr-auto'>
+    <%= render partial: 'catalog/bookmark_control', locals: { document: document } %>
+  </div>
+
+  <div class='mr-auto'>
+      <%= render partial: 'arclight/requests/google_form', locals: { document: document } %>
+  </div>
+
+</div>
