@@ -264,7 +264,7 @@ class CatalogController < ApplicationController
     }
 
     # Component Show Page Access Tab - Terms and Condition Section
-    config.add_component_terms_field 'accessrestrict_ssm', label: 'Restrictions'
+    config.add_component_terms_field 'accessrestrict_ssm', label: 'Restrictions', helper_method: :highlight_terms
     config.add_component_terms_field 'parent_access_restrict_ssm', label: 'Parent Restrictions'
     config.add_component_terms_field 'parent_access_terms_ssm', label: 'Terms of Access'
 

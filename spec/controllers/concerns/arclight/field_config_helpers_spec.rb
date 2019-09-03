@@ -17,6 +17,9 @@ RSpec.describe Arclight::FieldConfigHelpers do
   let(:document_without_request) do
     SolrDocument.new(repository_ssm: ['Stanford University Libraries. Special Collections and University Archives'])
   end
+  let(:document_with_highlight) do
+    SolrDocument.new(accessrestrict_ssm: ['Restricted until 2018.'])
+  end
 
   describe '#repository_config_present' do
     it 'is true when the repository configuration is present' do
@@ -55,6 +58,13 @@ RSpec.describe Arclight::FieldConfigHelpers do
       content = Capybara.string(helper.context_access_tab_repository(document: document_with_repository))
       expect(content).to have_css('.al-in-person-repository-name', text: 'My Repository')
       expect(content).to have_css('address .al-repository-contact-building', text: 'My Building')
+    end
+  end
+
+  describe '#highlight_terms' do
+    it 'renders bg-info class' do
+      content = helper.highlight_terms(value: ['Restricted until 2018.'])
+      expect(content).to eq '<span class="bg-info">Restricted until 2018.</span>'
     end
   end
 

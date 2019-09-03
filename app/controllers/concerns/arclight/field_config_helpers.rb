@@ -16,6 +16,7 @@ module Arclight
         helper_method :access_repository_contact
         helper_method :before_you_visit_note_present
         helper_method :context_access_tab_visit_note
+        helper_method :highlight_terms
         helper_method :context_sidebar_containers_request
         helper_method :item_requestable?
         helper_method :paragraph_separator
@@ -63,6 +64,10 @@ module Arclight
     def context_access_tab_visit_note(args)
       document = args[:document]
       document.repository_config.visit_note
+    end
+
+    def highlight_terms(args)
+      safe_join(args[:value].map { |value| content_tag(:span, value, class: 'bg-info') })
     end
 
     def context_sidebar_containers_request(args)
