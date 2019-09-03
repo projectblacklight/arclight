@@ -181,8 +181,8 @@ to_field 'has_online_content_ssim', extract_xpath('.//xmlns:dao') do |_record, a
   accumulator.replace([accumulator.any?])
 end
 
-to_field 'extent_ssm', extract_xpath('//xmlns:did/xmlns:physdesc/xmlns:extent')
-to_field 'extent_teim', extract_xpath('//xmlns:did/xmlns:physdesc/xmlns:extent')
+to_field 'extent_ssm', extract_xpath('//xmlns:archdesc/xmlns:did/xmlns:physdesc/xmlns:extent')
+to_field 'extent_teim', extract_xpath('//xmlns:archdesc/xmlns:did/xmlns:physdesc/xmlns:extent')
 to_field 'genreform_sim', extract_xpath('//xmlns:archdesc/xmlns:controlaccess/xmlns:genreform')
 to_field 'genreform_ssm', extract_xpath('//xmlns:archdesc/xmlns:controlaccess/xmlns:genreform')
 
@@ -315,6 +315,7 @@ compose 'components', ->(record, accumulator, _context) { accumulator.concat rec
   end
 
   to_field 'extent_ssm', extract_xpath('./xmlns:did/xmlns:physdesc/xmlns:extent')
+  to_field 'extent_teim', extract_xpath('./xmlns:did/xmlns:physdesc/xmlns:extent')
   to_field 'creator_ssm', extract_xpath("./xmlns:did/xmlns:origination[@label='creator']")
   to_field 'creator_ssim', extract_xpath("./xmlns:did/xmlns:origination[@label='creator']")
   to_field 'creators_ssim', extract_xpath("./xmlns:did/xmlns:origination[@label='creator']")
