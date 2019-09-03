@@ -11,9 +11,15 @@ RSpec.describe 'Component Page', type: :feature do
     it 'clicking contents toggles visibility', js: true do
       expect(page).to have_css '#overview', visible: true
       expect(page).to have_css '#online-content', visible: false
+      expect(page).to have_css '#access', visible: false
       click_link 'Online content'
       expect(page).to have_css '#overview', visible: false
       expect(page).to have_css '#online-content', visible: true
+      expect(page).to have_css '#access', visible: false
+      click_link 'Access'
+      expect(page).to have_css '#overview', visible: false
+      expect(page).to have_css '#contents', visible: false
+      expect(page).to have_css '#access', visible: true
     end
 
     describe 'contents tab', js: true do
@@ -70,31 +76,6 @@ RSpec.describe 'Component Page', type: :feature do
 
     it 'uses our rules for displaying containers' do
       expect(page).to have_css('dd', text: 'Box 1, Folder 4-5')
-    end
-  end
-
-  describe 'sidebar' do
-    describe 'context_sidebar' do
-      context 'that has restrictions and terms of access' do
-        it 'has a terms and conditions card' do
-          within '#accordion' do
-            expect(page).to have_css('.card-header h3', text: 'Terms & Conditions')
-            expect(page).to have_css('.card-body dt', text: 'Restrictions:')
-            expect(page).to have_css('.card-body dd', text: 'No restrictions on access.')
-            expect(page).to have_css('.card-body dt', text: 'Terms of Access:')
-            expect(page).to have_css('.card-body dd', text: /^Copyright was transferred to the public domain./)
-          end
-        end
-      end
-      context 'that has a visitation note' do
-        it 'has an in person card' do
-          within '#accordion' do
-            expect(page).to have_css '.card-header h3', text: 'In person'
-            expect(page).to have_css '.card-body dt', text: 'Location of this collection:'
-            expect(page).to have_css '.card-body dd .al-repository-contact-building', text: 'Building 38, Room 1E-21'
-          end
-        end
-      end
     end
   end
 
@@ -221,6 +202,27 @@ RSpec.describe 'Component Page', type: :feature do
       end
     end
   end
+
+  describe 'access tab', js: true do
+    it 'has visitation notes' do
+      click_link 'Access'
+      expect(page).to have_css 'dt', text: 'LOCATION OF THIS COLLECTION:'
+      expect(page).to have_css 'dd', text: 'Building 38, Room 1E-21'
+    end
+    it 'has a restrictions and access' do
+      click_link 'Access'
+      expect(page).to have_css 'dt', text: 'PARENT RESTRICTIONS:'
+      expect(page).to have_css 'dd', text: 'No restrictions on access.'
+      expect(page).to have_css 'dt', text: 'TERMS OF ACCESS:'
+      expect(page).to have_css 'dd', text: /^Copyright was transferred to the public domain./
+    end
+    it 'has a contact' do
+      click_link 'Access'
+      expect(page).to have_css 'dt', text: 'CONTACT:'
+      expect(page).to have_css 'dd', text: 'hmdref@nlm.nih.gov'
+    end
+  end
+
   describe 'breadcrumb' do
     it 'links home, collection, and parents' do
       within '.al-show-breadcrumb' do

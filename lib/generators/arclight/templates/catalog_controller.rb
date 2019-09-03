@@ -206,10 +206,11 @@ class CatalogController < ApplicationController
       indexed_terms_field
     ]
 
-    config.show.context_sidebar_items = %i[
-      in_person_field
+    config.show.context_access_tab_items = %i[
       terms_field
       cite_field
+      in_person_field
+      contact_field
     ]
 
     config.show.component_metadata_partials = %i[
@@ -217,10 +218,11 @@ class CatalogController < ApplicationController
       component_indexed_terms_field
     ]
 
-    config.show.component_sidebar_items = %i[
-      in_person_field
+    config.show.component_access_tab_items = %i[
       component_terms_field
       cite_field
+      in_person_field
+      contact_field
     ]
 
     # Component Show Page - Metadata Section
@@ -261,8 +263,9 @@ class CatalogController < ApplicationController
       last_word_connector: '<br/>'
     }
 
-    # Component Show Page Sidebar - Terms and Condition Section
-    config.add_component_terms_field 'parent_access_restrict_ssm', label: 'Restrictions'
+    # Component Show Page Access Tab - Terms and Condition Section
+    config.add_component_terms_field 'accessrestrict_ssm', label: 'Restrictions', helper_method: :highlight_terms
+    config.add_component_terms_field 'parent_access_restrict_ssm', label: 'Parent Restrictions'
     config.add_component_terms_field 'parent_access_terms_ssm', label: 'Terms of Access'
 
     # Collection Show Page - Summary Section
@@ -272,21 +275,23 @@ class CatalogController < ApplicationController
     config.add_summary_field 'language_ssm', label: 'Language'
     config.add_summary_field 'prefercite_ssm', label: 'Preferred citation'
 
-    # Collection Show Page - In Person Section
-    config.add_in_person_field 'id', if: :before_you_visit_note_present, label: 'Before you visit', helper_method: :context_sidebar_visit_note # Using ID because we know it will always exist
-    config.add_in_person_field 'containers_ssim', if: :request_config_present, label: 'Request', helper_method: :context_sidebar_containers_request
-    config.add_in_person_field 'repository_ssm', if: :repository_config_present, label: 'Location of this collection', helper_method: :context_sidebar_repository
+    # Collection and Component Show Page Access Tab - In Person Section
+    config.add_in_person_field 'repository_ssm', if: :repository_config_present, label: 'Location of this collection', helper_method: :context_access_tab_repository
+    config.add_in_person_field 'id', if: :before_you_visit_note_present, label: 'Before you visit', helper_method: :context_access_tab_visit_note # Using ID because we know it will always exist    
 
-    # Collection Show Page - Terms and Condition Section
+    # Collection Show Page Access Tab - Terms and Condition Section
     config.add_terms_field 'accessrestrict_ssm', label: 'Restrictions'
     config.add_terms_field 'userestrict_ssm', label: 'Terms of Access'
 
-    # Collection Show Page - How to Cite Section
+    # Collection and Component Show Page Access Tab - How to Cite Section
     config.add_cite_field 'prefercite_ssm', label: 'Preferred citation'
 
     # Collection Show Page - Access Section
     config.add_access_field 'accessrestrict_ssm', label: 'Conditions Governing Access', helper_method: :paragraph_separator
     config.add_access_field 'userestrict_ssm', label: 'Terms Of Use', helper_method: :paragraph_separator
+
+    # Collection and Component Show Page Access Tab - Contact Section
+    config.add_contact_field 'repository_ssm', if: :repository_config_present, label: 'Contact', helper_method: :access_repository_contact
 
     # Collection Show Page - Background Section
     config.add_background_field 'scopecontent_ssm', label: 'Scope and Content', helper_method: :paragraph_separator

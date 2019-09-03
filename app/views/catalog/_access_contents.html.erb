@@ -1,0 +1,15 @@
+<% doc_presenter = show_presenter(document).with_field_group(field_accessor) %>
+<div class="container">
+  <dl class="row dl-invert">
+    <% generic_document_fields(field_accessor).each do |field_name, field| %>
+      <% if generic_should_render_field?(field_accessor, document, field) %>
+        <dt class="blacklight-<%= field_name.parameterize %> col-md-2">
+          <%= generic_render_document_field_label(field_accessor, document, field: field_name).upcase %>
+        </dt>
+        <dd class="blacklight-<%= field_name.parameterize %> col-md-10">
+          <%= doc_presenter.field_value field %>
+        </dd>
+      <% end %>
+    <% end %>
+  </dl>
+</div>

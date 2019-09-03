@@ -36,18 +36,12 @@ en:
         view_all_collections: View all of our collections
         view_more: View more
       show:
+        access: Access
         collection_id: 'Collection ID: %{id}'
-        context_sidebar:
-          cite_field: How to cite this collection
-          component_terms_field: Terms & Conditions
-          in_person_field: In person
-          terms_field: Terms & Conditions
         download:
           default: Download
           ead: Collection EAD (%{size})
           pdf: Collection PDF (%{size})
-        navigation_sidebar:
-          title: Navigation overview
         no_contents: No content inventory
         no_online_content: No online content
         online_content: Online content

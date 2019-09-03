@@ -12,9 +12,11 @@ module Arclight
       if respond_to?(:helper_method)
         helper_method :repository_config_present
         helper_method :request_config_present
-        helper_method :context_sidebar_repository
+        helper_method :context_access_tab_repository
+        helper_method :access_repository_contact
         helper_method :before_you_visit_note_present
-        helper_method :context_sidebar_visit_note
+        helper_method :context_access_tab_visit_note
+        helper_method :highlight_terms
         helper_method :context_sidebar_containers_request
         helper_method :item_requestable?
         helper_method :paragraph_separator
@@ -36,10 +38,19 @@ module Arclight
         document.repository_config.request_config_present?
     end
 
-    def context_sidebar_repository(args)
+    def context_access_tab_repository(args)
       document = args[:document]
       ApplicationController.renderer.render(
         'arclight/repositories/_in_person_repository',
+        layout: false,
+        locals: { repository: document.repository_config }
+      )
+    end
+
+    def access_repository_contact(args)
+      document = args[:document]
+      ApplicationController.renderer.render(
+        'arclight/repositories/_repository_contact',
         layout: false,
         locals: { repository: document.repository_config }
       )
@@ -49,9 +60,13 @@ module Arclight
       document.repository_config && document.repository_config.visit_note.present?
     end
 
-    def context_sidebar_visit_note(args)
+    def context_access_tab_visit_note(args)
       document = args[:document]
       document.repository_config.visit_note
+    end
+
+    def highlight_terms(args)
+      safe_join(args[:value].map { |value| content_tag(:span, value, class: 'bg-info') })
     end
 
     def context_sidebar_containers_request(args)

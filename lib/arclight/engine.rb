@@ -20,6 +20,7 @@ module Arclight
     Arclight::Engine.config.catalog_controller_field_accessors = %i[
       summary_field
       access_field
+      contact_field
       background_field
       related_field
       admin_info_field

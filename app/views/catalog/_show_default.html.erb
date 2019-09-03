@@ -1,8 +1,5 @@
 <div class='row'>
-  <div class='col-md-3'>
-    <%= render partial: 'show_component_sidebar' %>
-  </div>
-  <div class='col-md-9'>
+  <div class='col-md-12'>
     <ul class='nav nav-pills' role='tablist'>
       <li class='nav-item'>
         <a class='nav-link active' data-toggle='pill' href='#overview' role='tab'>
@@ -25,6 +22,11 @@
           <% end %>
         </a>
       </li>
+      <li class='nav-item'>
+        <a class='nav-link' data-toggle='pill' href='#access' role='tab'>
+          <%= t 'arclight.views.show.access' %>
+        </a>
+      </li>
     </ul>
     <div class='tab-content'>
       <div class='tab-pane active' id='overview' role='tabpanel'>
@@ -35,6 +37,14 @@
       </div>
       <div class='tab-pane' id='online-content' role='tabpanel'>
         <%= render_document_partial(document, 'arclight_viewer') %>
+      </div>
+      <div class='tab-pane' id='access' role='tabpanel'>
+        <% unless blacklight_config.show.component_access_tab_items.nil? %>
+          <% items = blacklight_config.show.component_access_tab_items.select { |i|  fields_have_content?(@document, i) }  %>
+          <% items.each_with_index do |item, index| %>
+            <%= render partial: 'access_contents', locals: { document: @document, field_accessor: item, card_index: index} %>
+          <% end %>
+        <% end %>
       </div>
     </div>
   </div>

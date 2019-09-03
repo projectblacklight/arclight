@@ -1,50 +1,3 @@
-// Sidebar
-.al-sticky-sidebar {
-  position: sticky;
-  top: 0;
-
-  // Separate first-level divs in sidebar
-  > div {
-    margin-bottom: $spacer;
-  }
-
-  .card-header h3 {
-    font-size: $h6-font-size;
-    font-weight: $font-weight-normal;
-  }
-
-  // Sidebar sections
-  dt {
-    color: $gray-700;
-    font-size: $font-size-sm;
-    font-weight: $font-weight-bold;
-    margin-bottom: 3px;
-    text-transform: uppercase;
-  }
-
-  dd {
-    line-height: 1.4;
-    margin-bottom: $spacer;
-  }
-
-  .al-in-person-repository-name,
-  .al-in-person-repository-location {
-    font-size: $font-size-sm;
-    line-height: 1.25;
-  }
-
-  .al-in-person-repository-name img {
-    margin-bottom: $headings-margin-bottom;
-    margin-right: $spacer;
-    max-height: 65px;
-    max-width: 65px;
-  }
-
-  .al-repository-contact-city_state_zip_country {
-    margin-bottom: ($spacer / 2);
-  }
-}
-
 // Collection header
 .al-show-header-section {
   border: $result-item-border-styling;
@@ -83,4 +36,34 @@
 
 .al-collection-actions-menu {
   float: right;
+}
+
+// Access tab
+#access {
+  dl dt {
+    font-size: $font-size-sm;
+  }
+
+  dl dd {
+    line-height: 1.4;
+    margin-bottom: $spacer;
+  }
+
+  img {
+    margin-bottom: $headings-margin-bottom;
+    margin-right: $spacer;
+    max-height: 150px;
+    max-width: 150px;
+  }
+
+  .al-in-person-repository-name,
+  .al-in-person-repository-location,
+  .al-in-person-repository-contact {
+    font-size: $font-size-sm;
+    line-height: 1.25;
+  }
+
+  .al-repository-contact-city_state_zip_country {
+    margin-bottom: ($spacer / 2);
+  }
 }
