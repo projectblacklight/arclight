@@ -65,4 +65,25 @@ describe Arclight::SearchBehavior do
       end
     end
   end
+  describe '#add_grouping' do
+    context 'when group is selected' do
+      let(:user_params) { { group: 'true' } }
+
+      it 'adds grouping params' do
+        expect(search_builder_instance.add_grouping(solr_params)).to include(
+          group: true,
+          'group.field' => 'collection_ssi',
+          'group.ngroups' => true,
+          'group.limit' => 3
+        )
+      end
+    end
+    context 'when group is not selected' do
+      it 'enables highlighting' do
+        expect(search_builder_instance.add_grouping(solr_params)).not_to include(
+          group: true
+        )
+      end
+    end
+  end
 end

@@ -112,6 +112,9 @@ end
 to_field 'collection_sim' do |_record, accumulator, context|
   accumulator.concat context.output_hash.fetch('normalized_title_ssm', [])
 end
+to_field 'collection_ssi' do |_record, accumulator, context|
+  accumulator.concat context.output_hash.fetch('normalized_title_ssm', [])
+end
 
 to_field 'repository_ssm' do |_record, accumulator, context|
   accumulator << context.clipboard[:repository]
@@ -311,6 +314,9 @@ compose 'components', ->(record, accumulator, _context) { accumulator.concat rec
     accumulator.concat context.clipboard[:parent].output_hash['normalized_title_ssm']
   end
   to_field 'collection_sim' do |_record, accumulator, context|
+    accumulator.concat context.clipboard[:parent].output_hash['normalized_title_ssm']
+  end
+  to_field 'collection_ssi' do |_record, accumulator, context|
     accumulator.concat context.clipboard[:parent].output_hash['normalized_title_ssm']
   end
 
