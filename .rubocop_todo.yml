@@ -70,7 +70,7 @@ Metrics/BlockLength:
 # Offense count: 1
 # Configuration parameters: CountComments.
 Metrics/ModuleLength:
-  Max: 104
+  Max: 114
 
 # Offense count: 1
 # Configuration parameters: Blacklist.

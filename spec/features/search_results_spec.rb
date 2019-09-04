@@ -17,7 +17,7 @@ RSpec.describe 'Search results', type: :feature do
         end
 
         expect(page).to have_css('h3 a', text: 'Alpha Omega Alpha Archives, 1894-1992')
-
+        expect(page).to have_css('.blacklight-icons svg')
         expect(page).to have_css('.al-document-creator', text: 'Alpha Omega Alpha')
         expect(page).to have_css('.al-document-extent', text: /^15\.0 linear feet/)
         expect(page).to have_css(
