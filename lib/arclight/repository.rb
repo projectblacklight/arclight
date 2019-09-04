@@ -58,7 +58,7 @@ module Arclight
     # @return [Hash<Slug,Repository>]
     def self.from_yaml(file)
       repos = {}
-      data = YAML.safe_load(File.read(file))
+      data  = YAML.safe_load(File.read(file))
       data.keys.each do |slug|
         repos[slug] = new(slug, data[slug])
       end
@@ -69,7 +69,7 @@ module Arclight
     #
     # @return [Array<Repository>]
     def self.all(yaml_file = nil)
-      yaml_file = ENV['REPOSITORY_FILE'] || 'config/repositories.yml' if yaml_file.nil?
+      yaml_file ||= (ENV['REPOSITORY_FILE'] || 'config/repositories.yml')
       from_yaml(yaml_file).values
     end
 
