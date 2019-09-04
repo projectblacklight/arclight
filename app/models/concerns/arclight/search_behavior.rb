@@ -52,6 +52,7 @@ module Arclight
         solr_params['group.field'] = 'collection_ssi'
         solr_params['group.ngroups'] = true
         solr_params['group.limit'] = 3
+        # Will provide the parent collection document
         solr_params['fl'] = '*,parent:[subquery]'
         solr_params['parent.fl'] = '*'
         solr_params['parent.q'] = '{!term f=collection_sim v=$row.collection_ssi}'
