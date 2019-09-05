@@ -1,4 +1,4 @@
-Blacklight.onLoad(function () {
+Blacklight.onLoad(() => {
   'use strict';
 
   $('[data-arclight-collection-context="true"]').each(function (i, element) {
