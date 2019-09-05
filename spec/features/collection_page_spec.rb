@@ -2,7 +2,7 @@
 
 require 'spec_helper'
 
-RSpec.describe 'Collection Page', type: :feature do # rubocop: disable Metrics/BlockLength
+RSpec.describe 'Collection Page', type: :feature do
   let(:doc_id) { 'aoa271' }
 
   before do
