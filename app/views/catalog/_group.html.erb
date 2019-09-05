@@ -6,8 +6,11 @@
       <div class='row'>
         <div class='col-md-12'>
           <h3>
-            <%= link_to_document parent_document, document_show_link_field(parent_document) %>
+            <%= show_presenter(parent_document).heading %>
           </h3>
+          <%= content_tag('span', class: 'badge badge-light') do %>
+            <%= parent_document.extent %>
+          <% end if parent_document.extent %>
           <%= content_tag('div', class: 'al-document-abstract-or-scope') do %>
             <%= content_tag('div', 'data-arclight-truncate' => true) do %>
               <%= parent_document.abstract_or_scope %>
