@@ -1,0 +1,12 @@
+<nav class='al-sidebar-navigation-overview al-sticky-sidebar' aria-label='<%= t('arclight.views.show.overview_nav.title') %>'>
+  <ul class='nav nav-pills flex-sm-row flex-md-column text-sm-left text-md-right'>
+    <% unless blacklight_config.show.metadata_partials.nil? %>
+      <% blacklight_config.show.metadata_partials.each do |item| %>
+        <% next unless fields_have_content?(@document, item) %>
+        <li class='nav-item'>
+          <%= link_to t("arclight.views.show.sections.#{item}"), "##{t("arclight.views.show.sections.#{item}").parameterize}", class: 'nav-link' %>
+        </li>
+      <% end %>
+    <% end %>
+  </ul>
+</nav>

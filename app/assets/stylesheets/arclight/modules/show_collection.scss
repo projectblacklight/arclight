@@ -23,6 +23,11 @@
 }
 
 // Collection overview
+.al-sticky-sidebar {
+  position: sticky;
+  top: 0;
+}
+
 .al-show-sub-heading {
   font-size: $h6-font-size;
   text-transform: uppercase;

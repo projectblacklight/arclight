@@ -2,7 +2,7 @@
 
 require 'spec_helper'
 
-RSpec.describe 'Collection Page', type: :feature do
+RSpec.describe 'Collection Page', type: :feature do # rubocop: disable Metrics/BlockLength
   let(:doc_id) { 'aoa271' }
 
   before do
@@ -112,6 +112,28 @@ RSpec.describe 'Collection Page', type: :feature do
 
       it 'are not displayed' do
         expect(page).not_to have_css('.al-show-sub-heading', text: 'Related')
+      end
+    end
+  end
+
+  describe 'navigation bar' do
+    it 'has configured links' do
+      within '.al-sidebar-navigation-overview' do
+        expect(page).to have_css 'a[href="#summary"]', text: 'Summary'
+        expect(page).to have_css 'a[href="#access-and-use"]', text: 'Access and Use'
+        expect(page).to have_css 'a[href="#background"]', text: 'Background'
+        expect(page).to have_css 'a[href="#related"]', text: 'Related'
+        expect(page).to have_css 'a[href="#indexed-terms"]', text: 'Indexed Terms'
+      end
+    end
+
+    context 'for sections that do not have metadata' do
+      let(:doc_id) { 'm0198-xml' }
+
+      it 'does not include links to those sections' do
+        within '.al-sidebar-navigation-overview' do
+          expect(page).not_to have_css 'a[href="#related"]', text: 'Related'
+        end
       end
     end
   end
