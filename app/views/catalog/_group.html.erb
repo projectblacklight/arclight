@@ -17,7 +17,7 @@
       </div>
     </div>
     <div class="grouped-documents">
-      <%= render_document_index g.docs %>
+      <%= render_grouped_documents(g.docs) %>
     </div>
     <% # TODO: Should be removed/changed in #704 %>
     <%- if g.total > @response.group_limit %>

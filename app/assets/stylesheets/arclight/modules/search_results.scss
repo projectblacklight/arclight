@@ -43,11 +43,14 @@
     padding: $result-item-body-padding;
 
     h3 {
-      font-size: $h5-font-size;
+      font-size: $h4-font-size;
     }
   }
   .grouped-documents {
     margin: $result-item-body-padding;
+    h4 {
+      font-size: $h5-font-size;
+    }
   }
 }
 

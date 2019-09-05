@@ -196,6 +196,26 @@ RSpec.describe ArclightHelper, type: :helper do
     end
   end
 
+  describe '#component_parents_to_links' do
+    let(:document) do
+      SolrDocument.new(
+        parent_ssm: %w[def ghi jkl],
+        parent_unittitles_ssm: %w[DEF GHI JKL],
+        ead_ssi: 'abc123'
+      )
+    end
+
+    it 'converts component "parents" from SolrDocument to links' do
+      expect(helper.component_parents_to_links(document)).not_to include 'DEF'
+      expect(helper.component_parents_to_links(document)).not_to include solr_document_path('abc123def')
+      expect(helper.component_parents_to_links(document)).to include 'GHI'
+      expect(helper.component_parents_to_links(document)).to include solr_document_path('abc123ghi')
+    end
+    it 'properly delimited' do
+      expect(helper.component_parents_to_links(document)).to include '»'
+    end
+  end
+
   describe 'document_header_icon' do
     let(:document) { SolrDocument.new('level_ssm': ['collection']) }
 
