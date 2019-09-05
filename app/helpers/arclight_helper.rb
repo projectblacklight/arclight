@@ -42,6 +42,18 @@ module ArclightHelper
     @response.response['numFound']
   end
 
+  def grouped?
+    try(:search_state) && search_state.params_for_search.try(:[], 'group') == 'true'
+  end
+
+  def search_with_group
+    search_catalog_path search_state.params_for_search.merge('group' => 'true')
+  end
+
+  def search_without_group
+    search_catalog_path(search_state.params_for_search.reject { |k| k == 'group' })
+  end
+
   ##
   # Looks for `document.unitid` in the downloads configuration
   # @param [SolrDocument] `document`

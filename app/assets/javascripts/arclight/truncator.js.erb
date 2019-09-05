@@ -11,7 +11,7 @@ Blacklight.onLoad(function () {
 
   // When elements get loaded from hierarchy
   $('.al-contents').on('navigation.contains.elements', function () {
-    $('a[data-toggle="pill"]').on('shown.bs.tab', function () {
+    $('a[data-toggle="tab"]').on('shown.bs.tab', function () {
       $('[data-arclight-truncate="true"]').each(function (_, el) {
         $(el).responsiveTruncate({
           more: "<%= I18n.t 'arclight.truncation.view_more' %>",

@@ -1,3 +1,19 @@
 .nav.nav-pills {
   margin-bottom: $spacer;
 }
+
+.nav.nav-tabs {
+  margin-bottom: 0;
+  & .nav-item .nav-link:not(.active) {
+    background: $gray-100;
+    border-color: $nav-tabs-border-color;
+  }
+}
+
+.tab-pane {
+  border-style: solid;
+  border-width: 0 1px 1px 1px;
+  border-color: $nav-tabs-border-color;
+  border-radius: 0px 0px $nav-tabs-border-radius $nav-tabs-border-radius;
+  padding: $spacer*2;
+}

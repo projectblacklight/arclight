@@ -23,6 +23,7 @@ en:
       index:
         collection_search:
           count: collection
+        group_by_collection: Group by collection
         number_of_children:
           one: 1 child
           other: "%{count} children"
@@ -47,6 +48,8 @@ en:
         online_content: Online content
         our_collections: Our Collections
         overview: Overview
+        overview_nav:
+          title: Collection overview navigation
         sections:
           access_field: Access and Use
           admin_info_field: Administrative Information
@@ -58,3 +61,4 @@ en:
           related_field: Related
           scope_and_arrangement_field: Scope and Arrangement
           summary_field: Summary
+        tablist_nav: Context
