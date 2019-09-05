@@ -37,6 +37,20 @@
   }
 }
 
+.al-grouped-results {
+  .al-grouped-title-bar {
+    background-color: $gray-200;
+    padding: $result-item-body-padding;
+
+    h3 {
+      font-size: $h5-font-size;
+    }
+  }
+  .grouped-documents {
+    margin: $result-item-body-padding;
+  }
+}
+
 .documents-compact {
   .document {
     .breadcrumb-links,

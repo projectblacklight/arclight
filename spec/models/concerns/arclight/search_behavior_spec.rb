@@ -74,7 +74,10 @@ describe Arclight::SearchBehavior do
           group: true,
           'group.field' => 'collection_ssi',
           'group.ngroups' => true,
-          'group.limit' => 3
+          'group.limit' => 3,
+          'parent.fl' => '*',
+          'parent.q' => '{!term f=collection_sim v=$row.collection_ssi}',
+          'parent.fq' => '{!term f=level_sim v="Collection"}'
         )
       end
     end
