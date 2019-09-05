@@ -5,6 +5,10 @@
     <div class='al-grouped-title-bar'>
       <div class='row'>
         <div class='col-md-12'>
+          <% repository = Arclight::Repository.find_by(name: parent_document.repository) %>
+          <div class='al-grouped-repository'>
+            <%= link_to_if(repository.present?, repository.name, arclight_engine.repository_path(repository.slug)) %>
+          </div>
           <h3>
             <%= link_to_document parent_document, document_show_link_field(parent_document) %>
           </h3>

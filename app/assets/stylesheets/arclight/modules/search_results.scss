@@ -38,6 +38,9 @@
 }
 
 .al-grouped-results {
+  .al-grouped-repository {
+    font-size: $font-size-sm;
+  }
   .al-grouped-title-bar {
     background-color: $gray-200;
     padding: $result-item-body-padding;
