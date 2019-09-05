@@ -453,14 +453,14 @@ compose 'components', ->(record, accumulator, _context) { accumulator.concat rec
     end
   end
   SEARCHABLE_NOTES_FIELDS.map do |selector|
-    to_field "#{selector}_ssm", extract_xpath(".//xmlns:#{selector}/*[local-name()!='head']")
-    to_field "#{selector}_heading_ssm", extract_xpath(".//xmlns:archdesc/xmlns:#{selector}/xmlns:head")
-    to_field "#{selector}_teim", extract_xpath(".//xmlns:#{selector}/*[local-name()!='head']")
+    to_field "#{selector}_ssm", extract_xpath("./xmlns:#{selector}/*[local-name()!='head']")
+    to_field "#{selector}_heading_ssm", extract_xpath("./xmlns:#{selector}/xmlns:head")
+    to_field "#{selector}_teim", extract_xpath("./xmlns:#{selector}/*[local-name()!='head']")
   end
   DID_SEARCHABLE_NOTES_FIELDS.map do |selector|
-    to_field "#{selector}_ssm", extract_xpath(".//xmlns:did/xmlns:#{selector}")
+    to_field "#{selector}_ssm", extract_xpath("./xmlns:did/xmlns:#{selector}")
   end
-  to_field 'did_note_ssm', extract_xpath('.//xmlns:did/xmlns:note')
+  to_field 'did_note_ssm', extract_xpath('./xmlns:did/xmlns:note')
 end
 
 each_record do |_record, context|
