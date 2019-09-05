@@ -35,6 +35,68 @@ RSpec.describe ArclightHelper, type: :helper do
       end
     end
   end
+  describe '#grouped?' do
+    context 'when group is active' do
+      let(:search_state) do
+        instance_double(
+          'Blacklight::SearchState',
+          params_for_search: { 'group' => 'true' }
+        )
+      end
+
+      before do
+        allow(helper).to receive(:search_state).and_return(search_state)
+      end
+      it do
+        expect(helper.grouped?).to be_truthy
+      end
+    end
+    context 'when not grouped' do
+      let(:search_state) do
+        instance_double(
+          'Blacklight::SearchState',
+          params_for_search: { 'hello' => 'true' }
+        )
+      end
+
+      before do
+        allow(helper).to receive(:search_state).and_return(search_state)
+      end
+      it do
+        expect(helper.grouped?).to be_falsey
+      end
+    end
+  end
+  describe '#search_with_group' do
+    let(:search_state) do
+      instance_double(
+        'Blacklight::SearchState',
+        params_for_search: { 'q' => 'hello' }
+      )
+    end
+
+    before do
+      allow(helper).to receive(:search_state).and_return(search_state)
+    end
+    it do
+      expect(helper.search_with_group).to eq '/catalog?group=true&q=hello'
+    end
+  end
+  describe '#search_without_group' do
+    let(:search_state) do
+      instance_double(
+        'Blacklight::SearchState',
+        params_for_search: { 'q' => 'hello', 'group' => 'true' }
+      )
+    end
+
+    before do
+      allow(helper).to receive(:search_state).and_return(search_state)
+    end
+    it do
+      expect(helper.search_without_group).to eq '/catalog?q=hello'
+    end
+  end
   describe '#on_repositories_index?' do
     before { allow(helper).to receive(:action_name).twice.and_return('index') }
 
