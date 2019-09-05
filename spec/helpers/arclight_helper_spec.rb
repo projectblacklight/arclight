@@ -195,6 +195,23 @@ RSpec.describe ArclightHelper, type: :helper do
       expect(helper.parents_to_links(SolrDocument.new)).not_to include '»'
     end
   end
+
+  describe 'document_header_icon' do
+    let(:document) { SolrDocument.new('level_ssm': ['collection']) }
+
+    it 'properly assigns the icon' do
+      expect(helper.document_header_icon(document)).to eq 'search'
+    end
+
+    context 'there is no level_ssm' do
+      let(:document) { SolrDocument.new }
+
+      it 'gives the default icon' do
+        expect(helper.document_header_icon(document)).to eq 'compact'
+      end
+    end
+  end
+
   describe 'custom field accessors' do
     let(:accessors) { Arclight::Engine.config.catalog_controller_field_accessors }
     let(:field) { :yolo }

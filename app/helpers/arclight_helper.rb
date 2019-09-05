@@ -125,6 +125,20 @@ module ArclightHelper
     size.to_s
   end
 
+  # determine which icon to show in search results header
+  # these icon names will need to be updated when the icons are determined
+  def document_header_icon(document)
+    level = document.level
+    case level
+    when 'collection'
+      'search'
+    when 'File'
+      'compact'
+    else
+      'compact'
+    end
+  end
+
   ##
   # Defines custom helpers used for creating unique metadata blocks to render
   Arclight::Engine.config.catalog_controller_field_accessors.each do |config_field|
