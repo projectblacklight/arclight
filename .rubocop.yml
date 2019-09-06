@@ -16,7 +16,11 @@ AllCops:
 Metrics/BlockLength:
   Exclude:
     - 'spec/features/traject/ead2_indexing_spec.rb'
+    - 'spec/helpers/arclight_helper_spec.rb'
 
+Metrics/ModuleLength:
+  Exclude:
+    - 'app/helpers/arclight_helper.rb'
 
 Rails:
   Enabled: true
