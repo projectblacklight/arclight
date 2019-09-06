@@ -31,4 +31,12 @@ RSpec.describe 'Grouped search results', type: :feature do
     visit search_catalog_path q: 'alpha', group: 'true'
     expect(page).to have_css '.al-grouped-repository a', text: /National Library of Medicine/
   end
+  it 'links to additional results in collection' do
+    visit search_catalog_path q: 'alpha', group: 'true'
+    expect(page).to have_css '.al-grouped-more', text: /Top 3 results/
+    expect(page).to have_css(
+      '.al-grouped-more a[href*="/catalog?f%5Bcollection_sim%5D%5B%5D=Alpha+Omega+Alpha+Archives%2C+1894-1992"]',
+      text: 'view all 6'
+    )
+  end
 end

@@ -70,6 +70,10 @@ module ArclightHelper
     search_state.params_for_search.reject { |k| k == 'group' }
   end
 
+  def search_within_collection(collection_name, search)
+    search.merge(f: { collection_sim: [collection_name] })
+  end
+
   ##
   # Looks for `document.unitid` in the downloads configuration
   # @param [SolrDocument] `document`
