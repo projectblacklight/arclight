@@ -113,16 +113,16 @@ RSpec.describe Arclight::Repository do
   end
 
   context 'the repositories.yml template for the generator is valid' do
-    let(:repositories_yml_template_file) {
-      SPEC_ROOT.parent + "lib/generators/arclight/templates/config/repositories.yml"
-    }
+    let(:repositories_yml_template_file) do
+      SPEC_ROOT.parent + 'lib/generators/arclight/templates/config/repositories.yml'
+    end
 
-    it "successfully loads the template repositories file" do
+    it 'successfully loads the template repositories file' do
       nlm = described_class.find_by(slug: 'nlm', yaml_file: repositories_yml_template_file)
       expect(nlm.city).to eq 'Bethesda'
     end
 
-    it "has new-style request_type" do
+    it 'has new-style request_type' do
       raw_yaml_hash = YAML.safe_load(File.read(repositories_yml_template_file))
       nlm = described_class.find_by(slug: 'nlm', yaml_file: repositories_yml_template_file)
       google_form_url = nlm.request_url_for_type('google_form')

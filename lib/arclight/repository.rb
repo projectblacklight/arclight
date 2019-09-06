@@ -69,9 +69,7 @@ module Arclight
     #
     # @return [Array<Repository>]
     def self.all(yaml_file = nil)
-      if yaml_file.nil?
-        yaml_file = ENV['REPOSITORY_FILE'] || 'config/repositories.yml'
-      end
+      yaml_file = ENV['REPOSITORY_FILE'] || 'config/repositories.yml' if yaml_file.nil?
       from_yaml(yaml_file).values
     end
 
