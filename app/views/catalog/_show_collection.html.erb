@@ -4,17 +4,17 @@
       <div class='col-lg-12'>
         <ul class='nav nav-tabs nav-fill' role='tablist' aria-label='<%= t('arclight.views.show.tablist_nav') %>'>
           <li class='nav-item flex-fill'>
-            <a class='nav-link p-1 p-sm-3 active' data-toggle='tab' href='#overview' role='tab'>
+            <a class='nav-link p-1 p-sm-2 active' data-toggle='tab' href='#overview' role='tab'>
               <%= t 'arclight.views.show.overview' %>
             </a>
           </li>
           <li class='nav-item flex-fill'>
-            <a class='nav-link p-1 p-sm-3 disabled' data-toggle='tab' href='#contents' role='tab' data-hierarchy-enable-me='true'>
+            <a class='nav-link p-1 p-sm-2 disabled' data-toggle='tab' href='#contents' role='tab' data-hierarchy-enable-me='true'>
               <%= t 'arclight.views.show.no_contents' %>
             </a>
           </li>
           <li class='nav-item flex-fill'>
-            <a class='nav-link p-1 p-sm-3 <%= 'disabled' unless document.digital_objects.present? || document.online_content? %>' data-toggle='tab' href='#online-content' role='tab' data-arclight-online-content-tab='true'>
+            <a class='nav-link p-1 p-sm-2 <%= 'disabled' unless document.digital_objects.present? || document.online_content? %>' data-toggle='tab' href='#online-content' role='tab' data-arclight-online-content-tab='true'>
               <% if document.digital_objects.present? || document.online_content? %>
                 <%= t 'arclight.views.show.online_content' %>
               <% else %>
@@ -23,7 +23,7 @@
             </a>
           </li>
           <li class='nav-item flex-fill'>
-            <a class='nav-link p-1 p-sm-3' data-toggle='tab' href='#access' role='tab'>
+            <a class='nav-link p-1 p-sm-2' data-toggle='tab' href='#access' role='tab'>
               <%= t 'arclight.views.show.access' %>
             </a>
           </li>
