@@ -79,7 +79,10 @@ RSpec.describe ArclightHelper, type: :helper do
       allow(helper).to receive(:search_state).and_return(search_state)
     end
     it do
-      expect(helper.search_with_group).to eq '/catalog?group=true&q=hello'
+      expect(helper.search_with_group).to eq(
+        'q' => 'hello',
+        'group' => 'true'
+      )
     end
   end
   describe '#search_without_group' do
@@ -94,7 +97,9 @@ RSpec.describe ArclightHelper, type: :helper do
       allow(helper).to receive(:search_state).and_return(search_state)
     end
     it do
-      expect(helper.search_without_group).to eq '/catalog?q=hello'
+      expect(helper.search_without_group).to eq(
+        'q' => 'hello'
+      )
     end
   end
   describe '#on_repositories_index?' do

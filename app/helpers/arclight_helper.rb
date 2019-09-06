@@ -63,11 +63,11 @@ module ArclightHelper
   end
 
   def search_with_group
-    search_catalog_path search_state.params_for_search.merge('group' => 'true')
+    search_state.params_for_search.merge('group' => 'true')
   end
 
   def search_without_group
-    search_catalog_path(search_state.params_for_search.reject { |k| k == 'group' })
+    search_state.params_for_search.reject { |k| k == 'group' }
   end
 
   ##
