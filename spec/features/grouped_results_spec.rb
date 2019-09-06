@@ -27,4 +27,8 @@ RSpec.describe 'Grouped search results', type: :feature do
       expect(page).to have_css '.blacklight-icons', count: 3
     end
   end
+  it 'has link to repository' do
+    visit search_catalog_path q: 'alpha', group: 'true'
+    expect(page).to have_css '.al-grouped-repository a', text: /National Library of Medicine/
+  end
 end
