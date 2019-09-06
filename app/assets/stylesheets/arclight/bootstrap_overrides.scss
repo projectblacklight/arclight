@@ -12,6 +12,10 @@
   & .nav-item .nav-link {
     height: 100%;
   }
+  & .nav-item {
+      overflow-wrap: break-word;
+      width: 25%;
+  }
 }
 
 .tab-pane {
