@@ -6,9 +6,15 @@ module ArclightHelper
   ##
   # @param [SolrDocument]
   def parents_to_links(document)
-    safe_join(Arclight::Parents.from_solr_document(document).as_parents.map do |parent|
+    breadcrumb_links = []
+
+    breadcrumb_links << build_repository_link(document)
+
+    breadcrumb_links << Arclight::Parents.from_solr_document(document).as_parents.map do |parent|
       link_to parent.label, solr_document_path(parent.global_id)
-    end, t('arclight.breadcrumb_separator'))
+    end
+
+    safe_join(breadcrumb_links, t('arclight.breadcrumb_separator'))
   end
 
   def repository_collections_path(repository)
@@ -195,5 +201,16 @@ module ArclightHelper
   # Calls the method for a configured field
   def generic_render_document_field_label(config_field, document, field: field_name)
     send(:"render_document_#{config_field}_label", document, field: field)
+  end
+
+  private
+
+  def build_repository_link(document)
+    repository_path = Arclight::Repository.find_by(name: document.repository)&.slug if document.repository.present?
+    if repository_path.present?
+      link_to(document.repository, arclight_engine.repository_path(repository_path))
+    else
+      content_tag(:span, document.repository)
+    end
   end
 end
