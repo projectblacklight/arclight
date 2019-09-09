@@ -20,7 +20,7 @@ module Arclight
     # We're not sure this is right, but we aren't doing module imports
     # at the moment anyway
     register_umd_globals :arclight,
-      'blacklight' => 'Blacklight'
+                         'blacklight' => 'Blacklight'
 
     config.viewer_class = Arclight::Viewers::OEmbed
     config.oembed_resource_exclude_patterns = [/\.pdf$/, /\.ppt$/]

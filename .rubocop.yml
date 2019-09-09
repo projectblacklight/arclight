@@ -10,6 +10,7 @@ AllCops:
     - 'db/**/*'
     - 'lib/generators/arclight/templates/**/*'
     - 'vendor/**/*'
+    - 'node_modules/**/*'
   TargetRubyVersion: 2.4
   DisplayCopNames: true
 
