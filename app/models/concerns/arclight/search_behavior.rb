@@ -11,6 +11,7 @@ module Arclight
         add_hierarchy_max_rows
         add_hierarchy_sort
         add_highlighting
+        add_grouping
       ]
     end
 
@@ -39,6 +40,23 @@ module Arclight
         solr_params['hl'] = true
         solr_params['hl.fl'] = 'text'
         solr_params['hl.snippets'] = 3
+      end
+      solr_params
+    end
+
+    ##
+    # Adds grouping parameters for Solr if enabled
+    def add_grouping(solr_params)
+      if blacklight_params[:group] == 'true'
+        solr_params[:group] = true
+        solr_params['group.field'] = 'collection_ssi'
+        solr_params['group.ngroups'] = true
+        solr_params['group.limit'] = 3
+        # Will provide the parent collection document
+        solr_params['fl'] = '*,parent:[subquery]'
+        solr_params['parent.fl'] = '*'
+        solr_params['parent.q'] = '{!term f=collection_sim v=$row.collection_ssi}'
+        solr_params['parent.fq'] = '{!term f=level_sim v="Collection"}'
       end
       solr_params
     end

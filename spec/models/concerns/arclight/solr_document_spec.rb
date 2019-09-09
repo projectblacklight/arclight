@@ -126,6 +126,15 @@ RSpec.describe Arclight::SolrDocument do
     end
   end
 
+  describe '#parent_document' do
+    let(:document) { SolrDocument.new(parent: { docs: [{ id: 'abc123' }] }) }
+
+    it 'creates a SolrDocument of the first parent document' do
+      expect(document.parent_document).to be_an SolrDocument
+      expect(document.parent_document.id).to eq 'abc123'
+    end
+  end
+
   describe '#highlights' do
     before { allow(document).to receive(:response).and_return(response) }
 

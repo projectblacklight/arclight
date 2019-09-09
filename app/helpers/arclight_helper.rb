@@ -6,9 +6,25 @@ module ArclightHelper
   ##
   # @param [SolrDocument]
   def parents_to_links(document)
-    safe_join(Arclight::Parents.from_solr_document(document).as_parents.map do |parent|
+    safe_join(document_parents(document).map do |parent|
       link_to parent.label, solr_document_path(parent.global_id)
     end, t('arclight.breadcrumb_separator'))
+  end
+
+  ##
+  # @param [SolrDocument]
+  def component_parents_to_links(document)
+    parents = document_parents(document)
+    return unless parents.length > 1
+    safe_join(parents.slice(1, 999).map do |parent|
+      link_to parent.label, solr_document_path(parent.global_id)
+    end, t('arclight.breadcrumb_separator'))
+  end
+
+  ##
+  # @param [SolrDocument]
+  def document_parents(document)
+    Arclight::Parents.from_solr_document(document).as_parents
   end
 
   def repository_collections_path(repository)
@@ -40,6 +56,18 @@ module ArclightHelper
 
   def collection_count
     @response.response['numFound']
+  end
+
+  def grouped?
+    try(:search_state) && search_state.params_for_search.try(:[], 'group') == 'true'
+  end
+
+  def search_with_group
+    search_catalog_path search_state.params_for_search.merge('group' => 'true')
+  end
+
+  def search_without_group
+    search_catalog_path(search_state.params_for_search.reject { |k| k == 'group' })
   end
 
   ##
@@ -111,6 +139,29 @@ module ArclightHelper
   def display_size(size)
     size = number_to_human_size(size.to_i + 1) if size.is_a?(Numeric) || size =~ /^[0-9]+$/ # assumes bytes
     size.to_s
+  end
+
+  # determine which icon to show in search results header
+  # these icon names will need to be updated when the icons are determined
+  def document_header_icon(document)
+    level = document.level
+    case level
+    when 'collection'
+      'search'
+    when 'File'
+      'compact'
+    else
+      'compact'
+    end
+  end
+
+  def render_grouped_documents(documents)
+    safe_join(
+      documents.each_with_index.map do |document, i|
+        render_document_partial(document, :arclight_index_group_document, document_counter: i)
+      end,
+      raw('<hr>')
+    )
   end
 
   ##

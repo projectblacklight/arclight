@@ -116,6 +116,28 @@ RSpec.describe 'Collection Page', type: :feature do
     end
   end
 
+  describe 'navigation bar' do
+    it 'has configured links' do
+      within '.al-sidebar-navigation-overview' do
+        expect(page).to have_css 'a[href="#summary"]', text: 'Summary'
+        expect(page).to have_css 'a[href="#access-and-use"]', text: 'Access and Use'
+        expect(page).to have_css 'a[href="#background"]', text: 'Background'
+        expect(page).to have_css 'a[href="#related"]', text: 'Related'
+        expect(page).to have_css 'a[href="#indexed-terms"]', text: 'Indexed Terms'
+      end
+    end
+
+    context 'for sections that do not have metadata' do
+      let(:doc_id) { 'm0198-xml' }
+
+      it 'does not include links to those sections' do
+        within '.al-sidebar-navigation-overview' do
+          expect(page).not_to have_css 'a[href="#related"]', text: 'Related'
+        end
+      end
+    end
+  end
+
   describe 'tabbed display' do
     context 'collection has online content', js: true do
       it 'clicking contents toggles visibility' do

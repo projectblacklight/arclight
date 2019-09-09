@@ -35,6 +35,68 @@ RSpec.describe ArclightHelper, type: :helper do
       end
     end
   end
+  describe '#grouped?' do
+    context 'when group is active' do
+      let(:search_state) do
+        instance_double(
+          'Blacklight::SearchState',
+          params_for_search: { 'group' => 'true' }
+        )
+      end
+
+      before do
+        allow(helper).to receive(:search_state).and_return(search_state)
+      end
+      it do
+        expect(helper.grouped?).to be_truthy
+      end
+    end
+    context 'when not grouped' do
+      let(:search_state) do
+        instance_double(
+          'Blacklight::SearchState',
+          params_for_search: { 'hello' => 'true' }
+        )
+      end
+
+      before do
+        allow(helper).to receive(:search_state).and_return(search_state)
+      end
+      it do
+        expect(helper.grouped?).to be_falsey
+      end
+    end
+  end
+  describe '#search_with_group' do
+    let(:search_state) do
+      instance_double(
+        'Blacklight::SearchState',
+        params_for_search: { 'q' => 'hello' }
+      )
+    end
+
+    before do
+      allow(helper).to receive(:search_state).and_return(search_state)
+    end
+    it do
+      expect(helper.search_with_group).to eq '/catalog?group=true&q=hello'
+    end
+  end
+  describe '#search_without_group' do
+    let(:search_state) do
+      instance_double(
+        'Blacklight::SearchState',
+        params_for_search: { 'q' => 'hello', 'group' => 'true' }
+      )
+    end
+
+    before do
+      allow(helper).to receive(:search_state).and_return(search_state)
+    end
+    it do
+      expect(helper.search_without_group).to eq '/catalog?q=hello'
+    end
+  end
   describe '#on_repositories_index?' do
     before { allow(helper).to receive(:action_name).twice.and_return('index') }
 
@@ -133,6 +195,43 @@ RSpec.describe ArclightHelper, type: :helper do
       expect(helper.parents_to_links(SolrDocument.new)).not_to include '»'
     end
   end
+
+  describe '#component_parents_to_links' do
+    let(:document) do
+      SolrDocument.new(
+        parent_ssm: %w[def ghi jkl],
+        parent_unittitles_ssm: %w[DEF GHI JKL],
+        ead_ssi: 'abc123'
+      )
+    end
+
+    it 'converts component "parents" from SolrDocument to links' do
+      expect(helper.component_parents_to_links(document)).not_to include 'DEF'
+      expect(helper.component_parents_to_links(document)).not_to include solr_document_path('abc123def')
+      expect(helper.component_parents_to_links(document)).to include 'GHI'
+      expect(helper.component_parents_to_links(document)).to include solr_document_path('abc123ghi')
+    end
+    it 'properly delimited' do
+      expect(helper.component_parents_to_links(document)).to include '»'
+    end
+  end
+
+  describe 'document_header_icon' do
+    let(:document) { SolrDocument.new('level_ssm': ['collection']) }
+
+    it 'properly assigns the icon' do
+      expect(helper.document_header_icon(document)).to eq 'search'
+    end
+
+    context 'there is no level_ssm' do
+      let(:document) { SolrDocument.new }
+
+      it 'gives the default icon' do
+        expect(helper.document_header_icon(document)).to eq 'compact'
+      end
+    end
+  end
+
   describe 'custom field accessors' do
     let(:accessors) { Arclight::Engine.config.catalog_controller_field_accessors }
     let(:field) { :yolo }
