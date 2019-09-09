@@ -38,9 +38,5 @@
       <hr>
       <%= render_grouped_documents(g.docs) %>
     </div>
-    <% # TODO: Should be removed/changed in #704 %>
-    <%- if g.total > @response.group_limit %>
-      <%= link_to t('blacklight.search.group.more'), add_group_facet_params_and_redirect(g), :class => 'more-in-group' %>
-    <%- end %>
-  <%- end %>
+  <% end %>
 </div>
