@@ -6,8 +6,7 @@
     "@babel/core": "^7.5.5",
     "@babel/plugin-external-helpers": "^7.2.0",
     "@babel/plugin-transform-modules-umd": "^7.2.0",
-    "@babel/preset-env": "^7.5.5",
-    "@rails/webpacker": "^4.0.7"
+    "@babel/preset-env": "^7.5.5"
   },
   "devDependencies": {
     "eslint": "^3.19.0",
@@ -15,8 +14,7 @@
     "eslint-plugin-import": "^2.2.0"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "webpack"
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
     "type": "git",
