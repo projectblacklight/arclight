@@ -31,7 +31,7 @@ RSpec.describe Arclight::RepositoriesController, type: :controller do
       expect(repo.slug).to eq 'nlm'
       collections = controller.instance_variable_get(:@collections)
       expect(collections.first).to be_an(SolrDocument)
-      expect(collections.first.unitid).to eq 'MS C 271'
+      expect(collections.find { |c| c.id == 'aoa271' }.unitid).to eq 'MS C 271'
     end
     it 'raises RecordNotFound if non-registered slug' do
       expect { get :show, params: { id: 'not-registered' } }.to raise_error(
