@@ -185,11 +185,13 @@ RSpec.describe ArclightHelper, type: :helper do
       SolrDocument.new(
         parent_ssm: %w[def ghi],
         parent_unittitles_ssm: %w[DEF GHI],
-        ead_ssi: 'abc123'
+        ead_ssi: 'abc123',
+        repository_ssm: 'my repository'
       )
     end
 
     it 'converts "parents" from SolrDocument to links' do
+      expect(helper.parents_to_links(document)).to include 'my repository'
       expect(helper.parents_to_links(document)).to include 'DEF'
       expect(helper.parents_to_links(document)).to include solr_document_path('abc123def')
       expect(helper.parents_to_links(document)).to include 'GHI'

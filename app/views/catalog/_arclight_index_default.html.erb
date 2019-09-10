@@ -1,0 +1,51 @@
+<div class="al-search-result-index-article row d-flex align-items-start">
+  <% counter = document_counter_with_offset(document_counter) %>
+  <div class="col-auto">
+    <%= render partial: 'arclight_document_header_icon', locals: { document: document }  %>
+  </div>
+  <div class="col col-no-left-padding">
+    <div class="row">
+      <%= render partial: 'arclight_search_index_header', locals: { document: document, counter: counter }  %>
+      <div class="col-auto">
+        <% if document.online_content? %>
+          <span class='badge badge-success'>
+            <%= t(:'arclight.views.online_content_indicator') %>
+          </span>
+        <% end %>
+        <%= content_tag('div', class: 'al-document-container col') do %>
+          <%= document.containers.join(', ') %>
+        <% end if document.containers %>
+        <%= render_index_doc_actions document, wrapping_class: "col-sm-3 col-md-5 col-lg-4 text-right" %>
+      </div>
+    </div>
+    <div class="row">
+      <%= content_tag('div', class: 'al-document-creator col') do %>
+        <%= document.creator %>
+      <% end if document.creator %>
+    </div>
+
+    <div class="row">
+      <%= content_tag('div', class: 'al-document-extent col') do %>
+        <%= document.extent %>
+      <% end if document.extent %>
+    </div>
+
+    <div class="row">
+      <%= content_tag('div', class: 'al-document-abstract-or-scope col') do %>
+        <%= content_tag('div', 'data-arclight-truncate' => true) do %>
+          <%= document.abstract_or_scope %>
+        <% end %>
+      <% end if document.abstract_or_scope %>
+    </div>
+
+    <div class="row">
+      <%= content_tag('div', class: 'al-document-highlight col') do %>
+        <%= document.highlights.join('<br/>').html_safe %>
+      <% end if document.highlights %>
+    </div>
+
+    <%= render partial: 'index_breadcrumb_default', locals: { document: document } %>
+  </div>
+</div>
+
+

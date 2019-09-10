@@ -195,10 +195,8 @@ class CatalogController < ApplicationController
     config.index.document_presenter_class = Arclight::IndexPresenter
     ##
     # Configuration for partials
-    config.index.partials.insert(0, :arclight_online_content_indicator)
-    config.index.partials.insert(0, :index_breadcrumb)
-    config.index.partials.insert(0, :arclight_document_index_header)
-
+    config.index.partials = %i[arclight_index_default]
+    
     config.show.metadata_partials = %i[
       summary_field
       access_field
@@ -349,9 +347,8 @@ class CatalogController < ApplicationController
     # Hierarchy Index View
     config.view.hierarchy
     config.view.hierarchy.display_control = false
-    config.view.hierarchy.partials = config.index.partials.dup
-    config.view.hierarchy.partials.delete(:index_breadcrumb)
-    config.view.hierarchy.partials.delete(:arclight_online_content_indicator)
+    config.view.hierarchy.partials = %i[index_header_hierarchy index_hierarchy]
+    
 
     ##
     # Hierarchy Index View

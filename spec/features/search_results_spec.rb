@@ -12,10 +12,6 @@ RSpec.describe 'Search results', type: :feature do
       visit search_catalog_path q: '', search_field: 'all_fields'
 
       within('.document.document-position-1') do
-        within('.al-document-title-bar') do
-          expect(page).to have_content 'National Library of Medicine. History of Medicine Division: MS C 271'
-        end
-
         expect(page).to have_css('h3 a', text: 'Alpha Omega Alpha Archives, 1894-1992')
         expect(page).to have_css('.blacklight-icons svg')
         expect(page).to have_css('.al-document-creator', text: 'Alpha Omega Alpha')
