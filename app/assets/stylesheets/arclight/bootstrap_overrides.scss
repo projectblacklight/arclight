@@ -4,9 +4,16 @@
 
 .nav.nav-tabs {
   margin-bottom: 0;
+  flex-wrap: nowrap;
   & .nav-item .nav-link:not(.active) {
     background: $gray-100;
     border-color: $nav-tabs-border-color;
+  }
+  & .nav-item .nav-link {
+    height: 100%;
+  }
+  & .nav-item {
+      overflow-wrap: break-word;
   }
 }
 
