@@ -10,7 +10,7 @@ module ArclightHelper
 
     breadcrumb_links << build_repository_link(document)
 
-    breadcrumb_links << Arclight::Parents.from_solr_document(document).as_parents.map do |parent|
+    breadcrumb_links << document_parents(document).map do |parent|
       link_to parent.label, solr_document_path(parent.global_id)
     end
 
