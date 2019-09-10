@@ -17,6 +17,22 @@ module ArclightHelper
     safe_join(breadcrumb_links, t('arclight.breadcrumb_separator'))
   end
 
+  ##
+  # @param [SolrDocument]
+  def component_parents_to_links(document)
+    parents = document_parents(document)
+    return unless parents.length > 1
+    safe_join(parents.slice(1, 999).map do |parent|
+      link_to parent.label, solr_document_path(parent.global_id)
+    end, t('arclight.breadcrumb_separator'))
+  end
+
+  ##
+  # @param [SolrDocument]
+  def document_parents(document)
+    Arclight::Parents.from_solr_document(document).as_parents
+  end
+
   def repository_collections_path(repository)
     search_action_url(
       f: {
@@ -53,11 +69,15 @@ module ArclightHelper
   end
 
   def search_with_group
-    search_catalog_path search_state.params_for_search.merge('group' => 'true')
+    search_state.params_for_search.merge('group' => 'true')
   end
 
   def search_without_group
-    search_catalog_path(search_state.params_for_search.reject { |k| k == 'group' })
+    search_state.params_for_search.reject { |k| k == 'group' }
+  end
+
+  def search_within_collection(collection_name, search)
+    search.merge(f: { collection_sim: [collection_name] })
   end
 
   ##
@@ -143,6 +163,15 @@ module ArclightHelper
     else
       'compact'
     end
+  end
+
+  def render_grouped_documents(documents)
+    safe_join(
+      documents.each_with_index.map do |document, i|
+        render_document_partial(document, :arclight_index_group_document, document_counter: i)
+      end,
+      raw('<hr>')
+    )
   end
 
   ##

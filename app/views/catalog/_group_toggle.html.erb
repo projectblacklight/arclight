@@ -1,4 +1,4 @@
 <%= link_to t('arclight.views.index.group_by_collection'),
-            grouped? ? search_without_group : search_with_group,
+            search_catalog_path(grouped? ? search_without_group : search_with_group),
             class: "btn btn-outline-secondary #{grouped? ? 'active' : ''}"
 %>

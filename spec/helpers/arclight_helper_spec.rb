@@ -79,7 +79,10 @@ RSpec.describe ArclightHelper, type: :helper do
       allow(helper).to receive(:search_state).and_return(search_state)
     end
     it do
-      expect(helper.search_with_group).to eq '/catalog?group=true&q=hello'
+      expect(helper.search_with_group).to eq(
+        'q' => 'hello',
+        'group' => 'true'
+      )
     end
   end
   describe '#search_without_group' do
@@ -94,7 +97,9 @@ RSpec.describe ArclightHelper, type: :helper do
       allow(helper).to receive(:search_state).and_return(search_state)
     end
     it do
-      expect(helper.search_without_group).to eq '/catalog?q=hello'
+      expect(helper.search_without_group).to eq(
+        'q' => 'hello'
+      )
     end
   end
   describe '#on_repositories_index?' do
@@ -195,6 +200,26 @@ RSpec.describe ArclightHelper, type: :helper do
     it 'properly delimited' do
       expect(helper.parents_to_links(document)).to include '»'
       expect(helper.parents_to_links(SolrDocument.new)).not_to include '»'
+    end
+  end
+
+  describe '#component_parents_to_links' do
+    let(:document) do
+      SolrDocument.new(
+        parent_ssm: %w[def ghi jkl],
+        parent_unittitles_ssm: %w[DEF GHI JKL],
+        ead_ssi: 'abc123'
+      )
+    end
+
+    it 'converts component "parents" from SolrDocument to links' do
+      expect(helper.component_parents_to_links(document)).not_to include 'DEF'
+      expect(helper.component_parents_to_links(document)).not_to include solr_document_path('abc123def')
+      expect(helper.component_parents_to_links(document)).to include 'GHI'
+      expect(helper.component_parents_to_links(document)).to include solr_document_path('abc123ghi')
+    end
+    it 'properly delimited' do
+      expect(helper.component_parents_to_links(document)).to include '»'
     end
   end
 

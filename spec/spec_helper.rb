@@ -2,6 +2,7 @@
 
 ENV['RAILS_ENV'] ||= 'test'
 ENV['REPOSITORY_FILE'] ||= 'spec/fixtures/config/repositories.yml'
+SPEC_ROOT = Pathname.new(__dir__)
 
 require 'simplecov'
 SimpleCov.start do

@@ -5,9 +5,18 @@
     <div class='al-grouped-title-bar'>
       <div class='row'>
         <div class='col-md-12'>
+          <% repository = Arclight::Repository.find_by(name: parent_document.repository || g.docs.first.repository) %>
+          <% if repository.present? %>
+            <div class='al-grouped-repository'>
+              <%= link_to(repository.name, arclight_engine.repository_path(repository.slug)) %>
+            </div>
+          <% end %>
           <h3>
-            <%= link_to_document parent_document, document_show_link_field(parent_document) %>
+            <%= show_presenter(parent_document).heading %>
           </h3>
+          <%= content_tag('span', class: 'badge badge-light') do %>
+            <%= parent_document.extent %>
+          <% end if parent_document.extent %>
           <%= content_tag('div', class: 'al-document-abstract-or-scope') do %>
             <%= content_tag('div', 'data-arclight-truncate' => true) do %>
               <%= parent_document.abstract_or_scope %>
@@ -17,11 +26,19 @@
       </div>
     </div>
     <div class="grouped-documents">
-      <%= render_document_index g.docs %>
+      <div class="al-grouped-more">
+        <% if g.total > 3 %>
+          <%= t('arclight.views.index.top_group_results', count: 3) %>
+          <%= link_to(
+            t('arclight.views.index.all_group_results', count: g.total),
+            search_catalog_path(search_within_collection(parent_document.collection_name, search_without_group)))
+          %>
+        <% else %>
+          <%= t('arclight.views.index.group_results_count', count: g.total) %>
+        <% end %>
+      </div>
+      <hr>
+      <%= render_grouped_documents(g.docs) %>
     </div>
-    <% # TODO: Should be removed/changed in #704 %>
-    <%- if g.total > @response.group_limit %>
-      <%= link_to t('blacklight.search.group.more'), add_group_facet_params_and_redirect(g), :class => 'more-in-group' %>
-    <%- end %>
-  <%- end %>
+  <% end %>
 </div>
