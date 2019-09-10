@@ -18,6 +18,14 @@
 
     .document-title-heading {
       font-size: $h5-font-size;
+      .al-document-extent {
+        background-color: $gray-200;
+        border: $result-item-border-styling;
+        font-size: $font-size-sm;
+        margin-bottom: 0.25rem;
+        padding: 2px $result-item-body-padding;
+        border-radius: 10px;
+      }
     }
 
     .breadcrumb-links,

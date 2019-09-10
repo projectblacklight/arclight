@@ -25,12 +25,6 @@
     </div>
 
     <div class="row">
-      <%= content_tag('div', class: 'al-document-extent col') do %>
-        <%= document.extent %>
-      <% end if document.extent %>
-    </div>
-
-    <div class="row">
       <%= content_tag('div', class: 'al-document-abstract-or-scope col') do %>
         <%= content_tag('div', 'data-arclight-truncate' => true) do %>
           <%= document.abstract_or_scope %>
