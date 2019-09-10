@@ -1,0 +1,15 @@
+<article class="document">
+  <div class="documentHeader row">
+    <div class="col-auto">
+      <%= blacklight_icon document_header_icon(document) %>
+    </div>
+    <div class="col col-no-left-padding">
+      <h4>
+        <%= link_to_document document, document_show_link_field(document), counter: document_counter %>
+      </h4>
+      <div class='breadcrumb-links'>
+        <%= component_top_level_parent_to_links(document) %>
+      </div>
+    </div>
+  </div>
+</article>

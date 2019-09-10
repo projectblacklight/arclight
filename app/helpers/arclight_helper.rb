@@ -23,6 +23,23 @@ module ArclightHelper
 
   ##
   # @param [SolrDocument]
+  def component_top_level_parent_to_links(document)
+    parents = document_parents(document)
+    return unless parents.length > 1
+
+    parent_link = link_to(parents[1].label, solr_document_path(parents[1].global_id))
+    return parent_link if parents.length == 2
+    safe_join(
+      [
+        parent_link,
+        t('arclight.breadcrumb_separator'),
+        '&hellip;'.html_safe
+      ]
+    )
+  end
+
+  ##
+  # @param [SolrDocument]
   def document_parents(document)
     Arclight::Parents.from_solr_document(document).as_parents
   end
