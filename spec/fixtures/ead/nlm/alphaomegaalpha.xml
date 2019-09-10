@@ -253,6 +253,12 @@
             operation of Alpha Omega Alpha. Not all records are necessarily official documents
             but provide important background context.</p>
         </scopecontent>
+        <accessrestrict id="aspace_7bbec2cdc1e6e0cb7b2ff1acb7c9e364">
+          <head>Conditions Governing Access</head>
+          <p>RESTRICTED: Access to these folders requires prior written approval. To request access,
+            please contact Research Services prior to your visit.</p>
+          <p>All or portions of this collection may be housed off-site. The library may require up to 48-hours to retrieve these materials for research use.</p>
+        </accessrestrict>
         <c id="aspace_843e8f9f22bac69872d0802d6fffbb04" level="file">
           <did>
             <origination>
@@ -539,6 +545,14 @@
           <controlaccess>
             <genreform source="aat">Records</genreform>
           </controlaccess>
+          <c id="aspace_4b4fa033c630a45d41fcd608cf0d184d" level="file">
+            <did>
+              <unittitle>Miscellaneous 1999</unittitle>
+              <container id="aspace_d55e41948bba30fc2b5a74ddda810294"
+                         label="Mixed Materials"
+                         type="box">1</container>
+            </did>
+          </c>
         </c>
         <c id="aspace_4365cd1ed8bd8fee1bac6077a4d81359" level="otherlevel">
           <did>
