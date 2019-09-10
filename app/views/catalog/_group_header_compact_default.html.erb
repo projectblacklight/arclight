@@ -1,0 +1,15 @@
+<div class='al-grouped-title-bar'>
+  <div class='row'>
+    <div class='col-md-12'>
+      <% if document.repository_config.present? %>
+        <div class='al-grouped-repository'>
+          <%= link_to(document.repository_config.name, arclight_engine.repository_path(document.repository_config.slug)) %>
+        </div>
+      <% end %>
+      <h3><%= show_presenter(document).heading %></h3>
+      <%= content_tag('span', class: 'badge badge-light') do %>
+        <%= document.extent %>
+      <% end if document.extent %>
+    </div>
+  </div>
+</div>

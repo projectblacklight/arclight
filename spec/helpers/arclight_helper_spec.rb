@@ -223,6 +223,50 @@ RSpec.describe ArclightHelper, type: :helper do
     end
   end
 
+  describe '#component_top_level_parent_to_links' do
+    context 'when the component only has one parent (meaning it is a top level parent)' do
+      let(:document) do
+        SolrDocument.new(parent_ssm: %w[def], parent_unittitles_ssm: %w[DEF], ead_ssi: 'abc123')
+      end
+
+      it { expect(helper.component_top_level_parent_to_links(document)).to be_nil }
+    end
+
+    context 'when the component is a child of a top level component' do
+      let(:document) do
+        SolrDocument.new(
+          parent_ssm: %w[def ghi],
+          parent_unittitles_ssm: %w[DEF GHI],
+          ead_ssi: 'abc123'
+        )
+      end
+
+      it 'links to the top level component and does not include an ellipsis' do
+        expect(helper.component_top_level_parent_to_links(document)).to include 'GHI'
+        expect(helper.component_top_level_parent_to_links(document)).to include solr_document_path('abc123ghi')
+        expect(helper.component_top_level_parent_to_links(document)).not_to include '»'
+        expect(helper.component_top_level_parent_to_links(document)).not_to include '&hellip;'
+      end
+    end
+
+    context 'when the component is several levels deep' do
+      let(:document) do
+        SolrDocument.new(
+          parent_ssm: %w[def ghi jkl],
+          parent_unittitles_ssm: %w[DEF GHI JKL],
+          ead_ssi: 'abc123'
+        )
+      end
+
+      it 'links to the top level component and joins it with an ellipsis' do
+        expect(helper.component_top_level_parent_to_links(document)).to include 'GHI'
+        expect(helper.component_top_level_parent_to_links(document)).to include solr_document_path('abc123ghi')
+        expect(helper.component_top_level_parent_to_links(document)).to include '»'
+        expect(helper.component_top_level_parent_to_links(document)).to include '&hellip;'
+      end
+    end
+  end
+
   describe 'document_header_icon' do
     let(:document) { SolrDocument.new('level_ssm': ['collection']) }
 
