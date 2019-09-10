@@ -296,7 +296,7 @@ compose 'components', ->(record, accumulator, _context) { accumulator.concat rec
     context.output_hash['parent_ssm']&.drop(1)&.each do |id|
       accumulator.concat Array
         .wrap(context.clipboard[:parent].output_hash['components'])
-        .find { |c| c['ref_ssi'] == [id] }&.[]('normalized_title_ssm')
+        .select { |c| c['ref_ssi'] == [id] }.map { |c| c['normalized_title_ssm'] }.flatten
     end
   end
   to_field 'parent_unittitles_teim' do |_record, accumulator, context|
