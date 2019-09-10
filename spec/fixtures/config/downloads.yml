@@ -12,3 +12,10 @@ MS C 271:
   ead:
     href: 'http://example.com/MS+C+271.xml'
     size: 123456
+default:
+  # disabled: true
+  pdf:
+    template: 'http://example.com/%{unitid}.pdf'
+    # size_accessor: finding_aid_size
+  ead:
+    template: 'http://example.com/%{unitid}.xml'
