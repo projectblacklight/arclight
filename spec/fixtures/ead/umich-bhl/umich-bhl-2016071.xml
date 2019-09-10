@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ead xmlns="urn:isbn:1-931666-22-9" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="urn:isbn:1-931666-22-9 http://www.loc.gov/ead/ead.xsd">
+  <eadheader countryencoding="iso3166-1" dateencoding="iso8601" langencoding="iso639-2b" repositoryencoding="iso15511">
+    <eadid>umich-bhl-2016071</eadid>
+    <filedesc>
+      <titlestmt>
+        <titleproper>Finding aid for the Frank Henry Schultz photograph collection.
+          <num>2016071 Aa 1</num>
+        </titleproper>
+        <author>Finding aid created by Sarah Lebovitz, September 2016.</author>
+      </titlestmt>
+      <publicationstmt>
+        <publisher>Bentley Historical Library</publisher>
+        <p>
+          <date>2016-09-26</date>
+        </p>
+      </publicationstmt>
+    </filedesc>
+    <profiledesc>
+      <creation>This finding aid was produced using ArchivesSpace on
+        <date>2017-05-02 16:11:11 +0000</date>.</creation>
+      <langusage>The finding aid is written in
+        <language langcode="eng" scriptcode="Latn">English</language>
+      </langusage>
+    </profiledesc>
+    <revisiondesc>
+      <change>
+        <date>2016-11-21</date>
+        <item>Updated Conditions Governing Use Note</item>
+      </change>
+    </revisiondesc>
+  </eadheader>
+  <archdesc level="collection">
+    <did>
+      <langmaterial>
+        <language langcode="eng">English</language>
+      </langmaterial>
+      <repository>
+        <corpname>Bentley Historical Library</corpname>
+      </repository>
+      <unittitle>Frank Henry Schultz photograph collection</unittitle>
+      <origination label="creator">
+        <persname rules="dacs">Schultz, Frank Henry</persname>
+      </origination>
+      <unitid>2016071 Aa 1</unitid>
+      <physdesc altrender="whole">
+        <extent altrender="materialtype spaceoccupied">1 folders</extent>
+      </physdesc>
+      <unitdate normal="1909/1919" type="inclusive">Circa 1909-1919</unitdate>
+      <abstract id="aspace_2018732e26eec552f49ab0a87371837a">Corporal in Company B, 310th. Engineer Regiment during the Allied intervention in Russia, 1918-1920, the "Polar Bear Expedition." Collection includes photographs of Shultz and Shultz's family.
+      </abstract>
+      <langmaterial id="aspace_a9648226a02b362994d859ec3db99da9">The material is in
+        <language langcode="eng">English</language>
+      </langmaterial>
+    </did>
+    <accessrestrict id="aspace_cfba80b0bbb94315956d5db08a58e85c">
+      <head>Conditions Governing Access</head>
+      <p>This collection is open without restriction.</p>
+    </accessrestrict>
+    <acqinfo id="aspace_36317b9517073c707ac0dda3c56a1807">
+      <head>Immediate Source of Acquisition</head>
+      <p>Donated by James J. Bloedorn (donor no.
+        <num type="donor">11593</num>) in August, 2016.</p>
+    </acqinfo>
+    <bioghist id="aspace_546fe16743b03ea29fa2a6ab6c094542">
+      <head>Biographical / Historical</head>
+      <p>Frank Henry Shultz was born to German immigrant parents Johann H. Shultz and Lise Lempke Shultz on April 25, 1888 in Milwaukee, Wisconsin. He was appointed as a United States Army corporal in the Company B, 310th. Engineer Regiment in 1918, and
+        participated in the 1918 Polar Bear Expedition.</p>
+    </bioghist>
+    <scopecontent id="aspace_a6947fa9f924f54bce6ca11bae6250c9">
+      <head>Scope and Contents</head>
+      <p>The collection consists of three photographs. One is a photographic postcard of Frank Henry Shultz, taken in Archangel Russia during the expedition. One is a photocopy of a Shultz family photo, which includes Frank's mother, Frank's sister Minnie
+        Schultz Chromasta and neice Hazel Chromasta, and Frank's father. The third is a photocopy of another family photo, including Frank's mother, Frank's neices Grace Vierheilig and Hazel Chromasta, and nephew William Vierheilig.</p>
+    </scopecontent>
+    <accruals id="aspace_0ab34e33bea8c2e70e911fe18e10b4b4">
+      <head>Accruals</head>
+      <p>No further additions to the records are expected.</p>
+    </accruals>
+    <userestrict id="aspace_af6faeff1d7fcbedcf4d7f1c47cb2170">
+      <head>Conditions Governing Use</head>
+      <p>Donor(s) have transferred any applicable copyright to the Regents of the University of Michigan but the collection may contain third-party materials for which copyright was not transferred. Patrons are responsible for determining the appropriate
+        use or reuse of materials.</p>
+    </userestrict>
+    <prefercite id="aspace_c2c4653525c6f995e5ad1b27efaf43d5">
+      <head>Preferred Citation</head>
+      <p>[item], folder, box, Frank Henry Schultz photograph collection, Bentley Historical Library, University of Michigan. [URL]</p>
+    </prefercite>
+    <controlaccess>
+      <geogname source="lcsh">Soviet Union -- History -- Allied intervention, 1918-1920.</geogname>
+      <subject source="local">Polar Bear Expedition.</subject>
+      <genreform source="aat">Photographic postcards.</genreform>
+      <subject source="lctgm">Soldiers -- American.</subject>
+      <subject source="lctgm">Soldiers -- American -- Soviet Union.</subject>
+      <subject source="lcsh">World War, 1914-1918.</subject>
+      <corpname source="lcnaf">United States. Army. Engineer Regiment, 310th. Company B.</corpname>
+      <famname rules="dacs">Schultz family</famname>
+      <persname rules="dacs">Schultz, Frank Henry</persname>
+    </controlaccess>
+    <dsc>
+      <c01 id="aspace_9ff3a163fa97aaec4a609b261fd5e493" level="file">
+        <did>
+          <unittitle>Photographs</unittitle>
+          <unitdate normal="1909/1919" type="inclusive">1909-1919</unitdate>
+          <container id="aspace_a4d9686080013872c9a7eeec3c70c7b4" label="Folder" type="folder">1</container>
+        </did>
+      </c01>
+    </dsc>
+  </archdesc>
+</ead>

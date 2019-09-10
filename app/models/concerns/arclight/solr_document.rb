@@ -44,6 +44,10 @@ module Arclight
       first('collection_ssm')
     end
 
+    def collection_unitid
+      first('collection_unitid_ssm')
+    end
+
     def extent
       first('extent_ssm')
     end

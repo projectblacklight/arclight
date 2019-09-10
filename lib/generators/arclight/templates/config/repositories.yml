@@ -29,6 +29,10 @@ sul-spec:
   phone: '(650) 725-1022'
   contact_info: 'specialcollections@stanford.edu'
   thumbnail_url: 'https://library.stanford.edu/sites/default/files/styles/150x150/public/collection/image/Collections-Super-Enlight.jpg'
+  request_types:
+    aeon_web_ead:
+      request_url: 'https://sample.request.com'
+      request_mappings: 'Action=10&Form=31&Value=ead_url'
 umich-bhl:
   name: 'University of Michigan. Bentley Historical Library'
   description: 'The Bentley Historical Library collects the materials for and promotes the study of the histories of two great, intertwined institutions, the State of Michigan and the University of Michigan. The Library is open without fee to the public, and we welcome researchers regardless of academic or professional affiliation.'
@@ -43,14 +47,14 @@ umich-bhl:
   contact_info: 'bentley.ref@umich.edu'
   thumbnail_url: 'https://upload.wikimedia.org/wikipedia/commons/thumb/9/93/Bhlexterior.jpg/150px-Bhlexterior.jpg'
   request_types:
-      aeon_external_request_endpoint:
-          request_url: https://example.com/aeon/aeon.dll
-          request_mappings:
-              url_params:
-                  Action: 11
-                  Type: 200
-              static:
-                SystemId: ArcLight
-                ItemInfo1: manuscript
-              accessor:
-                ItemTitle: collection_name
+    aeon_external_request_endpoint:
+      request_url: https://example.com/aeon/aeon.dll
+      request_mappings:
+        url_params:
+          Action: 11
+          Type: 200
+        static:
+          SystemId: ArcLight
+          ItemInfo1: manuscript
+        accessor:
+          ItemTitle: collection_name

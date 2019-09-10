@@ -103,6 +103,7 @@
          accessrestrict_ssm,
          child_component_count_isim,
          collection_ssm,
+         collection_unitid_ssm,
          containers_ssim,
          creator_ssm,
          extent_ssm,
