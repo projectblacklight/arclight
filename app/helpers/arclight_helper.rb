@@ -235,7 +235,7 @@ module ArclightHelper
   private
 
   def build_repository_link(document)
-    repository_path = Arclight::Repository.find_by(name: document.repository)&.slug if document.repository.present?
+    repository_path = document.repository_config&.slug
     if repository_path.present?
       link_to(document.repository, arclight_engine.repository_path(repository_path))
     else
