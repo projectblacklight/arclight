@@ -26,8 +26,17 @@ module Arclight
       [city, state_zip, country].compact.join(', ')
     end
 
+    # Why are we using self#respond_to? below?
+    #
+    # All the keys in the config hash from `repositories.yml` are
+    # on-the-fly added as attr_accessors up in #initialize. If the
+    # request_types key isn't present, the method won't be created.
+    #
+    # Since the original data is thrown away, this is the best way
+    # to see if that key was present.
     def request_config_present?
-      return false unless request_types
+      return false unless respond_to? :request_types
+      return false if request_types.nil? || request_types.empty?
       request_configs = request_types.map { |_k, v| v }
       request_configs[0]&.fetch('request_url').present? &&
         request_configs[0]&.fetch('request_mappings').present?
