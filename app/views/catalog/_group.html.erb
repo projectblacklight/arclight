@@ -26,11 +26,19 @@
       </div>
     </div>
     <div class="grouped-documents">
+      <div class="al-grouped-more">
+        <% if g.total > 3 %>
+          <%= t('arclight.views.index.top_group_results', count: 3) %>
+          <%= link_to(
+            t('arclight.views.index.all_group_results', count: g.total),
+            search_catalog_path(search_within_collection(parent_document.collection_name, search_without_group)))
+          %>
+        <% else %>
+          <%= t('arclight.views.index.group_results_count', count: g.total) %>
+        <% end %>
+      </div>
+      <hr>
       <%= render_grouped_documents(g.docs) %>
     </div>
-    <% # TODO: Should be removed/changed in #704 %>
-    <%- if g.total > @response.group_limit %>
-      <%= link_to t('blacklight.search.group.more'), add_group_facet_params_and_redirect(g), :class => 'more-in-group' %>
-    <%- end %>
-  <%- end %>
+  <% end %>
 </div>
