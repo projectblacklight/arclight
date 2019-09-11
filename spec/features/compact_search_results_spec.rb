@@ -16,7 +16,7 @@ RSpec.describe 'Compact Search Results', type: :feature do
     expect(page).to have_css('.documents-compact')
     expect(page).to have_css('article.document', count: 10)
     within '.document-position-0' do
-      expect(page).to have_css '.col-5 .al-repository-footer', text: /National Library of/
+      expect(page).to have_css '.breadcrumb-links a', text: /National Library of/
     end
   end
 end

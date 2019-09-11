@@ -18,6 +18,30 @@ module ArclightHelper
   end
 
   ##
+  # For a non-grouped compact view, display the breadcrumbs with the following
+  # algorithm:
+  #  - Display only the first two parts of the item breadcrumb: the repository
+  #    and the collection.
+  #  - After the collection and the breadcrumb divider icon, show an ellipses as
+  #    shown in the mockup above. The repository and the collection parts are
+  #    linked as usual; the ellipses is not linked.
+  def regular_compact_breadcrumbs(document)
+    breadcrumb_links = [build_repository_link(document)]
+
+    parents = document_parents(document)
+    breadcrumb_links << parents[0, 1].map do |parent|
+      link_to parent.label, solr_document_path(parent.global_id)
+    end
+
+    breadcrumb_links << '&hellip;'.html_safe if parents.length > 1
+
+    safe_join(
+      breadcrumb_links,
+      t('arclight.breadcrumb_separator')
+    )
+  end
+
+  ##
   # @param [SolrDocument]
   def component_parents_to_links(document)
     parents = document_parents(document)

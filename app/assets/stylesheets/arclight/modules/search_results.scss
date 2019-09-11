@@ -37,6 +37,12 @@
   }
 }
 
+.documents-compact {
+  h3 {
+    font-size: $h5-font-size;
+  }
+}
+
 .al-grouped-results {
   .al-document-abstract-or-scope {
     max-width: 45em;

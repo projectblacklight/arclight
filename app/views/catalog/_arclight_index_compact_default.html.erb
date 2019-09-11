@@ -1,15 +1,13 @@
-<div class="row">
-  <div class="col-5">
-    <% counter = document_counter_with_offset(document_counter) %>
-    <%= link_to_document document, document_show_link_field(document), counter: counter %>
+<div class="documentHeader row">
+  <div class="col-auto">
+    <%= blacklight_icon document_header_icon(document) %>
   </div>
-  <div class="col-5">
-    <%= render_document_partial(document, :index_breadcrumb) %>
-    <div class='al-repository-footer'>
-      <%= document.repository %>
+  <div class="col col-no-left-padding">
+    <h3>
+      <%= link_to_document document, document_show_link_field(document), counter: document_counter %>
+    </h3>
+    <div class='breadcrumb-links'>
+      <%= regular_compact_breadcrumbs(document) %>
     </div>
-  </div>
-  <div class="col-2">
-    <%= render_document_partial(document, :arclight_online_content_indicator) %>
   </div>
 </div>
