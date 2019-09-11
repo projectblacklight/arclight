@@ -77,6 +77,17 @@ RSpec.describe 'Component Page', type: :feature do
     it 'uses our rules for displaying containers' do
       expect(page).to have_css('dd', text: 'Box 1, Folder 4-5')
     end
+    it 'shows misc notes' do
+      expect(page).to have_css('dt', text: 'Appraisal information')
+      expect(page).to have_css('dd', text: /^Materials for this group were selected/)
+      expect(page).to have_css('dt', text: 'Custodial history')
+      expect(page).to have_css('dd', text: /^These papers were maintained by the staff/)
+    end
+    it 'multivalued notes are rendered as paragaphs' do
+      within 'dd.blacklight-appraisal_ssm' do
+        expect(page).to have_css('p', count: 2)
+      end
+    end
   end
 
   describe 'collection context', js: true do

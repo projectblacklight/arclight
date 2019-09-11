@@ -232,7 +232,7 @@ class CatalogController < ApplicationController
 
     # Collection Show Page - Summary Section
     config.add_summary_field 'creators_ssim', label: 'Creator', link_to_facet: true
-    config.add_summary_field 'abstract_ssm', label: 'Abstract'
+    config.add_summary_field 'abstract_ssm', label: 'Abstract', helper_method: :paragraph_separator
     config.add_summary_field 'extent_ssm', label: 'Extent'
     config.add_summary_field 'language_ssm', label: 'Language'
     config.add_summary_field 'prefercite_ssm', label: 'Preferred citation'
@@ -248,6 +248,12 @@ class CatalogController < ApplicationController
     config.add_background_field 'appraisal_ssm', label: 'Appraisal information', helper_method: :paragraph_separator
     config.add_background_field 'custodhist_ssm', label: 'Custodial history', helper_method: :paragraph_separator
     config.add_background_field 'processinfo_ssm', label: 'Processing information', helper_method: :paragraph_separator
+    config.add_background_field 'arrangement_ssm', label: 'Arrangement', helper_method: :paragraph_separator
+    config.add_background_field 'accruals_ssm', label: 'Accruals', helper_method: :paragraph_separator
+    config.add_background_field 'phystech_ssm', label: 'Physical / technical requirements', helper_method: :paragraph_separator
+    config.add_background_field 'physloc_ssm', label: 'Physical location', helper_method: :paragraph_separator
+    config.add_background_field 'descrules_ssm', label: 'Rules or conventions', helper_method: :paragraph_separator
+
 
     # Collection Show Page - Related Section
     config.add_related_field 'relatedmaterial_ssm', label: 'Related material', helper_method: :paragraph_separator
@@ -288,16 +294,21 @@ class CatalogController < ApplicationController
     }, if: lambda { |_context, _field_config, document|
       document.containers.present?
     }
-    config.add_component_field 'abstract_ssm', label: 'Abstract'
+    config.add_component_field 'abstract_ssm', label: 'Abstract', helper_method: :paragraph_separator
     config.add_component_field 'extent_ssm', label: 'Extent'
-    config.add_component_field 'scopecontent_ssm', label: 'Scope and Content'
-    config.add_component_field 'accessrestrict_ssm', label: 'Restrictions'
-    config.add_component_field 'userestrict_ssm', label: 'Terms of Access'
-    config.add_component_field 'access_subjects_ssm', label: 'Subjects', separator_options: {
-      words_connector: '<br/>',
-      two_words_connector: '<br/>',
-      last_word_connector: '<br/>'
-    }
+    config.add_component_field 'scopecontent_ssm', label: 'Scope and Content', helper_method: :paragraph_separator
+    config.add_component_field 'accessrestrict_ssm', label: 'Restrictions', helper_method: :paragraph_separator
+    config.add_component_field 'userestrict_ssm', label: 'Terms of Access', helper_method: :paragraph_separator
+    config.add_component_field 'parent_access_restrict_ssm', label: 'Parent Restrictions', helper_method: :paragraph_separator
+    config.add_component_field 'parent_access_terms_ssm', label: 'Terms of Access', helper_method: :paragraph_separator
+    config.add_component_field 'acqinfo_ssm', label: 'Acquisition information', helper_method: :paragraph_separator
+    config.add_component_field 'appraisal_ssm', label: 'Appraisal information', helper_method: :paragraph_separator
+    config.add_component_field 'custodhist_ssm', label: 'Custodial history', helper_method: :paragraph_separator
+    config.add_component_field 'processinfo_ssm', label: 'Processing information', helper_method: :paragraph_separator
+    config.add_component_field 'arrangement_ssm', label: 'Arrangement', helper_method: :paragraph_separator
+    config.add_component_field 'accruals_ssm', label: 'Accruals', helper_method: :paragraph_separator
+    config.add_component_field 'phystech_ssm', label: 'Physical / technical requirements', helper_method: :paragraph_separator
+    config.add_component_field 'physloc_ssm', label: 'Physical location', helper_method: :paragraph_separator
 
     # Component Show Page - Indexed Terms Section
     config.add_component_indexed_terms_field 'access_subjects_ssim', label: 'Subjects', link_to_facet: true, separator_options: {
@@ -324,13 +335,13 @@ class CatalogController < ApplicationController
     # =================
 
     # Collection Show Page Access Tab - Terms and Conditions Section
-    config.add_terms_field 'accessrestrict_ssm', label: 'Restrictions'
-    config.add_terms_field 'userestrict_ssm', label: 'Terms of Access'
+    config.add_terms_field 'accessrestrict_ssm', label: 'Restrictions', helper_method: :paragraph_separator
+    config.add_terms_field 'userestrict_ssm', label: 'Terms of Access', helper_method: :paragraph_separator
 
     # Component Show Page Access Tab - Terms and Condition Section
-    config.add_component_terms_field 'accessrestrict_ssm', label: 'Restrictions', helper_method: :highlight_terms
-    config.add_component_terms_field 'parent_access_restrict_ssm', label: 'Parent Restrictions'
-    config.add_component_terms_field 'parent_access_terms_ssm', label: 'Terms of Access'
+    config.add_component_terms_field 'accessrestrict_ssm', label: 'Restrictions', helper_method: :paragraph_separator
+    config.add_component_terms_field 'parent_access_restrict_ssm', label: 'Parent Restrictions', helper_method: :paragraph_separator
+    config.add_component_terms_field 'parent_access_terms_ssm', label: 'Terms of Access', helper_method: :paragraph_separator
 
     # Collection and Component Show Page Access Tab - In Person Section
     config.add_in_person_field 'repository_ssm', if: :repository_config_present, label: 'Location of this collection', helper_method: :context_access_tab_repository

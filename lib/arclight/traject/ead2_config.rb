@@ -213,12 +213,12 @@ NAME_ELEMENTS.map do |selector|
   to_field 'names_ssim', extract_xpath("//#{selector}")
   to_field "#{selector}_ssm", extract_xpath("//#{selector}")
 end
-to_field 'corpname_sim', extract_xpath('//corpname')
 
+to_field 'corpname_sim', extract_xpath('//corpname')
 to_field 'language_sim', extract_xpath('//did/langmaterial')
 to_field 'language_ssm', extract_xpath('//did/langmaterial')
 
-to_field 'descrules_ssm', extract_xpath('/xmlns:ead/xmlns:eadheader/xmlns:profiledesc/xmlns:descrules')
+to_field 'descrules_ssm', extract_xpath('/ead/eadheader/profiledesc/descrules')
 
 # Each component child document
 # <c> <c01> <c12>

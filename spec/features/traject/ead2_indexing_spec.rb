@@ -226,7 +226,7 @@ describe 'EAD 2 traject indexing', type: :feature do
     end
 
     it 'abstract' do
-      expect(result['abstract_ssm'].first).to match(/^Alpha Omega Alpha Honor Medical Society/)
+      expect(result['abstract_ssm'].first).to match(/Alpha Omega Alpha Honor Medical Society/)
     end
 
     it 'separatedmaterial' do
