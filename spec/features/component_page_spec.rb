@@ -223,7 +223,7 @@ RSpec.describe 'Component Page', type: :feature do
     it 'has a restrictions and access' do
       click_link 'Access'
       expect(page).to have_css 'dt', text: 'PARENT RESTRICTIONS:'
-      expect(page).to have_css 'dd', text: 'No restrictions on access.'
+      expect(page).to have_css 'dd', text: /^RESTRICTED: Access to these folders requires prior written approval./
       expect(page).to have_css 'dt', text: 'TERMS OF ACCESS:'
       expect(page).to have_css 'dd', text: /^Copyright was transferred to the public domain./
     end
