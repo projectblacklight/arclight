@@ -102,7 +102,7 @@ module Arclight
     end
 
     def digital_objects
-      digital_objects_field = fetch('digital_objects_ssm', [])
+      digital_objects_field = fetch('digital_objects_ssm', []).reject { |o| o.empty? }
       return [] if digital_objects_field.blank?
 
       digital_objects_field.map do |object|
