@@ -205,17 +205,20 @@ SEARCHABLE_NOTES_FIELDS.map do |selector|
 end
 
 DID_SEARCHABLE_NOTES_FIELDS.map do |selector|
-  to_field "#{selector}_ssm", extract_xpath("//did/#{selector}")
+  to_field "#{selector}_ssm", extract_xpath("/ead/archdesc/did/#{selector}")
 end
+
 NAME_ELEMENTS.map do |selector|
   to_field 'names_coll_ssim', extract_xpath("/ead/archdesc/controlaccess/#{selector}")
   to_field 'names_ssim', extract_xpath("//#{selector}")
   to_field "#{selector}_ssm", extract_xpath("//#{selector}")
 end
-to_field 'corpname_sim', extract_xpath('//corpname')
 
+to_field 'corpname_sim', extract_xpath('//corpname')
 to_field 'language_sim', extract_xpath('//did/langmaterial')
 to_field 'language_ssm', extract_xpath('//did/langmaterial')
+
+to_field 'descrules_ssm', extract_xpath('/ead/eadheader/profiledesc/descrules')
 
 # Each component child document
 # <c> <c01> <c12>

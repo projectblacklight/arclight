@@ -31,11 +31,14 @@ RSpec.describe 'Collection Page', type: :feature do
       end
     end
 
-    it 'notes are rendered as paragaphs' do
+    it 'multivalued notes are rendered as paragaphs' do
       within 'dd.blacklight-bioghist_ssm' do
         expect(page).to have_css('p', count: 2)
         expect(page).to have_css('p', text: /^Alpha Omega Alpha Honor Medical Society was founded/)
         expect(page).to have_css('p', text: /^Root and his fellow medical students/)
+      end
+      within 'dd.blacklight-abstract_ssm' do
+        expect(page).to have_css('p', count: 2)
       end
     end
 
@@ -58,6 +61,15 @@ RSpec.describe 'Collection Page', type: :feature do
 
         expect(page).to have_css('dt', text: 'Processing information')
         expect(page).to have_css('dd', text: /^Processed in 2001\. Descended from astronomers\./)
+
+        expect(page).to have_css('dt', text: 'Accruals')
+        expect(page).to have_css('dd', text: /^No further materials are expected/)
+
+        expect(page).to have_css('dt', text: 'Arrangement')
+        expect(page).to have_css('dd', text: /^Arranged into seven series\./)
+
+        expect(page).to have_css('dt', text: 'Rules or conventions')
+        expect(page).to have_css('dd', text: /^Finding aid prepared using Rules for Archival Description/)
       end
     end
 
