@@ -38,6 +38,10 @@
     .al-document-abstract-or-scope {
       font-size: $font-size-sm;
     }
+
+    .al-document-abstract-or-scope {
+      max-width: 45em;
+    }
   }
 }
 
