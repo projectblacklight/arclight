@@ -326,12 +326,6 @@ class CatalogController < ApplicationController
       last_word_connector: '<br/>'
     }
 
-    # Collection Show Page - Administrative Information Section
-    config.add_admin_info_field 'acqinfo_ssm', label: 'Acquisition information'
-    config.add_admin_info_field 'appraisal_ssm', label: 'Appraisal information'
-    config.add_admin_info_field 'custodhist_ssm', label: 'Custodial history'
-    config.add_admin_info_field 'processinfo_ssm', label: 'Processing information'
-
     # Remove unused show document actions
     %i[citation email sms].each do |action|
       config.view_config(:show).document_actions.delete(action)

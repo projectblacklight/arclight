@@ -60,7 +60,6 @@ en:
           title: Collection overview navigation
         sections:
           access_field: Access and Use
-          admin_info_field: Administrative Information
           background_field: Background
           collection_context_field: Collection Context
           component_field: About this %{level}
