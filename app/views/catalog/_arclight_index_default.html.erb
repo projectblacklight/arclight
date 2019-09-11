@@ -15,7 +15,7 @@
         <%= content_tag('div', class: 'al-document-container col') do %>
           <%= document.containers.join(', ') %>
         <% end if document.containers %>
-        <%= render partial: 'catalog/bookmark_control', locals: { document: document } %>
+        <%= render partial: 'catalog/arclight_bookmark_control', locals: { document: document } %>
       </div>
     </div>
     <div class="row">
