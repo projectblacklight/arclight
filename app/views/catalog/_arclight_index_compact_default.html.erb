@@ -6,6 +6,11 @@
     <h3>
       <%= link_to_document document, document_show_link_field(document), counter: document_counter %>
     </h3>
+    <div class="row">
+      <%= content_tag('div', class: 'al-document-highlight col') do %>
+        <%= document.highlights.join('<br/>').html_safe %>
+      <% end if document.highlights %>
+    </div>
     <div class='breadcrumb-links'>
       <%= regular_compact_breadcrumbs(document) %>
     </div>

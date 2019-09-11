@@ -19,4 +19,14 @@ RSpec.describe 'Compact Search Results', type: :feature do
       expect(page).to have_css '.breadcrumb-links a', text: /National Library of/
     end
   end
+  scenario 'Shows highlights in compact view' do
+    visit search_catalog_path q: 'william root', search_field: 'name'
+    click_link 'Compact'
+    within '.document-position-0' do
+      within '.al-document-highlight' do
+        expect(page).to have_css 'em', text: 'William'
+        expect(page).to have_css 'em', text: 'Root'
+      end
+    end
+  end
 end
