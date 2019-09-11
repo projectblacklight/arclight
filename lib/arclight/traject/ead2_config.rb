@@ -205,8 +205,9 @@ SEARCHABLE_NOTES_FIELDS.map do |selector|
 end
 
 DID_SEARCHABLE_NOTES_FIELDS.map do |selector|
-  to_field "#{selector}_ssm", extract_xpath("//did/#{selector}")
+  to_field "#{selector}_ssm", extract_xpath("/ead/archdesc/did/#{selector}")
 end
+
 NAME_ELEMENTS.map do |selector|
   to_field 'names_coll_ssim', extract_xpath("/ead/archdesc/controlaccess/#{selector}")
   to_field 'names_ssim', extract_xpath("//#{selector}")
