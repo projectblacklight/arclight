@@ -1,326 +1,530 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ead xmlns="urn:isbn:1-931666-22-9" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="urn:isbn:1-931666-22-9 http://www.loc.gov/ead/ead.xsd"><eadheader countryencoding="iso3166-1" dateencoding="iso8601" findaidstatus="edited-full-draft" langencoding="iso639-2b" repositoryencoding="iso15511"><eadid publicid="PUBLIC &#34;-//National Library of Medicine::History of Medicine Division::Archives   and Modern Manuscripts Collection//TEXT&#xA;(US::DNLM::MS C 544::REPO TEST National Commission on Acquired   Immune Deficiency Syndrome Records)//EN&#34; &#34;ncaids544" countrycode="US" identifier="101083016">ncaids544-test</eadid>
- <filedesc> 
-<titlestmt> 
-  <titleproper>REPO TEST Finding Aid to the National Commission on Acquired Immune Deficiency Syndrome Records,
-<date era="ce" calendar="gregorian">1983-1994</date> 
-</titleproper> 
-<author>History of Medicine Division. Archives and Modern Manuscripts Collection</author> 
-</titlestmt>
-<editionstmt>
-<edition>1.0</edition>
-</editionstmt>
-<publicationstmt>
-<publisher>History of Medicine Division, National Library of Medicine.</publisher>
-<address>
-<addressline>8600 Rockville Pike</addressline>
-<addressline>Bethesda, Maryland, 20894</addressline>
-<addressline>USA</addressline>
-<addressline>Phone: (301) 402-8878 (Reference Desk)</addressline>
-<addressline>Fax:(301) 402-0872</addressline>
-<addressline>Email:hmdref@nlm.nih.gov</addressline>
-</address>
-</publicationstmt>
-</filedesc>
-<profiledesc>
-<creation>Machine-readable finding aid encoded by John P. Rees</creation>
-<langusage>Finding aid is written in 
-<language>English.</language>
-</langusage>
-</profiledesc>
-</eadheader>
-<frontmatter>
-<titlepage>
-  <titleproper>REPO TEST Finding Aid to the National Commission on Acquired Immune Deficiency Syndrome Records, <date era="ce" calendar="gregorian">1983-1994</date>
-</titleproper>
-<num>MS C 544</num>
-<author>History of Medicine Division</author>
-<publisher>National Library of Medicine</publisher>
-<date type="publication" era="ce" calendar="gregorian">November 2004</date>
-<edition>1.0</edition>
-<list type="simple">
-<head>Contact Information</head>
-<item>History of Medicine Division</item>
-<item>National Library of Medicine</item>
-<item>8600 Rockville Pike</item>
-<item>Bethesda, Maryland</item>
-<item>USA</item>
-<item>Phone:(301) 402-8878 (Reference Desk)</item>
-<item>Fax:(301) 402-0872</item>
-<item>Email:hmdref@nlm.nih.gov</item>
-</list>
-<list type="deflist">
-<defitem>
-<label>Processed by </label>
-<item>Daniel J. Lavoie II</item>
-</defitem>
-<defitem>
-<label>Processing Completed </label>
-<item>October 2004</item>
-</defitem>
-<defitem>
-<label>Encoded by </label>
-<item>John P. Rees</item>
-</defitem>
-</list>
-</titlepage>
-</frontmatter>
-<archdesc relatedencoding="marc21" level="collection">
-<did>
-  <head>Descriptive Summary</head> <origination label="Creator:"><corpname encodinganalog="110">United States. National Commission on Acquired Immune Deficiency Syndrome</corpname></origination><unittitle label="Title:" encodinganalog="245">REPO TEST National Commission on Acquired Immune Deficiency Syndrome Records <unitdate type="inclusive" era="ce" calendar="gregorian">1983-1994</unitdate>
-</unittitle>
-<physdesc label="Extent:" encodinganalog="300">10.2 linear feet (8 boxes)</physdesc>
-<unitid label="Collection number:" encodinganalog="060">MS C 544</unitid>
-<repository label="Repository:" encodinganalog="852">
-Materials stored onsite. <corpname>History of Medicine Division. National Library of Medicine</corpname>
-</repository>
-<langmaterial label="Language:">Collection materials primarily in <language langcode="eng">English.</language>
-</langmaterial>
-<abstract label="Abstract:">Briefing books, hearing and meeting transcripts, reports, and press clippings document the activities of the National Commission on Acquired Immune Deficiency Syndrome.  Materials cover all but the last year of the Commission's existence.  The majority of the collection consists of briefing books, and hearing and meeting transcripts of the National Commission.</abstract>
-</did>
-<descgrp type="admininfo">
-<accessrestrict encodinganalog="506">
-<head>Access Restrictions</head>
-<p>No restrictions on access.</p>
-</accessrestrict>
-<userestrict encodinganalog="540">
-<head>Copyright Information</head>
-<p>Copyright was transferred to the public domain. Contact the Reference Staff for details regarding rights.</p>
-</userestrict>
-<prefercite encodinganalog="524"><head>Preferred Citation</head>
-<p>United States. National Commission on Acquired Immune Deficiency Syndrome. National Commission on Acquired Immune Deficiency Syndrome Records. 1983-1994. Located in: Archives and Modern Manuscripts Collection, History of Medicine Division, National Library of Medicine, Bethesda, MD; MS C 544.</p>
-</prefercite>
-  
-  <odd encodinganalog="500">
-    <list type="simple">
-      <head>Commission Members List</head>
-      <item>June E. Osborn, M.D., Chairman</item>
-      <item>David E. Rogers, M.D., Vice Chairman</item>
-      <item>The Honorable Diane Ahrens</item>
-      <item>K. Scott Allen</item>
-      <item>Don C. Des Jarlais, Ph.D.</item>
-      <item>Eunice Diaz, M.S., M.P.H.</item>
-      <item>Mary D. Fisher</item>
-      <item>Donald S. Goldman, Esq.</item>
-      <item>Larry Kessler</item>
-      <item>Charles Konigsberg, Jr. M.D., M.P.H.</item> 
-      <item>The Honorable J. Roy Rowland, M.D.</item>
-    </list>
-    
-    <list type="simple"><head>Ex Officio</head>
-      <item>Les Aspin, Ph. D., Secretary of Defense</item>
-      <item>Donna E Shalala, Secretary of Health and Human Services</item>
-      <item>Jesse Brown, Secretary of Veterans Affairs</item>
-    </list>
-    
-    <list type="simple">
-      <head>Department of Defense</head>
-      <item>Col. Michael R. Peterson, D.V.M., Dr. P.H., Executive Secretary, Armed 		Forces Epidemiological Board</item>
-    </list>
-    
-    <list type="simple">
-      <head>Department of Health and Human Services
-        National AIDS Program Office</head>
-      <item>James R. Allen, M.D., M.P.H., Former Director</item>
-      <item>Valerie Setlow, Ph.D., Acting Director</item>
-    </list>
-    
-    <list type="simple">
-      <head>Department of Veterans Affairs</head>
-      <item>Irwin Pernick, J.D., Former Counselor to the Secretary, Associated Deputy Assistant for Policy </item>
-      <item>Marvelu R. Peterson, Ph.D., Associate Director, AIDS Services</item>
-    </list>
-    
-    
-    <list type="simple"><head>Former Members</head>
-      <item>Harlon L. Dalton, Esq.</item>
-      <item>Earvin Johnson, Jr.</item>
-      <item>Belinda Mason</item>
-      <item>Richard B. Cheney, Former Secretary of Defense</item>
-      <item>Edward J. Derwinski, M.D., Former Secretary of Veterans Affairs</item>
-      <item>Louis W. Sullivan, M.D., Former Secretary of Health and Human Services</item>
-    </list>
-    
-  </odd>
-</descgrp>
-<bioghist encodinganalog="545">
-<head>Historical Note</head>
-<p>The National Commission on Acquired Immune Deficiency Syndrome was an independent body created in 1989 by federal statute (Public Law 100-607).  The mission of the National Commission was to advise Congress and the President on the development of "a consistent national policy" concerning the HIV epidemic.  The statute created the Commission for a period of up to four years, which expired on September 3, 1993. </p>
-<p>
-The National Commission was preceded by the Presidential Commission on the Human Immunodeficiency Virus Epidemic, which was established on June 24, 1987, by Executive Order 12601.  The Presidential Commission held over 45 days of hearings and site visits in preparation of their final report to the President, which was completed on June 27, 1988.  One of the recommendations of the final report was the development of a national commission on AIDS to continue their work.</p>
-<p>
-The National Commission consisted of fifteen members including five appointed by the Senate; five by the House; two by President George W. Bush Sr.; and the secretaries of Health and Human Services, Defense, and the Veterans Administration.  The Commission accomplished its mission through numerous hearings and site visits.</p>
-<p>
-The Commission's hearings covered the following topic concerning AIDS:  healthcare, treatment, and international aspects of the HIV epidemic; Federal, State, and Local responsibilities; the Southern California epidemic; social and human issues; Executive and Legislative branch issues; current research and clinical trials; HIV epidemic in the Commonwealth of Puerto Rico; African American communities; Pediatric and Adolescent HIV; Lesbian, Gay, and Bisexual communities among Asians, Asian Americans, and Pacific Islanders; Women and HIV disease and civil rights; religious communities response; and risks of transmission in healthcare settings.</p>
-<p>
-Site visits included Southern California community based organizations in order to observe their response to the epidemic.  Other site visits also included the homeless in New York City, Newark, and Jersey City; AIDS in the rural communities of Waycross, Albany, and Macon, Georgia; HIV and AIDS in New York City correctional facilities; the epidemic in the Commonwealth of Puerto Rico; regional responses in Belle Glade and Miami, Florida; and the Native American Communities of Oklahoma, Minnesota, South Dakota, Arizona, and New Mexico.</p>
-<p>
-During its tenure the Commission produced fifteen reports plus analytical and policy statements on a number of issues.  AIDS:  An Expanding Tragedy, the Commission's final report was issued in June 1993.  The final report discusses the future of the AIDS epidemic in America and established two main recommendations on the appropriate response.  The first recommendation was that leaders at all levels must speak out about AIDS to their constituencies.  Secondly, we must develop a clear well-articulated national plan for confronting AIDS.  The steps necessary to meet these guidelines are outlined by the Commission in Mobilizing America's Response to AIDS, which was sent directly to the President.
-</p>
-</bioghist>
-<scopecontent encodinganalog="520">
-<head>Collection Summary</head>
-<p>Briefing books, hearing and meeting transcripts, reports, and press clippings (1983-1993; 10.2 l.f.) document the activities of the National Commission on Acquired Immune Deficiency Syndrome (NCAIDS).  Materials cover all but the last year of the Commission's existence.  The majority of the collection consists of NCAIDS briefing books, and hearing and meeting transcripts.  Series I contains hearing transcripts from the Commission's predecessor, the Presidential Commission on the Human Immunodeficiency Virus Epidemic (1987-1988);  Series II contains the work conducted by NCAIDS. In Series III the collection also includes various topical reports on AIDS published by external agencies.  There are no notes or correspondence in this collection and all materials appear here in published form.  In addition, the Commission's report <title>Mobilizing America's Response to AIDS</title>, is also not included within this collection but can be found n the Library's General Collection.  The bulk of the collection spans the years 1987 to early 1992.</p>
-<p>
-The collection comprises four series: Presidential Commission on the Human Immunodeficiency Virus Epidemic, 1987-1988; Briefings and Transcripts of Hearings and Meetings, 1989-1992; Press Coverage and Reports, 1989-1993; and Reports on AIDS from External Institutions and Government Agencies, 1983-1992.</p>
-<p>
-Of special interest is the Commission's final report <title>AIDS: An Expanding Tragedy</title>, which serves as a summary of the Commission's activities and includes a detailed chronology of its activities and provides an extensive list of all hearings, site visits, reports, and publications related to the Commission.</p>
-</scopecontent>
-<controlaccess>
-<head>Index Terms</head>
-<p>These terms are indexed in the National Library of Medicine's online catalog LocatorPlus. Researchers wishing to find related materials should search the catalog using these terms.</p>
-<controlaccess>
-<head>MESH Subjects</head>
-  <subject encodinganalog="650$a" source="mesh">Acquired Immunodeficiency Syndrome</subject>
-  <subject encodinganalog="650$a" source="mesh">African Americans</subject>
-<subject encodinganalog="650$a" source="mesh">Homosexuality</subject>
-<subject encodinganalog="650$a" source="mesh">Human Immunodeficiency Virus</subject>
-<subject encodinganalog="650$a" source="mesh">Public Health</subject>
-</controlaccess>
+<ead xmlns="urn:isbn:1-931666-22-9"
+     xmlns:xlink="http://www.w3.org/1999/xlink"
+     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+     xsi:schemaLocation="urn:isbn:1-931666-22-9 http://www.loc.gov/ead/ead.xsd">
+    <eadheader countryencoding="iso3166-1" dateencoding="iso8601"
+               findaidstatus="edited-full-draft" langencoding="iso639-2b"
+               repositoryencoding="iso15511">
+        <eadid
+            publicid="PUBLIC &#34;-//National Library of Medicine::History of Medicine Division::Archives   and Modern Manuscripts Collection//TEXT&#xA;(US::DNLM::MS C 544::REPO TEST National Commission on Acquired   Immune Deficiency Syndrome Records)//EN&#34; &#34;ncaids544"
+            countrycode="US" identifier="101083016">ncaids544-test
+        </eadid>
+        <filedesc>
+            <titlestmt>
+                <titleproper>REPO TEST Finding Aid to the National Commission
+                    on Acquired Immune Deficiency Syndrome Records,
+                    <date era="ce" calendar="gregorian">1983-1994</date>
+                </titleproper>
+                <author>History of Medicine Division. Archives and Modern
+                    Manuscripts Collection
+                </author>
+            </titlestmt>
+            <editionstmt>
+                <edition>1.0</edition>
+            </editionstmt>
+            <publicationstmt>
+                <publisher>History of Medicine Division, National Library of
+                    Medicine.
+                </publisher>
+                <address>
+                    <addressline>8600 Rockville Pike</addressline>
+                    <addressline>Bethesda, Maryland, 20894</addressline>
+                    <addressline>USA</addressline>
+                    <addressline>Phone: (301) 402-8878 (Reference Desk)
+                    </addressline>
+                    <addressline>Fax:(301) 402-0872</addressline>
+                    <addressline>Email:hmdref@nlm.nih.gov</addressline>
+                </address>
+            </publicationstmt>
+        </filedesc>
+        <profiledesc>
+            <creation>Machine-readable finding aid encoded by John P. Rees
+            </creation>
+            <langusage>Finding aid is written in
+                <language>English.</language>
+            </langusage>
+        </profiledesc>
+    </eadheader>
+    <frontmatter>
+        <titlepage>
+            <titleproper>REPO TEST Finding Aid to the National Commission on
+                Acquired Immune Deficiency Syndrome Records,
+                <date era="ce" calendar="gregorian">1983-1994</date>
+            </titleproper>
+            <num>MS C 544</num>
+            <author>History of Medicine Division</author>
+            <publisher>National Library of Medicine</publisher>
+            <date type="publication" era="ce" calendar="gregorian">November
+                2004
+            </date>
+            <edition>1.0</edition>
+            <list type="simple">
+                <head>Contact Information</head>
+                <item>History of Medicine Division</item>
+                <item>National Library of Medicine</item>
+                <item>8600 Rockville Pike</item>
+                <item>Bethesda, Maryland</item>
+                <item>USA</item>
+                <item>Phone:(301) 402-8878 (Reference Desk)</item>
+                <item>Fax:(301) 402-0872</item>
+                <item>Email:hmdref@nlm.nih.gov</item>
+            </list>
+            <list type="deflist">
+                <defitem>
+                    <label>Processed by</label>
+                    <item>Daniel J. Lavoie II</item>
+                </defitem>
+                <defitem>
+                    <label>Processing Completed</label>
+                    <item>October 2004</item>
+                </defitem>
+                <defitem>
+                    <label>Encoded by</label>
+                    <item>John P. Rees</item>
+                </defitem>
+            </list>
+        </titlepage>
+    </frontmatter>
+    <archdesc relatedencoding="marc21" level="collection">
+        <did>
+            <head>Descriptive Summary</head>
+            <origination label="Creator:">
+                <corpname encodinganalog="110">United States. National
+                    Commission on Acquired Immune Deficiency Syndrome
+                </corpname>
+            </origination>
+            <unittitle label="Title:" encodinganalog="245">REPO TEST National
+                Commission on Acquired Immune Deficiency Syndrome Records
+                <unitdate type="inclusive" era="ce" calendar="gregorian">
+                    1983-1994
+                </unitdate>
+            </unittitle>
+            <physdesc label="Extent:" encodinganalog="300">10.2 linear feet
+                (8 boxes)
+            </physdesc>
+            <unitid label="Collection number:" encodinganalog="060">MS C
+                544
+            </unitid>
+            <repository label="Repository:" encodinganalog="852">
+                Materials stored onsite.
+                <corpname>History of Medicine Division. National Library of
+                    Medicine
+                </corpname>
+            </repository>
+            <langmaterial label="Language:">Collection materials primarily in
+                <language langcode="eng">English.</language>
+            </langmaterial>
+            <abstract label="Abstract:">Briefing books, hearing and meeting
+                transcripts, reports, and press clippings document the
+                activities of the National Commission on Acquired Immune
+                Deficiency Syndrome. Materials cover all but the last year of
+                the Commission's existence. The majority of the collection
+                consists of briefing books, and hearing and meeting
+                transcripts of the National Commission.
+            </abstract>
+        </did>
+        <descgrp type="admininfo">
+            <accessrestrict encodinganalog="506">
+                <head>Access Restrictions</head>
+                <p>No restrictions on access.</p>
+            </accessrestrict>
+            <userestrict encodinganalog="540">
+                <head>Copyright Information</head>
+                <p>Copyright was transferred to the public domain. Contact
+                    the Reference Staff for details regarding rights.
+                </p>
+            </userestrict>
+            <prefercite encodinganalog="524">
+                <head>Preferred Citation</head>
+                <p>United States. National Commission on Acquired Immune
+                    Deficiency Syndrome. National Commission on Acquired
+                    Immune Deficiency Syndrome Records. 1983-1994. Located
+                    in: Archives and Modern Manuscripts Collection, History
+                    of Medicine Division, National Library of Medicine,
+                    Bethesda, MD; MS C 544.
+                </p>
+            </prefercite>
 
-<controlaccess>
-<head>Corporate Names</head>
-<corpname encodinganalog="610$a" source="mesh">United States. Presidential Commission on the Human Immunodeficiency Virus  Epidemic</corpname>
-</controlaccess>
-</controlaccess>
-<dsc type="combined">
-<head>Series Descriptions</head>
-<c01 id="d0e432" level="series">
-  <did>
-    <unitid type="digirepo">101083016Y1</unitid>
-<unittitle>
-Series I: Presidential Commission On The Human Immunodeficiency Virus Epidemic, 
-<unitdate era="ce" calendar="gregorian">1987-1988</unitdate>
-</unittitle>
-</did>
-<scopecontent>
-<p>This series contains transcripts of hearings and two reports from the first instance of the commission. The hearing transcripts cover topics such as IV drug abuse, social, legal, financial, ethical, and safety issues concerning AIDS.</p>
-</scopecontent>
-<descgrp type="admininfo">
-<acqinfo encodinganalog="541">
-<head>Provenance</head><p>Gift, John L. Parascandola, PHS Historian's Office, 3/1/1994, Acc. #812. Gift, Donald Goldman, Acc. #2005-21.</p>
-</acqinfo>
-</descgrp>
-<c02 id="d0e452" level="subseries">
-<did>
-  <unitid type="digirepo">101083016Y2</unitid>
-<unittitle>
-Hearing Transcripts
-</unittitle>
-</did>
-<c03 id="d0e463">
+            <odd encodinganalog="500">
+                <list type="simple">
+                    <head>Commission Members List</head>
+                    <item>June E. Osborn, M.D., Chairman</item>
+                    <item>David E. Rogers, M.D., Vice Chairman</item>
+                    <item>The Honorable Diane Ahrens</item>
+                    <item>K. Scott Allen</item>
+                    <item>Don C. Des Jarlais, Ph.D.</item>
+                    <item>Eunice Diaz, M.S., M.P.H.</item>
+                    <item>Mary D. Fisher</item>
+                    <item>Donald S. Goldman, Esq.</item>
+                    <item>Larry Kessler</item>
+                    <item>Charles Konigsberg, Jr. M.D., M.P.H.</item>
+                    <item>The Honorable J. Roy Rowland, M.D.</item>
+                </list>
 
-<did>
-<unitid type="digirepo">101083016X3</unitid>
-<container type="box">1</container>
-<container type="folder">1</container>
-<unittitle>
-Congressional, 
-<unitdate era="ce" calendar="gregorian">Sept. 30, 1987</unitdate>
-</unittitle>
-</did>
-</c03>
-<c03 id="d0e484">
-<did>
-<unitid type="digirepo">101083016X4</unitid>
-<container type="box">1</container>
-<container type="folder">2</container>
-<unittitle>
-Hearing, 
-<unitdate era="ce" calendar="gregorian">Nov. 24, 1987</unitdate>
-</unittitle>
-</did>
-</c03>
-<c03 id="d0e505">
-<did>
-<unitid type="digirepo">101083016X5</unitid>
-<container type="box">1</container>
-<container type="folder">3</container>
-<unittitle>
-IV Drug Abuse and HIV, 
-<unitdate era="ce" calendar="gregorian">Dec. 17-18, 1987</unitdate>
-</unittitle>
-</did>
-</c03>
-<c03 id="d0e526">
-<did>
-<unitid type="digirepo">101083016X6</unitid>
-<container type="box">1</container>
-<container type="folder">4</container>
-<unittitle>
-Care of HIV Infected Persons, 
-<unitdate era="ce" calendar="gregorian">Jan. 13-15, 1988</unitdate>
-</unittitle>
-</did>
-</c03>
-<c03 id="d0e547">
-<did>
-<unitid type="digirepo">101083016X7</unitid>
-<container type="box">1</container>
-<container type="folder">5</container>
-<unittitle>
-Research, 
-<unitdate era="ce" calendar="gregorian">Feb. 18-20, 1988</unitdate>
-</unittitle>
-</did>
-</c03>
-<c03 id="d0e568">
-<did>
-<unitid type="digirepo">101083016X8</unitid>
-<container type="box">1</container>
-<container type="folder">6</container>
-<unittitle>
-Interim Report Executive Session, 
-<unitdate era="ce" calendar="gregorian">Feb. 29, Mar. 3, 1988</unitdate>
-</unittitle>
-</did>
-</c03>
-<c03 id="d0e589">
-<did>
-<unitid type="digirepo">101083016X9</unitid>
-<container type="box">1</container>
-<container type="folder">7</container>
-<unittitle>
-Prevention and Education, 
-<unitdate era="ce" calendar="gregorian">Mar. 1-3, 1988</unitdate>
-</unittitle>
-</did>
-</c03>
-<c03 id="d0e610">
-<did>
-<unitid type="digirepo">101083016X10</unitid>
-<container type="box">1</container>
-<container type="folder">8-9</container>
-<unittitle>
-Discrimination, Ethics, and Testing, 
-<unitdate era="ce" calendar="gregorian">Mar. 16-18, 1988</unitdate>
-</unittitle>
-</did>
-</c03>
-<c03 id="d0e631">
-<did>
-<unitid type="digirepo">101083016X11</unitid>
-<container type="box">1</container>
-<container type="folder">10</container>
-<unittitle>
-Western States Response, 
-<unitdate era="ce" calendar="gregorian">Mar. 24-25, 1988</unitdate>
-</unittitle>
-</did>
-</c03>
-</c02>
-<c02 id="d0e3329">
-<did>
-<container type="box">8</container>
-<container type="folder">31</container>
-<unittitle>
-Uniform Crime Reporting [U.S. Department of Justice], 
-<unitdate era="ce" calendar="gregorian">1988</unitdate>
-</unittitle>
-</did>
-</c02>
-</c01>
+                <list type="simple">
+                    <head>Ex Officio</head>
+                    <item>Les Aspin, Ph. D., Secretary of Defense</item>
+                    <item>Donna E Shalala, Secretary of Health and Human
+                        Services
+                    </item>
+                    <item>Jesse Brown, Secretary of Veterans Affairs</item>
+                </list>
 
-</dsc>
-</archdesc>
+                <list type="simple">
+                    <head>Department of Defense</head>
+                    <item>Col. Michael R. Peterson, D.V.M., Dr. P.H.,
+                        Executive Secretary, Armed Forces Epidemiological
+                        Board
+                    </item>
+                </list>
+
+                <list type="simple">
+                    <head>Department of Health and Human Services
+                        National AIDS Program Office
+                    </head>
+                    <item>James R. Allen, M.D., M.P.H., Former Director
+                    </item>
+                    <item>Valerie Setlow, Ph.D., Acting Director</item>
+                </list>
+
+                <list type="simple">
+                    <head>Department of Veterans Affairs</head>
+                    <item>Irwin Pernick, J.D., Former Counselor to the
+                        Secretary, Associated Deputy Assistant for Policy
+                    </item>
+                    <item>Marvelu R. Peterson, Ph.D., Associate Director,
+                        AIDS Services
+                    </item>
+                </list>
+
+
+                <list type="simple">
+                    <head>Former Members</head>
+                    <item>Harlon L. Dalton, Esq.</item>
+                    <item>Earvin Johnson, Jr.</item>
+                    <item>Belinda Mason</item>
+                    <item>Richard B. Cheney, Former Secretary of Defense
+                    </item>
+                    <item>Edward J. Derwinski, M.D., Former Secretary of
+                        Veterans Affairs
+                    </item>
+                    <item>Louis W. Sullivan, M.D., Former Secretary of Health
+                        and Human Services
+                    </item>
+                </list>
+
+            </odd>
+        </descgrp>
+        <bioghist encodinganalog="545">
+            <head>Historical Note</head>
+            <p>The National Commission on Acquired Immune Deficiency Syndrome
+                was an independent body created in 1989 by federal statute
+                (Public Law 100-607). The mission of the National Commission
+                was to advise Congress and the President on the development
+                of "a consistent national policy" concerning the HIV
+                epidemic. The statute created the Commission for a period of
+                up to four years, which expired on September 3, 1993.
+            </p>
+            <p>
+                The National Commission was preceded by the Presidential
+                Commission on the Human Immunodeficiency Virus Epidemic,
+                which was established on June 24, 1987, by Executive Order
+                12601. The Presidential Commission held over 45 days of
+                hearings and site visits in preparation of their final report
+                to the President, which was completed on June 27, 1988. One
+                of the recommendations of the final report was the
+                development of a national commission on AIDS to continue
+                their work.
+            </p>
+            <p>
+                The National Commission consisted of fifteen members
+                including five appointed by the Senate; five by the House;
+                two by President George W. Bush Sr.; and the secretaries of
+                Health and Human Services, Defense, and the Veterans
+                Administration. The Commission accomplished its mission
+                through numerous hearings and site visits.
+            </p>
+            <p>
+                The Commission's hearings covered the following topic
+                concerning AIDS: healthcare, treatment, and international
+                aspects of the HIV epidemic; Federal, State, and Local
+                responsibilities; the Southern California epidemic; social
+                and human issues; Executive and Legislative branch issues;
+                current research and clinical trials; HIV epidemic in the
+                Commonwealth of Puerto Rico; African American communities;
+                Pediatric and Adolescent HIV; Lesbian, Gay, and Bisexual
+                communities among Asians, Asian Americans, and Pacific
+                Islanders; Women and HIV disease and civil rights; religious
+                communities response; and risks of transmission in healthcare
+                settings.
+            </p>
+            <p>
+                Site visits included Southern California community based
+                organizations in order to observe their response to the
+                epidemic. Other site visits also included the homeless in New
+                York City, Newark, and Jersey City; AIDS in the rural
+                communities of Waycross, Albany, and Macon, Georgia; HIV and
+                AIDS in New York City correctional facilities; the epidemic
+                in the Commonwealth of Puerto Rico; regional responses in
+                Belle Glade and Miami, Florida; and the Native American
+                Communities of Oklahoma, Minnesota, South Dakota, Arizona,
+                and New Mexico.
+            </p>
+            <p>
+                During its tenure the Commission produced fifteen reports
+                plus analytical and policy statements on a number of issues.
+                AIDS: An Expanding Tragedy, the Commission's final report was
+                issued in June 1993. The final report discusses the future of
+                the AIDS epidemic in America and established two main
+                recommendations on the appropriate response. The first
+                recommendation was that leaders at all levels must speak out
+                about AIDS to their constituencies. Secondly, we must develop
+                a clear well-articulated national plan for confronting AIDS.
+                The steps necessary to meet these guidelines are outlined by
+                the Commission in Mobilizing America's Response to AIDS,
+                which was sent directly to the President.
+            </p>
+        </bioghist>
+        <scopecontent encodinganalog="520">
+            <head>Collection Summary</head>
+            <p>Briefing books, hearing and meeting transcripts, reports, and
+                press clippings (1983-1993; 10.2 l.f.) document the
+                activities of the National Commission on Acquired Immune
+                Deficiency Syndrome (NCAIDS). Materials cover all but the
+                last year of the Commission's existence. The majority of the
+                collection consists of NCAIDS briefing books, and hearing and
+                meeting transcripts. Series I contains hearing transcripts
+                from the Commission's predecessor, the Presidential
+                Commission on the Human Immunodeficiency Virus Epidemic
+                (1987-1988); Series II contains the work conducted by NCAIDS.
+                In Series III the collection also includes various topical
+                reports on AIDS published by external agencies. There are no
+                notes or correspondence in this collection and all materials
+                appear here in published form. In addition, the Commission's
+                report <title>Mobilizing America's Response to AIDS</title>,
+                is also not included within this collection but can be found
+                n the Library's General Collection. The bulk of the
+                collection spans the years 1987 to early 1992.
+            </p>
+            <p>
+                The collection comprises four series: Presidential Commission
+                on the Human Immunodeficiency Virus Epidemic, 1987-1988;
+                Briefings and Transcripts of Hearings and Meetings,
+                1989-1992; Press Coverage and Reports, 1989-1993; and Reports
+                on AIDS from External Institutions and Government Agencies,
+                1983-1992.
+            </p>
+            <p>
+                Of special interest is the Commission's final report <title>
+                AIDS: An Expanding Tragedy</title>, which serves as a summary
+                of the Commission's activities and includes a detailed
+                chronology of its activities and provides an extensive list
+                of all hearings, site visits, reports, and publications
+                related to the Commission.
+            </p>
+        </scopecontent>
+        <controlaccess>
+            <head>Index Terms</head>
+            <p>These terms are indexed in the National Library of Medicine's
+                online catalog LocatorPlus. Researchers wishing to find
+                related materials should search the catalog using these
+                terms.
+            </p>
+            <controlaccess>
+                <head>MESH Subjects</head>
+                <subject encodinganalog="650$a" source="mesh">Acquired
+                    Immunodeficiency Syndrome
+                </subject>
+                <subject encodinganalog="650$a" source="mesh">African
+                    Americans
+                </subject>
+                <subject encodinganalog="650$a" source="mesh">Homosexuality
+                </subject>
+                <subject encodinganalog="650$a" source="mesh">Human
+                    Immunodeficiency Virus
+                </subject>
+                <subject encodinganalog="650$a" source="mesh">Public Health
+                </subject>
+            </controlaccess>
+
+            <controlaccess>
+                <head>Corporate Names</head>
+                <corpname encodinganalog="610$a" source="mesh">United States.
+                    Presidential Commission on the Human Immunodeficiency
+                    Virus Epidemic
+                </corpname>
+            </controlaccess>
+        </controlaccess>
+        <dsc type="combined">
+            <head>Series Descriptions</head>
+            <c01 id="d0e432" level="series">
+                <did>
+                    <unitid type="digirepo">101083016Y1</unitid>
+                    <unittitle>
+                        Series I: Presidential Commission On The Human
+                        Immunodeficiency Virus Epidemic,
+                        <unitdate era="ce" calendar="gregorian">1987-1988
+                        </unitdate>
+                    </unittitle>
+                </did>
+                <scopecontent>
+                    <p>This series contains transcripts of hearings and two
+                        reports from the first instance of the commission.
+                        The hearing transcripts cover topics such as IV drug
+                        abuse, social, legal, financial, ethical, and safety
+                        issues concerning AIDS.
+                    </p>
+                </scopecontent>
+                <descgrp type="admininfo">
+                    <acqinfo encodinganalog="541">
+                        <head>Provenance</head>
+                        <p>Gift, John L. Parascandola, PHS Historian's
+                            Office, 3/1/1994, Acc. #812. Gift, Donald
+                            Goldman, Acc. #2005-21.
+                        </p>
+                    </acqinfo>
+                </descgrp>
+                <c02 id="d0e452" level="subseries">
+                    <did>
+                        <unitid type="digirepo">101083016Y2</unitid>
+                        <unittitle>
+                            Hearing Transcripts
+                        </unittitle>
+                    </did>
+                    <c03 id="d0e463">
+
+                        <did>
+                            <unitid type="digirepo">101083016X3</unitid>
+                            <container type="box">1</container>
+                            <container type="folder">1</container>
+                            <unittitle>
+                                Congressional,
+                                <unitdate era="ce" calendar="gregorian">Sept.
+                                    30, 1987
+                                </unitdate>
+                            </unittitle>
+                        </did>
+                    </c03>
+                    <c03 id="d0e484">
+                        <did>
+                            <unitid type="digirepo">101083016X4</unitid>
+                            <container type="box">1</container>
+                            <container type="folder">2</container>
+                            <unittitle>
+                                Hearing,
+                                <unitdate era="ce" calendar="gregorian">Nov.
+                                    24, 1987
+                                </unitdate>
+                            </unittitle>
+                        </did>
+                    </c03>
+                    <c03 id="d0e505">
+                        <did>
+                            <unitid type="digirepo">101083016X5</unitid>
+                            <container type="box">1</container>
+                            <container type="folder">3</container>
+                            <unittitle>
+                                IV Drug Abuse and HIV,
+                                <unitdate era="ce" calendar="gregorian">Dec.
+                                    17-18, 1987
+                                </unitdate>
+                            </unittitle>
+                        </did>
+                    </c03>
+                    <c03 id="d0e526">
+                        <did>
+                            <unitid type="digirepo">101083016X6</unitid>
+                            <container type="box">1</container>
+                            <container type="folder">4</container>
+                            <unittitle>
+                                Care of HIV Infected Persons,
+                                <unitdate era="ce" calendar="gregorian">Jan.
+                                    13-15, 1988
+                                </unitdate>
+                            </unittitle>
+                        </did>
+                    </c03>
+                    <c03 id="d0e547">
+                        <did>
+                            <unitid type="digirepo">101083016X7</unitid>
+                            <container type="box">1</container>
+                            <container type="folder">5</container>
+                            <unittitle>
+                                Research,
+                                <unitdate era="ce" calendar="gregorian">Feb.
+                                    18-20, 1988
+                                </unitdate>
+                            </unittitle>
+                        </did>
+                    </c03>
+                    <c03 id="d0e568">
+                        <did>
+                            <unitid type="digirepo">101083016X8</unitid>
+                            <container type="box">1</container>
+                            <container type="folder">6</container>
+                            <unittitle>
+                                Interim Report Executive Session,
+                                <unitdate era="ce" calendar="gregorian">Feb.
+                                    29, Mar. 3, 1988
+                                </unitdate>
+                            </unittitle>
+                        </did>
+                    </c03>
+                    <c03 id="d0e589">
+                        <did>
+                            <unitid type="digirepo">101083016X9</unitid>
+                            <container type="box">1</container>
+                            <container type="folder">7</container>
+                            <unittitle>
+                                Prevention and Education,
+                                <unitdate era="ce" calendar="gregorian">Mar.
+                                    1-3, 1988
+                                </unitdate>
+                            </unittitle>
+                        </did>
+                    </c03>
+                    <c03 id="d0e610">
+                        <did>
+                            <unitid type="digirepo">101083016X10</unitid>
+                            <container type="box">1</container>
+                            <container type="folder">8-9</container>
+                            <unittitle>
+                                Discrimination, Ethics, and Testing,
+                                <unitdate era="ce" calendar="gregorian">Mar.
+                                    16-18, 1988
+                                </unitdate>
+                            </unittitle>
+                        </did>
+                    </c03>
+                    <c03 id="d0e631">
+                        <did>
+                            <unitid type="digirepo">101083016X11</unitid>
+                            <container type="box">1</container>
+                            <container type="folder">10</container>
+                            <unittitle>
+                                Western States Response,
+                                <unitdate era="ce" calendar="gregorian">Mar.
+                                    24-25, 1988
+                                </unitdate>
+                            </unittitle>
+                        </did>
+                    </c03>
+                </c02>
+                <c02 id="d0e3329">
+                    <did>
+                        <container type="box">8</container>
+                        <container type="folder">31</container>
+                        <unittitle>
+                            Uniform Crime Reporting [U.S. Department of
+                            Justice],
+                            <unitdate era="ce" calendar="gregorian">1988
+                            </unitdate>
+                        </unittitle>
+                    </did>
+                </c02>
+            </c01>
+
+        </dsc>
+    </archdesc>
 </ead>
