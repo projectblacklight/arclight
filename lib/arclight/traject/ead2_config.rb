@@ -218,6 +218,8 @@ to_field 'corpname_sim', extract_xpath('//corpname')
 to_field 'language_sim', extract_xpath('//did/langmaterial')
 to_field 'language_ssm', extract_xpath('//did/langmaterial')
 
+to_field 'descrules_ssm', extract_xpath('/xmlns:ead/xmlns:eadheader/xmlns:profiledesc/xmlns:descrules')
+
 # Each component child document
 # <c> <c01> <c12>
 compose 'components', ->(record, accumulator, _context) { accumulator.concat record.xpath('//*[is_component(.)]', NokogiriXpathExtensions.new) } do
