@@ -7,7 +7,7 @@
   <% unless bookmarked? document %>
     <%= form_tag(bookmark_path(document),
                  method: :put,
-                 class: 'bookmark-toggle',
+                 class: 'bookmark-toggle col-auto',
                  data: {
                    'doc-id' => document.id,
                    present: blacklight_icon(:bookmark),
