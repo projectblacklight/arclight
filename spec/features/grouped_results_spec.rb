@@ -14,6 +14,7 @@ RSpec.describe 'Grouped search results', type: :feature do
       expect(page).to have_css 'article', count: 3
     end
   end
+
   it 'displays breadcrumbs only for component parents' do
     visit search_catalog_path q: 'alpha', group: 'true'
     within first('.breadcrumb-links') do
@@ -30,5 +31,25 @@ RSpec.describe 'Grouped search results', type: :feature do
   it 'has link to repository' do
     visit search_catalog_path q: 'alpha', group: 'true'
     expect(page).to have_css '.al-grouped-repository a', text: /National Library of Medicine/
+  end
+  it 'links to additional results in collection' do
+    visit search_catalog_path q: 'alpha', group: 'true'
+    expect(page).to have_css '.al-grouped-more', text: /Top 3 results/
+    expect(page).to have_css(
+      '.al-grouped-more a[href*="/catalog?f%5Bcollection_sim%5D%5B%5D=Alpha+Omega+Alpha+Archives%2C+1894-1992"]',
+      text: 'view all 6'
+    )
+  end
+
+  context 'when in compact view' do
+    it 'does not render the collection abstract/scope' do
+      visit search_catalog_path q: 'alpha', group: 'true', view: 'compact'
+
+      within '.al-grouped-title-bar' do
+        expect(page).to have_css 'h3', text: /Alpha/
+        expect(page).not_to have_css '.al-document-abstract-or-scope', text: /founded in 1902/
+        expect(page).to have_css '.badge', text: '15.0 linear feet (36 boxes + oversize folder)'
+      end
+    end
   end
 end

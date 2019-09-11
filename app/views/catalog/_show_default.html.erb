@@ -1,20 +1,20 @@
 <div class='row'>
   <div class='col-md-12'>
-    <ul class='nav nav-pills' role='tablist'>
-      <li class='nav-item'>
-        <a class='nav-link active' data-toggle='tab' href='#overview' role='tab'>
+    <ul class='nav nav-tabs nav-fill' role='tablist' aria-label='<%= t('arclight.views.show.tablist_nav') %>'>
+      <li class='nav-item flex-fill'>
+        <a class='nav-link p-1 p-sm-2 active' data-toggle='tab' href='#overview' role='tab'>
           <%= t 'arclight.views.show.overview' %>
         </a>
       </li>
       <% if document.children? %>
-        <li class='nav-item'>
-          <a class='nav-link disabled' data-toggle='tab' href='#contents' role='tab' data-hierarchy-enable-me='true'>
+        <li class='nav-item flex-fill'>
+          <a class='nav-link p-1 p-sm-2 disabled' data-toggle='tab' href='#contents' role='tab' data-hierarchy-enable-me='true'>
             <%= t 'arclight.views.show.no_contents' %>
           </a>
         </li>
       <% end %>
-      <li class='nav-item'>
-        <a class='nav-link <%= 'disabled' unless document.online_content? %>' data-toggle='tab' href='#online-content' role='tab' data-arclight-online-content-tab='true'>
+      <li class='nav-item flex-fill'>
+        <a class='nav-link p-1 p-sm-2 <%= 'disabled' unless document.online_content? %>' data-toggle='tab' href='#online-content' role='tab' data-arclight-online-content-tab='true'>
           <% if document.online_content? %>
             <%= t 'arclight.views.show.online_content' %>
           <% else %>
@@ -22,8 +22,8 @@
           <% end %>
         </a>
       </li>
-      <li class='nav-item'>
-        <a class='nav-link' data-toggle='tab' href='#access' role='tab'>
+      <li class='nav-item flex-fill'>
+        <a class='nav-link p-1 p-sm-2' data-toggle='tab' href='#access' role='tab'>
           <%= t 'arclight.views.show.access' %>
         </a>
       </li>

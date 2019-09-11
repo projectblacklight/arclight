@@ -6,9 +6,15 @@ module ArclightHelper
   ##
   # @param [SolrDocument]
   def parents_to_links(document)
-    safe_join(document_parents(document).map do |parent|
+    breadcrumb_links = []
+
+    breadcrumb_links << build_repository_link(document)
+
+    breadcrumb_links << document_parents(document).map do |parent|
       link_to parent.label, solr_document_path(parent.global_id)
-    end, t('arclight.breadcrumb_separator'))
+    end
+
+    safe_join(breadcrumb_links, t('arclight.breadcrumb_separator'))
   end
 
   ##
@@ -19,6 +25,23 @@ module ArclightHelper
     safe_join(parents.slice(1, 999).map do |parent|
       link_to parent.label, solr_document_path(parent.global_id)
     end, t('arclight.breadcrumb_separator'))
+  end
+
+  ##
+  # @param [SolrDocument]
+  def component_top_level_parent_to_links(document)
+    parents = document_parents(document)
+    return unless parents.length > 1
+
+    parent_link = link_to(parents[1].label, solr_document_path(parents[1].global_id))
+    return parent_link if parents.length == 2
+    safe_join(
+      [
+        parent_link,
+        t('arclight.breadcrumb_separator'),
+        '&hellip;'.html_safe
+      ]
+    )
   end
 
   ##
@@ -63,11 +86,15 @@ module ArclightHelper
   end
 
   def search_with_group
-    search_catalog_path search_state.params_for_search.merge('group' => 'true')
+    search_state.params_for_search.merge('group' => 'true')
   end
 
   def search_without_group
-    search_catalog_path(search_state.params_for_search.reject { |k| k == 'group' })
+    search_state.params_for_search.reject { |k| k == 'group' }
+  end
+
+  def search_within_collection(collection_name, search)
+    search.merge(f: { collection_sim: [collection_name] })
   end
 
   ##
@@ -220,5 +247,16 @@ module ArclightHelper
   # Calls the method for a configured field
   def generic_render_document_field_label(config_field, document, field: field_name)
     send(:"render_document_#{config_field}_label", document, field: field)
+  end
+
+  private
+
+  def build_repository_link(document)
+    repository_path = document.repository_config&.slug
+    if repository_path.present?
+      link_to(document.repository, arclight_engine.repository_path(repository_path))
+    else
+      content_tag(:span, document.repository)
+    end
   end
 end

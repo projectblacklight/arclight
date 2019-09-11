@@ -1,7 +1,5 @@
 .documents-list {
-  .badge {
-    float: right;
-  }
+
 
   // Result item header
   .al-document-title-bar {
@@ -15,17 +13,19 @@
   // Result item body
   article.document {
     border-bottom: 0;
-    border-left: $result-item-border-styling;
-    border-right: $result-item-border-styling;
     margin-bottom: $spacer * 2;
     padding: 0 $result-item-body-padding;
 
-    .documentHeader {
-      padding-top: 0.4rem;
-    }
-
     .document-title-heading {
       font-size: $h5-font-size;
+      .al-document-extent {
+        background-color: $gray-200;
+        border: $result-item-border-styling;
+        font-size: $font-size-sm;
+        margin-bottom: 0.25rem;
+        padding: 2px $result-item-body-padding;
+        border-radius: 10px;
+      }
     }
 
     .breadcrumb-links,
@@ -108,4 +108,8 @@
 
 .col-no-right-padding {
   padding-right: 0 !important;
+}
+
+.breadcrumb-links a {
+  color: $body-color;
 }
