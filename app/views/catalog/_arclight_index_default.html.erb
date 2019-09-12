@@ -10,10 +10,15 @@
         <%= content_tag('span', class: 'al-document-container col-auto text-muted') do %>
           <%= document.containers.join(', ') %>
         <% end if document.containers %>
+
         <% if document.online_content? %>
-          <span class='badge badge-success'>
-            <%= t(:'arclight.views.online_content_indicator') %>
-          </span>
+          <% if document.level == "File" %>
+            <%= blacklight_icon :search, classes: 'al-online-content-icon' %>
+          <% else%>
+            <span class='text-success'>
+              <%= t(:'arclight.views.online_content_indicator') %>
+            </span>
+          <% end %>
         <% end %>
         
         <%= render_index_doc_actions document, wrapping_class: "text-right" %>

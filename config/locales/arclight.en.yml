@@ -36,7 +36,7 @@ en:
         top_group_results:
           one: Top %{count} result
           other: Top %{count} results
-      online_content_indicator: online content
+      online_content_indicator: Online content
       repositories:
         number_of_collections:
           one: 1 collection

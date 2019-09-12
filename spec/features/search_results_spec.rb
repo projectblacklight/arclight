@@ -41,14 +41,41 @@ RSpec.describe 'Search results', type: :feature do
       end
 
       within online_doc do
-        expect(page).to have_css('.badge.badge-success', text: 'online content')
+        expect(page).to have_css('.text-success', text: 'Online content')
       end
 
       within not_online_doc do
-        expect(page).not_to have_css('.badge.badge-success', text: 'online content')
+        expect(page).not_to have_css('.text-success', text: 'Online content')
       end
     end
 
+    it 'file with online content should display the online content icon' do
+      visit search_catalog_path q: 'photograph album', search_field: 'all_fields'
+      
+      within('.document-position-0') do
+        expect(page).to have_css('.blacklight-icons.al-online-content-icon svg')
+      end
+    end
+
+    it 'file with no online content should not display the online content icon' do
+      visit search_catalog_path q: 'constitution', search_field: 'all_fields'
+
+      expect(page).not_to have_css('.blacklight-icons.al-online-content-icon svg')
+    end
+
+
+    it 'parent container with child with digital content displays the online content label' do
+      visit search_catalog_path q: 'student life', search_field: 'all_fields'
+
+      expect(page).to have_css('.text-success', text: 'Online content')
+    end
+
+    it 'parent container with no child with digital content should not display online content label' do
+      visit search_catalog_path q: 'repo test', search_field: 'all_fields'
+
+      expect(page).not_to have_css('.text-success', text: 'Online content')
+    end
+    
     it 'does not include result numbers in the document header' do
       visit search_catalog_path q: '', search_field: 'all_fields'
 
