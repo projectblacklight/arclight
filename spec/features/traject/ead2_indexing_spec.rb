@@ -226,7 +226,7 @@ describe 'EAD 2 traject indexing', type: :feature do
     end
 
     it 'abstract' do
-      expect(result['abstract_ssm'].first).to match(/^Alpha Omega Alpha Honor Medical Society/)
+      expect(result['abstract_ssm'].first).to match(/Alpha Omega Alpha Honor Medical Society/)
     end
 
     it 'separatedmaterial' do
@@ -303,50 +303,92 @@ describe 'EAD 2 traject indexing', type: :feature do
     end
 
     it 'selects the components' do
-      expect(result['components'].length).to eq 37
+      expect(result['components'].length).to eq 38
     end
 
-    context 'when nested component' do
-      let(:component_with_access_restrict) { result['components'].find { |c| c['ref_ssi'] == ['aspace_dba76dab6f750f31aa5fc73e5402e71d'] } }
-      let(:component_where_parent_has_access_restrict) { result['components'].find { |c| c['ref_ssi'] == ['aspace_72f14d6c32e142baa3eeafdb6e4d69be'] } }
-      let(:component_with_access_terms) { result['components'].find { |c| c['ref_ssi'] == ['aspace_72f14d6c32e142baa3eeafdb6e4d69be'] } }
-      let(:component_where_parent_has_access_terms) { result['components'].find { |c| c['ref_ssi'] == ['aspace_dba76dab6f750f31aa5fc73e5402e71d'] } }
-      let(:component_with_many_parents) { result['components'].find { |c| c['ref_ssi'] == ['aspace_f934f1add34289f28bd0feb478e68275'] } }
+    context 'nested component' do
+      describe 'accessrestrict' do
+        let(:component_with_own_accessrestrict) do
+          result['components'].find { |c| c['ref_ssi'] == ['aspace_dba76dab6f750f31aa5fc73e5402e71d'] }
+        end
+        let(:component_inheriting_accessrestrict_from_parent) do
+          result['components'].find { |c| c['ref_ssi'] == ['aspace_843e8f9f22bac69872d0802d6fffbb04'] }
+        end
+        let(:component_inheriting_accessrestrict_from_grandparent) do
+          result['components'].find { |c| c['ref_ssi'] == ['aspace_4b4fa033c630a45d41fcd608cf0d184d'] }
+        end
+        let(:component_inheriting_accessrestrict_from_collection) do
+          result['components'].find { |c| c['ref_ssi'] == ['aspace_72f14d6c32e142baa3eeafdb6e4d69be'] }
+        end
 
-      it 'has access restrict' do
-        expect(component_with_access_restrict['parent_access_restrict_ssm']).to eq ['Restricted until 2018.']
+        it 'has own accessrestrict' do
+          expect(component_with_own_accessrestrict['accessrestrict_ssm'])
+            .to eq ['Restricted until 2018.']
+          expect(component_with_own_accessrestrict['parent_access_restrict_ssm'])
+            .to eq ['No restrictions on access.']
+        end
+
+        it 'gets accessrestrict from parent component' do
+          expect(component_inheriting_accessrestrict_from_parent['accessrestrict_ssm'])
+            .to be_nil
+          expect(component_inheriting_accessrestrict_from_parent['parent_access_restrict_ssm'])
+            .to include(a_string_matching(/RESTRICTED: Access to these folders requires prior written approval./))
+        end
+
+        it 'gets accessrestrict from grandparent component' do
+          expect(component_inheriting_accessrestrict_from_grandparent['accessrestrict_ssm']).to be_nil
+          expect(component_inheriting_accessrestrict_from_grandparent['parent_access_restrict_ssm'])
+            .to include(a_string_matching(/RESTRICTED: Access to these folders requires prior written approval./))
+        end
+        it 'gets accessrestrict from collection' do
+          expect(component_inheriting_accessrestrict_from_collection['accessrestrict_ssm']).to be_nil
+          expect(component_inheriting_accessrestrict_from_collection['parent_access_restrict_ssm'])
+            .to eq ['No restrictions on access.']
+        end
       end
+      describe 'userestrict' do
+        let(:component_with_own_userestrict) do
+          result['components'].find { |c| c['ref_ssi'] == ['aspace_72f14d6c32e142baa3eeafdb6e4d69be'] }
+        end
 
-      it 'gets access restrict from parent if component does not have terms' do
-        expect(component_where_parent_has_access_restrict['parent_ssm']).to eq %w[aoa271]
-        expect(component_where_parent_has_access_restrict['parent_access_restrict_ssm']).to eq ['No restrictions on access.']
-      end
+        let(:component_inheriting_userestrict_from_collection) do
+          result['components'].find { |c| c['ref_ssi'] == ['aspace_dba76dab6f750f31aa5fc73e5402e71d'] }
+        end
 
-      it 'has access terms' do
-        expect(component_with_access_terms['parent_access_terms_ssm']).to eq ['Original photographs must be handled using gloves.']
-      end
+        it 'has own userestrict' do
+          expect(component_with_own_userestrict['userestrict_ssm'])
+            .to eq ['Original photographs must be handled using gloves.']
+          expect(component_with_own_userestrict['parent_access_terms_ssm'])
+            .to eq ['Original photographs must be handled using gloves.']
+        end
 
-      it 'gets access terms from parent if component does not have terms' do
-        expect(component_where_parent_has_access_terms['parent_ssm']).to eq %w[aoa271]
-        expect(component_where_parent_has_access_terms['parent_access_terms_ssm'])
-          .to eq ["Copyright was transferred to the public domain. Contact the Reference Staff for details\n        regarding rights."]
-      end
-
-      it 'parent_unittitles should be displayable and searchable' do
-        component = result['components'].find { |c| c['id'] == ['aoa271aspace_563a320bb37d24a9e1e6f7bf95b52671'] }
-        %w[parent_unittitles_ssm parent_unittitles_teim].each do |field|
-          expect(component[field]).to contain_exactly(
-            'Alpha Omega Alpha Archives, 1894-1992'
-          )
+        it 'gets userestrict from collection' do
+          expect(component_inheriting_userestrict_from_collection['access_terms_ssm'])
+            .to be_nil
+          expect(component_inheriting_userestrict_from_collection['parent_access_terms_ssm'])
+            .to include(a_string_matching(/Copyright was transferred to the public domain./))
         end
       end
 
-      it 'parents are correctly ordered' do
-        expect(component_with_many_parents['parent_ssm']).to eq %w[
-          aoa271
-          aspace_563a320bb37d24a9e1e6f7bf95b52671
-          aspace_238a0567431f36f49acea49ef576d408
-        ]
+      describe 'parents & titles' do
+        let(:component_with_many_parents) { result['components'].find { |c| c['ref_ssi'] == ['aspace_f934f1add34289f28bd0feb478e68275'] } }
+
+        it 'parent_unittitles should be displayable and searchable' do
+          component = result['components'].find { |c| c['id'] == ['aoa271aspace_563a320bb37d24a9e1e6f7bf95b52671'] }
+          %w[parent_unittitles_ssm parent_unittitles_teim].each do |field|
+            expect(component[field]).to contain_exactly(
+              'Alpha Omega Alpha Archives, 1894-1992'
+            )
+          end
+        end
+
+        it 'parents are correctly ordered' do
+          expect(component_with_many_parents['parent_ssm']).to eq %w[
+            aoa271
+            aspace_563a320bb37d24a9e1e6f7bf95b52671
+            aspace_238a0567431f36f49acea49ef576d408
+          ]
+        end
       end
     end
   end

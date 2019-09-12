@@ -205,17 +205,20 @@ SEARCHABLE_NOTES_FIELDS.map do |selector|
 end
 
 DID_SEARCHABLE_NOTES_FIELDS.map do |selector|
-  to_field "#{selector}_ssm", extract_xpath("//did/#{selector}")
+  to_field "#{selector}_ssm", extract_xpath("/ead/archdesc/did/#{selector}")
 end
+
 NAME_ELEMENTS.map do |selector|
   to_field 'names_coll_ssim', extract_xpath("/ead/archdesc/controlaccess/#{selector}")
   to_field 'names_ssim', extract_xpath("//#{selector}")
   to_field "#{selector}_ssm", extract_xpath("//#{selector}")
 end
-to_field 'corpname_sim', extract_xpath('//corpname')
 
+to_field 'corpname_sim', extract_xpath('//corpname')
 to_field 'language_sim', extract_xpath('//did/langmaterial')
 to_field 'language_ssm', extract_xpath('//did/langmaterial')
+
+to_field 'descrules_ssm', extract_xpath('/ead/eadheader/profiledesc/descrules')
 
 # Each component child document
 # <c> <c01> <c12>
@@ -299,6 +302,7 @@ compose 'components', ->(record, accumulator, _context) { accumulator.concat rec
         .select { |c| c['ref_ssi'] == [id] }.map { |c| c['normalized_title_ssm'] }.flatten
     end
   end
+
   to_field 'parent_unittitles_teim' do |_record, accumulator, context|
     accumulator.concat context.output_hash['parent_unittitles_ssm']
   end
@@ -360,40 +364,18 @@ compose 'components', ->(record, accumulator, _context) { accumulator.concat rec
     accumulator.concat context.output_hash['level_ssm']&.map(&:capitalize)
   end
 
-  to_field 'parent_access_restrict_ssm', extract_xpath('./accessrestrict/p')
-
-  to_field 'parent_access_restrict_ssm' do |_record, accumulator, context|
-    next unless context.output_hash['accessrestrict_ssm'].nil?
-
-    context.output_hash['parent_ssm']&.each do |id|
-      accumulator.concat Array
-        .wrap(context.clipboard[:parent]&.output_hash&.[]('components'))
-        .select { |c| c['ref_ssi'] == [id] }.map { |c| c['accessrestrict_ssm'] }
-    end
+  # Get the <accessrestrict> from the closest ancestor that has one (includes top-level)
+  to_field 'parent_access_restrict_ssm' do |record, accumulator|
+    accumulator.concat Array
+      .wrap(record.xpath('(./ancestor::*/accessrestrict)[last()]/*[local-name()!="head"]')
+      .map(&:text))
   end
 
-  to_field 'parent_access_restrict_ssm' do |_record, accumulator, context|
-    next unless context.output_hash['parent_access_restrict_ssm'].nil?
-
-    accumulator.concat Array.wrap(context.clipboard[:parent]&.output_hash&.[]('accessrestrict_ssm'))
-  end
-
-  to_field 'parent_access_terms_ssm', extract_xpath('userestrict/p')
-
-  to_field 'parent_access_terms_ssm' do |_record, accumulator, context|
-    next unless context.output_hash['userestrict_ssm'].nil?
-
-    context.output_hash['parent_ssm']&.each do |id|
-      accumulator.concat Array
-        .wrap(context.clipboard[:parent]&.output_hash&.[]('components'))
-        .select { |c| c['ref_ssi'] == [id] }.map { |c| c['userestrict_ssm'] }
-    end
-  end
-
-  to_field 'parent_access_terms_ssm' do |_record, accumulator, context|
-    next unless context.output_hash['parent_access_terms_ssm'].nil?
-
-    accumulator << context.clipboard[:parent]&.output_hash&.[]('access_terms_ssm')&.first
+  # Get the <userestrict> from self OR the closest ancestor that has one (includes top-level)
+  to_field 'parent_access_terms_ssm' do |record, accumulator|
+    accumulator.concat Array
+      .wrap(record.xpath('(./ancestor-or-self::*/userestrict)[last()]/*[local-name()!="head"]')
+      .map(&:text))
   end
 
   to_field 'digital_objects_ssm', extract_xpath('./dao') do |record, accumulator|

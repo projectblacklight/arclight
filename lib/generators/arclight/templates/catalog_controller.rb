@@ -193,10 +193,11 @@ class CatalogController < ApplicationController
 
     config.show.document_presenter_class = Arclight::ShowPresenter
     config.index.document_presenter_class = Arclight::IndexPresenter
+
     ##
     # Configuration for partials
     config.index.partials = %i[arclight_index_default]
-    
+
     config.show.metadata_partials = %i[
       summary_field
       access_field
@@ -224,73 +225,21 @@ class CatalogController < ApplicationController
       contact_field
     ]
 
-    # Component Show Page - Metadata Section
-    config.add_component_field 'containers', label: 'Containers', accessor: 'containers', separator_options: {
-      words_connector: ', ',
-      two_words_connector: ', ',
-      last_word_connector: ', '
-    }, if: lambda { |_context, _field_config, document|
-      document.containers.present?
-    }
-    config.add_component_field 'abstract_ssm', label: 'Abstract'
-    config.add_component_field 'extent_ssm', label: 'Extent'
-    config.add_component_field 'scopecontent_ssm', label: 'Scope and Content'
-    config.add_component_field 'accessrestrict_ssm', label: 'Restrictions'
-    config.add_component_field 'userestrict_ssm', label: 'Terms of Access'
-    config.add_component_field 'access_subjects_ssm', label: 'Subjects', separator_options: {
-      words_connector: '<br/>',
-      two_words_connector: '<br/>',
-      last_word_connector: '<br/>'
-    }
 
-    # Collection Show Page - Indexed Terms Section
-    config.add_component_indexed_terms_field 'access_subjects_ssim', label: 'Subjects', link_to_facet: true, separator_options: {
-      words_connector: '<br/>',
-      two_words_connector: '<br/>',
-      last_word_connector: '<br/>'
-    }
-
-    config.add_component_indexed_terms_field 'names_ssim', label: 'Names', separator_options: {
-      words_connector: '<br/>',
-      two_words_connector: '<br/>',
-      last_word_connector: '<br/>'
-    }, helper_method: :link_to_name_facet
-
-    config.add_component_indexed_terms_field 'places_ssim', label: 'Places', link_to_facet: true, separator_options: {
-      words_connector: '<br/>',
-      two_words_connector: '<br/>',
-      last_word_connector: '<br/>'
-    }
-
-    # Component Show Page Access Tab - Terms and Condition Section
-    config.add_component_terms_field 'accessrestrict_ssm', label: 'Restrictions', helper_method: :highlight_terms
-    config.add_component_terms_field 'parent_access_restrict_ssm', label: 'Parent Restrictions'
-    config.add_component_terms_field 'parent_access_terms_ssm', label: 'Terms of Access'
+    # ===========================
+    # COLLECTION SHOW PAGE FIELDS
+    # ===========================
 
     # Collection Show Page - Summary Section
     config.add_summary_field 'creators_ssim', label: 'Creator', link_to_facet: true
-    config.add_summary_field 'abstract_ssm', label: 'Abstract'
+    config.add_summary_field 'abstract_ssm', label: 'Abstract', helper_method: :paragraph_separator
     config.add_summary_field 'extent_ssm', label: 'Extent'
     config.add_summary_field 'language_ssm', label: 'Language'
     config.add_summary_field 'prefercite_ssm', label: 'Preferred citation'
 
-    # Collection and Component Show Page Access Tab - In Person Section
-    config.add_in_person_field 'repository_ssm', if: :repository_config_present, label: 'Location of this collection', helper_method: :context_access_tab_repository
-    config.add_in_person_field 'id', if: :before_you_visit_note_present, label: 'Before you visit', helper_method: :context_access_tab_visit_note # Using ID because we know it will always exist    
-
-    # Collection Show Page Access Tab - Terms and Condition Section
-    config.add_terms_field 'accessrestrict_ssm', label: 'Restrictions'
-    config.add_terms_field 'userestrict_ssm', label: 'Terms of Access'
-
-    # Collection and Component Show Page Access Tab - How to Cite Section
-    config.add_cite_field 'prefercite_ssm', label: 'Preferred citation'
-
     # Collection Show Page - Access Section
     config.add_access_field 'accessrestrict_ssm', label: 'Conditions Governing Access', helper_method: :paragraph_separator
     config.add_access_field 'userestrict_ssm', label: 'Terms Of Use', helper_method: :paragraph_separator
-
-    # Collection and Component Show Page Access Tab - Contact Section
-    config.add_contact_field 'repository_ssm', if: :repository_config_present, label: 'Contact', helper_method: :access_repository_contact
 
     # Collection Show Page - Background Section
     config.add_background_field 'scopecontent_ssm', label: 'Scope and Content', helper_method: :paragraph_separator
@@ -299,6 +248,12 @@ class CatalogController < ApplicationController
     config.add_background_field 'appraisal_ssm', label: 'Appraisal information', helper_method: :paragraph_separator
     config.add_background_field 'custodhist_ssm', label: 'Custodial history', helper_method: :paragraph_separator
     config.add_background_field 'processinfo_ssm', label: 'Processing information', helper_method: :paragraph_separator
+    config.add_background_field 'arrangement_ssm', label: 'Arrangement', helper_method: :paragraph_separator
+    config.add_background_field 'accruals_ssm', label: 'Accruals', helper_method: :paragraph_separator
+    config.add_background_field 'phystech_ssm', label: 'Physical / technical requirements', helper_method: :paragraph_separator
+    config.add_background_field 'physloc_ssm', label: 'Physical location', helper_method: :paragraph_separator
+    config.add_background_field 'descrules_ssm', label: 'Rules or conventions', helper_method: :paragraph_separator
+
 
     # Collection Show Page - Related Section
     config.add_related_field 'relatedmaterial_ssm', label: 'Related material', helper_method: :paragraph_separator
@@ -326,11 +281,78 @@ class CatalogController < ApplicationController
       last_word_connector: '<br/>'
     }
 
-    # Collection Show Page - Administrative Information Section
-    config.add_admin_info_field 'acqinfo_ssm', label: 'Acquisition information'
-    config.add_admin_info_field 'appraisal_ssm', label: 'Appraisal information'
-    config.add_admin_info_field 'custodhist_ssm', label: 'Custodial history'
-    config.add_admin_info_field 'processinfo_ssm', label: 'Processing information'
+
+    # ==========================
+    # COMPONENT SHOW PAGE FIELDS
+    # ==========================
+
+    # Component Show Page - Metadata Section
+    config.add_component_field 'containers', label: 'Containers', accessor: 'containers', separator_options: {
+      words_connector: ', ',
+      two_words_connector: ', ',
+      last_word_connector: ', '
+    }, if: lambda { |_context, _field_config, document|
+      document.containers.present?
+    }
+    config.add_component_field 'abstract_ssm', label: 'Abstract', helper_method: :paragraph_separator
+    config.add_component_field 'extent_ssm', label: 'Extent'
+    config.add_component_field 'scopecontent_ssm', label: 'Scope and Content', helper_method: :paragraph_separator
+    config.add_component_field 'accessrestrict_ssm', label: 'Restrictions', helper_method: :paragraph_separator
+    config.add_component_field 'userestrict_ssm', label: 'Terms of Access', helper_method: :paragraph_separator
+    config.add_component_field 'parent_access_restrict_ssm', label: 'Parent Restrictions', helper_method: :paragraph_separator
+    config.add_component_field 'parent_access_terms_ssm', label: 'Terms of Access', helper_method: :paragraph_separator
+    config.add_component_field 'acqinfo_ssm', label: 'Acquisition information', helper_method: :paragraph_separator
+    config.add_component_field 'appraisal_ssm', label: 'Appraisal information', helper_method: :paragraph_separator
+    config.add_component_field 'custodhist_ssm', label: 'Custodial history', helper_method: :paragraph_separator
+    config.add_component_field 'processinfo_ssm', label: 'Processing information', helper_method: :paragraph_separator
+    config.add_component_field 'arrangement_ssm', label: 'Arrangement', helper_method: :paragraph_separator
+    config.add_component_field 'accruals_ssm', label: 'Accruals', helper_method: :paragraph_separator
+    config.add_component_field 'phystech_ssm', label: 'Physical / technical requirements', helper_method: :paragraph_separator
+    config.add_component_field 'physloc_ssm', label: 'Physical location', helper_method: :paragraph_separator
+
+    # Component Show Page - Indexed Terms Section
+    config.add_component_indexed_terms_field 'access_subjects_ssim', label: 'Subjects', link_to_facet: true, separator_options: {
+      words_connector: '<br/>',
+      two_words_connector: '<br/>',
+      last_word_connector: '<br/>'
+    }
+
+    config.add_component_indexed_terms_field 'names_ssim', label: 'Names', separator_options: {
+      words_connector: '<br/>',
+      two_words_connector: '<br/>',
+      last_word_connector: '<br/>'
+    }, helper_method: :link_to_name_facet
+
+    config.add_component_indexed_terms_field 'places_ssim', label: 'Places', link_to_facet: true, separator_options: {
+      words_connector: '<br/>',
+      two_words_connector: '<br/>',
+      last_word_connector: '<br/>'
+    }
+
+
+    # =================
+    # ACCESS TAB FIELDS
+    # =================
+
+    # Collection Show Page Access Tab - Terms and Conditions Section
+    config.add_terms_field 'accessrestrict_ssm', label: 'Restrictions', helper_method: :paragraph_separator
+    config.add_terms_field 'userestrict_ssm', label: 'Terms of Access', helper_method: :paragraph_separator
+
+    # Component Show Page Access Tab - Terms and Condition Section
+    config.add_component_terms_field 'accessrestrict_ssm', label: 'Restrictions', helper_method: :paragraph_separator
+    config.add_component_terms_field 'parent_access_restrict_ssm', label: 'Parent Restrictions', helper_method: :paragraph_separator
+    config.add_component_terms_field 'parent_access_terms_ssm', label: 'Terms of Access', helper_method: :paragraph_separator
+
+    # Collection and Component Show Page Access Tab - In Person Section
+    config.add_in_person_field 'repository_ssm', if: :repository_config_present, label: 'Location of this collection', helper_method: :context_access_tab_repository
+    config.add_in_person_field 'id', if: :before_you_visit_note_present, label: 'Before you visit', helper_method: :context_access_tab_visit_note # Using ID because we know it will always exist    
+
+    # Collection and Component Show Page Access Tab - How to Cite Section
+    config.add_cite_field 'prefercite_ssm', label: 'Preferred citation'
+
+    # Collection and Component Show Page Access Tab - Contact Section
+    config.add_contact_field 'repository_ssm', if: :repository_config_present, label: 'Contact', helper_method: :access_repository_contact
+
 
     # Remove unused show document actions
     %i[citation email sms].each do |action|
@@ -348,7 +370,6 @@ class CatalogController < ApplicationController
     config.view.hierarchy
     config.view.hierarchy.display_control = false
     config.view.hierarchy.partials = %i[index_header_hierarchy index_hierarchy]
-    
 
     ##
     # Hierarchy Index View
@@ -356,7 +377,7 @@ class CatalogController < ApplicationController
     config.view.online_contents.display_control = false
     config.view.online_contents.partials = config.view.hierarchy.partials.dup
 
-    # #
+    ##
     # Compact index view
     config.view.compact
     config.view.compact.partials = %i[arclight_index_compact]
