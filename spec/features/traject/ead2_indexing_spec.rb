@@ -86,6 +86,10 @@ describe 'EAD 2 traject indexing', type: :feature do
       expect(result['unitid_ssm']).to eq ['A0011']
     end
 
+    it 'collection_unitid' do
+      expect(result['collection_unitid_ssm']).to eq ['A0011']
+    end
+
     it 'creator' do
       %w[creator_ssm creator_ssim creator_corpname_ssm creator_corpname_ssim creators_ssim creator_sort].each do |field|
         expect(result[field]).to equal_array_ignoring_whitespace ['Stanford University']
@@ -156,6 +160,9 @@ describe 'EAD 2 traject indexing', type: :feature do
         %w[collection_creator_ssm].each do |field|
           expect(first_component[field]).to equal_array_ignoring_whitespace ['Stanford University']
         end
+      end
+      it 'collection_unitid' do
+        expect(first_component['collection_unitid_ssm']).to eq ['A0011']
       end
 
       it 'containers' do

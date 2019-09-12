@@ -89,6 +89,7 @@ end
 
 to_field 'unitid_ssm', extract_xpath('/ead/archdesc/did/unitid')
 to_field 'unitid_teim', extract_xpath('/ead/archdesc/did/unitid')
+to_field 'collection_unitid_ssm', extract_xpath('/ead/archdesc/did/unitid')
 
 to_field 'normalized_title_ssm' do |_record, accumulator, context|
   dates = Arclight::NormalizedDate.new(
