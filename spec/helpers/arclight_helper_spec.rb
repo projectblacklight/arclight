@@ -223,6 +223,45 @@ RSpec.describe ArclightHelper, type: :helper do
     end
   end
 
+  describe '#regular_compact_breadcrumbs' do
+    context 'when the component only has one parent (meaning it is a top level parent)' do
+      let(:document) do
+        SolrDocument.new(
+          parent_ssm: %w[def],
+          parent_unittitles_ssm: %w[DEF],
+          ead_ssi: 'abc123',
+          repository_ssm: 'my repository'
+        )
+      end
+
+      it 'links to repository and top level component and does not include an ellipsis' do
+        expect(helper.regular_compact_breadcrumbs(document)).to include 'my repository'
+        expect(helper.regular_compact_breadcrumbs(document)).to include 'DEF'
+        expect(helper.regular_compact_breadcrumbs(document)).to include solr_document_path('abc123def')
+        expect(helper.regular_compact_breadcrumbs(document)).to include '»'
+        expect(helper.regular_compact_breadcrumbs(document)).not_to include '&hellip;'
+      end
+    end
+
+    context 'when the component is a child of a top level component' do
+      let(:document) do
+        SolrDocument.new(
+          parent_ssm: %w[def ghi],
+          parent_unittitles_ssm: %w[DEF GHI],
+          ead_ssi: 'abc123',
+          repository_ssm: 'my repository'
+        )
+      end
+
+      it 'links to the top level component and does include an ellipsis' do
+        expect(helper.regular_compact_breadcrumbs(document)).to include 'DEF'
+        expect(helper.regular_compact_breadcrumbs(document)).to include solr_document_path('abc123def')
+        expect(helper.regular_compact_breadcrumbs(document)).to include '»'
+        expect(helper.regular_compact_breadcrumbs(document)).to include '&hellip;'
+      end
+    end
+  end
+
   describe '#component_top_level_parent_to_links' do
     context 'when the component only has one parent (meaning it is a top level parent)' do
       let(:document) do

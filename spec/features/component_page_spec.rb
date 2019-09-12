@@ -77,6 +77,17 @@ RSpec.describe 'Component Page', type: :feature do
     it 'uses our rules for displaying containers' do
       expect(page).to have_css('dd', text: 'Box 1, Folder 4-5')
     end
+    it 'shows misc notes' do
+      expect(page).to have_css('dt', text: 'Appraisal information')
+      expect(page).to have_css('dd', text: /^Materials for this group were selected/)
+      expect(page).to have_css('dt', text: 'Custodial history')
+      expect(page).to have_css('dd', text: /^These papers were maintained by the staff/)
+    end
+    it 'multivalued notes are rendered as paragaphs' do
+      within 'dd.blacklight-appraisal_ssm' do
+        expect(page).to have_css('p', count: 2)
+      end
+    end
   end
 
   describe 'collection context', js: true do
@@ -212,7 +223,7 @@ RSpec.describe 'Component Page', type: :feature do
     it 'has a restrictions and access' do
       click_link 'Access'
       expect(page).to have_css 'dt', text: 'PARENT RESTRICTIONS:'
-      expect(page).to have_css 'dd', text: 'No restrictions on access.'
+      expect(page).to have_css 'dd', text: /^RESTRICTED: Access to these folders requires prior written approval./
       expect(page).to have_css 'dt', text: 'TERMS OF ACCESS:'
       expect(page).to have_css 'dd', text: /^Copyright was transferred to the public domain./
     end

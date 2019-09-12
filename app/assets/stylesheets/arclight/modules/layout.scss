@@ -20,10 +20,10 @@
   .btn-secondary, .al-collection-id, .toggle-bookmark {
     margin-top: $spacer * .5;
   }
-  
+
   .toggle-bookmark {
-      margin: $spacer ($spacer * .5) (-$spacer * .5) 0;
-    }
+    margin: $spacer ($spacer * .5) (-$spacer * .5) 0;
+  }
 }
 
 .al-show-breadcrumb h1 { font-size: 1.5rem; }

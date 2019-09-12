@@ -28,12 +28,26 @@
       }
     }
 
+    .al-document-container.text-muted {
+      color: #ADB5BD !important;
+    }
+
     .breadcrumb-links,
     .al-document-creator,
     .al-document-extent,
     .al-document-abstract-or-scope {
       font-size: $font-size-sm;
     }
+
+    .al-document-abstract-or-scope {
+      max-width: 45em;
+    }
+  }
+}
+
+.documents-compact {
+  h3 {
+    font-size: $h5-font-size;
   }
 }
 

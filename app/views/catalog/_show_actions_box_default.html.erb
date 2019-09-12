@@ -1,9 +1,17 @@
 <div class='al-show-actions-box col-md-3'>
+  <% requestable = item_requestable?('', { document: document }) %>
 
   <div class='al-collection-id'>
-    <%= t(:'arclight.views.show.collection_id', id: document.unitid) %>
+    <% if document.unitid %>
+      <%= t(:'arclight.views.show.collection_id', id: document.unitid) %>
+    <% end %>
+
+    <% if document.unitid && document.containers.present? %>
+      <span> | </span>
+    <% end %>
+
     <% if document.containers.present? %>
-      <span>| <%= document.containers.join(', ') %></span>
+      <span><%= document.containers.join(', ') %></span>
     <% end %>
   </div>
 
@@ -11,8 +19,10 @@
     <%= render partial: 'catalog/bookmark_control', locals: { document: document } %>
   </div>
 
-  <div class='mr-auto'>
-      <%= render partial: 'arclight/requests/google_form', locals: { document: document } %>
-  </div>
+  <% if requestable %>
+    <div class='mr-auto al-action-box-request'>
+        <%= render partial: 'arclight/requests/google_form', locals: { document: document } %>
+    </div>
+  <% end %>
 
 </div>

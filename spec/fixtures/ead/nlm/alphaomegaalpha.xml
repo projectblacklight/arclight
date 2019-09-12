@@ -25,6 +25,7 @@
       <creation>This finding aid was produced using ArchivesSpace on <date>2017-04-13 14:08:18
           -0700</date>.</creation>
       <langusage>Finding aid is written in <language>English.</language></langusage>
+      <descrules>Finding aid prepared using Rules for Archival Description</descrules>
     </profiledesc>
   </eadheader>
   <archdesc level="collection">
@@ -47,10 +48,13 @@
       <unitdate normal="1894/1992" type="inclusive">1894-1992</unitdate>
       <langmaterial id="aspace_1cf405d4520ad390ab7b5532eab3ea00">Collection materials primarily in
           <language langcode="eng">English.</language></langmaterial>
-      <abstract id="aspace_3dcd45a7a2d2d0a1568d71906a03a4c1">Alpha Omega Alpha Honor Medical Society
-        was founded in 1902 by W.W. Root. Material relates to the history, organization, membership,
-        meetings and publications. A large portion of the collection pertain to the different
-        chapters of the Society.</abstract>
+      <abstract id="aspace_3dcd45a7a2d2d0a1568d71906a03a4c1">
+          Alpha Omega Alpha Honor Medical Society was founded in 1902 by W.W. Root.
+          Material relates to the history, organization, membership, meetings and publications.
+      </abstract>
+      <abstract id="aspace_6811b06895c4f12522a03d7ceacebde5">
+          A large portion of the collection pertain to the different chapters of the Society.
+      </abstract>
     </did>
     <dao xlink:actuate="onRequest"
       xlink:href="http://alphaomegaalpha.org/pdfs/AOAHistorySlideshow.ppt" xlink:role="application"
@@ -144,6 +148,9 @@
       <head>Arrangement</head>
       <p>Arranged into seven series.</p>
     </arrangement>
+    <accruals>
+      <p>No further materials are expected for this collection.</p>
+    </accruals>
     <relatedmaterial id="aspace_1d8c8848613231554be2ceb4524b5692">
       <head>Related Materials</head>
       <p>An unprocessed collection includes interviews with: J. Willis Hurst (May 1986), Theodore E.
@@ -253,6 +260,12 @@
             operation of Alpha Omega Alpha. Not all records are necessarily official documents
             but provide important background context.</p>
         </scopecontent>
+        <accessrestrict id="aspace_7bbec2cdc1e6e0cb7b2ff1acb7c9e364">
+          <head>Conditions Governing Access</head>
+          <p>RESTRICTED: Access to these folders requires prior written approval. To request access,
+            please contact Research Services prior to your visit.</p>
+          <p>All or portions of this collection may be housed off-site. The library may require up to 48-hours to retrieve these materials for research use.</p>
+        </accessrestrict>
         <c id="aspace_843e8f9f22bac69872d0802d6fffbb04" level="file">
           <did>
             <origination>
@@ -321,6 +334,17 @@
             <container id="aspace_4cceb568b39913f2342e43dd3d54b772"
               parent="aspace_19171bacef2f302c352195eaafca6b75" type="folder">4-5</container>
           </did>
+          <appraisal>
+            <p>Materials for this group were selected in consultation with the creators.</p>
+          </appraisal>
+          <appraisal>
+            <p>Duplicate materials have been removed and discarded.</p>
+          </appraisal>
+          <custodhist>
+            <p>These papers were maintained by the staff of the Mayor's
+            Office in the records storage facility until they were transferred, at his
+            family's request in 1988.</p>
+          </custodhist>
         </c>
         <c id="aspace_a8b5c3a57013462581d0e807241fcf93" level="otherlevel">
           <did>
@@ -539,6 +563,14 @@
           <controlaccess>
             <genreform source="aat">Records</genreform>
           </controlaccess>
+          <c id="aspace_4b4fa033c630a45d41fcd608cf0d184d" level="file">
+            <did>
+              <unittitle>Miscellaneous 1999</unittitle>
+              <container id="aspace_d55e41948bba30fc2b5a74ddda810294"
+                         label="Mixed Materials"
+                         type="box">1</container>
+            </did>
+          </c>
         </c>
         <c id="aspace_4365cd1ed8bd8fee1bac6077a4d81359" level="otherlevel">
           <did>

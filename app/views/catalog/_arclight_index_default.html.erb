@@ -7,17 +7,25 @@
     <div class="row">
       <%= render partial: 'arclight_search_index_header', locals: { document: document, counter: counter }  %>
       <div class="col-auto">
+        <%= content_tag('span', class: 'al-document-container col-auto text-muted') do %>
+          <%= document.containers.join(', ') %>
+        <% end if document.containers %>
         <% if document.online_content? %>
           <span class='badge badge-success'>
             <%= t(:'arclight.views.online_content_indicator') %>
           </span>
         <% end %>
-        <%= content_tag('div', class: 'al-document-container col') do %>
-          <%= document.containers.join(', ') %>
-        <% end if document.containers %>
-        <%= render_index_doc_actions document, wrapping_class: "col-sm-3 col-md-5 col-lg-4 text-right" %>
+        
+        <%= render_index_doc_actions document, wrapping_class: "text-right" %>
       </div>
     </div>
+
+    <div class="row">
+      <%= content_tag('div', class: 'al-document-highlight col') do %>
+        <%= document.highlights.join('<br/>').html_safe %>
+      <% end if document.highlights %>
+    </div>
+
     <div class="row">
       <%= content_tag('div', class: 'al-document-creator col') do %>
         <%= document.creator %>
@@ -32,14 +40,6 @@
       <% end if document.abstract_or_scope %>
     </div>
 
-    <div class="row">
-      <%= content_tag('div', class: 'al-document-highlight col') do %>
-        <%= document.highlights.join('<br/>').html_safe %>
-      <% end if document.highlights %>
-    </div>
-
     <%= render partial: 'index_breadcrumb_default', locals: { document: document } %>
   </div>
 </div>
-
-
