@@ -5,6 +5,10 @@ en:
     date_range_histogram:
       hide: Hide date distribution
       show: Show date distribution
+    entry_name:
+      grouped:
+        one: collection
+        other: collections
     hierarchy:
       scope_and_contents: Scope and Contents
       view_all: View
@@ -16,6 +20,13 @@ en:
       home: Home
       repositories: Repositories
       search_results: Search results
+    search:
+      pagination_info:
+        no_items_found: No %{entry_name} found
+        pages:
+          one: "<strong>%{start_num}</strong> - <strong>%{end_num}</strong> of <strong>%{total_num} %{entry_name}</strong>"
+          other: "<strong>%{start_num}</strong> - <strong>%{end_num}</strong> of <strong>%{total_num} %{entry_name}</strong>"
+        single_item_found: "<strong>1</strong> %{entry_name} found"
     truncation:
       view_less: view less ▼
       view_more: view more ▶

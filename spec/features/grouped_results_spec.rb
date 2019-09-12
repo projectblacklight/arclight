@@ -52,4 +52,15 @@ RSpec.describe 'Grouped search results', type: :feature do
       end
     end
   end
+
+  describe 'custom pagination info' do
+    it 'displays with 1 collection' do
+      visit search_catalog_path q: 'alpha', group: 'true'
+      expect(page).to have_css '.page-entries', text: '1 collection found'
+    end
+    it 'displays with many collections' do
+      visit search_catalog_path q: '*', group: 'true'
+      expect(page).to have_css '.page-entries', text: '1 - 5 of 5 collections'
+    end
+  end
 end
