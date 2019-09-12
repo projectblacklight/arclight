@@ -49,15 +49,19 @@ module Arclight
         config&.fetch('request_mappings').present?
     end
 
+    def request_config_for_type(type)
+      request_config_present_for_type?(type) && request_types[type]
+    end
+
     def request_url_for_type(type)
       return nil unless type && request_config_present_for_type?(type)
-      config = request_types.fetch(type)
+      config = request_types[type]
       config.fetch('request_url')
     end
 
     def request_mappings_for_type(type)
       return nil unless type && request_config_present_for_type?(type)
-      config = request_types.fetch(type)
+      config = request_types[type]
       config.fetch('request_mappings')
     end
 

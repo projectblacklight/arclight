@@ -31,6 +31,15 @@ sul-spec:
   phone: '(650) 725-1022'
   contact_info: 'specialcollections@stanford.edu'
   thumbnail_url: 'https://library.stanford.edu/sites/default/files/styles/150x150/public/collection/image/Collections-Super-Enlight.jpg'
+  request_types:
+      aeon_external_request_endpoint:
+          request_url: https://example.com/aeon/aeon.dll
+          request_mappings:
+              static:
+                SystemId: ArcLight
+                ItemInfo1: manuscript
+              accessor:
+                ItemTitle: collection_title
 nlm:
   name: 'National Library of Medicine. History of Medicine Division'
   description: 'NLM’s History of Medicine Division collects, preserves, makes available, and interprets for diverse audiences one of the world’s richest collections of historical material related to human health and disease.'
