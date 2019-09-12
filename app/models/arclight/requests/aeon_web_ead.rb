@@ -9,30 +9,34 @@ module Arclight
       attr_reader :document, :collection_downloads
       ##
       # @param [Blacklight::SolrDocument] document
-      # @param [Arclight::ShowPresenter] presenter
-      # @param [String] document_url
+      # @param [Hash] collection_downloads
       def initialize(document, collection_downloads)
         @document = document
         @collection_downloads = collection_downloads
       end
 
       ##
-      # Url of form to fill
-      def url
+      # Url target for Aeon request params
+      def request_url
         document.repository_config.request_url_for_type('aeon_web_ead')
       end
 
-      def request_url
-        "#{url}?#{form_mapping.to_query}"
+      ##
+      # Constructed request URL
+      def url
+        "#{request_url}?#{form_mapping.to_query}"
       end
 
+      ##
+      # Hosted EAD URL provided by downloads.yml
       def ead_url
         collection_downloads[:ead][:href]
       end
 
       ##
       # Converts mappings as a query url param into a Hash used for sending
-      # messages and providing pre-filled form fields
+      # messages
+      # If a defined method is provided as a value, that method will be invoked
       # "collection_name=entry.123" => { "collection_name" => "entry.123" }
       # @return [Hash]
       def form_mapping
@@ -43,10 +47,6 @@ module Arclight
           respond_to?(value) && form_hash[key] = send(value)
         end
         form_hash
-      end
-
-      def title
-        presenter.heading
       end
     end
   end

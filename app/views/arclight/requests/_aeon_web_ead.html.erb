@@ -1,4 +1,5 @@
 <% document ||= @document %>
+<% byebug %>
 <% aeon_web_ead ||= Arclight::Requests::AeonWebEad.new(document, collection_downloads(document.collection_unitid)) %>
 
-<%= link_to 'Request', aeon_web_ead.request_url %>
+<%= link_to 'Request', aeon_web_ead.url %>
