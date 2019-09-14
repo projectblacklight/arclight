@@ -313,6 +313,7 @@
             <container id="aspace_4b9fef8e13c68338317e50cc7d5b4c14"
               parent="aspace_cb0ce54fec31ceb66bcb46ff50143d54" type="folder">2</container>
           </did>
+          <dao xlink:actuate="onRequest" xlink:href="https://idn.duke.edu/ark:/87924/r3d39z" xlink:role="image-service" xlink:show="new" xlink:title="Example diary" xpointer="ark:/87924/r3d39z"/>
         </c>
         <c id="aspace_4e7f6dfada4b6e243f6f29f92d765073" level="otherlevel">
           <did>

@@ -567,6 +567,45 @@ describe 'EAD 2 traject indexing', type: :feature do
     end
   end
 
+  describe 'digital objects' do
+    let(:fixture_path) do
+      Arclight::Engine.root.join('spec', 'fixtures', 'ead', 'nlm', 'alphaomegaalpha.xml')
+    end
+
+    context 'when <dao> is direct child of <c0x> component' do
+      let(:component) { result['components'].find { |c| c['id'] == ['aoa271aspace_e6db65d47e891d61d69c2798c68a8f02'] } }
+
+      it 'gets the digital object' do
+        expect(component['digital_objects_ssm']).to eq(
+          [
+            JSON.generate(
+              label: 'Example diary',
+              href: 'https://idn.duke.edu/ark:/87924/r3d39z'
+            )
+          ]
+        )
+      end
+    end
+    context 'when <dao> is child of the <did> in a <c0x> component' do
+      let(:component) { result['components'].find { |c| c['id'] == ['aoa271aspace_843e8f9f22bac69872d0802d6fffbb04'] } }
+
+      it 'gets the digital objects' do
+        expect(component['digital_objects_ssm']).to eq(
+          [
+            JSON.generate(
+              label: 'Folder of digitized stuff',
+              href: 'https://collections.nlm.nih.gov/bookviewer?PID=nlm:nlmuid-100957835-bk'
+            ),
+            JSON.generate(
+              label: 'Letter from Christian B. Anfinsen (to the owner of the reel of yellow nylon rope [behind the bar])',
+              href: 'https://profiles.nlm.nih.gov/ps/access/KKBBFL.pdf'
+            )
+          ]
+        )
+      end
+    end
+  end
+
   describe 'for EAD Documents without XML namespaces' do
     let(:fixture_without_namespaces) do
       doc = Nokogiri::XML.parse(fixture_file.to_s)

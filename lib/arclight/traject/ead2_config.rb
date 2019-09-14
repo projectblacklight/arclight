@@ -379,13 +379,13 @@ compose 'components', ->(record, accumulator, _context) { accumulator.concat rec
       .map(&:text))
   end
 
-  to_field 'digital_objects_ssm', extract_xpath('./dao') do |record, accumulator|
-    accumulator.concat(record.xpath('.//dao').map do |dao|
+  to_field 'digital_objects_ssm', extract_xpath('.//dao', to_text: false) do |_record, accumulator|
+    accumulator.map! do |dao|
       label = dao.attributes['title']&.value ||
-        dao.xpath('daodesc/p')&.text
+              dao.xpath('daodesc/p')&.text
       href = (dao.attributes['href'] || dao.attributes['xlink:href'])&.value
       Arclight::DigitalObject.new(label: label, href: href).to_json
-    end.to_a)
+    end
   end
 
   to_field 'date_range_sim', extract_xpath('./did/unitdate/@normal', to_text: false) do |_record, accumulator|
@@ -432,6 +432,7 @@ compose 'components', ->(record, accumulator, _context) { accumulator.concat rec
       accumulator << [node.attribute('type'), node.text].join(' ').strip
     end
   end
+
   SEARCHABLE_NOTES_FIELDS.map do |selector|
     to_field "#{selector}_ssm", extract_xpath("./#{selector}/*[local-name()!='head']")
     to_field "#{selector}_heading_ssm", extract_xpath("./#{selector}/head")
