@@ -1,6 +1,6 @@
 [![Build Status](https://travis-ci.org/projectblacklight/arclight.svg?branch=master)](https://travis-ci.org/projectblacklight/arclight)
 [![All Contributors](https://img.shields.io/badge/all_contributors-17-orange.svg?style=flat-square)](CONTRIBUTORS.md)
-[![Code Climate Test Coverage](https://codeclimate.com/github/sul-dlss/arclight/badges/coverage.svg)](https://codeclimate.com/github/sul-dlss/arclight/coverage)
+[![Code Climate Test Coverage](https://codeclimate.com/github/projectblacklight/arclight/badges/coverage.svg)](https://codeclimate.com/github/projectblacklight/arclight/coverage)
 
 # ArcLight
 
