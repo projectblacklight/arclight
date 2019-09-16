@@ -28,10 +28,11 @@ RSpec.describe Arclight::Requests::AeonExternalRequest do
     instance_double 'Arclight::Repository',
                     'request_config_for_type': config_hash
   end
-  let(:document) { instance_double 'Blacklight::SolrDocument',
-                   repository_config: config,
-                   collection_title: 'Cool Document'
-  }
+  let(:document) do
+    instance_double 'Blacklight::SolrDocument',
+                    repository_config: config,
+                    collection_title: 'Cool Document'
+  end
 
   describe '#url' do
     it 'constructs from the repository config' do
@@ -41,28 +42,22 @@ RSpec.describe Arclight::Requests::AeonExternalRequest do
 
   describe '#form_mapping' do
     it 'compiles from the repository config' do
-      expect(valid_object.form_mapping).to eq({
-        "SystemId"=>"ArcLight",
-        "ItemInfo1"=>"manuscript",
-        "ItemTitle"=>"Cool Document"
-      })
+      expect(valid_object.form_mapping).to eq('SystemId' => 'ArcLight',
+                                              'ItemInfo1' => 'manuscript',
+                                              'ItemTitle' => 'Cool Document')
     end
   end
 
   describe '#static_mappings' do
     it 'pulls from the repository config' do
-      expect(valid_object.static_mappings).to eq({
-        "SystemId"=>"ArcLight",
-        "ItemInfo1"=>"manuscript"
-      })
+      expect(valid_object.static_mappings).to eq('SystemId' => 'ArcLight',
+                                                 'ItemInfo1' => 'manuscript')
     end
   end
 
   describe '#dynamic_mappings' do
     it 'pulls from the repository config' do
-      expect(valid_object.dynamic_mappings).to eq({
-        "ItemTitle"=>"Cool Document"
-      })
+      expect(valid_object.dynamic_mappings).to eq('ItemTitle' => 'Cool Document')
     end
   end
 
