@@ -32,6 +32,14 @@
       color: #ADB5BD !important;
     }
 
+    div .bookmark-toggle .toggle-bookmark, div .index-document-functions {
+      display: inline;
+    }
+
+    form.bookmark-toggle.col-auto {
+      padding-right: 0;
+    }
+
     .breadcrumb-links,
     .al-document-creator,
     .al-document-extent,

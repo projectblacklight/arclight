@@ -11,12 +11,11 @@
           <%= document.containers.join(', ') %>
         <% end if document.containers %>
         <% if document.online_content? %>
-          <span class='badge badge-success'>
+          <span class='badge badge-success col-auto'>
             <%= t(:'arclight.views.online_content_indicator') %>
           </span>
         <% end %>
-        
-        <%= render_index_doc_actions document, wrapping_class: "text-right" %>
+        <%= render_index_doc_actions document %>
       </div>
     </div>
 
