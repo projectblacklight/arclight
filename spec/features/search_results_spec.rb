@@ -51,7 +51,7 @@ RSpec.describe 'Search results', type: :feature do
 
     it 'file with online content should display the online content icon' do
       visit search_catalog_path q: 'photograph album', search_field: 'all_fields'
-      
+
       within('.document-position-0') do
         expect(page).to have_css('.blacklight-icons.al-online-content-icon svg')
       end
@@ -62,7 +62,6 @@ RSpec.describe 'Search results', type: :feature do
 
       expect(page).not_to have_css('.blacklight-icons.al-online-content-icon svg')
     end
-
 
     it 'parent container with child with digital content displays the online content label' do
       visit search_catalog_path q: 'student life', search_field: 'all_fields'
@@ -75,7 +74,7 @@ RSpec.describe 'Search results', type: :feature do
 
       expect(page).not_to have_css('.text-success', text: 'Online content')
     end
-    
+
     it 'does not include result numbers in the document header' do
       visit search_catalog_path q: '', search_field: 'all_fields'
 
