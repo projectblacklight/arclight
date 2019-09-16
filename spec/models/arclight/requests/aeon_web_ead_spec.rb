@@ -3,7 +3,7 @@
 require 'spec_helper'
 
 RSpec.describe Arclight::Requests::AeonWebEad do
-  subject(:valid_object) { described_class.new(document, ead: { href: 'http://example.com/sample.xml', size: '' }) }
+  subject(:valid_object) { described_class.new(document, 'http://example.com/sample.xml') }
 
   let(:config) do
     instance_double 'Arclight::Repository',
@@ -22,11 +22,7 @@ RSpec.describe Arclight::Requests::AeonWebEad do
       expect(valid_object.url).to eq 'https://sample.request.com?Action=10&Form=31&Value=http%3A%2F%2Fexample.com%2Fsample.xml'
     end
   end
-  describe '#ead_url' do
-    it 'retrieves EAD url from downloads config' do
-      expect(valid_object.ead_url).to eq 'http://example.com/sample.xml'
-    end
-  end
+
   describe '#form_mapping' do
     subject(:form_mapping) { valid_object.form_mapping }
 

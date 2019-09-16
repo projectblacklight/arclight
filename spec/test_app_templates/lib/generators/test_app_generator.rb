@@ -32,4 +32,14 @@ class TestAppGenerator < Rails::Generators::Base
       'Blacklight::LocalePicker::Engine.config.available_locales = [:en, :es]'
     end
   end
+
+  def add_custom_download
+    config_download = <<~YML
+      2016071 Aa 1:
+        disabled: false
+        ead:
+          template: 'http://example.com/%{collection_unitid}.xml'
+    YML
+    inject_into_file 'config/downloads.yml', config_download, after: "template: 'http://example.com/%{unitid}.xml'\n"
+  end
 end

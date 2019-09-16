@@ -6,13 +6,13 @@ module Arclight
     # This object relies on the ability to respond to attributes passed in as
     # query parameters from the form mapping configuration
     class AeonWebEad
-      attr_reader :document, :collection_downloads
+      attr_reader :document, :ead_url
       ##
       # @param [Blacklight::SolrDocument] document
-      # @param [Hash] collection_downloads
-      def initialize(document, collection_downloads)
+      # @param [String] ead_url
+      def initialize(document, ead_url)
         @document = document
-        @collection_downloads = collection_downloads
+        @ead_url = ead_url
       end
 
       ##
@@ -25,12 +25,6 @@ module Arclight
       # Constructed request URL
       def url
         "#{request_url}?#{form_mapping.to_query}"
-      end
-
-      ##
-      # Hosted EAD URL provided by downloads.yml
-      def ead_url
-        collection_downloads[:ead][:href]
       end
 
       ##
