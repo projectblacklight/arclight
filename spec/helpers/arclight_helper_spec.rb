@@ -310,14 +310,14 @@ RSpec.describe ArclightHelper, type: :helper do
     let(:document) { SolrDocument.new('level_ssm': ['collection']) }
 
     it 'properly assigns the icon' do
-      expect(helper.document_header_icon(document)).to eq 'search'
+      expect(helper.document_header_icon(document)).to eq 'collection'
     end
 
     context 'there is no level_ssm' do
       let(:document) { SolrDocument.new }
 
       it 'gives the default icon' do
-        expect(helper.document_header_icon(document)).to eq 'compact'
+        expect(helper.document_header_icon(document)).to eq 'container'
       end
     end
   end

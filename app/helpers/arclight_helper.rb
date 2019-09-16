@@ -157,14 +157,13 @@ module ArclightHelper
   # determine which icon to show in search results header
   # these icon names will need to be updated when the icons are determined
   def document_header_icon(document)
-    level = document.level
-    case level
+    case document.level&.downcase
     when 'collection'
-      'search'
-    when 'File'
-      'compact'
+      'collection'
+    when 'file'
+      'file'
     else
-      'compact'
+      'container'
     end
   end
 

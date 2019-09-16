@@ -45,6 +45,12 @@
   }
 }
 
+article.document {
+  .blacklight-icons svg {
+    fill: $secondary;
+  }
+}
+
 .documents-compact {
   h3 {
     font-size: $h5-font-size;
