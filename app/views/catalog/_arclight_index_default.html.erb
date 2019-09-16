@@ -12,7 +12,6 @@
         <% end if document.containers %>
 
         <% if document.online_content? %>
-<<<<<<< HEAD
           <% if document.level == "File" %>
             <%= blacklight_icon :search, classes: 'al-online-content-icon' %>
           <% else%>
@@ -20,11 +19,6 @@
               <%= t(:'arclight.views.online_content_indicator') %>
             </span>
           <% end %>
-=======
-          <span class='badge badge-success col-auto'>
-            <%= t(:'arclight.views.online_content_indicator') %>
-          </span>
->>>>>>> master
         <% end %>
         <%= render_index_doc_actions document %>
       </div>
