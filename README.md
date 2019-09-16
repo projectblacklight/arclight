@@ -120,3 +120,5 @@ To release a new version:
 ## License
 
 The gem is available as open source under the terms of the [Apache 2 License](https://opensource.org/licenses/Apache-2.0).
+
+ArcLight also uses embedded SVG icons from the [FontAwesome](https://fontawesome.com) project. These icons are unmodified and licensed [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/). All of these icons have the license and attribution embedded in them.
