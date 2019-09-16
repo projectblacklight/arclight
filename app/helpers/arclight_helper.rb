@@ -121,17 +121,6 @@ module ArclightHelper
     search.merge(f: { collection_sim: [collection_name] })
   end
 
-  ##
-  # Looks for `document.unitid` in the downloads configuration
-  # @param [SolrDocument] `document`
-  # @param [Hash] `config` metadata for downloadable files
-  # @return [Hash] with `:href` and `:size` keys
-  def collection_downloads(document, config = load_download_config)
-    config = config[document.unitid] if config.present?
-    return {} if config.blank?
-    parse_collection_downloads(config)
-  end
-
   def on_repositories_show?
     controller_name == 'repositories' && action_name == 'show'
   end
@@ -165,44 +154,16 @@ module ArclightHelper
     params[:hierarchy_context] == 'component'
   end
 
-  # @return [Hash] loaded from config/downloads.yml, or `{}` if missing file
-  def load_download_config(filename = Rails.root.join('config', 'downloads.yml'))
-    YAML.safe_load(File.read(filename))
-  rescue Errno::ENOENT
-    {}
-  end
-
-  # @return [Hash] the downloads for the given configuration using Hash symbols
-  # @example `{ pdf: { href: 'http://...', size: '123 KB' } }`
-  def parse_collection_downloads(config, results = {})
-    %w[pdf ead].each do |type|
-      next if config[type].blank?
-      results[type.to_sym] = {
-        href: config[type]['href'],
-        size: display_size(config[type]['size'])
-      }
-    end
-    results
-  end
-
-  # Show a human readable size, or if it's already a string, show that
-  # @return [String] human readable siz
-  def display_size(size)
-    size = number_to_human_size(size.to_i + 1) if size.is_a?(Numeric) || size =~ /^[0-9]+$/ # assumes bytes
-    size.to_s
-  end
-
   # determine which icon to show in search results header
   # these icon names will need to be updated when the icons are determined
   def document_header_icon(document)
-    level = document.level
-    case level
+    case document.level&.downcase
     when 'collection'
-      'search'
-    when 'File'
-      'compact'
+      'collection'
+    when 'file'
+      'file'
     else
-      'compact'
+      'container'
     end
   end
 

@@ -3,6 +3,11 @@
 #                 provide the PDF and/or EAD (.xml) links. The
 #                 size value should be a String (shown as-is) or
 #                 the number of bytes in the download.
+#               - Pass a template key to use a formatted string
+#                 which interpolates document accessors into the
+#                 url using the %{accessor} syntax.
+#               - Pass a size_accessor key to pull the size of
+#                 the file from an accessor in the solr document
 #
 sample_unitid:
   pdf:
@@ -11,3 +16,10 @@ sample_unitid:
   ead:
     href: 'http://example.com/sample.xml'
     size: 123456
+    # size_accessor: 'level'
+default:
+  disabled: true
+  pdf:
+    template: 'http://example.com/%{unitid}.pdf'
+  ead:
+    template: 'http://example.com/%{unitid}.xml'

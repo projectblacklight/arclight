@@ -22,7 +22,7 @@ module Arclight
       ##
       # Url of form to fill
       def url
-        document.repository_config.request_url_for_type('google_form')
+        document.repository_config&.request_url_for_type('google_form')
       end
 
       ##
@@ -32,7 +32,7 @@ module Arclight
       # @return [Hash]
       def form_mapping
         Rack::Utils.parse_nested_query(
-          document.repository_config.request_mappings_for_type('google_form')
+          document.repository_config&.request_mappings_for_type('google_form')
         )
       end
 

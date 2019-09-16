@@ -198,6 +198,11 @@ class CatalogController < ApplicationController
     # Configuration for partials
     config.index.partials = %i[arclight_index_default]
 
+    ##
+    # Configuration for index actions
+    config.add_results_document_tool :arclight_bookmark_control, partial: 'arclight_bookmark_control'
+    config.index.document_actions.delete(:bookmark)
+
     config.show.metadata_partials = %i[
       summary_field
       access_field
@@ -382,8 +387,5 @@ class CatalogController < ApplicationController
     config.view.compact
     config.view.compact.partials = %i[arclight_index_compact]
 
-    ##
-    # Extra actions
-    config.add_results_document_tool :google_form, partial: 'arclight/requests/google_form', if: :item_requestable?
   end
 end

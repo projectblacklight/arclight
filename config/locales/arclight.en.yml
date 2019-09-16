@@ -49,6 +49,10 @@ en:
         collection_id: 'Collection ID: %{id}'
         download:
           default: Download
+          ead: Collection EAD
+          pdf: Collection PDF
+        download_with_size:
+          default: Download (%{size})
           ead: Collection EAD (%{size})
           pdf: Collection PDF (%{size})
         no_contents: No content inventory

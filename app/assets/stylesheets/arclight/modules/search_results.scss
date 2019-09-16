@@ -32,6 +32,14 @@
       color: #ADB5BD !important;
     }
 
+    div .bookmark-toggle .toggle-bookmark, div .index-document-functions {
+      display: inline;
+    }
+
+    form.bookmark-toggle.col-auto {
+      padding-right: 0;
+    }
+
     .breadcrumb-links,
     .al-document-creator,
     .al-document-extent,
@@ -42,6 +50,12 @@
     .al-document-abstract-or-scope {
       max-width: 45em;
     }
+  }
+}
+
+article.document {
+  .blacklight-icons svg {
+    fill: $secondary;
   }
 }
 
@@ -126,4 +140,17 @@
 
 .breadcrumb-links a {
   color: $body-color;
+}
+
+.btn-outline-secondary svg {
+  fill: $gray-600;
+}
+
+.btn-outline-secondary:not(:disabled):not(.disabled).active svg, .btn-outline-secondary:hover svg {fill: #fff;}
+
+.btn-outline-secondary:not(:disabled):not(.disabled).active, .show > .btn-outline-secondary.dropdown-toggle {
+    color: #fff;
+    fill: white;
+    background-color: #6c757d;
+    border-color: #6c757d;
 }
