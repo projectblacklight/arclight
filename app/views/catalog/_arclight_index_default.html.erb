@@ -13,7 +13,7 @@
 
         <% if document.online_content? %>
           <% if document.level == "File" %>
-            <%= blacklight_icon :search, classes: 'al-online-content-icon' %>
+            <%= blacklight_icon :online_content, classes: 'al-online-content-icon' %>
           <% else%>
             <span class='text-success'>
               <%= t(:'arclight.views.online_content_indicator') %>

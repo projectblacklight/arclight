@@ -57,6 +57,10 @@ article.document {
   .blacklight-icons svg {
     fill: $secondary;
   }
+  .blacklight-icons.al-online-content-icon svg {
+    // fill: #28a745;
+    fill: $green;
+  }
 }
 
 .documents-compact {
