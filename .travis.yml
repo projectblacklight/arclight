@@ -22,7 +22,7 @@ addons:
 
 env:
   global:
-    - CC_TEST_REPORTER_ID=65288e8c489d9d571730d098a9e7ec951e286f7d8ca3d728f4bb812dd7eeb46d
+    - CC_TEST_REPORTER_ID=0bbc7b5fd7f6bab0c0517183ae34a4d2f6010ca1ef2d1c7c3ccdec55ea823115
 
 after_script:
   - ./cc-test-reporter after-build --exit-code $TRAVIS_TEST_RESULT
