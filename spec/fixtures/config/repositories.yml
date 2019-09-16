@@ -35,6 +35,9 @@ sul-spec:
       aeon_external_request_endpoint:
           request_url: https://example.com/aeon/aeon.dll
           request_mappings:
+              url_params:
+                  Action: 11
+                  Type: 200
               static:
                 SystemId: ArcLight
                 ItemInfo1: manuscript
