@@ -114,7 +114,7 @@ module ArclightHelper
   end
 
   def search_without_group
-    search_state.params_for_search.reject { |k| %w[group page].include? k }
+    search_state.params_for_search.except('group', 'page')
   end
 
   def search_within_collection(collection_name, search)
