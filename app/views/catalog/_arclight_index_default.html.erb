@@ -11,9 +11,7 @@
           <%= document.containers.join(', ') %>
         <% end if document.containers %>
         <% if document.online_content? %>
-          <span class='badge badge-success col-auto'>
-            <%= t(:'arclight.views.online_content_indicator') %>
-          </span>
+          <%= blacklight_icon :online, classes: 'al-online-content-icon' %>
         <% end %>
         <%= render_index_doc_actions document %>
       </div>

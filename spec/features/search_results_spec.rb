@@ -41,11 +41,11 @@ RSpec.describe 'Search results', type: :feature do
       end
 
       within online_doc do
-        expect(page).to have_css('.badge.badge-success', text: 'online content')
+        expect(page).to have_css('.al-online-content-icon')
       end
 
       within not_online_doc do
-        expect(page).not_to have_css('.badge.badge-success', text: 'online content')
+        expect(page).not_to have_css('.al-online-content-icon')
       end
     end
 

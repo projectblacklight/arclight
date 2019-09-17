@@ -57,6 +57,9 @@ article.document {
   .blacklight-icons svg {
     fill: $secondary;
   }
+  .blacklight-icons.al-online-content-icon svg {
+   fill: $green;
+ }
 }
 
 .documents-compact {
@@ -154,3 +157,4 @@ article.document {
     background-color: #6c757d;
     border-color: #6c757d;
 }
+
