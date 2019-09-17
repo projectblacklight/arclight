@@ -71,7 +71,7 @@ RSpec.describe ArclightHelper, type: :helper do
     let(:search_state) do
       instance_double(
         'Blacklight::SearchState',
-        params_for_search: { 'q' => 'hello' }
+        params_for_search: { 'q' => 'hello', 'page' => '2' }
       )
     end
 
@@ -89,7 +89,7 @@ RSpec.describe ArclightHelper, type: :helper do
     let(:search_state) do
       instance_double(
         'Blacklight::SearchState',
-        params_for_search: { 'q' => 'hello', 'group' => 'true' }
+        params_for_search: { 'q' => 'hello', 'group' => 'true', 'page' => '2' }
       )
     end
 

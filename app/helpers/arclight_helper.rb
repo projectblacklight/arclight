@@ -110,11 +110,11 @@ module ArclightHelper
   end
 
   def search_with_group
-    search_state.params_for_search.merge('group' => 'true')
+    search_state.params_for_search.merge('group' => 'true').except('page')
   end
 
   def search_without_group
-    search_state.params_for_search.reject { |k| k == 'group' }
+    search_state.params_for_search.except('group', 'page')
   end
 
   def search_within_collection(collection_name, search)
