@@ -21,11 +21,11 @@
   <% else %>
     <%= form_tag(bookmark_path(document),
                  method: :delete,
-                 class: "bookmark-toggle",
+                 class: "bookmark-toggle col-auto",
                  data: {
                    'doc-id' => document.id,
-                   present: t('blacklight.search.bookmarks.present'),
-                   absent: t('blacklight.search.bookmarks.absent'),
+                   present: blacklight_icon(:bookmark),
+                   absent: blacklight_icon(:bookmark),
                    inprogress: t('blacklight.search.bookmarks.inprogress')
                 }) do %>
       <%= submit_tag(t('blacklight.bookmarks.remove.button'),
