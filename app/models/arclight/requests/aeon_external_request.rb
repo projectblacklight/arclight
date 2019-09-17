@@ -10,11 +10,14 @@ module Arclight
       def initialize(document, presenter)
         @document = document
         @presenter = presenter
-        @config = document.repository_config.request_config_for_type('aeon_external_request_endpoint')
+      end
+
+      def config
+        @config ||= @document.repository_config.request_config_for_type('aeon_external_request_endpoint')
       end
 
       def url
-        "#{@config['request_url']}#{url_params}"
+        "#{config['request_url']}?#{url_params}"
       end
 
       def form_mapping
@@ -22,23 +25,17 @@ module Arclight
       end
 
       def static_mappings
-        @config['request_mappings']['static']
+        config['request_mappings']['static']
       end
 
       def dynamic_mappings
-        mappings = {}
-        @config['request_mappings']['accessor'].each_pair do |k, v|
-          mappings[k] = @document.send(v.to_sym)
+        config['request_mappings']['accessor'].transform_values do |v|
+          @document.send(v.to_sym)
         end
-        mappings
       end
 
       def url_params
-        params = []
-        @config['request_mappings']['url_params'].each_pair do |k, v|
-          params.append("#{k}=#{v}")
-        end
-        "?#{params.join('&')}" unless params.empty?
+        config['request_mappings']['url_params'].to_query
       end
     end
   end

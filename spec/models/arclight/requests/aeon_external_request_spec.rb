@@ -18,7 +18,7 @@ RSpec.describe Arclight::Requests::AeonExternalRequest do
           'ItemInfo1' => 'manuscript'
         },
         'accessor' => {
-          'ItemTitle' => 'collection_title'
+          'ItemTitle' => 'collection_name'
         }
       }
     }
@@ -31,7 +31,7 @@ RSpec.describe Arclight::Requests::AeonExternalRequest do
   let(:document) do
     instance_double 'Blacklight::SolrDocument',
                     repository_config: config,
-                    collection_title: 'Cool Document'
+                    collection_name: 'Cool Document'
   end
 
   describe '#url' do
@@ -63,7 +63,7 @@ RSpec.describe Arclight::Requests::AeonExternalRequest do
 
   describe '#url_params' do
     it 'constructs from the repository config' do
-      expect(valid_object.url_params).to eq('?Action=11&Type=200')
+      expect(valid_object.url_params).to eq('Action=11&Type=200')
     end
   end
 end
