@@ -3,9 +3,14 @@
     <%= blacklight_icon document_header_icon(document) %>
   </div>
   <div class="col col-no-left-padding">
-    <h3>
-      <%= link_to_document document, document_show_link_field(document), counter: document_counter %>
-    </h3>
+    <div class="d-flex justify-content-between">
+      <h3 class="d-flex">
+        <%= link_to_document document, document_show_link_field(document), counter: document_counter %>
+      </h3>
+      <div class="d-flex">
+        <%= render_index_doc_actions document %>
+      </div>
+    </div>
     <div class="row">
       <%= content_tag('div', class: 'al-document-highlight col') do %>
         <%= document.highlights.join('<br/>').html_safe %>
