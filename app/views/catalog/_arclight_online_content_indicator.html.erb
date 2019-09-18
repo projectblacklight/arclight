@@ -1,5 +1,3 @@
 <% if document.online_content? %>
-  <span class='badge badge-success'>
-    <%= t(:'arclight.views.online_content_indicator') %>
-  </span>
+  <%= blacklight_icon :online, classes: 'al-online-content-icon' %>
 <% end %>

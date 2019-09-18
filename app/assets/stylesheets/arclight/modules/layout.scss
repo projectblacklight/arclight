@@ -14,16 +14,8 @@
   border: $result-item-border-styling;
   background-color: $gray-200;
   font-size: $font-size-sm;
-  margin: 0 (-$spacer) $spacer;
-  padding: 3px $result-item-body-padding;
-
-  .btn-secondary, .al-collection-id, .toggle-bookmark {
-    margin-top: $spacer * .5;
-  }
-
-  .toggle-bookmark {
-    margin: $spacer ($spacer * .5) (-$spacer * .5) 0;
-  }
+  height: 100%;
+  padding: $spacer;
 }
 
 .al-show-breadcrumb h1 { font-size: 1.5rem; }
@@ -96,4 +88,3 @@
 dl dd {
   overflow-wrap: break-word;
 }
-

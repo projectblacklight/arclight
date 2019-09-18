@@ -23,9 +23,11 @@ en:
     views:
       index:
         all_group_results: view all %{count}
+        all_results: All results
         collection_search:
           count: collection
-        group_by_collection: Group by collection
+        group_by_collection: Grouped by collection
+        group_results: Group results
         group_results_count:
           one: 1 result
           other: "%{count} results"
@@ -37,7 +39,6 @@ en:
         top_group_results:
           one: Top %{count} result
           other: Top %{count} results
-      online_content_indicator: online content
       repositories:
         number_of_collections:
           one: 1 collection

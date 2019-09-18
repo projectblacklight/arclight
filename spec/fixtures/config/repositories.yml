@@ -62,3 +62,15 @@ umich-bhl:
   phone: ''
   contact_info: 'bentley.ref@umich.edu'
   thumbnail_url: 'https://upload.wikimedia.org/wikipedia/commons/thumb/9/93/Bhlexterior.jpg/150px-Bhlexterior.jpg'
+  request_types:
+      aeon_external_request_endpoint:
+          request_url: https://example.com/aeon/aeon.dll
+          request_mappings:
+              url_params:
+                  Action: 11
+                  Type: 200
+              static:
+                SystemId: ArcLight
+                ItemInfo1: manuscript
+              accessor:
+                ItemTitle: collection_name
