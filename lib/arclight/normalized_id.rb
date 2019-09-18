@@ -19,6 +19,7 @@ module Arclight
 
     def normalize
       raise Arclight::Exceptions::IDNotFound if id.blank?
+
       id.strip.tr('.', '-')
     end
   end

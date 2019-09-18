@@ -21,31 +21,6 @@ Gemspec/OrderedDependencies:
   Exclude:
     - 'arclight.gemspec'
 
-# Offense count: 32
-# Cop supports --auto-correct.
-Layout/EmptyLineAfterGuardClause:
-  Exclude:
-    - 'app/factories/blacklight_field_configuration_factory.rb'
-    - 'app/helpers/arclight_helper.rb'
-    - 'app/models/arclight/parent.rb'
-    - 'app/models/concerns/arclight/catalog.rb'
-    - 'app/models/concerns/arclight/solr_document.rb'
-    - 'lib/arclight/normalized_date.rb'
-    - 'lib/arclight/normalized_id.rb'
-    - 'lib/arclight/normalized_title.rb'
-    - 'lib/arclight/repository.rb'
-    - 'lib/arclight/viewers/oembed.rb'
-    - 'lib/arclight/year_range.rb'
-    - 'lib/tasks/index.rake'
-    - 'tasks/arclight.rake'
-
-# Offense count: 1
-# Cop supports --auto-correct.
-# Configuration parameters: AllowInHeredoc.
-Layout/TrailingWhitespace:
-  Exclude:
-    - 'lib/tasks/index.rake'
-
 # Offense count: 3
 Lint/AmbiguousBlockAssociation:
   Exclude:

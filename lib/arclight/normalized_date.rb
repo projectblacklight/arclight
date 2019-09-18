@@ -48,6 +48,7 @@ module Arclight
         result = nil
       end
       return if result.blank?
+
       result.strip
     end
   end

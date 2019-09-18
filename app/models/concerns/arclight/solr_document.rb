@@ -8,6 +8,7 @@ module Arclight
 
     def repository_config
       return unless repository
+
       @repository_config ||= Arclight::Repository.find_by(name: repository)
     end
 
@@ -129,6 +130,7 @@ module Arclight
       return if highlight_response.blank? ||
                 highlight_response[id].blank? ||
                 highlight_response[id][:text].blank?
+
       highlight_response[id][:text]
     end
   end
