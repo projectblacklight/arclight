@@ -7,6 +7,11 @@
       <h3 class="d-flex">
         <%= link_to_document document, document_show_link_field(document), counter: document_counter %>
       </h3>
+      <% if document.online_content? %>
+        <span class='badge badge-success col-auto'>
+          <%= t(:'arclight.views.online_content_indicator') %>
+        </span>
+      <% end %>
       <div class="d-flex">
         <%= render_index_doc_actions document %>
       </div>
