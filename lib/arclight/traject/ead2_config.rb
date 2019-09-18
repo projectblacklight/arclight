@@ -81,10 +81,10 @@ to_field 'unitdate_inclusive_ssm', extract_xpath('/ead/archdesc/did/unitdate[@ty
 to_field 'unitdate_other_ssim', extract_xpath('/ead/archdesc/did/unitdate[not(@type)]')
 
 to_field 'level_ssm' do |record, accumulator|
-  accumulator << record.at_xpath('/ead/archdesc').attribute('level').value
+  accumulator << record.at_xpath('/ead/archdesc').attribute('level')&.value
 end
 to_field 'level_sim' do |record, accumulator|
-  accumulator << record.at_xpath('/ead/archdesc').attribute('level').value&.capitalize
+  accumulator << record.at_xpath('/ead/archdesc').attribute('level')&.value&.capitalize
 end
 
 to_field 'unitid_ssm', extract_xpath('/ead/archdesc/did/unitid')
@@ -285,7 +285,7 @@ compose 'components', ->(record, accumulator, _context) { accumulator.concat rec
 
   to_field 'parent_ssm' do |record, accumulator, context|
     accumulator << context.clipboard[:parent].output_hash['id'].first
-    accumulator.concat NokogiriXpathExtensions.new.is_component(record.ancestors).reverse.map { |n| n.attribute('id').value }
+    accumulator.concat NokogiriXpathExtensions.new.is_component(record.ancestors).reverse.map { |n| n.attribute('id')&.value }
   end
 
   to_field 'parent_ssi' do |_record, accumulator, context|
