@@ -59,12 +59,12 @@ en:
           title: Collection context navigation
         download:
           default: Download
-          ead: Collection EAD
-          pdf: Collection PDF
+          ead: Download EAD
+          pdf: Download finding aid
         download_with_size:
           default: Download (%{size})
-          ead: Collection EAD (%{size})
-          pdf: Collection PDF (%{size})
+          ead: Download EAD (%{size})
+          pdf: Download finding aid (%{size})
         no_contents: No content inventory
         no_online_content: No online content
         online_content: Online content
