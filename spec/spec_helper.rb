@@ -32,3 +32,35 @@ RSpec.configure do |config|
     c.syntax = :expect
   end
 end
+
+# Provide a custom matcher that makes it easier to deal with pretty-printed
+# XML
+
+require 'rspec/expectations'
+
+def condense_whitespace(str)
+  str.gsub(/[\n\s]+/, ' ').strip
+end
+
+def equal_modulo_whitespace(string1, string2)
+  condense_whitespace(string1) == condense_whitespace(string2)
+end
+
+RSpec::Matchers.define :eq_ignoring_whitespace do |expected|
+  match do |actual|
+    condense_whitespace(expected) == condense_whitespace(actual)
+  end
+end
+
+RSpec::Matchers.define :include_ignoring_whitespace do |expected|
+  ex = condense_whitespace(expected)
+  match do |actual|
+    actual.any? { |act| condense_whitespace(act) == ex }
+  end
+end
+
+RSpec::Matchers.define :equal_array_ignoring_whitespace do |expected|
+  match do |actual|
+    actual.map { |act| condense_whitespace(act) } == expected.map { |ex| condense_whitespace(ex) }
+  end
+end

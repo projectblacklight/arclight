@@ -43,11 +43,11 @@ describe 'EAD 2 traject indexing', type: :feature do
 
     it 'id' do
       expect(result['id'].first).to eq 'a0011-xml'
-      expect(result['ead_ssi'].first).to eq 'a0011.xml'
+      expect(result['ead_ssi'].first).to eq_ignoring_whitespace 'a0011.xml'
     end
     it 'title' do
       %w[title_ssm title_teim].each do |field|
-        expect(result[field]).to include 'Stanford University student life photograph album'
+        expect(result[field]).to include_ignoring_whitespace 'Stanford University student life photograph album'
       end
       expect(result['normalized_title_ssm']).to include 'Stanford University student life photograph album, circa 1900-1906'
     end
@@ -56,9 +56,9 @@ describe 'EAD 2 traject indexing', type: :feature do
       expect(result['level_sim']).to eq ['Collection']
     end
     it 'dates' do
-      expect(result['normalized_date_ssm']).to include 'circa 1900-1906'
+      expect(result['normalized_date_ssm']).to include_ignoring_whitespace 'circa 1900-1906'
       expect(result['unitdate_bulk_ssim']).to be_nil
-      expect(result['unitdate_inclusive_ssm']).to include 'circa 1900-1906'
+      expect(result['unitdate_inclusive_ssm']).to include_ignoring_whitespace 'circa 1900-1906'
       expect(result['unitdate_other_ssim']).to be_nil
     end
 
@@ -78,7 +78,7 @@ describe 'EAD 2 traject indexing', type: :feature do
 
     it 'geogname' do
       %w[geogname_sim geogname_ssm].each do |field|
-        expect(result[field]).to include 'Yosemite National Park (Calif.)'
+        expect(result[field]).to include_ignoring_whitespace 'Yosemite National Park (Calif.)'
       end
     end
 
@@ -88,12 +88,12 @@ describe 'EAD 2 traject indexing', type: :feature do
 
     it 'creator' do
       %w[creator_ssm creator_ssim creator_corpname_ssm creator_corpname_ssim creators_ssim creator_sort].each do |field|
-        expect(result[field]).to eq ['Stanford University']
+        expect(result[field]).to equal_array_ignoring_whitespace ['Stanford University']
       end
     end
 
     it 'places' do
-      expect(result['places_ssim']).to eq ['Yosemite National Park (Calif.)']
+      expect(result['places_ssim']).to equal_array_ignoring_whitespace ['Yosemite National Park (Calif.)']
     end
 
     it 'has_online_content' do
@@ -102,7 +102,7 @@ describe 'EAD 2 traject indexing', type: :feature do
 
     it 'collection has normalized_title' do
       %w[collection_ssm collection_sim collection_ssi].each do |field|
-        expect(result[field]).to include 'Stanford University student life photograph album, circa 1900-1906'
+        expect(result[field]).to include_ignoring_whitespace 'Stanford University student life photograph album, circa 1900-1906'
       end
     end
 
@@ -149,12 +149,12 @@ describe 'EAD 2 traject indexing', type: :feature do
 
       it 'collection has normalized title' do
         %w[collection_sim collection_ssm collection_ssi].each do |field|
-          expect(first_component[field]).to include 'Stanford University student life photograph album, circa 1900-1906'
+          expect(first_component[field]).to include_ignoring_whitespace 'Stanford University student life photograph album, circa 1900-1906'
         end
       end
       it 'creator' do
         %w[collection_creator_ssm].each do |field|
-          expect(first_component[field]).to eq ['Stanford University']
+          expect(first_component[field]).to equal_array_ignoring_whitespace ['Stanford University']
         end
       end
 
@@ -226,7 +226,7 @@ describe 'EAD 2 traject indexing', type: :feature do
     end
 
     it 'abstract' do
-      expect(result['abstract_ssm'].first).to match(/Alpha Omega Alpha Honor Medical Society/)
+      expect(condense_whitespace(result['abstract_ssm'].first)).to match(/Alpha Omega Alpha Honor Medical Society/)
     end
 
     it 'separatedmaterial' do
@@ -258,11 +258,11 @@ describe 'EAD 2 traject indexing', type: :feature do
     end
 
     it 'custodhist' do
-      expect(result['custodhist_ssm'].first).to eq 'Maintained by Alpha Omega Alpha and the family of William Root.'
+      expect(result['custodhist_ssm'].first).to eq_ignoring_whitespace 'Maintained by Alpha Omega Alpha and the family of William Root.'
     end
 
     it 'processinfo' do
-      expect(result['processinfo_ssm'].first).to match(/^Processed in 2001\. Descended from astronomers\./)
+      expect(condense_whitespace(result['processinfo_ssm'].first)).to match(/^Processed in 2001\. Descended from astronomers\./)
     end
 
     describe 'component-level' do
@@ -287,8 +287,8 @@ describe 'EAD 2 traject indexing', type: :feature do
 
     it 'extent at the collection level' do
       %w[extent_ssm extent_teim].each do |field|
-        expect(result[field]).to contain_exactly(
-          "15.0 linear feet (36 boxes + oversize\n          folder)"
+        expect(result[field]).to equal_array_ignoring_whitespace(
+          ['15.0 linear feet (36 boxes + oversize folder)']
         )
       end
     end
@@ -296,8 +296,8 @@ describe 'EAD 2 traject indexing', type: :feature do
     it 'extent at the component level' do
       component = result['components'].find { |c| c['ref_ssi'] == ['aspace_a951375d104030369a993ff943f61a77'] }
       %w[extent_ssm extent_teim].each do |field|
-        expect(component[field]).to contain_exactly(
-          "1.5 Linear\n              Feet"
+        expect(component[field]).to equal_array_ignoring_whitespace(
+          ['1.5 Linear Feet']
         )
       end
     end
@@ -442,12 +442,12 @@ describe 'EAD 2 traject indexing', type: :feature do
       it 'indexes the values as controlled vocabulary terms' do
         %w[access_subjects_ssm access_subjects_ssim].each do |field|
           expect(result).to include field
-          expect(result[field]).to contain_exactly(
-            'Acquired Immunodeficiency Syndrome',
-            'African Americans',
-            'Homosexuality',
-            'Human Immunodeficiency Virus',
-            'Public Health'
+          expect(result[field]).to equal_array_ignoring_whitespace(
+            ['Acquired Immunodeficiency Syndrome',
+             'African Americans',
+             'Homosexuality',
+             'Human Immunodeficiency Virus',
+             'Public Health']
           )
         end
       end
@@ -461,20 +461,20 @@ describe 'EAD 2 traject indexing', type: :feature do
 
     describe 'collection-level' do
       it 'indexes collection-level <controlaccess> names in their own field' do
-        expect(result['names_coll_ssim']).to contain_exactly(
-          'Alpha Omega Alpha',
-          'Root, William Webster, 1867-1932',
-          'Bierring, Walter L. (Walter Lawrence), 1868-1961'
+        expect(result['names_coll_ssim']).to equal_array_ignoring_whitespace(
+          ['Alpha Omega Alpha',
+           'Root, William Webster, 1867-1932',
+           'Bierring, Walter L. (Walter Lawrence), 1868-1961']
         )
       end
 
       it 'indexes all names at any level in a shared names field' do
-        expect(result['names_ssim']).to include 'Root, William Webster, 1867-1932'
-        expect(result['names_ssim']).to include 'Robertson\'s Crab House'
+        expect(result['names_ssim']).to include_ignoring_whitespace 'Root, William Webster, 1867-1932'
+        expect(result['names_ssim']).to include_ignoring_whitespace 'Robertson\'s Crab House'
       end
       it 'indexes all names at any level in a type-specific name field' do
-        expect(result['persname_ssm']).to include 'Anfinsen, Christian B.'
-        expect(result['corpname_ssm']).to include 'Robertson\'s Crab House'
+        expect(result['persname_ssm']).to include_ignoring_whitespace 'Anfinsen, Christian B.'
+        expect(result['corpname_ssm']).to include_ignoring_whitespace 'Robertson\'s Crab House'
       end
     end
 
@@ -482,13 +482,13 @@ describe 'EAD 2 traject indexing', type: :feature do
       it 'indexes <controlaccess> names in a shared names field' do
         component = result['components'].find { |c| c['id'] == ['aoa271aspace_843e8f9f22bac69872d0802d6fffbb04'] }
         expect(component).to include 'names_ssim'
-        expect(component['names_ssim']).to include 'Robertson\'s Crab House'
+        expect(component['names_ssim']).to include_ignoring_whitespace 'Robertson\'s Crab House'
       end
 
       it 'indexes names in fields for specific name types, regardless of <controlaccess>' do
         component = result['components'].find { |c| c['id'] == ['aoa271aspace_843e8f9f22bac69872d0802d6fffbb04'] }
-        expect(component['corpname_ssm']).to include 'Robertson\'s Crab House'
-        expect(component['persname_ssm']).to include 'Anfinsen, Christian B.'
+        expect(component['corpname_ssm']).to include_ignoring_whitespace 'Robertson\'s Crab House'
+        expect(component['persname_ssm']).to include_ignoring_whitespace 'Anfinsen, Christian B.'
       end
     end
   end
@@ -555,13 +555,13 @@ describe 'EAD 2 traject indexing', type: :feature do
         first_component = result['components'].first
 
         expect(first_component).to include 'acqinfo_ssim'
-        expect(first_component['acqinfo_ssim']).to contain_exactly(
-          "Gift, John L. Parascandola, PHS Historian's Office, 3/1/1994, Acc. #812. Gift, Donald Goldman, Acc. #2005-21."
+        expect(first_component['acqinfo_ssim']).to equal_array_ignoring_whitespace(
+          ["Gift, John L. Parascandola, PHS Historian's Office, 3/1/1994, Acc. #812. Gift, Donald Goldman, Acc. #2005-21."]
         )
 
         expect(first_component).to include 'acqinfo_ssm'
-        expect(first_component['acqinfo_ssm']).to contain_exactly(
-          "Gift, John L. Parascandola, PHS Historian's Office, 3/1/1994, Acc. #812. Gift, Donald Goldman, Acc. #2005-21."
+        expect(first_component['acqinfo_ssm']).to equal_array_ignoring_whitespace(
+          ["Gift, John L. Parascandola, PHS Historian's Office, 3/1/1994, Acc. #812. Gift, Donald Goldman, Acc. #2005-21."]
         )
       end
     end
@@ -636,15 +636,15 @@ describe 'EAD 2 traject indexing', type: :feature do
     end
 
     it 'id' do
-      expect(result['id'].first).to eq 'a0011-xml'
-      expect(result['ead_ssi'].first).to eq 'a0011.xml'
+      expect(result['id'].first).to eq_ignoring_whitespace 'a0011-xml'
+      expect(result['ead_ssi'].first).to eq_ignoring_whitespace 'a0011.xml'
     end
 
     it 'title' do
       %w[title_ssm title_teim].each do |field|
-        expect(result[field]).to include 'Stanford University student life photograph album'
+        expect(result[field]).to include_ignoring_whitespace 'Stanford University student life photograph album'
       end
-      expect(result['normalized_title_ssm']).to include 'Stanford University student life photograph album, circa 1900-1906'
+      expect(result['normalized_title_ssm']).to include_ignoring_whitespace 'Stanford University student life photograph album, circa 1900-1906'
     end
   end
 end
