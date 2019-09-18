@@ -10,16 +10,6 @@
     }
   }
 
-  .al-toggle-view-all {
-    color: $gray-600;
-
-    &:before {
-      color: $gray-600;
-      content: "\2022";
-      padding-right: 3px;
-    }
-  }
-
   .al-hierarchy-children-status {
     font-size: $h6-font-size;
     margin-top: 6px;
