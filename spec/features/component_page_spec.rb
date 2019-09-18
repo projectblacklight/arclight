@@ -9,15 +9,15 @@ RSpec.describe 'Component Page', type: :feature do
 
   describe 'tabbed display' do
     it 'clicking contents toggles visibility', js: true do
-      expect(page).to have_css '#overview', visible: true
+      expect(page).to have_css '#context', visible: true
       expect(page).to have_css '#online-content', visible: false
       expect(page).to have_css '#access', visible: false
       click_link 'Online content'
-      expect(page).to have_css '#overview', visible: false
+      expect(page).to have_css '#context', visible: false
       expect(page).to have_css '#online-content', visible: true
       expect(page).to have_css '#access', visible: false
       click_link 'Access'
-      expect(page).to have_css '#overview', visible: false
+      expect(page).to have_css '#context', visible: false
       expect(page).to have_css '#contents', visible: false
       expect(page).to have_css '#access', visible: true
     end
@@ -28,7 +28,7 @@ RSpec.describe 'Component Page', type: :feature do
       it 'is present and accessible' do
         expect(page).to have_css('li.nav-item a', text: 'Contents', visible: true)
         click_link 'Contents'
-        expect(page).to have_css '#overview', visible: false
+        expect(page).to have_css '#context', visible: false
         expect(page).to have_css '#contents', visible: true
         expect(page).to have_css '#online-content', visible: false
       end

@@ -130,7 +130,7 @@ RSpec.describe 'Collection Page', type: :feature do
 
   describe 'navigation bar' do
     it 'has configured links' do
-      within '.al-sidebar-navigation-overview' do
+      within '.al-sidebar-navigation-context' do
         expect(page).to have_css 'a[href="#summary"]', text: 'Summary'
         expect(page).to have_css 'a[href="#access-and-use"]', text: 'Access and Use'
         expect(page).to have_css 'a[href="#background"]', text: 'Background'
@@ -143,7 +143,7 @@ RSpec.describe 'Collection Page', type: :feature do
       let(:doc_id) { 'm0198-xml' }
 
       it 'does not include links to those sections' do
-        within '.al-sidebar-navigation-overview' do
+        within '.al-sidebar-navigation-context' do
           expect(page).not_to have_css 'a[href="#related"]', text: 'Related'
         end
       end
@@ -155,22 +155,22 @@ RSpec.describe 'Collection Page', type: :feature do
       it 'clicking contents toggles visibility' do
         click_link 'Contents'
         expect(page).to have_css '#contents', visible: true
-        expect(page).to have_css '#overview', visible: false
+        expect(page).to have_css '#context', visible: false
         expect(page).to have_css '#access', visible: false
-        click_link 'Overview'
-        expect(page).to have_css '#overview', visible: true
+        click_link 'Collection context'
+        expect(page).to have_css '#context', visible: true
         expect(page).to have_css '#contents', visible: false
         expect(page).to have_css '#access', visible: false
         click_link 'Access'
-        expect(page).to have_css '#overview', visible: false
+        expect(page).to have_css '#context', visible: false
         expect(page).to have_css '#contents', visible: false
         expect(page).to have_css '#access', visible: true
       end
       it 'clicking online contents toggles visibility' do
-        expect(page).to have_css '#overview', visible: true
+        expect(page).to have_css '#context', visible: true
         expect(page).to have_css '#online-content', visible: false
         click_link 'Online content'
-        expect(page).to have_css '#overview', visible: false
+        expect(page).to have_css '#context', visible: false
         expect(page).to have_css '#online-content', visible: true
       end
     end
@@ -228,12 +228,12 @@ RSpec.describe 'Collection Page', type: :feature do
     end
   end
 
-  describe 'overview and contents' do
+  describe 'context and contents' do
     it 'contents are not visible by default' do
       expect(page).to have_css '#contents', visible: false
     end
-    it 'overview is visible' do
-      expect(page).to have_css '#overview', visible: true
+    it 'context is visible' do
+      expect(page).to have_css '#context', visible: true
     end
     describe 'interactions', js: true do
       before { click_link 'Contents' }
