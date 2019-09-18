@@ -10,9 +10,6 @@
         <%= content_tag('span', class: 'al-document-container col-auto text-muted') do %>
           <%= document.containers.join(', ') %>
         <% end if document.containers %>
-        <% if document.online_content? %>
-          <%= blacklight_icon :online, classes: 'al-online-content-icon' %>
-        <% end %>
         <%= render_index_doc_actions document %>
       </div>
     </div>
