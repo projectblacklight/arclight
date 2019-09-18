@@ -112,4 +112,22 @@ RSpec.describe Arclight::DocumentDownloads do
       end
     end
   end
+
+  describe '.config' do
+    context 'when the downloads config. file cannot be read' do
+      before do
+        described_class.instance_variable_set(:@config, nil)
+        allow(described_class).to receive(:config_filename).and_return('non-existent')
+      end
+
+      after do
+        described_class.instance_variable_set(:@config, nil)
+        allow(described_class).to receive(:config_filename).and_call_original
+      end
+
+      it 'returns empty configuration values' do
+        expect(described_class.config).to eq({})
+      end
+    end
+  end
 end

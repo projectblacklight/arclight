@@ -56,9 +56,6 @@ module Arclight
     ##
     # Model a single file configured in downloads.yml
     class File
-      EAD_TYPE = 'ead'
-      PDF_TYPE = 'pdf'
-
       attr_reader :type, :document
       def initialize(type:, data:, document:)
         @type = type
@@ -76,18 +73,6 @@ module Arclight
         return data['size'] if data['size']
 
         document.send(data['size_accessor'].to_sym) if data['size_accessor']
-      end
-
-      # Determines where or not this is an EAD file
-      # @return [Boolean]
-      def ead?
-        type == EAD_TYPE
-      end
-
-      # Determines whether or not this is a file in the PDF
-      # @return [Boolean]
-      def pdf?
-        type == PDF_TYPE
       end
 
       private

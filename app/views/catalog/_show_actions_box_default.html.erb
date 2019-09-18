@@ -15,21 +15,22 @@
     <% end %>
   </div>
 
-  <div class='mr-auto'>
-    <%= render partial: 'catalog/bookmark_control', locals: { document: document } %>
+  <div class='mr-auto al-show-actions-box-options'>
+    <% if requestable %>
+      <div class='mr-auto al-show-actions-box-request'>
+          <%= render partial: 'arclight/requests/google_form', locals: { document: document } %>
+      </div>
+    <% end %>
+
+    <div class='mr-auto al-show-actions-box-bookmarks'>
+      <%= render partial: 'catalog/bookmark_control', locals: { document: document } %>
+    </div>
   </div>
 
-  <% if requestable %>
-    <div class='mr-auto al-action-box-request'>
-        <%= render partial: 'arclight/requests/google_form', locals: { document: document } %>
-    </div>
-  <% end %>
-
-    <% document_downloads = Arclight::DocumentDownloads.new(document) %>
-    <% if document_downloads.files.present? %>
+    <% if document.downloads.files.present? %>
       <div class="mr-auto al-show-actions-box-downloads">
 
-        <% document_downloads.files.each do |file| %>
+        <% document.downloads.files.each do |file| %>
           <div class="al-show-actions-box-downloads-file">
             <%= blacklight_icon(file.type, classes: "al-show-actions-box-downloads-file") %>
             <% if file.size %>

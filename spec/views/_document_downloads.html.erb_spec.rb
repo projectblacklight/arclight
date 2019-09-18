@@ -2,7 +2,7 @@
 
 require 'spec_helper'
 
-RSpec.describe 'catalog/_collection_downloads', type: :view do
+RSpec.describe 'catalog/_document_downloads', type: :view do
   let(:document) { SolrDocument.new(id: 'abc123') }
 
   context 'when on collection show page' do
@@ -19,7 +19,7 @@ RSpec.describe 'catalog/_collection_downloads', type: :view do
     end
 
     before do
-      allow(view).to receive(:collection_downloads).and_return(downloads)
+      allow(view).to receive(:document_downloads).and_return(downloads)
       render
     end
 
@@ -42,6 +42,14 @@ RSpec.describe 'catalog/_collection_downloads', type: :view do
       it 'omits the dropdown' do
         expect(rendered).not_to have_css '.dropdown'
       end
+    end
+  end
+
+  describe 'ActionView::PartialRenderer#render' do
+    subject(:downloads) { Arclight::DocumentDownloads.new(document) }
+
+    it 'generates markup using the _document_downloads view partial' do
+      expect(render(downloads)).to eq rendered
     end
   end
 end
