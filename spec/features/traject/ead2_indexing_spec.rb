@@ -606,6 +606,25 @@ describe 'EAD 2 traject indexing', type: :feature do
     end
   end
 
+  describe 'EAD without component IDs' do
+    let(:fixture_path) do
+      Arclight::Engine.root.join('spec', 'fixtures', 'ead', 'sample', 'no-ids-recordgrp-level.xml')
+    end
+
+    it 'mints component ids by hashing absolute paths' do
+      expect(result).to include 'components'
+      expect(result['components']).not_to be_empty
+      first_component = result['components'].first
+      second_component = result['components'].second
+
+      expect(first_component['ref_ssi']).to contain_exactly('4bf70b448ac8351a147acff1dd8b1c0b9a791980')
+      expect(first_component['id']).to contain_exactly('ehllHemingwayErnest-sample4bf70b448ac8351a147acff1dd8b1c0b9a791980')
+
+      expect(second_component['ref_ssi']).to contain_exactly('54b06e5ad77cab05ec7f6beeaca50022c47d9c7b')
+      expect(second_component['id']).to contain_exactly('ehllHemingwayErnest-sample54b06e5ad77cab05ec7f6beeaca50022c47d9c7b')
+    end
+  end
+
   describe 'for EAD Documents without XML namespaces' do
     let(:fixture_without_namespaces) do
       doc = Nokogiri::XML.parse(fixture_file.to_s)
