@@ -152,14 +152,6 @@ Style/Encoding:
   Exclude:
     - 'arclight.gemspec'
 
-# Offense count: 3
-# Cop supports --auto-correct.
-Style/ExpandPathArguments:
-  Exclude:
-    - 'arclight.gemspec'
-    - 'lib/generators/arclight/install_generator.rb'
-    - 'lib/generators/arclight/update_generator.rb'
-
 # Offense count: 1
 # Cop supports --auto-correct.
 Style/IfUnlessModifier:
