@@ -23,6 +23,9 @@ Metrics/ModuleLength:
   Exclude:
     - 'app/helpers/arclight_helper.rb'
 
+Metrics/LineLength:
+  Max: 160
+
 Rails:
   Enabled: true
 

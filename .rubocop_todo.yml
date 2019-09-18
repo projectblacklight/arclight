@@ -143,10 +143,3 @@ Style/Documentation:
 Style/IfUnlessModifier:
   Exclude:
     - 'app/models/concerns/arclight/search_behavior.rb'
-
-# Offense count: 436
-# Cop supports --auto-correct.
-# Configuration parameters: AutoCorrect, AllowHeredoc, AllowURI, URISchemes, IgnoreCopDirectives, IgnoredPatterns.
-# URISchemes: http, https
-Metrics/LineLength:
-  Max: 153
