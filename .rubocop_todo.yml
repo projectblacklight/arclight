@@ -29,11 +29,6 @@ Metrics/MethodLength:
   Max: 11
 
 # Offense count: 1
-# Configuration parameters: CountComments.
-Metrics/ModuleLength:
-  Max: 136
-
-# Offense count: 1
 # Configuration parameters: Blacklist.
 # Blacklist: (?-mix:(^|\s)(EO[A-Z]{1}|END)(\s|$))
 Naming/HeredocDelimiterNaming:
