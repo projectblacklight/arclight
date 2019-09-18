@@ -1,0 +1,12 @@
+<div class="row col d-md-none mt-3">
+  <%= content_tag('span', class: 'd-flex justify-content-start flex-grow-1 al-document-container text-muted') do %>
+    <%= document.containers.join(', ') %>
+  <% end if document.containers %>
+  
+  <div class="d-flex justify-content-end">
+    <% if document.online_content? %>
+      <%= blacklight_icon :online, classes: 'al-online-content-icon' %>
+    <% end %>
+    <%= render_index_doc_actions document %>
+  </div>
+</div>

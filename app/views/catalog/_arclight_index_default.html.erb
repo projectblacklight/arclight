@@ -6,14 +6,12 @@
   <div class="col col-no-left-padding">
     <div class="row">
       <%= render partial: 'arclight_search_index_header', locals: { document: document, counter: counter }  %>
-      <div class="col-auto">
+      <div class="col-auto d-none d-md-block">
         <%= content_tag('span', class: 'al-document-container col-auto text-muted') do %>
           <%= document.containers.join(', ') %>
         <% end if document.containers %>
         <% if document.online_content? %>
-          <span class='badge badge-success col-auto'>
-            <%= t(:'arclight.views.online_content_indicator') %>
-          </span>
+          <%= blacklight_icon :online, classes: 'al-online-content-icon' %>
         <% end %>
         <%= render_index_doc_actions document %>
       </div>
@@ -40,5 +38,7 @@
     </div>
 
     <%= render partial: 'index_breadcrumb_default', locals: { document: document } %>
+    
+    <%= render partial: 'arclight_index_mobile_info', locals: { document: document } %>
   </div>
 </div>
