@@ -10,10 +10,10 @@ RSpec.describe 'catalog/_collection_downloads', type: :view do
     let(:ead_data) { { 'href' => 'http://example.com/documents/abc123.xml', 'size' => 456 } }
     let(:downloads) do
       instance_double(
-        'Arclight::CollectionDownloads',
+        'Arclight::DownloadDownloads',
         files: [
-          Arclight::CollectionDownloads::File.new(type: 'pdf', data: pdf_data, document: document),
-          Arclight::CollectionDownloads::File.new(type: 'ead', data: ead_data, document: document)
+          Arclight::DownloadDownloads::File.new(type: 'pdf', data: pdf_data, document: document),
+          Arclight::DownloadDownloads::File.new(type: 'ead', data: ead_data, document: document)
         ]
       )
     end
@@ -36,7 +36,7 @@ RSpec.describe 'catalog/_collection_downloads', type: :view do
 
     context 'with no downloads' do
       let(:downloads) do
-        instance_double('Arclight::CollectionDownloads', files: [])
+        instance_double('Arclight::DownloadDownloads', files: [])
       end
 
       it 'omits the dropdown' do
