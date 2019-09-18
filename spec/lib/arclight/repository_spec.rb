@@ -146,13 +146,5 @@ RSpec.describe Arclight::Repository do
         expect(repo.available_request_types).to eq ['google_form']
       end
     end
-
-    context 'request types not specified' do
-      let(:repo) { described_class.find_by(slug: 'sul-spec') }
-
-      it 'returns an empty array if no types are present' do
-        expect(repo.available_request_types).to eq []
-      end
-    end
   end
 end

@@ -35,7 +35,7 @@ class TestAppGenerator < Rails::Generators::Base
 
   def add_custom_download
     config_download = <<~YML
-      2016071 Aa 1:
+      M0198:
         disabled: false
         ead:
           template: 'http://example.com/%{collection_unitid}.xml'
