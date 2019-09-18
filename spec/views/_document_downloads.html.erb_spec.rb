@@ -10,10 +10,10 @@ RSpec.describe 'catalog/_collection_downloads', type: :view do
     let(:ead_data) { { 'href' => 'http://example.com/documents/abc123.xml', 'size' => 456 } }
     let(:downloads) do
       instance_double(
-        'Arclight::DownloadDownloads',
+        'Arclight::DocumentDownloads',
         files: [
-          Arclight::DownloadDownloads::File.new(type: 'pdf', data: pdf_data, document: document),
-          Arclight::DownloadDownloads::File.new(type: 'ead', data: ead_data, document: document)
+          Arclight::DocumentDownloads::File.new(type: 'pdf', data: pdf_data, document: document),
+          Arclight::DocumentDownloads::File.new(type: 'ead', data: ead_data, document: document)
         ]
       )
     end
@@ -27,16 +27,16 @@ RSpec.describe 'catalog/_collection_downloads', type: :view do
       it 'shows the menu items' do
         expect(rendered).to have_css('.dropdown')
         expect(rendered).to have_css('button', text: 'Download')
-        expect(rendered).to have_css('a', text: 'Collection PDF (123)')
+        expect(rendered).to have_css('a', text: 'Download finding aid (123)')
         expect(rendered).to have_css('a[@href="http://example.com/documents/abc123.pdf"]')
-        expect(rendered).to have_css('a', text: 'Collection EAD (456)')
+        expect(rendered).to have_css('a', text: 'Download EAD (456)')
         expect(rendered).to have_css('a[@href="http://example.com/documents/abc123.xml"]')
       end
     end
 
     context 'with no downloads' do
       let(:downloads) do
-        instance_double('Arclight::DownloadDownloads', files: [])
+        instance_double('Arclight::DocumentDownloads', files: [])
       end
 
       it 'omits the dropdown' do
