@@ -196,7 +196,7 @@
       </analyzer>
     </fieldType>
 
-    <fieldType class="solr.TextField" name="textSuggest" positionIncrementGap="100">
+    <fieldType name="textSuggest" class="solr.TextField" positionIncrementGap="100">
        <analyzer>
           <tokenizer class="solr.KeywordTokenizerFactory"/>
           <filter class="solr.LowerCaseFilterFactory"/>
