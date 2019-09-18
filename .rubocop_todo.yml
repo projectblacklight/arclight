@@ -8,13 +8,6 @@
 
 # Offense count: 1
 # Cop supports --auto-correct.
-# Configuration parameters: EnabledMethods.
-Capybara/FeatureMethods:
-  Exclude:
-    - 'spec/features/compact_search_results_spec.rb'
-
-# Offense count: 1
-# Cop supports --auto-correct.
 # Configuration parameters: TreatCommentsAsGroupSeparators, Include.
 # Include: **/*.gemspec
 Gemspec/OrderedDependencies:
