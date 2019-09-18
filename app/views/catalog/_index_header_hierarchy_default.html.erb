@@ -9,12 +9,12 @@
     <% counter = document_counter_with_offset(document_counter) %>
     <%= link_to_document document, document_show_link_field(document), counter: counter %>
     <% if document.children? %>
-      <span class="badge badge-pill badge-secondary"><%= document.number_of_children %></span>
+      <span class="badge badge-pill badge-secondary al-number-of-children-badge"><%= document.number_of_children %></span>
     <% end %>
     <%= render_document_partial(document, 'arclight_online_content_indicator') %>
     <% if document.children? %>
       <div class='al-hierarchy-children-status'>
-        <span class='badge badge-default al-number-of-children-badge'>
+        <span class='badge badge-default'>
           <% unless hierarchy_component_context? %>
             <%= link_to(
               t('arclight.hierarchy.view_all'),

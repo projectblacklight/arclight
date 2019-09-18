@@ -31,10 +31,6 @@ en:
           one: 1 result
           other: "%{count} results"
           zero: 0 results
-        number_of_children:
-          one: 1 child
-          other: "%{count} children"
-          zero: No children
         top_group_results:
           one: Top %{count} result
           other: Top %{count} results
