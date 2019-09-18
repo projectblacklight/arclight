@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+require 'sprockets/bumble_d'
 require 'blacklight'
 require 'traject'
 require 'active_model'
@@ -14,6 +15,13 @@ module Arclight
   ##
   # This is the defining class for the Arclight Rails Engine
   class Engine < ::Rails::Engine
+    extend ::Sprockets::BumbleD::DSL
+
+    # We're not sure this is right, but we aren't doing module imports
+    # at the moment anyway
+    register_umd_globals :arclight,
+                         'blacklight' => 'Blacklight'
+
     config.viewer_class = Arclight::Viewers::OEmbed
     config.oembed_resource_exclude_patterns = [/\.pdf$/, /\.ppt$/]
 
