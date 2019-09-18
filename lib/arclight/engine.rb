@@ -66,5 +66,9 @@ module Arclight
     initializer 'arclight.views' do
       Blacklight::Configuration.default_values[:view].hierarchy
     end
+
+    initializer 'arclight.assets.precompile' do |app|
+      app.config.assets.precompile += %w[blacklight/ead.svg blacklight/pdf.svg] if defined? Sprockets
+    end
   end
 end
