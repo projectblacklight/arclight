@@ -16,7 +16,14 @@ RSpec.describe 'Compact Search Results', type: :feature do
     expect(page).to have_css('.documents-compact')
     expect(page).to have_css('article.document', count: 10)
     within '.document-position-0' do
+      # Has breadcrumbs
       expect(page).to have_css '.breadcrumb-links a', text: /National Library of/
+      # Has Containers
+      expect(page).to have_css '.al-document-container', text: 'Box 1, Folder 1'
+      # Has Online Content Indicator
+      expect(page).to have_css '.al-online-content-icon'
+      # Has Bookmark Control
+      expect(page).to have_css 'form.bookmark-toggle'
     end
   end
   scenario 'Shows highlights in compact view' do
