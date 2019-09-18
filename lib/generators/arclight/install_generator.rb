@@ -69,5 +69,9 @@ module Arclight
     def modify_blacklight_yml
       gsub_file 'config/locales/blacklight.en.yml', "application_name: 'Blacklight'", "application_name: 'Arclight'"
     end
+
+    def run_yarn
+      run 'yarn add @babel/core @babel/plugin-external-helpers @babel/plugin-transform-modules-umd @babel/preset-env'
+    end
   end
 end
