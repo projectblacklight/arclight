@@ -1,0 +1,9 @@
+<% document ||= @document %>
+<% aeon_external_request ||= Arclight::Requests::AeonExternalRequest.new(document, show_presenter(document)) %>
+
+<%= form_tag aeon_external_request.url, method: :post, class: 'al-request-form' do |f| %>
+  <%= render_hash_as_hidden_fields(aeon_external_request.form_mapping) %>
+  <button type='submit' class='al-request-button btn-link'>
+    <%= t('arclight.request.container') %>
+  </button>
+<% end %>
