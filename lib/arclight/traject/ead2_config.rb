@@ -230,10 +230,11 @@ compose 'components', ->(record, accumulator, _context) { accumulator.concat rec
                      parent_id = context.clipboard[:parent].output_hash['id'].first
                      logger.warn('MISSING ID WARNING') do
                        [
-                         "A component in #{parent_id} did not have and ID so one was minted using the #{strategy} strategy.",
+                         "A component in #{parent_id} did not have an ID so one was minted using the #{strategy} strategy.",
                          "The ID of this document will be #{parent_id}#{hexdigest}."
                        ].join(' ')
                      end
+                     hexdigest
                    else
                      record.attribute('id')&.value&.strip&.gsub('.', '-')
                    end

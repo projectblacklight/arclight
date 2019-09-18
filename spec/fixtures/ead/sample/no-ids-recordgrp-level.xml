@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ead xmlns="urn:isbn:1-931666-22-9" xmlns:xlink="http://www.w3.org/1999/xlink"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="urn:isbn:1-931666-22-9 http://www.loc.gov/ead/ead.xsd">
+  <eadheader audience="internal" langencoding="iso639-2b" repositoryencoding="iso15511" dateencoding="iso8601" relatedencoding="Dublin Core">
+    <eadid publicid="us//::mi-HC//TXT us::ehll::HemingwayErnest.xml//EN" encodinganalog="identifier">ehllHemingwayErnest-sample</eadid>
+    <filedesc>
+      <titlestmt>
+        <titleproper encodinganalog="title">
+          Finding Aid for Ernest Hemingway Collection
+        </titleproper>
+      </titlestmt>
+      <publicationstmt>
+        <publisher encodinganalog="publisher">Clarke Historical Library</publisher>
+        <date encodinganalog="date">
+          2003, 2009, ongoing
+        </date>
+      </publicationstmt>
+    </filedesc>
+    <profiledesc>
+      <creation>These are modified excerpts from a Central Michigan University finding aid, converted from EAD2002 DTD to EAD2002 W3C Schema (XSD), for the purpose of testing the ArcLight application.</creation>
+      <langusage>The finding aid is written in 
+        <language langcode="eng">English</language>
+      </langusage>
+    </profiledesc>
+  </eadheader>
+  <frontmatter>
+    <titlepage>
+      <publisher>Clarke Historical Library<lb/>Central Michigan University</publisher>
+      <titleproper>Finding aid for <lb/>Ernest Hemingway Collection</titleproper>
+      <author>Finding aid created by <lb/>Marian Matyn</author>
+    </titlepage>
+  </frontmatter>
+  <archdesc level="recordgrp" audience="external" type="inventory" relatedencoding="marc21">
+    <did>
+      <origination>
+        <persname source="lcnaf" encodinganalog="100">Hemingway, Ernest, 1899-1961.</persname>
+      </origination>
+      <unittitle encodinganalog="245">
+        Ernest Hemingway Collection,
+        <unitdate type="inclusive" encodinganalog="245$f">
+          1901, 2014, and undated
+        </unitdate></unittitle>
+      <physdesc>
+        <extent encodinganalog="300">
+          6 cubic feet (in 7 boxes, 8 Oversized folders, 4 reels in 4 boxes, and 52 framed items)
+        </extent>
+      </physdesc>
+      <unitid encodinganalog="099" type="call number">
+        MSS.
+      </unitid>
+      <langmaterial>The material is in <language langcode="eng" encodinganalog="041">English</language></langmaterial>
+      <abstract>
+        This artificial collection includes articles by or about Hemingway, movie posters and photographs, manuscript letters, printed and miscellaneous materials about Ernest Hemingway and his books, diaries of Ernest's uncle, George R. Hemingway, and the organizational records of the Michigan Hemingway Society. 
+      </abstract>
+      <repository>
+        <corpname encodinganalog="852"><subarea>Clarke Historical Library</subarea>, Central Michigan University</corpname>
+        <extptr xmlns:xlink="http://www.w3.org/1999/xlink" xlink:type="simple" xlink:show="embed" xlink:actuate="onLoad" xlink:href="CHLadd"/>
+      </repository>
+    </did>
+    <descgrp type="admin">
+      <acqinfo encodinganalog="541">
+        <p>Acc# many</p>
+      </acqinfo>
+      <accessrestrict encodinganalog="506">
+        <p>Ernest Hemingway Collection is open for research.</p>
+      </accessrestrict>
+      <userestrict encodinganalog="540">
+        <p>
+          Some published materials in the collection are still under copyright. Some of the photographs are copies from the John F. Kennedy Presidential Library. Copyright and intellectual rights for Hemingway collections are complex. Regarding these photographic copies please refer to the John F. Kennedy Presidential Library online finding at https://www.jfklibrary.org/sites/default/files/archives/EHPP/EHPP-FA.xml.
+        </p>
+      </userestrict>
+      <prefercite encodinganalog="524">
+        <p>
+          Ernest Hemingway Collection, 1901, 2006, and undated, Folder # , Box #, Clarke Historical Library, Central Michigan University
+        </p>
+      </prefercite>
+    </descgrp>
+    <bioghist encodinganalog="545">
+      <p>Biography:</p>
+      <p>Ernest Hemingway was born July 21, 1899 in Oak Park, Illinois, the son of Clarence E. Hemingway, a doctor, and Grace Hall-Hemingway, a musician and voice teacher. He had four sisters and a brother. Every summer, the family summered at the family cottage, named Windemere, on Walloon Lake near Petoskey, Michigan.</p>
+      <p>After Ernest graduated from high school in June 1917, he joined the Missouri Home Guard. Before it was called to active duty, he served as a volunteer ambulance driver for the American Red Cross. On July 8, 1918 Hemingway was wounded by an Austrian trench mortar. He spent the subsequent summer and fall recovering from his leg wounds in the Milan Red Cross hospital. In Europe, Hemingway met nurse Agnes Von Kurowsky. He thought they were engaged when he returned to the U.S. on January 21, 1919, but she broke off whatever relationship they had had in March 1919.</p>
+      <p>In January 1920, the city editor of the Toronto Star agreed to buy Hemingway’s stories on a piece by piece basis as they suited the paper. The paper regularly printed his features on dental schools, prizefights, free shaves, trout fishing, rum-running and, later, on Chicago gangsters. He returned to Chicago in May 1920.</p>
+      <p>In September 1921, Hemingway married Hadley Richardson at Horton Bay, Michigan. They had planned to live in Italy, but were advised by Sherwood Anderson that a would-be-writer should live in Paris. In January 1922, the couple moved into an apartment in Paris’ Latin Quarter.</p>
+      <p>The Hemingways later returned to Toronto, where Ernest found that the new editor of the Star did not like him.  His first assignment upon his return was to cover a prison escape. He used one prisoner as the basis for his male, loner, anti-social characters, which later appeared in a number of his stories.</p>
+    </bioghist>
+    <arrangement encodinganalog="351">
+      <p>The collection is divided into three series: materials by and about Ernest Hemingway, the diaries of his uncle, George R. Hemingway, and the organizational records of the Michigan Hemingway Society.</p>
+    </arrangement>
+    <scopecontent encodinganalog="520">
+      <p>Materials by and about Ernest Hemingway in the collection include numerous periodicals with Articles by or about Hemingway, his books, and movies based on his books; numerous Movie Posters; other Posters of Hemingway, his homes, books, or exhibits about him; Photographs (copies), mostly from movies based on his books and some from the John F. Kennedy Presidential Library; the (Film) ‘Adventures of a Young Man’, undated (4 reels): Manuscript Correspondence, four Letters written by Hemingway, one to Jim Gamble written on April 18 and 27, 1919, one dated Oct. 28, 1919 to Ernest's father, Dr. Clarence Hemingway (framed), one dated Nov. 12, 1919 to his mother, Mrs. Grace H. Hemingway (framed), and one dated 2 Feb. 1960 to his son, J. H. N. Hemingway, as well as copies of two letters written by Hemingway to Owen Wister dated March 1 and 11, 1929 (the originals are in the Library of Congress). Brochures; Advertisements; Exhibit Brochures; Postcards; Auction Catalogs; Sheet Music; Miscellaneous materials. Biographical Information (copies) and ramed Items for exhibits, including posters, photographs, and other materials.</p>
+      <p>Of particular interest is the first letter (original six p., and a copy) written by Hemingway on April 18 and 27, 1919 to his friend Jim Gamble, the Proctor and Gamble heir, detailing his desire to write even though submissions for publication were rejected, his dashed hopes for marriage, his hunger for recognition, his love of northern Michigan and trout fishing, and notes about people whose company he enjoyed while staying at Windemere Cottage, near Petoskey, Michigan. During this time, Hemingway was recovering from war wounds and a broken heart. The letter is typed with his signature. Included with the letter are copies of two Hemingway letters to Owen Wister, March 1 (6 p.) and 11 (5 p.), 1929, copied from the Library of Congress, and a letter to Henry M. Watts from Theodore Voorhees, December 11, 1979, concerning the copied letters. (Note: This letter is housed separately from the rest of the collection.)</p>
+      <p>User Note: The collection has a decidedly musty to lightly moldy smell and patrons with allergies or breathing problems should use the collection with care.</p>
+      <p>Processing Note: Most of the numerous books that came to the Clarke with the collection have been cataloged. Those few books for which no catalog record could be found have been added to this manuscript collection. Later Oversized additions will be added at the end of the collection.</p>
+    </scopecontent>
+    <controlaccess>
+      <p>
+        <extptr xmlns:xlink="http://www.w3.org/1999/xlink" xlink:type="simple" xlink:show="embed" xlink:actuate="onLoad" xlink:href="accnote"/>
+      </p>
+      <controlaccess>
+        <head>Subjects:</head>
+        <corpname encodinganalog="610" source="lcnaf">Michigan Hemingway Society.</corpname>
+        <persname encodinganalog="600" source="lcnaf">Hemingway, Ernest, 1899-1961--Biography.</persname>
+        <persname encodinganalog="600" source="lcnaf">Hemingway, Ernest, 1899-1961--Correspondence.</persname>
+        <persname encodinganalog="600" source="lcnaf">Hemingway, Ernest, 1899-1961--Criticism and Interpretation.</persname>
+        <persname encodinganalog="600" source="lcnaf">Hemingway, Ernest, 1899-1961--Exhibitions.</persname>
+        <persname encodinganalog="600" source="lcnaf">Hemingway, Ernest, 1899-1961--Farewell to arms.</persname>
+        <persname encodinganalog="600" source="lcnaf">Hemingway, Ernest, 1899-1961--For whom the bell tolls.</persname>
+        <persname encodinganalog="600" source="lcnaf">Hemingway, Ernest, 1899-1961--Homes and haunts--Cuba--Havana--Pictorial works.</persname>
+        <persname encodinganalog="600" source="lcnaf">Hemingway, Ernest, 1899-1961--Homes and haunts--Florida--Key West--Pictorial works.</persname>
+        <persname encodinganalog="600" source="lcnaf">Hemingway, Ernest, 1899-1961--Moveable feast.</persname>
+        <persname encodinganalog="600" source="lcnaf">Hemingway, Ernest, 1899-1961--Old man and the sea.</persname>
+        <persname encodinganalog="600" source="lcnaf">Hemingway, Ernest, 1899-1961--Pictorial works.</persname>
+        <persname encodinganalog="600" source="lcnaf">Hemingway, Ernest, 1899-1961--Portraits--Exhibitions.</persname>
+        <persname encodinganalog="600" source="lcnaf">Hemingway, Ernest, 1899-1961--Sun also rises.</persname>
+        <persname encodinganalog="600" source="lcnaf">Hemingway, Ernest, 1899-1961--Correspondence.</persname>
+        <persname encodinganalog="700" source="lcnaf">Hemingway, Ernest, 1899-1961.</persname>
+        <subject encodinganalog="650" source="lcsh">Authors, American--20th century.</subject>
+        <subject encodinganalog="650" source="lcsh">War and society--United States--History--20th century.</subject>
+        <subject encodinganalog="650" source="lcsh">World War, 1914-1918--Veterans.</subject>
+        <geogname encodinganalog="651" source="lcsh">Petoskey (Mich.)--History.</geogname>
+        <famname encodinganalog="600" source="lcnaf">Hemingway family.</famname>
+        <corpname encodinganalog="710" source="lcnaf">Michigan Hemingway Society.</corpname>
+        <persname encodinganalog="700" source="lcnaf">Hemingway, Ernest, 1899-1961.</persname>
+      </controlaccess>
+    </controlaccess>
+    <dsc type="combined">
+      <c01 level="series">
+        <did>
+          <unittitle>Ernest Hemingway Collection</unittitle>
+        </did>
+        <c02 level="file">
+          <did>
+            <container type="Box" label="Box">1</container>
+            <container type="Folder" label="F">1</container>
+            <unittitle>
+              Biographical Information,<unitdate type="inclusive">2003</unitdate>
+            </unittitle>
+          </did>
+        </c02>
+        <c02 level="file">
+          <did>
+            <container type="Box" label="Box">1</container>
+            <container type="Folder" label="F">2</container>
+            <unittitle>
+              Sample Advertisements for, At the Hemingways, <unitdate type="inclusive">1999</unitdate>
+            </unittitle>
+          </did>
+        </c02>
+        <c02 level="file">
+          <did>
+            <container type="Box" label="Box">1</container>
+            <container type="Folder" label="F">3</container>
+            <unittitle>
+              Sample Advertisements for, (The) Complete stories of Ernest Hemingway, the Finca Vigia edition,<unitdate type="inclusive">1988</unitdate>
+            </unittitle>
+          </did>
+        </c02>
+      </c01>
+    </dsc>
+  </archdesc>
+</ead>
