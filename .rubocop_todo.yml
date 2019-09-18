@@ -17,10 +17,6 @@ Lint/Void:
   Exclude:
     - 'lib/arclight/year_range.rb'
 
-# Offense count: 2
-Metrics/AbcSize:
-  Max: 16
-
 # Offense count: 59
 # Configuration parameters: CountComments, ExcludedMethods.
 # ExcludedMethods: refine
