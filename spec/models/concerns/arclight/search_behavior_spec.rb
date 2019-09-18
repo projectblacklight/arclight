@@ -77,7 +77,8 @@ describe Arclight::SearchBehavior do
           'group.limit' => 3,
           'parent.fl' => '*',
           'parent.q' => '{!term f=collection_sim v=$row.collection_ssi}',
-          'parent.fq' => '{!term f=level_sim v="Collection"}'
+          'parent.fq' => '{!term f=level_sim v="Collection"}',
+          'parent.defType' => 'lucene'
         )
       end
     end

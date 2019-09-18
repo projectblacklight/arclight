@@ -57,6 +57,7 @@ module Arclight
         solr_params['parent.fl'] = '*'
         solr_params['parent.q'] = '{!term f=collection_sim v=$row.collection_ssi}'
         solr_params['parent.fq'] = '{!term f=level_sim v="Collection"}'
+        solr_params['parent.defType'] = 'lucene'
       end
       solr_params
     end
