@@ -23,6 +23,9 @@ Metrics/BlockLength:
     - 'arclight.gemspec'
     - 'lib/arclight/traject/ead2_config.rb'
     - 'lib/tasks/**/*'
+    - 'spec/features/traject/ead2_indexing_spec.rb'
+    - 'spec/helpers/arclight_helper_spec.rb'
+    - 'spec/features/collection_page_spec.rb'
     - 'spec/**/*'
     - 'tasks/**/*'
 

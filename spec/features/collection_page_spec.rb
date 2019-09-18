@@ -4,8 +4,23 @@ require 'spec_helper'
 
 RSpec.describe 'Collection Page', type: :feature do
   let(:doc_id) { 'aoa271' }
+  let(:download_config) do
+    ActiveSupport::HashWithIndifferentAccess.new(
+      default: {
+        pdf: {
+          href: 'http://example.com/sample.pdf',
+          size: '1.23MB'
+        },
+        ead: {
+          href: 'http://example.com/sample.xml',
+          size: 123_456
+        }
+      }
+    )
+  end
 
   before do
+    allow(Arclight::DocumentDownloads).to receive(:config).and_return(download_config)
     visit solr_document_path(id: doc_id)
   end
 
@@ -290,6 +305,14 @@ RSpec.describe 'Collection Page', type: :feature do
         expect(page).to have_css 'a', text: 'National Library of Medicine. History of Medicine Division'
         expect(page).to have_css 'h1.breadcrumb-item-2', text: 'Alpha Omega Alpha Archives, 1894-1992'
       end
+    end
+  end
+  context 'content with file downloads', js: true do
+    let(:doc_id) { 'a0011-xmlaspace_ref6_lx4' }
+
+    it 'renders links to the files for download' do
+      expect(page).to have_css('.al-show-actions-box-downloads-file', text: 'Download finding aid (1.23MB)')
+      expect(page).to have_css('.al-show-actions-box-downloads-file', text: 'Download EAD (123456)')
     end
   end
 end

@@ -16,6 +16,31 @@
   font-size: $font-size-sm;
   height: 100%;
   padding: $spacer;
+  margin: 0 (-$spacer) $spacer;
+  padding: 3px $result-item-body-padding;
+
+  .btn-secondary, .al-collection-id, .toggle-bookmark {
+    margin-top: $spacer * .5;
+  }
+
+  .toggle-bookmark {
+    margin: $spacer ($spacer * .5) (-$spacer * .5) 0;
+  }
+
+  &-downloads {
+    padding: 0.32rem;
+
+    &-file {
+      padding: 0.24rem;
+
+      &.blacklight-icons {
+        width: 1.24rem;
+        svg {
+          fill: $secondary;
+        }
+      }
+    }
+  }
 }
 
 .al-show-breadcrumb h1 { font-size: 1.5rem; }

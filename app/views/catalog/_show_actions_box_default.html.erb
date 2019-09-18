@@ -25,4 +25,27 @@
     </div>
   <% end %>
 
+    <% document_downloads = Arclight::DocumentDownloads.new(document) %>
+    <% if document_downloads.files.present? %>
+      <div class="mr-auto al-show-actions-box-downloads">
+
+        <% document_downloads.files.each do |file| %>
+          <div class="al-show-actions-box-downloads-file">
+            <% if file.pdf? %>
+                <%= blacklight_icon('pdf', classes: "al-show-actions-box-downloads-file") %>
+            <% elsif file.ead? %>
+                <%= blacklight_icon('ead', classes: "al-show-actions-box-downloads-file") %>
+            <% end %>
+
+            <% if file.size %>
+              <%= link_to(t("arclight.views.show.download_with_size.#{file.type}", size: file.size), file.href) %>
+            <% else %>
+              <%= link_to(t("arclight.views.show.download.#{file.type}"), file.href) %>
+            <% end %>
+          </div>
+        <% end %>
+
+      </div>
+    <% end %>
+
 </div>
