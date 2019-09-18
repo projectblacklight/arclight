@@ -16,6 +16,7 @@ en:
       home: Home
       repositories: Repositories
       search_results: Search results
+    show_breadcrumb_label: Repository
     truncation:
       view_less: view less ▼
       view_more: view more ▶

@@ -237,9 +237,10 @@ RSpec.describe 'Component Page', type: :feature do
   describe 'breadcrumb' do
     it 'links home, collection, and parents' do
       within '.al-show-breadcrumb' do
-        expect(page).to have_css 'a', text: 'Home'
-        expect(page).to have_css 'a', text: 'Collections'
-        expect(page).to have_css 'a', count: 4
+        expect(page).to have_css 'a', text: 'National Library of Medicine. History of Medicine Division'
+        expect(page).to have_css 'a', text: 'Alpha Omega Alpha Archives, 1894-1992'
+        expect(page).to have_css 'a', text: 'Series I: Administrative Records, 1902-1976, bulk 1975-1976'
+        expect(page).to have_css 'a', count: 3
       end
     end
   end
