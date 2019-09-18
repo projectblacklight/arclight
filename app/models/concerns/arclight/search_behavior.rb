@@ -47,18 +47,8 @@ module Arclight
     ##
     # Adds grouping parameters for Solr if enabled
     def add_grouping(solr_params)
-      if blacklight_params[:group] == 'true'
-        solr_params[:group] = true
-        solr_params['group.field'] = 'collection_ssi'
-        solr_params['group.ngroups'] = true
-        solr_params['group.limit'] = 3
-        # Will provide the parent collection document
-        solr_params['fl'] = '*,parent:[subquery]'
-        solr_params['parent.fl'] = '*'
-        solr_params['parent.q'] = '{!term f=collection_sim v=$row.collection_ssi}'
-        solr_params['parent.fq'] = '{!term f=level_sim v="Collection"}'
-        solr_params['parent.defType'] = 'lucene'
-      end
+      solr_params.merge!(Arclight::Engine.config.catalog_controller_group_query_params) if blacklight_params[:group] == 'true'
+
       solr_params
     end
   end

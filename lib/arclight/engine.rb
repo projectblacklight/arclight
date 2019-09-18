@@ -41,6 +41,18 @@ module Arclight
       component_indexed_terms_field
     ]
 
+    Arclight::Engine.config.catalog_controller_group_query_params = {
+      group: true,
+      'group.field': 'collection_ssi',
+      'group.ngroups': true,
+      'group.limit': 3,
+      fl: '*,parent:[subquery]',
+      'parent.fl': '*',
+      'parent.q': '{!term f=collection_sim v=$row.collection_ssi}',
+      'parent.fq': '{!term f=level_sim v="Collection"}',
+      'parent.defType': 'lucene'
+    }
+
     initializer 'arclight.fields' do
       Arclight::Engine.config.catalog_controller_field_accessors.each do |field|
         Blacklight::Configuration.define_field_access field
