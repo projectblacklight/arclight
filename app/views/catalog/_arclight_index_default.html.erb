@@ -6,7 +6,7 @@
   <div class="col col-no-left-padding">
     <div class="row">
       <%= render partial: 'arclight_search_index_header', locals: { document: document, counter: counter }  %>
-      <div class="col-auto">
+      <div class="col-auto al-document-mobile">
         <%= content_tag('span', class: 'al-document-container col-auto text-muted') do %>
           <%= document.containers.join(', ') %>
         <% end if document.containers %>
