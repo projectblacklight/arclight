@@ -103,7 +103,8 @@ module Arclight
 
     def to_s_for_streak(streak)
       return streak.min.to_s if streak.min == streak.max
-      [streak.min, streak.max].map(&:to_s).join('-')
+
+      streak.minmax.map(&:to_s).join('-')
     end
   end
 end

@@ -173,12 +173,6 @@ Style/IfUnlessModifier:
   Exclude:
     - 'app/models/concerns/arclight/search_behavior.rb'
 
-# Offense count: 1
-# Cop supports --auto-correct.
-Style/MinMax:
-  Exclude:
-    - 'lib/arclight/year_range.rb'
-
 # Offense count: 436
 # Cop supports --auto-correct.
 # Configuration parameters: AutoCorrect, AllowHeredoc, AllowURI, URISchemes, IgnoreCopDirectives, IgnoredPatterns.
