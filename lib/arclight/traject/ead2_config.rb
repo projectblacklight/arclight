@@ -129,20 +129,20 @@ end
 to_field 'geogname_ssm', extract_xpath('/ead/archdesc/controlaccess/geogname')
 to_field 'geogname_sim', extract_xpath('/ead/archdesc/controlaccess/geogname')
 
-to_field 'creator_ssm', extract_xpath("/ead/archdesc/did/origination[@label='creator']")
-to_field 'creator_sim', extract_xpath("/ead/archdesc/did/origination[@label='creator']")
-to_field 'creator_ssim', extract_xpath("/ead/archdesc/did/origination[@label='creator']")
+to_field 'creator_ssm', extract_xpath('/ead/archdesc/did/origination')
+to_field 'creator_sim', extract_xpath('/ead/archdesc/did/origination')
+to_field 'creator_ssim', extract_xpath('/ead/archdesc/did/origination')
 to_field 'creator_sort' do |record, accumulator|
-  accumulator << record.xpath("/ead/archdesc/did/origination[@label='creator']").map { |c| c.text.strip }.join(', ')
+  accumulator << record.xpath('/ead/archdesc/did/origination').map { |c| c.text.strip }.join(', ')
 end
 
-to_field 'creator_persname_ssm', extract_xpath("/ead/archdesc/did/origination[@label='creator']/persname")
-to_field 'creator_persname_ssim', extract_xpath("/ead/archdesc/did/origination[@label='creator']/persname")
-to_field 'creator_corpname_ssm', extract_xpath("/ead/archdesc/did/origination[@label='creator']/corpname")
-to_field 'creator_corpname_sim', extract_xpath("/ead/archdesc/did/origination[@label='creator']/corpname")
-to_field 'creator_corpname_ssim', extract_xpath("/ead/archdesc/did/origination[@label='creator']/corpname")
-to_field 'creator_famname_ssm', extract_xpath("/ead/archdesc/did/origination[@label='creator']/famname")
-to_field 'creator_famname_ssim', extract_xpath("/ead/archdesc/did/origination[@label='creator']/famname")
+to_field 'creator_persname_ssm', extract_xpath('/ead/archdesc/did/origination/persname')
+to_field 'creator_persname_ssim', extract_xpath('/ead/archdesc/did/origination/persname')
+to_field 'creator_corpname_ssm', extract_xpath('/ead/archdesc/did/origination/corpname')
+to_field 'creator_corpname_sim', extract_xpath('/ead/archdesc/did/origination/corpname')
+to_field 'creator_corpname_ssim', extract_xpath('/ead/archdesc/did/origination/corpname')
+to_field 'creator_famname_ssm', extract_xpath('/ead/archdesc/did/origination/famname')
+to_field 'creator_famname_ssim', extract_xpath('/ead/archdesc/did/origination/famname')
 
 to_field 'persname_sim', extract_xpath('//persname')
 
@@ -328,11 +328,11 @@ compose 'components', ->(record, accumulator, _context) { accumulator.concat rec
   to_field 'extent_ssm', extract_xpath('./did/physdesc/extent')
   to_field 'extent_teim', extract_xpath('./did/physdesc/extent')
 
-  to_field 'creator_ssm', extract_xpath("./did/origination[@label='creator']")
-  to_field 'creator_ssim', extract_xpath("./did/origination[@label='creator']")
-  to_field 'creators_ssim', extract_xpath("./did/origination[@label='creator']")
+  to_field 'creator_ssm', extract_xpath('./did/origination')
+  to_field 'creator_ssim', extract_xpath('./did/origination')
+  to_field 'creators_ssim', extract_xpath('./did/origination')
   to_field 'creator_sort' do |record, accumulator|
-    accumulator << record.xpath("./did/origination[@label='creator']").map(&:text).join(', ')
+    accumulator << record.xpath('./did/origination').map(&:text).join(', ')
   end
   to_field 'collection_creator_ssm' do |_record, accumulator, context|
     accumulator.concat Array.wrap(context.clipboard[:parent].output_hash['creator_ssm'])
