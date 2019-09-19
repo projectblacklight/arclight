@@ -55,6 +55,7 @@ describe 'EAD 2 traject indexing', type: :feature do
       expect(result['level_ssm']).to eq ['collection']
       expect(result['level_sim']).to eq ['Collection']
     end
+
     it 'dates' do
       expect(result['normalized_date_ssm']).to include_ignoring_whitespace 'circa 1900-1906'
       expect(result['unitdate_bulk_ssim']).to be_nil

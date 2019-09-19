@@ -35,14 +35,14 @@ describe Arclight::SearchBehavior do
       let(:user_params) { { view: 'hierarchy' } }
 
       it 'adds component-order sort to query' do
-        expect(search_builder_instance.add_hierarchy_sort(solr_params)).to include(sort: 'sort_ii asc')
+        expect(search_builder_instance.add_hierarchy_sort(solr_params)).to include(sort: '_nest_path_ asc')
       end
     end
     context 'when in online_contents view' do
       let(:user_params) { { view: 'online_contents' } }
 
       it 'adds component-order sort to query' do
-        expect(search_builder_instance.add_hierarchy_sort(solr_params)).to include(sort: 'sort_ii asc')
+        expect(search_builder_instance.add_hierarchy_sort(solr_params)).to include(sort: '_nest_path_ asc')
       end
     end
     context 'when not in hierarchy view' do

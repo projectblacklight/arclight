@@ -27,7 +27,7 @@ module Arclight
     ##
     # For the hierarchy view, set the sort order to preserve the order of components
     def add_hierarchy_sort(solr_params)
-      solr_params[:sort] = 'sort_ii asc' if %w[hierarchy online_contents].include? blacklight_params[:view]
+      solr_params[:sort] = '_nest_path_ asc' if %w[hierarchy online_contents].include? blacklight_params[:view]
       solr_params
     end
 
