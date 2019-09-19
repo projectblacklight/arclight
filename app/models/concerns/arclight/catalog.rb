@@ -16,6 +16,7 @@ module Arclight
     # the preferred view
     def store_preferred_view
       return if %w[hierarchy online_contents].include?(params[:view])
+
       super
     end
   end

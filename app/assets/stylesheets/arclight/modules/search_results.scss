@@ -28,14 +28,6 @@
       }
     }
 
-    .al-document-container.text-muted {
-      color: #ADB5BD !important;
-    }
-
-    div .bookmark-toggle .toggle-bookmark, div .index-document-functions {
-      display: inline;
-    }
-
     form.bookmark-toggle.col-auto {
       padding-right: 0;
     }
@@ -133,6 +125,14 @@ article.document {
   }
 }
 
+.index-document-functions {
+  display: flex;
+}
+
+.al-document-container.text-muted {
+  color: #ADB5BD !important;
+}
+
 .col-no-left-padding {
   padding-left: 0 !important;
 }
@@ -157,4 +157,3 @@ article.document {
     background-color: #6c757d;
     border-color: #6c757d;
 }
-

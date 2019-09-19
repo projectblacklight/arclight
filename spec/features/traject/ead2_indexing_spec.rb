@@ -179,6 +179,11 @@ describe 'EAD 2 traject indexing', type: :feature do
           expect(other_level_component['level_ssm']).to eq(['Binder'])
           expect(other_level_component['level_sim']).to eq(['Binder'])
         end
+
+        it 'sort' do
+          expect(other_level_component['sort_ii']).to eq([2])
+          expect(level_component['sort_ii']).to eq([32])
+        end
       end
     end
   end
@@ -190,6 +195,17 @@ describe 'EAD 2 traject indexing', type: :feature do
 
     it 'selects the components' do
       expect(result['components'].length).to eq 404
+    end
+
+    it 'indexes top-level daos' do
+      expect(result['digital_objects_ssm']).to eq(
+        [
+          JSON.generate(
+            label: '1st Street Arcade San Francisco',
+            href: 'https://purl.stanford.edu/yy901zw2656'
+          )
+        ]
+      )
     end
 
     context 'when nested component' do

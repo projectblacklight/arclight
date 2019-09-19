@@ -155,16 +155,32 @@ class CatalogController < ApplicationController
       field.qt = 'search' # default
     end
     config.add_search_field 'name', label: 'Name' do |field|
-      field.qt = 'name_search'
+      field.qt = 'search'
+      field.solr_parameters = {
+        qf:  '${qf_name}',
+        pf:  '${pf_name}'
+      }
     end
     config.add_search_field 'place', label: 'Place' do |field|
-      field.qt = 'place_search'
+      field.qt = 'search'
+      field.solr_parameters = {
+        qf:  '${qf_place}',
+        pf:  '${pf_place}'
+      }
     end
     config.add_search_field 'subject', label: 'Subject' do |field|
-      field.qt = 'subject_search'
+      field.qt = 'search'
+      field.solr_parameters = {
+        qf:  '${qf_subject}',
+        pf:  '${pf_subject}'
+      }
     end
     config.add_search_field 'title', label: 'Title' do |field|
-      field.qt = 'title_search'
+      field.qt = 'search'
+      field.solr_parameters = {
+        qf:  '${qf_title}',
+        pf:  '${pf_title}'
+      }
     end
 
     # "sort results by" select (pulldown)
@@ -199,6 +215,8 @@ class CatalogController < ApplicationController
 
     ##
     # Configuration for index actions
+    config.index.document_actions << :containers
+    config.index.document_actions << :online_content_label
     config.add_results_document_tool :arclight_bookmark_control, partial: 'arclight_bookmark_control'
     config.index.document_actions.delete(:bookmark)
 
@@ -349,7 +367,7 @@ class CatalogController < ApplicationController
 
     # Collection and Component Show Page Access Tab - In Person Section
     config.add_in_person_field 'repository_ssm', if: :repository_config_present, label: 'Location of this collection', helper_method: :context_access_tab_repository
-    config.add_in_person_field 'id', if: :before_you_visit_note_present, label: 'Before you visit', helper_method: :context_access_tab_visit_note # Using ID because we know it will always exist    
+    config.add_in_person_field 'id', if: :before_you_visit_note_present, label: 'Before you visit', helper_method: :context_access_tab_visit_note # Using ID because we know it will always exist
 
     # Collection and Component Show Page Access Tab - How to Cite Section
     config.add_cite_field 'prefercite_ssm', label: 'Preferred citation'

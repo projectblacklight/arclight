@@ -37,6 +37,7 @@ module Arclight
     def request_config_present?
       return false unless respond_to? :request_types
       return false if request_types.nil? || request_types.empty?
+
       request_configs = request_types.map { |_k, v| v }
       request_configs[0]&.fetch('request_url').present? &&
         request_configs[0]&.fetch('request_mappings').present?
@@ -44,6 +45,7 @@ module Arclight
 
     def request_config_present_for_type?(type)
       return false unless type && request_config_present?
+
       config = request_types[type]
       config&.fetch('request_url').present? &&
         config&.fetch('request_mappings').present?
@@ -51,17 +53,20 @@ module Arclight
 
     def request_config_for_type(type)
       return nil unless type && request_config_present_for_type?(type)
+
       request_types[type]
     end
 
     def request_url_for_type(type)
       return nil unless type && request_config_present_for_type?(type)
+
       config = request_config_for_type(type)
       config.fetch('request_url')
     end
 
     def request_mappings_for_type(type)
       return nil unless type && request_config_present_for_type?(type)
+
       config = request_config_for_type(type)
       config.fetch('request_mappings')
     end
@@ -109,6 +114,7 @@ module Arclight
     def self.find_by!(*args)
       repository = find_by(*args)
       raise ActiveRecord::RecordNotFound if repository.blank?
+
       repository
     end
   end

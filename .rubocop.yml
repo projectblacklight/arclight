@@ -14,14 +14,20 @@ AllCops:
   TargetRubyVersion: 2.4
   DisplayCopNames: true
 
-Metrics/BlockLength:
-  Exclude:
-    - 'spec/features/traject/ead2_indexing_spec.rb'
-    - 'spec/helpers/arclight_helper_spec.rb'
-
 Metrics/ModuleLength:
   Exclude:
     - 'app/helpers/arclight_helper.rb'
+
+Metrics/BlockLength:
+  Exclude:
+    - 'arclight.gemspec'
+    - 'lib/arclight/traject/ead2_config.rb'
+    - 'lib/tasks/**/*'
+    - 'spec/**/*'
+    - 'tasks/**/*'
+
+Metrics/LineLength:
+  Max: 160
 
 Rails:
   Enabled: true

@@ -180,6 +180,15 @@ to_field 'has_online_content_ssim', extract_xpath('.//dao') do |_record, accumul
   accumulator.replace([accumulator.any?])
 end
 
+to_field 'digital_objects_ssm', extract_xpath('/ead/archdesc/did/dao|/ead/archdesc/dao', to_text: false) do |_record, accumulator|
+  accumulator.map! do |dao|
+    label = dao.attributes['title']&.value ||
+            dao.xpath('daodesc/p')&.text
+    href = (dao.attributes['href'] || dao.attributes['xlink:href'])&.value
+    Arclight::DigitalObject.new(label: label, href: href).to_json
+  end
+end
+
 to_field 'extent_ssm', extract_xpath('/ead/archdesc/did/physdesc/extent')
 to_field 'extent_teim', extract_xpath('/ead/archdesc/did/physdesc/extent')
 to_field 'genreform_sim', extract_xpath('/ead/archdesc/controlaccess/genreform')
@@ -364,6 +373,10 @@ compose 'components', ->(record, accumulator, _context) { accumulator.concat rec
     next unless context.output_hash['level_ssm']
 
     accumulator.concat context.output_hash['level_ssm']&.map(&:capitalize)
+  end
+
+  to_field 'sort_ii' do |_record, accumulator, context|
+    accumulator.replace([context.position])
   end
 
   # Get the <accessrestrict> from the closest ancestor that has one (includes top-level)

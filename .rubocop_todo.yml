@@ -6,46 +6,6 @@
 # Note that changes in the inspected code, or installation of new
 # versions of RuboCop, may require this file to be generated again.
 
-# Offense count: 1
-# Cop supports --auto-correct.
-# Configuration parameters: EnabledMethods.
-Capybara/FeatureMethods:
-  Exclude:
-    - 'spec/features/compact_search_results_spec.rb'
-
-# Offense count: 1
-# Cop supports --auto-correct.
-# Configuration parameters: TreatCommentsAsGroupSeparators, Include.
-# Include: **/*.gemspec
-Gemspec/OrderedDependencies:
-  Exclude:
-    - 'arclight.gemspec'
-
-# Offense count: 32
-# Cop supports --auto-correct.
-Layout/EmptyLineAfterGuardClause:
-  Exclude:
-    - 'app/factories/blacklight_field_configuration_factory.rb'
-    - 'app/helpers/arclight_helper.rb'
-    - 'app/models/arclight/parent.rb'
-    - 'app/models/concerns/arclight/catalog.rb'
-    - 'app/models/concerns/arclight/solr_document.rb'
-    - 'lib/arclight/normalized_date.rb'
-    - 'lib/arclight/normalized_id.rb'
-    - 'lib/arclight/normalized_title.rb'
-    - 'lib/arclight/repository.rb'
-    - 'lib/arclight/viewers/oembed.rb'
-    - 'lib/arclight/year_range.rb'
-    - 'lib/tasks/index.rake'
-    - 'tasks/arclight.rake'
-
-# Offense count: 1
-# Cop supports --auto-correct.
-# Configuration parameters: AllowInHeredoc.
-Layout/TrailingWhitespace:
-  Exclude:
-    - 'lib/tasks/index.rake'
-
 # Offense count: 3
 Lint/AmbiguousBlockAssociation:
   Exclude:
@@ -57,25 +17,10 @@ Lint/Void:
   Exclude:
     - 'lib/arclight/year_range.rb'
 
-# Offense count: 2
-Metrics/AbcSize:
-  Max: 16
-
-# Offense count: 59
-# Configuration parameters: CountComments, ExcludedMethods.
-# ExcludedMethods: refine
-Metrics/BlockLength:
-  Max: 273
-
 # Offense count: 1
 # Configuration parameters: CountComments, ExcludedMethods.
 Metrics/MethodLength:
   Max: 11
-
-# Offense count: 1
-# Configuration parameters: CountComments.
-Metrics/ModuleLength:
-  Max: 136
 
 # Offense count: 1
 # Configuration parameters: Blacklist.
@@ -180,33 +125,6 @@ Style/Documentation:
 
 # Offense count: 1
 # Cop supports --auto-correct.
-Style/Encoding:
-  Exclude:
-    - 'arclight.gemspec'
-
-# Offense count: 3
-# Cop supports --auto-correct.
-Style/ExpandPathArguments:
-  Exclude:
-    - 'arclight.gemspec'
-    - 'lib/generators/arclight/install_generator.rb'
-    - 'lib/generators/arclight/update_generator.rb'
-
-# Offense count: 1
-# Cop supports --auto-correct.
 Style/IfUnlessModifier:
   Exclude:
     - 'app/models/concerns/arclight/search_behavior.rb'
-
-# Offense count: 1
-# Cop supports --auto-correct.
-Style/MinMax:
-  Exclude:
-    - 'lib/arclight/year_range.rb'
-
-# Offense count: 436
-# Cop supports --auto-correct.
-# Configuration parameters: AutoCorrect, AllowHeredoc, AllowURI, URISchemes, IgnoreCopDirectives, IgnoredPatterns.
-# URISchemes: http, https
-Metrics/LineLength:
-  Max: 153
