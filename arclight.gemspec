@@ -27,7 +27,7 @@ Gem::Specification.new do |spec|
   spec.add_dependency 'rails', '~> 5.0'
   spec.add_dependency 'sprockets-bumble_d'
   spec.add_dependency 'traject', '~> 3.0'
-  spec.add_dependency 'traject_plus'
+  spec.add_dependency 'traject_plus', '~> 1.2'
 
   spec.add_development_dependency 'bundler', '> 1.14'
   spec.add_development_dependency 'capybara'
