@@ -277,7 +277,7 @@ RSpec.describe 'Collection Page', type: :feature do
         within '.document-position-0' do
           expect(page).to have_css(
             '.al-hierarchy-children-status .al-number-of-children-badge',
-            text: /25 children\s+View/
+            text: /25 children/
           )
         end
       end
