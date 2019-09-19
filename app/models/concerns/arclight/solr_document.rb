@@ -19,6 +19,10 @@ module Arclight
       fetch('parent_unittitles_ssm', [])
     end
 
+    def parent_levels
+      fetch('parent_levels_ssm', [])
+    end
+
     def parent_document
       self.class.new fetch('parent').fetch('docs', []).first
     end

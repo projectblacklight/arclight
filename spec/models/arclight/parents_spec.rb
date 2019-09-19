@@ -7,7 +7,8 @@ RSpec.describe Arclight::Parents do
     SolrDocument.new(
       parent_ssm: %w[def ghi],
       parent_unittitles_ssm: %w[DEF GHI],
-      ead_ssi: 'abc123'
+      ead_ssi: 'abc123',
+      parent_levels_ssm: %w[collection]
     )
   end
 
@@ -15,7 +16,8 @@ RSpec.describe Arclight::Parents do
     SolrDocument.new(
       parent_ssm: %w[def ghi],
       parent_unittitles_ssm: %w[DEF GHI],
-      ead_ssi: 'abc123.xml'
+      ead_ssi: 'abc123.xml',
+      parent_levels_ssm: %w[collection]
     )
   end
 
@@ -32,6 +34,7 @@ RSpec.describe Arclight::Parents do
         expect(good_instance.ids).to eq %w[def ghi]
         expect(good_instance.labels).to eq %w[DEF GHI]
         expect(good_instance.eadid).to eq 'abc123'
+        expect(good_instance.levels).to eq %w[collection]
       end
 
       it 'cleans up the eadid properly by replacing dots with dashes' do
@@ -59,11 +62,12 @@ RSpec.describe Arclight::Parents do
         expect(good_instance.as_parents.first.id).to eq 'def'
         expect(good_instance.as_parents.first.label).to eq 'DEF'
         expect(good_instance.as_parents.first.eadid).to eq 'abc123'
+        expect(good_instance.as_parents.first.level).to eq 'collection'
       end
     end
     context 'with no data' do
       it 'returns an empty array' do
-        expect(described_class.new(ids: [], labels: [], eadid: '').as_parents).to eq []
+        expect(described_class.new(ids: [], labels: [], eadid: '', levels: '').as_parents).to eq []
       end
     end
   end

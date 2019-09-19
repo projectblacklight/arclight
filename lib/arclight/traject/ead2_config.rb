@@ -308,6 +308,17 @@ compose 'components', ->(record, accumulator, _context) { accumulator.concat rec
     accumulator.concat context.output_hash['parent_unittitles_ssm']
   end
 
+  to_field 'parent_levels_ssm' do |_record, accumulator, context|
+    ## Top level document
+    accumulator.concat context.clipboard[:parent].output_hash['level_ssm']
+    ## Other components
+    context.output_hash['parent_ssm']&.drop(1)&.each do |id|
+      accumulator.concat Array
+        .wrap(context.clipboard[:parent].output_hash['components'])
+        .select { |c| c['ref_ssi'] == [id] }.map { |c| c['level_ssm'] }.flatten
+    end
+  end
+
   to_field 'unitid_ssm', extract_xpath('./did/unitid')
   to_field 'repository_ssm' do |_record, accumulator, context|
     accumulator << context.clipboard[:parent].clipboard[:repository]

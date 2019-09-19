@@ -162,6 +162,8 @@ module ArclightHelper
       'collection'
     when 'file'
       'file'
+    when 'series'
+      'folder'
     else
       'container'
     end

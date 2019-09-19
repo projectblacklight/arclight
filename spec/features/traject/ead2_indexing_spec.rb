@@ -389,6 +389,14 @@ describe 'EAD 2 traject indexing', type: :feature do
             aspace_238a0567431f36f49acea49ef576d408
           ]
         end
+
+        it 'parents and levels' do
+          expect(component_with_many_parents['parent_levels_ssm']).to eq %w[
+            collection
+            Series
+            Subseries
+          ]
+        end
       end
     end
   end
