@@ -366,6 +366,10 @@ compose 'components', ->(record, accumulator, _context) { accumulator.concat rec
     accumulator.concat context.output_hash['level_ssm']&.map(&:capitalize)
   end
 
+  to_field 'sort_ii' do |_record, accumulator, context|
+    accumulator.replace([context.position])
+  end
+
   # Get the <accessrestrict> from the closest ancestor that has one (includes top-level)
   to_field 'parent_access_restrict_ssm' do |record, accumulator|
     accumulator.concat Array

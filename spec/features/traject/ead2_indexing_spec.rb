@@ -179,6 +179,11 @@ describe 'EAD 2 traject indexing', type: :feature do
           expect(other_level_component['level_ssm']).to eq(['Binder'])
           expect(other_level_component['level_sim']).to eq(['Binder'])
         end
+
+        it 'sort' do
+          expect(other_level_component['sort_ii']).to eq([2])
+          expect(level_component['sort_ii']).to eq([32])
+        end
       end
     end
   end
