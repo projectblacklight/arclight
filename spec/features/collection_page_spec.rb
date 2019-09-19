@@ -22,14 +22,6 @@ RSpec.describe 'Collection Page', type: :feature do
         expect(page).to have_css('dd', text: /Medicine, Bethesda, MD/)
       end
     end
-    it 'access and use has configured metadata' do
-      within '#access-and-use' do
-        expect(page).to have_css('dt', text: 'Conditions Governing Access:')
-        expect(page).to have_css('dd', text: 'No restrictions on access.')
-        expect(page).to have_css('dt', text: 'Terms Of Use')
-        expect(page).to have_css('dd', text: /Copyright was transferred/)
-      end
-    end
 
     it 'multivalued notes are rendered as paragaphs' do
       within 'dd.blacklight-bioghist_ssm' do
@@ -132,7 +124,6 @@ RSpec.describe 'Collection Page', type: :feature do
     it 'has configured links' do
       within '.al-sidebar-navigation-context' do
         expect(page).to have_css 'a[href="#summary"]', text: 'Summary'
-        expect(page).to have_css 'a[href="#access-and-use"]', text: 'Access and Use'
         expect(page).to have_css 'a[href="#background"]', text: 'Background'
         expect(page).to have_css 'a[href="#related"]', text: 'Related'
         expect(page).to have_css 'a[href="#indexed-terms"]', text: 'Indexed Terms'
