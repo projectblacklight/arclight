@@ -86,10 +86,12 @@
 
        <str name="qf">
          title_tesim^100
+         unitid_identifier_match^50
          text^10
        </str>
        <str name="pf">
          title_tesim^100
+         unitid_identifier_match^50
          text^10
        </str>
 

@@ -171,6 +171,29 @@
       </analyzer>
     </fieldType>
 
+    <fieldType name="identifier_match" class="solr.TextField" positionIncrementGap="100">
+      <analyzer type="index">
+        <tokenizer class="solr.WhitespaceTokenizerFactory"/>
+        <filter class="solr.WordDelimiterGraphFilterFactory"
+          catenateWords="1"
+          catenateNumbers="1"
+          catenateAll="1"
+          />
+        <filter class="solr.ICUFoldingFilterFactory" />
+        <filter class="solr.FlattenGraphFilterFactory"/> <!-- required on index analyzers after graph filters -->
+      </analyzer>
+      <analyzer type="query">
+        <tokenizer class="solr.WhitespaceTokenizerFactory"/>
+        <filter class="solr.WordDelimiterGraphFilterFactory"
+          catenateWords="1"
+          catenateNumbers="1"
+          catenateAll="1"
+          />
+        <filter class="solr.ICUFoldingFilterFactory" />
+        <filter class="solr.WordDelimiterGraphFilterFactory"/>
+      </analyzer>
+    </fieldType>
+
     <fieldType name="textSpell" class="solr.TextField" positionIncrementGap="100" >
       <analyzer>
         <tokenizer class="solr.StandardTokenizerFactory"/>
@@ -259,6 +282,7 @@
    <field name="timestamp" type="pdate" indexed="true" stored="true" default="NOW" multiValued="false"/>
    <!-- default, catch all search field -->
    <field name="text" type="text" indexed="true" stored="true" multiValued="true"/>
+   <field name="unitid_identifier_match" type="identifier_match" indexed="true" multiValued="true" />
 
    <field name="_root_" type="string" indexed="true" stored="true" docValues="false" />
    <field name="_nest_parent_" type="string" indexed="true" stored="true"/>
@@ -344,6 +368,7 @@
    <copyField source="userestrict_teim" dest="text" />
    <!-- grab structured data that's important -->
    <copyField source="unitid_ssm" dest="text" />
+   <copyField source="unitid_ssm" dest="unitid_identifier_match" />
 
    <!-- sort fields -->
    <copyField source="normalized_title_ssm" dest="title_sort"/> <!-- TODO: assumes single values -->
