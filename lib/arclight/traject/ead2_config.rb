@@ -5,6 +5,7 @@ require 'traject'
 require 'traject/nokogiri_reader'
 require 'traject_plus'
 require 'traject_plus/macros'
+require 'arclight/level_label'
 require 'arclight/normalized_date'
 require 'arclight/normalized_title'
 require 'active_model/conversion' ## Needed for Arclight::Repository
@@ -80,11 +81,18 @@ to_field 'unitdate_bulk_ssim', extract_xpath('/ead/archdesc/did/unitdate[@type="
 to_field 'unitdate_inclusive_ssm', extract_xpath('/ead/archdesc/did/unitdate[@type="inclusive"]')
 to_field 'unitdate_other_ssim', extract_xpath('/ead/archdesc/did/unitdate[not(@type)]')
 
-to_field 'level_ssm' do |record, accumulator|
-  accumulator << record.at_xpath('/ead/archdesc').attribute('level')&.value
+# All top-level docs treated as 'collection' for routing / display purposes
+to_field 'level_ssm' do |_record, accumulator|
+  accumulator << 'collection'
 end
+
+# Keep the original top-level archdesc/@level for Level facet in addition to 'Collection'
 to_field 'level_sim' do |record, accumulator|
-  accumulator << record.at_xpath('/ead/archdesc').attribute('level')&.value&.capitalize
+  level = record.at_xpath('/ead/archdesc').attribute('level')&.value
+  other_level = record.at_xpath('/ead/archdesc').attribute('otherlevel')&.value
+
+  accumulator << Arclight::LevelLabel.new(level, other_level).to_s
+  accumulator << 'Collection' unless level == 'collection'
 end
 
 to_field 'unitid_ssm', extract_xpath('/ead/archdesc/did/unitid')
@@ -364,13 +372,7 @@ compose 'components', ->(record, accumulator, _context) { accumulator.concat rec
   to_field 'level_ssm' do |record, accumulator|
     level = record.attribute('level')&.value
     other_level = record.attribute('otherlevel')&.value
-
-    accumulator << if level == 'otherlevel'
-                     alternative_level = other_level if other_level
-                     alternative_level.present? ? alternative_level : 'Other'
-                   elsif level.present?
-                     level&.capitalize
-                   end
+    accumulator << Arclight::LevelLabel.new(level, other_level).to_s
   end
 
   to_field 'level_sim' do |_record, accumulator, context|
