@@ -31,6 +31,7 @@ module Arclight
 
       def attributes_for(resource)
         return {} unless embeddable?(resource)
+
         { class: 'al-oembed-viewer', 'data-arclight-oembed': true, 'data-arclight-oembed-url': resource.href }
       end
 

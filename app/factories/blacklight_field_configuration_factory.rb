@@ -16,6 +16,7 @@ class BlacklightFieldConfigurationFactory
 
   def field_config
     return null_field unless config.respond_to?(:"#{field_group}s")
+
     config.send(:"#{field_group}s").fetch(field) { null_field }
   end
 

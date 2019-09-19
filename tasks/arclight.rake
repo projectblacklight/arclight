@@ -61,6 +61,7 @@ namespace :arclight do
     end
     Dir.glob('spec/fixtures/ead/*').each do |dir|
       next unless File.directory?(dir)
+
       system("REPOSITORY_ID=#{File.basename(dir)} " \
              'REPOSITORY_FILE=spec/fixtures/config/repositories.yml ' \
              "DIR=#{dir} " \

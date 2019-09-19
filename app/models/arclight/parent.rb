@@ -19,6 +19,7 @@ module Arclight
     # @return [String]
     def global_id
       return id if eadid == id
+
       "#{eadid}#{id}"
     end
   end
