@@ -28,7 +28,7 @@
        that you fully re-index after changing this setting as it can
        affect both how text is indexed and queried.
   -->
-  <luceneMatchVersion>5.0.0</luceneMatchVersion>
+  <luceneMatchVersion>8.2.0</luceneMatchVersion>
 
   <lib dir="${solr.install.dir:../../../..}/contrib/analysis-extras/lib" />
   <lib dir="${solr.install.dir:../../../..}/contrib/analysis-extras/lucene-libs" />
@@ -86,11 +86,42 @@
 
        <str name="qf">
          title_tesim^100
-         text^10
+         name_tesim^10
+         place_tesim^10
+         subject_tesim^2
+         text
        </str>
        <str name="pf">
          title_tesim^100
-         text^10
+         name_tesim^10
+         place_tesim^10
+         subject_tesim^2
+         text
+       </str>
+
+       <str name="qf_name">
+         name_tesim
+       </str>
+       <str name="pf_name">
+         name_tesim
+       </str>
+       <str name="qf_place">
+         place_tesim
+       </str>
+       <str name="pf_place">
+         place_tesim
+       </str>
+       <str name="qf_subject">
+         subject_tesim
+       </str>
+       <str name="pf_subject">
+         subject_tesim
+       </str>
+       <str name="qf_title">
+         title_tesim
+       </str>
+       <str name="pf_title">
+         title_tesim
        </str>
 
        <int name="ps">3</int>
@@ -148,127 +179,6 @@
     <arr name="last-components">
       <str>spellcheck</str>
     </arr>
-  </requestHandler>
-
-  <!-- Field-based searches -->
-  <requestHandler name="name_search" class="solr.SearchHandler">
-    <lst name="defaults">
-      <str name="defType">edismax</str>
-      <str name="echoParams">explicit</str>
-      <int name="rows">10</int>
-      <str name="q.alt">*:*</str>
-      <str name="mm">2&lt;-1 5&lt;-2 6&lt;90%</str>
-      <str name="df">name_tesim</str>
-      <str name="q.op">AND</str>
-
-      <str name="qf">
-        name_tesim
-      </str>
-      <str name="pf">
-        name_tesim
-      </str>
-
-      <str name="fl">*</str>
-      <str name="facet">true</str>
-      <str name="facet.mincount">1</str>
-      <str name="facet.field">level_sim</str>
-      <str name="facet.field">creator_sim</str>
-      <str name="facet.field">date_range_sim</str>
-      <str name="facet.field">names_sim</str>
-      <str name="facet.field">geogname_sim</str>
-      <str name="facet.field">access_subjects_sim</str>
-      <str name="facet.field">repository_sim</str>
-    </lst>
-  </requestHandler>
-
-  <requestHandler name="place_search" class="solr.SearchHandler">
-    <lst name="defaults">
-      <str name="defType">edismax</str>
-      <str name="echoParams">explicit</str>
-      <int name="rows">10</int>
-      <str name="q.alt">*:*</str>
-      <str name="mm">2&lt;-1 5&lt;-2 6&lt;90%</str>
-      <str name="df">place_tesim</str>
-      <str name="q.op">AND</str>
-
-      <str name="qf">
-        place_tesim
-      </str>
-      <str name="pf">
-        place_tesim
-      </str>
-
-      <str name="fl">*</str>
-      <str name="facet">true</str>
-      <str name="facet.mincount">1</str>
-      <str name="facet.field">level_sim</str>
-      <str name="facet.field">creator_sim</str>
-      <str name="facet.field">date_range_sim</str>
-      <str name="facet.field">names_sim</str>
-      <str name="facet.field">geogname_sim</str>
-      <str name="facet.field">access_subjects_sim</str>
-      <str name="facet.field">repository_sim</str>
-    </lst>
-  </requestHandler>
-
-  <requestHandler name="subject_search" class="solr.SearchHandler">
-    <lst name="defaults">
-      <str name="defType">edismax</str>
-      <str name="echoParams">explicit</str>
-      <int name="rows">10</int>
-      <str name="q.alt">*:*</str>
-      <str name="mm">2&lt;-1 5&lt;-2 6&lt;90%</str>
-      <str name="df">subject_tesim</str>
-      <str name="q.op">AND</str>
-
-      <str name="qf">
-        subject_tesim
-      </str>
-      <str name="pf">
-        subject_tesim
-      </str>
-
-      <str name="fl">*</str>
-      <str name="facet">true</str>
-      <str name="facet.mincount">1</str>
-      <str name="facet.field">level_sim</str>
-      <str name="facet.field">creator_sim</str>
-      <str name="facet.field">date_range_sim</str>
-      <str name="facet.field">names_sim</str>
-      <str name="facet.field">geogname_sim</str>
-      <str name="facet.field">access_subjects_sim</str>
-      <str name="facet.field">repository_sim</str>
-    </lst>
-  </requestHandler>
-
-  <requestHandler name="title_search" class="solr.SearchHandler">
-    <lst name="defaults">
-      <str name="defType">edismax</str>
-      <str name="echoParams">explicit</str>
-      <int name="rows">10</int>
-      <str name="q.alt">*:*</str>
-      <str name="mm">2&lt;-1 5&lt;-2 6&lt;90%</str>
-      <str name="df">title_tesim</str>
-      <str name="q.op">AND</str>
-
-      <str name="qf">
-        title_tesim
-      </str>
-      <str name="pf">
-        title_tesim
-      </str>
-
-      <str name="fl">*</str>
-      <str name="facet">true</str>
-      <str name="facet.mincount">1</str>
-      <str name="facet.field">level_sim</str>
-      <str name="facet.field">creator_sim</str>
-      <str name="facet.field">date_range_sim</str>
-      <str name="facet.field">names_sim</str>
-      <str name="facet.field">geogname_sim</str>
-      <str name="facet.field">access_subjects_sim</str>
-      <str name="facet.field">repository_sim</str>
-    </lst>
   </requestHandler>
 
   <!-- for requests to get a single document; use id=666 instead of q=id:666 -->
