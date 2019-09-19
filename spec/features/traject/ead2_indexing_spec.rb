@@ -197,6 +197,17 @@ describe 'EAD 2 traject indexing', type: :feature do
       expect(result['components'].length).to eq 404
     end
 
+    it 'indexes top-level daos' do
+      expect(result['digital_objects_ssm']).to eq(
+        [
+          JSON.generate(
+            label: '1st Street Arcade San Francisco',
+            href: 'https://purl.stanford.edu/yy901zw2656'
+          )
+        ]
+      )
+    end
+
     context 'when nested component' do
       let(:nested_component) { result['components'].find { |c| c['id'] == ['lc0100aspace_32ad9025a3a286358baeae91b5d7696e'] } }
 
