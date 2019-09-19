@@ -3,7 +3,7 @@
 require 'spec_helper'
 
 RSpec.describe 'Compact Search Results', type: :feature do
-  scenario 'As a user I should be able to view results in a compact display' do
+  it 'As a user I should be able to view results in a compact display' do
     visit root_path
     click_button 'Search'
 
@@ -26,7 +26,7 @@ RSpec.describe 'Compact Search Results', type: :feature do
       expect(page).to have_css 'form.bookmark-toggle'
     end
   end
-  scenario 'Shows highlights in compact view' do
+  it 'Shows highlights in compact view' do
     visit search_catalog_path q: 'william root', search_field: 'name'
     click_link 'Compact'
     within '.document-position-0' do

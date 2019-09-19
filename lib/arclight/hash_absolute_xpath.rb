@@ -29,12 +29,7 @@ module Arclight
 
     def absolute_xpath
       ancestor_tree = node.ancestors.map do |ancestor|
-        if ancestor.name =~ COMPONENT_NODE_NAME_REGEX
-          index = component_siblings_for_node(ancestor).index(ancestor)
-          "#{ancestor.name}#{index}"
-        else
-          ancestor.name
-        end
+        ancestor_name_and_index(ancestor)
       end
 
       "#{[ancestor_tree.reverse, node.name].flatten.join('/')}#{current_index}"
@@ -52,6 +47,15 @@ module Arclight
 
     def siblings
       @siblings ||= component_siblings_for_node(node)
+    end
+
+    def ancestor_name_and_index(ancestor)
+      if ancestor.name =~ COMPONENT_NODE_NAME_REGEX
+        index = component_siblings_for_node(ancestor).index(ancestor)
+        "#{ancestor.name}#{index}"
+      else
+        ancestor.name
+      end
     end
   end
 end

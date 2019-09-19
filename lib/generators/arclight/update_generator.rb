@@ -9,7 +9,7 @@ module Arclight
   # downstream application to choose if they want to take our changes or not and
   # can choose to see a diff of our changes to help them decide.
   class Update < Arclight::Install
-    source_root File.expand_path('../templates', __FILE__)
+    source_root File.expand_path('templates', __dir__)
 
     def create_blacklight_catalog
       copy_file 'catalog_controller.rb', 'app/controllers/catalog_controller.rb'
