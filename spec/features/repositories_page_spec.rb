@@ -21,7 +21,7 @@ RSpec.describe 'Repositores Page', type: :feature do
 
       click_link 'Stanford University Libraries. Special Collections and University Archives'
 
-      expect(page).to have_css('h3', text: 'Our Collections')
+      expect(page).to have_css('h2', text: 'Our Collections')
     end
 
     it 'links to all the repositories collections' do
