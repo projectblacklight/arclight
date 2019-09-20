@@ -2,9 +2,9 @@
 <%= render @repository %>
 <div class="row al-repository-show-header">
   <div class="col col-md-8 col-lg-9">
-    <h3>
+    <h2 class="h4">
       <%= t('arclight.views.show.our_collections') %>
-    </h3>
+    </h2>
   </div>
   <div class="col text-right">
     <span class="al-repository-collections">
@@ -19,7 +19,7 @@
       <div class='al-document-title-bar'>
         <div class='row'>
           <div class='col-md-10 col-lg-9'>
-            <h5><%= link_to document.normalized_title, solr_document_path(document.id) %></h5>
+            <h3 class="h5"><%= link_to document.normalized_title, solr_document_path(document.id) %></h3>
             <%= content_tag('div', class: 'al-document-abstract-or-scope', title: document.abstract_or_scope) do %>
               <%= content_tag('div', 'data-arclight-truncate' => true) do %>
                 <%= document.abstract_or_scope %>
