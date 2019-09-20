@@ -1,10 +1,28 @@
+class NavigationDocument {
+  constructor(el) {
+    this.el = $(el);
+  }
+
+  get id() {
+    return this.el.find('[data-document-id]').data().documentId;
+  }
+
+  setAsHighlighted() {
+    this.el.find('li.al-collection-context').addClass('al-hierarchy-highlight');
+  }
+
+  render() {
+    return this.el.html();
+  }
+}
+
 class ContextNavigation {
   constructor(el) {
     this.el = $(el);
     this.data = this.el.data();
     this.parentLi = this.el.parent();
   }
-  
+
   static placeholder() {
     const placeholder = '<div class="al-hierarchy-placeholder">' +
                           '<h3 class="col-md-9"></h3>' +
@@ -31,7 +49,7 @@ class ContextNavigation {
       }
     }).done((response) => that.updateView(response));
   }
-  
+
   updateView(response) {
     const that = this;
     var resp = $.parseHTML(response);
@@ -40,7 +58,8 @@ class ContextNavigation {
       .find('article')
       .toArray().map(el => new NavigationDocument(el));
 
-    const originalDocumentIndex = newDocs.findIndex(doc => doc.id === that.data.arclight.originalDocument);
+    const originalDocumentIndex = newDocs
+      .findIndex(doc => doc.id === that.data.arclight.originalDocument);
     that.parentLi.find('.al-hierarchy-placeholder').remove();
 
     // Case where this is the sibling tree of the current document
@@ -59,7 +78,7 @@ class ContextNavigation {
       that.parentLi.before(beforeDocs.map(newDoc => newDoc.render()).join('')).fadeIn(500);
       // Update the item
       const $itemDoc = $(newDocs.slice(newDocIndex, newDocIndex + 1).map(doc => doc.render()).join(''));
-      // Update the id, add classes of the classes. Prepend the current children. 
+      // Update the id, add classes of the classes. Prepend the current children.
       that.parentLi.attr('id', $itemDoc.attr('id'));
       that.parentLi.addClass($itemDoc.attr('class'));
       that.parentLi.prepend($itemDoc.children()).fadeIn(500);
@@ -70,27 +89,7 @@ class ContextNavigation {
   }
 }
 
-class NavigationDocument {
-  constructor(el) {
-    this.el = $(el);
-  }
-  
-  get id() {
-    return this.el.find('[data-document-id]').data().documentId;
-  }
-
-  setAsHighlighted() {
-    this.el.find('li.al-collection-context').addClass('al-hierarchy-highlight')
-  }
-
-  render() {
-    return this.el.html();
-  }
-}
-
-
 Blacklight.onLoad(function () {
-
   $('.context-navigator').each(function (i, e) {
     const contextNavigation = new ContextNavigation(e);
     contextNavigation.getData();
