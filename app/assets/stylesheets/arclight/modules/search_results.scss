@@ -52,6 +52,11 @@ article.document {
   .blacklight-icons.al-online-content-icon svg {
     fill: $green;
   }
+  div.breadcrumb-links, 
+  div.al-document-abstract-or-scope, 
+  div.al-document-creator {
+    margin-top: ($spacer * .5);
+  }
 }
 
 .documents-compact {
