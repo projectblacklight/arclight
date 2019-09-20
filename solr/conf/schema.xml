@@ -136,54 +136,61 @@
      -->
     <fieldType name="random" class="solr.RandomSortField" indexed="true" />
 
-    <!-- solr.TextField allows the specification of custom text analyzers
-         specified as a tokenizer and a list of token filters. Different
-         analyzers may be specified for indexing and querying.
+    <fieldType name="text" class="solr.TextField" positionIncrementGap="100">
+      <analyzer>
+        <tokenizer class="solr.ICUTokenizerFactory" />
+        <filter class="solr.KeywordRepeatFilterFactory" />
+        <filter class="solr.ICUFoldingFilterFactory" />
+        <filter class="solr.PorterStemFilterFactory"/>
+        <filter class="solr.RemoveDuplicatesTokenFilterFactory" />
+      </analyzer>
+    </fieldType>
 
-         The optional positionIncrementGap puts space between multiple fields of
-         this type on the same document, with the purpose of preventing false phrase
-         matching across fields.
-
-         For more info on customizing your analyzer chain, please see
-         http://wiki.apache.org/solr/AnalyzersTokenizersTokenFilters
-     -->
-     <fieldType name="text" class="solr.TextField" positionIncrementGap="100">
-       <analyzer>
-         <tokenizer class="solr.StandardTokenizerFactory"/>
-         <filter class="solr.ICUFoldingFilterFactory" />
-         <filter class="solr.SnowballPorterFilterFactory" language="English" />
-       </analyzer>
-     </fieldType>
-
-    <!-- A text field with defaults appropriate for English: it
-         tokenizes with StandardTokenizer, removes English stop words
-         (stopwords_en.txt), down cases, protects words from protwords.txt, and
-         finally applies Porter's stemming.  The query time analyzer
-         also applies synonyms from synonyms.txt. -->
     <fieldType name="text_en" class="solr.TextField" positionIncrementGap="100">
       <analyzer type="index">
-        <tokenizer class="solr.StandardTokenizerFactory"/>
-        <!-- in this example, we will only use synonyms at query time
-        <filter class="solr.SynonymFilterFactory" synonyms="index_synonyms.txt" ignoreCase="true" expand="false"/>
-        -->
-        <filter class="solr.LowerCaseFilterFactory"/>
-	<filter class="solr.EnglishPossessiveFilterFactory"/>
+        <tokenizer class="solr.WhitespaceTokenizerFactory" />
+        <filter class="solr.KeywordRepeatFilterFactory" />
+        <filter class="solr.WordDelimiterGraphFilterFactory"/>
+        <filter class="solr.EnglishPossessiveFilterFactory"/>
+        <filter class="solr.ICUFoldingFilterFactory" />
         <filter class="solr.KeywordMarkerFilterFactory" protected="protwords.txt"/>
-	<!-- Optionally you may want to use this less aggressive stemmer instead of PorterStemFilterFactory:
-        <filter class="solr.EnglishMinimalStemFilterFactory"/>
-	-->
         <filter class="solr.PorterStemFilterFactory"/>
+        <filter class="solr.FlattenGraphFilterFactory"/> <!-- required on index analyzers after graph filters -->
+        <filter class="solr.RemoveDuplicatesTokenFilterFactory" />
       </analyzer>
       <analyzer type="query">
-        <tokenizer class="solr.StandardTokenizerFactory"/>
+        <tokenizer class="solr.WhitespaceTokenizerFactory" />
+        <filter class="solr.KeywordRepeatFilterFactory" />
+        <filter class="solr.WordDelimiterGraphFilterFactory"/>
         <filter class="solr.SynonymFilterFactory" synonyms="synonyms.txt" ignoreCase="true" expand="true"/>
-        <filter class="solr.LowerCaseFilterFactory"/>
-	<filter class="solr.EnglishPossessiveFilterFactory"/>
+        <filter class="solr.ICUFoldingFilterFactory" />
+        <filter class="solr.EnglishPossessiveFilterFactory"/>
         <filter class="solr.KeywordMarkerFilterFactory" protected="protwords.txt"/>
-	<!-- Optionally you may want to use this less aggressive stemmer instead of PorterStemFilterFactory:
-        <filter class="solr.EnglishMinimalStemFilterFactory"/>
-	-->
         <filter class="solr.PorterStemFilterFactory"/>
+        <filter class="solr.RemoveDuplicatesTokenFilterFactory" />
+      </analyzer>
+    </fieldType>
+
+    <fieldType name="identifier_match" class="solr.TextField" positionIncrementGap="100">
+      <analyzer type="index">
+        <tokenizer class="solr.WhitespaceTokenizerFactory"/>
+        <filter class="solr.WordDelimiterGraphFilterFactory"
+          catenateWords="1"
+          catenateNumbers="1"
+          catenateAll="1"
+          />
+        <filter class="solr.ICUFoldingFilterFactory" />
+        <filter class="solr.FlattenGraphFilterFactory"/> <!-- required on index analyzers after graph filters -->
+      </analyzer>
+      <analyzer type="query">
+        <tokenizer class="solr.WhitespaceTokenizerFactory"/>
+        <filter class="solr.WordDelimiterGraphFilterFactory"
+          catenateWords="1"
+          catenateNumbers="1"
+          catenateAll="1"
+          />
+        <filter class="solr.ICUFoldingFilterFactory" />
+        <filter class="solr.WordDelimiterGraphFilterFactory"/>
       </analyzer>
     </fieldType>
 
@@ -275,6 +282,7 @@
    <field name="timestamp" type="pdate" indexed="true" stored="true" default="NOW" multiValued="false"/>
    <!-- default, catch all search field -->
    <field name="text" type="text" indexed="true" stored="true" multiValued="true"/>
+   <field name="unitid_identifier_match" type="identifier_match" indexed="true" multiValued="true" />
 
    <field name="_root_" type="string" indexed="true" stored="true" docValues="false" />
    <field name="_nest_parent_" type="string" indexed="true" stored="true"/>
@@ -360,6 +368,7 @@
    <copyField source="userestrict_teim" dest="text" />
    <!-- grab structured data that's important -->
    <copyField source="unitid_ssm" dest="text" />
+   <copyField source="unitid_ssm" dest="unitid_identifier_match" />
 
    <!-- sort fields -->
    <copyField source="normalized_title_ssm" dest="title_sort"/> <!-- TODO: assumes single values -->

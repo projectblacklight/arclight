@@ -88,6 +88,7 @@
          title_tesim^100
          name_tesim^10
          place_tesim^10
+         unitid_identifier_match^5
          subject_tesim^2
          text
        </str>
@@ -95,6 +96,7 @@
          title_tesim^100
          name_tesim^10
          place_tesim^10
+         unitid_identifier_match^5
          subject_tesim^2
          text
        </str>
