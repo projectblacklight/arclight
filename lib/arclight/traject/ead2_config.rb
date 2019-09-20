@@ -311,11 +311,10 @@ compose 'components', ->(record, accumulator, _context) { accumulator.concat rec
 
     # other components
     if parent_ssm && components
-      ancestors = parent_ssm.drop(1).map{ |x| [x] }
-      accumulator.concat components.select { |c| ancestors.include? c['ref_ssi'] }.flat_map{ |c| c['normalized_title_ssm'] }
+      ancestors = parent_ssm.drop(1).map { |x| [x] }
+      accumulator.concat components.select { |c| ancestors.include? c['ref_ssi'] }.flat_map { |c| c['normalized_title_ssm'] }
     end
   end
-
 
   to_field 'parent_unittitles_teim' do |_record, accumulator, context|
     accumulator.concat context.output_hash['parent_unittitles_ssm']
