@@ -208,6 +208,17 @@ describe 'EAD 2 traject indexing', type: :feature do
         expect(nested_component['parent_unittitles_ssm']).to eq ['Large collection sample, 1843-1872', 'File 1']
       end
     end
+
+    context 'with nested numbered c componenets' do
+      let(:fixture_path) do
+        Arclight::Engine.root.join('spec', 'fixtures', 'ead', 'nlm', 'ncaids544-id-test.xml')
+      end
+      let(:nested_component) { result['components'].find { |c| c['id'] == ['ncaids544-testd0e631'] } }
+
+      it 'correctly gets the component levels' do
+        expect(nested_component['component_level_isim']).to eq [3]
+      end
+    end
   end
 
   describe 'searchable notes' do

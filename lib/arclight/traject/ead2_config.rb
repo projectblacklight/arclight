@@ -281,7 +281,7 @@ compose 'components', ->(record, accumulator, _context) { accumulator.concat rec
   end
 
   to_field 'component_level_isim' do |record, accumulator|
-    accumulator << 1 + record.ancestors.count { |node| node.name == 'c' }
+    accumulator << 1 + NokogiriXpathExtensions.new.is_component(record.ancestors).count
   end
 
   to_field 'parent_ssm' do |record, accumulator, context|
