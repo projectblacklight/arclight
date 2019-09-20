@@ -32,6 +32,7 @@ RSpec.describe Arclight::DocumentDownloads do
     end
 
     it 'return an empty array of files' do
+      described_class.instance_variable_set(:@config, nil)
       expect(downloads.files).to eq []
     end
   end
