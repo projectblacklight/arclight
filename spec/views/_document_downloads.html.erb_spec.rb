@@ -25,8 +25,7 @@ RSpec.describe 'catalog/_document_downloads', type: :view do
 
     context 'with downloads' do
       it 'shows the menu items' do
-        expect(rendered).to have_css('.dropdown')
-        expect(rendered).to have_css('button', text: 'Download')
+        expect(rendered).to have_css('.al-show-actions-box-downloads')
         expect(rendered).to have_css('a', text: 'Download finding aid (123)')
         expect(rendered).to have_css('a[@href="http://example.com/documents/abc123.pdf"]')
         expect(rendered).to have_css('a', text: 'Download EAD (456)')

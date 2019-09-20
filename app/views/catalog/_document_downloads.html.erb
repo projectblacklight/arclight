@@ -1,16 +1,14 @@
 <% if document_downloads.files.present? %>
-  <div class='dropdown al-collection-actions-menu'>
-    <button class='btn btn-secondary btn-sm dropdown-toggle' type="button" id="download-dropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-      <%= t 'arclight.views.show.download.default' %>
-    </button>
-    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="download-dropdown">
-      <% document_downloads.files.each do |file| %>
+  <div class="mr-auto al-show-actions-box-downloads">
+    <% document_downloads.files.each do |file| %>
+      <div class="al-show-actions-box-downloads-file">
+        <%= blacklight_icon(file.type, classes: "al-show-actions-box-downloads-file") %>
         <% if file.size %>
-          <%= link_to(t("arclight.views.show.download_with_size.#{file.type}", size: file.size), file.href, class: 'dropdown-item') %>
+          <%= link_to(t("arclight.views.show.download_with_size.#{file.type}", size: file.size), file.href) %>
         <% else %>
-          <%= link_to(t("arclight.views.show.download.#{file.type}"), file.href, class: 'dropdown-item') %>
+          <%= link_to(t("arclight.views.show.download.#{file.type}"), file.href) %>
         <% end %>
-      <% end %>
-    </div>
+      </div>
+    <% end %>
   </div>
 <% end %>
