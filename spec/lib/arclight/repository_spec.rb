@@ -146,5 +146,13 @@ RSpec.describe Arclight::Repository do
         expect(repo.available_request_types).to eq ['google_form']
       end
     end
+
+    context 'no request types' do
+      let(:repo) { described_class.find_by(slug: 'sample-noreq') }
+
+      it 'returns an empty array' do
+        expect(repo.available_request_types).to eq []
+      end
+    end
   end
 end
