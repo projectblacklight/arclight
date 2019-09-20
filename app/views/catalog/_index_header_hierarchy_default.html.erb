@@ -9,7 +9,7 @@
     <% counter = document_counter_with_offset(document_counter) %>
     <%= link_to_document document, document_show_link_field(document), counter: counter %>
     <% if document.children? %>
-      <span class="badge badge-pill badge-secondary al-number-of-children-badge"><%= document.number_of_children %></span>
+      <span class="badge badge-pill badge-secondary al-number-of-children-badge"><%= document.number_of_children %><span class="sr-only"><%= t(:'arclight.views.index.number_of_components', count: document.number_of_children) %></span></span>
     <% end %>
     <%= render_document_partial(document, 'arclight_online_content_indicator') %>
     <% if document.children? %>

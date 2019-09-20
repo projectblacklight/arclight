@@ -31,6 +31,9 @@ en:
           one: 1 result
           other: "%{count} results"
           zero: 0 results
+        number_of_components:
+          one: component
+          other: components
         top_group_results:
           one: Top %{count} result
           other: Top %{count} results
