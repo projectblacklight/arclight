@@ -6,12 +6,13 @@ module Arclight
   class CollectionDownloads
     attr_reader :document
 
-    def initialize(document)
+    def initialize(document, id = nil)
       @document = document
+      @id = id
     end
 
     def id
-      document.unitid
+      @id || document.unitid
     end
 
     def files

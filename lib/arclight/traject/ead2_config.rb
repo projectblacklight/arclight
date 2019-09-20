@@ -89,6 +89,7 @@ end
 
 to_field 'unitid_ssm', extract_xpath('/ead/archdesc/did/unitid')
 to_field 'unitid_teim', extract_xpath('/ead/archdesc/did/unitid')
+to_field 'collection_unitid_ssm', extract_xpath('/ead/archdesc/did/unitid')
 
 to_field 'normalized_title_ssm' do |_record, accumulator, context|
   dates = Arclight::NormalizedDate.new(
@@ -318,6 +319,9 @@ compose 'components', ->(record, accumulator, _context) { accumulator.concat rec
   end
 
   to_field 'unitid_ssm', extract_xpath('./did/unitid')
+  to_field 'collection_unitid_ssm' do |_record, accumulator, context|
+    accumulator.concat Array.wrap(context.clipboard[:parent].output_hash['unitid_ssm'])
+  end
   to_field 'repository_ssm' do |_record, accumulator, context|
     accumulator << context.clipboard[:parent].clipboard[:repository]
   end

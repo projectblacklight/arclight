@@ -25,9 +25,9 @@ RSpec.describe 'arclight/repositories/index', type: :view do
       end
     end
     it 'has the four sections' do
-      expect(rendered).to have_css('.al-repository', count: 4)
+      expect(rendered).to have_css('.al-repository', count: 5)
       %w[thumbnail contact description].each do |f|
-        expect(rendered).to have_css(".al-repository-#{f}", count: 4)
+        expect(rendered).to have_css(".al-repository-#{f}", count: 5)
       end
     end
     it 'has the correct address information' do
@@ -68,7 +68,7 @@ RSpec.describe 'arclight/repositories/index', type: :view do
   context 'switched extra content' do
     it 'shows on repositories page' do
       render
-      expect(rendered).to have_css('.al-repository-extra', count: 4)
+      expect(rendered).to have_css('.al-repository-extra', count: 5)
     end
     it 'does not show on repositories detail page' do
       assign(:repository, instance_double('repository', name: 'My Repository'))

@@ -179,6 +179,13 @@ module ArclightHelper
     )
   end
 
+  def ead_files(document)
+    files = Arclight::CollectionDownloads.new(document, document.collection_unitid).files
+    files.find do |file|
+      file.type == 'ead'
+    end
+  end
+
   ##
   # Defines custom helpers used for creating unique metadata blocks to render
   Arclight::Engine.config.catalog_controller_field_accessors.each do |config_field|

@@ -19,7 +19,7 @@ RSpec.describe Arclight::RepositoriesController, type: :controller do
       repos = controller.instance_variable_get(:@repositories)
       expect(repos).to be_an(Array)
       expect(repos.first).to be_an(Arclight::Repository)
-      expect(repos.size).to eq 4
+      expect(repos.size).to eq 5
     end
   end
 

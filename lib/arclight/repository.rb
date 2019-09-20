@@ -71,6 +71,12 @@ module Arclight
       config.fetch('request_mappings')
     end
 
+    def available_request_types
+      return [] unless request_types.present?
+
+      request_types.keys
+    end
+
     # Load repository information from a YAML file
     #
     # @param [String] `filename`

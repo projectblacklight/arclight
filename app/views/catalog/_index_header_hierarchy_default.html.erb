@@ -36,7 +36,9 @@
       </div>
     <% end %>
     <% if requestable %>
-      <%= render partial: 'arclight/requests/google_form', locals: { document: document } %>
+      <% document.repository_config.available_request_types.each do |request_type| %>
+        <%= render partial: "arclight/requests/#{request_type}", locals: { document: document } %>
+      <% end %>
     <% end %>
   </div>
 </div>
