@@ -22,7 +22,8 @@ module Arclight
     # @return [Array<Arclight::DocumentDownloads::File>]
     def files
       data = self.class.config[id] || self.class.config['default']
-      return [] if data['disabled']
+      disabled = data.delete('disabled')
+      return [] if disabled
 
       @files ||= data.map do |file_type, file_data|
         self.class.file_class.new(type: file_type, data: file_data, document: document)
