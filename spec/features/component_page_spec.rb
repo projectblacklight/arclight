@@ -98,8 +98,7 @@ RSpec.describe 'Component Page', type: :feature do
             'article a',
             text: 'Series I: Administrative Records, 1902-1976'
           )
-          expect(page).to have_css('.al-number-of-children-badge', text: '25 children')
-          expect(page).not_to have_css('.al-number-of-children-badge', text: /View/)
+          expect(page).to have_css('.al-number-of-children-badge', text: '25')
           expect(page).not_to have_css 'form.bookmark-toggle' # no bookmarks
         end
       end

@@ -264,11 +264,11 @@ RSpec.describe 'Collection Page', type: :feature do
           end
         end
       end
-      it 'includes the number of direct children of the component and View link' do
+      it 'includes the number of direct children of the component' do
         within '.document-position-0' do
           expect(page).to have_css(
-            '.al-hierarchy-children-status .al-number-of-children-badge',
-            text: /25 children\s+View/
+            '.al-number-of-children-badge',
+            text: /25/
           )
         end
       end
