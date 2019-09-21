@@ -9,6 +9,7 @@ en:
       scope_and_contents: Scope and Contents
       view_all: View
     masthead_heading: Archival Collections at Institution
+    repositories: Repositories
     request:
       container: Request
     routes:
