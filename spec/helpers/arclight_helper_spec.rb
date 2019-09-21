@@ -306,6 +306,37 @@ RSpec.describe ArclightHelper, type: :helper do
     end
   end
 
+  describe '#search_results_header_text' do
+    let(:text) { helper.search_results_header_text }
+
+    context 'when searching within a repository' do
+      before do
+        expect(helper).to receive_messages(
+          repository_faceted_on: instance_double('Arclight::Repostory', name: 'Repository Name')
+        )
+      end
+
+      it { expect(text).to eq 'Collections : [Repository Name]' }
+    end
+
+    context 'when searching all collections' do
+      before do
+        expect(helper).to receive_messages(
+          facets_from_request: [],
+          search_state: instance_double(
+            'Blacklight::SearchState', params_for_search: { 'f' => { 'level_sim' => ['Collection'] } }
+          )
+        )
+      end
+
+      it { expect(text).to eq 'Collections' }
+    end
+
+    context 'all other non-special search behavior' do
+      it { expect(text).to eq 'Search' }
+    end
+  end
+
   describe 'document_header_icon' do
     let(:document) { SolrDocument.new('level_ssm': ['collection']) }
 
