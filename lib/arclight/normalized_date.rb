@@ -47,8 +47,8 @@ module Arclight
       else
         result = nil
       end
-      return if result.blank?
-      result.strip
+
+      result&.strip
     end
   end
 end

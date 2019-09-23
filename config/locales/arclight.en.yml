@@ -16,6 +16,7 @@ en:
       home: Home
       repositories: Repositories
       search_results: Search results
+    show_breadcrumb_label: Repository
     truncation:
       view_less: view less ▼
       view_more: view more ▶
@@ -48,6 +49,9 @@ en:
       show:
         access: Access
         collection_id: 'Collection ID: %{id}'
+        context: Collection context
+        context_nav:
+          title: Collection context navigation
         download:
           default: Download
           ead: Collection EAD
@@ -60,9 +64,6 @@ en:
         no_online_content: No online content
         online_content: Online content
         our_collections: Our Collections
-        overview: Overview
-        overview_nav:
-          title: Collection overview navigation
         sections:
           access_field: Access and Use
           background_field: Background

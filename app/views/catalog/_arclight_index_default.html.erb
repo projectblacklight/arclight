@@ -3,40 +3,43 @@
   <div class="col-auto">
     <%= render partial: 'arclight_document_header_icon', locals: { document: document }  %>
   </div>
-  <div class="col col-no-left-padding">
-    <div class="row">
-      <%= render partial: 'arclight_search_index_header', locals: { document: document, counter: counter }  %>
-      <div class="col-auto al-document-mobile">
-        <%= content_tag('span', class: 'al-document-container col-auto text-muted') do %>
-          <%= document.containers.join(', ') %>
-        <% end if document.containers %>
-        <% if document.online_content? %>
-          <%= blacklight_icon :online, classes: 'al-online-content-icon' %>
-        <% end %>
-        <%= render_index_doc_actions document %>
+
+  <div class="col col-no-left-padding d-flex flex-wrap">
+    <div class="documentHeader my-w-75 w-md-100 order-0" data-document-id="<%= document.id %>">
+      <h3 class="index_title document-title-heading">
+        <%= link_to_document document, document_show_link_field(document), counter: counter %>
+        <%= content_tag('span', class: 'al-document-extent badge badge-light') do %>
+          <%= document.extent %>
+        <% end if document.extent %>
+      </h3>
+    </div>
+
+    <div class="my-w-25 w-md-100 order-12 order-md-1">
+      <%= render_index_doc_actions document, wrapping_class: 'd-flex justify-content-end' %>
+    </div>
+
+    <div class="order-2">
+      <div class="row">
+        <%= content_tag('div', class: 'al-document-highlight col') do %>
+          <%= document.highlights.join('<br/>').html_safe %>
+        <% end if document.highlights %>
       </div>
-    </div>
 
-    <div class="row">
-      <%= content_tag('div', class: 'al-document-highlight col') do %>
-        <%= document.highlights.join('<br/>').html_safe %>
-      <% end if document.highlights %>
-    </div>
+      <div class="row">
+        <%= content_tag('div', class: 'al-document-creator col') do %>
+          <%= document.creator %>
+        <% end if document.creator %>
+      </div>
 
-    <div class="row">
-      <%= content_tag('div', class: 'al-document-creator col') do %>
-        <%= document.creator %>
-      <% end if document.creator %>
-    </div>
+      <div class="row">
+        <%= content_tag('div', class: 'al-document-abstract-or-scope col') do %>
+          <%= content_tag('div', 'data-arclight-truncate' => true) do %>
+            <%= document.abstract_or_scope %>
+          <% end %>
+        <% end if document.abstract_or_scope %>
+      </div>
 
-    <div class="row">
-      <%= content_tag('div', class: 'al-document-abstract-or-scope col') do %>
-        <%= content_tag('div', 'data-arclight-truncate' => true) do %>
-          <%= document.abstract_or_scope %>
-        <% end %>
-      <% end if document.abstract_or_scope %>
+      <%= render partial: 'index_breadcrumb_default', locals: { document: document } %>
     </div>
-
-    <%= render partial: 'index_breadcrumb_default', locals: { document: document } %>
   </div>
 </div>
