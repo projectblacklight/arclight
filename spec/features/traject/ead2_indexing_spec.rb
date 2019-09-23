@@ -231,16 +231,21 @@ describe 'EAD 2 traject indexing', type: :feature do
         expect(nested_component['parent_unittitles_ssm']).to eq ['Large collection sample, 1843-1872', 'File 1']
       end
     end
+  end
 
-    context 'with nested numbered c componenets' do
-      let(:fixture_path) do
-        Arclight::Engine.root.join('spec', 'fixtures', 'ead', 'nlm', 'ncaids544-id-test.xml')
-      end
-      let(:nested_component) { result['components'].find { |c| c['id'] == ['ncaids544-testd0e631'] } }
+  describe 'nested numbered c components' do
+    let(:fixture_path) do
+      Arclight::Engine.root.join('spec', 'fixtures', 'ead', 'nlm', 'ncaids544-id-test.xml')
+    end
+    let(:component_with_descendants) { result['components'].find { |c| c['id'] == ['ncaids544-testd0e452'] } }
+    let(:nested_component) { result['components'].find { |c| c['id'] == ['ncaids544-testd0e631'] } }
 
-      it 'correctly gets the component levels' do
-        expect(nested_component['component_level_isim']).to eq [3]
-      end
+    it 'counts child components' do
+      expect(component_with_descendants['child_component_count_isim']).to eq [9]
+    end
+
+    it 'correctly gets the component levels' do
+      expect(nested_component['component_level_isim']).to eq [3]
     end
   end
 
