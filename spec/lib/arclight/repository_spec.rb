@@ -137,4 +137,22 @@ RSpec.describe Arclight::Repository do
       expect(repo.downstream_defined_field).to eq 'Custom Data From Consumer'
     end
   end
+
+  describe '#available_request_types' do
+    context 'request types present' do
+      let(:repo) { described_class.find_by(slug: 'sample') }
+
+      it 'returns a list' do
+        expect(repo.available_request_types).to eq ['google_form']
+      end
+    end
+
+    context 'no request types' do
+      let(:repo) { described_class.find_by(slug: 'sample-noreq') }
+
+      it 'returns an empty array' do
+        expect(repo.available_request_types).to eq []
+      end
+    end
+  end
 end

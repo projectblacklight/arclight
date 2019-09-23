@@ -116,7 +116,8 @@
       "avatar_url": "https://avatars0.githubusercontent.com/u/114006?v=4",
       "profile": "http://robotlibrarian.billdueber.com/",
       "contributions": [
-        "analysis"
+        "analysis",
+        "code"
       ]
     },
     {
@@ -369,6 +370,15 @@
       ]
     },
     {
+      "login": "remocrevo",
+      "name": "Remington Steed",
+      "avatar_url": "https://avatars1.githubusercontent.com/u/8701105?v=4",
+      "profile": "https://github.com/remocrevo",
+      "contributions": [
+        "code"
+      ]
+    },
+    {
       "login": "tampakis",
       "name": "Nikitas Tampakis",
       "avatar_url": "https://avatars2.githubusercontent.com/u/4650153?v=4",
@@ -433,15 +443,6 @@
       "profile": "https://github.com/lauraw15",
       "contributions": [
         "analysis"
-      ]
-    },
-    {
-      "login": "remocrevo",
-      "name": "remocrevo",
-      "avatar_url": "https://avatars1.githubusercontent.com/u/8701105?v=4",
-      "profile": "https://github.com/remocrevo",
-      "contributions": [
-        "code"
       ]
     }
   ],

@@ -89,6 +89,7 @@ end
 
 to_field 'unitid_ssm', extract_xpath('/ead/archdesc/did/unitid')
 to_field 'unitid_teim', extract_xpath('/ead/archdesc/did/unitid')
+to_field 'collection_unitid_ssm', extract_xpath('/ead/archdesc/did/unitid')
 
 to_field 'normalized_title_ssm' do |_record, accumulator, context|
   dates = Arclight::NormalizedDate.new(
@@ -129,20 +130,20 @@ end
 to_field 'geogname_ssm', extract_xpath('/ead/archdesc/controlaccess/geogname')
 to_field 'geogname_sim', extract_xpath('/ead/archdesc/controlaccess/geogname')
 
-to_field 'creator_ssm', extract_xpath("/ead/archdesc/did/origination[@label='creator']")
-to_field 'creator_sim', extract_xpath("/ead/archdesc/did/origination[@label='creator']")
-to_field 'creator_ssim', extract_xpath("/ead/archdesc/did/origination[@label='creator']")
+to_field 'creator_ssm', extract_xpath('/ead/archdesc/did/origination')
+to_field 'creator_sim', extract_xpath('/ead/archdesc/did/origination')
+to_field 'creator_ssim', extract_xpath('/ead/archdesc/did/origination')
 to_field 'creator_sort' do |record, accumulator|
-  accumulator << record.xpath("/ead/archdesc/did/origination[@label='creator']").map { |c| c.text.strip }.join(', ')
+  accumulator << record.xpath('/ead/archdesc/did/origination').map { |c| c.text.strip }.join(', ')
 end
 
-to_field 'creator_persname_ssm', extract_xpath("/ead/archdesc/did/origination[@label='creator']/persname")
-to_field 'creator_persname_ssim', extract_xpath("/ead/archdesc/did/origination[@label='creator']/persname")
-to_field 'creator_corpname_ssm', extract_xpath("/ead/archdesc/did/origination[@label='creator']/corpname")
-to_field 'creator_corpname_sim', extract_xpath("/ead/archdesc/did/origination[@label='creator']/corpname")
-to_field 'creator_corpname_ssim', extract_xpath("/ead/archdesc/did/origination[@label='creator']/corpname")
-to_field 'creator_famname_ssm', extract_xpath("/ead/archdesc/did/origination[@label='creator']/famname")
-to_field 'creator_famname_ssim', extract_xpath("/ead/archdesc/did/origination[@label='creator']/famname")
+to_field 'creator_persname_ssm', extract_xpath('/ead/archdesc/did/origination/persname')
+to_field 'creator_persname_ssim', extract_xpath('/ead/archdesc/did/origination/persname')
+to_field 'creator_corpname_ssm', extract_xpath('/ead/archdesc/did/origination/corpname')
+to_field 'creator_corpname_sim', extract_xpath('/ead/archdesc/did/origination/corpname')
+to_field 'creator_corpname_ssim', extract_xpath('/ead/archdesc/did/origination/corpname')
+to_field 'creator_famname_ssm', extract_xpath('/ead/archdesc/did/origination/famname')
+to_field 'creator_famname_ssim', extract_xpath('/ead/archdesc/did/origination/famname')
 
 to_field 'persname_sim', extract_xpath('//persname')
 
@@ -178,6 +179,15 @@ end
 
 to_field 'has_online_content_ssim', extract_xpath('.//dao') do |_record, accumulator|
   accumulator.replace([accumulator.any?])
+end
+
+to_field 'digital_objects_ssm', extract_xpath('/ead/archdesc/did/dao|/ead/archdesc/dao', to_text: false) do |_record, accumulator|
+  accumulator.map! do |dao|
+    label = dao.attributes['title']&.value ||
+            dao.xpath('daodesc/p')&.text
+    href = (dao.attributes['href'] || dao.attributes['xlink:href'])&.value
+    Arclight::DigitalObject.new(label: label, href: href).to_json
+  end
 end
 
 to_field 'extent_ssm', extract_xpath('/ead/archdesc/did/physdesc/extent')
@@ -281,7 +291,7 @@ compose 'components', ->(record, accumulator, _context) { accumulator.concat rec
   end
 
   to_field 'component_level_isim' do |record, accumulator|
-    accumulator << 1 + record.ancestors.count { |node| node.name == 'c' }
+    accumulator << 1 + NokogiriXpathExtensions.new.is_component(record.ancestors).count
   end
 
   to_field 'parent_ssm' do |record, accumulator, context|
@@ -320,6 +330,9 @@ compose 'components', ->(record, accumulator, _context) { accumulator.concat rec
   end
 
   to_field 'unitid_ssm', extract_xpath('./did/unitid')
+  to_field 'collection_unitid_ssm' do |_record, accumulator, context|
+    accumulator.concat Array.wrap(context.clipboard[:parent].output_hash['unitid_ssm'])
+  end
   to_field 'repository_ssm' do |_record, accumulator, context|
     accumulator << context.clipboard[:parent].clipboard[:repository]
   end
@@ -339,11 +352,11 @@ compose 'components', ->(record, accumulator, _context) { accumulator.concat rec
   to_field 'extent_ssm', extract_xpath('./did/physdesc/extent')
   to_field 'extent_teim', extract_xpath('./did/physdesc/extent')
 
-  to_field 'creator_ssm', extract_xpath("./did/origination[@label='creator']")
-  to_field 'creator_ssim', extract_xpath("./did/origination[@label='creator']")
-  to_field 'creators_ssim', extract_xpath("./did/origination[@label='creator']")
+  to_field 'creator_ssm', extract_xpath('./did/origination')
+  to_field 'creator_ssim', extract_xpath('./did/origination')
+  to_field 'creators_ssim', extract_xpath('./did/origination')
   to_field 'creator_sort' do |record, accumulator|
-    accumulator << record.xpath("./did/origination[@label='creator']").map(&:text).join(', ')
+    accumulator << record.xpath('./did/origination').map(&:text).join(', ')
   end
   to_field 'collection_creator_ssm' do |_record, accumulator, context|
     accumulator.concat Array.wrap(context.clipboard[:parent].output_hash['creator_ssm'])
@@ -375,6 +388,10 @@ compose 'components', ->(record, accumulator, _context) { accumulator.concat rec
     next unless context.output_hash['level_ssm']
 
     accumulator.concat context.output_hash['level_ssm']&.map(&:capitalize)
+  end
+
+  to_field 'sort_ii' do |_record, accumulator, context|
+    accumulator.replace([context.position])
   end
 
   # Get the <accessrestrict> from the closest ancestor that has one (includes top-level)

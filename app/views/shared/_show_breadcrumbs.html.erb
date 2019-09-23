@@ -2,28 +2,25 @@
 <% h1_index = 0 %>
 <nav aria-label="breadcrumb">
   <ol class="breadcrumb">
-    <li class="breadcrumb-item  breadcrumb-item-1">
+    <li class="media breadcrumb-item  breadcrumb-item-1">
       <% if document.repository_config.present? %>
-        <span class="col-auto col-icon-padding"><%= blacklight_icon :repository, classes: 'al-repository-content-icon' %></span>
-        <span class="col col-no-left-padding"><%= link_to(document.repository_config.name, arclight_engine.repository_path(document.repository_config.slug)) %></span>
+        <span class="media-body" aria-hidden="true"><%= blacklight_icon :repository, classes: 'al-repository-content-icon' %></span>
+        <span class="col"><%= link_to(document.repository_config.name, arclight_engine.repository_path(document.repository_config.slug)) %></span>
       <% else %>
-          <span><%= blacklight_icon :repository, classes: 'al-repository-content-icon' %><%= t('arclight.show_breadcrumb_label') %></span>
+          <span><%= blacklight_icon :repository, classes: 'al-repository-content-icon' %></span><span class="col"><%= t('arclight.show_breadcrumb_label') %></span>
       <% end %>
     </li>
     <% parents.each_with_index.map do |parent, index| %>
-      <%= content_tag :li, class: "breadcrumb-item breadcrumb-item-#{index + 1}" do %>
-        <% bc_icon = parent.level.downcase %>
-        <% bc_icon = 'folder' if bc_icon == 'series' %>
-        <% bc_icon = 'folder' if bc_icon == 'subseries' %>
-        <span class="col-auto col-icon-padding"><%= blacklight_icon bc_icon %></span>
-        <span class="col col-no-left-padding"><%= link_to parent.label, solr_document_path(parent.global_id) %></span>
+      <%= content_tag :li, class: "breadcrumb-item breadcrumb-item-#{index + 1} media" do %>
+        <span class="media-body" aria-hidden="true"><%= blacklight_icon document_or_parent_icon(parent) %></span>
+        <span class="col"><%= link_to parent.label, solr_document_path(parent.global_id) %></span>
         <% h1_index = index + 3 %> 
       <% end %> 
     <% end %>
   </ol>
 
-  <%= content_tag :h1, class: "breadcrumb-item breadcrumb-item-#{h1_index}" do %>
-    <span class="col-auto col-icon-padding"><%= blacklight_icon document_header_icon(document) %></span>
-    <span class="col col-no-left-padding-indent"><%= document.normalized_title %></span>
+  <%= content_tag :h1, class: "breadcrumb-item breadcrumb-item-#{h1_index} media" do %>
+    <span class="media-body" aria-hidden="true"><%= blacklight_icon document_or_parent_icon(document) %></span>
+    <span class="col"><%= document.normalized_title %></span>
   <% end %>
 </nav>

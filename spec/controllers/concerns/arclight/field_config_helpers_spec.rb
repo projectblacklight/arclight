@@ -15,7 +15,7 @@ RSpec.describe Arclight::FieldConfigHelpers do
   end
   let(:document_without_repository) { SolrDocument.new }
   let(:document_without_request) do
-    SolrDocument.new(repository_ssm: ['Stanford University Libraries. Special Collections and University Archives'])
+    SolrDocument.new(repository_ssm: ['Repository with no requestable items'])
   end
   let(:document_with_highlight) do
     SolrDocument.new(accessrestrict_ssm: ['Restricted until 2018.'])

@@ -86,6 +86,10 @@ describe 'EAD 2 traject indexing', type: :feature do
       expect(result['unitid_ssm']).to eq ['A0011']
     end
 
+    it 'collection_unitid' do
+      expect(result['collection_unitid_ssm']).to eq ['A0011']
+    end
+
     it 'creator' do
       %w[creator_ssm creator_ssim creator_corpname_ssm creator_corpname_ssim creators_ssim creator_sort].each do |field|
         expect(result[field]).to equal_array_ignoring_whitespace ['Stanford University']
@@ -157,6 +161,9 @@ describe 'EAD 2 traject indexing', type: :feature do
           expect(first_component[field]).to equal_array_ignoring_whitespace ['Stanford University']
         end
       end
+      it 'collection_unitid' do
+        expect(first_component['collection_unitid_ssm']).to eq ['A0011']
+      end
 
       it 'containers' do
         component = result['components'].find { |c| c['ref_ssi'] == ['aspace_ref6_lx4'] }
@@ -179,6 +186,11 @@ describe 'EAD 2 traject indexing', type: :feature do
           expect(other_level_component['level_ssm']).to eq(['Binder'])
           expect(other_level_component['level_sim']).to eq(['Binder'])
         end
+
+        it 'sort' do
+          expect(other_level_component['sort_ii']).to eq([2])
+          expect(level_component['sort_ii']).to eq([32])
+        end
       end
     end
   end
@@ -190,6 +202,17 @@ describe 'EAD 2 traject indexing', type: :feature do
 
     it 'selects the components' do
       expect(result['components'].length).to eq 404
+    end
+
+    it 'indexes top-level daos' do
+      expect(result['digital_objects_ssm']).to eq(
+        [
+          JSON.generate(
+            label: '1st Street Arcade San Francisco',
+            href: 'https://purl.stanford.edu/yy901zw2656'
+          )
+        ]
+      )
     end
 
     context 'when nested component' do
@@ -206,6 +229,17 @@ describe 'EAD 2 traject indexing', type: :feature do
 
       it 'parent_unittitles' do
         expect(nested_component['parent_unittitles_ssm']).to eq ['Large collection sample, 1843-1872', 'File 1']
+      end
+    end
+
+    context 'with nested numbered c componenets' do
+      let(:fixture_path) do
+        Arclight::Engine.root.join('spec', 'fixtures', 'ead', 'nlm', 'ncaids544-id-test.xml')
+      end
+      let(:nested_component) { result['components'].find { |c| c['id'] == ['ncaids544-testd0e631'] } }
+
+      it 'correctly gets the component levels' do
+        expect(nested_component['component_level_isim']).to eq [3]
       end
     end
   end

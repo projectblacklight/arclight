@@ -52,6 +52,11 @@ article.document {
   .blacklight-icons.al-online-content-icon svg {
     fill: $green;
   }
+  div.breadcrumb-links, 
+  div.al-document-abstract-or-scope, 
+  div.al-document-creator {
+    margin-top: ($spacer * .5);
+  }
 }
 
 .documents-compact {
@@ -137,18 +142,16 @@ article.document {
   padding-left: 0 !important;
 }
 
-.col-no-left-padding-indent {
-  padding-left: 0 !important;
-  display: inline;
-}
-
 .col-no-right-padding {
   padding-right: 0 !important;
 }
 
-.col-icon-padding {
-  padding-right: 4px !important;
-  padding-left: 0 !important;
+.breadcrumb .media .col, h1.media .col {
+  flex-basis: auto;
+}
+
+.breadcrumb .media svg, h1.media svg {
+  fill: $gray-600;
 }
 
 .breadcrumb-links a {
