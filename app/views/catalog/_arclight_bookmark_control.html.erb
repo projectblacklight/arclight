@@ -10,8 +10,8 @@
                  class: 'bookmark-toggle col-auto',
                  data: {
                    'doc-id' => document.id,
-                   present: blacklight_icon(:bookmark),
-                   absent: blacklight_icon(:bookmark),
+                   present: "#{blacklight_icon(:bookmark)}<span class=\"sr-only\">#{t('blacklight.search.bookmarks.present')}",
+                   absent: "#{blacklight_icon(:bookmark)}<span class=\"sr-only\">#{t('blacklight.search.bookmarks.absent')}",
                    inprogress: t('blacklight.search.bookmarks.inprogress')
                 }) do %>
       <%= submit_tag(t('blacklight.bookmarks.add.button'),
@@ -24,8 +24,8 @@
                  class: "bookmark-toggle col-auto",
                  data: {
                    'doc-id' => document.id,
-                   present: blacklight_icon(:bookmark),
-                   absent: blacklight_icon(:bookmark),
+                   present: "#{blacklight_icon(:bookmark)}<span class=\"sr-only\">#{t('blacklight.search.bookmarks.present')}",
+                   absent: "#{blacklight_icon(:bookmark)}<span class=\"sr-only\">#{t('blacklight.search.bookmarks.absent')}",
                    inprogress: t('blacklight.search.bookmarks.inprogress')
                 }) do %>
       <%= submit_tag(t('blacklight.bookmarks.remove.button'),
