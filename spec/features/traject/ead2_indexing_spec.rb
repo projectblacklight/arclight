@@ -686,4 +686,21 @@ describe 'EAD 2 traject indexing', type: :feature do
       expect(result['normalized_title_ssm']).to include_ignoring_whitespace 'Stanford University student life photograph album, circa 1900-1906'
     end
   end
+  describe 'EAD top level is not "collection"' do
+    let(:fixture_path) do
+      Arclight::Engine.root.join('spec', 'fixtures', 'ead', 'sample', 'no-ids-recordgrp-level.xml')
+    end
+
+    it 'indexes as collection for routing/display' do
+      expect(result['level_ssm']).to eq ['collection']
+    end
+
+    it 'changes EAD level code to human-readable' do
+      expect(result['level_sim']).to include 'Record Group'
+    end
+
+    it 'retains both original level & Collection for faceting' do
+      expect(result['level_sim']).to eq ['Record Group', 'Collection']
+    end
+  end
 end
