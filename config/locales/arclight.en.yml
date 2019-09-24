@@ -28,8 +28,6 @@ en:
       index:
         all_group_results: view all %{count}
         all_results: All results
-        collection_search:
-          count: collection
         group_by_collection: Grouped by collection
         group_results: Group results
         group_results_count:

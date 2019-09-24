@@ -30,8 +30,6 @@ RSpec.describe 'Repositores Page', type: :feature do
       click_link 'Stanford University Libraries. Special Collections and University Archives'
 
       click_link 'View all of our collections'
-
-      expect(page).to have_css('.al-collection-count', text: '2 collections')
     end
 
     it 'does not link the same page in the repository card header' do
