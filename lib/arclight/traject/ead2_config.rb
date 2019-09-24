@@ -353,8 +353,8 @@ compose 'components', ->(record, accumulator, _context) { accumulator.concat rec
   to_field 'has_online_content_ssim', extract_xpath('.//dao') do |_record, accumulator|
     accumulator.replace([accumulator.any?])
   end
-  to_field 'child_component_count_isim', extract_xpath('c') do |_record, accumulator|
-    accumulator.replace([accumulator.length])
+  to_field 'child_component_count_isim' do |record, accumulator|
+    accumulator << NokogiriXpathExtensions.new.is_component(record.children).count
   end
 
   to_field 'ref_ssm' do |record, accumulator|
