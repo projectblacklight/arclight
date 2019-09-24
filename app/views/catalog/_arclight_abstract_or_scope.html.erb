@@ -1,0 +1,5 @@
+<%= content_tag('div', class: 'al-document-abstract-or-scope') do %>
+  <%= content_tag('div', 'data-arclight-truncate' => true) do %>
+    <%= content_tag(:span, I18n.t('arclight.hierarchy.scope_note')) %><%= document.abstract_or_scope %>
+  <% end %>
+<% end if document.abstract_or_scope %>
