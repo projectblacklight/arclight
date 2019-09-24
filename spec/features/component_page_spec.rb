@@ -9,15 +9,15 @@ RSpec.describe 'Component Page', type: :feature do
 
   describe 'tabbed display' do
     it 'clicking contents toggles visibility', js: true do
-      expect(page).to have_css '#overview', visible: true
+      expect(page).to have_css '#context', visible: true
       expect(page).to have_css '#online-content', visible: false
       expect(page).to have_css '#access', visible: false
       click_link 'Online content'
-      expect(page).to have_css '#overview', visible: false
+      expect(page).to have_css '#context', visible: false
       expect(page).to have_css '#online-content', visible: true
       expect(page).to have_css '#access', visible: false
       click_link 'Access'
-      expect(page).to have_css '#overview', visible: false
+      expect(page).to have_css '#context', visible: false
       expect(page).to have_css '#contents', visible: false
       expect(page).to have_css '#access', visible: true
     end
@@ -28,7 +28,7 @@ RSpec.describe 'Component Page', type: :feature do
       it 'is present and accessible' do
         expect(page).to have_css('li.nav-item a', text: 'Contents', visible: true)
         click_link 'Contents'
-        expect(page).to have_css '#overview', visible: false
+        expect(page).to have_css '#context', visible: false
         expect(page).to have_css '#contents', visible: true
         expect(page).to have_css '#online-content', visible: false
       end
@@ -98,8 +98,7 @@ RSpec.describe 'Component Page', type: :feature do
             'article a',
             text: 'Series I: Administrative Records, 1902-1976'
           )
-          expect(page).to have_css('.al-number-of-children-badge', text: '25 children')
-          expect(page).not_to have_css('.al-number-of-children-badge', text: /View/)
+          expect(page).to have_css('.al-number-of-children-badge', text: '25')
           expect(page).not_to have_css 'form.bookmark-toggle' # no bookmarks
         end
       end
@@ -237,9 +236,10 @@ RSpec.describe 'Component Page', type: :feature do
   describe 'breadcrumb' do
     it 'links home, collection, and parents' do
       within '.al-show-breadcrumb' do
-        expect(page).to have_css 'a', text: 'Home'
-        expect(page).to have_css 'a', text: 'Collections'
-        expect(page).to have_css 'a', count: 4
+        expect(page).to have_css 'a', text: 'National Library of Medicine. History of Medicine Division'
+        expect(page).to have_css 'a', text: 'Alpha Omega Alpha Archives, 1894-1992'
+        expect(page).to have_css 'a', text: 'Series I: Administrative Records, 1902-1976, bulk 1975-1976'
+        expect(page).to have_css 'a', count: 3
       end
     end
   end

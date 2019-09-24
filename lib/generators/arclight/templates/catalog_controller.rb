@@ -155,16 +155,32 @@ class CatalogController < ApplicationController
       field.qt = 'search' # default
     end
     config.add_search_field 'name', label: 'Name' do |field|
-      field.qt = 'name_search'
+      field.qt = 'search'
+      field.solr_parameters = {
+        qf:  '${qf_name}',
+        pf:  '${pf_name}'
+      }
     end
     config.add_search_field 'place', label: 'Place' do |field|
-      field.qt = 'place_search'
+      field.qt = 'search'
+      field.solr_parameters = {
+        qf:  '${qf_place}',
+        pf:  '${pf_place}'
+      }
     end
     config.add_search_field 'subject', label: 'Subject' do |field|
-      field.qt = 'subject_search'
+      field.qt = 'search'
+      field.solr_parameters = {
+        qf:  '${qf_subject}',
+        pf:  '${pf_subject}'
+      }
     end
     config.add_search_field 'title', label: 'Title' do |field|
-      field.qt = 'title_search'
+      field.qt = 'search'
+      field.solr_parameters = {
+        qf:  '${qf_title}',
+        pf:  '${pf_title}'
+      }
     end
 
     # "sort results by" select (pulldown)
@@ -199,6 +215,8 @@ class CatalogController < ApplicationController
 
     ##
     # Configuration for index actions
+    config.index.document_actions << :containers
+    config.index.document_actions << :online_content_label
     config.add_results_document_tool :arclight_bookmark_control, partial: 'arclight_bookmark_control'
     config.index.document_actions.delete(:bookmark)
 
@@ -229,7 +247,6 @@ class CatalogController < ApplicationController
       contact_field
     ]
 
-
     # ===========================
     # COLLECTION SHOW PAGE FIELDS
     # ===========================
@@ -240,10 +257,6 @@ class CatalogController < ApplicationController
     config.add_summary_field 'extent_ssm', label: 'Extent'
     config.add_summary_field 'language_ssm', label: 'Language'
     config.add_summary_field 'prefercite_ssm', label: 'Preferred citation'
-
-    # Collection Show Page - Access Section
-    config.add_access_field 'accessrestrict_ssm', label: 'Conditions Governing Access', helper_method: :paragraph_separator
-    config.add_access_field 'userestrict_ssm', label: 'Terms Of Use', helper_method: :paragraph_separator
 
     # Collection Show Page - Background Section
     config.add_background_field 'scopecontent_ssm', label: 'Scope and Content', helper_method: :paragraph_separator
@@ -257,7 +270,6 @@ class CatalogController < ApplicationController
     config.add_background_field 'phystech_ssm', label: 'Physical / technical requirements', helper_method: :paragraph_separator
     config.add_background_field 'physloc_ssm', label: 'Physical location', helper_method: :paragraph_separator
     config.add_background_field 'descrules_ssm', label: 'Rules or conventions', helper_method: :paragraph_separator
-
 
     # Collection Show Page - Related Section
     config.add_related_field 'relatedmaterial_ssm', label: 'Related material', helper_method: :paragraph_separator
@@ -285,7 +297,6 @@ class CatalogController < ApplicationController
       last_word_connector: '<br/>'
     }
 
-
     # ==========================
     # COMPONENT SHOW PAGE FIELDS
     # ==========================
@@ -301,10 +312,6 @@ class CatalogController < ApplicationController
     config.add_component_field 'abstract_ssm', label: 'Abstract', helper_method: :paragraph_separator
     config.add_component_field 'extent_ssm', label: 'Extent'
     config.add_component_field 'scopecontent_ssm', label: 'Scope and Content', helper_method: :paragraph_separator
-    config.add_component_field 'accessrestrict_ssm', label: 'Restrictions', helper_method: :paragraph_separator
-    config.add_component_field 'userestrict_ssm', label: 'Terms of Access', helper_method: :paragraph_separator
-    config.add_component_field 'parent_access_restrict_ssm', label: 'Parent Restrictions', helper_method: :paragraph_separator
-    config.add_component_field 'parent_access_terms_ssm', label: 'Terms of Access', helper_method: :paragraph_separator
     config.add_component_field 'acqinfo_ssm', label: 'Acquisition information', helper_method: :paragraph_separator
     config.add_component_field 'appraisal_ssm', label: 'Appraisal information', helper_method: :paragraph_separator
     config.add_component_field 'custodhist_ssm', label: 'Custodial history', helper_method: :paragraph_separator
@@ -333,7 +340,6 @@ class CatalogController < ApplicationController
       last_word_connector: '<br/>'
     }
 
-
     # =================
     # ACCESS TAB FIELDS
     # =================
@@ -344,19 +350,19 @@ class CatalogController < ApplicationController
 
     # Component Show Page Access Tab - Terms and Condition Section
     config.add_component_terms_field 'accessrestrict_ssm', label: 'Restrictions', helper_method: :paragraph_separator
+    config.add_component_terms_field 'userestrict_ssm', label: 'Terms of Access', helper_method: :paragraph_separator
     config.add_component_terms_field 'parent_access_restrict_ssm', label: 'Parent Restrictions', helper_method: :paragraph_separator
-    config.add_component_terms_field 'parent_access_terms_ssm', label: 'Terms of Access', helper_method: :paragraph_separator
+    config.add_component_terms_field 'parent_access_terms_ssm', label: 'Parent Terms of Access', helper_method: :paragraph_separator
 
     # Collection and Component Show Page Access Tab - In Person Section
     config.add_in_person_field 'repository_ssm', if: :repository_config_present, label: 'Location of this collection', helper_method: :context_access_tab_repository
-    config.add_in_person_field 'id', if: :before_you_visit_note_present, label: 'Before you visit', helper_method: :context_access_tab_visit_note # Using ID because we know it will always exist    
+    config.add_in_person_field 'id', if: :before_you_visit_note_present, label: 'Before you visit', helper_method: :context_access_tab_visit_note # Using ID because we know it will always exist
 
     # Collection and Component Show Page Access Tab - How to Cite Section
     config.add_cite_field 'prefercite_ssm', label: 'Preferred citation'
 
     # Collection and Component Show Page Access Tab - Contact Section
     config.add_contact_field 'repository_ssm', if: :repository_config_present, label: 'Contact', helper_method: :access_repository_contact
-
 
     # Remove unused show document actions
     %i[citation email sms].each do |action|
@@ -367,7 +373,6 @@ class CatalogController < ApplicationController
     config.show.partials.unshift(:show_upper_metadata)
     config.show.partials.unshift(:show_breadcrumbs)
     config.show.partials.delete(:show_header)
-
 
     ##
     # Hierarchy Index View
@@ -385,6 +390,5 @@ class CatalogController < ApplicationController
     # Compact index view
     config.view.compact
     config.view.compact.partials = %i[arclight_index_compact]
-
   end
 end

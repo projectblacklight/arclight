@@ -46,6 +46,7 @@ module ArclightHelper
   def component_parents_to_links(document)
     parents = document_parents(document)
     return unless parents.length > 1
+
     safe_join(parents.slice(1, 999).map do |parent|
       link_to parent.label, solr_document_path(parent.global_id)
     end, t('arclight.breadcrumb_separator'))
@@ -59,6 +60,7 @@ module ArclightHelper
 
     parent_link = link_to(parents[1].label, solr_document_path(parents[1].global_id))
     return parent_link if parents.length == 2
+
     safe_join(
       [
         parent_link,
@@ -145,6 +147,7 @@ module ArclightHelper
   # @return [Repository]
   def repository_faceted_on
     return unless try(:search_state)
+
     repos = facets_from_request.find { |f| f.name == 'repository_sim' }.try(:items)
     faceted = repos && repos.length == 1 && repos.first.value
     Arclight::Repository.find_by(name: repos.first.value) if faceted
@@ -174,6 +177,13 @@ module ArclightHelper
       end,
       raw('<hr>')
     )
+  end
+
+  def ead_files(document)
+    files = Arclight::CollectionDownloads.new(document, document.collection_unitid).files
+    files.find do |file|
+      file.type == 'ead'
+    end
   end
 
   ##

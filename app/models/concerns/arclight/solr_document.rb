@@ -8,6 +8,7 @@ module Arclight
 
     def repository_config
       return unless repository
+
       @repository_config ||= Arclight::Repository.find_by(name: repository)
     end
 
@@ -41,6 +42,10 @@ module Arclight
 
     def collection_name
       first('collection_ssm')
+    end
+
+    def collection_unitid
+      first('collection_unitid_ssm')
     end
 
     def extent
@@ -129,6 +134,7 @@ module Arclight
       return if highlight_response.blank? ||
                 highlight_response[id].blank? ||
                 highlight_response[id][:text].blank?
+
       highlight_response[id][:text]
     end
   end

@@ -22,14 +22,10 @@
     <% end %>
     <% counter = document_counter_with_offset(document_counter) %>
     <%= link_to_document document, document_show_link_field(document), counter: counter %>
-    <%= render_document_partial(document, 'arclight_online_content_indicator') %>
     <% if document.children? %>
-      <div class='al-hierarchy-children-status'>
-        <span class='badge badge-default al-number-of-children-badge'>
-          <%= t(:'arclight.views.index.number_of_children', count: document.number_of_children) %>
-        </span>
-      </div>
+      <span class="badge badge-pill badge-secondary al-number-of-children-badge"><%= document.number_of_children %><span class="sr-only"><%= t(:'arclight.views.index.number_of_components', count: document.number_of_children) %></span></span>
     <% end %>
+    <%= render_document_partial(document, 'arclight_online_content_indicator') %>
   </h3>
 
   <div class="al-hierarchy-side-content float-right col">
@@ -39,7 +35,9 @@
       </div>
     <% end %>
     <% if requestable %>
-      <%= render partial: 'arclight/requests/google_form', locals: { document: document } %>
+      <% document.repository_config.available_request_types.each do |request_type| %>
+        <%= render partial: "arclight/requests/#{request_type}", locals: { document: document } %>
+      <% end %>
     <% end %>
   </div>
 </div>

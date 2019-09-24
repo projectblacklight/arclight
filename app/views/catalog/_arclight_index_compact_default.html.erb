@@ -2,14 +2,12 @@
   <div class="col-auto">
     <%= blacklight_icon document_header_icon(document) %>
   </div>
-  <div class="col col-no-left-padding">
+  <div class="col col-no-left-padding col-no-right-padding">
     <div class="d-flex justify-content-between">
-      <h3 class="d-flex">
+      <h3 class="col col-no-left-padding">
         <%= link_to_document document, document_show_link_field(document), counter: document_counter %>
       </h3>
-      <div class="d-flex">
-        <%= render_index_doc_actions document %>
-      </div>
+      <%= render_index_doc_actions document %>
     </div>
     <div class="row">
       <%= content_tag('div', class: 'al-document-highlight col') do %>

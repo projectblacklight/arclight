@@ -40,7 +40,8 @@
 }
 
 .al-masthead {
-  h1 {
+  h1, .h1 {
+    display: block;
     font-size: $h2-font-size;
     margin: 0;
     padding: ($spacer * 1.5) ($spacer / 2);

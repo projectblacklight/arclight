@@ -22,14 +22,6 @@ RSpec.describe 'Collection Page', type: :feature do
         expect(page).to have_css('dd', text: /Medicine, Bethesda, MD/)
       end
     end
-    it 'access and use has configured metadata' do
-      within '#access-and-use' do
-        expect(page).to have_css('dt', text: 'Conditions Governing Access:')
-        expect(page).to have_css('dd', text: 'No restrictions on access.')
-        expect(page).to have_css('dt', text: 'Terms Of Use')
-        expect(page).to have_css('dd', text: /Copyright was transferred/)
-      end
-    end
 
     it 'multivalued notes are rendered as paragaphs' do
       within 'dd.blacklight-bioghist_ssm' do
@@ -130,9 +122,8 @@ RSpec.describe 'Collection Page', type: :feature do
 
   describe 'navigation bar' do
     it 'has configured links' do
-      within '.al-sidebar-navigation-overview' do
+      within '.al-sidebar-navigation-context' do
         expect(page).to have_css 'a[href="#summary"]', text: 'Summary'
-        expect(page).to have_css 'a[href="#access-and-use"]', text: 'Access and Use'
         expect(page).to have_css 'a[href="#background"]', text: 'Background'
         expect(page).to have_css 'a[href="#related"]', text: 'Related'
         expect(page).to have_css 'a[href="#indexed-terms"]', text: 'Indexed Terms'
@@ -143,7 +134,7 @@ RSpec.describe 'Collection Page', type: :feature do
       let(:doc_id) { 'm0198-xml' }
 
       it 'does not include links to those sections' do
-        within '.al-sidebar-navigation-overview' do
+        within '.al-sidebar-navigation-context' do
           expect(page).not_to have_css 'a[href="#related"]', text: 'Related'
         end
       end
@@ -155,22 +146,22 @@ RSpec.describe 'Collection Page', type: :feature do
       it 'clicking contents toggles visibility' do
         click_link 'Contents'
         expect(page).to have_css '#contents', visible: true
-        expect(page).to have_css '#overview', visible: false
+        expect(page).to have_css '#context', visible: false
         expect(page).to have_css '#access', visible: false
-        click_link 'Overview'
-        expect(page).to have_css '#overview', visible: true
+        click_link 'Collection context'
+        expect(page).to have_css '#context', visible: true
         expect(page).to have_css '#contents', visible: false
         expect(page).to have_css '#access', visible: false
         click_link 'Access'
-        expect(page).to have_css '#overview', visible: false
+        expect(page).to have_css '#context', visible: false
         expect(page).to have_css '#contents', visible: false
         expect(page).to have_css '#access', visible: true
       end
       it 'clicking online contents toggles visibility' do
-        expect(page).to have_css '#overview', visible: true
+        expect(page).to have_css '#context', visible: true
         expect(page).to have_css '#online-content', visible: false
         click_link 'Online content'
-        expect(page).to have_css '#overview', visible: false
+        expect(page).to have_css '#context', visible: false
         expect(page).to have_css '#online-content', visible: true
       end
     end
@@ -228,12 +219,12 @@ RSpec.describe 'Collection Page', type: :feature do
     end
   end
 
-  describe 'overview and contents' do
+  describe 'context and contents' do
     it 'contents are not visible by default' do
       expect(page).to have_css '#contents', visible: false
     end
-    it 'overview is visible' do
-      expect(page).to have_css '#overview', visible: true
+    it 'context is visible' do
+      expect(page).to have_css '#context', visible: true
     end
     describe 'interactions', js: true do
       before { click_link 'Contents' }
@@ -273,11 +264,11 @@ RSpec.describe 'Collection Page', type: :feature do
           end
         end
       end
-      it 'includes the number of direct children of the component and View link' do
+      it 'includes the number of direct children of the component' do
         within '.document-position-0' do
           expect(page).to have_css(
-            '.al-hierarchy-children-status .al-number-of-children-badge',
-            text: /25 children/
+            '.al-number-of-children-badge',
+            text: /25/
           )
         end
       end
@@ -294,10 +285,10 @@ RSpec.describe 'Collection Page', type: :feature do
     end
   end
   describe 'breadcrumb' do
-    it 'links home and to the collection' do
+    it 'links repository and shows collection header 1 text' do
       within '.al-show-breadcrumb' do
-        expect(page).to have_css 'a', text: 'Home'
-        expect(page).to have_css 'a', text: 'Collections'
+        expect(page).to have_css 'a', text: 'National Library of Medicine. History of Medicine Division'
+        expect(page).to have_css 'h1.breadcrumb-item-2', text: 'Alpha Omega Alpha Archives, 1894-1992'
       end
     end
   end
