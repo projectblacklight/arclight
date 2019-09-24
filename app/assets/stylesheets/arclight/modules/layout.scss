@@ -37,19 +37,18 @@
 }
 
 // Collapse arrow indicators
-.al-toggle-view-more,
 .al-toggle-view-all {
   &[aria-expanded="true"] {
-    &::after {
-      content: '\25BC';
-      margin-left: 6px;
+    & {
+      content: image-url('blacklight/minus.svg');
     }
   }
 
-  &::after {
-    content: '\25B6';
-    margin-left: 6px;
-  }
+  content: image-url('blacklight/plus.svg');
+}
+
+a.al-toggle-view-all{
+  vertical-align: text-bottom;
 }
 
 .bookmark-toggle .toggle-bookmark {
