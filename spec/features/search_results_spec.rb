@@ -143,6 +143,13 @@ RSpec.describe 'Search results', type: :feature do
 
       expect(page).not_to have_css('.al-repository-card')
     end
+    it 'does not include repository card if faceted on something that is not repository' do
+      visit search_catalog_path f: {
+        names_ssim: ['Owner of the reel of yellow nylon rope']
+      }, search_field: 'all_fields'
+
+      expect(page).not_to have_css('.al-repository-card')
+    end
   end
   describe 'date range histogram', js: true do
     before do
