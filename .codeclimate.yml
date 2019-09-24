@@ -1,0 +1,7 @@
+---
+ version: "2"
+ plugins:
+   duplication:
+     enabled: true
+     exclude_patterns:
+       - "lib/arclight/traject/ead2_config.rb"
