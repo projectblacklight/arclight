@@ -1,6 +1,7 @@
 <h1 class="sr-only"><%= t('arclight.repositories') %></h1>
 
 <div class="al-repositories">
+  <% @page_title = t('arclight.views.repositories.title') %>
   <%= render 'shared/breadcrumbs' %>
   <%= render @repositories %>
 </div>
