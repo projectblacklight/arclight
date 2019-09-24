@@ -11,13 +11,12 @@
       padding-left: 0;
     }
 
-    h2 {
-      font-size: $h5-font-size;
-      margin-bottom: $spacer;
-    }
-
     address {
       margin-bottom: 0;
+    }
+
+    .repo-name {
+      margin-bottom: $spacer;
     }
 
     .al-repository-contact,

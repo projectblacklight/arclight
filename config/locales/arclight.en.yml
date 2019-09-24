@@ -9,6 +9,7 @@ en:
       scope_and_contents: Scope and Contents
       view_all: View
     masthead_heading: Archival Collections at Institution
+    repositories: Repositories
     request:
       container: Request
     routes:
@@ -16,6 +17,9 @@ en:
       home: Home
       repositories: Repositories
       search_results: Search results
+    search:
+      collections_header: Collections
+      repository_header: 'Collections : [%{repository}]'
     show_breadcrumb_label: Repository
     truncation:
       view_less: view less ▼

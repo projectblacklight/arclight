@@ -85,6 +85,17 @@ module ArclightHelper
     )
   end
 
+  # Returns the i18n-ed string to be used as the h1 in search results
+  def search_results_header_text
+    if (repo = repository_faceted_on).present?
+      t('arclight.search.repository_header', repository: repo.name)
+    elsif collection_active?
+      t('arclight.search.collections_header')
+    else
+      t('blacklight.search.header')
+    end
+  end
+
   ##
   # Classes used for customized show page in arclight
   def custom_show_content_classes
