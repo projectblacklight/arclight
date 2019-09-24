@@ -4,37 +4,5 @@
   <h3 class='al-show-sub-heading'>
     <%= t("arclight.views.show.sections.collection_context_field") %>
   </h3>
-  <%= content_tag(
-    :div, '',
-    class: 'al-context',
-    data: {
-      arclight_collection_context: true,
-      arclight_collection_context_url: solr_document_path(
-        normalize_id(@document.eadid)
-      )
-    }
-  ) %>
-  <%= content_tag(
-    :div, '',
-    class: 'al-ancestors',
-    data: {
-      arclight_ancestors: @document.parent_ids,
-      arclight_path: search_catalog_path(hierarchy_context: 'component')
-    }
-  ) %>
-  <%= content_tag(
-    :div, '',
-    class: "al-contents al-hierarchy-level-#{@document.component_level} extra-indent documents-hierarchy",
-    data: {
-      arclight: {
-        hierarchy: true,
-        level: @document.component_level,
-        path: search_catalog_path(hierarchy_context: 'component'),
-        name: @document.collection_name,
-        parent: @document.parent_ids.last,
-        highlightId: @document.id
-      }
-    }
-  ) %>
-
+  <%= nested_component_lists(@document) %>
 <% end %>
