@@ -198,7 +198,7 @@ RSpec.describe ArclightHelper, type: :helper do
       expect(helper.parents_to_links(document)).to include solr_document_path('abc123ghi')
     end
     it 'properly delimited' do
-      expect(helper.parents_to_links(document)).to include '»'
+      expect(helper.parents_to_links(document)).to include '<span aria-hidden="true"> » </span>'
       expect(helper.parents_to_links(SolrDocument.new)).not_to include '»'
     end
   end
@@ -219,7 +219,7 @@ RSpec.describe ArclightHelper, type: :helper do
       expect(helper.component_parents_to_links(document)).to include solr_document_path('abc123ghi')
     end
     it 'properly delimited' do
-      expect(helper.component_parents_to_links(document)).to include '»'
+      expect(helper.component_parents_to_links(document)).to include '<span aria-hidden="true"> » </span>'
     end
   end
 
@@ -238,7 +238,7 @@ RSpec.describe ArclightHelper, type: :helper do
         expect(helper.regular_compact_breadcrumbs(document)).to include 'my repository'
         expect(helper.regular_compact_breadcrumbs(document)).to include 'DEF'
         expect(helper.regular_compact_breadcrumbs(document)).to include solr_document_path('abc123def')
-        expect(helper.regular_compact_breadcrumbs(document)).to include '»'
+        expect(helper.regular_compact_breadcrumbs(document)).to include '<span aria-hidden="true"> » </span>'
         expect(helper.regular_compact_breadcrumbs(document)).not_to include '&hellip;'
       end
     end
@@ -256,7 +256,7 @@ RSpec.describe ArclightHelper, type: :helper do
       it 'links to the top level component and does include an ellipsis' do
         expect(helper.regular_compact_breadcrumbs(document)).to include 'DEF'
         expect(helper.regular_compact_breadcrumbs(document)).to include solr_document_path('abc123def')
-        expect(helper.regular_compact_breadcrumbs(document)).to include '»'
+        expect(helper.regular_compact_breadcrumbs(document)).to include '<span aria-hidden="true"> » </span>'
         expect(helper.regular_compact_breadcrumbs(document)).to include '&hellip;'
       end
     end
@@ -300,7 +300,7 @@ RSpec.describe ArclightHelper, type: :helper do
       it 'links to the top level component and joins it with an ellipsis' do
         expect(helper.component_top_level_parent_to_links(document)).to include 'GHI'
         expect(helper.component_top_level_parent_to_links(document)).to include solr_document_path('abc123ghi')
-        expect(helper.component_top_level_parent_to_links(document)).to include '»'
+        expect(helper.component_top_level_parent_to_links(document)).to include '<span aria-hidden="true"> » </span>'
         expect(helper.component_top_level_parent_to_links(document)).to include '&hellip;'
       end
     end

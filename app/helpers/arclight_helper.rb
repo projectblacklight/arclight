@@ -3,6 +3,16 @@
 ##
 # Generic Helpers used in Arclight
 module ArclightHelper
+  def aria_hidden_breadcrumb_separator
+    safe_join(
+      [
+        '<span aria-hidden="true">'.html_safe,
+        t('arclight.breadcrumb_separator'),
+        '</span>'.html_safe
+      ]
+    )
+  end
+
   ##
   # @param [SolrDocument]
   def parents_to_links(document)
@@ -14,7 +24,7 @@ module ArclightHelper
       link_to parent.label, solr_document_path(parent.global_id)
     end
 
-    safe_join(breadcrumb_links, t('arclight.breadcrumb_separator'))
+    safe_join(breadcrumb_links, aria_hidden_breadcrumb_separator)
   end
 
   ##
@@ -37,7 +47,7 @@ module ArclightHelper
 
     safe_join(
       breadcrumb_links,
-      t('arclight.breadcrumb_separator')
+      aria_hidden_breadcrumb_separator
     )
   end
 
@@ -49,7 +59,7 @@ module ArclightHelper
 
     safe_join(parents.slice(1, 999).map do |parent|
       link_to parent.label, solr_document_path(parent.global_id)
-    end, t('arclight.breadcrumb_separator'))
+    end, aria_hidden_breadcrumb_separator)
   end
 
   ##
@@ -64,7 +74,7 @@ module ArclightHelper
     safe_join(
       [
         parent_link,
-        t('arclight.breadcrumb_separator'),
+        aria_hidden_breadcrumb_separator,
         '&hellip;'.html_safe
       ]
     )
