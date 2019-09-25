@@ -26,7 +26,7 @@ RSpec.describe 'Home Page', type: :feature do
     expect(page).to have_css '.nav-link', text: 'Collections'
   end
   it 'has a title of Arclight' do
-    expect(page.body).to include('<title>Arclight</title>')
+    expect(page.body).to include('<title>Archival Collections at Institution - Arclight</title>')
   end
 
   context 'search dropdown' do

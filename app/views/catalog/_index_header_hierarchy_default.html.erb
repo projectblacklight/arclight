@@ -6,29 +6,26 @@
         <%= document.containers.join(', ') %>:
       </span>
     <% end %>
+    <% if document.children? %>
+      <% unless hierarchy_component_context? %>
+        <%= link_to(
+          blacklight_icon(:plus),
+          "##{document.reference}-collapsible-hierarchy",
+          class: 'al-toggle-view-all',
+          'aria-label': t('arclight.hierarchy.view_all'),
+            data: {
+              toggle: 'collapse'
+            }
+          )
+        %>
+      <% end %>
+    <% end %>
     <% counter = document_counter_with_offset(document_counter) %>
     <%= link_to_document document, document_show_link_field(document), counter: counter %>
     <% if document.children? %>
       <span class="badge badge-pill badge-secondary al-number-of-children-badge"><%= document.number_of_children %><span class="sr-only"><%= t(:'arclight.views.index.number_of_components', count: document.number_of_children) %></span></span>
     <% end %>
     <%= render_document_partial(document, 'arclight_online_content_indicator') %>
-    <% if document.children? %>
-      <div class='al-hierarchy-children-status'>
-        <span class='badge badge-default'>
-          <% unless hierarchy_component_context? %>
-            <%= link_to(
-              t('arclight.hierarchy.view_all'),
-              "##{document.reference}-collapsible-hierarchy",
-              class: 'al-toggle-view-all',
-                data: {
-                  toggle: 'collapse'
-                }
-              )
-            %>
-          <% end %>
-        </span>
-      </div>
-    <% end %>
   </h3>
 
   <div class="al-hierarchy-side-content float-right col">

@@ -13,6 +13,8 @@ RSpec.describe 'Repositores Page', type: :feature do
     within '.al-repositories' do
       expect(page).to have_css('.al-repository h2 a', text: 'My Repository')
     end
+
+    expect(page.body).to include('<title>Repositories - Arclight</title>')
   end
 
   describe 'Repostory Show Page' do
@@ -30,8 +32,6 @@ RSpec.describe 'Repositores Page', type: :feature do
       click_link 'Stanford University Libraries. Special Collections and University Archives'
 
       click_link 'View all of our collections'
-
-      expect(page).to have_css('.al-collection-count', text: '2 collections')
     end
 
     it 'does not link the same page in the repository card header' do
@@ -45,6 +45,14 @@ RSpec.describe 'Repositores Page', type: :feature do
           text: 'Stanford University Libraries. Special Collections and University Archives'
         )
       end
+    end
+
+    it 'has a title title starting with the repository name ' do
+      visit '/repositories'
+
+      click_link 'Stanford University Libraries. Special Collections and University Archives'
+
+      expect(page.body).to include('<title>Stanford University Libraries. Special Collections and University Archives - Arclight</title>')
     end
   end
 end

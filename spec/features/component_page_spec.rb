@@ -93,113 +93,50 @@ RSpec.describe 'Component Page', type: :feature do
   describe 'collection context', js: true do
     it 'has ancestor component with badge having children count' do
       within '#collection-context' do
-        within '.al-hierarchy-level-0' do
-          expect(page).to have_css(
-            'article a',
-            text: 'Series I: Administrative Records, 1902-1976'
-          )
-          expect(page).to have_css('.al-number-of-children-badge', text: '25')
-          expect(page).not_to have_css 'form.bookmark-toggle' # no bookmarks
-        end
+        expect(page).to have_css(
+          'li a',
+          text: 'Series I: Administrative Records, 1902-1976'
+        )
+        expect(page).to have_css('.al-number-of-children-badge', text: '25')
+        expect(page).not_to have_css 'form.bookmark-toggle' # no bookmarks
       end
     end
     context 'siblings and highlighted self' do
-      it 'does not link to itself' do
+      it 'has all siblings' do
         within '#collection-context' do
-          within '.al-contents' do
-            expect(page).not_to have_css(
-              'article.al-hierarchy-highlight h3 a'
-            )
-            expect(page).to have_css(
-              'article.al-hierarchy-highlight h3',
-              text: /"A brief account of the origin/
-            )
-          end
-        end
-      end
-      it 'has next 2 siblings -- i.e., at beginning' do
-        within '#collection-context' do
-          within '.al-contents' do
-            expect(page).to have_css(
-              'article:nth-child(1).al-hierarchy-highlight h3',
-              text: /"A brief account of the origin/
-            )
-            expect(page).to have_css 'article:nth-child(2)', text: 'Statements of purpose, c.1902'
-            expect(page).to have_css 'article:nth-child(3)',
-                                     text: 'Constitution - notes on drafting of constitution, c.1902-1903'
-            expect(page).to have_css 'article', count: 3
-          end
-        end
-      end
-      context '2 prev siblings only' do
-        let(:doc_id) { 'aoa271aspace_4365cd1ed8bd8fee1bac6077a4d81359' }
-
-        it 'is at the end' do
-          within '#collection-context' do
-            within '.al-contents' do
-              expect(page).to have_css(
-                'article:nth-child(3).al-hierarchy-highlight h3',
-                text: 'General announcements, 1909-1967'
-              )
-              expect(page).to have_css 'article:nth-child(1)', text: 'Meetings'
-              expect(page).to have_css 'article:nth-child(2)', text: 'Financial Records'
-              expect(page).to have_css 'article', count: 3
-            end
-          end
-        end
-      end
-      context 'prev and next sibling' do
-        let(:doc_id) { 'aoa271aspace_e6db65d47e891d61d69c2798c68a8f02' }
-
-        it 'is in the middle' do
-          within '#collection-context' do
-            within '.al-contents' do
-              expect(page).to have_css(
-                'article:nth-child(2).al-hierarchy-highlight h3',
-                text: /Statements of purpose/
-              )
-              expect(page).to have_css 'article:nth-child(1)', text: /"A brief account of the origin/
-              expect(page).to have_css 'article:nth-child(3)',
-                                       text: 'Constitution - notes on drafting of constitution, c.1902-1903'
-              expect(page).to have_css 'article', count: 3
-            end
-          end
+          expect(page).to have_css(
+            'li.al-hierarchy-highlight:nth-child(1)',
+            text: /"A brief account of the origin/
+          )
+          expect(page).to have_css 'li:nth-child(2)', text: 'Statements of purpose, c.1902'
+          expect(page).to have_css 'li:nth-child(3)',
+                                   text: 'Constitution - notes on drafting of constitution, c.1902-1903'
+          expect(page).to have_css 'li', count: 33
         end
       end
     end
     it 'supports clicks within collection context' do
       within '#collection-context' do
-        within '.al-contents' do
-          click_link('Statements of purpose, c.1902')
-        end
+        click_link('Statements of purpose, c.1902')
       end
       expect(page).to have_css 'h1', text: 'Statements of purpose, c.1902'
-      within '#collection-context .al-contents' do
-        expect(page).to have_css '.al-hierarchy-highlight h3', text: 'Statements of purpose, c.1902'
-        expect(page).to have_css 'article', text: /"A brief account of the origin/
+      within '#collection-context' do
+        expect(page).to have_css 'li.al-hierarchy-highlight', text: 'Statements of purpose, c.1902'
+        expect(page).to have_css '.document-title-heading', text: /"A brief account of the origin/
         expect(page).to have_css(
-          'article',
+          '.document-title-heading',
           text: 'Constitution - notes on drafting of constitution, c.1902-1903'
         )
         click_link 'Constitution - notes on drafting of constitution, c.1902-1903'
       end
       expect(page).to have_css 'h1', text: 'Constitution - notes on drafting of constitution, c.1902-1903'
-      within '#collection-context .al-contents' do
+      within '#collection-context' do
         expect(page).to have_css(
-          '.al-hierarchy-highlight h3',
+          'li.al-hierarchy-highlight',
           text: 'Constitution - notes on drafting of constitution, c.1902-1903'
         )
-        expect(page).to have_css 'article', text: 'Statements of purpose, c.1902'
-        expect(page).to have_css 'article', text: 'Constitution and by-laws - drafts, 1902-1904'
-      end
-    end
-    context 'ancestor list does not contain cousins' do
-      let(:doc_id) { 'aoa271aspace_e8755922a9336970292ca817983e7139' }
-
-      it 'only has one component at level 4' do
-        within '#collection-context .al-contents.al-hierarchy-level-4' do
-          expect(page).to have_css 'h3', text: 'Building Plans', count: 1
-        end
+        expect(page).to have_css '.document-title-heading', text: 'Statements of purpose, c.1902'
+        expect(page).to have_css '.document-title-heading', text: 'Constitution and by-laws - drafts, 1902-1904'
       end
     end
     context 'duplicate titles' do
@@ -207,7 +144,7 @@ RSpec.describe 'Component Page', type: :feature do
 
       it 'does not highlight duplicate titles' do
         within '#collection-context .al-hierarchy-highlight' do
-          expect(page).to have_css 'h3', text: 'Item AA201', count: 1
+          expect(page).to have_css '.document-title-heading', text: 'Item AA201', count: 1
         end
       end
     end

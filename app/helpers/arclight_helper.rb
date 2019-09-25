@@ -3,6 +3,16 @@
 ##
 # Generic Helpers used in Arclight
 module ArclightHelper
+  def aria_hidden_breadcrumb_separator
+    safe_join(
+      [
+        '<span aria-hidden="true">'.html_safe,
+        t('arclight.breadcrumb_separator'),
+        '</span>'.html_safe
+      ]
+    )
+  end
+
   ##
   # @param [SolrDocument]
   def parents_to_links(document)
@@ -14,7 +24,7 @@ module ArclightHelper
       link_to parent.label, solr_document_path(parent.global_id)
     end
 
-    safe_join(breadcrumb_links, t('arclight.breadcrumb_separator'))
+    safe_join(breadcrumb_links, aria_hidden_breadcrumb_separator)
   end
 
   ##
@@ -37,7 +47,7 @@ module ArclightHelper
 
     safe_join(
       breadcrumb_links,
-      t('arclight.breadcrumb_separator')
+      aria_hidden_breadcrumb_separator
     )
   end
 
@@ -49,7 +59,7 @@ module ArclightHelper
 
     safe_join(parents.slice(1, 999).map do |parent|
       link_to parent.label, solr_document_path(parent.global_id)
-    end, t('arclight.breadcrumb_separator'))
+    end, aria_hidden_breadcrumb_separator)
   end
 
   ##
@@ -64,7 +74,7 @@ module ArclightHelper
     safe_join(
       [
         parent_link,
-        t('arclight.breadcrumb_separator'),
+        aria_hidden_breadcrumb_separator,
         '&hellip;'.html_safe
       ]
     )
@@ -83,6 +93,17 @@ module ArclightHelper
         level_sim: ['Collection']
       }
     )
+  end
+
+  # Returns the i18n-ed string to be used as the h1 in search results
+  def search_results_header_text
+    if (repo = repository_faceted_on).present?
+      t('arclight.search.repository_header', repository: repo.name)
+    elsif collection_active?
+      t('arclight.search.collections_header')
+    else
+      t('blacklight.search.header')
+    end
   end
 
   ##
@@ -242,6 +263,34 @@ module ArclightHelper
   # Calls the method for a configured field
   def generic_render_document_field_label(config_field, document, field: field_name)
     send(:"render_document_#{config_field}_label", document, field: field)
+  end
+
+  ##
+  # Reduces a document's parent_ids to a set of nested ul/li that resembels
+  # the collection / component / subcomponent structure
+  def nested_component_lists(document)
+    document.parent_ids.reverse.reduce(''.html_safe) do |acc, parent_id|
+      content_tag(:ul) do
+        content_tag(:li, id: parent_id) do
+          safe_join(
+            [context_navigator_content(document, parent_id), acc]
+          )
+        end
+      end
+    end
+  end
+
+  def context_navigator_content(document, parent_id)
+    content_tag(
+      :div, '',
+      class: "context-navigator al-hierarchy-level-#{document.component_level} documents-hierarchy",
+      data: { arclight: {
+        level: document.parent_ids.index(parent_id) + 1,
+        path: search_catalog_path(hierarchy_context: 'component'),
+        name: document.collection_name, parent: parent_id,
+        originalDocument: document.id, originalParents: document.parent_ids
+      } }
+    )
   end
 
   private

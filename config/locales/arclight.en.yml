@@ -9,6 +9,7 @@ en:
       scope_and_contents: Scope and Contents
       view_all: View
     masthead_heading: Archival Collections at Institution
+    repositories: Repositories
     request:
       container: Request
     routes:
@@ -16,16 +17,19 @@ en:
       home: Home
       repositories: Repositories
       search_results: Search results
+    search:
+      collections_header: Collections
+      repository_header: 'Collections : [%{repository}]'
     show_breadcrumb_label: Repository
     truncation:
       view_less: view less ▼
       view_more: view more ▶
     views:
+      home:
+        title: Archival Collections at Institution - Arclight
       index:
         all_group_results: view all %{count}
         all_results: All results
-        collection_search:
-          count: collection
         group_by_collection: Grouped by collection
         group_results: Group results
         group_results_count:
@@ -43,6 +47,8 @@ en:
           one: 1 collection
           other: "%{count} collections"
           zero: No collections
+        show: "%{name} - Arclight"
+        title: Repositories - Arclight
         view_all_collections: View all of our collections
         view_more: View more
       show:
