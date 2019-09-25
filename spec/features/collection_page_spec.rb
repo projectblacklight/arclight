@@ -11,9 +11,8 @@ RSpec.describe 'Collection Page', type: :feature do
 
   describe 'arclight document header' do
     it 'includes a div with the repository and collection ID' do
-      within('.al-document-title-bar') do
+      within('.al-show-breadcrumb') do
         expect(page).to have_content 'National Library of Medicine. History of Medicine Division'
-        expect(page).to have_content 'Collection ID: MS C 271'
       end
     end
   end
@@ -21,7 +20,7 @@ RSpec.describe 'Collection Page', type: :feature do
   describe 'online content indicator' do
     context 'when there is online content available' do
       it 'is rendered' do
-        expect(page).to have_css('.badge-success', text: 'online content')
+        expect(page).to have_css('.nav-link', text: 'Online content')
       end
     end
 
@@ -30,23 +29,6 @@ RSpec.describe 'Collection Page', type: :feature do
 
       it 'is not rendered' do
         expect(page).not_to have_css('.badge-success', text: 'online content')
-      end
-    end
-
-    context 'when there are more than 10 components with online content', js: true do
-      let(:doc_id) { 'a0011-xml' }
-
-      it 'renders the component links with pagination' do
-        expect(page).to have_css('.badge-success', text: 'online content')
-
-        click_on class: 'nav-link', text: 'Online content'
-        within '#online-content' do
-          expect(page).to have_text('Box 1: Photograph Album')
-          click_on class: 'page-link', text: '2'
-          expect(page).to have_text('1917 July 12')
-          click_on class: 'page-link', text: '1'
-          expect(page).to have_text('Box 1: Photograph Album')
-        end
       end
     end
   end

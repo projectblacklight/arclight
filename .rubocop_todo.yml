@@ -16,7 +16,6 @@ Lint/AmbiguousBlockAssociation:
 Lint/Void:
   Exclude:
     - 'lib/arclight/year_range.rb'
-    - 'lib/arclight/traject/ead2_config.rb'
 
 # Offense count: 68
 # Configuration parameters: CountComments, ExcludedMethods.
@@ -24,12 +23,6 @@ Metrics/BlockLength:
   Max: 278
   Exclude:
     - 'spec/features/collection_page_spec.rb'
-
-# Offense count: 412
-# Configuration parameters: AllowHeredoc, AllowURI, URISchemes, IgnoreCopDirectives, IgnoredPatterns.
-# URISchemes: http, https
-Metrics/LineLength:
-  Max: 153
 
 # Offense count: 1
 # Configuration parameters: CountComments, ExcludedMethods.

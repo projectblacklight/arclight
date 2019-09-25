@@ -47,124 +47,46 @@
     return newDocs;
   }
 
-  /** Class for generating placeholder markup for the AJAX requests */
-  function Placeholder() {
-
-    /**
-     * Generate the placeholder markup
-     * @return {string} the HTML for the placeholder
-     */
-    this.render = function() {
-      var html = '<div class="al-hierarchy-placeholder">' +
+  CollectionNavigation = {
+    init: function (el) {
+      var $el = $(el);
+      var data = $el.data();
+      // Add a placeholder so flashes of text are not as significant
+      var placeholder = '<div class="al-hierarchy-placeholder">' +
                           '<h3 class="col-md-9"></h3>' +
                           '<p class="col-md-6"></p>' +
                           '<p class="col-md-12"></p>' +
                           '<p class="col-md-3"></p>' +
                         '</div>';
-      var output = new Array(3).join(html);
-      return output;
-    }
-  }
-
-  /**
-    * Class for handling responses from the catalog endpoint
-    * @param {ContentRequest} request
-    */
-  function ContentResponse(request) {
-    this.request = request;
-
-    /**
-     * Resolve the response and invoke a callback for the payload
-     */
-    this.resolve = function(callback) {
-      this.request.send(callback);
-    }
-  }
-
-  /** Class for transmitting and receiving requests from the catalog endpoint */
-  function ContentRequest($el, data) {
-    this.$el = $el;
-    this.data = data;
-
-    /**
-     * Generate the response
-     * @return {ContentResponse} the response object
-     */
-    this.getResponse = function() {
-      return new ContentResponse(this);
-    }
-
-    /**
-     * @param {function} callback a function which takes the server payload as an argument
-     */
-    this.send = function(callback) {
-      var placeholder = new Placeholder();
-      this.$el.html(placeholder.render());
-      var requestData = {
-        'f[component_level_isim][]': this.data.arclight.level,
-        'f[has_online_content_ssim][]': this.data.arclight.access,
-        'f[collection_sim][]': this.data.arclight.name,
-        'f[parent_ssi][]': this.data.arclight.parent,
-        search_field: this.data.arclight.search_field,
-        view: this.data.arclight.view || 'hierarchy',
-        limit: this.data.arclight.limit || 10
-      };
-
-      var that = this;
+      placeholder = new Array(3).join(placeholder);
+      $el.html(placeholder);
       $.ajax({
-        url: this.data.arclight.path,
-        data: requestData
-      }).done(function(response) {
-        this.resp = $.parseHTML(response);
-        this.$doc = $(this.resp);
-        var showDocs = this.$doc.find('article.document');
-        var newDocs = this.$doc.find('#documents');
-        var paginationElements = this.$doc.find('.pagination');
+        url: data.arclight.path,
+        data: {
+          'f[component_level_isim][]': data.arclight.level,
+          'f[has_online_content_ssim][]': data.arclight.access,
+          'f[collection_sim][]': data.arclight.name,
+          'f[parent_ssi][]': data.arclight.parent,
+          search_field: data.arclight.search_field,
+          view: data.arclight.view || 'hierarchy'
+        }
+      }).done(function (response) {
+        var resp = $.parseHTML(response);
+        var $doc = $(resp);
+        var showDocs = $doc.find('article.document');
+        var newDocs = $doc.find('#documents');
 
         // Add a highlight class for the article matching the highlight id
-        if (that.data.arclight.highlightId) {
-          // This should be removed from the global scope
-          newDocs = convertDocsForContext(that.data.arclight.highlightId, this.$doc);
+        if (data.arclight.highlightId) {
+          newDocs = convertDocsForContext(data.arclight.highlightId, $doc);
         }
 
-        // Ensure that the pagination elements are added to the AJAX-loaded
-        // content
-        if (paginationElements.length > 0) {
-          newDocs.append(paginationElements);
-
-          // Override the handlers to refresh the content
-          var paginationLinks = paginationElements.find('a')
-          paginationLinks.on('click', function(e) {
-            e.preventDefault();
-
-            var $linkElement = $(e.target);
-            var href = $linkElement.attr('href');
-            that.data.arclight.path = href;
-            that.send();
-          });
-        }
-
-        // Invoke the callback
-        if (callback) {
-          callback.call(response, this);
-        }
-
-        that.$el.hide().html(newDocs).fadeIn(500);
+        $el.hide().html(newDocs).fadeIn(500);
         if (showDocs.length > 0) {
-          that.$el.trigger('navigation.contains.elements');
+          $el.trigger('navigation.contains.elements');
         }
         Blacklight.doBookmarkToggleBehavior();
       });
-    }
-  }
-
-  CollectionNavigation = {
-    init: function (el) {
-      var $el = $(el);
-      var data = $el.data();
-      var request = new ContentRequest($el, data);
-      var response = request.getResponse();
-      response.resolve();
     }
   };
 
