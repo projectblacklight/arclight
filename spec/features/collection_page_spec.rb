@@ -339,4 +339,32 @@ RSpec.describe 'Collection Page', type: :feature do
       expect(page).to have_css('.al-show-actions-box-downloads-file', text: 'Download EAD (123456)')
     end
   end
+
+  describe 'actions box' do
+    before do
+      visit solr_document_path(id: doc_id)
+    end
+
+    context 'with EAD documents which are requestable using Aeon' do
+      let(:doc_id) { 'aoa271aspace_563a320bb37d24a9e1e6f7bf95b52671' }
+
+      it 'render links to the Google Form' do
+        within '.al-show-actions-box' do
+          expect(page).to have_css '.al-request-form'
+          expect(page).to have_css '.al-request-form[action*="https://docs.google.com"]'
+        end
+      end
+    end
+
+    context 'with a Google Form configured for requesting items' do
+      let(:doc_id) { 'm0198-xmlaspace_ref11_d0s' }
+
+      it 'renders links to the Aeon request form' do
+        within '.al-show-actions-box' do
+          expect(page).to have_css '.al-action-box-request'
+          expect(page).to have_css '.al-action-box-request a[href*="https://sample.request.com"]'
+        end
+      end
+    end
+  end
 end

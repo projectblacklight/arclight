@@ -17,8 +17,12 @@
 
   <div class='mt-2 mb-1 pt-1 pt-2 al-show-actions-box-options'>
     <% if requestable %>
-      <div class='mr-auto al-show-actions-box-request'>
+      <div class='mr-auto al-action-box-request'>
+        <% if ead_files(document).present? %>
+          <%= render partial: 'arclight/requests/aeon_web_ead', locals: { document: document } %>
+        <% else %>
           <%= render partial: 'arclight/requests/google_form', locals: { document: document } %>
+        <% end %>
       </div>
     <% end %>
 
