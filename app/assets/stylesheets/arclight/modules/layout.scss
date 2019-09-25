@@ -1,8 +1,3 @@
-.row.al-show {
-  padding-top: 0.8rem;
-  padding-bottom: 0.8rem;
-}
-
 .al-search-breadcrumb,
 .al-show-breadcrumb {
   font-size: $font-size-sm;
@@ -25,20 +20,10 @@
   &-options {
     display: flex;
     align-items: center;
-    margin-top: 0.64rem;
-    margin-bottom: 0.16rem;
-    padding-top: 0.24rem;
-    padding-bottom: 0.08rem;
   }
 
   &-downloads {
-    padding: 0.32rem 0;
-
     &-file {
-      padding: 0.24rem 0;
-      margin-left: -0.06rem;
-      margin-right: -0.06rem;
-
       &.blacklight-icons {
         width: 1.24rem;
         svg {
