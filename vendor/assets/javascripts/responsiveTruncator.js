@@ -8,7 +8,7 @@
 **/
 (function( $ ){
   $.fn.responsiveTruncate = function(options){
-	  var $this = this;
+		var $this = this;
 		$(window).bind("resize", function(){
 			removeTruncation($this);
 			addTruncation($this);
@@ -45,7 +45,7 @@
 						toggle_link.click(function(){
 						  var text = toggle_link.text() == settings.more ? settings.less : settings.more;
 							toggle_link.text(text);
-							if(truncate.height() == truncate_height){
+							if(truncate.height() <= truncate_height){
 								truncate.css({height: '100%'})
 							}else{
 								truncate.css({height: truncate_height})
