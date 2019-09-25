@@ -89,6 +89,7 @@ class ContextNavigation {
     }
   }
 
+  // eslint-disable-next-line class-methods-use-this
   truncateItems() {
     $('[data-arclight-truncate="true"]').each(function (_, el) {
       $(el).responsiveTruncate({
