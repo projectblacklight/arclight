@@ -18,10 +18,6 @@
     </div>
   </div>
 
-  <%= content_tag('div', class: 'al-document-abstract-or-scope') do %>
-    <%= content_tag('div', I18n.t('arclight.hierarchy.scope_and_contents'), class: 'al-hierarchy-sub-heading') %>
-    <%= content_tag('div', 'data-arclight-truncate' => true) do %>
-      <%= document.abstract_or_scope %>
-    <% end %>
-  <% end if document.abstract_or_scope %>
+  <%= render partial: 'arclight_abstract_or_scope', locals: { document: document } %>
+
 </li>

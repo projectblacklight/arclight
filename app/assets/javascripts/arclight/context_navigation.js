@@ -46,7 +46,9 @@ class ContextNavigation {
         'f[parent_ssi][]': this.data.arclight.parent,
         search_field: this.data.arclight.search_field,
         view: 'collection_context'
-      }
+        
+      },
+      success: this.truncateItems()
     }).done((response) => that.updateView(response));
   }
 
@@ -86,6 +88,15 @@ class ContextNavigation {
       const afterDocs = newDocs.slice(newDocIndex + 1, newDocs.length);
       that.parentLi.after(afterDocs.map(newDoc => newDoc.render()).join('')).fadeIn(500);
     }
+  }
+
+  truncateItems() {
+    $('[data-arclight-truncate="true"]').each(function (_, el) {
+      $(el).responsiveTruncate({
+        more: "<%= I18n.t 'arclight.truncation.view_more' %>",
+        less: "<%= I18n.t 'arclight.truncation.view_less' %>"
+      });
+    });
   }
 }
 
