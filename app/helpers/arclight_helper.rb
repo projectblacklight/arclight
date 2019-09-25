@@ -146,7 +146,7 @@ module ArclightHelper
   #
   # @return [Repository]
   def repository_faceted_on
-    return unless try(:search_state)
+    return unless try(:search_state) and params['f'].keys.include?('repository_sim')
 
     repos = facets_from_request.find { |f| f.name == 'repository_sim' }.try(:items)
     faceted = repos && repos.length == 1 && repos.first.value
