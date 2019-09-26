@@ -11,7 +11,7 @@
     <hr>
     <% add_hash = { "group" => "true" } %>
     <% new_params = params.permit(params.keys).merge(add_hash) %>
-    <%= link_to "Group by collection", new_params, { class: "dropdown-item" } %>
+    <%= link_to t('arclight.search.sort_option_by_group'), new_params, { class: "dropdown-item" } %>
   </div>
 </div>
 <% end %>

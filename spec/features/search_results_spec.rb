@@ -143,27 +143,20 @@ RSpec.describe 'Search results', type: :feature do
 
       expect(page).not_to have_css('.al-repository-card')
     end
-  end
-  describe 'date range histogram', js: true do
-    before do
-      visit search_catalog_path q: '', search_field: 'all_fields'
-    end
-    it 'is not present on load' do
-      expect(page).to have_css '.distribution.subsection.chart_js', visible: false
-    end
-    it 'is showable' do
-      expect(page).to have_css '.distribution.subsection.chart_js', visible: false
-      page.find('[href="#al-date-range-histogram-content"]').click
-      within '.distribution.subsection.chart_js' do
-        expect(page).to have_css 'canvas', visible: true
-      end
+    it 'does not include repository card if faceted on something that is not repository' do
+      visit search_catalog_path f: {
+        names_ssim: ['Owner of the reel of yellow nylon rope']
+      }, search_field: 'all_fields'
+
+      expect(page).not_to have_css('.al-repository-card')
     end
   end
   describe 'sorting' do
     it 'provides a dropdown with all the options' do
       visit search_catalog_path q: '', search_field: 'all_fields'
       within '.sort-dropdown' do
-        expect(page).to have_css '.dropdown-item', count: 7
+        expect(page).to have_css '.dropdown-item', count: 8
+        expect(page).to have_css('a.dropdown-item', text: 'Group by collection')
       end
     end
   end

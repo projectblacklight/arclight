@@ -2,9 +2,6 @@
 en:
   arclight:
     breadcrumb_separator: " » "
-    date_range_histogram:
-      hide: Hide date distribution
-      show: Show date distribution
     hierarchy:
       scope_and_contents: Scope and Contents
       view_all: View
@@ -20,6 +17,7 @@ en:
     search:
       collections_header: Collections
       repository_header: 'Collections : [%{repository}]'
+      sort_option_by_group: Group by collection
     show_breadcrumb_label: Repository
     truncation:
       view_less: view less ▼
