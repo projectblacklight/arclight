@@ -3,7 +3,8 @@
 module Arclight
   ##
   # Model the Download links that can be configured (via YAML) for a collection
-  class CollectionDownloads
+  # or container
+  class DocumentDownloads
     attr_reader :document
 
     def initialize(document, id = nil)
@@ -11,21 +12,26 @@ module Arclight
       @id = id
     end
 
+    # Accessor for the ID
+    # @return [String]
     def id
       @id || document.unitid
     end
 
+    # Factory method for the File objects
+    # @return [Array<Arclight::DocumentDownloads::File>]
     def files
       data = self.class.config[id] || self.class.config['default']
-      return [] if data['disabled']
+      disabled = data.delete('disabled')
+      return [] if disabled
 
       @files ||= data.map do |file_type, file_data|
-        Arclight::CollectionDownloads::File.new(type: file_type, data: file_data, document: document)
+        self.class.file_class.new(type: file_type, data: file_data, document: document)
       end.compact
     end
 
     def to_partial_path
-      'catalog/collection_downloads'
+      'catalog/document_downloads'
     end
 
     class << self
@@ -39,6 +45,12 @@ module Arclight
 
       def config_filename
         Rails.root.join('config', 'downloads.yml')
+      end
+
+      # Accessor for the File Class
+      # @return [Class]
+      def file_class
+        File
       end
     end
 

@@ -15,14 +15,16 @@
     <% end %>
   </div>
 
-  <div class='mr-auto'>
-    <%= render partial: 'catalog/bookmark_control', locals: { document: document } %>
-  </div>
+  <div class='mt-2 mb-1 pt-1 pt-2 al-show-actions-box-options'>
+    <% if requestable %>
+      <div class='mr-auto al-show-actions-box-request'>
+          <%= render partial: 'arclight/requests/google_form', locals: { document: document } %>
+      </div>
+    <% end %>
 
-  <% if requestable %>
-    <div class='mr-auto al-action-box-request'>
-        <%= render partial: 'arclight/requests/google_form', locals: { document: document } %>
+    <div class='mr-auto al-show-actions-box-bookmarks'>
+      <%= render partial: 'catalog/bookmark_control', locals: { document: document } %>
     </div>
-  <% end %>
-
+  </div>
+  <%= render document.downloads %>
 </div>

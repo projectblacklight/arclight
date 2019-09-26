@@ -201,7 +201,7 @@ module ArclightHelper
   end
 
   def ead_files(document)
-    files = Arclight::CollectionDownloads.new(document, document.collection_unitid).files
+    files = Arclight::DocumentDownloads.new(document, document.collection_unitid).files
     files.find do |file|
       file.type == 'ead'
     end

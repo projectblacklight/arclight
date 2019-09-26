@@ -4,8 +4,25 @@ require 'spec_helper'
 
 RSpec.describe 'Component Page', type: :feature do
   let(:doc_id) { 'aoa271aspace_843e8f9f22bac69872d0802d6fffbb04' }
+  let(:download_config) do
+    ActiveSupport::HashWithIndifferentAccess.new(
+      default: {
+        pdf: {
+          href: 'http://example.com/sample.pdf',
+          size: '1.23MB'
+        },
+        ead: {
+          href: 'http://example.com/sample.xml',
+          size: 123_456
+        }
+      }
+    )
+  end
 
-  before { visit solr_document_path(id: doc_id) }
+  before do
+    allow(Arclight::DocumentDownloads).to receive(:config).and_return(download_config)
+    visit solr_document_path(id: doc_id)
+  end
 
   describe 'tabbed display' do
     it 'clicking contents toggles visibility', js: true do
@@ -178,6 +195,15 @@ RSpec.describe 'Component Page', type: :feature do
         expect(page).to have_css 'a', text: 'Series I: Administrative Records, 1902-1976, bulk 1975-1976'
         expect(page).to have_css 'a', count: 3
       end
+    end
+  end
+
+  context 'content with file downloads', js: true do
+    let(:doc_id) { 'a0011-xmlaspace_ref6_lx4' }
+
+    it 'renders links to the files for download' do
+      expect(page).to have_css('.al-show-actions-box-downloads-file', text: 'Download finding aid (1.23MB)')
+      expect(page).to have_css('.al-show-actions-box-downloads-file', text: 'Download EAD (123456)')
     end
   end
 end
