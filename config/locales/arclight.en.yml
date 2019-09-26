@@ -2,9 +2,6 @@
 en:
   arclight:
     breadcrumb_separator: " » "
-    date_range_histogram:
-      hide: Hide date distribution
-      show: Show date distribution
     hierarchy:
       scope_and_contents: Scope and Contents
       view_all: View
