@@ -322,10 +322,10 @@ RSpec.describe ArclightHelper, type: :helper do
     context 'when searching all collections' do
       before do
         expect(helper).to receive_messages(
-          facets_from_request: [],
           search_state: instance_double(
             'Blacklight::SearchState', params_for_search: { 'f' => { 'level_sim' => ['Collection'] } }
-          )
+          ),
+          facet_field_in_params?: false
         )
       end
 
