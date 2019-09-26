@@ -324,7 +324,8 @@ RSpec.describe ArclightHelper, type: :helper do
         expect(helper).to receive_messages(
           search_state: instance_double(
             'Blacklight::SearchState', params_for_search: { 'f' => { 'level_sim' => ['Collection'] } }
-          )
+          ),
+          facet_field_in_params?: false
         )
       end
 

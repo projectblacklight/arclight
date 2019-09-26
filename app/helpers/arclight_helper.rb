@@ -167,10 +167,9 @@ module ArclightHelper
   #
   # @return [Repository]
   def repository_faceted_on
-    search_fields = params.fetch('f', nil)
-    return unless try(:search_state) && search_fields
+    return unless try(:search_state) && facet_field_in_params?('repository_sim')
 
-    repos = Array(search_fields['repository_sim'])
+    repos = Array(facet_params('repository_sim'))
     faceted = repos && repos.length == 1 && repos.first
     Arclight::Repository.find_by(name: repos.first) if faceted
   end
