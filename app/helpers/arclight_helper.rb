@@ -284,12 +284,16 @@ module ArclightHelper
     content_tag(
       :div, '',
       class: "context-navigator al-hierarchy-level-#{document.component_level} documents-hierarchy",
-      data: { arclight: {
-        level: document.parent_ids.index(parent_id) + 1,
-        path: search_catalog_path(hierarchy_context: 'component'),
-        name: document.collection_name, parent: parent_id,
-        originalDocument: document.id, originalParents: document.parent_ids
-      } }
+      data: {
+        arclight: {
+          level: document.parent_ids.index(parent_id) + 1,
+          path: search_catalog_path(hierarchy_context: 'component'),
+          name: document.collection_name,
+          parent: parent_id,
+          originalDocument: document.id,
+          originalParents: document.parent_ids
+        }
+      }
     )
   end
 
