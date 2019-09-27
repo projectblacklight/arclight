@@ -167,11 +167,11 @@ module ArclightHelper
   #
   # @return [Repository]
   def repository_faceted_on
-    return unless try(:search_state)
+    return unless try(:search_state) && facet_field_in_params?('repository_sim')
 
-    repos = facets_from_request.find { |f| f.name == 'repository_sim' }.try(:items)
-    faceted = repos && repos.length == 1 && repos.first.value
-    Arclight::Repository.find_by(name: repos.first.value) if faceted
+    repos = Array(facet_params('repository_sim'))
+    faceted = repos && repos.length == 1 && repos.first
+    Arclight::Repository.find_by(name: repos.first) if faceted
   end
 
   def hierarchy_component_context?
@@ -201,7 +201,7 @@ module ArclightHelper
   end
 
   def ead_files(document)
-    files = Arclight::CollectionDownloads.new(document, document.collection_unitid).files
+    files = Arclight::DocumentDownloads.new(document, document.collection_unitid).files
     files.find do |file|
       file.type == 'ead'
     end

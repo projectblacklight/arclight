@@ -137,5 +137,11 @@ module Arclight
 
       highlight_response[id][:text]
     end
+
+    # Factory method for constructing the Object modeling downloads
+    # @return [DocumentDownloads]
+    def downloads
+      @downloads ||= DocumentDownloads.new(self)
+    end
   end
 end
