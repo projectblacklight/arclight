@@ -1,11 +1,7 @@
-<% requestable = item_requestable?('', { document: document }) %>
-
-<% if requestable %>
+<% if item_requestable?('', { document: document }) %>
   <div class='mr-auto al-show-actions-box-request'>
-    <% if ead_files(document).present? %>
-      <%= render partial: 'arclight/requests/aeon_web_ead', locals: { document: document } %>
-    <% else %>
-      <%= render partial: 'arclight/requests/google_form', locals: { document: document } %>
+    <% document.repository_config.available_request_types.each do |request_type| %>
+      <%= render partial: "arclight/requests/#{request_type}", locals: { document: document } %>
     <% end %>
   </div>
 <% end %>
