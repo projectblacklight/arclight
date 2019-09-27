@@ -28,7 +28,7 @@ RSpec.describe 'arclight/_requests.html.erb', type: :view do
 
     it 'renders links to the Aeon request form' do
       expect(rendered).to have_css '.al-show-actions-box-request'
-      expect(rendered).to have_css '.al-show-actions-box-request a[href*="https://sample.request.com"]'
+      expect(rendered).to have_css '.al-show-actions-box-request a[href^="https://sample.request.com"]'
     end
   end
 
@@ -59,8 +59,8 @@ RSpec.describe 'arclight/_requests.html.erb', type: :view do
     end
 
     it 'renders links to the external Aeon request endpoint' do
-      expect(rendered).to have_css '.al-request-button'
-      expect(rendered).to have_css '.al-request-button a[href*="https://example.com/aeon/aeon.dll"]'
+      expect(rendered).to have_css '.al-request-form'
+      expect(rendered).to have_css '.al-request-form[action^="https://example.com/aeon/aeon.dll"]'
     end
   end
 end

@@ -63,6 +63,7 @@ RSpec.describe 'Component Page', type: :feature do
     it 'includes names dt subheading text' do
       expect(page).to have_css('dt.blacklight-names_ssim', text: 'Names:')
     end
+
     it 'includes names dd link text' do
       expect(page).to have_css('dd a', text: "Robertson's Crab House")
     end
@@ -72,6 +73,7 @@ RSpec.describe 'Component Page', type: :feature do
     it 'includes places dt subheading text' do
       expect(page).to have_css('dt.blacklight-places_ssim', text: 'Places:')
     end
+
     it 'includes places dd link text' do
       expect(page).to have_css('dd a', text: 'Popes Creek (Md.)')
     end
@@ -83,6 +85,7 @@ RSpec.describe 'Component Page', type: :feature do
     it 'includes subjects dt subheading text' do
       expect(page).to have_css('dt.blacklight-access_subjects_ssim', text: 'Subjects:')
     end
+
     it 'includes subjects dd link text' do
       expect(page).to have_css('dd.blacklight-access_subjects_ssim a', text: 'Records')
     end
@@ -94,12 +97,14 @@ RSpec.describe 'Component Page', type: :feature do
     it 'uses our rules for displaying containers' do
       expect(page).to have_css('dd', text: 'Box 1, Folder 4-5')
     end
+
     it 'shows misc notes' do
       expect(page).to have_css('dt', text: 'Appraisal information')
       expect(page).to have_css('dd', text: /^Materials for this group were selected/)
       expect(page).to have_css('dt', text: 'Custodial history')
       expect(page).to have_css('dd', text: /^These papers were maintained by the staff/)
     end
+
     it 'multivalued notes are rendered as paragaphs' do
       within 'dd.blacklight-appraisal_ssm' do
         expect(page).to have_css('p', count: 2)
@@ -118,6 +123,7 @@ RSpec.describe 'Component Page', type: :feature do
         expect(page).not_to have_css 'form.bookmark-toggle' # no bookmarks
       end
     end
+
     context 'siblings and highlighted self' do
       it 'has all siblings' do
         within '#collection-context' do
@@ -156,6 +162,7 @@ RSpec.describe 'Component Page', type: :feature do
         expect(page).to have_css '.document-title-heading', text: 'Constitution and by-laws - drafts, 1902-1904'
       end
     end
+
     context 'duplicate titles' do
       let(:doc_id) { 'lc0100aspace_c5ef89d4ae68bb77e7c641f3edb3f1c8' }
 
@@ -173,6 +180,7 @@ RSpec.describe 'Component Page', type: :feature do
       expect(page).to have_css 'dt', text: 'LOCATION OF THIS COLLECTION:'
       expect(page).to have_css 'dd', text: 'Building 38, Room 1E-21'
     end
+
     it 'has a restrictions and access' do
       click_link 'Access'
       expect(page).to have_css 'dt', text: 'PARENT RESTRICTIONS:'
@@ -180,6 +188,7 @@ RSpec.describe 'Component Page', type: :feature do
       expect(page).to have_css 'dt', text: 'TERMS OF ACCESS:'
       expect(page).to have_css 'dd', text: /^Copyright was transferred to the public domain./
     end
+
     it 'has a contact' do
       click_link 'Access'
       expect(page).to have_css 'dt', text: 'CONTACT:'

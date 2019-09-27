@@ -29,6 +29,7 @@ RSpec.describe Arclight::Requests::AeonWebEad do
     it 'converts string from config to hash' do
       expect(form_mapping).to be_an Hash
     end
+
     it 'has valid key/value pairs' do
       expect(form_mapping).to include('Action' => '10', 'Form' => '31', 'Value' => 'http://example.com/sample.xml')
     end

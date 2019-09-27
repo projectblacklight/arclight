@@ -11,6 +11,7 @@ RSpec.describe 'Many component EAD', type: :feature do
         expect(page).to have_css '.blacklight-file', count: 202
       end
     end
+
     it 'includes all children' do
       click_link 'Contents'
       within '#contents' do
