@@ -16,6 +16,22 @@
   font-size: $font-size-sm;
   height: 100%;
   padding: $spacer;
+
+  &-options {
+    display: flex;
+    align-items: center;
+  }
+
+  &-downloads {
+    &-file {
+      &.blacklight-icons {
+        width: 1.24rem;
+        svg {
+          fill: $secondary;
+        }
+      }
+    }
+  }
 }
 
 .al-show-breadcrumb h1 { font-size: 1.5rem; }
@@ -86,3 +102,5 @@ a.al-toggle-view-all{
 dl dd {
   overflow-wrap: break-word;
 }
+
+
