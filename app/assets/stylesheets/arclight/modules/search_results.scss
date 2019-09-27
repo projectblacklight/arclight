@@ -154,11 +154,6 @@ article.document {
   fill: $gray-600;
 }
 
-.btn-outline-secondary:not(:disabled):not(.disabled).active svg, .btn-outline-secondary:hover svg {fill: #fff;}
-
-.btn-outline-secondary:not(:disabled):not(.disabled).active, .show > .btn-outline-secondary.dropdown-toggle {
-    color: #fff;
-    fill: white;
-    background-color: #6c757d;
-    border-color: #6c757d;
+.btn-outline-secondary:not(:disabled):not(.disabled).active svg, .btn-outline-secondary:hover svg {
+  fill: #fff;
 }
