@@ -21,6 +21,7 @@ module Arclight
         helper_method :item_requestable?
         helper_method :paragraph_separator
         helper_method :link_to_name_facet
+        helper_method :render_html_tags
       end
     end
 
@@ -95,6 +96,10 @@ module Arclight
           view_context.search_action_path(f: { names_ssim: [value] })
         )
       end.to_sentence(options).html_safe
+    end
+
+    def render_html_tags(args)
+      safe_join(args[:value].map { |value| content_tag(:p, value.html_safe) })
     end
   end
 end

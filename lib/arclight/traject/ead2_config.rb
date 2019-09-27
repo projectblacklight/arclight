@@ -14,9 +14,11 @@ require 'arclight/digital_object'
 require 'arclight/year_range'
 require 'arclight/repository'
 require 'arclight/missing_id_strategy'
+require 'arclight/traject/macros.rb'
 require 'arclight/traject/nokogiri_namespaceless_reader'
 
 # rubocop:disable Style/MixinUsage
+extend Arclight::Traject::Macros
 extend TrajectPlus::Macros
 # rubocop:enable Style/MixinUsage
 
@@ -213,13 +215,13 @@ to_field 'date_range_sim', extract_xpath('/ead/archdesc/did/unitdate/@normal', t
 end
 
 SEARCHABLE_NOTES_FIELDS.map do |selector|
-  to_field "#{selector}_ssm", extract_xpath("/ead/archdesc/#{selector}/*[local-name()!='head']")
+  to_field "#{selector}_ssm", extract_xpath("/ead/archdesc/#{selector}/*[local-name()!='head']", to_text: false), format_tags
   to_field "#{selector}_heading_ssm", extract_xpath("/ead/archdesc/#{selector}/head") unless selector == 'prefercite'
   to_field "#{selector}_teim", extract_xpath("/ead/archdesc/#{selector}/*[local-name()!='head']")
 end
 
 DID_SEARCHABLE_NOTES_FIELDS.map do |selector|
-  to_field "#{selector}_ssm", extract_xpath("/ead/archdesc/did/#{selector}")
+  to_field "#{selector}_ssm", extract_xpath("/ead/archdesc/did/#{selector}", to_text: false), format_tags
 end
 
 NAME_ELEMENTS.map do |selector|
@@ -241,6 +243,8 @@ to_field 'descrules_ssm', extract_xpath('/ead/eadheader/profiledesc/descrules')
 # =============================
 
 compose 'components', ->(record, accumulator, _context) { accumulator.concat record.xpath('//*[is_component(.)]', NokogiriXpathExtensions.new) } do
+  extend Arclight::Traject::Macros
+
   to_field 'ref_ssi' do |record, accumulator, context|
     accumulator << if record.attribute('id').blank?
                      strategy = Arclight::MissingIdStrategy.selected
@@ -456,12 +460,12 @@ compose 'components', ->(record, accumulator, _context) { accumulator.concat rec
   end
 
   SEARCHABLE_NOTES_FIELDS.map do |selector|
-    to_field "#{selector}_ssm", extract_xpath("./#{selector}/*[local-name()!='head']")
+    to_field "#{selector}_ssm", extract_xpath("./#{selector}/*[local-name()!='head']", to_text: false), format_tags
     to_field "#{selector}_heading_ssm", extract_xpath("./#{selector}/head")
     to_field "#{selector}_teim", extract_xpath("./#{selector}/*[local-name()!='head']")
   end
   DID_SEARCHABLE_NOTES_FIELDS.map do |selector|
-    to_field "#{selector}_ssm", extract_xpath("./did/#{selector}")
+    to_field "#{selector}_ssm", extract_xpath("./did/#{selector}", to_text: false), format_tags
   end
   to_field 'did_note_ssm', extract_xpath('./did/note')
 end

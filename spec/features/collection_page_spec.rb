@@ -63,10 +63,8 @@ RSpec.describe 'Collection Page', type: :feature do
     end
 
     it 'multivalued notes are rendered as paragaphs' do
-      within 'dd.blacklight-bioghist_ssm' do
+      within 'dd.blacklight-relatedmaterial_ssm' do
         expect(page).to have_css('p', count: 2)
-        expect(page).to have_css('p', text: /^Alpha Omega Alpha Honor Medical Society was founded/)
-        expect(page).to have_css('p', text: /^Root and his fellow medical students/)
       end
       within 'dd.blacklight-abstract_ssm' do
         expect(page).to have_css('p', count: 2)
@@ -155,6 +153,21 @@ RSpec.describe 'Collection Page', type: :feature do
 
       it 'are not displayed' do
         expect(page).not_to have_css('.al-show-sub-heading', text: 'Related')
+      end
+    end
+  end
+
+  describe 'elements with formatting' do
+    it 'renders html tags for formatted elements' do
+      within '#background' do
+        expect(page).to have_css('ul li', text: 'June E. Osborn, M.D., Chairman')
+        expect(page).to have_css('ol li', text: /^Title: How I Love the Old Black Cat/)
+        expect(page).to have_css('ul li em', text: /^The Happy Marriage/)
+        expect(page).to have_css('table.deflist thead th', text: 'Abbreviation')
+        expect(page).to have_css('strong', text: /^College of Physicians/)
+        expect(page).to have_css('small.text-uppercase', text: /^\[Excerpted from/)
+        expect(page).to have_css('table.chronlist caption', text: 'Julia Stockton Rush')
+        expect(page).to have_css('table.chronlist tbody tr td', text: '1759')
       end
     end
   end

@@ -696,6 +696,7 @@ describe 'EAD 2 traject indexing', type: :feature do
       expect(result['normalized_title_ssm']).to include_ignoring_whitespace 'Stanford University student life photograph album, circa 1900-1906'
     end
   end
+
   describe 'EAD top level is not "collection"' do
     let(:fixture_path) do
       Arclight::Engine.root.join('spec', 'fixtures', 'ead', 'sample', 'no-ids-recordgrp-level.xml')
@@ -711,6 +712,47 @@ describe 'EAD 2 traject indexing', type: :feature do
 
     it 'retains both original level & Collection for faceting' do
       expect(result['level_sim']).to eq ['Record Group', 'Collection']
+    end
+  end
+
+  describe 'elements with lists & other formatting' do
+    let(:fixture_path) do
+      Arclight::Engine.root.join('spec', 'fixtures', 'ead', 'nlm', 'alphaomegaalpha.xml')
+    end
+
+    describe 'lists' do
+      it 'transforms <list> to html <ul> or <ol>' do
+        expect(result['scopecontent_ssm']).to include(
+          a_string_matching(%r{^<strong>Commission Members List<\/strong><ul>\n<li>June E. Osborn, M.D., Chairman<\/li>})
+        )
+        expect(result['scopecontent_ssm']).to include(a_string_matching(%r{^<strong>Track List<\/strong><ol>\n<li>Title: How I Love the Old Black Cat}))
+      end
+
+      it 'transforms <deflist> to html <table>' do
+        expect(result['scopecontent_ssm']).to include(a_string_matching(/^<table class="table deflist">/))
+      end
+
+      it 'transforms <chronlist> to html <table>' do
+        expect(result['bioghist_ssm']).to include(a_string_matching(/^<table class="table chronlist">/))
+      end
+    end
+
+    describe 'other formatting' do
+      it 'wraps [@render="bold"] with html <strong>' do
+        expect(result['bioghist_ssm']).to include(a_string_matching(%r{<strong>College of Physicians and \n        Surgeons in Chicago<\/strong>}))
+      end
+
+      it 'wraps [@render="italic"] with html <em>' do
+        expect(result['bioghist_ssm']).to include(a_string_matching(/<em>a condition which associated the name medical student/))
+      end
+
+      it 'wraps [@render="smcaps"] with html <small>' do
+        expect(result['bioghist_ssm'].second).to match(%r{<small class=\"text-uppercase\">\[Excerpted from Alpha Omega Alpha website.\]<\/small>})
+      end
+
+      it 'transforms @render formatting within lists' do
+        expect(result['scopecontent_ssm']).to include(a_string_matching(%r{<em>The Happy Marriage, and Other Poems<\/em>}))
+      end
     end
   end
 end
