@@ -4,7 +4,7 @@ require 'spec_helper'
 
 RSpec.describe 'Field-based search results', type: :feature do
   describe 'searches by' do
-    context '#all_fields' do
+    describe '#all_fields' do
       context 'for collections, fielded content is searchable by' do
         it 'title' do
           visit search_catalog_path q: 'student life', search_field: 'all_fields', f: { level_sim: ['Collection'] }
@@ -12,24 +12,28 @@ RSpec.describe 'Field-based search results', type: :feature do
             expect(page).to have_css '.index_title', text: /Stanford University student life photograph album/
           end
         end
+
         it 'biographical note' do
           visit search_catalog_path q: 'boorishness', search_field: 'all_fields'
           within('.document-position-0') do
             expect(page).to have_css '.index_title', text: /Alpha Omega Alpha Archives/
           end
         end
+
         it 'bioghist note' do
           visit search_catalog_path q: 'Hippocratic oath', search_field: 'all_fields'
           within('.document-position-0') do
             expect(page).to have_css '.index_title', text: /Alpha Omega Alpha Archives/
           end
         end
+
         it 'odd note without <p> tag' do
           visit search_catalog_path q: 'Jim Labosier', search_field: 'all_fields'
           within('.document-position-0') do
             expect(page).to have_css '.index_title', text: /Alpha Omega Alpha Archives/
           end
         end
+
         it 'relatedmaterial note with nested structured tags within a <p> tag' do
           visit search_catalog_path q: 'HMD MS ACC 496', search_field: 'all_fields'
           within('.document-position-0') do
@@ -44,12 +48,14 @@ RSpec.describe 'Field-based search results', type: :feature do
             expect(page).to have_css '.index_title', text: /A brief account/
           end
         end
+
         it 'userestrict note' do
           visit search_catalog_path q: 'Original photographs must be handled using gloves', search_field: 'all_fields'
           within('.document-position-0') do
             expect(page).to have_css '.index_title', text: /Series VI: Photographs/
           end
         end
+
         it 'unitid' do
           visit search_catalog_path q: 'MS C 271.VI', search_field: 'all_fields'
           within('.document-position-0') do
@@ -59,7 +65,7 @@ RSpec.describe 'Field-based search results', type: :feature do
       end
     end
 
-    context '#keyword' do
+    describe '#keyword' do
       it 'does a narrow search that has 1 hit' do
         visit search_catalog_path q: '"a brief account"', search_field: 'keyword'
         expect(page).to have_css '.index_title', count: 1
@@ -67,6 +73,7 @@ RSpec.describe 'Field-based search results', type: :feature do
           expect(page).to have_css '.index_title', text: /A brief account/
         end
       end
+
       it 'matches titles with a boost for multiple hits' do
         visit search_catalog_path q: 'alpha omega alpha archives', search_field: 'keyword'
         expect(page).to have_css '.index_title', count: 6

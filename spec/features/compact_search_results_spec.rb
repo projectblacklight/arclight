@@ -26,6 +26,7 @@ RSpec.describe 'Compact Search Results', type: :feature do
       expect(page).to have_css 'form.bookmark-toggle'
     end
   end
+
   it 'Shows highlights in compact view' do
     visit search_catalog_path q: 'william root', search_field: 'name'
     click_link 'Compact'

@@ -196,6 +196,7 @@ RSpec.describe 'Collection Page', type: :feature do
         expect(page).to have_css '#contents', visible: false
         expect(page).to have_css '#access', visible: true
       end
+
       it 'clicking online contents toggles visibility' do
         expect(page).to have_css '#context', visible: true
         expect(page).to have_css '#online-content', visible: false
@@ -262,9 +263,11 @@ RSpec.describe 'Collection Page', type: :feature do
     it 'contents are not visible by default' do
       expect(page).to have_css '#contents', visible: false
     end
+
     it 'context is visible' do
       expect(page).to have_css '#context', visible: true
     end
+
     describe 'interactions', js: true do
       before { click_link 'Contents' }
       it 'contents contain linked level 1 components' do
@@ -273,6 +276,7 @@ RSpec.describe 'Collection Page', type: :feature do
         end
         expect(page).to have_css '.show-document', text: /Series I: Administrative Records/
       end
+
       it 'component metadata' do
         within '#contents' do
           within '.document-position-0 ' do
@@ -283,6 +287,7 @@ RSpec.describe 'Collection Page', type: :feature do
           end
         end
       end
+
       it 'sub components are viewable and expandable' do
         within '#contents' do
           within '.document-position-0' do
@@ -303,6 +308,7 @@ RSpec.describe 'Collection Page', type: :feature do
           end
         end
       end
+
       it 'includes the number of direct children of the component' do
         within '.document-position-0' do
           expect(page).to have_css(
@@ -311,6 +317,7 @@ RSpec.describe 'Collection Page', type: :feature do
           )
         end
       end
+
       it 'has bookmark controls' do
         expect(page).to have_css 'form.bookmark-toggle', count: 8
       end

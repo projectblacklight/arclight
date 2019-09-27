@@ -40,6 +40,7 @@ RSpec.describe Arclight::FieldConfigHelpers do
       it do
         expect(helper.request_config_present(nil, document_with_repository)).to be true
       end
+
       context 'when no request config is present' do
         it do
           expect(helper.request_config_present(nil, document_without_request)).to be false

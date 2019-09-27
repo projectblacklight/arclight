@@ -4,7 +4,7 @@ require 'spec_helper'
 
 RSpec.describe 'Highlighted search results', type: :feature do
   describe 'when querying' do
-    context '#all_fields' do
+    describe '#all_fields' do
       it 'highlights the snippets' do
         visit search_catalog_path q: 'student life', search_field: 'all_fields'
         within '.document-position-0' do
@@ -15,12 +15,14 @@ RSpec.describe 'Highlighted search results', type: :feature do
           end
         end
       end
+
       it 'does not highlight the snippets on empty query' do
         visit search_catalog_path q: '', search_field: 'all_fields'
         within '.document-position-0' do
           expect(page).not_to have_css '.al-document-highlight'
         end
       end
+
       it 'does not highlight the snippets on hierarchy query' do
         visit search_catalog_path q: 'student life', search_field: 'all_fields', view: 'hierarchy'
         within '.document-position-0' do
@@ -28,7 +30,7 @@ RSpec.describe 'Highlighted search results', type: :feature do
         end
       end
     end
-    context '#name' do
+    describe '#name' do
       it 'highlights the snippets' do
         visit search_catalog_path q: 'william root', search_field: 'name'
         within '.document-position-0' do

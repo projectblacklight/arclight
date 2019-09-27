@@ -31,6 +31,7 @@ RSpec.describe Arclight::Requests::GoogleForm do
     it 'converts string from config to hash' do
       expect(form_mapping).to be_an Hash
     end
+
     it 'has valid key/value pairs' do
       expect(form_mapping).to include('collection_name' => 'abc', 'eadid' => '123')
     end
