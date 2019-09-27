@@ -1,9 +1,9 @@
 ---
 en:
   arclight:
+    breadcrumb_separator: " » "
     breadcrumbs:
       aria_label: breadcrumb
-    breadcrumb_separator: " » "
     date_range_histogram:
       hide: Hide date distribution
       show: Show date distribution
