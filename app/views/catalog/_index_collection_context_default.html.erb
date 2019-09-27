@@ -2,6 +2,18 @@
   <div class="documentHeader row" data-document-id="<%= document.id %>">
     <% requestable = item_requestable?('', { document: document }) %>
     <div class="index_title document-title-heading col-md-8">
+      <% if document.children? %>
+          <%= link_to(
+            blacklight_icon(:plus),
+            "##{document.reference}-collapsible-hierarchy",
+            class: 'al-toggle-view-all',
+            'aria-label': t('arclight.hierarchy.view_all'),
+              data: {
+                toggle: 'collapse'
+              }
+            )
+          %>
+      <% end %>
       <% if document.containers.present? %>
         <span class="document-title-containers">
           <%= document.containers.join(', ') %>:
@@ -24,4 +36,25 @@
       <%= document.abstract_or_scope %>
     <% end %>
   <% end if document.abstract_or_scope %>
+  <% if document.number_of_children > 0 %>
+    <%= content_tag(:div, id: "#{document.reference}-collapsible-hierarchy",
+      class: "collapse al-hierarchy-level-#{document.component_level}",
+    ) do %>
+
+      <%= content_tag(
+        :div, '',
+        class: 'al-contents',
+        data: {
+          arclight: {
+            hierarchy: true,
+            level: document.component_level + 1,
+            path: search_catalog_path,
+            name: document.collection_name,
+            parent: document.reference
+          }
+        }
+      ) %>
+
+    <% end %>
+  <% end %>
 </li>
