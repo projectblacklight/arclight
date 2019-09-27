@@ -65,6 +65,7 @@ en:
           default: Download (%{size})
           ead: Collection EAD (%{size})
           pdf: Collection PDF (%{size})
+        has_content: Contents
         no_contents: No content inventory
         no_online_content: No online content
         online_content: Online content
