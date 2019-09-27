@@ -1,8 +1,7 @@
 <% document ||= @document %>
 <% @sub_level ||= document.component_level + 1 %>
 
-
-<h2 class="sr-only">Component inventory</h2>
+<h2 class="sr-only" data-sr-enable-me='true' data-has-contents=<%= t 'arclight.views.show.has_content' %>><%= t 'arclight.views.show.no_contents' %></h2>
 <div class="component-level-only">
   <%= content_tag(
     :div, '',
