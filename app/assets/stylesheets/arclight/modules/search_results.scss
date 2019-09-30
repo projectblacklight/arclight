@@ -150,6 +150,10 @@ article.document {
   color: $body-color;
 }
 
+.breadcrumb-links .col {
+  flex-basis: auto;
+ }
+
 .btn-outline-secondary svg {
   fill: $gray-600;
 }
