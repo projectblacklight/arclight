@@ -172,6 +172,37 @@ RSpec.describe 'Component Page', type: :feature do
         end
       end
     end
+
+    context 'when there are more than two previous sibling documents for the current document' do
+      let(:doc_id) { 'm0198-xmlaspace_ref13_yl7' }
+
+      it 'hides all but the first previous sibling document items' do
+        within '#collection-context' do
+          expect(page).to have_css '.document-title-heading', text: 'Pages 171-272'
+          expect(page).to have_css '.document-title-heading', text: 'Pages 79-170'
+          expect(page).not_to have_css '.document-title-heading', text: 'Pages 1-78'
+        end
+      end
+
+      it 'offers a button for displaying the hidden sibling document items' do
+        within '#collection-context' do
+          expect(page).to have_css '.btn-secondary', text: 'Expand'
+          expect(page).to have_css '.document-title-heading', text: 'Pages 171-272'
+          expect(page).to have_css '.document-title-heading', text: 'Pages 79-170'
+          expect(page).not_to have_css '.document-title-heading', text: 'Pages 1-78'
+
+          find('.btn-secondary', text: 'Expand').click
+
+          expect(page).to have_css '.btn-secondary', text: 'Collapse'
+          expect(page).to have_css '.document-title-heading', text: 'Pages 1-78'
+
+          find('.btn-secondary', text: 'Collapse').click
+
+          expect(page).to have_css '.btn-secondary', text: 'Expand'
+          expect(page).not_to have_css '.document-title-heading', text: 'Pages 1-78'
+        end
+      end
+    end
   end
 
   describe 'access tab', js: true do
