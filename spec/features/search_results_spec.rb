@@ -8,6 +8,7 @@ RSpec.describe 'Search results', type: :feature do
       visit search_catalog_path q: 'a brief', search_field: 'all_fields'
       expect(page).to have_css '.index_title', text: /A brief account/
     end
+
     it 'renders the expected metadata for a collection' do
       visit search_catalog_path q: '', search_field: 'all_fields'
 
@@ -129,6 +130,7 @@ RSpec.describe 'Search results', type: :feature do
         end
       end
     end
+
     it 'renders the repository card when faceted on repository' do
       visit search_catalog_path f: {
         repository_sim: ['National Library of Medicine. History of Medicine Division']
@@ -138,11 +140,13 @@ RSpec.describe 'Search results', type: :feature do
       expect(page).to have_css('.al-repository')
       expect(page).not_to have_css('.al-repository-extra')
     end
+
     it 'does not include repository card if not faceted on repository' do
       visit search_catalog_path q: '', search_field: 'all_fields'
 
       expect(page).not_to have_css('.al-repository-card')
     end
+
     it 'does not include repository card if faceted on something that is not repository' do
       visit search_catalog_path f: {
         names_ssim: ['Owner of the reel of yellow nylon rope']

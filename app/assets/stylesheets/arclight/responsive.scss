@@ -1,0 +1,13 @@
+.my-w-25 {
+  width: 25% !important;
+}
+
+.my-w-75 {
+  width: 75% !important;
+}
+
+.w-md-100 {
+  @media (max-width: 767px) {
+    width: 100% !important;
+  }
+}

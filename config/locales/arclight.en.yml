@@ -2,6 +2,8 @@
 en:
   arclight:
     breadcrumb_separator: " » "
+    breadcrumbs:
+      aria_label: breadcrumb
     hierarchy:
       scope_and_contents: Scope and Contents
       scope_note: 'Scope note: '
@@ -63,6 +65,7 @@ en:
           default: Download (%{size})
           ead: Download EAD (%{size})
           pdf: Download finding aid (%{size})
+        has_content: Contents
         no_contents: No content inventory
         no_online_content: No online content
         online_content: Online content

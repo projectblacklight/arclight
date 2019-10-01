@@ -11,6 +11,7 @@ RSpec.describe 'Vanity repositories routes', type: :routing do
         action: 'index'
       )
     end
+
     it '#show' do
       expect(get: '/repositories/my-slug').to route_to(
         controller: 'arclight/repositories',

@@ -102,8 +102,10 @@ Blacklight.onLoad(function () {
 
   $('.al-contents').on('navigation.contains.elements', function (e) {
     var toEnable = $('[data-hierarchy-enable-me]');
+    var srOnly = $('h2[data-sr-enable-me]');
     toEnable.removeClass('disabled');
-    toEnable.text('Contents');
+    toEnable.text(srOnly.data('hasContents'));
+    srOnly.text(srOnly.data('hasContents'));
 
     $(e.target).find('.collapse').on('show.bs.collapse', function (ee) {
       var $newTarget = $(ee.target);

@@ -14,6 +14,8 @@
     "eslint-plugin-import": "^2.2.0"
   },
   "scripts": {
+    "lint": "eslint './app/assets/javascripts/**/*.{js,es6}'",
+    "lint:fix": "eslint --fix './app/assets/javascripts/**/*.{js,es6}'",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {

@@ -7,24 +7,31 @@ RSpec.describe 'Home Page', type: :feature do
   it 'has a custom heading' do
     expect(page).to have_css 'h1', text: 'Archival Collections at Institution'
   end
+
   it 'has a search with a jumbotron' do
     expect(page).to have_css '.jumbotron .search-query-form'
   end
+
   it 'does not have a sidebar' do
     expect(page).not_to have_css '#sidebar'
   end
+
   it 'does not have content' do
     expect(page).not_to have_css '#content'
   end
+
   it 'does have a navbar-nav' do
     expect(page).to have_css '.navbar-nav'
   end
+
   it 'has a Respository link' do
     expect(page).to have_css '.nav-link', text: 'Repositories'
   end
+
   it 'has a Collections link' do
     expect(page).to have_css '.nav-link', text: 'Collections'
   end
+
   it 'has a title of Arclight' do
     expect(page.body).to include('<title>Archival Collections at Institution - Arclight</title>')
   end
@@ -35,6 +42,7 @@ RSpec.describe 'Home Page', type: :feature do
         expect(page).to have_css 'option', text: 'All Fields'
       end
     end
+
     it 'has several fielded' do
       within('.search-field') do
         expect(page).to have_css 'option', text: 'Keyword'

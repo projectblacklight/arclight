@@ -28,6 +28,8 @@ Metrics/BlockLength:
 # Configuration parameters: CountComments, ExcludedMethods.
 Metrics/MethodLength:
   Max: 11
+  Exclude:
+    - 'app/helpers/arclight_helper.rb'
 
 # Offense count: 1
 # Configuration parameters: Blacklist.
