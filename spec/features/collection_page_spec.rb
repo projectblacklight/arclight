@@ -346,4 +346,21 @@ RSpec.describe 'Collection Page', type: :feature do
       expect(page).to have_css('.al-show-actions-box-downloads-file', text: 'Download EAD (123456)')
     end
   end
+
+  describe 'actions box' do
+    before do
+      visit solr_document_path(id: doc_id)
+    end
+
+    context 'with EAD documents which require Aeon requests' do
+      let(:doc_id) { 'm0198-xmlaspace_ref11_d0s' }
+
+      it 'renders links to the Aeon request form' do
+        within '.al-show-actions-box' do
+          expect(page).to have_css '.al-show-actions-box-request'
+          expect(page).to have_css '.al-show-actions-box-request a[href^="https://sample.request.com"]'
+        end
+      end
+    end
+  end
 end

@@ -30,7 +30,7 @@ module Arclight
 
     def item_requestable?(_, options)
       document = options[:document]
-      request_config_present('', document) && document.containers.present?
+      request_config_present('', document)
     end
 
     def request_config_present(var, document)
