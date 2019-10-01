@@ -3,5 +3,5 @@
   <% aeon_web_ead ||= Arclight::Requests::AeonWebEad.new(document, parsed_files.href) %>
   <% aeon_web_ead_url = aeon_web_ead.try(:url) %>
 
-  <%= link_to 'Request', aeon_web_ead_url %>
+  <%= link_to 'Request', aeon_web_ead_url, class: 'btn btn-secondary btn-sm' %>
 <% end %>
