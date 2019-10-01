@@ -96,7 +96,7 @@ class ContextNavigation {
           const targetedChildren = children.slice(0, -1);
           targetedChildren.toggleClass('collapsed');
           $target.toggleClass('collapsed');
-          const targetText = $target.hasClass('collapsed') ? 'Collapse' : 'Expanded';
+          const targetText = $target.hasClass('collapsed') ? 'Collapse' : 'Expand';
           $target.text(targetText);
         });
 
