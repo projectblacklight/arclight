@@ -16,6 +16,17 @@
   font-size: $font-size-sm;
   height: 100%;
   padding: $spacer;
+  
+  :first-child {
+    padding-top: 0;
+  }
+  :last-child {
+    padding-bottom: 0;
+  }
+
+  > div {
+    padding: ($spacer / 3) 0;
+  }
 
   &-options {
     display: flex;
@@ -102,5 +113,3 @@ a.al-toggle-view-all{
 dl dd {
   overflow-wrap: break-word;
 }
-
-
