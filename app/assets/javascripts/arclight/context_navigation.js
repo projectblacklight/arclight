@@ -75,24 +75,32 @@ class ContextNavigation {
     if (originalDocumentIndex !== -1) {
       newDocs[originalDocumentIndex].setAsHighlighted();
 
-      // Hide all but the first previous sibling
-      const prevSiblingDocs = newDocs.slice(0, originalDocumentIndex - 1);
+      const prevSiblingDocs = newDocs.slice(0, originalDocumentIndex);
       let nextSiblingDocs = [];
 
+      // If there are more than 1 siblings, hide them all but the first
       if (prevSiblingDocs.length > 1 && originalDocumentIndex > 0) {
-        prevSiblingDocs.forEach(function (siblingDoc) {
+        const hiddenPrevSiblingDocs = prevSiblingDocs.slice(0, -1);
+        hiddenPrevSiblingDocs.forEach(function (siblingDoc) {
           siblingDoc.collapse();
         });
 
-        const prevSiblingContainer = $('<ul class="pl-0 prev-siblings"><button class="my-3 btn btn-secondary btn-sm">Expand</button></ul>');
-        prevSiblingContainer.click((event) => {
-          const $container = $(event.target);
-          $container.parent().children('li').toggleClass('collapsed');
-          $container.toggleClass('collapsed');
-          const containerText = $container.hasClass('collapsed') ? 'Collapse' : 'Expanded';
-          $container.text(containerText);
+        // Add the "expand" button
+        // @todo this needs to be refactored
+        const $expandButton = $('<button class="my-3 btn btn-secondary btn-sm">Expand</button>');
+        const prevSiblingContainer = $('<ul class="pl-0 prev-siblings"></ul>');
+        prevSiblingContainer.append($expandButton);
+        $expandButton.click((event) => {
+          const $target = $(event.target);
+          const children = $target.parent().children('li');
+          const targetedChildren = children.slice(0, -1);
+          targetedChildren.toggleClass('collapsed');
+          $target.toggleClass('collapsed');
+          const targetText = $target.hasClass('collapsed') ? 'Collapse' : 'Expanded';
+          $target.text(targetText);
         });
 
+        // Render the docs as <li> elements and append them to the DOM
         const renderedPrevSiblingItems = prevSiblingDocs.map(doc => doc.render()).join('');
         prevSiblingContainer.append(renderedPrevSiblingItems);
         that.parentLi.before(prevSiblingContainer);
