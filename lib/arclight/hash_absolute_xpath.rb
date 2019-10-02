@@ -24,7 +24,7 @@ module Arclight
     end
 
     def to_hexdigest
-      self.class.hash_algorithm.hexdigest(absolute_xpath)
+      self.class.hash_algorithm.hexdigest(absolute_xpath).prepend('al_')
     end
 
     def absolute_xpath

@@ -659,18 +659,24 @@ describe 'EAD 2 traject indexing', type: :feature do
     let(:fixture_path) do
       Arclight::Engine.root.join('spec', 'fixtures', 'ead', 'sample', 'no-ids-recordgrp-level.xml')
     end
+    let(:first_component) { result['components'].first }
+    let(:second_component) { result['components'].second }
 
     it 'mints component ids by hashing absolute paths' do
       expect(result).to include 'components'
       expect(result['components']).not_to be_empty
-      first_component = result['components'].first
-      second_component = result['components'].second
 
-      expect(first_component['ref_ssi']).to contain_exactly('4bf70b448ac8351a147acff1dd8b1c0b9a791980')
-      expect(first_component['id']).to contain_exactly('ehllHemingwayErnest-sample4bf70b448ac8351a147acff1dd8b1c0b9a791980')
+      expect(first_component['ref_ssi']).to contain_exactly('al_4bf70b448ac8351a147acff1dd8b1c0b9a791980')
+      expect(first_component['id']).to contain_exactly('ehllHemingwayErnest-sampleal_4bf70b448ac8351a147acff1dd8b1c0b9a791980')
 
-      expect(second_component['ref_ssi']).to contain_exactly('54b06e5ad77cab05ec7f6beeaca50022c47d9c7b')
-      expect(second_component['id']).to contain_exactly('ehllHemingwayErnest-sample54b06e5ad77cab05ec7f6beeaca50022c47d9c7b')
+      expect(second_component['ref_ssi']).to contain_exactly('al_54b06e5ad77cab05ec7f6beeaca50022c47d9c7b')
+      expect(second_component['id']).to contain_exactly('ehllHemingwayErnest-sampleal_54b06e5ad77cab05ec7f6beeaca50022c47d9c7b')
+    end
+
+    it 'indexes trail of ancestor ids' do
+      expect(second_component['parent_ssm']).to equal_array_ignoring_whitespace(
+        %w[ehllHemingwayErnest-sample al_4bf70b448ac8351a147acff1dd8b1c0b9a791980]
+      )
     end
   end
 
