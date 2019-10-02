@@ -42,6 +42,7 @@
         <%= render partial: 'collection_online_contents', locals: { document: document }  %>
       </div>
       <div class='tab-pane' id='access' role='tabpanel'>
+        <h2 class="sr-only"><%= t 'arclight.views.show.access' %></h2>
         <% unless blacklight_config.show.context_access_tab_items.nil? %>
           <% items = blacklight_config.show.context_access_tab_items.select { |i|  fields_have_content?(@document, i) }  %>
           <% items.each_with_index do |item, index| %>

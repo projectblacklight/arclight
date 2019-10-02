@@ -14,8 +14,9 @@
         <%= document.highlights.join('<br/>').html_safe %>
       <% end if document.highlights %>
     </div>
-    <div class='breadcrumb-links'>
-      <%= regular_compact_breadcrumbs(document) %>
+    <div class='breadcrumb-links media'>
+      <span class="media-body" aria-hidden="true"><%= blacklight_icon :repository, classes: 'al-repository-content-icon' %></span>
+    <span class="col ml-3 pl-0" ><%= regular_compact_breadcrumbs(document) %></span>
     </div>
   </div>
 </div>

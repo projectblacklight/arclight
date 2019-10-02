@@ -4,9 +4,48 @@ require 'spec_helper'
 
 RSpec.describe 'Collection Page', type: :feature do
   let(:doc_id) { 'aoa271' }
+  let(:download_config) do
+    ActiveSupport::HashWithIndifferentAccess.new(
+      default: {
+        pdf: {
+          href: 'http://example.com/sample.pdf',
+          size: '1.23MB'
+        },
+        ead: {
+          href: 'http://example.com/sample.xml',
+          size: 123_456
+        }
+      }
+    )
+  end
 
   before do
+    allow(Arclight::DocumentDownloads).to receive(:config).and_return(download_config)
     visit solr_document_path(id: doc_id)
+  end
+
+  describe 'arclight document header' do
+    it 'includes a div with the repository and collection ID' do
+      within('.al-show-breadcrumb') do
+        expect(page).to have_content 'National Library of Medicine. History of Medicine Division'
+      end
+    end
+  end
+
+  describe 'online content indicator' do
+    context 'when there is online content available' do
+      it 'is rendered' do
+        expect(page).to have_css('.nav-link', text: 'Online content')
+      end
+    end
+
+    context 'when there is no online content available' do
+      let(:doc_id) { 'm0198-xml' }
+
+      it 'is not rendered' do
+        expect(page).not_to have_css('.badge-success', text: 'online content')
+      end
+    end
   end
 
   describe 'custom metadata sections' do
@@ -157,6 +196,7 @@ RSpec.describe 'Collection Page', type: :feature do
         expect(page).to have_css '#contents', visible: false
         expect(page).to have_css '#access', visible: true
       end
+
       it 'clicking online contents toggles visibility' do
         expect(page).to have_css '#context', visible: true
         expect(page).to have_css '#online-content', visible: false
@@ -223,9 +263,11 @@ RSpec.describe 'Collection Page', type: :feature do
     it 'contents are not visible by default' do
       expect(page).to have_css '#contents', visible: false
     end
+
     it 'context is visible' do
       expect(page).to have_css '#context', visible: true
     end
+
     describe 'interactions', js: true do
       before { click_link 'Contents' }
       it 'contents contain linked level 1 components' do
@@ -234,6 +276,7 @@ RSpec.describe 'Collection Page', type: :feature do
         end
         expect(page).to have_css '.show-document', text: /Series I: Administrative Records/
       end
+
       it 'component metadata' do
         within '#contents' do
           within '.document-position-0 ' do
@@ -244,6 +287,7 @@ RSpec.describe 'Collection Page', type: :feature do
           end
         end
       end
+
       it 'sub components are viewable and expandable' do
         within '#contents' do
           within '.document-position-0' do
@@ -264,6 +308,7 @@ RSpec.describe 'Collection Page', type: :feature do
           end
         end
       end
+
       it 'includes the number of direct children of the component' do
         within '.document-position-0' do
           expect(page).to have_css(
@@ -272,8 +317,9 @@ RSpec.describe 'Collection Page', type: :feature do
           )
         end
       end
+
       it 'has bookmark controls' do
-        expect(page).to have_css 'form.bookmark-toggle', count: 7
+        expect(page).to have_css 'form.bookmark-toggle', count: 8
       end
 
       it 'clicking contents does not change the session results view context' do
@@ -289,6 +335,31 @@ RSpec.describe 'Collection Page', type: :feature do
       within '.al-show-breadcrumb' do
         expect(page).to have_css 'a', text: 'National Library of Medicine. History of Medicine Division'
         expect(page).to have_css 'span', text: 'Alpha Omega Alpha Archives, 1894-1992'
+      end
+    end
+  end
+  context 'content with file downloads', js: true do
+    let(:doc_id) { 'a0011-xmlaspace_ref6_lx4' }
+
+    it 'renders links to the files for download' do
+      expect(page).to have_css('.al-show-actions-box-downloads-file', text: 'Download finding aid (1.23MB)')
+      expect(page).to have_css('.al-show-actions-box-downloads-file', text: 'Download EAD (123456)')
+    end
+  end
+
+  describe 'actions box' do
+    before do
+      visit solr_document_path(id: doc_id)
+    end
+
+    context 'with EAD documents which require Aeon requests' do
+      let(:doc_id) { 'm0198-xmlaspace_ref11_d0s' }
+
+      it 'renders links to the Aeon request form' do
+        within '.al-show-actions-box' do
+          expect(page).to have_css '.al-show-actions-box-request'
+          expect(page).to have_css '.al-show-actions-box-request a[href^="https://sample.request.com"]'
+        end
       end
     end
   end

@@ -2,7 +2,7 @@
 
 require 'spec_helper'
 
-RSpec.describe Arclight::CollectionDownloads do
+RSpec.describe Arclight::DocumentDownloads do
   subject(:downloads) { described_class.new(document) }
 
   let(:document) do
@@ -17,9 +17,9 @@ RSpec.describe Arclight::CollectionDownloads do
   end
 
   describe '#files' do
-    it 'returns an array of Arclight::CollectionDownloads::File objects' do
+    it 'returns an array of Arclight::DocumentDownloads::File objects' do
       expect(downloads.files.length).to eq 2
-      expect(downloads.files).to be_all(Arclight::CollectionDownloads::File)
+      expect(downloads.files).to be_all(Arclight::DocumentDownloads::File)
     end
   end
 
@@ -32,11 +32,12 @@ RSpec.describe Arclight::CollectionDownloads do
     end
 
     it 'return an empty array of files' do
+      described_class.instance_variable_set(:@config, nil)
       expect(downloads.files).to eq []
     end
   end
 
-  describe 'Arclight::CollectionDownloads::File' do
+  describe 'Arclight::DocumentDownloads::File' do
     let(:file_params) { {} }
     let(:file) do
       described_class::File.new(
@@ -109,6 +110,24 @@ RSpec.describe Arclight::CollectionDownloads do
         it 'is not escaped' do
           expect(file.href).to eq 'http://example.com/finding-aid.pdf'
         end
+      end
+    end
+  end
+
+  describe '.config' do
+    context 'when the downloads config. file cannot be read' do
+      before do
+        described_class.instance_variable_set(:@config, nil)
+        allow(described_class).to receive(:config_filename).and_return('non-existent')
+      end
+
+      after do
+        described_class.instance_variable_set(:@config, nil)
+        allow(described_class).to receive(:config_filename).and_call_original
+      end
+
+      it 'returns empty configuration values' do
+        expect(described_class.config).to eq({})
       end
     end
   end

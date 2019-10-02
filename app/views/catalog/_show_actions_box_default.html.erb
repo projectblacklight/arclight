@@ -1,6 +1,4 @@
 <div class='al-show-actions-box col-md-3'>
-  <% requestable = item_requestable?('', { document: document }) %>
-
   <div class='al-collection-id'>
     <% if document.unitid %>
       <%= t(:'arclight.views.show.collection_id', id: document.unitid) %>
@@ -15,14 +13,11 @@
     <% end %>
   </div>
 
-  <div class='mr-auto'>
-    <%= render partial: 'catalog/bookmark_control', locals: { document: document } %>
-  </div>
-
-  <% if requestable %>
-    <div class='mr-auto al-action-box-request'>
-        <%= render partial: 'arclight/requests/google_form', locals: { document: document } %>
+  <div class='al-show-actions-box-options'>
+    <%= render partial: 'arclight/requests', locals: { document: document } %>
+    <div class='mr-auto al-show-actions-box-bookmarks'>
+      <%= render partial: 'catalog/bookmark_control', locals: { document: document } %>
     </div>
-  <% end %>
-
+  </div>
+  <%= render document.downloads %>
 </div>

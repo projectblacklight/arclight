@@ -167,11 +167,11 @@ module ArclightHelper
   #
   # @return [Repository]
   def repository_faceted_on
-    return unless try(:search_state)
+    return unless try(:search_state) && facet_field_in_params?('repository_sim')
 
-    repos = facets_from_request.find { |f| f.name == 'repository_sim' }.try(:items)
-    faceted = repos && repos.length == 1 && repos.first.value
-    Arclight::Repository.find_by(name: repos.first.value) if faceted
+    repos = Array(facet_params('repository_sim'))
+    faceted = repos && repos.length == 1 && repos.first
+    Arclight::Repository.find_by(name: repos.first) if faceted
   end
 
   def hierarchy_component_context?
@@ -203,7 +203,7 @@ module ArclightHelper
   end
 
   def ead_files(document)
-    files = Arclight::CollectionDownloads.new(document, document.collection_unitid).files
+    files = Arclight::DocumentDownloads.new(document, document.collection_unitid).files
     files.find do |file|
       file.type == 'ead'
     end
@@ -265,6 +265,38 @@ module ArclightHelper
   # Calls the method for a configured field
   def generic_render_document_field_label(config_field, document, field: field_name)
     send(:"render_document_#{config_field}_label", document, field: field)
+  end
+
+  ##
+  # Reduces a document's parent_ids to a set of nested ul/li that resembels
+  # the collection / component / subcomponent structure
+  def nested_component_lists(document)
+    document.parent_ids.reverse.reduce(''.html_safe) do |acc, parent_id|
+      content_tag(:ul) do
+        content_tag(:li, id: parent_id) do
+          safe_join(
+            [context_navigator_content(document, parent_id), acc]
+          )
+        end
+      end
+    end
+  end
+
+  def context_navigator_content(document, parent_id)
+    content_tag(
+      :div, '',
+      class: "context-navigator al-hierarchy-level-#{document.component_level} documents-hierarchy",
+      data: {
+        arclight: {
+          level: document.parent_ids.index(parent_id) + 1,
+          path: search_catalog_path(hierarchy_context: 'component'),
+          name: document.collection_name,
+          parent: parent_id,
+          originalDocument: document.id,
+          originalParents: document.parent_ids
+        }
+      }
+    )
   end
 
   private

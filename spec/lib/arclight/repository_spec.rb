@@ -8,20 +8,24 @@ RSpec.describe Arclight::Repository do
       repos = described_class.all
       expect(repos.map(&:slug)).to include 'sample', 'nlm', 'sul-spec'
     end
+
     it '#find_by(slug)' do
       expect(described_class.find_by(slug: 'sample').slug).to eq 'sample'
       expect(described_class.find_by(slug: 'not_there')).to be_nil
       expect { described_class.find_by(slug: nil) }.to raise_error(ArgumentError)
     end
+
     it '#find_by(name)' do
       expect(described_class.find_by(name: 'My Repository').slug).to eq 'sample'
       expect(described_class.find_by(name: 'not_there')).to be_nil
       expect { described_class.find_by(name: nil) }.to raise_error(ArgumentError)
     end
+
     it '#find_by!(slug)' do
       expect(described_class.find_by!(slug: 'sample').slug).to eq 'sample'
       expect { described_class.find_by!(slug: 'not_there') }.to raise_error(ActiveRecord::RecordNotFound)
     end
+
     it '#find_by!(name)' do
       expect(described_class.find_by!(name: 'My Repository').slug).to eq 'sample'
       expect { described_class.find_by!(name: 'not_there') }.to raise_error(ActiveRecord::RecordNotFound)
@@ -34,46 +38,60 @@ RSpec.describe Arclight::Repository do
     it 'in a YAML file' do
       expect(repo.slug).to eq 'sample'
     end
+
     context 'fields' do
       it '#name' do
         expect(repo.name).to eq 'My Repository'
       end
+
       it '#visit_note' do
         expect(repo.visit_note).to eq 'Containers are stored offsite and must be pages 2 to 3 days in advance'
       end
+
       it '#description' do
         expect(repo.description).to eq 'Lorem ipsum'
       end
+
       it '#building' do
         expect(repo.building).to eq 'My Building'
       end
+
       it '#address1' do
         expect(repo.address1).to eq 'My Street Address'
       end
+
       it '#address2' do
         expect(repo.address2).to eq 'My Extra Address'
       end
+
       it '#city' do
         expect(repo.city).to eq 'My City'
       end
+
       it '#state' do
         expect(repo.state).to eq 'My State'
       end
+
       it '#zip' do
         expect(repo.zip).to eq '12345'
       end
+
       it '#country' do
         expect(repo.country).to eq 'My Country'
       end
+
       it '#city_state_zip_country' do
         expect(repo.city_state_zip_country).to eq 'My City, My State 12345, My Country'
       end
+
       it '#phone' do
         expect(repo.phone).to eq '123-456-7890'
       end
+
       it '#contact_info' do
         expect(repo.contact_info).to eq 'My Contact Info'
       end
+
       it '#thumbnail_url' do
         expect(repo.thumbnail_url).to eq 'http://example.com/thumbnail_ABC.jpg'
       end
@@ -82,15 +100,19 @@ RSpec.describe Arclight::Repository do
       it '#request_config_present?' do
         expect(repo.request_config_present?).to be true
       end
+
       it '#request_config_present_for_type? is present' do
         expect(repo.request_config_present_for_type?('google_form')).to be true
       end
+
       it '#request_config_present_for_type? is not present' do
         expect(repo.request_config_present_for_type?('fake_type')).to be false
       end
+
       it '#request_url_for_type' do
         expect(repo.request_url_for_type('google_form')).to eq 'https://docs.google.com/abc123'
       end
+
       it '#request_mappings_for_type' do
         expect(repo.request_mappings_for_type('google_form')).to eq 'collection_name=abc&eadid=123'
       end

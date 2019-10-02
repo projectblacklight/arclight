@@ -18,7 +18,7 @@ module Arclight
     ##
     # For the hierarchy view, set a higher (unlimited) maximum document return
     def add_hierarchy_max_rows(solr_params)
-      if blacklight_params[:view] == 'hierarchy'
+      if %w[hierarchy collection_context online_contents].include? blacklight_params[:view]
         solr_params[:rows] = 999_999_999
       end
       solr_params
@@ -27,7 +27,7 @@ module Arclight
     ##
     # For the hierarchy view, set the sort order to preserve the order of components
     def add_hierarchy_sort(solr_params)
-      solr_params[:sort] = 'sort_ii asc' if %w[hierarchy online_contents].include? blacklight_params[:view]
+      solr_params[:sort] = 'sort_ii asc' if %w[hierarchy online_contents collection_context].include? blacklight_params[:view]
       solr_params
     end
 

@@ -17,10 +17,19 @@ Lint/Void:
   Exclude:
     - 'lib/arclight/year_range.rb'
 
+# Offense count: 68
+# Configuration parameters: CountComments, ExcludedMethods.
+Metrics/BlockLength:
+  Max: 278
+  Exclude:
+    - 'spec/features/collection_page_spec.rb'
+
 # Offense count: 1
 # Configuration parameters: CountComments, ExcludedMethods.
 Metrics/MethodLength:
   Max: 11
+  Exclude:
+    - 'app/helpers/arclight_helper.rb'
 
 # Offense count: 1
 # Configuration parameters: Blacklist.

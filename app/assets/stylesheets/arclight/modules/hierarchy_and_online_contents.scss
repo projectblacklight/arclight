@@ -156,6 +156,18 @@
       }
     }
   }
+
+  .prev-siblings li {
+    visibility: visible;
+    opacity: 1;
+    transition: visibility 0s, height 0.5s, opacity 0.5s linear;
+
+    &.collapsed {
+      visibility: hidden;
+      height: 0;
+      opacity: 0;
+    }
+  }
 }
 
 // Indentation styling for all level hierarchies

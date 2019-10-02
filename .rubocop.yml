@@ -17,12 +17,16 @@ AllCops:
 Metrics/ModuleLength:
   Exclude:
     - 'app/helpers/arclight_helper.rb'
+    - 'app/models/concerns/arclight/solr_document.rb'
 
 Metrics/BlockLength:
   Exclude:
     - 'arclight.gemspec'
     - 'lib/arclight/traject/ead2_config.rb'
     - 'lib/tasks/**/*'
+    - 'spec/features/traject/ead2_indexing_spec.rb'
+    - 'spec/helpers/arclight_helper_spec.rb'
+    - 'spec/features/collection_page_spec.rb'
     - 'spec/**/*'
     - 'tasks/**/*'
 

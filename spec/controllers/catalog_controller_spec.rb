@@ -11,6 +11,7 @@ RSpec.describe CatalogController, type: :controller do
         get :index, params: { q: 'foo', view: 'hierarchy' }
         expect(session[:history]).to be_empty
       end
+
       it 'does not store a preferred_view' do
         allow(controller).to receive(:search_results)
         session[:preferred_view] = 'list'
@@ -26,6 +27,7 @@ RSpec.describe CatalogController, type: :controller do
         get :index, params: { q: 'foo', view: 'online_contents' }
         expect(session[:history]).to be_empty
       end
+
       it 'does not store a preferred_view' do
         allow(controller).to receive(:search_results)
         session[:preferred_view] = 'list'
@@ -40,6 +42,7 @@ RSpec.describe CatalogController, type: :controller do
         get :index, params: { q: 'foo', view: 'list' }
         expect(session[:history]).not_to be_empty
       end
+
       it 'stores a preferred_view' do
         allow(controller).to receive(:search_results)
         session[:preferred_view] = 'list'

@@ -30,6 +30,7 @@ RSpec.describe Arclight::Parents do
       it 'returns an instance of itself' do
         expect(good_instance).to be_an described_class
       end
+
       it 'values are appropriately set' do
         expect(good_instance.ids).to eq %w[def ghi]
         expect(good_instance.labels).to eq %w[DEF GHI]
@@ -52,12 +53,15 @@ RSpec.describe Arclight::Parents do
       it 'returns an array' do
         expect(good_instance.as_parents).to be_an Array
       end
+
       it 'the array length equals ids length' do
         expect(good_instance.as_parents.length).to eq good_instance.ids.length
       end
+
       it 'each item in array is an Arclight::Parent' do
         expect(good_instance.as_parents).to all(be_an(Arclight::Parent))
       end
+
       it 'the containing parents have the correct data' do
         expect(good_instance.as_parents.first.id).to eq 'def'
         expect(good_instance.as_parents.first.label).to eq 'DEF'

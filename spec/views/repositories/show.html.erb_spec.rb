@@ -19,6 +19,7 @@ RSpec.describe 'arclight/repositories/show', type: :view do
     it 'has the repository card' do
       expect(rendered).to have_css('.al-repository h2', text: /My Repository/)
     end
+
     it 'has breadcrumbs' do
       expect(rendered).to have_css('.al-search-breadcrumb', text: /My Repository/)
     end

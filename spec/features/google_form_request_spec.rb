@@ -22,6 +22,7 @@ xdescribe 'Google Form Request', type: :feature, js: true do
           expect(page).to have_css 'button[type="submit"]', text: 'Request'
         end
       end
+
       context 'repository is not requestable' do
         it 'form is absent' do
           visit solr_document_path 'm0198-xmlaspace_ref14_di4'
@@ -51,6 +52,7 @@ xdescribe 'Google Form Request', type: :feature, js: true do
         expect(page).to have_css 'form[action*="https://docs.google.com"]', count: 22
       end
     end
+
     it 'shows up in context' do
       visit solr_document_path 'aoa271aspace_843e8f9f22bac69872d0802d6fffbb04'
       within '#collection-context' do
