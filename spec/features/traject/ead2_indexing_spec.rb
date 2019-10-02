@@ -108,7 +108,7 @@ describe 'EAD 2 traject indexing', type: :feature do
     end
 
     it 'collection has normalized_title' do
-      %w[collection_ssm collection_sim collection_ssi].each do |field|
+      %w[collection_ssm collection_sim collection_ssi collection_title_tesim].each do |field|
         expect(result[field]).to include_ignoring_whitespace 'Stanford University student life photograph album, circa 1900-1906'
       end
     end
