@@ -1,5 +1,5 @@
 <article class="document">
-  <% breadcrumbs = component_top_level_parent_to_links(document) %>
+  <% breadcrumbs = parents_to_links(document) %>
   <div class="documentHeader row">
     <div class="col-auto">
       <%= blacklight_icon document_header_icon(document) %>
@@ -11,7 +11,7 @@
       <div class='breadcrumb-links media'>
         <% unless breadcrumbs.nil? %>
           <span class="media-body" aria-hidden="true"><%= blacklight_icon :folder, classes: 'al-folder-icon' %></span>
-          <span class="col" ><%= component_top_level_parent_to_links(document) %></span>
+          <span class="col" ><%= parents_to_links(document) %></span>
         <% end %>
     </div>
   </div>
