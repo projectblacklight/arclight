@@ -27,14 +27,28 @@ class NavigationDocument {
  */
 class ExpandButton {
   /**
+   * This retrieves the <li> elements which are hidden/rendered in response to
+   *   clicking the <button> element
+   * @param {jQuery} $li - the <button> element
+   * @return {jQuery} - a jQuery object containing the targeted <li>
+   */
+  static findSiblings($button) {
+    const $siblings = $button.parent().children('li');
+    return $siblings.slice(0, -1);
+  }
+
+  /**
    * This adds a "collapsed" class to all of the <li> children, as well as
-   * updates the text for the <button> element
+   *   updates the text for the <button> element
    * @param {Event} event - the event propagated in response to clicking on the
-   *   <button>
+   *   <button> element
    */
   static handleClick(event) {
     const $element = $(event.target);
-    $element.parent().children('li').toggleClass('collapsed');
+    // This function is bound to the instance object
+    const $targeted = this.constructor.findSiblings($element);
+
+    $targeted.toggleClass('collapsed');
     $element.toggleClass('collapsed');
 
     const containerText = $element.hasClass('collapsed') ? this.collapseText : this.expandText;
@@ -50,8 +64,27 @@ class ExpandButton {
     this.expandText = parentUl[0].dataset.dataExpand;
 
     this.$el = $(`<button class="my-3 btn btn-secondary btn-sm">${this.expandText}</button>`);
-    ExpandButton.handleClick = ExpandButton.handleClick.bind(this);
-    this.$el.click(ExpandButton.handleClick);
+    this.constructor.handleClick = this.constructor.handleClick.bind(this);
+    this.$el.click(this.constructor.handleClick);
+  }
+}
+
+/**
+ * Modeling <button> Elements which hide or retrieve <li> elements for sibling
+ *   documents nested within the <li> elements of the <ul> tree
+ * @class
+ */
+class NestedExpandButton extends ExpandButton {
+  /**
+   * This retrieves the <li> elements which are hidden/rendered in response to
+   *   clicking the <button> element
+   * @param {jQuery} $li - the <button> element
+   * @return {jQuery} - a jQuery object containing the targeted <li>
+   */
+  static findSiblings($button) {
+    const highlighted = $button.siblings('.al-hierarchy-highlight');
+    const $siblings = highlighted.prevAll('.al-collection-context');
+    return $siblings.slice(0, -1);
   }
 }
 
@@ -95,21 +128,24 @@ class ContextNavigation {
    * within it
    * @returns {jQuery}
    */
-  buildExpandContainer() {
-    const $container = $('<ul class="pl-0 prev-siblings"></ul>');
+  static buildExpandList() {
+    const $ul = $('<ul></ul>');
+    $ul.addClass('pl-0');
+    $ul.addClass('prev-siblings');
     const button = new ExpandButton();
-    $container.append(button.$el);
-    return $container;
+    $ul.append(button.$el);
+    return $ul;
   }
 
   /**
-   * Highlights the <li> element for the current Document and appends <li> the sibling documents for a given Document element
+   * Highlights the <li> element for the current Document and appends <li> the
+   *   sibling documents for a given Document element
    * @param {NavigationDocument[]} newDocs - the NavigationDocument objects for
    *   each resulting Solr Document
    * @param {number} originalDocumentIndex
    * @param {jQuery} parentLi
    */
-  updateSiblings(newDocs, originalDocumentIndex, parentLi) {
+  static updateSiblings(newDocs, originalDocumentIndex, parentLi) {
     newDocs[originalDocumentIndex].setAsHighlighted();
 
     // Hide all but the first previous sibling
@@ -122,11 +158,11 @@ class ContextNavigation {
         siblingDoc.collapse();
       });
 
-      const prevSiblingContainer = this.buildExpandContainer();
+      const prevSiblingList = this.buildExpandList();
       const renderedPrevSiblingItems = prevSiblingDocs.map(doc => doc.render()).join('');
 
-      prevSiblingContainer.append(renderedPrevSiblingItems);
-      parentLi.before(prevSiblingContainer);
+      prevSiblingList.append(renderedPrevSiblingItems);
+      parentLi.before(prevSiblingList);
 
       nextSiblingDocs = newDocs.slice(originalDocumentIndex);
     } else {
@@ -150,7 +186,7 @@ class ContextNavigation {
    * @param {jQuery} parentLi - the <li> used to generate the <ul> for the
    * context - this is consistently the *last* element in the <ul>
    */
-  updateParents(newDocs, originalParents, parent, parentLi) {
+  static updateParents(newDocs, originalParents, parent, parentLi) {
     // Case where this is a parent list and needs to be filed correctly
     //
     // Otherwise, retrieve the parent...
@@ -172,8 +208,8 @@ class ContextNavigation {
         parentDoc.collapse();
       });
       renderedBeforeDocs = beforeDocs.map(newDoc => newDoc.render()).join('');
-      const prevParentContainer = this.buildExpandContainer();
-      prevParentContainer.append(renderedBeforeDocs);
+      const prevParentList = this.buildExpandList();
+      prevParentList.append(renderedBeforeDocs);
     } else {
       renderedBeforeDocs = beforeDocs.map(newDoc => newDoc.render()).join('');
     }
@@ -205,57 +241,16 @@ class ContextNavigation {
    *   Document in the <ul> context list of collections, components, and
    *   containers
    */
-  updateListSiblings($li) {
+  static updateListSiblings($li) {
     const prevSiblings = $li.prevAll('.al-collection-context');
-    /**
-     * @todo This should be deduplicated and refactored - perhaps a Class
-     *   derived from ExpandButton?
-     */
     if (prevSiblings.length > 1) {
       const hiddenNextSiblings = prevSiblings.slice(0, -1);
       hiddenNextSiblings.toggleClass('collapsed');
 
-      // This all needs to be refactored
-      const $button = $('<button class="my-3 btn btn-secondary btn-sm">Expand</button>');
-      $button.handleClick = event => {
-        const highlighted = $(this.parentLi).siblings('.al-hierarchy-highlight');
-        let targeted = highlighted.prevAll('.al-collection-context');
-        targeted = targeted.slice(0, -1);
-        targeted.toggleClass('collapsed');
-        const collapsed = targeted.hasClass('collapsed');
-        const updatedText = collapsed ? 'Expand' : 'Collapse';
-        const $target = $(event.target);
-        $target.text(updatedText);
-      };
-      $button.handleClick = $button.handleClick.bind($button);
-      $button.click($button.handleClick);
+      const button = new NestedExpandButton();
 
       const lastHiddenNextSibling = hiddenNextSiblings[hiddenNextSiblings.length - 1];
-      $button.insertAfter(lastHiddenNextSibling);
-    }
-
-    const nextSiblings = $li.nextAll('.al-collection-context');
-    if (nextSiblings.length > 1) {
-      const hiddenNextSiblings = nextSiblings.slice(1);
-      hiddenNextSiblings.toggleClass('collapsed');
-
-      // This all needs to be refactored
-      const $button = $('<button class="my-3 btn btn-secondary btn-sm">Expand</button>');
-      $button.handleClick = event => {
-        const highlighted = $(this.parentLi).siblings('.al-hierarchy-highlight');
-        let targeted = highlighted.nextAll('.al-collection-context');
-        targeted = targeted.slice(1);
-        targeted.toggleClass('collapsed');
-        const collapsed = targeted.hasClass('collapsed');
-        const updatedText = collapsed ? 'Expand' : 'Collapse';
-        const $target = $(event.target);
-        $target.text(updatedText);
-      };
-      $button.handleClick = $button.handleClick.bind($button);
-      $button.click($button.handleClick);
-
-      const lastHiddenNextSibling = hiddenNextSiblings[0];
-      $button.insertBefore(lastHiddenNextSibling);
+      button.$el.insertAfter(lastHiddenNextSibling);
     }
   }
 
@@ -285,9 +280,9 @@ class ContextNavigation {
     // If the response does contain any <article> elements for the child or
     // parent Solr Documents, then the documents are treated as sibling nodes
     if (originalDocumentIndex !== -1) {
-      this.updateSiblings(newDocs, originalDocumentIndex, that.parentLi);
+      ContextNavigation.updateSiblings(newDocs, originalDocumentIndex, that.parentLi);
     } else {
-      this.updateParents(
+      ContextNavigation.updateParents(
         newDocs,
         that.data.arclight.originalParents,
         that.data.arclight.parent,
@@ -299,7 +294,7 @@ class ContextNavigation {
 
     // Select the <li> element for the current document
     const highlighted = that.parentLi.siblings('.al-hierarchy-highlight');
-    this.updateListSiblings(highlighted);
+    this.constructor.updateListSiblings(highlighted);
   }
 
   // eslint-disable-next-line class-methods-use-this

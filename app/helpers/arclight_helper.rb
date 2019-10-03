@@ -274,7 +274,7 @@ module ArclightHelper
     document.parent_ids.reverse.reduce(''.html_safe) do |acc, parent_id|
       content_tag(
         :ul,
-        class: ['parent', 'collection-context'],
+        class: %w[parent collection-context],
         data: { 'data-collapse': I18n.t('arclight.views.show.collapse'), 'data-expand': I18n.t('arclight.views.show.expand') }
       ) do
         content_tag(:li, id: parent_id) do
