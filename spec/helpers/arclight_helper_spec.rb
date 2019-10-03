@@ -197,6 +197,7 @@ RSpec.describe ArclightHelper, type: :helper do
       expect(helper.parents_to_links(document)).to include 'GHI'
       expect(helper.parents_to_links(document)).to include solr_document_path('abc123ghi')
     end
+
     it 'properly delimited' do
       expect(helper.parents_to_links(document)).to include '<span aria-hidden="true"> » </span>'
       expect(helper.parents_to_links(SolrDocument.new)).not_to include '»'
@@ -218,6 +219,7 @@ RSpec.describe ArclightHelper, type: :helper do
       expect(helper.component_parents_to_links(document)).to include 'GHI'
       expect(helper.component_parents_to_links(document)).to include solr_document_path('abc123ghi')
     end
+
     it 'properly delimited' do
       expect(helper.component_parents_to_links(document)).to include '<span aria-hidden="true"> » </span>'
     end
@@ -322,10 +324,10 @@ RSpec.describe ArclightHelper, type: :helper do
     context 'when searching all collections' do
       before do
         expect(helper).to receive_messages(
-          facets_from_request: [],
           search_state: instance_double(
             'Blacklight::SearchState', params_for_search: { 'f' => { 'level_sim' => ['Collection'] } }
-          )
+          ),
+          facet_field_in_params?: false
         )
       end
 
@@ -404,11 +406,12 @@ RSpec.describe ArclightHelper, type: :helper do
       end
     end
   end
-  context '#hierarchy_component_context?' do
+  describe '#hierarchy_component_context?' do
     it 'requires a parameter to enable' do
       allow(helper).to receive(:params).and_return(hierarchy_context: 'component')
       expect(helper.hierarchy_component_context?).to be_truthy
     end
+
     it 'omission is disabled' do
       allow(helper).to receive(:params).and_return({})
       expect(helper.hierarchy_component_context?).to be_falsey

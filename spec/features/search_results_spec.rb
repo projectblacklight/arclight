@@ -8,6 +8,7 @@ RSpec.describe 'Search results', type: :feature do
       visit search_catalog_path q: 'a brief', search_field: 'all_fields'
       expect(page).to have_css '.index_title', text: /A brief account/
     end
+
     it 'renders the expected metadata for a collection' do
       visit search_catalog_path q: '', search_field: 'all_fields'
 
@@ -129,6 +130,7 @@ RSpec.describe 'Search results', type: :feature do
         end
       end
     end
+
     it 'renders the repository card when faceted on repository' do
       visit search_catalog_path f: {
         repository_sim: ['National Library of Medicine. History of Medicine Division']
@@ -138,25 +140,19 @@ RSpec.describe 'Search results', type: :feature do
       expect(page).to have_css('.al-repository')
       expect(page).not_to have_css('.al-repository-extra')
     end
+
     it 'does not include repository card if not faceted on repository' do
       visit search_catalog_path q: '', search_field: 'all_fields'
 
       expect(page).not_to have_css('.al-repository-card')
     end
-  end
-  describe 'date range histogram', js: true do
-    before do
-      visit search_catalog_path q: '', search_field: 'all_fields'
-    end
-    it 'is not present on load' do
-      expect(page).to have_css '.distribution.subsection.chart_js', visible: false
-    end
-    it 'is showable' do
-      expect(page).to have_css '.distribution.subsection.chart_js', visible: false
-      page.find('[href="#al-date-range-histogram-content"]').click
-      within '.distribution.subsection.chart_js' do
-        expect(page).to have_css 'canvas', visible: true
-      end
+
+    it 'does not include repository card if faceted on something that is not repository' do
+      visit search_catalog_path f: {
+        names_ssim: ['Owner of the reel of yellow nylon rope']
+      }, search_field: 'all_fields'
+
+      expect(page).not_to have_css('.al-repository-card')
     end
   end
   describe 'sorting' do

@@ -45,16 +45,19 @@ describe 'EAD 2 traject indexing', type: :feature do
       expect(result['id'].first).to eq 'a0011-xml'
       expect(result['ead_ssi'].first).to eq_ignoring_whitespace 'a0011.xml'
     end
+
     it 'title' do
       %w[title_ssm title_teim].each do |field|
         expect(result[field]).to include_ignoring_whitespace 'Stanford University student life photograph album'
       end
       expect(result['normalized_title_ssm']).to include 'Stanford University student life photograph album, circa 1900-1906'
     end
+
     it 'level' do
       expect(result['level_ssm']).to eq ['collection']
       expect(result['level_sim']).to eq ['Collection']
     end
+
     it 'dates' do
       expect(result['normalized_date_ssm']).to include_ignoring_whitespace 'circa 1900-1906'
       expect(result['unitdate_bulk_ssim']).to be_nil
@@ -105,7 +108,7 @@ describe 'EAD 2 traject indexing', type: :feature do
     end
 
     it 'collection has normalized_title' do
-      %w[collection_ssm collection_sim collection_ssi].each do |field|
+      %w[collection_ssm collection_sim collection_ssi collection_title_tesim].each do |field|
         expect(result[field]).to include_ignoring_whitespace 'Stanford University student life photograph album, circa 1900-1906'
       end
     end
@@ -118,12 +121,15 @@ describe 'EAD 2 traject indexing', type: :feature do
           expect(first_component[field]).to include 'aspace_ref6_lx4'
         end
       end
+
       it 'id' do
         expect(first_component).to include 'id' => ['a0011-xmlaspace_ref6_lx4']
       end
+
       it 'ead_ssi should be parents' do
         expect(first_component['ead_ssi']).to eq result['ead_ssi']
       end
+
       it 'repository' do
         %w[repository_sim repository_ssm].each do |field|
           expect(first_component[field]).to include 'Stanford University Libraries. Special Collections and University Archives'
@@ -156,11 +162,13 @@ describe 'EAD 2 traject indexing', type: :feature do
           expect(first_component[field]).to include_ignoring_whitespace 'Stanford University student life photograph album, circa 1900-1906'
         end
       end
+
       it 'creator' do
         %w[collection_creator_ssm].each do |field|
           expect(first_component[field]).to equal_array_ignoring_whitespace ['Stanford University']
         end
       end
+
       it 'collection_unitid' do
         expect(first_component['collection_unitid_ssm']).to eq ['A0011']
       end
@@ -379,6 +387,7 @@ describe 'EAD 2 traject indexing', type: :feature do
           expect(component_inheriting_accessrestrict_from_grandparent['parent_access_restrict_ssm'])
             .to include(a_string_matching(/RESTRICTED: Access to these folders requires prior written approval./))
         end
+
         it 'gets accessrestrict from collection' do
           expect(component_inheriting_accessrestrict_from_collection['accessrestrict_ssm']).to be_nil
           expect(component_inheriting_accessrestrict_from_collection['parent_access_restrict_ssm'])
@@ -511,6 +520,7 @@ describe 'EAD 2 traject indexing', type: :feature do
         expect(result['names_ssim']).to include_ignoring_whitespace 'Root, William Webster, 1867-1932'
         expect(result['names_ssim']).to include_ignoring_whitespace 'Robertson\'s Crab House'
       end
+
       it 'indexes all names at any level in a type-specific name field' do
         expect(result['persname_ssm']).to include_ignoring_whitespace 'Anfinsen, Christian B.'
         expect(result['corpname_ssm']).to include_ignoring_whitespace 'Robertson\'s Crab House'

@@ -1,0 +1,14 @@
+<% if document_downloads.files.present? %>
+  <div class=" al-show-actions-box-downloads">
+    <% document_downloads.files.each do |file| %>
+      <div class="py-1 al-show-actions-box-downloads-file">
+        <%= blacklight_icon(file.type, classes: "al-show-actions-box-downloads-file") %>
+        <% if file.size %>
+          <%= link_to(t("arclight.views.show.download_with_size.#{file.type}", size: file.size), file.href) %>
+        <% else %>
+          <%= link_to(t("arclight.views.show.download.#{file.type}"), file.href) %>
+        <% end %>
+      </div>
+    <% end %>
+  </div>
+<% end %>

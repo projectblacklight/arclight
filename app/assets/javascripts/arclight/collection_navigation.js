@@ -17,7 +17,7 @@
     $currentDoc.addClass('al-hierarchy-highlight');
 
     // Unlink the current component - just show the title
-    $currentDoc.find('a').contents().unwrap();
+    $currentDoc.find('.al-hierarchy-highlight a').contents().unwrap();
 
     // We want to show 0-1 or 0-2 siblings depending on where highlighted component is
     $previousDocs = $currentDoc.prevUntil().slice(0, 2);
@@ -102,8 +102,10 @@ Blacklight.onLoad(function () {
 
   $('.al-contents').on('navigation.contains.elements', function (e) {
     var toEnable = $('[data-hierarchy-enable-me]');
+    var srOnly = $('h2[data-sr-enable-me]');
     toEnable.removeClass('disabled');
-    toEnable.text('Contents');
+    toEnable.text(srOnly.data('hasContents'));
+    srOnly.text(srOnly.data('hasContents'));
 
     $(e.target).find('.collapse').on('show.bs.collapse', function (ee) {
       var $newTarget = $(ee.target);

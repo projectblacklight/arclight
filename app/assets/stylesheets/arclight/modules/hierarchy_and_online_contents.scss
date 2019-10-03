@@ -32,6 +32,7 @@
   .al-document-abstract-or-scope {
     font-size: 0.85rem;
     line-height: 1.25;
+    max-width: 45em;
   }
 
   .al-hierarchy-sub-heading {
@@ -120,10 +121,22 @@
   }
 }
 
+// Scope content
+.al-document-abstract-or-scope {
+  font-size: 0.85rem;
+  line-height: 1.25;
+  max-width: 45em;
+  margin-bottom: $spacer;
+}
+
 // Component show page, Collection context section
 #collection-context {
   h1 {
     font-size: $h5-font-size;
+  }
+
+  ul {
+    list-style: none;
   }
 
   .documents-hierarchy,
@@ -154,6 +167,18 @@
       > a {
         color: $gray-900;
       }
+    }
+  }
+
+  .prev-siblings li {
+    visibility: visible;
+    opacity: 1;
+    transition: visibility 0s, height 0.5s, opacity 0.5s linear;
+
+    &.collapsed {
+      visibility: hidden;
+      height: 0;
+      opacity: 0;
     }
   }
 }

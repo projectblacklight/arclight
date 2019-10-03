@@ -8,7 +8,7 @@ RSpec.describe Arclight::RepositoriesController, type: :controller do
     ENV['REPOSITORY_FILE'] = 'spec/fixtures/config/repositories.yml'
   end
 
-  context '#index' do
+  describe '#index' do
     it 'displays the repositories' do
       get :index
       expect(response).to be_success
@@ -23,7 +23,7 @@ RSpec.describe Arclight::RepositoriesController, type: :controller do
     end
   end
 
-  context '#show' do
+  describe '#show' do
     it 'looks up the repository detail page' do
       get :show, params: { id: 'nlm' }
       repo = controller.instance_variable_get(:@repository)
@@ -33,6 +33,7 @@ RSpec.describe Arclight::RepositoriesController, type: :controller do
       expect(collections.first).to be_an(SolrDocument)
       expect(collections.find { |c| c.id == 'aoa271' }.unitid).to eq 'MS C 271'
     end
+
     it 'raises RecordNotFound if non-registered slug' do
       expect { get :show, params: { id: 'not-registered' } }.to raise_error(
         ActiveRecord::RecordNotFound

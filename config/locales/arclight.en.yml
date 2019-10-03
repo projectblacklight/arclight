@@ -2,11 +2,11 @@
 en:
   arclight:
     breadcrumb_separator: " » "
-    date_range_histogram:
-      hide: Hide date distribution
-      show: Show date distribution
+    breadcrumbs:
+      aria_label: breadcrumb
     hierarchy:
       scope_and_contents: Scope and Contents
+      scope_note: 'Scope note: '
       view_all: View
     masthead_heading: Archival Collections at Institution
     repositories: Repositories
@@ -53,18 +53,21 @@ en:
         view_more: View more
       show:
         access: Access
+        collapse: Collapse
         collection_id: 'Collection ID: %{id}'
         context: Collection context
         context_nav:
           title: Collection context navigation
         download:
           default: Download
-          ead: Collection EAD
-          pdf: Collection PDF
+          ead: Download EAD
+          pdf: Download finding aid
         download_with_size:
           default: Download (%{size})
-          ead: Collection EAD (%{size})
-          pdf: Collection PDF (%{size})
+          ead: Download EAD (%{size})
+          pdf: Download finding aid (%{size})
+        expand: Expand
+        has_content: Contents
         no_contents: No content inventory
         no_online_content: No online content
         online_content: Online content

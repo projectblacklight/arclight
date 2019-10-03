@@ -7,6 +7,7 @@ RSpec.describe 'Arclight', type: :feature do
     visit search_catalog_path q: '', search_field: 'all_fields'
     expect(page).to have_css '.document', count: 10
   end
+
   describe 'eadid with a period' do
     it 'is visitable with a hyphen' do
       visit solr_document_path('m0198-xmlaspace_ref11_d0s')

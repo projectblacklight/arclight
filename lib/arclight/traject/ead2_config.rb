@@ -126,6 +126,9 @@ end
 to_field 'collection_ssi' do |_record, accumulator, context|
   accumulator.concat context.output_hash.fetch('normalized_title_ssm', [])
 end
+to_field 'collection_title_tesim' do |_record, accumulator, context|
+  accumulator.concat context.output_hash.fetch('normalized_title_ssm', [])
+end
 
 to_field 'repository_ssm' do |_record, accumulator, context|
   accumulator << context.clipboard[:repository]
@@ -311,14 +314,16 @@ compose 'components', ->(record, accumulator, _context) { accumulator.concat rec
     accumulator << context.output_hash['parent_ssm'].last
   end
 
-  to_field 'parent_unittitles_ssm' do |_record, accumulator, context|
-    ## Top level document
+  to_field 'parent_unittitles_ssm' do |_rec, accumulator, context|
+    # top level document
     accumulator.concat context.clipboard[:parent].output_hash['normalized_title_ssm']
-    ## Other components
-    context.output_hash['parent_ssm']&.drop(1)&.each do |id|
-      accumulator.concat Array
-        .wrap(context.clipboard[:parent].output_hash['components'])
-        .select { |c| c['ref_ssi'] == [id] }.map { |c| c['normalized_title_ssm'] }.flatten
+    parent_ssm = context.output_hash['parent_ssm']
+    components = context.clipboard[:parent].output_hash['components']
+
+    # other components
+    if parent_ssm && components
+      ancestors = parent_ssm.drop(1).map { |x| [x] }
+      accumulator.concat components.select { |c| ancestors.include? c['ref_ssi'] }.flat_map { |c| c['normalized_title_ssm'] }
     end
   end
 

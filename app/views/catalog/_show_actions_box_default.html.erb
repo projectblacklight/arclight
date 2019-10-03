@@ -1,28 +1,27 @@
-<div class='al-show-actions-box col-md-3'>
-  <% requestable = item_requestable?('', { document: document }) %>
+<div class='al-show-actions-box d-flex flex-column'>
+  <div class=" d-flex flex-wrap">
+    <div class='al-collection-id mr-2'>
+      <% if document.unitid %>
+        <%= t(:'arclight.views.show.collection_id', id: document.unitid) %>
+      <% end %>
 
-  <div class='al-collection-id'>
-    <% if document.unitid %>
-      <%= t(:'arclight.views.show.collection_id', id: document.unitid) %>
-    <% end %>
+      <% if document.unitid && document.containers.present? %>
+        <span> | </span>
+      <% end %>
 
-    <% if document.unitid && document.containers.present? %>
-      <span> | </span>
-    <% end %>
-
-    <% if document.containers.present? %>
-      <span><%= document.containers.join(', ') %></span>
-    <% end %>
-  </div>
-
-  <div class='mr-auto'>
-    <%= render partial: 'catalog/bookmark_control', locals: { document: document } %>
-  </div>
-
-  <% if requestable %>
-    <div class='mr-auto al-action-box-request'>
-        <%= render partial: 'arclight/requests/google_form', locals: { document: document } %>
+      <% if document.containers.present? %>
+        <span><%= document.containers.join(', ') %></span>
+      <% end %>
     </div>
-  <% end %>
+    <div class='al-show-actions-box-options mt-md-3'>
+      <%= render partial: 'arclight/requests', locals: { document: document } %>
+      <div class='mr-auto al-show-actions-box-bookmarks'>
+        <%= render partial: 'catalog/bookmark_control', locals: { document: document } %>
+      </div>
+    </div>
+  </div>
 
+  <div>
+    <%= render document.downloads %>
+  </div>
 </div>
