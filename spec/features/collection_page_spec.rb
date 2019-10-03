@@ -282,7 +282,7 @@ RSpec.describe 'Collection Page', type: :feature do
           within '.document-position-0 ' do
             expect(page).to have_css(
               '.al-document-abstract-or-scope',
-              text: /^SCOPE AND CONTENTS.*Administrative records include/im
+              text: /^scope note:.*Administrative records include/im
             )
           end
         end

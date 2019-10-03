@@ -32,6 +32,7 @@
   .al-document-abstract-or-scope {
     font-size: 0.85rem;
     line-height: 1.25;
+    max-width: 45em;
   }
 
   .al-hierarchy-sub-heading {
@@ -118,6 +119,14 @@
     border-radius: 5px;
     height: $font-size-base;
   }
+}
+
+// Scope content
+.al-document-abstract-or-scope {
+  font-size: 0.85rem;
+  line-height: 1.25;
+  max-width: 45em;
+  margin-bottom: $spacer;
 }
 
 // Component show page, Collection context section

@@ -147,6 +147,17 @@ class ContextNavigation {
       // Insert the documents after the current
       that.parentLi.after(renderedAfterDocs).fadeIn(500);
     }
+    that.truncateItems();
+  }
+
+  // eslint-disable-next-line class-methods-use-this
+  truncateItems() {
+    $('[data-arclight-truncate="true"]').each(function (_, el) {
+      $(el).responsiveTruncate({
+        more: el.dataset.truncateMore,
+        less: el.dataset.truncateLess
+      });
+    });
   }
 }
 
