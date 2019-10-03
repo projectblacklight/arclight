@@ -1,5 +1,4 @@
 <% parents = Arclight::Parents.from_solr_document(document).as_parents %>
-<% h1_index = 0 %>
 <nav aria-label="breadcrumb">
   <ol class="breadcrumb">
     <li class="media breadcrumb-item  breadcrumb-item-1">
@@ -14,12 +13,11 @@
       <%= content_tag :li, class: "breadcrumb-item breadcrumb-item-#{index + 1} media" do %>
         <span class="media-body" aria-hidden="true"><%= blacklight_icon document_or_parent_icon(parent) %></span>
         <span class="col"><%= link_to parent.label, solr_document_path(parent.global_id) %></span>
-        <% h1_index = index + 3 %> 
       <% end %> 
     <% end %>
   </ol>
 
-  <%= content_tag :h1, class: "breadcrumb-item breadcrumb-item-#{h1_index} media" do %>
+  <%= content_tag :h1, class: "breadcrumb-item breadcrumb-item-#{parents.length + 2} media" do %>
     <span class="media-body" aria-hidden="true"><%= blacklight_icon document_or_parent_icon(document) %></span>
     <span class="col"><%= document.normalized_title %></span>
   <% end %>

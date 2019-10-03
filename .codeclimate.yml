@@ -3,4 +3,3 @@ exclude_patterns:
   - "app/assets/javascripts/arclight/context_navigation.js"
   - "vendor/assets/javascripts/**/*.js"
   - "spec/**/*.rb"
-  - "lib/arclight/traject/ead2_config.rb"

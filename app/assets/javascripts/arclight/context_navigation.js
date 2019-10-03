@@ -87,7 +87,10 @@ class ContextNavigation {
 
         // Add the "expand" button
         // @todo this needs to be refactored
-        const $expandButton = $('<button class="my-3 btn btn-secondary btn-sm">Expand</button>');
+        const parentUl = $('ul.parent');
+        const collapseText = parentUl[0].dataset.dataCollapse;
+        const expandText = parentUl[0].dataset.dataExpand;
+        const $expandButton = $(`<button class="my-3 btn btn-secondary btn-sm">${expandText}</button>`);
         const prevSiblingContainer = $('<ul class="pl-0 prev-siblings"></ul>');
         prevSiblingContainer.append($expandButton);
         $expandButton.click((event) => {
@@ -96,7 +99,7 @@ class ContextNavigation {
           const targetedChildren = children.slice(0, -1);
           targetedChildren.toggleClass('collapsed');
           $target.toggleClass('collapsed');
-          const targetText = $target.hasClass('collapsed') ? 'Collapse' : 'Expand';
+          const targetText = $target.hasClass('collapsed') ? collapseText : expandText;
           $target.text(targetText);
         });
 

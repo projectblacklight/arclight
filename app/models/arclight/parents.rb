@@ -20,9 +20,7 @@ module Arclight
     ##
     # @return [Array[Arclight::Parent]]
     def as_parents
-      parents = []
-      ids.each.with_index { |_id, idx| parents << Arclight::Parent.new(id: ids[idx], label: labels[idx], eadid: eadid, level: levels[idx]) }
-      parents
+      ids.map.with_index { |_id, idx| Arclight::Parent.new(id: ids[idx], label: labels[idx], eadid: eadid, level: levels[idx]) }
     end
 
     ##

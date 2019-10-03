@@ -134,7 +134,7 @@ RSpec.describe 'Component Page', type: :feature do
           expect(page).to have_css 'li:nth-child(2)', text: 'Statements of purpose, c.1902'
           expect(page).to have_css 'li:nth-child(3)',
                                    text: 'Constitution - notes on drafting of constitution, c.1902-1903'
-          expect(page).to have_css 'li', count: 33
+          expect(page).to have_css 'li', count: 32
         end
       end
     end
