@@ -16,6 +16,25 @@ describe Arclight::SearchBehavior do
   end
   let(:search_builder) { search_builder_class.new(context) }
 
+  describe '#add_facetting_to_solr' do
+    context 'when in collection_context view' do
+      let(:user_params) { { view: 'online_contents' } }
+
+      it 'does not modify params ' do
+        expect(search_builder_instance.add_facetting_to_solr(solr_params)).to eq({})
+      end
+    end
+    context 'in index view' do
+      let(:user_params) { { view: 'index' } }
+
+      it 'calls super (from Blacklight) ' do
+        expect do
+          search_builder_instance.add_facetting_to_solr(solr_params)
+        end.to raise_error(NoMethodError).with_message(/super/)
+      end
+    end
+  end
+
   describe '#add_hierarchy_max_rows' do
     context 'when in online_contents view' do
       let(:user_params) { { view: 'collection_context' } }
