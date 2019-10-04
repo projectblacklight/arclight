@@ -47,18 +47,18 @@ RSpec.describe Arclight::HashAbsoluteXpath do
     expect(described_class.new(components[4]).absolute_xpath).to eq 'document/ead/archdesc/dsc/c1/c1'
   end
 
-  it 'hashes the absolute_xpath' do
-    expect(described_class.new(components[0]).to_hexdigest).to eq '9c4e84c284385184b7e3548ebe2a81a9df522a67'
-    expect(described_class.new(components[1]).to_hexdigest).to eq '73760c5f85d3691b9f537a5ca3d887825e6e0ee9'
-    expect(described_class.new(components[2]).to_hexdigest).to eq '44c3b0a0ba891df68aa056f9d3e3fcf23f64ad4e'
-    expect(described_class.new(components[3]).to_hexdigest).to eq '75fdc26f3f0a5fd30e157dbd523885a4eda7ecb3'
-    expect(described_class.new(components[4]).to_hexdigest).to eq '72636263da05d832fb4a05c90c2b2c79480af70e'
+  it 'hashes the absolute_xpath & prepends al_' do
+    expect(described_class.new(components[0]).to_hexdigest).to eq 'al_9c4e84c284385184b7e3548ebe2a81a9df522a67'
+    expect(described_class.new(components[1]).to_hexdigest).to eq 'al_73760c5f85d3691b9f537a5ca3d887825e6e0ee9'
+    expect(described_class.new(components[2]).to_hexdigest).to eq 'al_44c3b0a0ba891df68aa056f9d3e3fcf23f64ad4e'
+    expect(described_class.new(components[3]).to_hexdigest).to eq 'al_75fdc26f3f0a5fd30e157dbd523885a4eda7ecb3'
+    expect(described_class.new(components[4]).to_hexdigest).to eq 'al_72636263da05d832fb4a05c90c2b2c79480af70e'
   end
 
   it 'allows the hashing algorithm to be configured' do
     hash_algorithm = described_class.hash_algorithm
     described_class.hash_algorithm = Digest::SHA256
-    expect(described_class.new(components[0]).to_hexdigest).to eq '4b884bc407a22e7e6a41867ef4987b7c49f81c641fe0c4d1f92009a5e4b963a9'
+    expect(described_class.new(components[0]).to_hexdigest).to eq 'al_4b884bc407a22e7e6a41867ef4987b7c49f81c641fe0c4d1f92009a5e4b963a9'
     described_class.hash_algorithm = hash_algorithm
   end
 end

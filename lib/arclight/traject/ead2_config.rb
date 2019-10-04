@@ -255,6 +255,7 @@ compose 'components', ->(record, accumulator, _context) { accumulator.concat rec
                          "The ID of this document will be #{parent_id}#{hexdigest}."
                        ].join(' ')
                      end
+                     record['id'] = hexdigest
                      hexdigest
                    else
                      record.attribute('id')&.value&.strip&.gsub('.', '-')

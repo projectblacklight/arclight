@@ -187,7 +187,7 @@ RSpec.describe 'Collection Page', type: :feature do
         expect(page).to have_css '#contents', visible: true
         expect(page).to have_css '#context', visible: false
         expect(page).to have_css '#access', visible: false
-        click_link 'Collection context'
+        click_link 'Overview'
         expect(page).to have_css '#context', visible: true
         expect(page).to have_css '#contents', visible: false
         expect(page).to have_css '#access', visible: false
