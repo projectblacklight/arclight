@@ -20,11 +20,32 @@ class NavigationDocument {
   }
 }
 
+var contextNavigators = []
+
 class ContextNavigation {
   constructor(el) {
     this.el = $(el);
     this.data = this.el.data();
     this.parentLi = this.el.parent();
+    this.loaded = false
+    contextNavigators.push(this)
+  }
+
+  static exists_for_element(el) {
+    let existing = contextNavigators.find(e => {
+      return e.data.arclight.name === $(el).data().arclight.name &&
+        e.data.arclight.level === $(el).data().arclight.level
+    })
+    return existing
+  }
+
+  static new_for_element(el) {
+    let existing = ContextNavigation.exists_for_element(el)
+    if (existing != null) {
+      return existing
+    } else {
+      return new ContextNavigation(el)
+    }
   }
 
   static placeholder() {
@@ -38,6 +59,9 @@ class ContextNavigation {
   }
 
   getData() {
+    if (this.loaded) {
+      return
+    }
     const that = this;
     // Add a placeholder so flashes of text are not as significant
     this.el.after(ContextNavigation.placeholder());
@@ -53,6 +77,7 @@ class ContextNavigation {
         view: 'collection_context'
       }
     }).done((response) => that.updateView(response));
+    this.loaded = true
   }
 
   updateView(response) {
@@ -148,6 +173,19 @@ class ContextNavigation {
       that.parentLi.after(renderedAfterDocs).fadeIn(500);
     }
     that.truncateItems();
+    $('.al-toggle-view-children').click((e) => {
+      e.preventDefault()
+      var context = $(e.target).closest('.al-collection-context')
+      var id = context[0].id
+      var expandable = context.find('#' + id + '-collapsible-hierarchy').not('.show')
+      if (expandable != null && expandable.length == 1) {
+        var expandable_contents = expandable.find('.al-contents')
+        if (expandable_contents != null) {
+          const navigator = ContextNavigation.new_for_element(expandable_contents[0])
+          navigator.getData()
+        }
+      }
+    })
   }
 
   // eslint-disable-next-line class-methods-use-this
@@ -163,7 +201,7 @@ class ContextNavigation {
 
 Blacklight.onLoad(function () {
   $('.context-navigator').each(function (i, e) {
-    const contextNavigation = new ContextNavigation(e);
+    const contextNavigation = ContextNavigation.new_for_element(e);
     contextNavigation.getData();
   });
 });
