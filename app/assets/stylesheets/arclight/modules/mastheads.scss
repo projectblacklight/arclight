@@ -1,5 +1,5 @@
 .al-homepage-masthead.jumbotron {
-  border-bottom: $result-item-border-styling;
+  border-bottom: $default-border-styling;
   padding: ($spacer * 2) $spacer $spacer;
 
   .navbar-nav {
@@ -57,8 +57,8 @@
   }
 
   + .navbar-search {
-    border-bottom: $result-item-border-styling;
-    border-top: $result-item-border-styling;
+    border-bottom: $default-border-styling;
+    border-top: $default-border-styling;
     margin-bottom: ($spacer / 2);
 
     a {
@@ -71,7 +71,7 @@
 
     .navbar-toggler {
       background-color: $white;
-      border: $result-item-border-styling;
+      border: $default-border-styling;
     }
 
     .navbar-toggler-icon {

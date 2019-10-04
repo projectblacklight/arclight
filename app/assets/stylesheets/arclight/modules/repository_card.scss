@@ -1,6 +1,6 @@
 .al-repository {
   background-color: $gray-200;
-  border: $result-item-border-styling;
+  border: $default-border-styling;
   margin-bottom: $spacer;
 
   .al-repository-information {
@@ -33,7 +33,7 @@
       padding-left: $spacer * 2;
 
       @media (min-width: 992px) {
-        border-left: $result-item-border-styling;
+        border-left: $default-border-styling;
       }
     }
 
