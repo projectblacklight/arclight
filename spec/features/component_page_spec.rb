@@ -107,7 +107,9 @@ RSpec.describe 'Component Page', type: :feature do
           text: 'Series I: Administrative Records, 1902-1976'
         )
         expect(page).to have_css('.al-number-of-children-badge', text: '25')
-        expect(page).not_to have_css 'form.bookmark-toggle' # no bookmarks
+        expect(page).to have_css('.al-online-content-icon')
+        expect(page).to have_css('form.bookmark-toggle')
+        expect(page).to have_css '.al-document-container', text: 'Box 1, Folder 1'
       end
     end
 
@@ -133,6 +135,7 @@ RSpec.describe 'Component Page', type: :feature do
       within '#collection-context' do
         expect(page).to have_css 'li.al-hierarchy-highlight', text: 'Statements of purpose, c.1902'
         expect(page).to have_css '.document-title-heading', text: /"A brief account of the origin/
+        expect(page).to have_css '.al-document-container', text: 'Box 1, Folder 1'
         expect(page).to have_css(
           '.document-title-heading',
           text: 'Constitution - notes on drafting of constitution, c.1902-1903'

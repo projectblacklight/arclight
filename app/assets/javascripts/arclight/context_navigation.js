@@ -148,6 +148,7 @@ class ContextNavigation {
       that.parentLi.after(renderedAfterDocs).fadeIn(500);
     }
     that.truncateItems();
+    Blacklight.doBookmarkToggleBehavior();
   }
 
   // eslint-disable-next-line class-methods-use-this
