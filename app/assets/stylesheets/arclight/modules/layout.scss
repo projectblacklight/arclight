@@ -8,6 +8,9 @@
   background-color: transparent;
   margin-bottom: 0;
   padding: 0;
+  .breadcrumb-item + .breadcrumb-item::before {
+    content: '';
+  }
 }
 
 .al-show-actions-box {

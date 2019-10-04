@@ -17,6 +17,7 @@ AllCops:
 Metrics/ModuleLength:
   Exclude:
     - 'app/helpers/arclight_helper.rb'
+    - 'app/models/concerns/arclight/solr_document.rb'
 
 Metrics/BlockLength:
   Exclude:
