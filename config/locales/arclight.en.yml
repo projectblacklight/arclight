@@ -69,8 +69,8 @@ en:
         expand: Expand
         has_content: Contents
         no_contents: No content inventory
-        no_online_content: No online content
         online_content: Online content
+        online_content_upper: ONLINE CONTENT
         our_collections: Our Collections
         overview: Overview
         sections:

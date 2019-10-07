@@ -43,6 +43,13 @@
   float: right;
 }
 
+.al-online-content-icon .blacklight-icons svg {
+  fill: $green;
+}
+
+p.media .col {
+  flex: auto;
+}
 // Access tab
 #access {
   dl dt {
