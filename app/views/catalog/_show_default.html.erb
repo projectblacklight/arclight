@@ -1,41 +1,55 @@
+<% parents = Arclight::Parents.from_solr_document(document).as_parents %>
 <div class='row'>
   <div class='col-md-12'>
-    <ul class='nav nav-tabs nav-fill' role='tablist' aria-label='<%= t('arclight.views.show.tablist_nav') %>'>
-      <li class='nav-item flex-fill'>
-        <a class='nav-link p-1 p-sm-2 active' data-toggle='tab' href='#context' role='tab'>
-          <%= t 'arclight.views.show.context' %>
-        </a>
-      </li>
-      <li class='nav-item flex-fill'>
-        <a class='nav-link p-1 p-sm-2 <%= 'disabled' unless document.online_content? %>' data-toggle='tab' href='#online-content' role='tab' data-arclight-online-content-tab='true'>
-          <% if document.online_content? %>
-            <%= t 'arclight.views.show.online_content' %>
-          <% else %>
-            <%= t 'arclight.views.show.no_online_content' %>
-          <% end %>
-        </a>
-      </li>
-      <li class='nav-item flex-fill'>
-        <a class='nav-link p-1 p-sm-2' data-toggle='tab' href='#access' role='tab'>
-          <%= t 'arclight.views.show.access' %>
-        </a>
-      </li>
-    </ul>
-    <div class='tab-content'>
-      <div class='tab-pane active' id='context' role='tabpanel'>
-        <%= render 'component_context' %>
-      </div>
-      <div class='tab-pane' id='online-content' role='tabpanel'>
+    <% if document.digital_objects.present? %>
+      <%= content_tag :p, class: "media breadcrumb-item breadcrumb-item-#{parents.length + 3}" do %>
+        <span class="media-body al-online-content-icon" aria-hidden="true"><%= blacklight_icon :online %></span>
+        <span class="col text-muted">
+          <%= t('arclight.views.show.online_content_upper') %>
+        </span>
         <%= render_document_partial(document, 'arclight_viewer') %>
-      </div>
-      <div class='tab-pane' id='access' role='tabpanel'>
-        <h2 class="sr-only"><%= t 'arclight.views.show.access' %></h2>
-        <% unless blacklight_config.show.component_access_tab_items.nil? %>
-          <% items = blacklight_config.show.component_access_tab_items.select { |i|  fields_have_content?(@document, i) }  %>
-          <% items.each_with_index do |item, index| %>
-            <%= render partial: 'access_contents', locals: { document: @document, field_accessor: item, card_index: index} %>
+      <% end %>
+    <% end %>
+    <div class='row'>
+      <div class='col-md-12'>
+        <ul class='nav nav-tabs nav-fill' role='tablist' aria-label='<%= t('arclight.views.show.tablist_nav') %>'>
+          <li class='nav-item flex-fill'>
+            <a class='nav-link p-1 p-sm-2 active' data-toggle='tab' href='#context' role='tab'>
+              <%= t 'arclight.views.show.context' %>
+            </a>
+          </li>
+          <% if document.online_content? %>
+            <li class='nav-item flex-fill'>
+              <a class='nav-link p-1 p-sm-2' data-toggle='tab' href='#online-content' role='tab' data-arclight-online-content-tab='true'>
+                <%= t 'arclight.views.show.online_content' %>
+              </a>
+            </li>
           <% end %>
-        <% end %>
+          <li class='nav-item flex-fill'>
+            <a class='nav-link p-1 p-sm-2' data-toggle='tab' href='#access' role='tab'>
+              <%= t 'arclight.views.show.access' %>
+            </a>
+          </li>
+        </ul>
+        <div class='tab-content'>
+          <div class='tab-pane active' id='context' role='tabpanel'>
+            <%= render 'component_context' %>
+          </div>
+          <% if document.online_content? %>
+            <div class='tab-pane' id='online-content' role='tabpanel'>
+            <%# TODO: render children with online content in a search result style view %>
+            </div>
+          <% end %>
+          <div class='tab-pane' id='access' role='tabpanel'>
+            <h2 class="sr-only"><%= t 'arclight.views.show.access' %></h2>
+            <% unless blacklight_config.show.component_access_tab_items.nil? %>
+              <% items = blacklight_config.show.component_access_tab_items.select { |i|  fields_have_content?(@document, i) }  %>
+              <% items.each_with_index do |item, index| %>
+                <%= render partial: 'access_contents', locals: { document: @document, field_accessor: item, card_index: index} %>
+              <% end %>
+            <% end %>
+          </div>
+        </div>
       </div>
     </div>
   </div>

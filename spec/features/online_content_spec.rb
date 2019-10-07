@@ -37,7 +37,8 @@ RSpec.describe 'Online Content', type: :feature do
     context 'a collection w/o digital objects at the collection level' do
       let(:doc_id) { 'a0011-xml' }
 
-      it 'renders a flat list of the child components with online content', js: true do
+      # TODO: new specs for updated online content tab content
+      xit 'renders a flat list of the child components with online content', js: true do
         click_link('Online content')
 
         within('.documents-online_contents') do
@@ -51,8 +52,8 @@ RSpec.describe 'Online Content', type: :feature do
     context 'no content' do
       let(:doc_id) { 'aoa271aspace_a951375d104030369a993ff943f61a77' }
 
-      it 'renders disabled tab' do
-        expect(page).to have_css('.nav-link.disabled', text: 'No online content')
+      it 'does not render online content tab' do
+        expect(page).not_to have_css('.nav-link', text: 'Online content')
       end
     end
   end
