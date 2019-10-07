@@ -23,15 +23,7 @@
     .document-title-heading {
       font-size: $h5-font-size;
       .al-document-extent {
-        background-color: $gray-200;
-        border: $default-border-styling;
-        border-radius: 10px;
-        font-size: $font-size-sm;
-        line-height: 1.2;
-        margin-bottom: 0.25rem;
-        padding: 2px $result-item-body-padding;
-        text-align: left;
-        white-space: normal;
+        @include extent-badge;
       }
     }
 
@@ -93,6 +85,28 @@ article.document {
     h4 {
       font-size: $h5-font-size;
     }
+
+    .al-grouped-more {
+      border-bottom: $default-border-styling;
+      padding: ($spacer * .5) 0;
+    }
+
+    .document {
+      border-bottom: $default-border-styling;
+      margin-top: 0;
+      padding: $spacer 0;
+
+      &:last-child {
+        border-bottom: 0;
+      }
+    }
+  }
+
+  .al-document-extent {
+    @include extent-badge;
+    background-color: $gray-100;
+    border-color: $gray-400;
+    color: $gray-700;
   }
 }
 
