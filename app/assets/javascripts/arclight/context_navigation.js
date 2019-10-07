@@ -95,7 +95,7 @@ const setUpParentTree = (that, newDocs, newDocIndex) => {
 
 const setUpChildTree = (that, newDocs) => {
   let parentId = that.data.arclight.originalDocument
-  let parentSel = $('#' + parentId)
+  let parentSel = $('#' + parentId + '-collapsible-hierarchy')
   let renderedDocs = newDocs.map(d => d.render()).join('')
   parentSel.append('<ul>' + renderedDocs + '</ul>')
 }
@@ -111,8 +111,7 @@ class ContextNavigation {
 
   static exists_for_element(el) {
     let existing = contextNavigators.find(e => {
-      return e.data.arclight.name === $(el).data().arclight.name &&
-        e.data.arclight.level === $(el).data().arclight.level
+      return e.data.arclight.originalDocument === $(el).data().arclight.originalDocument
     })
     return existing
   }
@@ -173,7 +172,6 @@ class ContextNavigation {
     that.parentLi.find('.al-hierarchy-placeholder').remove();
 
     if (originalDocumentIndex !== -1) {
-      console.log('sibling!')
       // Case where this is the sibling tree of the current document
       // If the response does contain any <article> elements for the child or
       // parent Solr Documents, then the documents are treated as sibling nodes
@@ -187,15 +185,13 @@ class ContextNavigation {
       const newDocIndex = newDocs.findIndex(doc => doc.id === currentId);
 
       if (newDocIndex !== -1) {
-        console.log('parent!')
         setUpParentTree(that, newDocs, newDocIndex)
       } else {
-        console.log('child!')
         setUpChildTree(that, newDocs, currentId)
       }
     }
     that.truncateItems();
-    $('.al-toggle-view-children').click((e) => {
+    $('.al-toggle-view-all').click((e) => {
       e.preventDefault()
       var context = $(e.target).closest('.al-collection-context')
       var id = context[0].id
