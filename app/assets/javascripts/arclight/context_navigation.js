@@ -68,12 +68,7 @@ const setUpSiblingTree = (newDocs, originalDocumentIndex, that) => {
   that.parentLi.before(renderedNextSiblingItems).fadeIn(500);
 }
 
-const setUpParentTree = (that, newDocs) => {
-  // Otherwise, retrieve the parent...
-  const parentIndex = that.data.arclight.originalParents.indexOf(that.data.arclight.parent);
-  const currentId = `${that.data.arclight.originalParents[0]}${that.data.arclight.originalParents[parentIndex + 1]}`;
-  const newDocIndex = newDocs.findIndex(doc => doc.id === currentId);
-
+const setUpParentTree = (that, newDocs, newDocIndex) => {
   // Update the docs before the item
   // TODO: Add a class or something that doesn't display these until the expando is clicked
   // Retrieves the documents up to and including the "new document"
@@ -96,6 +91,13 @@ const setUpParentTree = (that, newDocs) => {
   const renderedAfterDocs = afterDocs.map(newDoc => newDoc.render()).join('');
   // Insert the documents after the current
   that.parentLi.after(renderedAfterDocs).fadeIn(500);
+}
+
+const setUpChildTree = (that, newDocs) => {
+  let parentId = that.data.arclight.originalDocument
+  let parentSel = $('#' + parentId)
+  let renderedDocs = newDocs.map(d => d.render()).join('')
+  parentSel.append('<ul>' + renderedDocs + '</ul>')
 }
 
 class ContextNavigation {
@@ -171,6 +173,7 @@ class ContextNavigation {
     that.parentLi.find('.al-hierarchy-placeholder').remove();
 
     if (originalDocumentIndex !== -1) {
+      console.log('sibling!')
       // Case where this is the sibling tree of the current document
       // If the response does contain any <article> elements for the child or
       // parent Solr Documents, then the documents are treated as sibling nodes
@@ -178,7 +181,18 @@ class ContextNavigation {
     } else {
       // Case where this is a parent list and needs to be filed correctly
       //
-      setUpParentTree(that, newDocs)
+      // Otherwise, retrieve the parent...
+      const parentIndex = that.data.arclight.originalParents.indexOf(that.data.arclight.parent);
+      const currentId = `${that.data.arclight.originalParents[0]}${that.data.arclight.originalParents[parentIndex + 1]}`;
+      const newDocIndex = newDocs.findIndex(doc => doc.id === currentId);
+
+      if (newDocIndex !== -1) {
+        console.log('parent!')
+        setUpParentTree(that, newDocs, newDocIndex)
+      } else {
+        console.log('child!')
+        setUpChildTree(that, newDocs, currentId)
+      }
     }
     that.truncateItems();
     $('.al-toggle-view-children').click((e) => {
