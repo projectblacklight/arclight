@@ -32,7 +32,7 @@
   font-size: $h6-font-size;
   text-transform: uppercase;
 
-  + dl dt {
+  + dl > dt {
     font-size: $font-size-sm;
     margin-top: 4px;
     text-transform: uppercase;

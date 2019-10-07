@@ -41,7 +41,7 @@ end
 require 'rspec/expectations'
 
 def condense_whitespace(str)
-  str.gsub(/[\n\s]+/, ' ').strip
+  str.squish.strip.gsub(/>[\n\s]+</, '><')
 end
 
 def equal_modulo_whitespace(string1, string2)

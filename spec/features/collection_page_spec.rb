@@ -62,9 +62,9 @@ RSpec.describe 'Collection Page', type: :feature do
       end
     end
 
-    it 'multivalued notes are rendered as paragaphs' do
+    it 'html-formatted notes render with paragraphs intact' do
       within 'dd.blacklight-bioghist_ssm' do
-        expect(page).to have_css('p', count: 2)
+        expect(page).to have_css('p', count: 4)
         expect(page).to have_css('p', text: /^Alpha Omega Alpha Honor Medical Society was founded/)
         expect(page).to have_css('p', text: /^Root and his fellow medical students/)
       end
@@ -236,7 +236,7 @@ RSpec.describe 'Collection Page', type: :feature do
       it 'has citations' do
         click_link 'Access'
         expect(page).to have_css 'dt', text: 'PREFERRED CITATION:'
-        expect(page).to have_css 'dd', text: /Omega Alpha Archives\. 1894-1992/
+        expect(page).to have_css 'dd p', text: /Omega Alpha Archives\. 1894-1992/
       end
     end
 

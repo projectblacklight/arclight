@@ -155,3 +155,33 @@ a.al-toggle-view-all{
 dl dd {
   overflow-wrap: break-word;
 }
+
+dl.deflist dt {
+  text-align: left;
+}
+
+.chronlist-head, .list-head {
+  caption-side: top;
+  font-size: 1.25rem;
+  font-weight: 500;
+  margin-bottom: 1rem;
+}
+
+.chronlist th,
+.chronlist-item-date {
+  font-weight: 500;
+}
+
+.chronlist-item-date {
+  width: 15ch;
+}
+
+.chronlist-item-event {
+  div:not(:last-child) {
+    margin-bottom: 0.75rem;
+  }
+}
+
+.text-underline {
+  text-decoration: underline;
+}
