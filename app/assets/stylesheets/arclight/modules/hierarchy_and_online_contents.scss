@@ -170,7 +170,7 @@
     }
   }
 
-  .prev-siblings li {
+  .prev-siblings li, li.al-collection-context {
     visibility: visible;
     opacity: 1;
     transition: visibility 0s, height 0.5s, opacity 0.5s linear;
