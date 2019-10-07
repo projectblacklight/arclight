@@ -7,3 +7,16 @@ $result-item-body-padding: 12px;
 
 // Mixins
 $default-border-styling: 1px solid $default-border-color;
+
+@mixin extent-badge {
+  background-color: $gray-200;
+  border: $default-border-styling;
+  border-radius: $border-radius-lg;
+  color: $dark;
+  font-size: $font-size-sm;
+  line-height: 1.2;
+  margin: ($spacer * .5) 0 0;
+  padding: ($spacer * .25) ($spacer * .5);
+  text-align: left;
+  white-space: normal;
+}

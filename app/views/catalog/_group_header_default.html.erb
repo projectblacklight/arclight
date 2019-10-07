@@ -7,7 +7,7 @@
         </div>
       <% end %>
       <h3><%= link_to_document document, document_show_link_field(document) %></h3>
-      <%= content_tag('span', class: 'badge badge-light') do %>
+      <%= content_tag('span', class: 'al-document-extent badge') do %>
         <%= document.extent %>
       <% end if document.extent %>
       <%= content_tag('div', class: 'al-document-abstract-or-scope') do %>

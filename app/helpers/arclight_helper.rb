@@ -197,8 +197,7 @@ module ArclightHelper
     safe_join(
       documents.each_with_index.map do |document, i|
         render_document_partial(document, :arclight_index_group_document, document_counter: i)
-      end,
-      raw('<hr>')
+      end
     )
   end
 
