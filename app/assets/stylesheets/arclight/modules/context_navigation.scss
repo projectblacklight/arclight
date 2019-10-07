@@ -6,7 +6,7 @@ li.al-collection-context  {
   flex-grow: 1;
   padding-left: 15px;
   max-width: 100%;
-  
+
   .documentHeader {
     flex-grow: 1;
     margin-bottom: $spacer;
@@ -23,13 +23,13 @@ li.al-collection-context  {
   .al-document-abstract-or-scope {
     max-width: 45em;
   }
-  
+
   .blacklight-icons svg {
-    fill: #797d81;
+    fill: $gray-600;
   }
 
   .al-online-content-icon svg {
-    fill: #28a745;
+    fill: $green;
   }
   @media (max-width: 767px) {
     padding-left: 0;
@@ -49,5 +49,3 @@ li.al-collection-context  {
     padding-left: 40px;
   }
 }
-
-

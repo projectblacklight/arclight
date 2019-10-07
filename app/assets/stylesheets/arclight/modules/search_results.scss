@@ -4,7 +4,7 @@
   // Result item header
   .al-document-title-bar {
     background-color: $gray-200;
-    border: $result-item-border-styling;
+    border: $default-border-styling;
     font-size: $font-size-sm;
     margin: 0 (-$result-item-body-padding - 1px) 0.5rem;
     padding: 3px $result-item-body-padding;
@@ -20,7 +20,7 @@
       font-size: $h5-font-size;
       .al-document-extent {
         background-color: $gray-200;
-        border: $result-item-border-styling;
+        border: $default-border-styling;
         font-size: $font-size-sm;
         margin-bottom: 0.25rem;
         padding: 2px $result-item-body-padding;
@@ -52,8 +52,8 @@ article.document {
   .blacklight-icons.al-online-content-icon svg {
     fill: $green;
   }
-  div.breadcrumb-links, 
-  div.al-document-abstract-or-scope, 
+  div.breadcrumb-links,
+  div.al-document-abstract-or-scope,
   div.al-document-creator {
     margin-top: ($spacer * .5);
   }
@@ -100,8 +100,8 @@ article.document {
 
 .documents-hierarchy {
   .al-number-of-children-badge {
-    background-color: #eee;
-    border: 1px solid #ccc;
+    background-color: $gray-200;
+    border: $default-border-styling;
     color: $gray-600;
     vertical-align: top;
   }
@@ -121,11 +121,11 @@ article.document {
   margin-bottom: $spacer;
 
   .document {
-    border-bottom: $result-item-border-styling;
+    border-bottom: $default-border-styling;
     padding: $spacer 0;
 
     &:first-child {
-      border-top: $result-item-border-styling;
+      border-top: $default-border-styling;
     }
   }
 }
@@ -135,7 +135,7 @@ article.document {
 }
 
 .al-document-container.text-muted {
-  color: #ADB5BD !important;
+  color: $gray-600 !important;
 }
 
 .col-no-left-padding {
@@ -167,5 +167,5 @@ article.document {
 }
 
 .btn-outline-secondary:not(:disabled):not(.disabled).active svg, .btn-outline-secondary:hover svg {
-  fill: #fff;
+  fill: $white;
 }
