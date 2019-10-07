@@ -1,12 +1,12 @@
 // Collection header
 .al-show-header-section {
-  border: $result-item-border-styling;
+  border: $default-border-styling;
   margin-bottom: $spacer;
   padding: 0 $spacer;
 
   .al-document-title-bar {
     background-color: $gray-200;
-    border-bottom: $result-item-border-styling;
+    border-bottom: $default-border-styling;
     font-size: $font-size-sm;
     margin: 0 (-$spacer) $spacer;
     padding: 3px $result-item-body-padding;

@@ -22,82 +22,72 @@ class NavigationDocument {
 
 var contextNavigators = []
 
-const setUpSiblingTree = (newDocs, originalDocumentIndex, that) => {
-  newDocs[originalDocumentIndex].setAsHighlighted();
-
-  const prevSiblingDocs = newDocs.slice(0, originalDocumentIndex);
-  let nextSiblingDocs = [];
-
-  // If there are more than 1 siblings, hide them all but the first
-  if (prevSiblingDocs.length > 1 && originalDocumentIndex > 0) {
-    const hiddenPrevSiblingDocs = prevSiblingDocs.slice(0, -1);
-    hiddenPrevSiblingDocs.forEach(function (siblingDoc) {
-      siblingDoc.collapse();
-    });
-
-    // Add the "expand" button
-    // @todo this needs to be refactored
-    const parentUl = $('ul.parent');
-    const collapseText = parentUl[0].dataset.dataCollapse;
-    const expandText = parentUl[0].dataset.dataExpand;
-    const $expandButton = $(`<button class="my-3 btn btn-secondary btn-sm">${expandText}</button>`);
-    const prevSiblingContainer = $('<ul class="pl-0 prev-siblings"></ul>');
-    prevSiblingContainer.append($expandButton);
-    $expandButton.click((event) => {
-      const $target = $(event.target);
-      const children = $target.parent().children('li');
-      const targetedChildren = children.slice(0, -1);
-      targetedChildren.toggleClass('collapsed');
-      $target.toggleClass('collapsed');
-      const targetText = $target.hasClass('collapsed') ? collapseText : expandText;
-      $target.text(targetText);
-    });
-
-    // Render the docs as <li> elements and append them to the DOM
-    const renderedPrevSiblingItems = prevSiblingDocs.map(doc => doc.render()).join('');
-    prevSiblingContainer.append(renderedPrevSiblingItems);
-    that.parentLi.before(prevSiblingContainer);
-    nextSiblingDocs = newDocs.slice(originalDocumentIndex);
-  } else {
-    nextSiblingDocs = newDocs;
+/**
+ * Models the "Expand"/"Collapse" button, and provides an onClick event handler
+ * for the jQuery element
+ * @class
+ */
+class ExpandButton {
+  /**
+   * This retrieves the <li> elements which are hidden/rendered in response to
+   *   clicking the <button> element
+   * @param {jQuery} $li - the <button> element
+   * @return {jQuery} - a jQuery object containing the targeted <li>
+   */
+  static findSiblings($button) {
+    const $siblings = $button.parent().children('li');
+    return $siblings.slice(0, -1);
   }
 
-  const renderedNextSiblingItems = nextSiblingDocs.map(newDoc => newDoc.render()).join('');
+  /**
+   * This adds a "collapsed" class to all of the <li> children, as well as
+   *   updates the text for the <button> element
+   * @param {Event} event - the event propagated in response to clicking on the
+   *   <button> element
+   */
+  static handleClick(event) {
+    const $element = $(event.target);
+    // This function is bound to the instance object
+    const $targeted = this.constructor.findSiblings($element);
 
-  // Insert the rendered sibling documents before the <li> elements
-  that.parentLi.before(renderedNextSiblingItems).fadeIn(500);
+    $targeted.toggleClass('collapsed');
+    $element.toggleClass('collapsed');
+
+    const containerText = $element.hasClass('collapsed') ? this.collapseText : this.expandText;
+    $element.text(containerText);
+  }
+
+  /**
+   * @constructor
+   */
+  constructor() {
+    const parentUl = $('ul.parent');
+    this.collapseText = parentUl[0].dataset.dataCollapse;
+    this.expandText = parentUl[0].dataset.dataExpand;
+
+    this.$el = $(`<button class="my-3 btn btn-secondary btn-sm">${this.expandText}</button>`);
+    this.constructor.handleClick = this.constructor.handleClick.bind(this);
+    this.$el.click(this.constructor.handleClick);
+  }
 }
 
-const setUpParentTree = (that, newDocs, newDocIndex) => {
-  // Update the docs before the item
-  // TODO: Add a class or something that doesn't display these until the expando is clicked
-  // Retrieves the documents up to and including the "new document"
-  const beforeDocs = newDocs.slice(0, newDocIndex);
-
-  let renderedBeforeDocs = beforeDocs.map(newDoc => newDoc.render()).join('');
-  that.parentLi.before(renderedBeforeDocs).fadeIn(500);
-
-  let itemDoc = newDocs.slice(newDocIndex, newDocIndex + 1);
-  let renderedItemDoc = itemDoc.map(doc => doc.render()).join('');
-
-  // Update the item
-  const $itemDoc = $(renderedItemDoc);
-  // Update the id, add classes of the classes. Prepend the current children.
-  that.parentLi.attr('id', $itemDoc.attr('id'));
-  that.parentLi.addClass($itemDoc.attr('class'));
-  that.parentLi.prepend($itemDoc.children()).fadeIn(500);
-  // Update the docs after the item
-  const afterDocs = newDocs.slice(newDocIndex + 1, newDocs.length);
-  const renderedAfterDocs = afterDocs.map(newDoc => newDoc.render()).join('');
-  // Insert the documents after the current
-  that.parentLi.after(renderedAfterDocs).fadeIn(500);
-}
-
-const setUpChildTree = (that, newDocs) => {
-  let parentId = that.data.arclight.originalDocument
-  let parentSel = $('#' + parentId + '-collapsible-hierarchy')
-  let renderedDocs = newDocs.map(d => d.render()).join('')
-  parentSel.append('<ul>' + renderedDocs + '</ul>')
+/**
+ * Modeling <button> Elements which hide or retrieve <li> elements for sibling
+ *   documents nested within the <li> elements of the <ul> tree
+ * @class
+ */
+class NestedExpandButton extends ExpandButton {
+  /**
+   * This retrieves the <li> elements which are hidden/rendered in response to
+   *   clicking the <button> element
+   * @param {jQuery} $li - the <button> element
+   * @return {jQuery} - a jQuery object containing the targeted <li>
+   */
+  static findSiblings($button) {
+    const highlighted = $button.siblings('.al-hierarchy-highlight');
+    const $siblings = highlighted.prevAll('.al-collection-context');
+    return $siblings.slice(0, -1);
+  }
 }
 
 class ContextNavigation {
@@ -157,6 +147,151 @@ class ContextNavigation {
     this.loaded = true
   }
 
+  /**
+   * Constructs a <ul> container element with an ElementButton instance appended
+   * within it
+   * @returns {jQuery}
+   */
+  static buildExpandList() {
+    const $ul = $('<ul></ul>');
+    $ul.addClass('pl-0');
+    $ul.addClass('prev-siblings');
+    const button = new ExpandButton();
+    $ul.append(button.$el);
+    return $ul;
+  }
+
+  /**
+   * Highlights the <li> element for the current Document and appends <li> the
+   *   sibling documents for a given Document element
+   * @param {NavigationDocument[]} newDocs - the NavigationDocument objects for
+   *   each resulting Solr Document
+   * @param {number} originalDocumentIndex
+   * @param {jQuery} parentLi
+   */
+  static updateSiblings(newDocs, originalDocumentIndex, parentLi) {
+    newDocs[originalDocumentIndex].setAsHighlighted();
+
+    // Hide all but the first previous sibling
+    const prevSiblingDocs = newDocs.slice(0, originalDocumentIndex - 1);
+    let nextSiblingDocs = [];
+
+    if (prevSiblingDocs.length > 1 && originalDocumentIndex > 0) {
+      const hiddenPrevSiblingDocs = prevSiblingDocs.slice(0, -1);
+      hiddenPrevSiblingDocs.forEach(siblingDoc => {
+        siblingDoc.collapse();
+      });
+
+      const prevSiblingList = this.buildExpandList();
+      const renderedPrevSiblingItems = prevSiblingDocs.map(doc => doc.render()).join('');
+
+      prevSiblingList.append(renderedPrevSiblingItems);
+      parentLi.before(prevSiblingList);
+
+      nextSiblingDocs = newDocs.slice(originalDocumentIndex);
+    } else {
+      nextSiblingDocs = newDocs;
+    }
+
+    const renderedNextSiblingItems = nextSiblingDocs.map(newDoc => newDoc.render()).join('');
+
+    // Insert the rendered sibling documents before the <li> elements
+    parentLi.before(renderedNextSiblingItems).fadeIn(500);
+  }
+
+  /**
+   * Inserts <li> elements for parents (e. g. components or collections) for the
+   *   current Document and appends <li> for each of these
+   * @param {NavigationDocument[]} newDocs - the NavigationDocument objects for
+   *   each resulting Solr Document
+   * @param {string[]} originalParents - the IDs for the Solr Documents of each
+   *   ancestor
+   * @param {string} parent - the ID for the immediate parent (ancestor)
+   * @param {jQuery} parentLi - the <li> used to generate the <ul> for the
+   * context - this is consistently the *last* element in the <ul>
+   */
+  static updateParents(newDocs, originalParents, parent, parentLi) {
+    // Case where this is a parent list and needs to be filed correctly
+    //
+    // Otherwise, retrieve the parent...
+    const parentIndex = originalParents.indexOf(parent);
+
+    // The first parent is always used to consistently construct the doc ID
+    const firstParent = originalParents[0];
+    const nextParent = originalParents[parentIndex + 1];
+    const currentId = `${firstParent}${nextParent}`;
+
+    const newDocIndex = newDocs.findIndex(doc => doc.id === currentId);
+
+    // Update the docs before the item
+    // Retrieves the documents up to and including the "new document"
+    const beforeDocs = newDocs.slice(0, newDocIndex);
+    let renderedBeforeDocs;
+    if (beforeDocs.length > 1) {
+      beforeDocs.forEach(function (parentDoc) {
+        parentDoc.collapse();
+      });
+      renderedBeforeDocs = beforeDocs.map(newDoc => newDoc.render()).join('');
+      const prevParentList = this.buildExpandList();
+      prevParentList.append(renderedBeforeDocs);
+    } else {
+      renderedBeforeDocs = beforeDocs.map(newDoc => newDoc.render()).join('');
+    }
+
+    parentLi.before(renderedBeforeDocs).fadeIn(500);
+
+    let itemDoc = newDocs.slice(newDocIndex, newDocIndex + 1);
+    let renderedItemDoc = itemDoc.map(doc => doc.render()).join('');
+
+    // Update the item
+    const $itemDoc = $(renderedItemDoc);
+    // Update the id, add classes of the classes. Prepend the current children.
+    parentLi.attr('id', $itemDoc.attr('id'));
+    parentLi.addClass($itemDoc.attr('class'));
+
+    parentLi.prepend($itemDoc.children()).fadeIn(500);
+
+    // Update the docs after the item
+    const afterDocs = newDocs.slice(newDocIndex + 1, newDocs.length);
+    const renderedAfterDocs = afterDocs.map(newDoc => newDoc.render()).join('');
+
+    // Insert the documents after the current
+    parentLi.after(renderedAfterDocs).fadeIn(500);
+  }
+
+  static updateChildren (newDocs, parentId) {
+    let parentSel = $('#' + parentId + '-collapsible-hierarchy')
+    let renderedDocs = newDocs.map(d => d.render()).join('')
+    parentSel.append('<ul>' + renderedDocs + '</ul>')
+  }
+
+  /**
+   * Update the ancestors for <li> elements
+   * @param {jQuery} $li - the <li> element for the current, highlighted
+   *   Document in the <ul> context list of collections, components, and
+   *   containers
+   */
+  static updateListSiblings($li) {
+    const prevSiblings = $li.prevAll('.al-collection-context');
+    if (prevSiblings.length > 1) {
+      const hiddenNextSiblings = prevSiblings.slice(0, -1);
+      hiddenNextSiblings.toggleClass('collapsed');
+
+      const button = new NestedExpandButton();
+
+      const lastHiddenNextSibling = hiddenNextSiblings[hiddenNextSiblings.length - 1];
+      button.$el.insertAfter(lastHiddenNextSibling);
+    }
+  }
+
+  /**
+   * This updates the elements in the View DOM using an AJAX response containing
+   *   the HTML of a server-rendered View template.
+   * It is this which is primarily used to populate the <ul> element with
+   *   children for the navigation context, containing <li> elements for
+   *   collections, components, and containers.
+   * @param {string} response - the AJAX response body
+   */
   updateView(response) {
     const that = this;
     var resp = $.parseHTML(response);
@@ -175,7 +310,6 @@ class ContextNavigation {
       // Case where this is the sibling tree of the current document
       // If the response does contain any <article> elements for the child or
       // parent Solr Documents, then the documents are treated as sibling nodes
-      setUpSiblingTree(newDocs, originalDocumentIndex, that)
     } else {
       // Case where this is a parent list and needs to be filed correctly
       //
@@ -185,12 +319,20 @@ class ContextNavigation {
       const newDocIndex = newDocs.findIndex(doc => doc.id === currentId);
 
       if (newDocIndex !== -1) {
-        setUpParentTree(that, newDocs, newDocIndex)
+        ContextNavigation.updateParents(
+          newDocs,
+          that.data.arclight.originalParents,
+          that.data.arclight.parent,
+          that.parentLi
+        );
       } else {
-        setUpChildTree(that, newDocs, currentId)
+        ContextNavigation.updateChildren(newDocs,
+          that.data.arclight.originalDocument
+        );
       }
     }
     that.truncateItems();
+    Blacklight.doBookmarkToggleBehavior();
     $('.al-toggle-view-all').click((e) => {
       e.preventDefault()
       var context = $(e.target).closest('.al-collection-context')
@@ -204,6 +346,10 @@ class ContextNavigation {
         }
       }
     })
+
+    // Select the <li> element for the current document
+    const highlighted = that.parentLi.siblings('.al-hierarchy-highlight');
+    this.constructor.updateListSiblings(highlighted);
   }
 
   // eslint-disable-next-line class-methods-use-this

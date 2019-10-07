@@ -180,12 +180,14 @@ module ArclightHelper
 
   # determine which icon to show in search results header
   # these icon names will need to be updated when the icons are determined
-  def document_header_icon(document)
+  def document_or_parent_icon(document)
     case document.level&.downcase
     when 'collection'
       'collection'
     when 'file'
       'file'
+    when 'series', 'subseries'
+      'folder'
     else
       'container'
     end
@@ -272,7 +274,7 @@ module ArclightHelper
     document.parent_ids.reverse.reduce(''.html_safe) do |acc, parent_id|
       content_tag(
         :ul,
-        class: 'parent',
+        class: %w[parent collection-context],
         data: { 'data-collapse': I18n.t('arclight.views.show.collapse'), 'data-expand': I18n.t('arclight.views.show.expand') }
       ) do
         content_tag(:li, id: parent_id) do

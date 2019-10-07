@@ -1,0 +1,51 @@
+ul.parent {
+  padding-left: 20px;
+}
+
+li.al-collection-context  {
+  flex-grow: 1;
+  padding-left: 15px;
+  max-width: 100%;
+
+  .documentHeader {
+    flex-grow: 1;
+    margin-bottom: $spacer;
+    font-size: 1.25rem
+  }
+
+  .col.col-no-left-padding.d-flex.flex-wrap {
+    flex-grow: 1;
+  }
+  .order-2 .row {
+    margin-left: 0;
+  }
+
+  .al-document-abstract-or-scope {
+    max-width: 45em;
+  }
+
+  .blacklight-icons svg {
+    fill: $gray-600;
+  }
+
+  .al-online-content-icon svg {
+    fill: $green;
+  }
+  @media (max-width: 767px) {
+    padding-left: 0;
+    .al-document-abstract-or-scope {
+      max-width: 25em;
+    }
+  }
+}
+
+@media (max-width: 767px) {
+  .blacklight-catalog.blacklight-catalog-show {
+    #context {
+      padding: 10px;
+    }
+  }
+  ul.parent {
+    padding-left: 40px;
+  }
+}

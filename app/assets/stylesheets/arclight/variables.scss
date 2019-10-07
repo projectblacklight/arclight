@@ -1,2 +1,9 @@
+// Colors
+$background-highlight: #ffffaa;
+$default-border-color: $gray-400;
+
+// Spacing
 $result-item-body-padding: 12px;
-$result-item-border-styling: 1px solid #ccc;
+
+// Mixins
+$default-border-styling: 1px solid $default-border-color;
