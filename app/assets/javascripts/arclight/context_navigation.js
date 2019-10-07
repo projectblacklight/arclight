@@ -307,9 +307,7 @@ class ContextNavigation {
     that.parentLi.find('.al-hierarchy-placeholder').remove();
 
     if (originalDocumentIndex !== -1) {
-      // Case where this is the sibling tree of the current document
-      // If the response does contain any <article> elements for the child or
-      // parent Solr Documents, then the documents are treated as sibling nodes
+      ContextNavigation.updateSiblings(newDocs, originalDocumentIndex, that.parentLi);
     } else {
       // Case where this is a parent list and needs to be filed correctly
       //
