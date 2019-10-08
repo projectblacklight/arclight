@@ -68,7 +68,8 @@
 }
 
 // Collapse arrow indicators
-.al-toggle-view-all {
+.al-toggle-view-all,
+.al-toggle-view-children {
   &[aria-expanded="true"] {
     & {
       content: image-url('blacklight/minus.svg');
@@ -78,7 +79,8 @@
   content: image-url('blacklight/plus.svg');
 }
 
-a.al-toggle-view-all{
+a.al-toggle-view-all,
+a.al-toggle-view-children {
   vertical-align: text-bottom;
 }
 

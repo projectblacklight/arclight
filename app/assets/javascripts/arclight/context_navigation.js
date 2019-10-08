@@ -101,7 +101,8 @@ class ContextNavigation {
 
   static exists_for_element(el) {
     let existing = contextNavigators.find(e => {
-      return e.data.arclight.originalDocument === $(el).data().arclight.originalDocument
+      return e.data.arclight.originalDocument === $(el).data().arclight.originalDocument &&
+        e.data.arclight.level === $(el).data().arclight.level
     })
     return existing
   }
@@ -129,9 +130,9 @@ class ContextNavigation {
     if (this.loaded) {
       return
     }
-    const that = this;
     // Add a placeholder so flashes of text are not as significant
-    this.el.after(ContextNavigation.placeholder());
+    this.el.append(ContextNavigation.placeholder());
+    const that = this;
 
     $.ajax({
       url: this.data.arclight.path,
@@ -170,6 +171,7 @@ class ContextNavigation {
    * @param {jQuery} parentLi
    */
   static updateSiblings(newDocs, originalDocumentIndex, parentLi) {
+    console.log('sibling', parentLi)
     newDocs[originalDocumentIndex].setAsHighlighted();
 
     // Hide all but the first previous sibling
@@ -211,6 +213,7 @@ class ContextNavigation {
    * context - this is consistently the *last* element in the <ul>
    */
   static updateParents(newDocs, originalParents, parent, parentLi) {
+    console.log('parent', parentLi)
     // Case where this is a parent list and needs to be filed correctly
     //
     // Otherwise, retrieve the parent...
@@ -238,7 +241,7 @@ class ContextNavigation {
       renderedBeforeDocs = beforeDocs.map(newDoc => newDoc.render()).join('');
     }
 
-    parentLi.before(renderedBeforeDocs).fadeIn(500);
+    parentLi.prepend(renderedBeforeDocs).fadeIn(500);
 
     let itemDoc = newDocs.slice(newDocIndex, newDocIndex + 1);
     let renderedItemDoc = itemDoc.map(doc => doc.render()).join('');
@@ -305,6 +308,17 @@ class ContextNavigation {
     const originalDocumentIndex = newDocs
       .findIndex(doc => doc.id === that.data.arclight.originalDocument);
     that.parentLi.find('.al-hierarchy-placeholder').remove();
+    console.log('parentLi', that.parentLi)
+    let nestSels = newDocs.map(doc => {
+        let context = doc.el.find('li.al-collection-context')
+        let hierarchySel = doc.el.find('#'+context[0].id+'-collapsible-hierarchy')
+        return hierarchySel[0]
+    }).filter(s => s != null)
+    let parentSel = $(nestSels[0])
+    if (parentSel == null) {
+      parentSel = that.parentLi
+    }
+    console.log('parentSel', parentSel)
 
     if (originalDocumentIndex !== -1) {
       ContextNavigation.updateSiblings(newDocs, originalDocumentIndex, that.parentLi);
@@ -324,18 +338,16 @@ class ContextNavigation {
           that.parentLi
         );
       } else {
-        ContextNavigation.updateChildren(newDocs,
-          that.data.arclight.originalDocument
-        );
+        ContextNavigation.updateChildren(newDocs, that.data.arclight.originalDocument);
       }
     }
     that.truncateItems();
     Blacklight.doBookmarkToggleBehavior();
-    $('.al-toggle-view-all').click((e) => {
+    $('.al-toggle-view-children').click((e) => {
       e.preventDefault()
       var context = $(e.target).closest('.al-collection-context')
       var id = context[0].id
-      var expandable = context.find('#' + id + '-collapsible-hierarchy').not('.show')
+      var expandable = context.find('#' + id + '-collapsible-hierarchy')
       if (expandable != null && expandable.length == 1) {
         var expandable_contents = expandable.find('.al-contents')
         if (expandable_contents != null) {
