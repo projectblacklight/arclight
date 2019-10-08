@@ -1,15 +1,15 @@
 <% parents = Arclight::Parents.from_solr_document(document).as_parents %>
 <div class='row'>
   <div class='col-md-12'>
-    <% if document.direct_digital_objects.present? %>
-     <p>Test</p>
-        <%= content_tag :p, class: "media" do %>
-            <span class="media-body al-online-content-icon" aria-hidden="true"><%= blacklight_icon :online %></span>
-            <span class="col text-muted"><%= t('arclight.views.show.online_content_upper') %>
-            </span>
-             <%= render_document_partial(document, 'arclight_viewer') %>
-          <% end %>
-    <% end %>  
+    <% if document.digital_objects.present? %>
+      <%= content_tag :p, class: "media breadcrumb-item breadcrumb-item-#{parents.length + 3}" do %>
+        <span class="media-body al-online-content-icon" aria-hidden="true"><%= blacklight_icon :online %></span>
+        <span class="col text-muted">
+          <%= t('arclight.views.show.online_content_upper') %>
+        </span>
+        <%= render_document_partial(document, 'arclight_viewer') %>
+      <% end %>
+    <% end %>
     <div class='row'>
       <div class='col-md-12'>
         <ul class='nav nav-tabs nav-fill' role='tablist' aria-label='<%= t('arclight.views.show.tablist_nav') %>'>
@@ -37,8 +37,7 @@
           </div>
           <% if document.online_content? %>
             <div class='tab-pane' id='online-content' role='tabpanel'>
-              <p>Testing</p>
-            <%#= render_document_partial(document, 'arclight_viewer') %>
+            <%# TODO: render children with online content in a search result style view %>
             </div>
           <% end %>
           <div class='tab-pane' id='access' role='tabpanel'>

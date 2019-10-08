@@ -432,7 +432,7 @@ compose 'components', ->(record, accumulator, _context) { accumulator.concat rec
       href = (dao.attributes['href'] || dao.attributes['xlink:href'])&.value
       Arclight::DigitalObject.new(label: label, href: href).to_json
     end
-  end 
+  end
 
   to_field 'date_range_sim', extract_xpath('./did/unitdate/@normal', to_text: false) do |_record, accumulator|
     range = Arclight::YearRange.new

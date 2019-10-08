@@ -78,6 +78,12 @@ RSpec.describe 'Component Page', type: :feature do
     end
   end
 
+  describe 'direct online content items' do
+    it 'includes links to online content' do
+      expect(page).to have_css('.al-digital-object.breadcrumb-item', text: 'Folder of digitized stuff')
+    end
+  end
+
   describe 'metadata' do
     let(:doc_id) { 'aoa271aspace_dc2aaf83625280ae2e193beb3f4aea78' }
 
