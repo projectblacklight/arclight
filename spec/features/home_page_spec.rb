@@ -38,13 +38,13 @@ RSpec.describe 'Home Page', type: :feature do
 
   context 'search dropdown' do
     it 'has all fields' do
-      within('.search-field') do
+      within('#search_field') do
         expect(page).to have_css 'option', text: 'All Fields'
       end
     end
 
     it 'has several fielded' do
-      within('.search-field') do
+      within('#search_field') do
         expect(page).to have_css 'option', text: 'Keyword'
         expect(page).to have_css 'option', text: 'Name'
         expect(page).to have_css 'option', text: 'Place'
