@@ -333,6 +333,7 @@ RSpec.describe 'Collection Page', type: :feature do
   describe 'breadcrumb' do
     it 'links repository and shows collection header 1 text' do
       within '.al-show-breadcrumb' do
+        expect(page).to have_css 'a', text: 'Home'
         expect(page).to have_css 'a', text: 'National Library of Medicine. History of Medicine Division'
         expect(page).to have_css 'span', text: 'Alpha Omega Alpha Archives, 1894-1992'
       end
