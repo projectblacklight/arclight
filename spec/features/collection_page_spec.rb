@@ -32,9 +32,7 @@ RSpec.describe 'Collection Page', type: :feature do
     end
 
     it 'has list of direct online content items' do
-      within('.al-digital-object.breadcrumb-item') do
-        expect(page).to have_content 'History slideshow'
-      end
+      expect(page.first('.al-digital-object.breadcrumb-item')).to have_content 'History slideshow'
     end
   end
 
