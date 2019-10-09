@@ -48,7 +48,7 @@
       </div>
       <% if document.online_content? %>
         <div class='tab-pane' id='online-content' role='tabpanel'>
-          <%# TODO: render children with online content in a search result style view %>
+          <%= render partial: 'collection_online_contents', locals: { document: document }  %>
         </div>
       <% end %>
       <div class='tab-pane' id='access' role='tabpanel'>

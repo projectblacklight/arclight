@@ -37,7 +37,7 @@
           </div>
           <% if document.online_content? %>
             <div class='tab-pane' id='online-content' role='tabpanel'>
-            <%# TODO: render children with online content in a search result style view %>
+              <%= render_document_partial(document, 'arclight_viewer') %>
             </div>
           <% end %>
           <div class='tab-pane' id='access' role='tabpanel'>
