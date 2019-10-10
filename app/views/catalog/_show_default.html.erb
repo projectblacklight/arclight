@@ -23,7 +23,7 @@
     </ul>
     <div class='tab-content'>
       <div class='tab-pane active' id='context' role='tabpanel'>
-        <%= render 'component_context' %>
+        <%= render_document_context(@document) %>
       </div>
       <div class='tab-pane' id='online-content' role='tabpanel'>
         <%= render_document_partial(document, 'arclight_viewer') %>

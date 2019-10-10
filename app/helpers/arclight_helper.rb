@@ -266,6 +266,23 @@ module ArclightHelper
     send(:"render_document_#{config_field}_label", document, field: field)
   end
 
+  def render_document_context(document, core: nil)
+    parents = document.parent_ids
+    if parents.length > 0
+      new_core = render "catalog/nested_component_context",
+        document: document,
+        core: core,
+        document_counter: parents.length
+      parent_search_id = parents.length == 1 ? parents[0] : parents[0] + parents[-1]
+      parent = SolrDocument::find(parent_search_id)
+      return render_document_context(parent, core: new_core)
+    end
+    render "catalog/nested_component_context",
+      document: document,
+      core: core,
+      document_counter: parents.length
+  end
+
   ##
   # Reduces a document's parent_ids to a set of nested ul/li that resembels
   # the collection / component / subcomponent structure
