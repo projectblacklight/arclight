@@ -347,8 +347,10 @@ RSpec.describe 'Collection Page', type: :feature do
     let(:doc_id) { 'a0011-xmlaspace_ref6_lx4' }
 
     it 'renders links to the files for download' do
-      expect(page).to have_css('.al-show-actions-box-downloads-file', text: 'Download finding aid (1.23MB)')
-      expect(page).to have_css('.al-show-actions-box-downloads-file', text: 'Download EAD (123456)')
+      within '.al-show-actions-box-downloads-container' do
+        expect(page).to have_css('a', text: 'Download finding aid (1.23MB)')
+        expect(page).to have_css('a', text: 'Download EAD (123456)')
+      end
     end
   end
 
