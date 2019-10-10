@@ -10,7 +10,8 @@ li.al-collection-context  {
   .documentHeader {
     flex-grow: 1;
     margin-bottom: $spacer;
-    font-size: 1.25rem
+    font-size: 1.25rem;
+    width: 100%;
   }
 
   .col.col-no-left-padding.d-flex.flex-wrap {
