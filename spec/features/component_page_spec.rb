@@ -41,7 +41,7 @@ RSpec.describe 'Component Page', type: :feature do
 
   describe 'label/title' do
     it 'does not double escape entities in the heading' do
-      expect(page).to have_css('h1', text: /^"A brief account of the origin of/)
+      expect(page).to have_css('h1', text: /"A brief account of the origin of/)
       expect(page).not_to have_css('h1', text: /^&quot;A brief account of the origin of/)
     end
   end
