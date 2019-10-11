@@ -177,28 +177,28 @@ RSpec.describe 'Component Page', type: :feature do
         within '#collection-context' do
           expect(page).to have_css '.document-title-heading', text: 'Pages 273-353'
           expect(page).to have_css '.document-title-heading', text: 'Pages 171-272'
-          expect(page).not_to have_css '.document-title-heading', text: 'Pages 79-170'
-          expect(page).to have_css '.document-title-heading', text: 'Pages 1-78'
+          expect(page).to have_css '.document-title-heading', text: 'Pages 79-170'
+          expect(page).not_to have_css '.document-title-heading', text: 'Pages 1-78'
         end
       end
 
       it 'offers a button for displaying the hidden sibling document items' do
         within '#collection-context' do
           expect(page).to have_css '.btn-secondary', text: 'Expand'
-          expect(page).to have_css '.document-title-heading', text: 'Pages 1-78'
-          expect(page).not_to have_css '.document-title-heading', text: 'Pages 79-170'
+          expect(page).not_to have_css '.document-title-heading', text: 'Pages 1-78'
+          expect(page).to have_css '.document-title-heading', text: 'Pages 79-170'
           expect(page).to have_css '.document-title-heading', text: 'Pages 171-272'
           expect(page).to have_css '.document-title-heading', text: 'Pages 273-353'
 
           first('.btn-secondary', text: 'Expand').click
 
           expect(page).to have_css '.btn-secondary', text: 'Collapse'
-          expect(page).to have_css '.document-title-heading', text: 'Pages 79-170'
+          expect(page).to have_css '.document-title-heading', text: 'Pages 1-78'
 
           first('.btn-secondary', text: 'Collapse').click
 
           expect(page).to have_css '.btn-secondary', text: 'Expand'
-          expect(page).not_to have_css '.document-title-heading', text: 'Pages 79-170'
+          expect(page).not_to have_css '.document-title-heading', text: 'Pages 1-78'
         end
       end
     end
