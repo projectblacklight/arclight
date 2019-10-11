@@ -96,6 +96,7 @@ class Placeholder {
    * Builds the element set which contains the placeholder markup
    *   classes
    */
+  /* eslint-disable class-methods-use-this */
   buildElement() {
     const elementMarkup = '<div class="al-hierarchy-placeholder">' +
       '<h3 class="col-md-9"></h3>' +
@@ -107,6 +108,7 @@ class Placeholder {
 
     return $(markup);
   }
+  /* eslint-enable class-methods-use-this */
 
   /*
    * @constructor
@@ -147,6 +149,7 @@ class ContextNavigation {
    * within it
    * @returns {jQuery}
    */
+  /* eslint-disable class-methods-use-this */
   buildExpandList() {
     const $ul = $('<ul></ul>');
     $ul.addClass('pl-0');
@@ -155,6 +158,7 @@ class ContextNavigation {
     $ul.append(button.$el);
     return $ul;
   }
+  /* eslint-enable class-methods-use-this */
 
   /**
    * Highlights the <li> element for the current Document and appends <li> the
@@ -260,6 +264,7 @@ class ContextNavigation {
    *   Document in the <ul> context list of collections, components, and
    *   containers
    */
+  /* eslint-disable class-methods-use-this */
   updateListSiblings($li) {
     const prevSiblings = $li.prevAll('.al-collection-context');
     if (prevSiblings.length > 1) {
@@ -272,6 +277,7 @@ class ContextNavigation {
       button.$el.insertAfter(lastHiddenNextSibling);
     }
   }
+  /* eslint-enable class-methods-use-this */
 
   /**
    * This updates the elements in the View DOM using an AJAX response containing
@@ -316,6 +322,7 @@ class ContextNavigation {
     this.updateListSiblings(highlighted);
   }
 
+  /* eslint-disable class-methods-use-this */
   truncateItems() {
     $('[data-arclight-truncate="true"]').each(function (_, el) {
       $(el).responsiveTruncate({
@@ -324,6 +331,7 @@ class ContextNavigation {
       });
     });
   }
+  /* eslint-enable class-methods-use-this */
 }
 
 /**

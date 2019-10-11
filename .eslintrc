@@ -11,14 +11,5 @@
   "rules": {
     "no-param-reassign": [2, { "props": false }],
     "func-names": ["error", "never"]
-  },
-  "overrides": [
-    {
-      "excludedFiles": ["app/assets/javascripts/arclight/context_navigation.js"],
-      "rules": {
-        "class-methods-use-this": "off",
-        "no-new": "off"
-      }
-    }
-  ]
+  }
 }
