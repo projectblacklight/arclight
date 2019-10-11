@@ -125,6 +125,11 @@ class ContextNavigation {
     this.parentLi = this.el.parent();
   }
 
+  get insertionTarget() {
+    const selector = `#${this.data.arclight.originalParents[0]}${this.parentLi.attr('id')}-collapsible-hierarchy`;
+    return $(selector);
+  }
+
   getData() {
     const that = this;
     // Add a placeholder so flashes of text are not as significant
@@ -168,10 +173,9 @@ class ContextNavigation {
    * @param {number} originalDocumentIndex
    * @param {jQuery} parentLi
    */
-  updateSiblings(newDocs, originalDocumentIndex, parentLi) {
+  updateSiblings(newDocs, originalDocumentIndex) {
     newDocs[originalDocumentIndex].setAsHighlighted();
-    const selector = `#${this.data.arclight.originalParents[0]}${parentLi.attr('id')}-collapsible-hierarchy`;
-    const stuff = $(selector);
+
     // Hide all but the first previous sibling
     const prevSiblingDocs = newDocs.slice(0, originalDocumentIndex);
     let nextSiblingDocs = [];
@@ -186,7 +190,7 @@ class ContextNavigation {
       const renderedPrevSiblingItems = prevSiblingDocs.map(doc => doc.render()).join('');
 
       prevSiblingList.append(renderedPrevSiblingItems);
-      stuff.append(prevSiblingList);
+      this.insertionTarget.append(prevSiblingList);
 
       nextSiblingDocs = newDocs.slice(originalDocumentIndex);
     } else {
@@ -196,7 +200,7 @@ class ContextNavigation {
     const renderedNextSiblingItems = nextSiblingDocs.map(newDoc => newDoc.render()).join('');
 
     // Insert the rendered sibling documents before the <li> elements
-    stuff.append(renderedNextSiblingItems);
+    this.insertionTarget.append(renderedNextSiblingItems);
   }
 
   /**
@@ -308,7 +312,7 @@ class ContextNavigation {
     // If the response does contain any <article> elements for the child or
     // parent Solr Documents, then the documents are treated as sibling nodes
     if (originalDocumentIndex !== -1) {
-      this.updateSiblings(newDocs, originalDocumentIndex, that.parentLi);
+      this.updateSiblings(newDocs, originalDocumentIndex);
     } else {
       this.updateParents(
         newDocs,
