@@ -21,7 +21,7 @@
         <div class='row'>
           <div class='col-md-10 col-lg-9'>
             <h3 class="h5"><%= link_to document.normalized_title, solr_document_path(document.id) %></h3>
-            <%= content_tag('div', class: 'al-document-abstract-or-scope', title: document.abstract_or_scope) do %>
+            <%= content_tag('div', class: 'al-document-abstract-or-scope') do %>
               <%= content_tag('div', 'data-arclight-truncate' => true) do %>
                 <%= document.abstract_or_scope %>
               <% end %>
