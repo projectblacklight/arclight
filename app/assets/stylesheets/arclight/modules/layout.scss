@@ -26,18 +26,15 @@
   background-color: $gray-200;
   font-size: $font-size-sm;
   height: 100%;
-  min-width: 200px;
-  padding: $spacer;
+  margin-bottom: $spacer * 2;
+  padding: ($spacer * .5) $spacer ($spacer * .75);
 
-  :first-child {
-    padding-top: 0;
-  }
-  :last-child {
-    padding-bottom: 0;
+  @media (max-width: 767px) {
+    margin-top: $spacer;
   }
 
-  > div {
-    padding: ($spacer / 3) 0;
+  .al-collection-id {
+    margin-bottom: $spacer * .75;
   }
 
   &-options {
@@ -46,9 +43,16 @@
   }
 
   &-downloads {
+    padding-top: $spacer * .25;
+
+    &-container {
+      margin-top: $spacer * .5;
+    }
+
     &-file {
       &.blacklight-icons {
-        width: 1.24rem;
+        margin-right: $spacer * .5;
+
         svg {
           fill: $secondary;
         }
