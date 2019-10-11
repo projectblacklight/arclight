@@ -125,10 +125,17 @@ class ContextNavigation {
     this.parentLi = this.el.parent();
   }
 
+  get collapsibleSelector() {
+    return `#${this.data.arclight.originalParents[0]}${this.parentLi.attr('id')}-collapsible-hierarchy`;
+  }
+
+  get collapsibleTarget() {
+    return $(this.collapsibleSelector);
+  }
+
   get insertionTarget() {
-    const $el = $(`#${this.data.arclight.originalParents[0]}${this.parentLi.attr('id')}-collapsible-hierarchy`);
-    if ($el.length) {
-      return $el;
+    if (this.collapsibleTarget.length) {
+      return this.collapsibleTarget;
     }
     return this.parentLi;
   }
@@ -254,7 +261,6 @@ class ContextNavigation {
     } else {
       renderedBeforeDocs = beforeDocs.map(newDoc => newDoc.render()).join('');
     }
-    // console.log(parentLi);
     stuff.append(renderedBeforeDocs);
 
     let itemDoc = newDocs.slice(newDocIndex, newDocIndex + 1);
@@ -265,8 +271,7 @@ class ContextNavigation {
     // Update the id, add classes of the classes. Prepend the current children.
     parentLi.attr('id', $itemDoc.attr('id'));
     parentLi.addClass($itemDoc.attr('class'));
-
-    parentLi.prepend($itemDoc.children()).fadeIn(500);
+    parentLi.prepend($itemDoc.children());
 
     // Update the docs after the item
     const afterDocs = newDocs.slice(newDocIndex + 1, newDocs.length);
