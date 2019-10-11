@@ -126,8 +126,11 @@ class ContextNavigation {
   }
 
   get insertionTarget() {
-    const selector = `#${this.data.arclight.originalParents[0]}${this.parentLi.attr('id')}-collapsible-hierarchy`;
-    return $(selector);
+    const $el = $(`#${this.data.arclight.originalParents[0]}${this.parentLi.attr('id')}-collapsible-hierarchy`);
+    if ($el.length) {
+      return $el;
+    }
+    return this.parentLi;
   }
 
   getData() {

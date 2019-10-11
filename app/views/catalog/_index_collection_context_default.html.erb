@@ -38,10 +38,10 @@
       </div>
     </div>
   </div>
-  <% if document.number_of_children > 0 %>
-    <%= content_tag(:div, id: "#{document.id}-collapsible-hierarchy",
-      class: "collapse show al-hierarchy-level-#{document.component_level}",
-    ) do %>
+  <%= content_tag(:div, id: "#{document.id}-collapsible-hierarchy",
+    class: "collapse show al-hierarchy-level-#{document.component_level}",
+  ) do %>
+    <% if document.number_of_children > 0 %>
       <%= content_tag(
         :div, '',
         class: 'al-contents',
