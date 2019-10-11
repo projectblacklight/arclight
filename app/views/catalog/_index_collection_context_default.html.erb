@@ -6,6 +6,19 @@
     </div>
     <div class="col col-no-left-padding d-flex flex-wrap">
       <div class="index_title document-title-heading my-w-75 w-md-100 order-0">
+        <% if document.children? %>
+            <%= link_to(
+              blacklight_icon(:plus),
+              "##{document.id}-collapsible-hierarchy",
+              class: 'al-toggle-view-children',
+              'aria-label': t('arclight.hierarchy.view_all'),
+                data: {
+                  toggle: 'collapse'
+                }
+              )
+            %>
+        <% end %>
+
       
         <% counter = document_counter_with_offset(document_counter) %>
         <%= link_to_document document, document_show_link_field(document), counter: counter %>
@@ -25,4 +38,26 @@
       </div>
     </div>
   </div>
+  <% if document.number_of_children > 0 %>
+    <%= content_tag(:div, id: "#{document.id}-collapsible-hierarchy",
+      class: "collapse show al-hierarchy-level-#{document.component_level}",
+    ) do %>
+      <%= content_tag(
+        :div, '',
+        class: 'al-contents',
+        data: {
+          farclight: {
+            hierarchy: true,
+            level: document.component_level + 1,
+            path: search_catalog_path,
+            name: document.collection_name,
+            parent: document.reference,
+            originalParents: document.parent_ids,
+            originalDocument: document.id
+          }
+        }
+      ) %>
+
+    <% end %>
+  <% end %>
 </li>

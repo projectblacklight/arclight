@@ -170,7 +170,8 @@ class ContextNavigation {
    */
   updateSiblings(newDocs, originalDocumentIndex, parentLi) {
     newDocs[originalDocumentIndex].setAsHighlighted();
-
+    const selector = `#${this.data.arclight.originalParents[0]}${parentLi.attr('id')}-collapsible-hierarchy`;
+    const stuff = $(selector);
     // Hide all but the first previous sibling
     const prevSiblingDocs = newDocs.slice(0, originalDocumentIndex);
     let nextSiblingDocs = [];
@@ -185,7 +186,7 @@ class ContextNavigation {
       const renderedPrevSiblingItems = prevSiblingDocs.map(doc => doc.render()).join('');
 
       prevSiblingList.append(renderedPrevSiblingItems);
-      parentLi.before(prevSiblingList);
+      stuff.append(prevSiblingList);
 
       nextSiblingDocs = newDocs.slice(originalDocumentIndex);
     } else {
@@ -195,7 +196,7 @@ class ContextNavigation {
     const renderedNextSiblingItems = nextSiblingDocs.map(newDoc => newDoc.render()).join('');
 
     // Insert the rendered sibling documents before the <li> elements
-    parentLi.before(renderedNextSiblingItems).fadeIn(500);
+    stuff.append(renderedNextSiblingItems);
   }
 
   /**
@@ -214,6 +215,8 @@ class ContextNavigation {
     //
     // Otherwise, retrieve the parent...
     const parentIndex = originalParents.indexOf(parent);
+    const selector = `#${this.data.arclight.originalParents[0]}${parentLi.attr('id')}-collapsible-hierarchy`;
+    const stuff = $(selector);
 
     // The first parent is always used to consistently construct the doc ID
     const firstParent = originalParents[0];
@@ -236,8 +239,8 @@ class ContextNavigation {
     } else {
       renderedBeforeDocs = beforeDocs.map(newDoc => newDoc.render()).join('');
     }
-
-    parentLi.before(renderedBeforeDocs).fadeIn(500);
+    // console.log(parentLi);
+    stuff.append(renderedBeforeDocs);
 
     let itemDoc = newDocs.slice(newDocIndex, newDocIndex + 1);
     let renderedItemDoc = itemDoc.map(doc => doc.render()).join('');
@@ -255,7 +258,7 @@ class ContextNavigation {
     const renderedAfterDocs = afterDocs.map(newDoc => newDoc.render()).join('');
 
     // Insert the documents after the current
-    parentLi.after(renderedAfterDocs).fadeIn(500);
+    stuff.append(renderedAfterDocs);
   }
 
   /**
