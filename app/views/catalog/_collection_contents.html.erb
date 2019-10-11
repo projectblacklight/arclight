@@ -2,11 +2,25 @@
 
 <h2 class="sr-only" data-sr-enable-me='true' data-has-contents=<%= t 'arclight.views.show.has_content' %>></h2>
 <%= content_tag(
-  :div, '',
-  class: 'al-contents',
-  data: {
-    arclight: {
-      hierarchy: true, level: 1, path: search_catalog_path, name: document.collection_name
-    }
-  }
-) %>
+  :ul,
+  class: %w[parent collection-context],
+  data: { 'data-collapse': I18n.t('arclight.views.show.collapse'), 'data-expand': I18n.t('arclight.views.show.expand') }
+  ) do
+%>
+  <%= content_tag(:li, id: document.id) do %>
+  <%= content_tag(
+    :div, '',
+    class: "context-navigator al-hierarchy-level-#{document.component_level} documents-hierarchy",
+    data: {
+      arclight: {
+        level: 1,
+        path: search_catalog_path(hierarchy_context: 'component'),
+        name: document.collection_name,
+        parent: document.id,
+        originalParents: []
+      }
+     }
+  ) %>
+  <% end %>
+<% end %>
+<%= nested_component_lists(document) %>

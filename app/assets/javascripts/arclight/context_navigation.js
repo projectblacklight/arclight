@@ -232,6 +232,14 @@ class ContextNavigation {
 
     const newDocIndex = newDocs.findIndex(doc => doc.id === currentId);
 
+    // Case where there is no nested hierarchy and we only need to display the first level
+    if (newDocIndex === -1) {
+      const renderedDocs = newDocs.map(newDoc => newDoc.render()).join('');
+      parentLi.after(renderedDocs).fadeIn(500);
+      parentLi.remove();
+      return;
+    }
+
     // Update the docs before the item
     // Retrieves the documents up to and including the "new document"
     const beforeDocs = newDocs.slice(0, newDocIndex);
@@ -330,6 +338,16 @@ class ContextNavigation {
     // Select the <li> element for the current document
     const highlighted = that.parentLi.siblings('.al-hierarchy-highlight');
     this.updateListSiblings(highlighted);
+    this.enablebuttons();
+  }
+
+  // eslint-disable-next-line class-methods-use-this
+  enablebuttons() {
+    var toEnable = $('[data-hierarchy-enable-me]');
+    var srOnly = $('h2[data-sr-enable-me]');
+    toEnable.removeClass('disabled');
+    toEnable.text(srOnly.data('hasContents'));
+    srOnly.text(srOnly.data('hasContents'));
   }
 
   /* eslint-disable class-methods-use-this */
