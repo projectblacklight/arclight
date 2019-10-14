@@ -7,6 +7,7 @@ module Arclight
     extend ActiveSupport::Concern
     include ActionView::Helpers::OutputSafetyHelper
     include ActionView::Helpers::TagHelper
+    include Arclight::EadFormatHelpers
 
     included do
       if respond_to?(:helper_method)
@@ -21,6 +22,7 @@ module Arclight
         helper_method :item_requestable?
         helper_method :paragraph_separator
         helper_method :link_to_name_facet
+        helper_method :render_html_tags
       end
     end
 

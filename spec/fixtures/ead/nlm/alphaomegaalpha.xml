@@ -111,38 +111,165 @@
     </prefercite>
     <bioghist id="aspace_ff0f836406ce214cae38e1f7c798d76e">
       <head>Historical Note</head>
-      <p>Alpha Omega Alpha Honor Medical Society was founded in 1902 by William Webster Root and
-        five other medical students at the College of Physicians and Surgeons in Chicago. Root
-        viewed the society as a protest against "a condition which associated the name medical
-        student with rowdyism, boorishness, immorality, and low educational ideals." Of the
+      <p>
+        Alpha Omega Alpha Honor Medical Society was founded in 1902 by William Webster Root and
+        five other medical students at the <emph render="bold">College of Physicians and
+        Surgeons in Chicago</emph>. Root viewed the society as a protest against
+        <emph render="italic">a condition which associated the name medical student with rowdyism,
+        boorishness, immorality, and low educational ideals."</emph> Of the
         approximately 25,000 medical students in the United States at the turn of the century, no
-        more than 15 percent were college graduates. The only requirement in most schools was a high
+        more than <emph render="altrender" altrender="my-custom-class">15 percent</emph> were
+        college graduates. The only requirement in most schools was a high
         school diploma or its equivalent; the latter often meaning the ability to pay the fee. The
         schools themselves-there were about 150-were by and large of dubious quality. With a few
-        exceptions, notably the Johns Hopkins School of Medicine, founded in 1893, the medical
-        school curriculum consisted of a series of lectures, sometimes supplemented by
-        demonstrations at the bedside or in the laboratory, if such existed.</p>
-      <p> Root and his fellow medical students met to form a society that would foster honesty and
-        formulate higher ideals of scholastic achievement. Chartered in 1903 by the state of
+        exceptions, notably the Johns Hopkins School of Medicine<emph render="super">3</emph>, founded
+        in 1893, the medical school curriculum consisted of a series of lectures, sometimes supplemented by
+        demonstrations at the bedside or in the laboratory, if such existed.
+      </p>
+      <p>
+        Root and his fellow medical students met to form a society that would foster honesty and
+        formulate higher ideals of scholastic achievement.
+        <emph render="underline">Chartered in 1903</emph> by the state of
         Illinois, Alpha Omega Alpha's growth has paralleled the development of American medical
         education. Within a decade after the society was founded, chapters were established at
         seventeen medical schools. At present there are 124 active chapters in the United States and
         Canada. Today, when students and established physicians alike reject easy platitudes, the
         tenets of the society are more relevant than ever. As framed by Root, they are a modern
-        interpretation of the Hippocratic oath: "It is the duty of members to foster the scientific
-        and philosophical features of the medical profession, to look beyond self to the welfare of
-        the profession and of the public, to cultivate social mindedness, as well as individualistic
-        attitude toward responsibilities, to show respect for colleagues, especially for elders and
-        teachers, to foster research and in all ways to ennoble the profession of medicine and
-        advance it in public opinion. It is equally a duty to avoid that which is unworthy,
-        including the commercial spirit and all practices injurious to the welfare of patients, the
-        public, or the profession." [Excerpted from Alpha Omega Alpha website.]</p>
+        interpretation of the Hippocratic oath: <emph render="bolddoublequote">It is the duty of
+        members to foster the scientific and philosophical features of the medical profession</emph>,
+        to look beyond self to the welfare of the profession and of the public, to cultivate social
+        mindedness, as well as individualistic attitude toward responsibilities, to show respect for
+        colleagues, especially for elders and teachers, to foster research and in all ways to enoble
+        the profession of medicine and advance it in public opinion. <emph render="boldsinglequote">It
+        is equally a duty to avoid that which is unworthy, including the commercial spirit and all practices
+        injurious to the welfare of patients, the public, or the profession.</emph>
+        <emph render="smcaps">[Excerpted from Alpha Omega Alpha website.]</emph>
+      </p>
+      <p>Here is a chronlist with default table headers and no eventgrp elements.</p>
+      <chronlist>
+        <head>Julia Stockton Rush</head>
+        <chronitem>
+          <date>1759</date>
+          <event>Born, at "Morven" family estate near Princeton, N.J.</event>
+        </chronitem>
+        <chronitem>
+          <date>1776</date>
+          <event>Married Benjamin Rush; the couple went on to have 13 children</event>
+        </chronitem>
+        <chronitem>
+          <date>1848</date>
+          <event>Died at their county property, "Sydenham" (now 15th Street and Columbus Ave,
+                Philadelphia)</event>
+        </chronitem>
+      </chronlist>
+      <p>Here is a chronlist with custom table headers via listhead, and events wrapped in eventgrp.</p>
+      <chronlist>
+        <head>Benjamin Rush</head>
+        <listhead>
+          <head01>Dates</head01>
+          <head02>Things That Happened</head02>
+        </listhead>
+        <chronitem>
+          <date>1769</date>
+          <eventgrp>
+            <event>Began medical practice in Philadelphia</event>
+            <event>Appointed Professor of Chemistry in College of Philadelphia's medical
+                department</event>
+          </eventgrp>
+        </chronitem>
+        <chronitem>
+          <date>1776</date>
+          <eventgrp>
+            <event>Took his seat in Second Continental Congress</event>
+          </eventgrp>
+        </chronitem>
+        <chronitem>
+          <date>1776 August 2</date>
+          <eventgrp>
+            <event>Signed Declaration of Independence</event>
+          </eventgrp>
+        </chronitem>
+        <chronitem>
+          <date>1777 April</date>
+          <eventgrp>
+            <event>Commissioned Surgeon General of Middle Department of the Continental Army</event>
+          </eventgrp>
+        </chronitem>
+        <chronitem>
+          <date>1778</date>
+          <eventgrp>
+            <event>Resigned from the Army</event>
+            <event>Became lecturer at University of the State of Pennsylvania</event>
+          </eventgrp>
+        </chronitem>
+      </chronlist>
     </bioghist>
     <scopecontent id="aspace_00d4328c32ed5e54eac5c662aa45245f">
       <head>Collection Summary</head>
       <p>Correspondence, documents, records, photos and printed matter. Material relates to the
-        history, organization, membership, meetings and publications. A large portion of the
-        collection pertains to the different chapters of the Society.</p>
+          history, organization, membership, meetings and publications. A large portion of the
+          collection pertains to the different chapters of the Society.</p>
+      <p>Here is a simple list with a head.</p>
+      <list type="simple">
+        <head>Commission Members List</head>
+        <item>June E. Osborn, M.D., Chairman</item>
+        <item>David E. Rogers, M.D., Vice Chairman</item>
+        <item>The Honorable Diane Ahrens</item>
+        <item>K. Scott Allen</item>
+      </list>
+      <p>Here is an ordered list with a head.</p>
+      <list type="ordered">
+        <head>Track List</head>
+        <item>Title: How I Love the Old Black Cat, performer: Strawbridge, Mary, location:
+            Durham (N.C.)</item>
+        <item>Title: The Broken Heart, performer: Strawbridge, Mary | Robbins, Jewell,
+            location: Durham (N.C.)</item>
+        <item>Title: Farewell (You Are False), performer: Strawbridge, Mary, location:
+            Durham (N.C.)</item>
+      </list>
+      <p>Here is a list with no type specified, and render-attribute formatting within the items.</p>
+      <list>
+        <item>
+          <bibref><title render="italic">The Happy Marriage, and Other Poems</title> (Boston and
+              New York: Houghton Mifflin. 79 pp.)
+            </bibref>
+        </item>
+        <item>
+          <bibref><title render="italic">The Pot of Earth</title> (Boston and New York:
+              Houghton Mifflin. 44 pp.)
+            </bibref>
+        </item>
+      </list>
+      <p>Here is a definition list with column headings. Render it as a table.</p>
+      <list type="deflist">
+        <listhead>
+          <head01>Abbreviation</head01>
+          <head02>Expansion</head02>
+        </listhead>
+        <defitem>
+          <label>ALS</label>
+          <item>Autograph Letter Signed</item>
+        </defitem>
+        <defitem>
+          <label>TLS</label>
+          <item>Typewritten Letter Signed</item>
+        </defitem>
+      </list>
+      <p>Here is a traditional definition list with no column headings.</p>
+      <list type="deflist">
+        <defitem>
+          <label>AL</label>
+          <item>Alabama</item>
+        </defitem>
+        <defitem>
+          <label>AK</label>
+          <item>Alaska</item>
+        </defitem>
+        <defitem>
+          <label>AZ</label>
+          <item>Arizona</item>
+        </defitem>
+      </list>
     </scopecontent>
     <arrangement id="aspace_845bb9a95be0924c3c9b33ccdc676813">
       <head>Arrangement</head>
