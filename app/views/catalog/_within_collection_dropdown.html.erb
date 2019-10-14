@@ -1,4 +1,4 @@
-<div class="input-group w-50">
+<div class="input-group within-collection-dropdown flex-nowrap flex-shrink-1 mb-2 mb-md-0 mr-md-2">
   <span class="input-group-prepend">
     <label class="input-group-text" for="within_collection">
       <%= t('arclight.within_collection_dropdown.label_html') %>
@@ -6,7 +6,7 @@
   </span>
   <select
     id="within_collection"
-    class="custom-select mr-2 search-field rounded-right"
+    class="custom-select search-field rounded-right"
     <%= 'name="f[collection_sim][]"'.html_safe if within_collection_context? %>
   >
     <option
