@@ -76,56 +76,56 @@ RSpec.describe 'Search results', type: :feature do
 
       within('#facets') do
         within('.blacklight-collection_sim') do
-          expect(page).to have_css('h3 a', text: 'Collection')
+          expect(page).to have_css('h3 button', text: 'Collection')
           expect(page).to have_css('li .facet-label', text: 'Alpha Omega Alpha Archives, 1894-1992', visible: false)
         end
 
         within('.blacklight-level_sim') do
-          expect(page).to have_css('h3 a', text: 'Level')
+          expect(page).to have_css('h3 button', text: 'Level')
           expect(page).to have_css('li .facet-label', text: 'Series', visible: false) # level != "otherlevel"
           expect(page).to have_css('li .facet-label', text: 'Binder', visible: false) # "otherlevel" with alt value
           expect(page).to have_css('li .facet-label', text: 'Other', visible: false) # "otherlevel" but missing alt val
         end
 
         within('.blacklight-creator_ssim') do
-          expect(page).to have_css('h3 a', text: 'Creator')
+          expect(page).to have_css('h3 button', text: 'Creator')
           expect(page).to have_css('li .facet-label', text: 'Alpha Omega Alpha', visible: false)
           expect(page).to have_css('li .facet-label', text: 'Stanford University', visible: false)
         end
 
         within('.blacklight-date_range_sim') do
-          expect(page).to have_css('h3 a', text: 'Date range')
-          click_link 'Date range'
+          expect(page).to have_css('h3 button', text: '')
+          click_button 'Date range'
           expect(page).to have_css('.range_limit', visible: true)
           expect(page).to have_css('.profile canvas.flot-base', visible: true)
         end
 
         within('.blacklight-names_ssim') do
-          expect(page).to have_css('h3 a', text: 'Names')
+          expect(page).to have_css('h3 button', text: 'Names')
           expect(page).to have_css('li .facet-label', text: 'Department of Special Collections and University Archives', visible: false)
           expect(page).to have_css('li .facet-label', text: '1118 Badger Vine Special Collections', visible: false)
         end
 
         within('.blacklight-repository_sim') do
-          expect(page).to have_css('h3 a', text: 'Repository')
+          expect(page).to have_css('h3 button', text: 'Repository')
           expect(page).to have_css('li .facet-label', text: 'National Library of Medicine. History of Medicine Division', visible: false) # rubocop: disable Metrics/LineLength
         end
 
         within('.blacklight-geogname_sim') do
-          expect(page).to have_css('h3 a', text: 'Place')
+          expect(page).to have_css('h3 button', text: 'Place')
           expect(page).to have_css('li .facet-label', text: 'Mindanao Island (Philippines)', visible: false)
           expect(page).to have_css('li .facet-label', text: 'Yosemite National Park (Calif.)', visible: false)
         end
 
         within('.blacklight-access_subjects_ssim') do
-          expect(page).to have_css('h3 a', text: 'Subject')
+          expect(page).to have_css('h3 button', text: 'Subject')
           expect(page).to have_css('li .facet-label', text: 'Fraternizing', visible: false)
           expect(page).to have_css('li .facet-label', text: 'Photographs', visible: false)
           expect(page).to have_css('li .facet-label', text: 'Medicine', visible: false)
         end
 
         within('.blacklight-has_online_content_ssim') do
-          expect(page).to have_css('h3 a', text: 'Access')
+          expect(page).to have_css('h3 button', text: 'Access')
           expect(page).to have_css('li .facet-label', text: 'Online access', visible: false)
         end
       end

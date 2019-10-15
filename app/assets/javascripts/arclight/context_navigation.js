@@ -34,8 +34,8 @@ class ExpandButton {
    * @param {jQuery} $li - the <button> element
    * @return {jQuery} - a jQuery object containing the targeted <li>
    */
-  static findSiblings($button) {
-    const $siblings = $button.parent().children('li');
+  findSiblings() {
+    const $siblings = this.$el.parent().children('li');
     return $siblings.slice(0, -1);
   }
 
@@ -45,16 +45,14 @@ class ExpandButton {
    * @param {Event} event - the event propagated in response to clicking on the
    *   <button> element
    */
-  static handleClick(event) {
-    const $element = $(event.target);
-    // This function is bound to the instance object
-    const $targeted = this.constructor.findSiblings($element);
+  handleClick() {
+    const $targeted = this.findSiblings();
 
     $targeted.toggleClass('collapsed');
-    $element.toggleClass('collapsed');
+    this.$el.toggleClass('collapsed');
 
-    const containerText = $element.hasClass('collapsed') ? this.collapseText : this.expandText;
-    $element.text(containerText);
+    const containerText = this.$el.hasClass('collapsed') ? this.collapseText : this.expandText;
+    this.$el.text(containerText);
   }
 
   /**
@@ -66,8 +64,8 @@ class ExpandButton {
     this.expandText = parentUl[0].dataset.dataExpand;
 
     this.$el = $(`<button class="my-3 btn btn-secondary btn-sm">${this.expandText}</button>`);
-    this.constructor.handleClick = this.constructor.handleClick.bind(this);
-    this.$el.click(this.constructor.handleClick);
+    this.handleClick = this.handleClick.bind(this);
+    this.$el.click(this.handleClick);
   }
 }
 
@@ -83,10 +81,42 @@ class NestedExpandButton extends ExpandButton {
    * @param {jQuery} $li - the <button> element
    * @return {jQuery} - a jQuery object containing the targeted <li>
    */
-  static findSiblings($button) {
-    const highlighted = $button.siblings('.al-hierarchy-highlight');
+  findSiblings() {
+    const highlighted = this.$el.siblings('.al-hierarchy-highlight');
     const $siblings = highlighted.prevAll('.al-collection-context');
     return $siblings.slice(0, -1);
+  }
+}
+
+/**
+ * Models the placeholder display elements for content loading from AJAX
+ *   requests
+ * @class
+ */
+class Placeholder {
+  /*
+   * Builds the element set which contains the placeholder markup
+   *   classes
+   */
+  /* eslint-disable class-methods-use-this */
+  buildElement() {
+    const elementMarkup = '<div class="al-hierarchy-placeholder">' +
+      '<h3 class="col-md-9"></h3>' +
+      '<p class="col-md-6"></p>' +
+      '<p class="col-md-12"></p>' +
+      '<p class="col-md-3"></p>' +
+      '</div>';
+    const markup = Array(3).join(elementMarkup);
+
+    return $(markup);
+  }
+  /* eslint-enable class-methods-use-this */
+
+  /*
+   * @constructor
+   */
+  constructor() {
+    this.$el = this.buildElement();
   }
 }
 
@@ -116,23 +146,13 @@ class ContextNavigation {
     }
   }
 
-  static placeholder() {
-    const placeholder = '<div class="al-hierarchy-placeholder">' +
-                          '<h3 class="col-md-9"></h3>' +
-                          '<p class="col-md-6"></p>' +
-                          '<p class="col-md-12"></p>' +
-                          '<p class="col-md-3"></p>' +
-                        '</div>';
-    return new Array(3).join(placeholder);
-  }
-
   getData() {
     if (this.loaded) {
       return
     }
     // Add a placeholder so flashes of text are not as significant
-    this.el.append(ContextNavigation.placeholder());
-    const that = this;
+    const placeholder = new Placeholder();
+    this.el.after(placeholder.$el);
 
     $.ajax({
       url: this.data.arclight.path,
@@ -153,7 +173,8 @@ class ContextNavigation {
    * within it
    * @returns {jQuery}
    */
-  static buildExpandList() {
+  /* eslint-disable class-methods-use-this */
+  buildExpandList() {
     const $ul = $('<ul></ul>');
     $ul.addClass('pl-0');
     $ul.addClass('prev-siblings');
@@ -161,6 +182,7 @@ class ContextNavigation {
     $ul.append(button.$el);
     return $ul;
   }
+  /* eslint-enable class-methods-use-this */
 
   /**
    * Highlights the <li> element for the current Document and appends <li> the
@@ -170,12 +192,11 @@ class ContextNavigation {
    * @param {number} originalDocumentIndex
    * @param {jQuery} parentLi
    */
-  static updateSiblings(newDocs, originalDocumentIndex, parentLi) {
-    console.log('sibling', parentLi)
+  updateSiblings(newDocs, originalDocumentIndex, parentLi) {
     newDocs[originalDocumentIndex].setAsHighlighted();
 
     // Hide all but the first previous sibling
-    const prevSiblingDocs = newDocs.slice(0, originalDocumentIndex - 1);
+    const prevSiblingDocs = newDocs.slice(0, originalDocumentIndex);
     let nextSiblingDocs = [];
 
     if (prevSiblingDocs.length > 1 && originalDocumentIndex > 0) {
@@ -212,8 +233,7 @@ class ContextNavigation {
    * @param {jQuery} parentLi - the <li> used to generate the <ul> for the
    * context - this is consistently the *last* element in the <ul>
    */
-  static updateParents(newDocs, originalParents, parent, parentLi) {
-    console.log('parent', parentLi)
+  updateParents(newDocs, originalParents, parent, parentLi) {
     // Case where this is a parent list and needs to be filed correctly
     //
     // Otherwise, retrieve the parent...
@@ -274,7 +294,8 @@ class ContextNavigation {
    *   Document in the <ul> context list of collections, components, and
    *   containers
    */
-  static updateListSiblings($li) {
+  /* eslint-disable class-methods-use-this */
+  updateListSiblings($li) {
     const prevSiblings = $li.prevAll('.al-collection-context');
     if (prevSiblings.length > 1) {
       const hiddenNextSiblings = prevSiblings.slice(0, -1);
@@ -286,6 +307,7 @@ class ContextNavigation {
       button.$el.insertAfter(lastHiddenNextSibling);
     }
   }
+  /* eslint-enable class-methods-use-this */
 
   /**
    * This updates the elements in the View DOM using an AJAX response containing
@@ -321,25 +343,14 @@ class ContextNavigation {
     console.log('parentSel', parentSel)
 
     if (originalDocumentIndex !== -1) {
-      ContextNavigation.updateSiblings(newDocs, originalDocumentIndex, that.parentLi);
+      this.updateSiblings(newDocs, originalDocumentIndex, that.parentLi);
     } else {
-      // Case where this is a parent list and needs to be filed correctly
-      //
-      // Otherwise, retrieve the parent...
-      const parentIndex = that.data.arclight.originalParents.indexOf(that.data.arclight.parent);
-      const currentId = `${that.data.arclight.originalParents[0]}${that.data.arclight.originalParents[parentIndex + 1]}`;
-      const newDocIndex = newDocs.findIndex(doc => doc.id === currentId);
-
-      if (newDocIndex !== -1) {
-        ContextNavigation.updateParents(
-          newDocs,
-          that.data.arclight.originalParents,
-          that.data.arclight.parent,
-          that.parentLi
-        );
-      } else {
-        ContextNavigation.updateChildren(newDocs, that.data.arclight.originalDocument);
-      }
+      this.updateParents(
+        newDocs,
+        that.data.arclight.originalParents,
+        that.data.arclight.parent,
+        that.parentLi
+      );
     }
     that.truncateItems();
     Blacklight.doBookmarkToggleBehavior();
@@ -359,10 +370,10 @@ class ContextNavigation {
 
     // Select the <li> element for the current document
     const highlighted = that.parentLi.siblings('.al-hierarchy-highlight');
-    this.constructor.updateListSiblings(highlighted);
+    this.updateListSiblings(highlighted);
   }
 
-  // eslint-disable-next-line class-methods-use-this
+  /* eslint-disable class-methods-use-this */
   truncateItems() {
     $('[data-arclight-truncate="true"]').each(function (_, el) {
       $(el).responsiveTruncate({
@@ -371,8 +382,13 @@ class ContextNavigation {
       });
     });
   }
+  /* eslint-enable class-methods-use-this */
 }
 
+/**
+ * Integrate the behavior into the DOM using the Blacklight#onLoad callback
+ *
+ */
 Blacklight.onLoad(function () {
   $('.context-navigator').each(function (i, e) {
     const contextNavigation = ContextNavigation.new_for_element(e);

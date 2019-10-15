@@ -26,11 +26,12 @@
             </ul>
           </div>
         </div>
-      </div>
-      <div class='row justify-content-md-center'>
-        <div class='col-auto'>
-          <div class='navbar-search'>
-            <%= render_search_bar %>
+
+        <div class='row justify-content-md-center'>
+          <div class='col-12'>
+            <div class='navbar-search'>
+              <%= render_search_bar %>
+            </div>
           </div>
         </div>
       </div>
@@ -51,14 +52,9 @@
         </div>
       </div>
     </div>
-    <div class="navbar-search navbar navbar-expand-sm bg-faded">
+    <div class="navbar-search navbar">
       <div class="<%= container_classes %>">
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-          <%= render_search_bar  %>
-        </div>
+        <%= render_search_bar  %>
       </div>
     </div>
   <% end %>

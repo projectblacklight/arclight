@@ -96,7 +96,8 @@ ignore_missing:
 - '{blacklight}.*'
 
 ## Consider these keys used:
-# ignore_unused:
+ignore_unused:
+  - '{blacklight}.*'
 # - 'activerecord.attributes.*'
 # - '{devise,kaminari,will_paginate}.*'
 # - 'simple_form.{yes,no}'

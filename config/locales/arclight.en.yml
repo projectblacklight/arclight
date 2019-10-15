@@ -69,8 +69,8 @@ en:
         expand: Expand
         has_content: Contents
         no_contents: No content inventory
-        no_online_content: No online content
         online_content: Online content
+        online_content_upper: ONLINE CONTENT
         our_collections: Our Collections
         overview: Overview
         sections:
@@ -88,3 +88,12 @@ en:
       all_collections: all collections
       label_html: Search<span class="sr-only"> within</span>
       this_collection: this collection
+  blacklight:
+    entry_name:
+      grouped:
+        collection_ssi: collection
+    search:
+      pagination_info:
+        pages:
+          one: "<strong>%{start_num}</strong> - <strong>%{end_num}</strong> of <strong>%{total_num} %{entry_name}</strong>"
+          other: "<strong>%{start_num}</strong> - <strong>%{end_num}</strong> of <strong>%{total_num} %{entry_name}</strong>"

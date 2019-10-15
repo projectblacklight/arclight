@@ -1,6 +1,9 @@
 <% parents = Arclight::Parents.from_solr_document(document).as_parents %>
 <nav aria-label="breadcrumb">
   <ol class="breadcrumb">
+    <li class="breadcrumb-home-link">
+      <%= link_to t('arclight.routes.home'), root_path %>
+    </li>
     <li class="media breadcrumb-item  breadcrumb-item-1">
       <% if document.repository_config.present? %>
         <span class="media-body" aria-hidden="true"><%= blacklight_icon :repository, classes: 'al-repository-content-icon' %></span>

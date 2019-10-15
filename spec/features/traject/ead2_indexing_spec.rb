@@ -151,6 +151,10 @@ describe 'EAD 2 traject indexing', type: :feature do
         )
       end
 
+      it 'has does not have direct_digital_objects' do
+        expect(first_component['direct_digital_objects_ssm']).to eq nil
+      end
+
       it 'geogname' do
         %w[geogname_sim geogname_ssm].each do |field|
           expect(result['components'].first[field]).to be_nil
@@ -263,7 +267,7 @@ describe 'EAD 2 traject indexing', type: :feature do
     end
 
     it 'bioghist' do
-      expect(result['bioghist_ssm'].first).to match(/^Alpha Omega Alpha Honor Medical Society was founded/)
+      expect(result['bioghist_ssm'].first).to match(/Alpha Omega Alpha Honor Medical Society was founded/)
       expect(result['bioghist_teim'].second).to match(/Hippocratic oath/)
       expect(result['bioghist_heading_ssm'].first).to match(/^Historical Note/)
     end
@@ -273,7 +277,7 @@ describe 'EAD 2 traject indexing', type: :feature do
     end
 
     it 'abstract' do
-      expect(condense_whitespace(result['abstract_ssm'].first)).to match(/Alpha Omega Alpha Honor Medical Society/)
+      expect(result['abstract_ssm'].first).to match(/Alpha Omega Alpha Honor Medical Society/)
     end
 
     it 'separatedmaterial' do
@@ -293,7 +297,7 @@ describe 'EAD 2 traject indexing', type: :feature do
     end
 
     it 'arrangement' do
-      expect(result['arrangement_ssm'].first).to eq 'Arranged into seven series.'
+      expect(result['arrangement_ssm'].first).to match(/Arranged into seven series./)
     end
 
     it 'acqinfo' do
@@ -305,11 +309,11 @@ describe 'EAD 2 traject indexing', type: :feature do
     end
 
     it 'custodhist' do
-      expect(result['custodhist_ssm'].first).to eq_ignoring_whitespace 'Maintained by Alpha Omega Alpha and the family of William Root.'
+      expect(result['custodhist_ssm'].first).to match(/Maintained by Alpha Omega Alpha and the family of William Root/)
     end
 
     it 'processinfo' do
-      expect(condense_whitespace(result['processinfo_ssm'].first)).to match(/^Processed in 2001\. Descended from astronomers\./)
+      expect(result['processinfo_ssm'].first).to match(/Processed in 2001\. Descended from astronomers\./)
     end
 
     describe 'component-level' do
@@ -370,9 +374,9 @@ describe 'EAD 2 traject indexing', type: :feature do
 
         it 'has own accessrestrict' do
           expect(component_with_own_accessrestrict['accessrestrict_ssm'])
-            .to eq ['Restricted until 2018.']
+            .to include(a_string_matching(/Restricted until 2018./))
           expect(component_with_own_accessrestrict['parent_access_restrict_ssm'])
-            .to eq ['No restrictions on access.']
+            .to include(a_string_matching(/No restrictions on access/))
         end
 
         it 'gets accessrestrict from parent component' do
@@ -405,9 +409,9 @@ describe 'EAD 2 traject indexing', type: :feature do
 
         it 'has own userestrict' do
           expect(component_with_own_userestrict['userestrict_ssm'])
-            .to eq ['Original photographs must be handled using gloves.']
+            .to include(a_string_matching(/Original photographs must be handled using gloves/))
           expect(component_with_own_userestrict['parent_access_terms_ssm'])
-            .to eq ['Original photographs must be handled using gloves.']
+            .to include(a_string_matching(/Original photographs must be handled using gloves./))
         end
 
         it 'gets userestrict from collection' do
@@ -642,6 +646,17 @@ describe 'EAD 2 traject indexing', type: :feature do
           ]
         )
       end
+
+      it 'gets the direct digital object' do
+        expect(component['direct_digital_objects_ssm']).to eq(
+          [
+            JSON.generate(
+              label: 'Example diary',
+              href: 'https://idn.duke.edu/ark:/87924/r3d39z'
+            )
+          ]
+        )
+      end
     end
     context 'when <dao> is child of the <did> in a <c0x> component' do
       let(:component) { result['components'].find { |c| c['id'] == ['aoa271aspace_843e8f9f22bac69872d0802d6fffbb04'] } }
@@ -659,6 +674,10 @@ describe 'EAD 2 traject indexing', type: :feature do
             )
           ]
         )
+      end
+
+      it 'the direct digital objects is nil' do
+        expect(component['direct_digital_objects_ssm']).to eq nil
       end
     end
   end

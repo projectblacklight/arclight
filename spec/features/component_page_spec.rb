@@ -41,7 +41,7 @@ RSpec.describe 'Component Page', type: :feature do
 
   describe 'label/title' do
     it 'does not double escape entities in the heading' do
-      expect(page).to have_css('h1', text: /^"A brief account of the origin of/)
+      expect(page).to have_css('h1', text: /"A brief account of the origin of/)
       expect(page).not_to have_css('h1', text: /^&quot;A brief account of the origin of/)
     end
   end
@@ -75,6 +75,12 @@ RSpec.describe 'Component Page', type: :feature do
 
     it 'includes subjects dd link text' do
       expect(page).to have_css('dd.blacklight-access_subjects_ssim a', text: 'Records')
+    end
+  end
+
+  describe 'direct online content items' do
+    it 'includes links to online content' do
+      expect(page).to have_css('.al-digital-object.breadcrumb-item', text: 'Folder of digitized stuff')
     end
   end
 
@@ -171,28 +177,28 @@ RSpec.describe 'Component Page', type: :feature do
         within '#collection-context' do
           expect(page).to have_css '.document-title-heading', text: 'Pages 273-353'
           expect(page).to have_css '.document-title-heading', text: 'Pages 171-272'
-          expect(page).not_to have_css '.document-title-heading', text: 'Pages 79-170'
-          expect(page).to have_css '.document-title-heading', text: 'Pages 1-78'
+          expect(page).to have_css '.document-title-heading', text: 'Pages 79-170'
+          expect(page).not_to have_css '.document-title-heading', text: 'Pages 1-78'
         end
       end
 
       it 'offers a button for displaying the hidden sibling document items' do
         within '#collection-context' do
           expect(page).to have_css '.btn-secondary', text: 'Expand'
-          expect(page).to have_css '.document-title-heading', text: 'Pages 1-78'
-          expect(page).not_to have_css '.document-title-heading', text: 'Pages 79-170'
+          expect(page).not_to have_css '.document-title-heading', text: 'Pages 1-78'
+          expect(page).to have_css '.document-title-heading', text: 'Pages 79-170'
           expect(page).to have_css '.document-title-heading', text: 'Pages 171-272'
           expect(page).to have_css '.document-title-heading', text: 'Pages 273-353'
 
           first('.btn-secondary', text: 'Expand').click
 
           expect(page).to have_css '.btn-secondary', text: 'Collapse'
-          expect(page).to have_css '.document-title-heading', text: 'Pages 79-170'
+          expect(page).to have_css '.document-title-heading', text: 'Pages 1-78'
 
           first('.btn-secondary', text: 'Collapse').click
 
           expect(page).to have_css '.btn-secondary', text: 'Expand'
-          expect(page).not_to have_css '.document-title-heading', text: 'Pages 79-170'
+          expect(page).not_to have_css '.document-title-heading', text: 'Pages 1-78'
         end
       end
     end
@@ -223,10 +229,11 @@ RSpec.describe 'Component Page', type: :feature do
   describe 'breadcrumb' do
     it 'links home, collection, and parents' do
       within '.al-show-breadcrumb' do
+        expect(page).to have_css 'a', text: 'Home'
         expect(page).to have_css 'a', text: 'National Library of Medicine. History of Medicine Division'
         expect(page).to have_css 'a', text: 'Alpha Omega Alpha Archives, 1894-1992'
         expect(page).to have_css 'a', text: 'Series I: Administrative Records, 1902-1976, bulk 1975-1976'
-        expect(page).to have_css 'a', count: 3
+        expect(page).to have_css 'a', count: 4
       end
     end
   end
@@ -235,8 +242,10 @@ RSpec.describe 'Component Page', type: :feature do
     let(:doc_id) { 'a0011-xmlaspace_ref6_lx4' }
 
     it 'renders links to the files for download' do
-      expect(page).to have_css('.al-show-actions-box-downloads-file', text: 'Download finding aid (1.23MB)')
-      expect(page).to have_css('.al-show-actions-box-downloads-file', text: 'Download EAD (123456)')
+      within '.al-show-actions-box-downloads-container' do
+        expect(page).to have_css('a', text: 'Download finding aid (1.23MB)')
+        expect(page).to have_css('a', text: 'Download EAD (123456)')
+      end
     end
   end
 end

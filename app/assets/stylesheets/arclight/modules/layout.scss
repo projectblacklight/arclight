@@ -8,28 +8,33 @@
   background-color: transparent;
   margin-bottom: 0;
   padding: 0;
-  .breadcrumb-item + .breadcrumb-item::before {
-    content: '';
+
+  .breadcrumb-item + .breadcrumb-item {
+    padding-top: 2px;
+
+    &::before {
+      content: '';
+    }
   }
 }
 
+.breadcrumb-home-link {
+  margin-bottom: ($spacer / 4);
+}
 .al-show-actions-box {
   border: $default-border-styling;
   background-color: $gray-200;
   font-size: $font-size-sm;
   height: 100%;
-  min-width: 200px;
-  padding: $spacer;
-  
-  :first-child {
-    padding-top: 0;
-  }
-  :last-child {
-    padding-bottom: 0;
+  margin-bottom: $spacer * 2;
+  padding: ($spacer * .5) $spacer ($spacer * .75);
+
+  @media (max-width: 767px) {
+    margin-top: $spacer;
   }
 
-  > div {
-    padding: ($spacer / 3) 0;
+  .al-collection-id {
+    margin-bottom: $spacer * .75;
   }
 
   &-options {
@@ -38,9 +43,16 @@
   }
 
   &-downloads {
+    padding-top: $spacer * .25;
+
+    &-container {
+      margin-top: $spacer * .5;
+    }
+
     &-file {
       &.blacklight-icons {
-        width: 1.24rem;
+        margin-right: $spacer * .5;
+
         svg {
           fill: $secondary;
         }
@@ -49,7 +61,13 @@
   }
 }
 
-.al-show-breadcrumb h1 { font-size: 1.5rem; }
+.al-show-breadcrumb h1 {
+  font-size: 1.5rem;
+
+  &.media .col {
+    padding-top: $spacer * .25;
+  }
+}
 
 .breadcrumb-item {
   flex: 1 0 100%;
@@ -61,11 +79,35 @@
   }
 }
 
+// Show page breadcrumbs
 @for $i from 1 to 14 {
-  .breadcrumb-item.breadcrumb-item-#{$i} {
-    padding-left: ($i - 1) * 10px !important;
+  .breadcrumb-item.breadcrumb-item-#{$i}.media {
+    padding-left: 0;
+
+    @media (max-width: 767px) {
+      &::before {
+        padding-right: 0;
+      }
+    }
+
+    @media (min-width: 768px) {
+      padding-left: ($i - 1) * 10px;
+	  }
   }
 }
+
+// Show page metadata.
+// Indent to match terminal show page breadcrumb.
+@for $i from 1 to 14 {
+  .al-metadata-section.breadcrumb-item-#{$i} {
+    padding-left: 0;
+
+    @media (min-width: 768px) {
+      padding-left: ($i * 10) + 10px;
+    }
+  }
+}
+
 
 // Collapse arrow indicators
 .al-toggle-view-all,
@@ -118,4 +160,34 @@ a.al-toggle-view-children {
 
 dl dd {
   overflow-wrap: break-word;
+}
+
+dl.deflist dt {
+  text-align: left;
+}
+
+.chronlist-head, .list-head {
+  caption-side: top;
+  font-size: 1.25rem;
+  font-weight: 500;
+  margin-bottom: 1rem;
+}
+
+.chronlist th,
+.chronlist-item-date {
+  font-weight: 500;
+}
+
+.chronlist-item-date {
+  width: 15ch;
+}
+
+.chronlist-item-event {
+  div:not(:last-child) {
+    margin-bottom: 0.75rem;
+  }
+}
+
+.text-underline {
+  text-decoration: underline;
 }

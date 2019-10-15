@@ -1,6 +1,6 @@
 // Colors
 $background-highlight: #ffffaa;
-$default-border-color: $gray-400;
+$default-border-color: $border-color;
 
 // Spacing
 $result-item-body-padding: 12px;
@@ -15,7 +15,7 @@ $default-border-styling: 1px solid $default-border-color;
   color: $dark;
   font-size: $font-size-sm;
   line-height: 1.2;
-  margin: ($spacer * .5) 0 0;
+  margin: 0;
   padding: ($spacer * .25) ($spacer * .5);
   text-align: left;
   white-space: normal;

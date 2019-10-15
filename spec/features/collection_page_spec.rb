@@ -30,6 +30,10 @@ RSpec.describe 'Collection Page', type: :feature do
         expect(page).to have_content 'National Library of Medicine. History of Medicine Division'
       end
     end
+
+    it 'has list of direct online content items' do
+      expect(page.first('.al-digital-object.breadcrumb-item')).to have_content 'History slideshow'
+    end
   end
 
   describe 'online content indicator' do
@@ -62,9 +66,9 @@ RSpec.describe 'Collection Page', type: :feature do
       end
     end
 
-    it 'multivalued notes are rendered as paragaphs' do
+    it 'html-formatted notes render with paragraphs intact' do
       within 'dd.blacklight-bioghist_ssm' do
-        expect(page).to have_css('p', count: 2)
+        expect(page).to have_css('p', count: 4)
         expect(page).to have_css('p', text: /^Alpha Omega Alpha Honor Medical Society was founded/)
         expect(page).to have_css('p', text: /^Root and his fellow medical students/)
       end
@@ -236,7 +240,7 @@ RSpec.describe 'Collection Page', type: :feature do
       it 'has citations' do
         click_link 'Access'
         expect(page).to have_css 'dt', text: 'PREFERRED CITATION:'
-        expect(page).to have_css 'dd', text: /Omega Alpha Archives\. 1894-1992/
+        expect(page).to have_css 'dd p', text: /Omega Alpha Archives\. 1894-1992/
       end
     end
 
@@ -253,8 +257,8 @@ RSpec.describe 'Collection Page', type: :feature do
     context 'collection has no online content' do
       let(:doc_id) { 'm0198-xml' }
 
-      it 'displays a disabled tab' do
-        expect(page).to have_css 'a.nav-link.disabled', text: 'No online content'
+      it 'does not display an online content tab' do
+        expect(page).not_to have_css '.nav-link', text: 'Online content'
       end
     end
   end
@@ -333,6 +337,7 @@ RSpec.describe 'Collection Page', type: :feature do
   describe 'breadcrumb' do
     it 'links repository and shows collection header 1 text' do
       within '.al-show-breadcrumb' do
+        expect(page).to have_css 'a', text: 'Home'
         expect(page).to have_css 'a', text: 'National Library of Medicine. History of Medicine Division'
         expect(page).to have_css 'span', text: 'Alpha Omega Alpha Archives, 1894-1992'
       end
@@ -342,8 +347,10 @@ RSpec.describe 'Collection Page', type: :feature do
     let(:doc_id) { 'a0011-xmlaspace_ref6_lx4' }
 
     it 'renders links to the files for download' do
-      expect(page).to have_css('.al-show-actions-box-downloads-file', text: 'Download finding aid (1.23MB)')
-      expect(page).to have_css('.al-show-actions-box-downloads-file', text: 'Download EAD (123456)')
+      within '.al-show-actions-box-downloads-container' do
+        expect(page).to have_css('a', text: 'Download finding aid (1.23MB)')
+        expect(page).to have_css('a', text: 'Download EAD (123456)')
+      end
     end
   end
 

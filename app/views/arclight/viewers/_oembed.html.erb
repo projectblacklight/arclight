@@ -1,6 +1,7 @@
+<% parents = Arclight::Parents.from_solr_document(viewer.document).as_parents %>
 <% viewer.resources.each do |resource| %>
   <%= content_tag(:div, viewer.attributes_for(resource)) do %>
-    <div class='al-digital-object'>
+    <div class="al-digital-object media breadcrumb-item breadcrumb-item-<%= parents.length + 6 %>"> 
       <%= link_to(resource.label, resource.href) %>
     </div>
   <% end %>
