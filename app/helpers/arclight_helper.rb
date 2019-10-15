@@ -266,21 +266,19 @@ module ArclightHelper
     send(:"render_document_#{config_field}_label", document, field: field)
   end
 
-  def render_document_context(document, core: nil)
+  def render_document_context(document, core: nil, is_original: false)
     parents = document.parent_ids
-    if parents.length > 0
-      new_core = render "catalog/nested_component_context",
-        document: document,
-        core: core,
-        document_counter: parents.length
-      parent_search_id = parents.length == 1 ? parents[0] : parents[0] + parents[-1]
+    new_core = render "catalog/nested_component_context",
+      document: document,
+      core: core,
+      document_counter: parents.length,
+      is_original: is_original
+    if parents.length > 1
+      parent_search_id = parents[0] + parents[-1]
       parent = SolrDocument::find(parent_search_id)
       return render_document_context(parent, core: new_core)
     end
-    render "catalog/nested_component_context",
-      document: document,
-      core: core,
-      document_counter: parents.length
+    new_core
   end
 
   ##

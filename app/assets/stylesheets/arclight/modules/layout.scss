@@ -126,6 +126,17 @@ a.al-toggle-view-children {
   vertical-align: text-bottom;
 }
 
+// Collapse arrow indicators
+.al-toggle-view-children {
+  &:not(.collapsed) {
+    & {
+      content: image-url('blacklight/minus.svg');
+    }
+  }
+
+  content: image-url('blacklight/plus.svg');
+}
+
 .bookmark-toggle .toggle-bookmark {
   display: inline;
   margin-bottom: 0;
