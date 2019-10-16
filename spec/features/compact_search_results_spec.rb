@@ -15,7 +15,7 @@ RSpec.describe 'Compact Search Results', type: :feature do
     expect(page).not_to have_css('.documents-list')
     expect(page).to have_css('.documents-compact')
     expect(page).to have_css('article.document', count: 10)
-    within '.document-position-0' do
+    within '.document-position-2' do
       # Has breadcrumbs
       expect(page).to have_css '.breadcrumb-links a', text: /National Library of/
       # Has Containers

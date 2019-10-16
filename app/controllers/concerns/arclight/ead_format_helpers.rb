@@ -10,7 +10,7 @@ module Arclight
     def render_html_tags(args)
       values = args[:value] || []
       values.map! do |value|
-        html_sanitize(transform_ead_to_html(value))
+        transform_ead_to_html(value)
       end
       values.map! { |value| wrap_in_paragraph(value) } if values.count > 1
       safe_join(values.map(&:html_safe))
@@ -20,11 +20,8 @@ module Arclight
 
     def transform_ead_to_html(value)
       Loofah.xml_fragment(condense_whitespace(value))
-            .scrub!(ead_to_html_scrubber).to_html
-    end
-
-    def html_sanitize(value)
-      Loofah.fragment(value).scrub!(:strip).to_html
+            .scrub!(ead_to_html_scrubber)
+            .scrub!(:strip).to_html
     end
 
     def ead_to_html_scrubber

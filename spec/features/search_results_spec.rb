@@ -12,7 +12,7 @@ RSpec.describe 'Search results', type: :feature do
     it 'renders the expected metadata for a collection' do
       visit search_catalog_path q: '', search_field: 'all_fields'
 
-      within('.document.document-position-1') do
+      within('.document.document-position-3') do
         expect(page).to have_css('h3 a', text: 'Alpha Omega Alpha Archives, 1894-1992')
         expect(page).to have_css('.blacklight-icons svg')
         expect(page).to have_css('.al-document-creator', text: 'Alpha Omega Alpha')
@@ -120,8 +120,8 @@ RSpec.describe 'Search results', type: :feature do
         within('.blacklight-access_subjects_ssim') do
           expect(page).to have_css('h3 button', text: 'Subject')
           expect(page).to have_css('li .facet-label', text: 'Fraternizing', visible: false)
-          expect(page).to have_css('li .facet-label', text: 'Photographs', visible: false)
           expect(page).to have_css('li .facet-label', text: 'Medicine', visible: false)
+          expect(page).to have_css('li .facet-label', text: 'Motion pictures.', visible: false)
         end
 
         within('.blacklight-has_online_content_ssim') do
