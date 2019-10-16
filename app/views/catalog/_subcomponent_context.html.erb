@@ -1,4 +1,4 @@
-<li id="<%= document.id %>" class="<%= is_original ? "al-hierarchy-highlight " : "" %>al-collection-context row d-flex align-items-start">
+<li id="<%= document.id %>" class="<%= "al-hierarchy-highlight " if is_original %><%= "al-hierarchy-element " unless is_sibling %>al-collection-context row d-flex align-items-start">
   <div class="documentHeader row" data-document-id="<%= document.id %>">
     <% requestable = item_requestable?('', { document: document }) %>
     <div class="col-auto">

@@ -46,7 +46,7 @@ class ExpandButton {
    *   <button> element
    */
   handleClick() {
-    const $targeted = this.findSiblings();
+    const $targeted = this.$el.prevAll('li');
 
     $targeted.toggleClass('collapsed');
     this.$el.toggleClass('collapsed');
@@ -59,9 +59,9 @@ class ExpandButton {
    * @constructor
    */
   constructor() {
-    const parentUl = $('ul.parent');
-    this.collapseText = parentUl[0].dataset.dataCollapse;
-    this.expandText = parentUl[0].dataset.dataExpand;
+    const collapseParent = $('.al-collapse-parent');
+    this.collapseText = collapseParent[0].dataset.collapse;
+    this.expandText = collapseParent[0].dataset.expand;
 
     this.$el = $(`<button class="my-3 btn btn-secondary btn-sm">${this.expandText}</button>`);
     this.handleClick = this.handleClick.bind(this);
@@ -329,15 +329,6 @@ class ContextNavigation {
     const originalDocumentIndex = newDocs
       .findIndex(doc => doc.id === that.data.arclight.originalDocument);
     that.parentLi.find('.al-hierarchy-placeholder').remove();
-    let nestSels = newDocs.map(doc => {
-      let context = doc.el.find('li.al-collection-context');
-      let hierarchySel = doc.el.find('#' + context[0].id + '-collapsible-hierarchy');
-      return hierarchySel[0];
-    }).filter(s => s != null);
-    let parentSel = $(nestSels[0]);
-    if (parentSel == null) {
-      parentSel = that.parentLi;
-    }
 
     if (originalDocumentIndex !== -1) {
       this.updateSiblings(newDocs, originalDocumentIndex, that.parentLi);
@@ -387,6 +378,20 @@ class ContextNavigation {
  *
  */
 Blacklight.onLoad(function () {
+  let hierarchyElements = $('.al-hierarchy-element');
+  hierarchyElements.each((index, element) => {
+    // This list will be in reverse order, counting up from the target element
+    let prevSiblings = $(element).prevAll('li');
+    if (prevSiblings.length > 1) {
+      const hiddenNextSiblings = prevSiblings.slice(1);
+      hiddenNextSiblings.toggleClass('collapsed');
+
+      const button = new ExpandButton();
+
+      const lastHiddenNextSibling = hiddenNextSiblings[0];
+      button.$el.insertAfter(lastHiddenNextSibling);
+    }
+  });
   $('.context-navigator').each(function (i, e) {
     const contextNavigation = ContextNavigation.newForElement(e);
     contextNavigation.getData();
