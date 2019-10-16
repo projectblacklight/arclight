@@ -153,6 +153,49 @@ RSpec.describe Arclight::EadFormatHelpers do
           expect(content).to eq_ignoring_whitespace '<ol><li>Item <strong>One</strong></li><li>Item <em>Two</em></li></ol>'
         end
       end
+
+      describe 'nested lists' do
+        it 'transforms hierarchical nested lists' do
+          content = helper.render_html_tags(value: [%(
+            <list type="ordered">
+              <head>Summary Contents List</head>
+              <item>Chronological, mainly 1920-1966
+                <list type="simple">
+                  <item>Joseph Maddy</item>
+                  <item>Camp History
+                    <list type="simple">
+                      <item>Histories and anniversaries</item>
+                      <item>Orchestra Camp Colony</item>
+                    </list>
+                  </item>
+                  <item>Camp records, 1935-1945</item>
+                  <item>Camp records, 1945-1966</item>
+                </list>
+              </item>
+              <item>Previously Closed Files</item>
+            </list>
+          )])
+          expect(content).to eq_ignoring_whitespace %(
+            <div class="list-head">Summary Contents List</div>
+            <ol>
+              <li>Chronological, mainly 1920-1966
+                <ul>
+                  <li>Joseph Maddy</li>
+                  <li>Camp History
+                    <ul>
+                      <li>Histories and anniversaries</li>
+                      <li>Orchestra Camp Colony</li>
+                    </ul>
+                  </li>
+                  <li>Camp records, 1935-1945</li>
+                  <li>Camp records, 1945-1966</li>
+                </ul>
+              </li>
+              <li>Previously Closed Files</li>
+            </ol>
+          )
+        end
+      end
     end
 
     describe 'definition lists' do
