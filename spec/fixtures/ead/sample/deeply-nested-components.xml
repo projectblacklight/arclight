@@ -1,0 +1,495 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ead xmlns="urn:isbn:1-931666-22-9" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="urn:isbn:1-931666-22-9 http://www.loc.gov/ead/ead.xsd">
+  <eadheader countryencoding="iso3166-1" dateencoding="iso8601" langencoding="iso639-2b" repositoryencoding="iso15511">
+    <eadid>umich-bhl-851981</eadid>
+    <filedesc>
+      <titlestmt>
+        <titleproper>Sample Finding aid for Interlochen Center for The Arts Records, 1927-2005 <num>851981 BImu Bimu C367 2</num></titleproper>
+        <author>Finding aid created by Kenneth Scheffel, 1994-1996 Philip J. Deloria, 2005 accession</author>
+      </titlestmt>
+      <publicationstmt>
+        <publisher>Bentley Historical Library</publisher>
+        <p>
+          <date>2004</date>
+        </p>
+      </publicationstmt>
+    </filedesc>
+    <profiledesc>
+      <creation>This finding aid was produced using ArchivesSpace on <date>2017-05-02 16:09:19 +0000</date>.</creation>
+      <langusage>The finding aid is written in <language langcode="eng" scriptcode="Latn">English</language></langusage>
+    </profiledesc>
+    <revisiondesc>
+      <change>
+        <date>2016-06-01</date>
+        <item>Added digitized audio cassettes.</item>
+      </change>
+      <change>
+        <date>2015-09-08</date>
+        <item>Corrected collection dates.</item>
+      </change>
+      <change>
+        <date>2014-12-23</date>
+        <item>Card index added to the collection (box 92)</item>
+      </change>
+      <change>
+        <date>2013-12-16</date>
+        <item>Changes made to reflect changed box numbers.</item>
+      </change>
+      <change>
+        <date>2006-08-09</date>
+        <item>Original encoding from Word 2000 file using Word macros and Xmetal. A complete reconversion of the earlier EAD file.</item>
+      </change>
+      <change>
+        <date>2016-11-21</date>
+        <item>Updated Conditions Governing Use Note</item>
+      </change>
+    </revisiondesc>
+  </eadheader>
+  <archdesc level="recordgrp">
+    <did>
+      <langmaterial>
+        <language langcode="eng">English</language>
+      </langmaterial>
+      <repository>
+        <corpname>Bentley Historical Library</corpname>
+      </repository>
+      <unittitle>Interlochen Center for The Arts records</unittitle>
+      <origination label="creator">
+        <corpname authfilenumber="http://id.loc.gov/authorities/names/n98020761" source="lcnaf">Interlochen Center for the Arts.</corpname>
+      </origination>
+      <unitid>851981 BImu Bimu C367 2</unitid>
+      <physdesc altrender="part">
+        <extent altrender="materialtype spaceoccupied">86.4 linear feet</extent>
+        <extent altrender="carrier">in 92 boxes</extent>
+      </physdesc>
+      <physdesc altrender="part">
+        <extent altrender="materialtype spaceoccupied">51 Volumes</extent>
+        <physfacet>scrapbook</physfacet>
+      </physdesc>
+      <physdesc altrender="part">
+        <extent altrender="materialtype spaceoccupied">1 oversize folders</extent>
+      </physdesc>
+      <physdesc altrender="part">
+        <extent altrender="materialtype spaceoccupied">30.91 GB</extent>
+        <physfacet>online</physfacet>
+      </physdesc>
+      <unitdate normal="1927/2005" type="inclusive">1927-2005</unitdate>
+      <unitdate normal="1935/1994" type="bulk">1935-1994</unitdate>
+      <langmaterial id="aspace_4a432cea90885559632bd3537a37fb33">The material is in <language encodinganalog="041" langcode="eng">English</language></langmaterial>
+      <abstract id="aspace_7d2675c3c324309da1e6e64ed0484933">Parent organization of the Interlochen Arts Academy and the Interlochen Arts Camp (formerly the National Music Camp) founded by Joseph Maddy. Includes administrative records of the Center, the Academy and the Camp and personal papers of Maddy, photographs, sound recordings, and motion pictures.</abstract>
+      <physloc id="aspace_bf9581f3e5cd35bd5b67660b1a3bca5d">Portions located in offsite storage; prior notification required for access.</physloc>
+    </did>
+    <acqinfo id="aspace_d378b4f60b49a102abb44798cd41bd7a">
+      <head>Immediate Source of Acquisition</head>
+      <p>The bulk of this record group came from the National Music Camp/Interlochen Center for the Arts (donor no. <num encodinganalog="541$e" type="donor">1754</num>) beginning in 1942. Periodic additions have been received and are expected. Separate accessions have been received from the C. M. Tremaine family (donor no. <num encodinganalog="541$e" type="donor">5550</num>) and others (donor nos. <num encodinganalog="541$e" type="donor">6669</num>, and <num encodinganalog="541$e" type="donor">7769</num>).</p>
+    </acqinfo>
+    <accessrestrict id="aspace_d92803b1e5979f695921d8f2f90037b7">
+      <head>Conditions Governing Access</head>
+      <p>The collection is open to research. Digitized audio files are currently available only in the Bentley Historical Library reading room on designated Bentley Library computers.</p>
+    </accessrestrict>
+    <userestrict id="aspace_1d0e71292d1a3c45c0e15029a1d08f8f">
+      <head>Conditions Governing Use</head>
+      <p>Copyright for the bulk of the record group remains with the Interlochen Center for the Arts. Copyright to those materials received from the C. M. Tremaine family and from Sheryl Szady has been transferred to the Regents of the University of Michigan but the collection may contain third-party materials for which copyright was not transferred. Patrons are responsible for determining the appropriate use or reuse of materials.</p>
+    </userestrict>
+    <prefercite id="aspace_0dc77fa53d18ba55263b172e338507c8">
+      <head>Preferred Citation</head>
+      <p>[item], folder, box, Interlochen Center for The Arts Records, Bentley Historical Library, University of Michigan</p>
+    </prefercite>
+    <processinfo id="aspace_072242bb5f2b2a2ecd9dcb66b3dd4501">
+      <head>Processing Information</head>
+      <p>During processing of the 2005 accession significant changes were made to the organization of the finding aid. Some new material was physically interfiled in existing series or subseries in the appropriate box. In other cases, additions to a series or subseries has been placed in a new box. This finding aid reflects the intellectual arrangement of the collection with the result that in the detailed container listing box numbers are not always consecutive.</p>
+    </processinfo>
+    <altformavail id="aspace_45da09d4651779d2c2167711a0342e62">
+      <head>Existence and Location of Copies</head>
+      <p><emph render="bold">Digitization:</emph> The Library has undertaken the digitization of a number of sound recordings within this collection. The resulting audio files are available for playback only in the Bentley Library Reading Room. Links to item images and additional information are available within this finding aid. Original sound recordings are only available for staff use.</p>
+    </altformavail>
+    <bioghist id="aspace_b8ab50c5e3af30c4282adc95f55d488c">
+      <head>Biographical / Historical</head>
+      <p>Joseph Maddy, Interlochen's founder and long-time leader, was born in Wellington, Kansas, on October 21, 1891. Both his parents were educators. His father taught before becoming a banker, and his mother served as county school superintendent. Both also enjoyed performing music, especially his mother, an accomplished amateur musician. Their first son, Harry, a year and a half older, served as a role model in Joe's early musical career.</p>
+      <p> As youths, the two brothers joined the newly formed Wellington Boys Band. Its director took the group on a musical camping trip, which Joe greatly enjoyed. Later, the boys graduated to the town band. They also performed in the family quartet, which was expanded during their early teens when another talented musical family, the Petits, moved to town. The Petits' youngest daughter, Fay, who years later eventually became Mrs. Joseph Maddy, and the two families spent part of a summer playing music while camping together.</p>
+      <p> On becoming president, Odell spent much of his first year meeting with Interlochen supporters both on campus and throughout the country in order to define the institution's future goals. Then, he announced a major fund-raising program to renovate facilities and increase endowment, adding that he hoped to make Interochen better known both in its home area and beyond. In fact, during Odell's tenure, the camp was named one of the top ten camps in the country and the World Youth Symphony Orchestra performed in the Cultural Olympiad at the 1996 Olympics in Atlanta, GA.</p>
+      <p> Odell was succeeded by Edward J. Downing. During Downing's time in office, Interlochen merged with The Pathfinder School, a local independent day school for pre-school through eighth-grade students. Downing retired in 2002 and was succeeded by Jeffery S. Kimpton in 2003.</p>
+    </bioghist>
+    <arrangement id="aspace_0a197b981b2afaa07f9df8ba1467c620">
+      <head>Arrangement</head>
+      <list type="ordered">
+        <head>Summary Contents List</head>
+        <item>Chronological, mainly 1920-1966 (boxes 1-15)
+          <list type="simple">
+            <item>Joseph Maddy (box 1)</item>
+            <item>Camp History (boxes 1-2)
+              <list type="simple">
+                <item>Histories and anniversaries</item>
+                <item>Orchestra Camp Colony</item>
+                <item>Other Music camps</item>
+                <item>National High School Orchestra</item>
+                <item>National Music Camp</item>
+                <item>Pennington family</item>
+              </list>
+            </item>
+            <item>Camp records, 1935-1945 (boxes 3-12)</item>
+            <item>Camp records, 1945-1966 (boxes 12-13)</item>
+            <item>Special correspondence, mainly 1928-1966 (boxes 13-15)</item>
+          </list>
+        </item>
+        <item>Subject, (boxes 15-46 and 87-91)
+          <list type="simple">
+            <item>mainly 1928-1989 (boxes 15-46)
+              <list type="simple">
+                <item>Joseph Maddy (boxes 15-25)
+                  <list type="simple">
+                    <item>Appearances</item>
+                    <item>Broadcasting</item>
+                    <item>Civic Music</item>
+                    <item>Music education</item>
+                    <item>Publications, speeches, and writings</item>
+                    <item>University of Michigan</item>
+                  </list>
+                </item>
+                <item>Giddings and Tremaine (boxes 25-26)</item>
+                <item>Interlochen (Camp and Academy) (boxes 26-41)
+                  <list type="simple">
+                    <item>Alumni</item>
+                    <item>Broadcasting</item>
+                    <item>Campus</item>
+                    <item>Financial</item>
+                    <item>Fund raising</item>
+                    <item>Interlochen Arts Festival</item>
+                    <item>Interlochen Press</item>
+                    <item>International</item>
+                    <item>International Society of Music Educators</item>
+                    <item>Michigan, State of</item>
+                    <item>Organizations</item>
+                    <item>Petrillo Controversy</item>
+                    <item>Publicity/Promotion</item>
+                    <item>Special Events</item>
+                    <item>Traverse City</item>
+                    <item>U.S. Government</item>
+                    <item>University of Michigan</item>
+                  </list>
+                </item>
+                <item>Camp (boxes 41-44)</item>
+                <item>Academy (boxes 44-46)</item>
+                <item>College (box 46)</item>
+              </list>
+            </item>
+            <item>1930-2003, Later Acquisition (boxes 87-91)
+              <list type="simple">
+                <item>Alumni-Grainger, Percy (box 87)</item>
+                <item>Henethorne, Margaret-Federation of Music Clubs, WI (box 88)</item>
+                <item>Federation of Music Clubs, 1959-News Releases, Chron. (box 89)</item>
+                <item>News Releases, Alpha-Special Events, Jacobi Dinner (box 90)</item>
+                <item>Special Events, Milliken Dinner-Strategic Planning Update (box 91)</item>
+              </list>
+            </item>
+          </list>
+        </item>
+        <item>Post-Maddy Administrators; 1958-recent (boxes 46-56, 66 and 85-86)
+          <list type="simple">
+            <item>Donald Gillis (boxes 46-47)</item>
+            <item>John Merrill (box 47)</item>
+            <item>Margaret Stace (box 47)</item>
+            <item>George Wilson (boxes 47-48)</item>
+            <item>Karl Haas (boxes 48-49)</item>
+            <item>Roger Jacobi (boxes 50-56)</item>
+            <item>Boal (boxes 66-67 and 85-86)</item>
+            <item>Szady (box 67)</item>
+            <item>Odell (box 86 and 67)</item>
+            <item>Downing (box 86)</item>
+          </list>
+        </item>
+        <item>Boards, 1928-1989 (boxes 56-64)
+          <list type="simple">
+            <item>Board of Advisors (box 56)</item>
+            <item>Board of Control (box 57)</item>
+            <item>Board of Trustees (boxes 57-64)</item>
+          </list>
+        </item>
+        <item>Previously Closed Files (box 65)</item>
+        <item>Recent Leaders, 1989-1995 (boxes 66-66)</item>
+        <item>Printed, mainly 1928-1989 (boxes 68-72 and 81-83)</item>
+        <item>Scrapbooks, 1928-1979 (with gaps)</item>
+        <item>Visual Materials (boxes 73-79)</item>
+        <item>Sound Recordings (boxes 79-80 and 84)</item>
+      </list>
+    </arrangement>
+    <scopecontent id="aspace_7d1d07ec13b7508392ea56df9d763e98">
+      <head>Scope and Contents</head>
+      <p>The records of the Interlochen Center for the Arts were received in installments over many years. They came from several sources: the Camp office in Ann Arbor, the Tremaine family, an alumni leader, and various administrators at Interlochen, but the greatest proportion was assembled from Maddy's home and Interlochen offices, after his death, by Margaret (Peg) Stace, his long-time assistant.</p>
+      <p> The Camp files for 1935-1945 comprise the major portion received in their original order, and they were in disarray because of frequent changes in Camp secretaries and the practice of moving the office (along with relevant files) from Ann Arbor to Interlochen and back each summer. Also, Maddy kept many items of a personal and confidential nature at home.</p>
+      <p> In processing the records, an attempt was made both to preserve the original order, where ascertainable, and to highlight major subjects and individuals, some of whose importance only became apparent with the passage of time. A separate name index is available for major correspondents. Where extant, explanatory historical and background information has been placed at the front of records categories. Because of Maddy's influence on the development of Interlochen both past and present, his correspondence with later administrators has been included if practical, under "Administration" in their papers.</p>
+      <p> The surviving records have been divided into nine series: Chronological, Subject, Post-Maddy Administrators, Boards, Closed, Printed, Visual Materials, Sound Recordings, and Scrapbooks. The Chronological focuses on Maddy and the Camp until 1966 while the Subject, is composed of two subseries. The first, mainly 1928-1989, though also heavily relating to Maddy, also includes much on developments through the '90s. The second subseries, 1930-2003, Later Acquisition represents a group of files that were acquired in 2005. Many files pertain to the early camp and Joesph Maddy. The Post-Maddy Administrators series begins in the late 1950's when Maddy expanded the staff in anticipation of making Interlochen a year-round institution and continues unto the most recent accession. Boards (governing bodies) starts with the Camp's founding in 1928 and ends in 1989 while the Closed series covers the Maddy, Haas, and Wilson administrations through 1971. Printed offers coverage to the present but is more complete for the early years through the 1980's. While the Visual Materials and Sound Recordings series extend from the 1920's into the 1980's, it offers best coverage from 1924 to 1942 Scrapbooks, with gaps in the early years, documents both Maddy and the Camp, beginning with the National High School Orchestra and ending with the Camp's 50th anniversary celebration in 1978.</p>
+    </scopecontent>
+    <controlaccess>
+      <geogname authfilenumber="http://id.loc.gov/authorities/names/n82066429" source="lcsh">Interlochen (Mich.)</geogname>
+      <subject source="lcsh">Music -- Michigan -- Interlochen.</subject>
+      <subject source="lcsh">Musicians -- Michigan -- Interlochen.</subject>
+      <subject source="lcsh">Radio and music -- Michigan.</subject>
+      <subject source="lcsh">Radio broadcasting -- Michigan -- Interlochen.</subject>
+      <subject source="lcsh">Music camps -- Michigan -- Interlochen.</subject>
+      <geogname authfilenumber="http://id.loc.gov/authorities/names/n82066429" source="lcsh">Interlochen (Mich.)</geogname>
+      <subject source="lctgm">Music -- Michigan -- Interlochen.</subject>
+      <subject source="lctgm">Music camps -- Michigan -- Interlochen.</subject>
+      <subject source="lctgm">Musicians -- Michigan -- Interlochen.</subject>
+      <genreform source="lctgm">Motion pictures.</genreform>
+      <genreform source="aat">Photographs.</genreform>
+      <genreform source="gmgpc">Slides.</genreform>
+      <genreform source="aat">Scrapbooks.</genreform>
+      <genreform source="aat">Sound recordings.</genreform>
+      <corpname authfilenumber="http://id.loc.gov/authorities/names/n85375762" source="lcnaf">American Federation of Musicians.</corpname>
+      <corpname source="lcnaf">Interlochen Arts Academy (Interlochen, Mich.)</corpname>
+      <corpname source="lcnaf">Interlochen Arts Camp.</corpname>
+      <corpname authfilenumber="http://id.loc.gov/authorities/names/n98020761" source="lcnaf">Interlochen Center for the Arts.</corpname>
+      <corpname authfilenumber="http://id.loc.gov/authorities/names/n2007028492" source="lcnaf">National Music Camp.</corpname>
+      <persname authfilenumber="http://id.loc.gov/authorities/names/no00010229" source="lcnaf">Petrillo, James C. (James Caesar), 1892-1984</persname>
+      <persname authfilenumber="http://id.loc.gov/authorities/names/n91111361" source="lcnaf">Maddy, Joseph E. (Joseph Edgar), 1891-1966</persname>
+      <corpname authfilenumber="http://id.loc.gov/authorities/names/n2007028492" source="lcnaf">National Music Camp.</corpname>
+      <corpname authfilenumber="http://id.loc.gov/authorities/names/n98020761" source="lcnaf">Interlochen Center for the Arts.</corpname>
+      <corpname authfilenumber="http://id.loc.gov/authorities/names/n2007028492" source="lcnaf">National Music Camp.</corpname>
+      <persname authfilenumber="http://id.loc.gov/authorities/names/n94105471" role="ctb" source="lcnaf">Brucker, Wilber Marion, 1894-1968</persname>
+      <persname authfilenumber="http://id.loc.gov/authorities/names/n79015686" role="ctb" source="lcnaf">Casals, Pablo, 1876-1973</persname>
+      <persname authfilenumber="http://id.loc.gov/authorities/names/n93804792" role="ctb" source="lcnaf">Charters, W. W. (Werrett Wallace), 1875-1952</persname>
+      <persname authfilenumber="http://id.loc.gov/authorities/names/n83044046" role="ctb" source="lcnaf">Dow, Alden B., 1904-1983</persname>
+      <persname authfilenumber="http://id.loc.gov/authorities/names/n83173677" role="ctb" source="lcnaf">Dow, Herbert Henry, 1866-1930</persname>
+      <persname authfilenumber="http://id.loc.gov/authorities/names/no2003084987" role="ctb" source="lcnaf">Dunham, Franklin, 1892-</persname>
+      <persname authfilenumber="http://id.loc.gov/authorities/names/no90014271" role="ctb" source="lcnaf">Dykema, Peter W. (Peter William), 1873-1951</persname>
+      <persname authfilenumber="http://id.loc.gov/authorities/names/nr89008677" role="ctb" source="lcnaf">Earhart, Will.</persname>
+      <persname authfilenumber="http://id.loc.gov/authorities/names/n81016940" role="ctb" source="lcnaf">Fennell, Frederick.</persname>
+      <persname role="ctb" source="lcnaf">Gordon, Edgar B.</persname>
+      <persname authfilenumber="http://id.loc.gov/authorities/names/n79124007" role="ctb" source="lcnaf">Grainger, Percy, 1882-1961</persname>
+      <persname role="ctb" source="lcnaf">Grofe, Ferde, 1892-1972</persname>
+      <persname authfilenumber="http://id.loc.gov/authorities/names/n79089449" role="ctb" source="lcnaf">Hanson, Howard, 1896-1981</persname>
+      <persname authfilenumber="http://id.loc.gov/authorities/names/n82025113" role="ctb" source="lcnaf">Heifetz, Jascha, 1901-1987</persname>
+      <persname authfilenumber="http://id.loc.gov/authorities/names/n91070264" role="ctb" source="lcnaf">Insull, Samuel, 1859-1938</persname>
+      <persname authfilenumber="http://id.loc.gov/authorities/names/n79140998" role="ctb" source="lcnaf">Kresge, Stanley Sebastian, 1900-</persname>
+      <persname authfilenumber="http://id.loc.gov/authorities/names/n81043282" role="ctb" source="lcnaf">Maazel, Lorin, 1930-2014</persname>
+      <persname authfilenumber="http://id.loc.gov/authorities/names/n91111361" role="ctb" source="lcnaf">Maddy, Joseph E. (Joseph Edgar), 1891-1966</persname>
+      <persname authfilenumber="http://id.loc.gov/authorities/names/n80122958" role="ctb" source="lcnaf">Ormandy, Eugene, 1899-1985</persname>
+      <persname authfilenumber="http://id.loc.gov/authorities/names/n79068399" role="ctb" source="lcnaf">Sibelius, Jean, 1865-1957</persname>
+      <persname authfilenumber="http://id.loc.gov/authorities/names/n50045033" role="ctb" source="lcnaf">Vandenberg, Arthur H. (Arthur Hendrick), 1884-1951</persname>
+      <persname authfilenumber="http://id.loc.gov/authorities/names/no2010113234" role="ctb" source="lcnaf">Waller, Judith C. (Judith Cary), 1889-1973</persname>
+      <persname authfilenumber="http://id.loc.gov/authorities/names/n83176688" role="ctb" source="lcnaf">Whiteman, Paul, 1890-1967</persname>
+      <persname authfilenumber="http://id.loc.gov/authorities/names/n91111361" role="ctb" source="lcnaf">Maddy, Joseph E. (Joseph Edgar), 1891-1966</persname>
+      <persname authfilenumber="http://id.loc.gov/authorities/names/nr93051793" role="ctb" source="lcnaf">Johnson, Thor.</persname>
+      <persname role="ctb" source="lcnaf">Wilson, George.</persname>
+    </controlaccess>
+    <dsc>
+      <c01 id="aspace_9b5b0ff697f0a78a48bad43c55ad324e" level="series">
+        <did>
+          <unittitle>Chronological</unittitle>
+          <unitdate normal="1920/1966" type="bulk">1920-1966</unitdate>
+        </did>
+        <scopecontent id="aspace_417b89c6eb2087e9473dfaecd122c23a">
+          <head>Scope and Contents</head>
+          <p>The Chronological series emphasizes Maddy and the Camp until 1966. It is divided into several subseries: Maddy biography, Camp history, Camp files, 1935-1945, Camp files, 1945-1966, and Special correspondence. The first two subseries provide documentation for the earliest years. The series is supplemented by the Subject series which is especially useful for Camp operations and the founding of the Academy.</p>
+        </scopecontent>
+        <c02 id="aspace_71ee05daac3802bb3a19666078f1edf4" level="subseries">
+          <did>
+            <unittitle>Subject Files</unittitle>
+            <unitdate normal="1928/1989" type="bulk">1928-1989</unitdate>
+          </did>
+          <scopecontent id="aspace_27f3aafbccf908e66b6321f76775a3fa">
+            <head>Scope and Contents</head>
+            <p>The Subject Files series, is divided into two subseries. The first, mainly 1928-1989, emphasizes Maddy and his administration of Interlochen although later materials, especially for the decade or two following his death, are also included. It has six sub-subseries: Joseph Maddy, Giddings and Tremaine, Interlochen, Camp, Academy, and College. The Maddy sub-subseries focuses on his career activities apart from Interlochen while Giddings and Tremaine contains background information and publications of the two other early Camp leaders. Interlochen covers subjects affecting the institution in general, mainly the Camp before 1962 and both it and the Academy thereafter. The remaining sub-subseries focus on detailed planning and operation of: the National Music Camp, Interlochen Arts Academy, and proposed Interlochen College of Creative Arts.</p>
+          </scopecontent>
+          <c03 id="aspace_ef6cf00839ee19e1bee1977ef70ab4f3" level="file">
+            <did>
+              <unittitle>Card index</unittitle>
+              <container id="aspace_b337be7774f8dd693c46b62dee28a87e" label="Box" type="box">92</container>
+            </did>
+          </c03>
+          <c03 id="aspace_4c08111acad2d66e8a63404ad6ce4b46" level="file">
+            <did>
+              <unittitle>Maddy</unittitle>
+            </did>
+            <scopecontent id="aspace_e3d2d30bc5551015bf8e45c5997b452c">
+              <head>Scope and Contents</head>
+              <p>The Maddy sub-subseries contains information on his professional activities outside Interlochen. Many of them relate to his role as a faculty member of the university. Although direct ties to Interlochen are lacking, virtually everything he did somehow involved the institution he founded. The sub-subseries consists of six subsections: Appearances, Broadcasting, Civic Music, Music Education, Publications, Speeches and Writings, and University of Michigan.</p>
+            </scopecontent>
+            <c04 id="aspace_a382a0436b69a32ed5efb9f9fe9d2578" level="file">
+              <did>
+                <unittitle>Broadcasting</unittitle>
+              </did>
+              <scopecontent id="aspace_c35989258374716cba77a65194543f68">
+                <head>Scope and Contents</head>
+                <p>"Broadcasting", mainly 1931-1948, documents Maddy's non-Interlochen radio work. It includes his correspondence and scripts for instrumental and vocal education programs as well as correspondence, reports, and other records on his attempt to create an alternative to commercial radio, largely using the new FM technology. Scripts include those used by announcers Mike Wallace and Ward Quaal and texts of radio addresses on Americanism by Murray Van Wagoner, Leo Fitzpatrick, and Karl Detzer. Researchers will also want to check "Civic Music" for Maddy's wartime broadcasts and "Music Education" for the professional educators' program "Music and American Youth." Since much of his non-Interlochen broadcasting was done for the university, reports and other information about it can be found under "University of Michigan" (6) in this sub-subseries. Recordings and a movie film of his instructional programs can be found in the Visual Materials and Sound Recordings series.</p>
+              </scopecontent>
+              <c05 id="aspace_8ad578b291224f735ab0d5b4a7b6d406" level="file">
+                <did>
+                  <unittitle>University of Michigan radio</unittitle>
+                  <unitdate normal="1931/1954" type="inclusive">1931-1954</unitdate>
+                </did>
+                <c06 id="aspace_7a47b946a5107eb56d93ef0cd069d568" level="file">
+                  <did>
+                    <unittitle>History</unittitle>
+                    <container id="aspace_3041649c800dc2e4f9be4811394656c5" label="Box" type="box">16</container>
+                  </did>
+                </c06>
+                <c06 id="aspace_d1c270314f9ca687b5fd961f6c36c4fa" level="file">
+                  <did>
+                    <unittitle>General</unittitle>
+                  </did>
+                  <c07 id="aspace_e4c7c0e0fa8f8c082f12b679e0dbab28" level="file">
+                    <did>
+                      <unittitle>Papers</unittitle>
+                      <physdesc altrender="whole">
+                        <extent altrender="materialtype spaceoccupied">8 folders</extent>
+                      </physdesc>
+                      <unitdate normal="1931/1954" type="inclusive">1931-1954</unitdate>
+                      <container id="aspace_16d37d365a75fb2bdbec20b895e1b33e" label="Box" type="box">16</container>
+                    </did>
+                  </c07>
+                  <c07 id="aspace_6adace1976f990f2dd8656dd863d3714" level="file">
+                    <did>
+                      <unittitle>U. of M. student papers, circa</unittitle>
+                      <unitdate normal="1935/1936" type="inclusive">1935-1936</unitdate>
+                      <container id="aspace_01b44a0c490eafa4ef95ac1ed1aa8c6e" label="Box" type="box">16</container>
+                    </did>
+                  </c07>
+                  <c07 id="aspace_71d21f9ee143d4cccce9434835c0710f" level="file">
+                    <did>
+                      <unittitle>Summer survey responses</unittitle>
+                      <unitdate normal="1937/1937" type="inclusive">1937</unitdate>
+                      <container id="aspace_23208e40a3f59ddfd8dfe8a0840bd63b" label="Box" type="box">16</container>
+                    </did>
+                  </c07>
+                  <c07 id="aspace_8914c235a0315968a461b6e81c30111a" level="file">
+                    <did>
+                      <unittitle>W.P.A.-student workers</unittitle>
+                      <unitdate normal="1938/1940" type="inclusive">1938-1940</unitdate>
+                      <container id="aspace_d5f4d960ea8017b17ec3c0dbc4c8a78a" label="Box" type="box">16</container>
+                    </did>
+                  </c07>
+                </c06>
+                <c06 id="aspace_ffa8f2e89cab96c9fa8c25b55ddb1e16" level="file">
+                  <did>
+                    <unittitle>Program materials</unittitle>
+                  </did>
+                  <c07 id="aspace_b383b70a39476272414586a526e6fc2a" level="file">
+                    <did>
+                      <unittitle>Band &amp; gen'l instrument lessons</unittitle>
+                    </did>
+                    <c08 id="aspace_1310565f4839a9087aedcf60b2f1a447" level="file">
+                      <did>
+                        <unittitle>February and March, including course book</unittitle>
+                        <unitdate normal="1931/1931" type="inclusive">1931</unitdate>
+                        <container id="aspace_054e53ebbbac74809bc8b5f0323a09b8" label="Box" type="box">16</container>
+                      </did>
+                    </c08>
+                    <c08 id="aspace_14c49f96bc57a109768d7266b39d0d4e" level="file">
+                      <did>
+                        <unittitle>February and March</unittitle>
+                        <unitdate normal="1932/1932" type="inclusive">1932</unitdate>
+                      </did>
+                      <c09 id="aspace_5e58a603a337e85d306de94b966b8a6c" level="file">
+                        <did>
+                          <unittitle>Announcements and scripts</unittitle>
+                          <container id="aspace_391074eb103001b5a9c67eb16597259c" label="Box" type="box">16</container>
+                        </did>
+                      </c09>
+                      <c09 id="aspace_46deff15fb04a2266a7887fa28b229fd" level="file">
+                        <did>
+                          <unittitle>Survey of participating schools</unittitle>
+                          <container id="aspace_cf90bc6e238908682b59068da99a6473" label="Box" type="box">16</container>
+                        </did>
+                      </c09>
+                      <c09 id="aspace_4dad38366bb58c719e979775df4e110e" level="file">
+                        <did>
+                          <unittitle>Correspondence</unittitle>
+                          <container id="aspace_af3a3f9eaf96f9a4936e063d7e4c7ae6" label="Box" type="box">16</container>
+                        </did>
+                      </c09>
+                    </c08>
+                    <c08 id="aspace_bdb57135b407423d86be29c57d9e765f" level="file">
+                      <did>
+                        <unittitle>October-December-course book</unittitle>
+                        <unitdate normal="1932/1932" type="inclusive">1932</unitdate>
+                        <container id="aspace_9cebea9eb3b02d64d8c7c424c44c1d39" label="Box" type="box">16</container>
+                      </did>
+                    </c08>
+                    <c08 id="aspace_8d6b59045326f42766cc59934e90dc78" level="file">
+                      <did>
+                        <unittitle>1933-1935-scripts and lesson plans</unittitle>
+                        <physdesc altrender="whole">
+                          <extent altrender="materialtype spaceoccupied">2 folders</extent>
+                        </physdesc>
+                        <container id="aspace_5cc05e1947b21f1e9fe900c12151b7a7" label="Box" type="box">16</container>
+                      </did>
+                    </c08>
+                    <c08 id="aspace_533f0fb03170d86408e0b1dde0d92fa7" level="file">
+                      <did>
+                        <unitdate normal="1935/1936" type="inclusive">1935-1936</unitdate>
+                      </did>
+                      <odd id="aspace_d8b13df0a7dfde4d14ca739a35eb91b7">
+                        <head>General</head>
+                        <p>WJR and WMAQ</p>
+                      </odd>
+                      <c09 id="aspace_894984d00c81f484a5a99621107909d4" level="file">
+                        <did>
+                          <unittitle>Correspondence</unittitle>
+                        </did>
+                        <c10 id="aspace_ca1bd729699f52c25271f98db12be1b3" level="file">
+                          <did>
+                            <unittitle>Production (mainly NBC)</unittitle>
+                            <container id="aspace_e5a864f7348a33a31209ce66847e5352" label="Box" type="box">16</container>
+                          </did>
+                          <c11 id="aspace_4e5f8373d724ef2d4e90476f8def86a3" level="file">
+                            <did>
+                              <unittitle>General</unittitle>
+                              <physdesc altrender="whole"><extent altrender="materialtype spaceoccupied">2 folders</extent></physdesc>
+                              <container id="aspace_d5e868404aba3e782b498b13e79dc06f" label="Box" type="box">16</container>
+                            </did>
+                            <c12 id="aspace_f1e1250abe9e554b96cc8bc326be2783" level="file">
+                              <did>
+                                <unittitle>Listener</unittitle>
+                                <container id="aspace_195a3f385ef7d9250ab19a97e77cd863" label="Box" type="box">16</container>
+                              </did>
+                            </c12>
+                          </c11>
+                        </c10>
+                        <c10 id="aspace_ec95a359e7c57f93c9e5ba85089bd008" level="file">
+                          <did>
+                            <unittitle>General</unittitle>
+                            <container id="aspace_c59d0e4202cdaa3bab31787b1af5df28" label="Box" type="box">16</container>
+                          </did>
+                        </c10>
+                      </c09>
+                      <c09 id="aspace_151bdc3c6e9418dea2758d831b29727d" level="file">
+                        <did>
+                          <unittitle>Instruction book orders</unittitle>
+                          <container id="aspace_fe7c967c0b8d58bd278eaf8ee5a95654" label="Box" type="box">16</container>
+                        </did>
+                      </c09>
+                      <c09 id="aspace_5362719e9f54af458dda6d19bdc7b818" level="file">
+                        <did>
+                          <unittitle>Participating schools, circa</unittitle>
+                          <unitdate normal="1936/1936" type="inclusive">1936</unitdate>
+                          <container id="aspace_7172bc6b42c8e07dea8084c958a6689a" label="Box" type="box">16</container>
+                        </did>
+                      </c09>
+                      <c09 id="aspace_679e73d364f4963c797fd8d7c40fec2d" level="file">
+                        <did>
+                          <unittitle>Scripts</unittitle>
+                          <physdesc altrender="whole">
+                            <extent altrender="materialtype spaceoccupied">2 folders</extent>
+                          </physdesc>
+                          <container id="aspace_3958d2d7f04b986a4eab7ac7baf2d331" label="Box" type="box">16</container>
+                        </did>
+                      </c09>
+                      <c09 id="aspace_7a83ee4e80dc9001f98c661c1804748b" level="file">
+                        <did>
+                          <unittitle>Network plans for "Musical Youth"</unittitle>
+                          <container id="aspace_204006ddbd3b36ac6f91cfc0d4bb0416" label="Box" type="box">16</container>
+                        </did>
+                      </c09>
+                    </c08>
+                  </c07>
+                </c06>
+              </c05>
+            </c04>
+          </c03>
+        </c02>
+      </c01>
+    </dsc>
+  </archdesc>
+</ead>
