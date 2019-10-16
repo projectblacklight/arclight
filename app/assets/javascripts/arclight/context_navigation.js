@@ -1,3 +1,5 @@
+var contextNavigators = [];
+
 class NavigationDocument {
   constructor(el) {
     this.el = $(el);
@@ -19,8 +21,6 @@ class NavigationDocument {
     return this.el.html();
   }
 }
-
-var contextNavigators = []
 
 /**
  * Models the "Expand"/"Collapse" button, and provides an onClick event handler
@@ -125,30 +125,29 @@ class ContextNavigation {
     this.el = $(el);
     this.data = this.el.data();
     this.parentLi = this.el.parent();
-    this.loaded = false
-    contextNavigators.push(this)
+    this.loaded = false;
+    contextNavigators.push(this);
   }
 
-  static exists_for_element(el) {
+  static existsForElement(el) {
     let existing = contextNavigators.find(e => {
       return e.data.arclight.originalDocument === $(el).data().arclight.originalDocument &&
-        e.data.arclight.level === $(el).data().arclight.level
-    })
-    return existing
+        e.data.arclight.level === $(el).data().arclight.level;
+    });
+    return existing;
   }
 
-  static new_for_element(el) {
-    let existing = ContextNavigation.exists_for_element(el)
+  static newForElement(el) {
+    let existing = ContextNavigation.existsForElement(el);
     if (existing != null) {
-      return existing
-    } else {
-      return new ContextNavigation(el)
+      return existing;
     }
+    return new ContextNavigation(el);
   }
 
   getData() {
     if (this.loaded) {
-      return
+      return;
     }
     // Add a placeholder so flashes of text are not as significant
     const placeholder = new Placeholder();
@@ -164,8 +163,8 @@ class ContextNavigation {
         search_field: this.data.arclight.search_field,
         view: 'collection_context'
       }
-    }).done((response) => that.updateView(response));
-    this.loaded = true
+    }).done((response) => this.updateView(response));
+    this.loaded = true;
   }
 
   /**
@@ -282,10 +281,10 @@ class ContextNavigation {
     parentLi.after(renderedAfterDocs).fadeIn(500);
   }
 
-  static updateChildren (newDocs, parentId) {
-    let parentSel = $('#' + parentId + '-collapsible-hierarchy')
-    let renderedDocs = newDocs.map(d => d.render()).join('')
-    parentSel.append('<ul>' + renderedDocs + '</ul>')
+  static updateChildren(newDocs, parentId) {
+    let parentSel = $('#' + parentId + '-collapsible-hierarchy');
+    let renderedDocs = newDocs.map(d => d.render()).join('');
+    parentSel.append('<ul>' + renderedDocs + '</ul>');
   }
 
   /**
@@ -330,17 +329,15 @@ class ContextNavigation {
     const originalDocumentIndex = newDocs
       .findIndex(doc => doc.id === that.data.arclight.originalDocument);
     that.parentLi.find('.al-hierarchy-placeholder').remove();
-    console.log('parentLi', that.parentLi)
     let nestSels = newDocs.map(doc => {
-        let context = doc.el.find('li.al-collection-context')
-        let hierarchySel = doc.el.find('#'+context[0].id+'-collapsible-hierarchy')
-        return hierarchySel[0]
-    }).filter(s => s != null)
-    let parentSel = $(nestSels[0])
+      let context = doc.el.find('li.al-collection-context');
+      let hierarchySel = doc.el.find('#' + context[0].id + '-collapsible-hierarchy');
+      return hierarchySel[0];
+    }).filter(s => s != null);
+    let parentSel = $(nestSels[0]);
     if (parentSel == null) {
-      parentSel = that.parentLi
+      parentSel = that.parentLi;
     }
-    console.log('parentSel', parentSel)
 
     if (originalDocumentIndex !== -1) {
       this.updateSiblings(newDocs, originalDocumentIndex, that.parentLi);
@@ -355,18 +352,18 @@ class ContextNavigation {
     that.truncateItems();
     Blacklight.doBookmarkToggleBehavior();
     $('.al-toggle-view-children').click((e) => {
-      e.preventDefault()
-      var context = $(e.target).closest('.al-collection-context')
-      var id = context[0].id
-      var expandable = context.find('#' + id + '-collapsible-hierarchy')
-      if (expandable != null && expandable.length == 1) {
-        var expandable_contents = expandable.find('.al-contents')
-        if (expandable_contents != null) {
-          const navigator = ContextNavigation.new_for_element(expandable_contents[0])
-          navigator.getData()
+      e.preventDefault();
+      let context = $(e.target).closest('.al-collection-context');
+      let id = context[0].id;
+      let expandable = context.find('#' + id + '-collapsible-hierarchy');
+      if (expandable != null && expandable.length === 1) {
+        let expandableContents = expandable.find('.al-contents');
+        if (expandableContents != null) {
+          const navigator = ContextNavigation.newForElement(expandableContents[0]);
+          navigator.getData();
         }
       }
-    })
+    });
 
     // Select the <li> element for the current document
     const highlighted = that.parentLi.siblings('.al-hierarchy-highlight');
@@ -391,7 +388,7 @@ class ContextNavigation {
  */
 Blacklight.onLoad(function () {
   $('.context-navigator').each(function (i, e) {
-    const contextNavigation = ContextNavigation.new_for_element(e);
+    const contextNavigation = ContextNavigation.newForElement(e);
     contextNavigation.getData();
   });
 });
