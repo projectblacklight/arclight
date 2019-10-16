@@ -266,37 +266,28 @@ module ArclightHelper
     send(:"render_document_#{config_field}_label", document, field: field)
   end
 
-  ##
-  # Reduces a document's parent_ids to a set of nested ul/li that resembels
-  # the collection / component / subcomponent structure
-  def nested_component_lists(document)
-    document.parent_ids.reverse.reduce(''.html_safe) do |acc, parent_id|
-      content_tag(
-        :ul,
-        class: %w[parent collection-context],
-        data: { 'data-collapse': I18n.t('arclight.views.show.collapse'), 'data-expand': I18n.t('arclight.views.show.expand') }
-      ) do
-        content_tag(:li, id: parent_id) do
-          safe_join(
-            [context_navigator_content(document, parent_id), acc]
-          )
-        end
-      end
-    end
+  def show_expanded?(document)
+    !original_document?(document)
   end
 
-  def context_navigator_content(document, parent_id)
+  def original_document?(document)
+    document.id == params['original_document']
+  end
+
+  def generic_context_navigation(document, original_parents: document.parent_ids, component_level: 1)
     content_tag(
-      :div, '',
-      class: "context-navigator al-hierarchy-level-#{document.component_level} documents-hierarchy",
+      :div,
+      '',
+      class: 'context-navigator',
       data: {
+        collapse: I18n.t('arclight.views.show.collapse'),
+        expand: I18n.t('arclight.views.show.expand'),
         arclight: {
-          level: document.parent_ids.index(parent_id) + 1,
+          level: component_level,
           path: search_catalog_path(hierarchy_context: 'component'),
           name: document.collection_name,
-          parent: parent_id,
           originalDocument: document.id,
-          originalParents: document.parent_ids
+          originalParents: original_parents
         }
       }
     )
