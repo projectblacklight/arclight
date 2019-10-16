@@ -266,13 +266,32 @@ module ArclightHelper
     send(:"render_document_#{config_field}_label", document, field: field)
   end
 
+  def fetch_siblings(document)
+    conn = Blacklight.default_index.connection
+    parents = document.parent_ids
+    parent_search_id = parents[-1]
+    component_level = document.component_level
+    collection = document.collection_name
+    search_params = {fq: ["{!term f=parent_ssi}#{parent_search_id}",
+                     "{!term f=component_level_isim}#{component_level}"],
+                     :facet=> false} 
+    siblings = conn.get('select', :params=> search_params)
+    before_siblings, after_siblings = siblings['response']['docs'].collect { |d| SolrDocument.new d }.split { |d| d['id'] == document.id}
+    before_siblings ||= []
+    after_siblings ||= []
+    [before_siblings, after_siblings]
+  end
+
   def render_document_context(document, core: nil, is_original: false)
     parents = document.parent_ids
+    before_siblings, after_siblings = fetch_siblings(document)
     new_core = render "catalog/nested_component_context",
       document: document,
       core: core,
       document_counter: parents.length,
-      is_original: is_original
+      is_original: is_original,
+      before_siblings: before_siblings.to_set,
+      after_siblings: after_siblings.to_set
     if parents.length > 1
       parent_search_id = parents[0] + parents[-1]
       parent = SolrDocument::find(parent_search_id)

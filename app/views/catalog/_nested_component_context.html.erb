@@ -1,4 +1,7 @@
 <ul>
+  <% before_siblings.each do |doc| %>
+    <%= render partial: 'subcomponent_context', locals: { document: doc, is_original: false, document_counter: document_counter, core: nil, is_sibling: true } %>
+  <% end %>
   <li id="<%= document.id %>" class="<%= is_original ? "al-hierarchy-highlight " : "" %>al-collection-context row d-flex align-items-start">
     <div class="documentHeader row" data-document-id="<%= document.id %>">
       <% requestable = item_requestable?('', { document: document }) %>
@@ -66,4 +69,7 @@
       </div>
     </div>
   </li>
+  <% after_siblings.each do |doc| %>
+    <%= render partial: 'subcomponent_context', locals: { document: doc, is_original: false, document_counter: document_counter, core: nil, is_sibling: true } %>
+  <% end %>
 </ul>
