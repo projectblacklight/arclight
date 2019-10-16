@@ -24,7 +24,7 @@ Gem::Specification.new do |spec|
 
   spec.add_dependency 'blacklight', '~> 7.2'
   spec.add_dependency 'blacklight_range_limit', '~> 7.1'
-  spec.add_dependency 'rails', '~> 5.0'
+  spec.add_dependency 'rails', '>= 5.1', '< 7'
   spec.add_dependency 'sprockets-bumble_d'
   spec.add_dependency 'traject', '~> 3.0'
   spec.add_dependency 'traject_plus', '~> 1.2'

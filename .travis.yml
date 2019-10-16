@@ -2,9 +2,13 @@ sudo: false
 language: ruby
 notifications:
   email: false
-rvm:
-  - 2.5.5
-  - 2.6.3
+matrix:
+  include:
+    - rvm: 2.6.5
+    - rvm: 2.6.5
+      env: "RAILS_VERSION=5.2.3"
+    - rvm: 2.5.7
+      env: "RAILS_VERSION=5.2.3"
 jdk:
   - openjdk11
 
