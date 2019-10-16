@@ -146,6 +146,7 @@ class ContextNavigation {
   }
 
   getData() {
+    const that = this;
     if (this.loaded) {
       return;
     }
@@ -163,7 +164,7 @@ class ContextNavigation {
         search_field: this.data.arclight.search_field,
         view: 'collection_context'
       }
-    }).done((response) => this.updateView(response));
+    }).done((response) => that.updateView(response));
     this.loaded = true;
   }
 
@@ -260,7 +261,7 @@ class ContextNavigation {
       renderedBeforeDocs = beforeDocs.map(newDoc => newDoc.render()).join('');
     }
 
-    parentLi.prepend(renderedBeforeDocs).fadeIn(500);
+    parentLi.before(renderedBeforeDocs).fadeIn(500);
 
     let itemDoc = newDocs.slice(newDocIndex, newDocIndex + 1);
     let renderedItemDoc = itemDoc.map(doc => doc.render()).join('');
@@ -279,12 +280,6 @@ class ContextNavigation {
 
     // Insert the documents after the current
     parentLi.after(renderedAfterDocs).fadeIn(500);
-  }
-
-  static updateChildren(newDocs, parentId) {
-    let parentSel = $('#' + parentId + '-collapsible-hierarchy');
-    let renderedDocs = newDocs.map(d => d.render()).join('');
-    parentSel.append('<ul>' + renderedDocs + '</ul>');
   }
 
   /**
