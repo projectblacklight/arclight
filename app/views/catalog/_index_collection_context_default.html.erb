@@ -37,10 +37,11 @@
       </div>
     </div>
   </div>
-  <%= content_tag(:div, id: "#{document.id}-collapsible-hierarchy",
-    class: "collapse al-hierarchy-level-#{document.component_level} #{'show' if show_expanded?(document)}",
-  ) do %>
-    <% if document.number_of_children > 0 %>
+  <% if document.number_of_children > 0 %>
+    <%= content_tag(:div, id: "#{document.id}-collapsible-hierarchy",
+      class: "collapse al-collection-context-collapsible al-hierarchy-level-#{document.component_level} #{'show' if show_expanded?(document)}",
+      data: { resolved: false }
+    ) do %>
       <%= generic_context_navigation(document, component_level: document.component_level + 1, original_parents: params[:original_parents]) %>
     <% end %>
   <% end %>

@@ -124,6 +124,7 @@ class ContextNavigation {
     this.parentLi = this.el.parent();
     this.originalParents = originalParents || this.data.arclight.originalParents;
     this.originalDocument = originalDocument || this.data.arclight.originalDocument;
+    this.ul = $('<ul></ul>');
   }
 
   // Gets the targetId to select, based off of parents and current level
@@ -178,7 +179,6 @@ class ContextNavigation {
    */
   updateSiblings(newDocs, originalDocumentIndex) {
     newDocs[originalDocumentIndex].setAsHighlighted();
-    const ul = $('<ul></ul>');
 
     // Hide all but the first previous sibling
     const prevSiblingDocs = newDocs.slice(0, originalDocumentIndex);
@@ -194,7 +194,7 @@ class ContextNavigation {
       const renderedPrevSiblingItems = prevSiblingDocs.map(doc => doc.render()).join('');
 
       prevSiblingList.append(renderedPrevSiblingItems);
-      ul.append(prevSiblingList);
+      this.ul.append(prevSiblingList);
 
       nextSiblingDocs = newDocs.slice(originalDocumentIndex);
     } else {
@@ -204,8 +204,8 @@ class ContextNavigation {
     const renderedNextSiblingItems = nextSiblingDocs.map(newDoc => newDoc.render()).join('');
 
     // Insert the rendered sibling documents before the <li> elements
-    ul.append(renderedNextSiblingItems);
-    this.el.html(ul);
+    this.ul.append(renderedNextSiblingItems);
+    this.el.html(this.ul);
   }
 
   /**
@@ -219,8 +219,6 @@ class ContextNavigation {
     // Case where this is a parent list and needs to be filed correctly
     //
     // Otherwise, retrieve the parent...
-    const ul = $('<ul></ul>');
-
     let newDocIndex = newDocs.findIndex(doc => doc.id === this.targetId);
     // Update the docs before the item
     // Retrieves the documents up to and including the "new document"
@@ -239,22 +237,22 @@ class ContextNavigation {
     }
 
     // Silly but works for now
-    ul.append(prevParentList || renderedBeforeDocs);
+    this.ul.append(prevParentList || renderedBeforeDocs);
 
     let itemDoc = newDocs.slice(newDocIndex, newDocIndex + 1);
     let renderedItemDoc = itemDoc.map(doc => doc.render()).join('');
 
     // Update the item
     const $itemDoc = $(renderedItemDoc);
-    ul.append($itemDoc);
+    this.ul.append($itemDoc);
 
     // Update the docs after the item
     const afterDocs = newDocs.slice(newDocIndex + 1, newDocs.length);
     const renderedAfterDocs = afterDocs.map(newDoc => newDoc.render()).join('');
 
     // Insert the documents after the current
-    ul.append(renderedAfterDocs);
-    this.el.html(ul);
+    this.ul.append(renderedAfterDocs);
+    this.el.html(this.ul);
 
     // Initialize additional things
     $itemDoc.find('.context-navigator').each(function (i, e) {
@@ -320,8 +318,26 @@ class ContextNavigation {
         that.parentLi
       );
     }
+    this.el.parent().data('resolved', true);
+    this.addListenersForPlusMinus();
     this.truncateItems();
     Blacklight.doBookmarkToggleBehavior();
+  }
+
+  addListenersForPlusMinus() {
+    const that = this;
+    this.ul.find('.al-toggle-view-children').on('click', (e) => {
+      e.preventDefault();
+      const targetArea = $($(e.target).attr('href'));
+      if (!targetArea.data().resolved) {
+        targetArea.find('.context-navigator').each((i, ee) => {
+          const contextNavigation = new ContextNavigation(
+            ee, that.originalParents, that.originalDocument
+          );
+          contextNavigation.getData();
+        });
+      }
+    });
   }
 
   truncateItems() {
