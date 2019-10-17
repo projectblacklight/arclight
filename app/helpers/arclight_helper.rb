@@ -267,7 +267,13 @@ module ArclightHelper
   end
 
   def show_expanded?(document)
-    !original_document?(document)
+    !original_document?(document) && within_original_tree?(document)
+  end
+
+  def within_original_tree?(document)
+    params['original_parents'].map do |parent|
+      Arclight::Parent.new(id: parent, eadid: document.parent_ids.first, level: nil, label: nil).global_id
+    end.include?(document.id)
   end
 
   def original_document?(document)
