@@ -267,33 +267,41 @@ module ArclightHelper
   end
 
   def fetch_siblings(document)
-    conn = Blacklight.default_index.connection
-    parents = document.parent_ids
-    parent_search_id = parents[-1]
-    component_level = document.component_level
-    search_params = {fq: ["{!term f=parent_ssi}#{parent_search_id}",
-                     "{!term f=component_level_isim}#{component_level}"],
-                     :facet=> false} 
-    siblings = conn.get('select', :params=> search_params)
-    before_siblings, after_siblings = siblings['response']['docs'].collect { |d| SolrDocument.new d }.split { |d| d['id'] == document.id}
-    before_siblings ||= []
-    after_siblings ||= []
+    siblings = Blacklight
+               .default_index
+               .connection
+               .get('select',
+                    params: {
+                      fq: ["{!term f=parent_ssi}#{document.parent_ids[-1]}",
+                           "{!term f=component_level_isim}#{document.component_level}"],
+                      facet: false,
+                      rows: 999_999_999
+                    })
+    solr_docs = siblings['response']['docs'].collect { |d| SolrDocument.new d }
+    solr_docs
+  end
+
+  def fetch_sorted_siblings(document)
+    siblings = fetch_siblings(document)
+    original_index = siblings.find_index { |d| d.id == document.id } || -1
+    before_siblings = siblings.slice(0, original_index) || []
+    after_siblings = siblings.slice(original_index + 1, siblings.length) || []
     [before_siblings, after_siblings]
   end
 
   def render_document_context(document, core: nil, is_original: false)
     parents = document.parent_ids
     before_siblings, after_siblings = fetch_siblings(document)
-    new_core = render "catalog/nested_component_context",
-      document: document,
-      core: core,
-      document_counter: parents.length,
-      is_original: is_original,
-      before_siblings: before_siblings.to_set,
-      after_siblings: after_siblings.to_set
+    new_core = render 'catalog/nested_component_context',
+                      document: document,
+                      core: core,
+                      document_counter: parents.length,
+                      is_original: is_original,
+                      before_siblings: before_siblings.to_set,
+                      after_siblings: after_siblings.to_set
     if parents.length > 1
       parent_search_id = parents[0] + parents[-1]
-      parent = SolrDocument::find(parent_search_id)
+      parent = SolrDocument.find(parent_search_id)
       return render_document_context(parent, core: new_core)
     end
     new_core
