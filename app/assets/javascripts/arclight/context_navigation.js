@@ -131,19 +131,22 @@ class ContextNavigation {
     return `${this.originalParents[0]}${this.originalParents[this.data.arclight.level]}`;
   }
 
+  get requestParent() {
+    return this.originalParents[this.data.arclight.level - 1] || this.data.arclight.originalDocument.replace(this.originalParents[0], '');
+  }
+
   getData() {
     const that = this;
     // Add a placeholder so flashes of text are not as significant
     const placeholder = new Placeholder();
     this.el.after(placeholder.$el);
-
     $.ajax({
       url: this.data.arclight.path,
       data: {
         'f[component_level_isim][]': this.data.arclight.level,
         'f[has_online_content_ssim][]': this.data.arclight.access,
         'f[collection_sim][]': this.data.arclight.name,
-        'f[parent_ssi][]': this.data.arclight.parent,
+        'f[parent_ssi][]': this.requestParent,
         search_field: this.data.arclight.search_field,
         original_parents: this.data.arclight.originalParents,
         original_document: this.originalDocument,
