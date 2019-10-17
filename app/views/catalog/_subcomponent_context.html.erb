@@ -31,10 +31,7 @@
       </div>
 
       <div class="order-2">
-        <div class="row">
           <%= render partial: 'arclight_abstract_or_scope', locals: { document: document } %>
-        </div>
-        <div class="row">
           <% if document.number_of_children > 0 %>
             <%= content_tag(:div, id: "#{document.id}-collapsible-hierarchy",
                 class: "collapse  #{'show' unless is_original || is_sibling} al-hierarchy-level-#{document.component_level}",
@@ -60,7 +57,6 @@
               <% end %>
             <% end %>
           <% end %>
-        </div>
       </div>
     </div>
   </div>
