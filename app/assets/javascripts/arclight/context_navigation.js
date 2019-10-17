@@ -220,6 +220,13 @@ class ContextNavigation {
     //
     // Otherwise, retrieve the parent...
     let newDocIndex = newDocs.findIndex(doc => doc.id === this.targetId);
+
+    if (newDocIndex === -1) {
+      const renderedDocs = newDocs.map(newDoc => newDoc.render()).join('');
+      this.ul.append(renderedDocs);
+      this.el.html(this.ul);
+      return;
+    }
     // Update the docs before the item
     // Retrieves the documents up to and including the "new document"
     const beforeDocs = newDocs.slice(0, newDocIndex);
