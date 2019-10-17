@@ -291,7 +291,7 @@ module ArclightHelper
 
   def render_document_context(document, core: nil, is_original: false)
     parents = document.parent_ids
-    before_siblings, after_siblings = fetch_siblings(document)
+    before_siblings, after_siblings = fetch_sorted_siblings(document)
     new_core = render 'catalog/nested_component_context',
                       document: document,
                       core: core,
