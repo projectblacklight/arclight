@@ -8,7 +8,7 @@ RSpec.describe 'Many component EAD', type: :feature do
     it 'includes all components' do
       click_link 'Contents'
       within '#contents' do
-        expect(page).to have_css '.blacklight-file', count: 202
+        expect(page).to have_css 'li.al-collection-context', count: 202
       end
     end
 
@@ -16,8 +16,8 @@ RSpec.describe 'Many component EAD', type: :feature do
       click_link 'Contents'
       within '#contents' do
         click_link 'View'
-        within '#aspace_327a75c226d44aa1a769edb4d2f13c6e-collapsible-hierarchy' do
-          expect(page).to have_css '.blacklight-item', count: 202
+        within '#lc0100aspace_327a75c226d44aa1a769edb4d2f13c6e-collapsible-hierarchy' do
+          expect(page).to have_css 'li.al-collection-context', count: 202
         end
       end
     end

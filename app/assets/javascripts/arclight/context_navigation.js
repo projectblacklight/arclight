@@ -122,6 +122,7 @@ class ContextNavigation {
     this.el = $(el);
     this.data = this.el.data();
     this.parentLi = this.el.parent();
+    this.eadid = this.data.arclight.eadid;
     this.originalParents = originalParents || this.data.arclight.originalParents;
     this.originalDocument = originalDocument || this.data.arclight.originalDocument;
     this.ul = $('<ul></ul>');
@@ -129,11 +130,14 @@ class ContextNavigation {
 
   // Gets the targetId to select, based off of parents and current level
   get targetId() {
-    return `${this.originalParents[0]}${this.originalParents[this.data.arclight.level]}`;
+    return `${this.eadid}${this.originalParents[this.data.arclight.level]}`;
   }
 
   get requestParent() {
-    return this.originalParents[this.data.arclight.level - 1] || this.data.arclight.originalDocument.replace(this.originalParents[0], '');
+    if (this.originalParents && this.originalParents[this.data.arclight.level - 1]) {
+      return this.originalParents[this.data.arclight.level - 1];
+    }
+    return this.data.arclight.originalDocument.replace(this.eadid, '');
   }
 
   getData() {
@@ -327,8 +331,18 @@ class ContextNavigation {
     }
     this.el.parent().data('resolved', true);
     this.addListenersForPlusMinus();
-    this.truncateItems();
+    this.enablebuttons();
     Blacklight.doBookmarkToggleBehavior();
+    this.el.trigger('navigation.contains.elements');
+  }
+
+  // eslint-disable-next-line class-methods-use-this
+  enablebuttons() {
+    var toEnable = $('[data-hierarchy-enable-me]');
+    var srOnly = $('h2[data-sr-enable-me]');
+    toEnable.removeClass('disabled');
+    toEnable.text(srOnly.data('hasContents'));
+    srOnly.text(srOnly.data('hasContents'));
   }
 
   addListenersForPlusMinus() {
@@ -344,15 +358,6 @@ class ContextNavigation {
           contextNavigation.getData();
         });
       }
-    });
-  }
-
-  truncateItems() {
-    this.el.find('[data-arclight-truncate="true"]').each(function (_, el) {
-      $(el).responsiveTruncate({
-        more: el.dataset.truncateMore,
-        less: el.dataset.truncateLess
-      });
     });
   }
 }

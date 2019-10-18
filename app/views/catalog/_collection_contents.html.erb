@@ -1,12 +1,4 @@
 <% document ||= @document %>
 
 <h2 class="sr-only" data-sr-enable-me='true' data-has-contents=<%= t 'arclight.views.show.has_content' %>></h2>
-<%= content_tag(
-  :div, '',
-  class: 'al-contents',
-  data: {
-    arclight: {
-      hierarchy: true, level: 1, path: search_catalog_path, name: document.collection_name
-    }
-  }
-) %>
+<%= generic_context_navigation(document) %>

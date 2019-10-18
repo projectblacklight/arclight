@@ -283,7 +283,7 @@ RSpec.describe 'Collection Page', type: :feature do
 
       it 'component metadata' do
         within '#contents' do
-          within '.document-position-0 ' do
+          within '#aoa271aspace_563a320bb37d24a9e1e6f7bf95b52671 ' do
             expect(page).to have_css(
               '.al-document-abstract-or-scope',
               text: /^scope note:.*Administrative records include/im
@@ -294,16 +294,16 @@ RSpec.describe 'Collection Page', type: :feature do
 
       it 'sub components are viewable and expandable' do
         within '#contents' do
-          within '.document-position-0' do
+          within '#aoa271aspace_563a320bb37d24a9e1e6f7bf95b52671' do
             click_link 'View'
-            within '.blacklight-other.document-position-3' do
-              expect(page).to have_css '.document-title-containers', text: /Box 1, Folder 4\-5/
+            within '#aoa271aspace_dc2aaf83625280ae2e193beb3f4aea78.al-collection-context' do
+              expect(page).to have_css '.al-document-container', text: /Box 1, Folder 4\-5/
             end
             expect(page).to have_css 'a', text: 'Reports'
-            within '.blacklight-subseries.document-position-21' do
+            within '#aoa271aspace_238a0567431f36f49acea49ef576d408' do
               click_link 'View'
               expect(page).to have_css 'a', text: 'Expansion Plan'
-              within '.blacklight-subseries.document-position-0' do
+              within '#aoa271aspace_f934f1add34289f28bd0feb478e68275' do
                 click_link 'View'
                 expect(page).to have_css 'a', text: 'Initial Phase'
                 expect(page).to have_css 'a', text: 'Phase II: Expansion'
@@ -314,7 +314,7 @@ RSpec.describe 'Collection Page', type: :feature do
       end
 
       it 'includes the number of direct children of the component' do
-        within '.document-position-0' do
+        within '#aoa271aspace_563a320bb37d24a9e1e6f7bf95b52671' do
           expect(page).to have_css(
             '.al-number-of-children-badge',
             text: /25/

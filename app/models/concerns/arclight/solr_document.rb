@@ -30,7 +30,7 @@ module Arclight
     end
 
     def eadid
-      fetch('ead_ssi', nil)
+      fetch('ead_ssi', nil)&.strip
     end
 
     def unitid
