@@ -271,7 +271,7 @@ module ArclightHelper
   end
 
   def within_original_tree?(document)
-    params['original_parents'].map do |parent|
+    Array.wrap(params['original_parents']).map do |parent|
       Arclight::Parent.new(id: parent, eadid: document.parent_ids.first, level: nil, label: nil).global_id
     end.include?(document.id)
   end
@@ -293,7 +293,8 @@ module ArclightHelper
           path: search_catalog_path(hierarchy_context: 'component'),
           name: document.collection_name,
           originalDocument: document.id,
-          originalParents: original_parents
+          originalParents: original_parents,
+          eadid: document.eadid
         }
       }
     )
