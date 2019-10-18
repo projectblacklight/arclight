@@ -4,8 +4,14 @@ ul.parent {
 
 li.al-collection-context  {
   flex-grow: 1;
+  margin-right: 0;
+  margin-left: 0;
   padding-left: 15px;
   max-width: 100%;
+
+  .al-collection-context-collapsible {
+    width: 100%;
+  }
 
   .documentHeader {
     flex-grow: 1;

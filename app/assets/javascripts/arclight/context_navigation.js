@@ -56,10 +56,9 @@ class ExpandButton {
   /**
    * @constructor
    */
-  constructor() {
-    const parentUl = $('ul.parent');
-    this.collapseText = parentUl[0].dataset.dataCollapse;
-    this.expandText = parentUl[0].dataset.dataExpand;
+  constructor(data) {
+    this.collapseText = data.collapse;
+    this.expandText = data.expand;
 
     this.$el = $(`<button class="my-3 btn btn-secondary btn-sm">${this.expandText}</button>`);
     this.handleClick = this.handleClick.bind(this);
@@ -119,10 +118,22 @@ class Placeholder {
 }
 
 class ContextNavigation {
-  constructor(el) {
+  constructor(el, originalParents = null, originalDocument = null) {
     this.el = $(el);
     this.data = this.el.data();
     this.parentLi = this.el.parent();
+    this.originalParents = originalParents || this.data.arclight.originalParents;
+    this.originalDocument = originalDocument || this.data.arclight.originalDocument;
+    this.ul = $('<ul></ul>');
+  }
+
+  // Gets the targetId to select, based off of parents and current level
+  get targetId() {
+    return `${this.originalParents[0]}${this.originalParents[this.data.arclight.level]}`;
+  }
+
+  get requestParent() {
+    return this.originalParents[this.data.arclight.level - 1] || this.data.arclight.originalDocument.replace(this.originalParents[0], '');
   }
 
   getData() {
@@ -130,15 +141,16 @@ class ContextNavigation {
     // Add a placeholder so flashes of text are not as significant
     const placeholder = new Placeholder();
     this.el.after(placeholder.$el);
-
     $.ajax({
       url: this.data.arclight.path,
       data: {
         'f[component_level_isim][]': this.data.arclight.level,
         'f[has_online_content_ssim][]': this.data.arclight.access,
         'f[collection_sim][]': this.data.arclight.name,
-        'f[parent_ssi][]': this.data.arclight.parent,
+        'f[parent_ssi][]': this.requestParent,
         search_field: this.data.arclight.search_field,
+        original_parents: this.data.arclight.originalParents,
+        original_document: this.originalDocument,
         view: 'collection_context'
       }
     }).done((response) => that.updateView(response));
@@ -149,16 +161,14 @@ class ContextNavigation {
    * within it
    * @returns {jQuery}
    */
-  /* eslint-disable class-methods-use-this */
   buildExpandList() {
     const $ul = $('<ul></ul>');
     $ul.addClass('pl-0');
     $ul.addClass('prev-siblings');
-    const button = new ExpandButton();
+    const button = new ExpandButton(this.data);
     $ul.append(button.$el);
     return $ul;
   }
-  /* eslint-enable class-methods-use-this */
 
   /**
    * Highlights the <li> element for the current Document and appends <li> the
@@ -166,9 +176,8 @@ class ContextNavigation {
    * @param {NavigationDocument[]} newDocs - the NavigationDocument objects for
    *   each resulting Solr Document
    * @param {number} originalDocumentIndex
-   * @param {jQuery} parentLi
    */
-  updateSiblings(newDocs, originalDocumentIndex, parentLi) {
+  updateSiblings(newDocs, originalDocumentIndex) {
     newDocs[originalDocumentIndex].setAsHighlighted();
 
     // Hide all but the first previous sibling
@@ -185,7 +194,7 @@ class ContextNavigation {
       const renderedPrevSiblingItems = prevSiblingDocs.map(doc => doc.render()).join('');
 
       prevSiblingList.append(renderedPrevSiblingItems);
-      parentLi.before(prevSiblingList);
+      this.ul.append(prevSiblingList);
 
       nextSiblingDocs = newDocs.slice(originalDocumentIndex);
     } else {
@@ -195,7 +204,8 @@ class ContextNavigation {
     const renderedNextSiblingItems = nextSiblingDocs.map(newDoc => newDoc.render()).join('');
 
     // Insert the rendered sibling documents before the <li> elements
-    parentLi.before(renderedNextSiblingItems).fadeIn(500);
+    this.ul.append(renderedNextSiblingItems);
+    this.el.html(this.ul);
   }
 
   /**
@@ -203,60 +213,63 @@ class ContextNavigation {
    *   current Document and appends <li> for each of these
    * @param {NavigationDocument[]} newDocs - the NavigationDocument objects for
    *   each resulting Solr Document
-   * @param {string[]} originalParents - the IDs for the Solr Documents of each
-   *   ancestor
-   * @param {string} parent - the ID for the immediate parent (ancestor)
-   * @param {jQuery} parentLi - the <li> used to generate the <ul> for the
-   * context - this is consistently the *last* element in the <ul>
    */
-  updateParents(newDocs, originalParents, parent, parentLi) {
+  updateParents(newDocs) {
+    const that = this;
     // Case where this is a parent list and needs to be filed correctly
     //
     // Otherwise, retrieve the parent...
-    const parentIndex = originalParents.indexOf(parent);
+    let newDocIndex = newDocs.findIndex(doc => doc.id === this.targetId);
 
-    // The first parent is always used to consistently construct the doc ID
-    const firstParent = originalParents[0];
-    const nextParent = originalParents[parentIndex + 1];
-    const currentId = `${firstParent}${nextParent}`;
-
-    const newDocIndex = newDocs.findIndex(doc => doc.id === currentId);
-
+    if (newDocIndex === -1) {
+      const renderedDocs = newDocs.map(newDoc => newDoc.render()).join('');
+      this.ul.append(renderedDocs);
+      this.el.html(this.ul);
+      return;
+    }
     // Update the docs before the item
     // Retrieves the documents up to and including the "new document"
     const beforeDocs = newDocs.slice(0, newDocIndex);
+    let prevParentList = null;
     let renderedBeforeDocs;
     if (beforeDocs.length > 1) {
       beforeDocs.forEach(function (parentDoc) {
         parentDoc.collapse();
       });
       renderedBeforeDocs = beforeDocs.map(newDoc => newDoc.render()).join('');
-      const prevParentList = this.buildExpandList();
+      prevParentList = this.buildExpandList();
       prevParentList.append(renderedBeforeDocs);
     } else {
       renderedBeforeDocs = beforeDocs.map(newDoc => newDoc.render()).join('');
     }
 
-    parentLi.before(renderedBeforeDocs).fadeIn(500);
+    // Silly but works for now
+    this.ul.append(prevParentList || renderedBeforeDocs);
 
     let itemDoc = newDocs.slice(newDocIndex, newDocIndex + 1);
     let renderedItemDoc = itemDoc.map(doc => doc.render()).join('');
 
     // Update the item
     const $itemDoc = $(renderedItemDoc);
-    // Update the id, add classes of the classes. Prepend the current children.
-    parentLi.attr('id', $itemDoc.attr('id'));
-    parentLi.addClass($itemDoc.attr('class'));
-
-    parentLi.prepend($itemDoc.children()).fadeIn(500);
+    this.ul.append($itemDoc);
 
     // Update the docs after the item
     const afterDocs = newDocs.slice(newDocIndex + 1, newDocs.length);
     const renderedAfterDocs = afterDocs.map(newDoc => newDoc.render()).join('');
 
     // Insert the documents after the current
-    parentLi.after(renderedAfterDocs).fadeIn(500);
+    this.ul.append(renderedAfterDocs);
+    this.el.html(this.ul);
+
+    // Initialize additional things
+    $itemDoc.find('.context-navigator').each(function (i, e) {
+      const contextNavigation = new ContextNavigation(
+        e, that.originalParents, that.originalDocument
+      );
+      contextNavigation.getData();
+    });
   }
+
 
   /**
    * Update the ancestors for <li> elements
@@ -295,17 +308,15 @@ class ContextNavigation {
       .find('article')
       .toArray().map(el => new NavigationDocument(el));
 
-    // Filter for only the <article> element which encodes the information for
-    // the child or parent Solr Document
+    // See if the original document is located in the returned documents
     const originalDocumentIndex = newDocs
-      .findIndex(doc => doc.id === that.data.arclight.originalDocument);
+      .findIndex(doc => doc.id === that.originalDocument);
     that.parentLi.find('.al-hierarchy-placeholder').remove();
 
-    // Case where this is the sibling tree of the current document
-    // If the response does contain any <article> elements for the child or
-    // parent Solr Documents, then the documents are treated as sibling nodes
+    // If the original document in the results, update it. If not update with a
+    // more complex procedure
     if (originalDocumentIndex !== -1) {
-      this.updateSiblings(newDocs, originalDocumentIndex, that.parentLi);
+      this.updateSiblings(newDocs, originalDocumentIndex);
     } else {
       this.updateParents(
         newDocs,
@@ -314,24 +325,36 @@ class ContextNavigation {
         that.parentLi
       );
     }
-    that.truncateItems();
+    this.el.parent().data('resolved', true);
+    this.addListenersForPlusMinus();
+    this.truncateItems();
     Blacklight.doBookmarkToggleBehavior();
-
-    // Select the <li> element for the current document
-    const highlighted = that.parentLi.siblings('.al-hierarchy-highlight');
-    this.updateListSiblings(highlighted);
   }
 
-  /* eslint-disable class-methods-use-this */
+  addListenersForPlusMinus() {
+    const that = this;
+    this.ul.find('.al-toggle-view-children').on('click', (e) => {
+      e.preventDefault();
+      const targetArea = $($(e.target).attr('href'));
+      if (!targetArea.data().resolved) {
+        targetArea.find('.context-navigator').each((i, ee) => {
+          const contextNavigation = new ContextNavigation(
+            ee, that.originalParents, that.originalDocument
+          );
+          contextNavigation.getData();
+        });
+      }
+    });
+  }
+
   truncateItems() {
-    $('[data-arclight-truncate="true"]').each(function (_, el) {
+    this.el.find('[data-arclight-truncate="true"]').each(function (_, el) {
       $(el).responsiveTruncate({
         more: el.dataset.truncateMore,
         less: el.dataset.truncateLess
       });
     });
   }
-  /* eslint-enable class-methods-use-this */
 }
 
 /**

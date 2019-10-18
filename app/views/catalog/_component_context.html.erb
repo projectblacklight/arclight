@@ -1,5 +1,5 @@
 <h2 class="sr-only"><%= t 'arclight.views.show.context' %></h2>
 <!-- Section below will be moved into its own partial later -->
 <%= content_tag(:div, id: t("arclight.views.show.sections.collection_context_field").parameterize) do %>
-  <%= nested_component_lists(@document) %>
+  <%= generic_context_navigation(@document) %>
 <% end %>
