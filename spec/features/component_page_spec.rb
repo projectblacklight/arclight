@@ -27,11 +27,6 @@ RSpec.describe 'Component Page', type: :feature do
   describe 'tabbed display' do
     it 'clicking context toggles visibility', js: true do
       expect(page).to have_css '#context', visible: true
-      expect(page).to have_css '#online-content', visible: false
-      expect(page).to have_css '#access', visible: false
-      click_link 'Online content'
-      expect(page).to have_css '#context', visible: false
-      expect(page).to have_css '#online-content', visible: true
       expect(page).to have_css '#access', visible: false
       click_link 'Access'
       expect(page).to have_css '#context', visible: false

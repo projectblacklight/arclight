@@ -16,11 +16,6 @@ RSpec.describe 'Online Content', type: :feature do
           '.al-oembed-viewer[data-arclight-oembed-url="http://purl.stanford.edu/kc844kt2526"]',
           visible: false
         )
-        click_link('Online content')
-        expect(page).to have_css(
-          '.al-oembed-viewer[data-arclight-oembed-url="http://purl.stanford.edu/kc844kt2526"]',
-          visible: true
-        )
       end
     end
 
@@ -28,7 +23,6 @@ RSpec.describe 'Online Content', type: :feature do
       let(:doc_id) { 'aoa271aspace_843e8f9f22bac69872d0802d6fffbb04' }
 
       it 'renders a list of links', js: true do
-        click_link('Online content')
         expect(page).to have_link('Folder of digitized stuff')
         expect(page).to have_css('a', text: /^Letter from Christian B. Anfinsen/)
       end
@@ -37,14 +31,23 @@ RSpec.describe 'Online Content', type: :feature do
     context 'a collection w/o digital objects at the collection level' do
       let(:doc_id) { 'a0011-xml' }
 
-      # TODO: new specs for updated online content tab content
-      xit 'renders a flat list of the child components with online content', js: true do
+      it 'renders a flat list of the child components with online content', js: true do
         click_link('Online content')
 
-        within('.documents-online_contents') do
+        within('#online-content') do
           expect(page).to have_css('article', count: 1)
 
-          expect(page).to have_css('.document-title-heading', text: 'Box 1: Photograph Album')
+          expect(page).to have_css('.document-title-heading', text: 'Photograph Album')
+        end
+      end
+
+      it 'document container is not visible', js: true do
+        click_link('Online content')
+
+        within('#online-content') do
+          expect(page).to have_css('article', count: 1)
+
+          expect(page).not_to have_css('.al-document-container', text: 'Box 1')
         end
       end
     end
