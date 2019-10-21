@@ -2,7 +2,7 @@
   var CollectionNavigation;
 
   CollectionNavigation = {
-    init: function (el) {
+    init: function (el, page = 1) {
       var $el = $(el);
       var data = $el.data();
       // Add a placeholder so flashes of text are not as significant
@@ -20,7 +20,8 @@
           'f[component_level_isim][]': data.arclight.level,
           'f[has_online_content_ssim][]': data.arclight.access,
           'f[collection_sim][]': data.arclight.name,
-          'f[parent_ssi][]': data.arclight.parent,
+          'f[parent_ssim][]': data.arclight.parent,
+          page: page,
           search_field: data.arclight.search_field,
           view: data.arclight.view || 'hierarchy'
         }
@@ -30,12 +31,26 @@
         var showDocs = $doc.find('article.document');
         var newDocs = $doc.find('#documents');
 
-        // Add a highlight class for the article matching the highlight id
-        if (data.arclight.highlightId) {
-          newDocs = convertDocsForContext(data.arclight.highlightId, $doc);
-        }
+        var sortPerPage = $doc.find('#sortAndPerPage');
+        // Hide these until we re-enable in the future
+        sortPerPage.find('.result-type-group').hide();
+        sortPerPage.find('.search-widgets').hide();
 
-        $el.hide().html(newDocs).fadeIn(500);
+        sortPerPage.find('a').on('click', function (e) {
+          var pages = [];
+          var $target = $(e.target);
+          e.preventDefault();
+          pages = /page=(\d+)&/.exec($target.attr('href'));
+          if (pages) {
+            CollectionNavigation.init($el, pages[1]);
+          } else {
+            // Case where the "first" page
+            CollectionNavigation.init($el);
+          }
+        });
+
+        $el.hide().html('').append(sortPerPage).append(newDocs)
+          .fadeIn(500);
         if (showDocs.length > 0) {
           $el.trigger('navigation.contains.elements');
         }

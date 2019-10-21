@@ -311,6 +311,11 @@ compose 'components', ->(record, accumulator, _context) { accumulator.concat rec
     accumulator.concat NokogiriXpathExtensions.new.is_component(record.ancestors).reverse.map { |n| n.attribute('id')&.value }
   end
 
+  to_field 'parent_ssim' do |record, accumulator, context|
+    accumulator << context.clipboard[:parent].output_hash['id'].first
+    accumulator.concat NokogiriXpathExtensions.new.is_component(record.ancestors).reverse.map { |n| n.attribute('id')&.value }
+  end
+
   to_field 'parent_ssi' do |_record, accumulator, context|
     accumulator << context.output_hash['parent_ssm'].last
   end

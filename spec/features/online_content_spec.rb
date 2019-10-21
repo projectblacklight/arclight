@@ -59,5 +59,23 @@ RSpec.describe 'Online Content', type: :feature do
         expect(page).not_to have_css('.nav-link', text: 'Online content')
       end
     end
+
+    context 'with multiple pages of online content' do
+      let(:doc_id) { 'umich-bhl-851981aspace_9b5b0ff697f0a78a48bad43c55ad324e' }
+
+      it 'has next/previous controls', js: true do
+        click_link 'Online content'
+
+        expect(page).to have_css '.page-entries', text: '1 - 10 of 12 entries'
+
+        click_link 'Next »'
+
+        expect(page).to have_css '.page-entries', text: '11 - 12 of 12 entries'
+
+        click_link '« Previous'
+
+        expect(page).to have_css '.page-entries', text: '1 - 10 of 12 entries'
+      end
+    end
   end
 end

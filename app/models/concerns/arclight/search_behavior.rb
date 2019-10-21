@@ -16,9 +16,9 @@ module Arclight
     end
 
     ##
-    # For the asynch views, set a higher (unlimited) maximum document return
+    # For the collection_context views, set a higher (unlimited) maximum document return
     def add_hierarchy_max_rows(solr_params)
-      if %w[collection_context online_contents].include? blacklight_params[:view]
+      if %w[collection_context].include? blacklight_params[:view]
         solr_params[:rows] = 999_999_999
       end
       solr_params
