@@ -14,7 +14,7 @@ module Arclight
     end
 
     def parent_ids
-      fetch('parent_ssm', [])
+      fetch('parent_ssim', [])
     end
 
     def parent_labels

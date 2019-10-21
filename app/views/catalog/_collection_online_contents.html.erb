@@ -1,7 +1,6 @@
 <h2 class="sr-only"><%= t 'arclight.views.show.online_content' %></h2>
-<% if document.digital_objects.present? %>
-  <%= render_document_partial(document, 'arclight_viewer') %>
-<% elsif document.online_content? %>
+
+<% if document.online_content? %>
   <%= content_tag(
     :div, '',
     class: 'al-contents',

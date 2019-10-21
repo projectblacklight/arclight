@@ -18,7 +18,7 @@
               <%= t 'arclight.views.show.context' %>
             </a>
           </li>
-          <% if document.online_content? %>
+          <% if document.online_content? && document.children? %>
             <li class='nav-item flex-fill'>
               <a class='nav-link p-1 p-sm-2' data-toggle='tab' href='#online-content' role='tab' data-arclight-online-content-tab='true'>
                 <%= t 'arclight.views.show.online_content' %>
@@ -35,9 +35,22 @@
           <div class='tab-pane active' id='context' role='tabpanel'>
             <%= render 'component_context' %>
           </div>
-          <% if document.online_content? %>
+          <% if document.online_content? && document.children? %>
             <div class='tab-pane' id='online-content' role='tabpanel'>
-              <%= render_document_partial(document, 'arclight_viewer') %>
+              <%= content_tag(
+                :div, '',
+                class: 'al-contents',
+                data: {
+                  arclight: {
+                    path: search_catalog_path,
+                    name: document.collection_name,
+                    access: 'online',
+                    view: 'online_contents',
+                    parent: document.reference,
+                    search_field: 'within_collection'
+                  }
+                }
+              ) %>
             </div>
           <% end %>
           <div class='tab-pane' id='access' role='tabpanel'>

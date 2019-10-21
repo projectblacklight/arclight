@@ -235,7 +235,7 @@ describe 'EAD 2 traject indexing', type: :feature do
       end
 
       it 'parent' do
-        expect(nested_component['parent_ssm']).to eq %w[lc0100 aspace_327a75c226d44aa1a769edb4d2f13c6e]
+        expect(nested_component['parent_ssim']).to eq %w[lc0100 aspace_327a75c226d44aa1a769edb4d2f13c6e]
         expect(nested_component['parent_ssi']).to eq ['aspace_327a75c226d44aa1a769edb4d2f13c6e']
       end
 
@@ -435,7 +435,7 @@ describe 'EAD 2 traject indexing', type: :feature do
         end
 
         it 'parents are correctly ordered' do
-          expect(component_with_many_parents['parent_ssm']).to eq %w[
+          expect(component_with_many_parents['parent_ssim']).to eq %w[
             aoa271
             aspace_563a320bb37d24a9e1e6f7bf95b52671
             aspace_238a0567431f36f49acea49ef576d408
@@ -701,7 +701,7 @@ describe 'EAD 2 traject indexing', type: :feature do
     end
 
     it 'indexes trail of ancestor ids' do
-      expect(second_component['parent_ssm']).to equal_array_ignoring_whitespace(
+      expect(second_component['parent_ssim']).to equal_array_ignoring_whitespace(
         %w[ehllHemingwayErnest-sample al_4bf70b448ac8351a147acff1dd8b1c0b9a791980]
       )
     end

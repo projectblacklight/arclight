@@ -301,6 +301,13 @@
           <c03 id="aspace_4c08111acad2d66e8a63404ad6ce4b46" level="file">
             <did>
               <unittitle>Maddy</unittitle>
+              <dao audience="internal" xlink:actuate="onRequest"
+                   xlink:href="https://www.youtube.com/playlist?list=PLMdUaIJ0G8QiIXZ_SFHASJErD14CJW-p5"
+                   xlink:show="new" xlink:title="ArcLight Phase II Demo Playlist">
+                  <daodesc>
+                      <p>ArcLight Phase II Demo Playlist</p>
+                  </daodesc>
+              </dao>
             </did>
             <scopecontent id="aspace_e3d2d30bc5551015bf8e45c5997b452c">
               <head>Scope and Contents</head>
@@ -309,6 +316,13 @@
             <c04 id="aspace_a382a0436b69a32ed5efb9f9fe9d2578" level="file">
               <did>
                 <unittitle>Broadcasting</unittitle>
+                <dao audience="internal" xlink:actuate="onRequest"
+                     xlink:href="https://www.youtube.com/playlist?list=PLMdUaIJ0G8QiIXZ_SFHASJErD14CJW-p5"
+                     xlink:show="new" xlink:title="ArcLight Phase II Demo Playlist">
+                    <daodesc>
+                        <p>ArcLight Phase II Demo Playlist</p>
+                    </daodesc>
+                </dao>
               </did>
               <scopecontent id="aspace_c35989258374716cba77a65194543f68">
                 <head>Scope and Contents</head>
@@ -318,6 +332,13 @@
                 <did>
                   <unittitle>University of Michigan radio</unittitle>
                   <unitdate normal="1931/1954" type="inclusive">1931-1954</unitdate>
+                  <dao audience="internal" xlink:actuate="onRequest"
+                       xlink:href="https://www.youtube.com/playlist?list=PLMdUaIJ0G8QiIXZ_SFHASJErD14CJW-p5"
+                       xlink:show="new" xlink:title="ArcLight Phase II Demo Playlist">
+                      <daodesc>
+                          <p>ArcLight Phase II Demo Playlist</p>
+                      </daodesc>
+                  </dao>
                 </did>
                 <c06 id="aspace_7a47b946a5107eb56d93ef0cd069d568" level="file">
                   <did>
@@ -374,29 +395,64 @@
                         <unittitle>February and March, including course book</unittitle>
                         <unitdate normal="1931/1931" type="inclusive">1931</unitdate>
                         <container id="aspace_054e53ebbbac74809bc8b5f0323a09b8" label="Box" type="box">16</container>
+                        <dao audience="internal" xlink:actuate="onRequest"
+                             xlink:href="https://www.youtube.com/playlist?list=PLMdUaIJ0G8QiIXZ_SFHASJErD14CJW-p5"
+                             xlink:show="new" xlink:title="ArcLight Phase II Demo Playlist">
+                            <daodesc>
+                                <p>ArcLight Phase II Demo Playlist</p>
+                            </daodesc>
+                        </dao>
                       </did>
                     </c08>
                     <c08 id="aspace_14c49f96bc57a109768d7266b39d0d4e" level="file">
                       <did>
                         <unittitle>February and March</unittitle>
                         <unitdate normal="1932/1932" type="inclusive">1932</unitdate>
+                        <dao audience="internal" xlink:actuate="onRequest"
+                             xlink:href="https://www.youtube.com/playlist?list=PLMdUaIJ0G8QiIXZ_SFHASJErD14CJW-p5"
+                             xlink:show="new" xlink:title="ArcLight Phase II Demo Playlist">
+                            <daodesc>
+                                <p>ArcLight Phase II Demo Playlist</p>
+                            </daodesc>
+                        </dao>
                       </did>
                       <c09 id="aspace_5e58a603a337e85d306de94b966b8a6c" level="file">
                         <did>
                           <unittitle>Announcements and scripts</unittitle>
                           <container id="aspace_391074eb103001b5a9c67eb16597259c" label="Box" type="box">16</container>
+                          <dao audience="internal" xlink:actuate="onRequest"
+                               xlink:href="https://www.youtube.com/playlist?list=PLMdUaIJ0G8QiIXZ_SFHASJErD14CJW-p5"
+                               xlink:show="new" xlink:title="ArcLight Phase II Demo Playlist">
+                              <daodesc>
+                                  <p>ArcLight Phase II Demo Playlist</p>
+                              </daodesc>
+                          </dao>
                         </did>
                       </c09>
                       <c09 id="aspace_46deff15fb04a2266a7887fa28b229fd" level="file">
                         <did>
                           <unittitle>Survey of participating schools</unittitle>
                           <container id="aspace_cf90bc6e238908682b59068da99a6473" label="Box" type="box">16</container>
+                          <dao audience="internal" xlink:actuate="onRequest"
+                               xlink:href="https://www.youtube.com/playlist?list=PLMdUaIJ0G8QiIXZ_SFHASJErD14CJW-p5"
+                               xlink:show="new" xlink:title="ArcLight Phase II Demo Playlist">
+                              <daodesc>
+                                  <p>ArcLight Phase II Demo Playlist</p>
+                              </daodesc>
+                          </dao>
                         </did>
                       </c09>
                       <c09 id="aspace_4dad38366bb58c719e979775df4e110e" level="file">
                         <did>
                           <unittitle>Correspondence</unittitle>
                           <container id="aspace_af3a3f9eaf96f9a4936e063d7e4c7ae6" label="Box" type="box">16</container>
+                          <dao audience="internal" xlink:actuate="onRequest"
+                               xlink:href="https://www.youtube.com/playlist?list=PLMdUaIJ0G8QiIXZ_SFHASJErD14CJW-p5"
+                               xlink:show="new" xlink:title="ArcLight Phase II Demo Playlist">
+                              <daodesc>
+                                  <p>ArcLight Phase II Demo Playlist</p>
+                              </daodesc>
+                          </dao>
                         </did>
                       </c09>
                     </c08>
@@ -405,6 +461,13 @@
                         <unittitle>October-December-course book</unittitle>
                         <unitdate normal="1932/1932" type="inclusive">1932</unitdate>
                         <container id="aspace_9cebea9eb3b02d64d8c7c424c44c1d39" label="Box" type="box">16</container>
+                        <dao audience="internal" xlink:actuate="onRequest"
+                             xlink:href="https://www.youtube.com/playlist?list=PLMdUaIJ0G8QiIXZ_SFHASJErD14CJW-p5"
+                             xlink:show="new" xlink:title="ArcLight Phase II Demo Playlist">
+                            <daodesc>
+                                <p>ArcLight Phase II Demo Playlist</p>
+                            </daodesc>
+                        </dao>
                       </did>
                     </c08>
                     <c08 id="aspace_8d6b59045326f42766cc59934e90dc78" level="file">

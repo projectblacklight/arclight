@@ -375,16 +375,9 @@ class CatalogController < ApplicationController
     config.show.partials.delete(:show_header)
 
     ##
-    # Hierarchy Index View
-    config.view.hierarchy
-    config.view.hierarchy.display_control = false
-    config.view.hierarchy.partials = %i[index_header_hierarchy index_hierarchy]
-
-    ##
-    # Hierarchy Index View
+    # Online Contents Index View
     config.view.online_contents
     config.view.online_contents.display_control = false
-    config.view.online_contents.partials = config.view.hierarchy.partials.dup
 
     ##
     # Collection Context

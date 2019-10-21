@@ -183,7 +183,7 @@ RSpec.describe ArclightHelper, type: :helper do
   describe '#parents_to_links' do
     let(:document) do
       SolrDocument.new(
-        parent_ssm: %w[def ghi],
+        parent_ssim: %w[def ghi],
         parent_unittitles_ssm: %w[DEF GHI],
         ead_ssi: 'abc123',
         repository_ssm: 'my repository'
@@ -207,7 +207,7 @@ RSpec.describe ArclightHelper, type: :helper do
   describe '#component_parents_to_links' do
     let(:document) do
       SolrDocument.new(
-        parent_ssm: %w[def ghi jkl],
+        parent_ssim: %w[def ghi jkl],
         parent_unittitles_ssm: %w[DEF GHI JKL],
         ead_ssi: 'abc123'
       )
@@ -229,7 +229,7 @@ RSpec.describe ArclightHelper, type: :helper do
     context 'when the component only has one parent (meaning it is a top level parent)' do
       let(:document) do
         SolrDocument.new(
-          parent_ssm: %w[def],
+          parent_ssim: %w[def],
           parent_unittitles_ssm: %w[DEF],
           ead_ssi: 'abc123',
           repository_ssm: 'my repository'
@@ -248,7 +248,7 @@ RSpec.describe ArclightHelper, type: :helper do
     context 'when the component is a child of a top level component' do
       let(:document) do
         SolrDocument.new(
-          parent_ssm: %w[def ghi],
+          parent_ssim: %w[def ghi],
           parent_unittitles_ssm: %w[DEF GHI],
           ead_ssi: 'abc123',
           repository_ssm: 'my repository'
@@ -267,7 +267,7 @@ RSpec.describe ArclightHelper, type: :helper do
   describe '#component_top_level_parent_to_links' do
     context 'when the component only has one parent (meaning it is a top level parent)' do
       let(:document) do
-        SolrDocument.new(parent_ssm: %w[def], parent_unittitles_ssm: %w[DEF], ead_ssi: 'abc123')
+        SolrDocument.new(parent_ssim: %w[def], parent_unittitles_ssm: %w[DEF], ead_ssi: 'abc123')
       end
 
       it { expect(helper.component_top_level_parent_to_links(document)).to be_nil }
@@ -276,7 +276,7 @@ RSpec.describe ArclightHelper, type: :helper do
     context 'when the component is a child of a top level component' do
       let(:document) do
         SolrDocument.new(
-          parent_ssm: %w[def ghi],
+          parent_ssim: %w[def ghi],
           parent_unittitles_ssm: %w[DEF GHI],
           ead_ssi: 'abc123'
         )
@@ -293,7 +293,7 @@ RSpec.describe ArclightHelper, type: :helper do
     context 'when the component is several levels deep' do
       let(:document) do
         SolrDocument.new(
-          parent_ssm: %w[def ghi jkl],
+          parent_ssim: %w[def ghi jkl],
           parent_unittitles_ssm: %w[DEF GHI JKL],
           ead_ssi: 'abc123'
         )

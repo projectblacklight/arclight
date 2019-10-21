@@ -19,14 +19,14 @@ module Arclight
     # Overriding the Blacklight method so that the hierarchy view does not start
     # a new search session
     def start_new_search_session?
-      !%w[hierarchy online_contents collection_context].include?(params[:view]) && super
+      !%w[online_contents collection_context].include?(params[:view]) && super
     end
 
     ##
     # Overriding the Blacklight method so that hierarchy does not get stored as
     # the preferred view
     def store_preferred_view
-      return if %w[hierarchy online_contents collection_context].include?(params[:view])
+      return if %w[online_contents collection_context].include?(params[:view])
 
       super
     end
