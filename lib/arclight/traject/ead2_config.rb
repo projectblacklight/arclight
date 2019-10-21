@@ -306,29 +306,24 @@ compose 'components', ->(record, accumulator, _context) { accumulator.concat rec
     accumulator << 1 + NokogiriXpathExtensions.new.is_component(record.ancestors).count
   end
 
-  to_field 'parent_ssm' do |record, accumulator, context|
-    accumulator << context.clipboard[:parent].output_hash['id'].first
-    accumulator.concat NokogiriXpathExtensions.new.is_component(record.ancestors).reverse.map { |n| n.attribute('id')&.value }
-  end
-
   to_field 'parent_ssim' do |record, accumulator, context|
     accumulator << context.clipboard[:parent].output_hash['id'].first
     accumulator.concat NokogiriXpathExtensions.new.is_component(record.ancestors).reverse.map { |n| n.attribute('id')&.value }
   end
 
   to_field 'parent_ssi' do |_record, accumulator, context|
-    accumulator << context.output_hash['parent_ssm'].last
+    accumulator << context.output_hash['parent_ssim'].last
   end
 
   to_field 'parent_unittitles_ssm' do |_rec, accumulator, context|
     # top level document
     accumulator.concat context.clipboard[:parent].output_hash['normalized_title_ssm']
-    parent_ssm = context.output_hash['parent_ssm']
+    parent_ssim = context.output_hash['parent_ssim']
     components = context.clipboard[:parent].output_hash['components']
 
     # other components
-    if parent_ssm && components
-      ancestors = parent_ssm.drop(1).map { |x| [x] }
+    if parent_ssim && components
+      ancestors = parent_ssim.drop(1).map { |x| [x] }
       accumulator.concat components.select { |c| ancestors.include? c['ref_ssi'] }.flat_map { |c| c['normalized_title_ssm'] }
     end
   end
@@ -341,7 +336,7 @@ compose 'components', ->(record, accumulator, _context) { accumulator.concat rec
     ## Top level document
     accumulator.concat context.clipboard[:parent].output_hash['level_ssm']
     ## Other components
-    context.output_hash['parent_ssm']&.drop(1)&.each do |id|
+    context.output_hash['parent_ssim']&.drop(1)&.each do |id|
       accumulator.concat Array
         .wrap(context.clipboard[:parent].output_hash['components'])
         .select { |c| c['ref_ssi'] == [id] }.map { |c| c['level_ssm'] }.flatten

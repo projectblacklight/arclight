@@ -5,7 +5,7 @@ require 'spec_helper'
 RSpec.describe Arclight::Parents do
   let(:document) do
     SolrDocument.new(
-      parent_ssm: %w[def ghi],
+      parent_ssim: %w[def ghi],
       parent_unittitles_ssm: %w[DEF GHI],
       ead_ssi: 'abc123',
       parent_levels_ssm: %w[collection]
@@ -14,7 +14,7 @@ RSpec.describe Arclight::Parents do
 
   let(:dot_eadid_doc) do
     SolrDocument.new(
-      parent_ssm: %w[def ghi],
+      parent_ssim: %w[def ghi],
       parent_unittitles_ssm: %w[DEF GHI],
       ead_ssi: 'abc123.xml',
       parent_levels_ssm: %w[collection]
