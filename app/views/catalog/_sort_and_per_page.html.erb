@@ -3,6 +3,6 @@
   <div>
     <%= render partial: "paginate_compact", object: @response if show_pagination? %>
   </div>
-  <%= render partial: 'group_toggle' %>
+  <%= render partial: 'group_toggle' unless current_page?(controller: 'bookmarks')  %>
   <%= render_results_collection_tools wrapping_class: "search-widgets float-md-right" %>
 </div>
