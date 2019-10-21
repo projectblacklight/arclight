@@ -1,51 +1,5 @@
 (function (global) {
   var CollectionNavigation;
-  /**
-   * Converts documents that should be used in a hierarchy, to highlighted
-   * localized siblings.
-   */
-  function convertDocsForContext(id, $doc) {
-    var newDocs;
-    var $currentDoc;
-    var $previousDocs;
-    var $nextDocs;
-    var headers = $doc.find('article div[data-document-id="' + id + '"]');
-    if (headers.length === 0) {
-      $.error('Document is missing id=' + id);
-    }
-    $currentDoc = $(headers[0].parentNode); // need article element
-    $currentDoc.addClass('al-hierarchy-highlight');
-
-    // Unlink the current component - just show the title
-    $currentDoc.find('.al-hierarchy-highlight a').contents().unwrap();
-
-    // We want to show 0-1 or 0-2 siblings depending on where highlighted component is
-    $previousDocs = $currentDoc.prevUntil().slice(0, 2);
-    $nextDocs = $currentDoc.nextUntil().slice(0, 2);
-
-    if ($previousDocs.length > 0 && $nextDocs.length > 0) {
-      // Case where there are siblings on both sides, show 1 each
-      newDocs = $('<div>');
-      newDocs.append($previousDocs.first());
-      newDocs.append($currentDoc);
-      newDocs.append($nextDocs.first());
-    } else if ($previousDocs.length > 0) {
-      // Case where there are only previous siblings, show 2 of them
-      newDocs = $('<div>');
-      newDocs.append($previousDocs.get().reverse()); // previous is not in the order we need
-      newDocs.append($currentDoc);
-    } else {
-      // Case where there are only next siblings, show 2 of them
-      newDocs = $('<div>');
-      newDocs.append($currentDoc);
-      newDocs.append($nextDocs);
-    }
-    // Cleanup to remove collapsible children stuff
-    newDocs.find('.al-toggle-view-more').remove();
-    newDocs.find('.collapse').remove();
-    newDocs.find('hr').remove();
-    return newDocs;
-  }
 
   CollectionNavigation = {
     init: function (el) {

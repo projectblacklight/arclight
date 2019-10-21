@@ -22,13 +22,6 @@ RSpec.describe 'Highlighted search results', type: :feature do
           expect(page).not_to have_css '.al-document-highlight'
         end
       end
-
-      it 'does not highlight the snippets on hierarchy query' do
-        visit search_catalog_path q: 'student life', search_field: 'all_fields', view: 'hierarchy'
-        within '.document-position-0' do
-          expect(page).not_to have_css '.al-document-highlight'
-        end
-      end
     end
     describe '#name' do
       it 'highlights the snippets' do
