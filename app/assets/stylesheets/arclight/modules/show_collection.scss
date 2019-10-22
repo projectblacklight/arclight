@@ -1,27 +1,3 @@
-// Collection header
-.al-show-header-section {
-  border: $default-border-styling;
-  margin-bottom: $spacer;
-  padding: 0 $spacer;
-
-  .al-document-title-bar {
-    background-color: $gray-200;
-    border-bottom: $default-border-styling;
-    font-size: $font-size-sm;
-    margin: 0 (-$spacer) $spacer;
-    padding: 3px $result-item-body-padding;
-  }
-
-  .badge {
-    float: right;
-  }
-
-  h1 {
-    font-size: $h4-font-size;
-    margin-bottom: $spacer;
-  }
-}
-
 // Collection context
 .al-sticky-sidebar {
   position: sticky;
