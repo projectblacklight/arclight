@@ -30,10 +30,6 @@ RSpec.describe 'Collection Page', type: :feature do
         expect(page).to have_content 'National Library of Medicine. History of Medicine Division'
       end
     end
-
-    it 'has list of direct online content items' do
-      expect(page.first('.al-digital-object.breadcrumb-item')).to have_content 'History slideshow'
-    end
   end
 
   describe 'online content indicator' do

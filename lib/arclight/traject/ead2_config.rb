@@ -416,16 +416,7 @@ compose 'components', ->(record, accumulator, _context) { accumulator.concat rec
       .map(&:text))
   end
 
-  to_field 'digital_objects_ssm', extract_xpath('.//dao', to_text: false) do |_record, accumulator|
-    accumulator.map! do |dao|
-      label = dao.attributes['title']&.value ||
-              dao.xpath('daodesc/p')&.text
-      href = (dao.attributes['href'] || dao.attributes['xlink:href'])&.value
-      Arclight::DigitalObject.new(label: label, href: href).to_json
-    end
-  end
-
-  to_field 'direct_digital_objects_ssm', extract_xpath('./dao', to_text: false) do |_record, accumulator|
+  to_field 'digital_objects_ssm', extract_xpath('./dao|./did/dao', to_text: false) do |_record, accumulator|
     accumulator.map! do |dao|
       label = dao.attributes['title']&.value ||
               dao.xpath('daodesc/p')&.text

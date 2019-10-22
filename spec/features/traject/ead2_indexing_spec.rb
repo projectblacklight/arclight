@@ -151,10 +151,6 @@ describe 'EAD 2 traject indexing', type: :feature do
         )
       end
 
-      it 'has does not have direct_digital_objects' do
-        expect(first_component['direct_digital_objects_ssm']).to eq nil
-      end
-
       it 'geogname' do
         %w[geogname_sim geogname_ssm].each do |field|
           expect(result['components'].first[field]).to be_nil
@@ -646,17 +642,6 @@ describe 'EAD 2 traject indexing', type: :feature do
           ]
         )
       end
-
-      it 'gets the direct digital object' do
-        expect(component['direct_digital_objects_ssm']).to eq(
-          [
-            JSON.generate(
-              label: 'Example diary',
-              href: 'https://idn.duke.edu/ark:/87924/r3d39z'
-            )
-          ]
-        )
-      end
     end
     context 'when <dao> is child of the <did> in a <c0x> component' do
       let(:component) { result['components'].find { |c| c['id'] == ['aoa271aspace_843e8f9f22bac69872d0802d6fffbb04'] } }
@@ -674,10 +659,6 @@ describe 'EAD 2 traject indexing', type: :feature do
             )
           ]
         )
-      end
-
-      it 'the direct digital objects is nil' do
-        expect(component['direct_digital_objects_ssm']).to eq nil
       end
     end
   end

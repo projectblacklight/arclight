@@ -121,15 +121,6 @@ module Arclight
       end
     end
 
-    def direct_digital_objects
-      direct_digital_objects_field = fetch('direct_digital_objects_ssm', []).reject(&:empty?)
-      return [] if direct_digital_objects_field.blank?
-
-      direct_digital_objects_field.map do |object|
-        Arclight::DigitalObject.from_json(object)
-      end
-    end
-
     def containers
       # note that .titlecase strips punctuation, like hyphens, we want to keep
       fetch('containers_ssim', []).map(&:capitalize)
