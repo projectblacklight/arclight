@@ -1,4 +1,4 @@
-ul.parent {
+ul.al-context-nav-parent {
   padding-left: 20px;
 }
 
@@ -16,8 +16,11 @@ li.al-collection-context  {
   .documentHeader {
     flex-grow: 1;
     margin-bottom: $spacer;
-    font-size: 1.25rem;
     width: 100%;
+  }
+
+  .document-title-heading {
+    font-size: 1.25rem;
   }
 
   .col.col-no-left-padding.d-flex.flex-wrap {
@@ -52,7 +55,7 @@ li.al-collection-context  {
       padding: 10px;
     }
   }
-  ul.parent {
+  ul.al-context-nav-parent {
     padding-left: 40px;
   }
 }

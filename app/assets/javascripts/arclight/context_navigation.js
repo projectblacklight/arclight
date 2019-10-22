@@ -125,7 +125,7 @@ class ContextNavigation {
     this.eadid = this.data.arclight.eadid;
     this.originalParents = originalParents || this.data.arclight.originalParents;
     this.originalDocument = originalDocument || this.data.arclight.originalDocument;
-    this.ul = $('<ul></ul>');
+    this.ul = $('<ul class="al-context-nav-parent"></ul>');
   }
 
   // Gets the targetId to select, based off of parents and current level
