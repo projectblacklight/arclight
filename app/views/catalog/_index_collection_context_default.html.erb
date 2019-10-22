@@ -1,24 +1,25 @@
 <li id="<%= document.id %>" class="al-collection-context row d-flex align-items-start">
   <div class="documentHeader row" data-document-id="<%= document.id %>">
     <% requestable = item_requestable?('', { document: document }) %>
+    <% if document.children? %>
+      <div class="al-toggle-children-container">
+        <%= link_to(
+          blacklight_icon(:plus),
+          "##{document.id}-collapsible-hierarchy",
+          class: "al-toggle-view-children #{!show_expanded?(document) ? 'collapsed' : ''}",
+          'aria-label': t('arclight.hierarchy.view_all'),
+            data: {
+              toggle: 'collapse'
+            }
+          )
+        %>
+      </div>
+    <% end %>
     <div class="col-auto">
       <%= render partial: 'arclight_document_header_icon', locals: { document: document }  %>
     </div>
     <div class="col col-no-left-padding d-flex flex-wrap">
       <div class="index_title document-title-heading my-w-75 w-md-100 order-0">
-        <% if document.children? %>
-            <%= link_to(
-              blacklight_icon(:plus),
-              "##{document.id}-collapsible-hierarchy",
-              class: "al-toggle-view-children #{!show_expanded?(document) ? 'collapsed' : ''}",
-              'aria-label': t('arclight.hierarchy.view_all'),
-                data: {
-                  toggle: 'collapse'
-                }
-              )
-            %>
-        <% end %>
-      
         <% counter = document_counter_with_offset(document_counter) %>
         <%= link_to_document document, document_show_link_field(document), counter: counter %>
         <% if document.children? %>

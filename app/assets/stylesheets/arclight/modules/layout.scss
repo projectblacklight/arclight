@@ -108,19 +108,7 @@
   }
 }
 
-
-// Collapse arrow indicators
-.al-toggle-view-all {
-  &[aria-expanded="true"] {
-    & {
-      content: image-url('blacklight/minus.svg');
-    }
-  }
-
-  content: image-url('blacklight/plus.svg');
-}
-
-// Collapse arrow indicators
+// Collapse +/- indicators
 .al-toggle-view-children {
   &:not(.collapsed) {
     & {
@@ -131,9 +119,8 @@
   content: image-url('blacklight/plus.svg');
 }
 
-
-a.al-toggle-view-all{
-  vertical-align: text-bottom;
+.al-toggle-children-container {
+  margin-left: -1.5rem;
 }
 
 .bookmark-toggle .toggle-bookmark {

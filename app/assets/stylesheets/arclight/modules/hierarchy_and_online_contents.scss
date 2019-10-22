@@ -147,27 +147,23 @@
     }
   }
 
-  // Top-level context
-  .al-hierarchy-level-0 .document-title-heading {
-    // background-color: red;
-    font-size: $h5-font-size;
+  .document-title-heading {
     font-weight: 400;
-    margin-bottom: ($spacer / 2);
-
     > a {
       color: $gray-900;
     }
+  }
+
+  // Top-level context
+  .al-hierarchy-level-0 .document-title-heading {
+    font-size: $h5-font-size;
+    margin-bottom: ($spacer / 2);
   }
 
   // All subsequent levels
   @for $i from 1 through 12 {
     .al-hierarchy-level-#{$i} .document-title-heading {
       font-size: $h6-font-size;
-      font-weight: 400;
-
-      > a {
-        color: $gray-900;
-      }
     }
   }
 
