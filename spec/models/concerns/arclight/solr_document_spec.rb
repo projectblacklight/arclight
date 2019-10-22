@@ -78,36 +78,6 @@ RSpec.describe Arclight::SolrDocument do
     end
   end
 
-  describe 'direct digital objects' do
-    let(:document) do
-      SolrDocument.new(
-        direct_digital_objects_ssm: [
-          { href: 'http://example.com', label: 'Label 1' }.to_json,
-          { href: 'http://another-example.com', label: 'Label 2' }.to_json
-        ]
-      )
-    end
-
-    describe '#direct_digital_objects' do
-      context 'when the document has a direct digital object' do
-        it 'is array of DigitalObjects' do
-          expect(document.direct_digital_objects.length).to eq 2
-          document.direct_digital_objects.all? do |object|
-            expect(object).to be_a Arclight::DigitalObject
-          end
-        end
-      end
-
-      context 'when the document does not have a digital object' do
-        let(:document) { SolrDocument.new }
-
-        it 'is a blank array' do
-          expect(document.direct_digital_objects).to be_blank
-        end
-      end
-    end
-  end
-
   describe '#normalize_title' do
     let(:document) { SolrDocument.new(normalized_title_ssm: 'My Title, 1990-2000') }
 
