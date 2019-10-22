@@ -30,11 +30,23 @@
         var $doc = $(resp);
         var showDocs = $doc.find('article.document');
         var newDocs = $doc.find('#documents');
-
         var sortPerPage = $doc.find('#sortAndPerPage');
+        var pageEntries = sortPerPage.find('.page-entries');
+        var numberEntries = parseInt(pageEntries.find('strong').last().text().replace(/,/g, ''), 10);
+
         // Hide these until we re-enable in the future
         sortPerPage.find('.result-type-group').hide();
         sortPerPage.find('.search-widgets').hide();
+
+        if (!isNaN(numberEntries)) {
+          $('[data-arclight-online-content-tab]').append(
+            $(
+              '<span class="badge badge-pill badge-secondary al-online-content-badge">'
+                + numberEntries
+                + '<span class="sr-only">components</span></span>'
+            )
+          );
+        }
 
         sortPerPage.find('a').on('click', function (e) {
           var pages = [];
