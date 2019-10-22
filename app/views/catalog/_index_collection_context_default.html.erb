@@ -33,7 +33,11 @@
 
       <div class="order-2">
         <div class="row">
-          <%= render partial: 'arclight_abstract_or_scope', locals: { document: document } %>
+          <%= content_tag('div', class: 'al-document-abstract-or-scope mb-0') do %>
+            <%= content_tag('div', data: { 'arclight-truncate': true, 'truncate-more': I18n.t('arclight.truncation.view_more'), 'truncate-less': I18n.t('arclight.truncation.view_less') } ) do %>
+              <%= document.abstract_or_scope %>
+            <% end %>
+          <% end if document.abstract_or_scope %>
         </div>
       </div>
     </div>
