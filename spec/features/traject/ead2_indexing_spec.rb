@@ -297,7 +297,7 @@ describe 'EAD 2 traject indexing', type: :feature do
     end
 
     it 'acqinfo' do
-      expect(result['acqinfo_ssm'].first).to eq 'Donated by Alpha Omega Alpha.'
+      expect(result['acqinfo_ssim'].first).to eq 'Donated by Alpha Omega Alpha.'
     end
 
     it 'appraisal' do
@@ -595,8 +595,8 @@ describe 'EAD 2 traject indexing', type: :feature do
         'Donated by Alpha Omega Alpha.'
       )
 
-      expect(first_component).to include 'acqinfo_ssm'
-      expect(first_component['acqinfo_ssm']).to contain_exactly(
+      expect(first_component).to include 'acqinfo_ssim'
+      expect(first_component['acqinfo_ssim']).to contain_exactly(
         'Donated by Alpha Omega Alpha.'
       )
     end
@@ -616,8 +616,8 @@ describe 'EAD 2 traject indexing', type: :feature do
           ["Gift, John L. Parascandola, PHS Historian's Office, 3/1/1994, Acc. #812. Gift, Donald Goldman, Acc. #2005-21."]
         )
 
-        expect(first_component).to include 'acqinfo_ssm'
-        expect(first_component['acqinfo_ssm']).to equal_array_ignoring_whitespace(
+        expect(first_component).to include 'acqinfo_ssim'
+        expect(first_component['acqinfo_ssim']).to equal_array_ignoring_whitespace(
           ["Gift, John L. Parascandola, PHS Historian's Office, 3/1/1994, Acc. #812. Gift, Donald Goldman, Acc. #2005-21."]
         )
       end
