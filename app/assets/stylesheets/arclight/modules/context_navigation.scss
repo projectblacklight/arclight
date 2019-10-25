@@ -1,5 +1,10 @@
+#contents > .context-navigator,
+#collection-context > .context-navigator {
+  padding-left: $spacer;
+}
+
 ul.al-context-nav-parent {
-  padding-left: 20px;
+  padding-left: 0px;
 }
 
 li.al-collection-context  {
