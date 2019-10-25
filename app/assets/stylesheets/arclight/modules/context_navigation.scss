@@ -17,6 +17,11 @@ li.al-collection-context  {
     padding-top: $spacer * .25;
   }
 
+  .al-number-of-children-badge {
+    font-size: 12px;
+    vertical-align: middle;
+  }
+
   .documentHeader {
     flex-grow: 1;
     margin-bottom: $spacer;
