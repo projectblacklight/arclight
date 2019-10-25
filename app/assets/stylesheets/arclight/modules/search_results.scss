@@ -1,4 +1,5 @@
-.documents-list {
+.documents-list,
+.documents-online_contents {
   margin-bottom: $spacer;
 
   // Result item header
@@ -39,6 +40,7 @@
     }
 
     .al-document-abstract-or-scope {
+      margin-bottom: $spacer * .5;
       max-width: 45em;
     }
   }
