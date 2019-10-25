@@ -164,7 +164,7 @@ RSpec.describe ArclightHelper, type: :helper do
     end
 
     context 'when the configured fields have content' do
-      let(:document) { SolrDocument.new('acqinfo_ssm': ['Data']) }
+      let(:document) { SolrDocument.new('acqinfo_ssim': ['Data']) }
 
       it 'is true' do
         expect(helper.fields_have_content?(document, :background_field)).to eq true
