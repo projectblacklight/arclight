@@ -13,6 +13,10 @@ li.al-collection-context  {
     width: 100%;
   }
 
+  .blacklight-icons {
+    padding-top: $spacer * .25;
+  }
+
   .documentHeader {
     flex-grow: 1;
     margin-bottom: $spacer;
