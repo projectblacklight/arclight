@@ -145,13 +145,6 @@
     }
   }
 
-  .document-title-heading {
-    font-weight: 400;
-    > a {
-      color: $gray-900;
-    }
-  }
-
   // Top-level context
   .al-hierarchy-level-0 .document-title-heading {
     font-size: $h5-font-size;
