@@ -16,6 +16,16 @@ module Arclight
     end
 
     ##
+    # Override Blacklight's method so that some views don't add Solr facets into the request.
+    def add_facetting_to_solr(solr_params)
+      if %w[collection_context online_contents].include? blacklight_params[:view]
+        return solr_params
+      end
+
+      super(solr_params)
+    end
+
+    ##
     # For the collection_context views, set a higher (unlimited) maximum document return
     def add_hierarchy_max_rows(solr_params)
       if %w[collection_context].include? blacklight_params[:view]
