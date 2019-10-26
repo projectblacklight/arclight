@@ -44,6 +44,7 @@
 
   &-downloads {
     padding-top: $spacer * .25;
+    white-space: nowrap;
 
     &-container {
       margin-top: $spacer * .5;
