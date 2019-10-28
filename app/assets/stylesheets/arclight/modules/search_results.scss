@@ -65,6 +65,10 @@ article.document {
 }
 
 .al-grouped-results {
+  .breadcrumb-links {
+    font-size: $font-size-sm;
+  }
+
   .al-document-abstract-or-scope {
     margin-bottom: 0;
     margin-top: $spacer * .75;
