@@ -20,16 +20,10 @@
     font-size: $font-size-sm;
   }
 
-  // Component title + children badge
-  .documentHeader {
-    border-bottom: $border-width dashed $gray-400;
-    margin-bottom: ($spacer / 2);
-  }
-
   // Headings and text
   .al-document-abstract-or-scope {
     font-size: 0.85rem;
-    line-height: 1.25;
+    line-height: 1.5;
     max-width: 45em;
   }
 
@@ -49,10 +43,6 @@
     font-size: $h5-font-size;
     font-weight: 400;
     margin-bottom: ($spacer / 2);
-
-    > a {
-      color: $gray-900;
-    }
   }
 
   .blacklight-series,
@@ -99,7 +89,7 @@
   }
 }
 
-.al-hierarchy-highlight {
+.al-hierarchy-highlight > .documentHeader {
   background: $mark-bg;
 }
 
@@ -142,13 +132,6 @@
   .documents-online_contents {
     .documentHeader {
       margin-top: 1.5rem;
-    }
-  }
-
-  .document-title-heading {
-    font-weight: 400;
-    > a {
-      color: $gray-900;
     }
   }
 
