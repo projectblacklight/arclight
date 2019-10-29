@@ -78,7 +78,10 @@ RSpec.describe 'Online Content', type: :feature do
       end
 
       it 'adds the count badge', js: true do
-        expect(page).to have_css '.al-online-content-badge', text: '12'
+        expect(page).to have_css '.al-online-content-badge', text: '12', count: 1
+        click_link 'Online content'
+        click_link 'Next »'
+        expect(page).to have_css '.al-online-content-badge', text: '12', count: 1
       end
     end
   end

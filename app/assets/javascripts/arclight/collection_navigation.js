@@ -39,7 +39,7 @@
         sortPerPage.find('.search-widgets').hide();
 
         if (!isNaN(numberEntries)) {
-          $('[data-arclight-online-content-tab]').append(
+          $('[data-arclight-online-content-tab-count]').html(
             $(
               '<span class="badge badge-pill badge-secondary al-online-content-badge">'
                 + numberEntries
