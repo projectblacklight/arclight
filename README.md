@@ -12,6 +12,7 @@ A Rails engine supporting discovery of archival materials, based on [Blacklight]
 
 * [Ruby](https://www.ruby-lang.org/en/) 2.5 or later
 * [Rails](http://rubyonrails.org) 5.0 or later
+* Solr 8.1 or later
 
 ## Installation
 
