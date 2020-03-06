@@ -123,20 +123,27 @@ class ContextNavigation {
     this.data = this.el.data();
     this.parentLi = this.el.parent();
     this.eadid = this.data.arclight.eadid;
-    this.originalParents = originalParents || this.data.arclight.originalParents;
+    this.originalParents = originalParents; // let originalParents stay null
     this.originalDocument = originalDocument || this.data.arclight.originalDocument;
     this.ul = $('<ul class="al-context-nav-parent"></ul>');
   }
 
   // Gets the targetId to select, based off of parents and current level
   get targetId() {
-    return `${this.eadid}${this.originalParents[this.data.arclight.level]}`;
+    if (this.originalParents && this.originalParents[this.data.arclight.level]) {
+      return `${this.eadid}${this.originalParents[this.data.arclight.level]}`;
+    }
+    return this.data.arclight.originalDocument;
   }
 
   get requestParent() {
+    // Cases where you're viewing a component page (use its ancestor trail)...
     if (this.originalParents && this.originalParents[this.data.arclight.level - 1]) {
       return this.originalParents[this.data.arclight.level - 1];
     }
+    // Cases where there are no parents provided...
+    //   1) when on a top-level collection page
+    //   2) when +/- gets clicked
     return this.data.arclight.originalDocument.replace(this.eadid, '');
   }
 
@@ -353,7 +360,10 @@ class ContextNavigation {
       if (!targetArea.data().resolved) {
         targetArea.find('.context-navigator').each((i, ee) => {
           const contextNavigation = new ContextNavigation(
-            ee, that.originalParents, that.originalDocument
+            // Send null for originalParents. We want to disregard the original
+            // component's ancestor trail and instead use the current ID as the
+            // parent in the query to populate the navigator.
+            ee, null, that.originalDocument
           );
           contextNavigation.getData();
         });
@@ -368,7 +378,9 @@ class ContextNavigation {
  */
 Blacklight.onLoad(function () {
   $('.context-navigator').each(function (i, e) {
-    const contextNavigation = new ContextNavigation(e);
+    const contextNavigation = new ContextNavigation(
+        e, $(this).data('arclight').originalParents, $(this).data('arclight').originalDocument
+      );
     contextNavigation.getData();
   });
 });
