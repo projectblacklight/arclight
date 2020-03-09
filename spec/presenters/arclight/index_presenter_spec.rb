@@ -17,10 +17,6 @@ describe Arclight::IndexPresenter, type: :presenter do
   end
 
   before do
-    expect(view_context).to receive_messages(
-      controller: instance_double('Controller', params: {}, session: {}),
-      default_document_index_view_type: 'index'
-    )
     config.index.title_field = :normalized_title_ssm
   end
 

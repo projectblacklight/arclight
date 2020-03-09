@@ -197,6 +197,17 @@ RSpec.describe 'Component Page', type: :feature do
         end
       end
     end
+
+    context 'when on a deeply nested component' do
+      let(:doc_id) { 'aoa271aspace_6ea193f778e553ca9ea0d00a3e5a1891' }
+
+      it 'enables expanding nodes outside of own ancestor tree' do
+        within '#collection-context' do
+          find('#aoa271aspace_01daa89087641f7fc9dbd7a10d3f2da9 .al-toggle-view-children').click
+          expect(page).to have_css '.document-title-heading', text: 'Miscellaneous 1999'
+        end
+      end
+    end
   end
 
   describe 'access tab', js: true do

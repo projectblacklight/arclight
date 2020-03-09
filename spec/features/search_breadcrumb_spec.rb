@@ -11,8 +11,7 @@ RSpec.describe 'Search Breadcrumb', type: :feature do
         expect(page).to have_content 'Search results'
       end
     end
-  end
-  context 'on regular search results' do
+
     it do
       visit search_catalog_path f: { level_sim: ['Collection'] }, search_field: 'all_fields'
       within '.al-search-breadcrumb' do
