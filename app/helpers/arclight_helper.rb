@@ -298,7 +298,7 @@ module ArclightHelper
           name: document.collection_name,
           originalDocument: document.id,
           originalParents: original_parents,
-          eadid: document.eadid
+          eadid: normalize_id(document.eadid)
         }
       }
     )

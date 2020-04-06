@@ -208,6 +208,17 @@ RSpec.describe 'Component Page', type: :feature do
         end
       end
     end
+
+    context 'when on a component with an eadid with . normalized to -' do
+      let(:doc_id) { 'pc0170-xmlaspace_ref1_z0j' }
+
+      it 'expands child nodes when clicked' do
+        within '#collection-context' do
+          find('#pc0170-xmlaspace_ref5_edi .al-toggle-view-children').click
+          expect(page).to have_css '.document-title-heading', text: 'Restricted images, 1979-2000'
+        end
+      end
+    end
   end
 
   describe 'access tab', js: true do
