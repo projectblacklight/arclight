@@ -96,8 +96,8 @@ RSpec.describe 'Search results', type: :feature do
         within('.blacklight-date_range_sim') do
           expect(page).to have_css('h3 button', text: '')
           click_button 'Date range'
-          expect(page).to have_css('.range_limit', visible: true)
-          expect(page).to have_css('.profile canvas.flot-base', visible: true)
+          expect(page).to have_css('.range_limit', visible: :visible)
+          expect(page).to have_css('.profile canvas.flot-base', visible: :visible)
         end
 
         within('.blacklight-names_ssim') do
