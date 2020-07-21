@@ -261,7 +261,7 @@ RSpec.describe 'Collection Page', type: :feature do
 
   describe 'context and contents' do
     it 'contents are not visible by default' do
-      expect(page).to have_css '#contents', visible: :hidden
+      expect(page).to have_css '#contents', visible: :all
     end
 
     it 'context is visible' do
