@@ -67,25 +67,6 @@ class ExpandButton {
 }
 
 /**
- * Modeling <button> Elements which hide or retrieve <li> elements for sibling
- *   documents nested within the <li> elements of the <ul> tree
- * @class
- */
-class NestedExpandButton extends ExpandButton {
-  /**
-   * This retrieves the <li> elements which are hidden/rendered in response to
-   *   clicking the <button> element
-   * @param {jQuery} $li - the <button> element
-   * @return {jQuery} - a jQuery object containing the targeted <li>
-   */
-  findSiblings() {
-    const highlighted = this.$el.siblings('.al-hierarchy-highlight');
-    const $siblings = highlighted.prevAll('.al-collection-context');
-    return $siblings.slice(0, -1);
-  }
-}
-
-/**
  * Models the placeholder display elements for content loading from AJAX
  *   requests
  * @class
@@ -280,28 +261,6 @@ class ContextNavigation {
       contextNavigation.getData();
     });
   }
-
-
-  /**
-   * Update the ancestors for <li> elements
-   * @param {jQuery} $li - the <li> element for the current, highlighted
-   *   Document in the <ul> context list of collections, components, and
-   *   containers
-   */
-  /* eslint-disable class-methods-use-this */
-  updateListSiblings($li) {
-    const prevSiblings = $li.prevAll('.al-collection-context');
-    if (prevSiblings.length > 1) {
-      const hiddenNextSiblings = prevSiblings.slice(0, -1);
-      hiddenNextSiblings.toggleClass('collapsed');
-
-      const button = new NestedExpandButton();
-
-      const lastHiddenNextSibling = hiddenNextSiblings[hiddenNextSiblings.length - 1];
-      button.$el.insertAfter(lastHiddenNextSibling);
-    }
-  }
-  /* eslint-enable class-methods-use-this */
 
   /**
    * This updates the elements in the View DOM using an AJAX response containing
