@@ -11,6 +11,10 @@ class NavigationDocument {
     this.el.find('li.al-collection-context').addClass('al-hierarchy-highlight');
   }
 
+  makeCollapsible() {
+    this.el.find('li.al-collection-context').addClass('collapsible');
+  }
+
   collapse() {
     this.el.find('li.al-collection-context').addClass('collapsed');
   }
@@ -32,9 +36,9 @@ class ExpandButton {
    * @param {jQuery} $li - the <button> element
    * @return {jQuery} - a jQuery object containing the targeted <li>
    */
-  findSiblings() {
-    const $siblings = this.$el.parent().children('li');
-    return $siblings.slice(0, -1);
+  findCollapsibleSiblings() {
+    const $siblings = this.$el.parent().children('li.collapsible');
+    return $siblings;
   }
 
   /**
@@ -44,7 +48,7 @@ class ExpandButton {
    *   <button> element
    */
   handleClick() {
-    const $targeted = this.findSiblings();
+    const $targeted = this.findCollapsibleSiblings();
 
     $targeted.toggleClass('collapsed');
     this.$el.toggleClass('collapsed');
@@ -179,6 +183,7 @@ class ContextNavigation {
     if (prevSiblingDocs.length > 1 && originalDocumentIndex > 0) {
       const hiddenPrevSiblingDocs = prevSiblingDocs.slice(0, -1);
       hiddenPrevSiblingDocs.forEach(siblingDoc => {
+        siblingDoc.makeCollapsible();
         siblingDoc.collapse();
       });
 
@@ -226,6 +231,7 @@ class ContextNavigation {
     let renderedBeforeDocs;
     if (beforeDocs.length > 1) {
       beforeDocs.forEach(function (parentDoc) {
+        parentDoc.makeCollapsible();
         parentDoc.collapse();
       });
       renderedBeforeDocs = beforeDocs.map(newDoc => newDoc.render()).join('');
