@@ -356,8 +356,8 @@ class ContextNavigation {
     const that = this;
     this.ul.find('.al-toggle-view-children').on('click', (e) => {
       e.preventDefault();
-      const targetArea = $($(e.target).attr('href'));
-      if (!targetArea.data().resolved) {
+      const targetArea = $($(e.currentTarget).attr('href'));
+      if (!targetArea.data('resolved') === true) {
         targetArea.find('.context-navigator').each((i, ee) => {
           const contextNavigation = new ContextNavigation(
             // Send null for originalParents. We want to disregard the original
