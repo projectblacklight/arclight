@@ -27,9 +27,9 @@ end
 # rubocop:disable Metrics/AbcSize
 def truncation_works(text)
   expect(page).to have_css 'a.responsiveTruncatorToggle', text: 'view more ▶'
-  expect(page).to have_css '.al-document-abstract-or-scope', text: /#{text}/, visible: false
+  expect(page).to have_css '.al-document-abstract-or-scope', text: /#{text}/, visible: :all
   first(:link, 'view more ▶').click
   expect(page).to have_css 'a.responsiveTruncatorToggle', text: 'view less ▼'
-  expect(page).to have_css '.al-document-abstract-or-scope', text: /#{text}/, visible: true
+  expect(page).to have_css '.al-document-abstract-or-scope', text: /#{text}/, visible: :visible
 end
 # rubocop:enable Metrics/AbcSize

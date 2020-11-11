@@ -11,7 +11,7 @@ RSpec.describe Arclight::RepositoriesController, type: :controller do
   describe '#index' do
     it 'displays the repositories' do
       get :index
-      expect(response).to be_success
+      expect(response).to be_successful
     end
 
     it 'assigns the view variable' do
