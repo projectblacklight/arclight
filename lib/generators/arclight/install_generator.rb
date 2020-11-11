@@ -43,22 +43,9 @@ module Arclight
       end
     end
 
-    def copy_styles
+    def assets
       copy_file 'arclight.scss', 'app/assets/stylesheets/arclight.scss'
-    end
-
-    def inject_js
-      inject_into_file 'app/assets/javascripts/application.js', after: '//= require blacklight/blacklight' do
-        "\n// Required by Arclight" \
-        "\n//= require arclight/arclight" \
-        "\n//= require stickyfill"
-      end
-    end
-
-    def install_webpacker
-      return unless Rails.version.to_i == 6
-
-      rake 'webpacker:install'
+      copy_file 'arclight.js', 'app/assets/javascripts/arclight.js'
     end
 
     def add_arclight_search_behavior
