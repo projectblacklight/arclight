@@ -11,6 +11,10 @@ class NavigationDocument {
     this.el.find('li.al-collection-context').addClass('al-hierarchy-highlight');
   }
 
+  makeCollapsible() {
+    this.el.find('li.al-collection-context').addClass('collapsible');
+  }
+
   collapse() {
     this.el.find('li.al-collection-context').addClass('collapsed');
   }
@@ -32,9 +36,9 @@ class ExpandButton {
    * @param {jQuery} $li - the <button> element
    * @return {jQuery} - a jQuery object containing the targeted <li>
    */
-  findSiblings() {
-    const $siblings = this.$el.parent().children('li');
-    return $siblings.slice(0, -1);
+  findCollapsibleSiblings() {
+    const $siblings = this.$el.parent().children('li.collapsible');
+    return $siblings;
   }
 
   /**
@@ -44,7 +48,7 @@ class ExpandButton {
    *   <button> element
    */
   handleClick() {
-    const $targeted = this.findSiblings();
+    const $targeted = this.findCollapsibleSiblings();
 
     $targeted.toggleClass('collapsed');
     this.$el.toggleClass('collapsed');
@@ -63,25 +67,6 @@ class ExpandButton {
     this.$el = $(`<button class="my-3 btn btn-secondary btn-sm">${this.expandText}</button>`);
     this.handleClick = this.handleClick.bind(this);
     this.$el.click(this.handleClick);
-  }
-}
-
-/**
- * Modeling <button> Elements which hide or retrieve <li> elements for sibling
- *   documents nested within the <li> elements of the <ul> tree
- * @class
- */
-class NestedExpandButton extends ExpandButton {
-  /**
-   * This retrieves the <li> elements which are hidden/rendered in response to
-   *   clicking the <button> element
-   * @param {jQuery} $li - the <button> element
-   * @return {jQuery} - a jQuery object containing the targeted <li>
-   */
-  findSiblings() {
-    const highlighted = this.$el.siblings('.al-hierarchy-highlight');
-    const $siblings = highlighted.prevAll('.al-collection-context');
-    return $siblings.slice(0, -1);
   }
 }
 
@@ -198,6 +183,7 @@ class ContextNavigation {
     if (prevSiblingDocs.length > 1 && originalDocumentIndex > 0) {
       const hiddenPrevSiblingDocs = prevSiblingDocs.slice(0, -1);
       hiddenPrevSiblingDocs.forEach(siblingDoc => {
+        siblingDoc.makeCollapsible();
         siblingDoc.collapse();
       });
 
@@ -245,6 +231,7 @@ class ContextNavigation {
     let renderedBeforeDocs;
     if (beforeDocs.length > 1) {
       beforeDocs.forEach(function (parentDoc) {
+        parentDoc.makeCollapsible();
         parentDoc.collapse();
       });
       renderedBeforeDocs = beforeDocs.map(newDoc => newDoc.render()).join('');
@@ -280,28 +267,6 @@ class ContextNavigation {
       contextNavigation.getData();
     });
   }
-
-
-  /**
-   * Update the ancestors for <li> elements
-   * @param {jQuery} $li - the <li> element for the current, highlighted
-   *   Document in the <ul> context list of collections, components, and
-   *   containers
-   */
-  /* eslint-disable class-methods-use-this */
-  updateListSiblings($li) {
-    const prevSiblings = $li.prevAll('.al-collection-context');
-    if (prevSiblings.length > 1) {
-      const hiddenNextSiblings = prevSiblings.slice(0, -1);
-      hiddenNextSiblings.toggleClass('collapsed');
-
-      const button = new NestedExpandButton();
-
-      const lastHiddenNextSibling = hiddenNextSiblings[hiddenNextSiblings.length - 1];
-      button.$el.insertAfter(lastHiddenNextSibling);
-    }
-  }
-  /* eslint-enable class-methods-use-this */
 
   /**
    * This updates the elements in the View DOM using an AJAX response containing

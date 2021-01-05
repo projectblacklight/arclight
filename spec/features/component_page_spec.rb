@@ -207,6 +207,13 @@ RSpec.describe 'Component Page', type: :feature do
           expect(page).to have_css '.document-title-heading', text: 'Miscellaneous 1999'
         end
       end
+
+      it 'includes ancestor\'s preceding sibling when clicking ancestor\'s Expand button' do
+        within '#collection-context' do
+          find('#aoa271aspace_563a320bb37d24a9e1e6f7bf95b52671-collapsible-hierarchy .prev-siblings button').click
+          expect(page).to have_css '.document-title-heading', text: 'Officers and directors - lists, 1961, n.d.'
+        end
+      end
     end
 
     context 'when on a component with an eadid with . normalized to -' do
