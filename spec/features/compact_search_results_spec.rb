@@ -15,7 +15,7 @@ RSpec.describe 'Compact Search Results', type: :feature do
     expect(page).not_to have_css('.documents-list')
     expect(page).to have_css('.documents-compact')
     expect(page).to have_css('article.document', count: 10)
-    within '.document-position-2' do
+    within '.document-position-3' do
       # Has breadcrumbs
       expect(page).to have_css '.breadcrumb-links a', text: /National Library of/
       # Has Containers
@@ -30,7 +30,7 @@ RSpec.describe 'Compact Search Results', type: :feature do
   it 'Shows highlights in compact view' do
     visit search_catalog_path q: 'william root', search_field: 'name'
     click_link 'Compact'
-    within '.document-position-0' do
+    within '.document-position-1' do
       within '.al-document-highlight' do
         expect(page).to have_css 'em', text: 'William'
         expect(page).to have_css 'em', text: 'Root'
