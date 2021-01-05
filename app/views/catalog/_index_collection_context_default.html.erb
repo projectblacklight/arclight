@@ -4,7 +4,7 @@
     <% if document.children? %>
       <div class="al-toggle-children-container">
         <%= link_to(
-          blacklight_icon(:plus),
+          '',
           "##{document.id}-collapsible-hierarchy",
           class: "al-toggle-view-children #{!show_expanded?(document) ? 'collapsed' : ''}",
           'aria-label': t('arclight.hierarchy.view_all'),
