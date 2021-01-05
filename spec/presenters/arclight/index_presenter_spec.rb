@@ -5,7 +5,7 @@ require 'spec_helper'
 describe Arclight::IndexPresenter, type: :presenter do
   subject { presenter }
 
-  let(:view_context) { ActionView::Base.new }
+  let(:view_context) { ActionView::Base.new(nil, {}, nil) }
 
   let(:config) { Blacklight::Configuration.new }
 

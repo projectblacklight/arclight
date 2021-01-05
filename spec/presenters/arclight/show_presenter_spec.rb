@@ -5,7 +5,7 @@ require 'spec_helper'
 describe Arclight::ShowPresenter, type: :presenter do
   subject { presenter }
 
-  let(:view_context) { ActionView::Base.new }
+  let(:view_context) { ActionView::Base.new(nil, {}, nil) }
   let(:config) { Blacklight::Configuration.new }
 
   let(:presenter) { described_class.new(document, view_context, config) }
