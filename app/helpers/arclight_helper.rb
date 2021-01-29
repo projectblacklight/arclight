@@ -117,7 +117,7 @@ module ArclightHelper
   end
 
   def collection_active?
-    try(:search_state) && search_state.params_for_search.try(:[], 'f').try(:[], 'level_sim') == ['Collection']
+    respond_to?(:search_state) && search_state&.params_for_search&.dig('f', 'level_sim') == ['Collection']
   end
 
   def collection_active_class
@@ -129,7 +129,7 @@ module ArclightHelper
   end
 
   def grouped?
-    try(:search_state) && search_state.params_for_search.try(:[], 'group') == 'true'
+    respond_to?(:search_state) && search_state&.params_for_search&.dig('group') == 'true'
   end
 
   def search_with_group
@@ -167,7 +167,7 @@ module ArclightHelper
   #
   # @return [Repository]
   def repository_faceted_on
-    return unless try(:search_state) && facet_field_in_params?('repository_sim')
+    return unless respond_to?(:search_state) && search_state && facet_field_in_params?('repository_sim')
 
     repos = Array(facet_params('repository_sim'))
     faceted = repos && repos.length == 1 && repos.first
