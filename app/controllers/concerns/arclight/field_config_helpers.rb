@@ -88,7 +88,7 @@ module Arclight
     end
 
     def link_to_name_facet(args)
-      options = args[:config].try(:separator_options) || {}
+      options = args[:config]&.separator_options || {}
       values = args[:value] || []
 
       values.map do |value|
