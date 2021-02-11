@@ -5,6 +5,7 @@ require 'traject'
 require 'traject/nokogiri_reader'
 require 'traject_plus'
 require 'traject_plus/macros'
+require 'arclight/exceptions'							 
 require 'arclight/level_label'
 require 'arclight/normalized_date'
 require 'arclight/normalized_title'
@@ -71,6 +72,7 @@ end
 # ==================
 
 to_field 'id', extract_xpath('/ead/eadheader/eadid'), strip, gsub('.', '-')
+to_field 'eadid_clean_ssi', extract_xpath('/ead/eadheader/eadid'), strip, gsub('.', '-')
 to_field 'title_filing_si', extract_xpath('/ead/eadheader/filedesc/titlestmt/titleproper[@type="filing"]')
 to_field 'title_ssm', extract_xpath('/ead/archdesc/did/unittitle')
 to_field 'title_teim', extract_xpath('/ead/archdesc/did/unittitle')
@@ -172,6 +174,9 @@ to_field 'access_terms_ssm', extract_xpath('/ead/archdesc/userestrict/*[local-na
 
 to_field 'acqinfo_ssim', extract_xpath('/ead/archdesc/acqinfo/*[local-name()!="head"]')
 to_field 'acqinfo_ssim', extract_xpath('/ead/archdesc/descgrp/acqinfo/*[local-name()!="head"]')
+to_field 'acqinfo_ssm' do |_record, accumulator, context|
+  accumulator.concat(context.output_hash.fetch('acqinfo_ssim', []))
+end
 
 to_field 'access_subjects_ssim', extract_xpath('/ead/archdesc/controlaccess', to_text: false) do |_record, accumulator|
   accumulator.map! do |element|
@@ -294,6 +299,8 @@ compose 'components', ->(record, accumulator, _context) { accumulator.concat rec
   to_field 'unitdate_inclusive_ssm', extract_xpath('./did/unitdate[@type="inclusive"]')
   to_field 'unitdate_other_ssim', extract_xpath('./did/unitdate[not(@type)]')
 
+  to_field 'unitid_ssm', extract_xpath('./did/unitid')
+
   to_field 'normalized_title_ssm' do |_record, accumulator, context|
     dates = Arclight::NormalizedDate.new(
       context.output_hash['unitdate_inclusive_ssm'],
@@ -413,14 +420,14 @@ compose 'components', ->(record, accumulator, _context) { accumulator.concat rec
   end
 
   # Get the <accessrestrict> from the closest ancestor that has one (includes top-level)
-  to_field 'parent_access_restrict_ssm' do |record, accumulator|
+  to_field 'parent_access_restrict_tesim' do |record, accumulator|
     accumulator.concat Array
       .wrap(record.xpath('(./ancestor::*/accessrestrict)[last()]/*[local-name()!="head"]')
       .map(&:text))
   end
 
   # Get the <userestrict> from self OR the closest ancestor that has one (includes top-level)
-  to_field 'parent_access_terms_ssm' do |record, accumulator|
+  to_field 'parent_access_terms_tesim' do |record, accumulator|
     accumulator.concat Array
       .wrap(record.xpath('(./ancestor-or-self::*/userestrict)[last()]/*[local-name()!="head"]')
       .map(&:text))
@@ -465,10 +472,13 @@ compose 'components', ->(record, accumulator, _context) { accumulator.concat rec
     accumulator.concat(context.output_hash.fetch('access_subjects_ssim', []))
   end
 
-  to_field 'acqinfo_ssim', extract_xpath('/ead/archdesc/acqinfo/*[local-name()!="head"]')
-  to_field 'acqinfo_ssim', extract_xpath('/ead/archdesc/descgrp/acqinfo/*[local-name()!="head"]')
-  to_field 'acqinfo_ssim', extract_xpath('./acqinfo/*[local-name()!="head"]')
-  to_field 'acqinfo_ssim', extract_xpath('./descgrp/acqinfo/*[local-name()!="head"]')
+#  to_field 'acqinfo_ssim', extract_xpath('/ead/archdesc/acqinfo/*[local-name()!="head"]')
+#  to_field 'acqinfo_ssim', extract_xpath('/ead/archdesc/descgrp/acqinfo/*[local-name()!="head"]')
+#  to_field 'acqinfo_ssim', extract_xpath('./acqinfo/*[local-name()!="head"]')
+#  to_field 'acqinfo_ssim', extract_xpath('./descgrp/acqinfo/*[local-name()!="head"]')
+#  to_field 'acqinfo_ssm' do |_record, accumulator, context|
+#    accumulator.concat(context.output_hash.fetch('acqinfo_ssim', []))
+#  end
 
   to_field 'language_ssm', extract_xpath('./did/langmaterial')
   to_field 'containers_ssim' do |record, accumulator|
@@ -478,12 +488,12 @@ compose 'components', ->(record, accumulator, _context) { accumulator.concat rec
   end
 
   SEARCHABLE_NOTES_FIELDS.map do |selector|
-    to_field "#{selector}_ssm", extract_xpath("./#{selector}/*[local-name()!='head']", to_text: false)
+    to_field "#{selector}_tesim", extract_xpath("./#{selector}/*[local-name()!='head']", to_text: false)
     to_field "#{selector}_heading_ssm", extract_xpath("./#{selector}/head")
     to_field "#{selector}_teim", extract_xpath("./#{selector}/*[local-name()!='head']")
   end
   DID_SEARCHABLE_NOTES_FIELDS.map do |selector|
-    to_field "#{selector}_ssm", extract_xpath("./did/#{selector}", to_text: false)
+    to_field "#{selector}_tesim", extract_xpath("./did/#{selector}", to_text: false)
   end
   to_field 'did_note_ssm', extract_xpath('./did/note')
 end
