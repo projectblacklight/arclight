@@ -94,9 +94,11 @@ module Arclight
     #
     # @return [Array<Repository>]
     def self.all(yaml_file = nil)
-      yaml_file = ENV['REPOSITORY_FILE'] || 'config/repositories.yml' if yaml_file.nil?
+      yaml_file = ENV['REPOSITORY_FILE'] || '/home/arclight/arclight/config/repositories.yml' if yaml_file.nil?
       from_yaml(yaml_file).values
     end
+
+
 
     # Mimics ActiveRecord dynamic `find_by` behavior for the slug or name
     #
