@@ -12,7 +12,7 @@ jobs:
     strategy:
       matrix:
         rails_version: [5.2.4.4, 6.0.3.4, 6.1.1]
-        ruby: [2.6, 2.7]
+        ruby: [2.6, 2.7, 3.0]
     env:
       RAILS_VERSION: ${{ matrix.rails_version }}
     steps:
