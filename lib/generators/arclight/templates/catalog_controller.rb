@@ -96,6 +96,9 @@ class CatalogController < ApplicationController
     config.add_facet_field 'places_ssim', label: 'Places', show: false
     config.add_facet_field 'access_subjects_ssim', label: 'Subject', limit: 10
     config.add_facet_field 'component_level_isim', show: false
+
+    # Note that parent_ssim is an array of all ancestor nodes, including the parent
+    # parent_ssi is just the immediate parent; it's used in queries for context nav
     config.add_facet_field 'parent_ssim', show: false
     config.add_facet_field 'parent_ssi', show: false
 
