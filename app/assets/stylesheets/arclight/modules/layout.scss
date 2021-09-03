@@ -111,13 +111,12 @@
 
 // Collapse +/- indicators
 .al-toggle-view-children {
-  &:not(.collapsed) {
-    & {
-      content: image-url('blacklight/minus.svg');
-    }
+  &::after {
+    content: image-url('blacklight/plus.svg');
   }
-
-  content: image-url('blacklight/plus.svg');
+  &:not(.collapsed)::after {
+    content: image-url('blacklight/minus.svg');
+  }
 }
 
 .al-toggle-children-container {

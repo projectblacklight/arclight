@@ -95,6 +95,8 @@ class CatalogController < ApplicationController
     config.add_facet_field 'geogname_sim', label: 'Place', limit: 10
     config.add_facet_field 'places_ssim', label: 'Places', show: false
     config.add_facet_field 'access_subjects_ssim', label: 'Subject', limit: 10
+    config.add_facet_field 'component_level_isim', show: false
+    config.add_facet_field 'parent_ssim', show: false
 
     # Have BL send all facet field names to Solr, which has been the default
     # previously. Simply remove these lines if you'd rather use Solr request
