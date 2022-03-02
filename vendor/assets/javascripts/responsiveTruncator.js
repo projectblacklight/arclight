@@ -45,7 +45,7 @@
 						toggle_link.click(function(){
 						  var text = toggle_link.text() == settings.more ? settings.less : settings.more;
 							toggle_link.text(text);
-							if(truncate.height() <= truncate_height){
+							if(parseInt(truncate.height(), 10) <= parseInt(truncate_height), 10) {
 								truncate.css({height: '100%'})
 							}else{
 								truncate.css({height: truncate_height})
