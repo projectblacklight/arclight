@@ -23,18 +23,17 @@ Gem::Specification.new do |spec|
   spec.require_paths = ['lib']
 
   spec.add_dependency 'blacklight', '~> 7.2'
-  spec.add_dependency 'blacklight_range_limit', '~> 7.1'
-  spec.add_dependency 'rails', '>= 5.2.3', '< 6.2'
+  spec.add_dependency 'blacklight_range_limit', '>= 7.1', '< 9'
+  spec.add_dependency 'rails', '>= 6', '< 7.1'
   spec.add_dependency 'rexml'
-  spec.add_dependency 'sprockets-bumble_d'
   spec.add_dependency 'traject', '~> 3.0'
-  spec.add_dependency 'traject_plus', '~> 1.2'
+  spec.add_dependency 'traject_plus', '~> 2.0'
 
-  spec.add_development_dependency 'bundler', '> 1.14'
+  spec.add_development_dependency 'bundler'
   spec.add_development_dependency 'capybara'
   spec.add_development_dependency 'engine_cart'
   spec.add_development_dependency 'i18n-tasks'
-  spec.add_development_dependency 'rake', '~> 12.0'
+  spec.add_development_dependency 'rake', '>= 12.0'
   spec.add_development_dependency 'rspec-rails'
   spec.add_development_dependency 'rubocop', '~> 1.8'
   spec.add_development_dependency 'rubocop-rails', '~> 2.8'
