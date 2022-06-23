@@ -16,8 +16,6 @@ jobs:
         include:
           - rails_version: 6.0.3.7
             ruby: 2.7
-          - rails_version: 5.2.6.3
-            ruby: 2.6
     env:
       RAILS_VERSION: ${{ matrix.rails_version }}
     steps:
