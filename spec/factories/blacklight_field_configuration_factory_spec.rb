@@ -17,7 +17,7 @@ describe BlacklightFieldConfigurationFactory, type: :factory do
 
   context 'a configured field' do
     it 'returns the configuration class for the given field' do
-      expect(factory.field_config).to be_a Blacklight::Configuration::SummaryField
+      expect(factory.field_config).to be_a Blacklight::Configuration::Field
       expect(factory.field_config.separator_options).to eq(words_connector: '; ')
     end
   end

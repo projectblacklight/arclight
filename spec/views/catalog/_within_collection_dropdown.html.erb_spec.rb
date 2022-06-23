@@ -2,7 +2,7 @@
 
 require 'spec_helper'
 
-RSpec.describe 'catalog/_within_collection_dropdown.html.erb', type: :view do
+RSpec.describe 'catalog/_within_collection_dropdown', type: :view do
   before do
     allow(view).to receive(:within_collection_context?).and_return(within_collection_context?)
     render
