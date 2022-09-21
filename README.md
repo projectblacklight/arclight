@@ -16,7 +16,7 @@ A Rails engine supporting discovery of archival materials, based on [Blacklight]
 
 ## Installation
 
-[Installing ArcLight](https://github.com/sul-dlss/arclight/wiki/Creating,-installing,-and-running-your-ArcLight-application) is straightforward in a Rails environment.
+[Installing ArcLight](https://github.com/projectblacklight/arclight/wiki/Creating,-installing,-and-running-your-ArcLight-application) is straightforward in a Rails environment.
 
 Basically, add this line to your application's `Gemfile`:
 
@@ -36,7 +36,7 @@ Or install it yourself as:
 $ gem install arclight
 ```
 
-For further details, see our [Installing ArcLight](https://github.com/sul-dlss/arclight/wiki/Creating,-installing,-and-running-your-ArcLight-application) documentation.
+For further details, see our [Installing ArcLight](https://github.com/projectblacklight/arclight/wiki/Creating,-installing,-and-running-your-ArcLight-application) documentation.
 
 ## Usage
 
@@ -48,9 +48,9 @@ Browsing allows you to view the Overview or Contents (when it exists) of a colle
 
 Some pages include an inline view tab to the right of an item which will expand the Contents further.
 
-See the [ArcLight demo](https://arclight-demo.projectblacklight.org/) and [ArcLight MVP Wiki](https://github.com/sul-dlss/arclight/wiki) for usage.
+See the [ArcLight demo](https://arclight-demo.projectblacklight.org/) and [ArcLight MVP Wiki](https://github.com/projectblacklight/arclight/wiki) for usage.
 
-See [Arclight Major Features](https://github.com/sul-dlss/arclight/wiki/Arclight-Major-Features) for a list of features.
+See [Arclight Major Features](https://github.com/projectblacklight/arclight/wiki/Arclight-Major-Features) for a list of features.
 
 ### Traject indexing of EAD content
 [Traject](https://github.com/traject/traject) is a high performance way of transforming documents for indexing into Solr and how ArcLight does indexing. An EAD2 can be indexed by doing the following:
@@ -70,7 +70,7 @@ bundle exec rake arclight:seed
 * General
   * [ArcLight demo site](https://arclight-demo.projectblacklight.org/)
   * [ArcLight project wiki](https://bit.ly/arclightproject): includes design process documentation
-  * [ArcLight Github Wiki](https://github.com/sul-dlss/arclight/wiki): developer/implementor documentation
+  * [ArcLight Github Wiki](https://github.com/projectblacklight/arclight/wiki): developer/implementor documentation
   * [Blacklight wiki](https://github.com/projectblacklight/blacklight/wiki)
   * Use the [ArcLight Google Group](http://groups.google.com/d/forum/arclight-community) to contact us with questions
 * ArcLight Phase II:
@@ -117,7 +117,7 @@ To release a new version:
 
 ## Contributing
 
-[Bug reports](https://github.com/sul-dlss/arclight/issues) and [pull requests](https://github.com/sul-dlss/arclight/pulls) are welcome on ArcLight -- see [CONTRIBUTING.md](https://github.com/sul-dlss/arclight/blob/master/CONTRIBUTING.md) for details.
+[Bug reports](https://github.com/projectblacklight/arclight/issues) and [pull requests](https://github.com/projectblacklight/arclight/pulls) are welcome on ArcLight -- see [CONTRIBUTING.md](https://github.com/projectblacklight/arclight/blob/main/CONTRIBUTING.md) for details.
 ## License
 
 The gem is available as open source under the terms of the [Apache 2 License](https://opensource.org/licenses/Apache-2.0).
