@@ -20,12 +20,12 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/sul-dlss/arclight.git"
+    "url": "git+https://github.com/projectblacklight/arclight.git"
   },
   "author": "",
   "license": "Apache-2.0",
   "bugs": {
-    "url": "https://github.com/sul-dlss/arclight/issues"
+    "url": "https://github.com/projectblacklight/arclight/issues"
   },
-  "homepage": "https://github.com/sul-dlss/arclight#readme"
+  "homepage": "https://github.com/projectblacklight/arclight#readme"
 }

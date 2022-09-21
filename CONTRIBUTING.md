@@ -1,13 +1,13 @@
 ## Contributing
 
-ArcLight is a collaborative open source project where contributions are welcome. This contributing guide is borrowed in part from the [GeoBlacklight Contributing Guide](https://github.com/geoblacklight/geoblacklight/blob/master/CONTRIBUTING.md).
+ArcLight is a collaborative open source project where contributions are welcome. This contributing guide is borrowed in part from the [GeoBlacklight Contributing Guide](https://github.com/geoblacklight/geoblacklight/blob/main/CONTRIBUTING.md).
 
 ### Reporting issues
 
-Did you find a bug in ArcLight or interested in a new feature? Please make sure to add an issue for it in the [issue tracker](https://github.com/sul-dlss/arclight/issues) as follows:
+Did you find a bug in ArcLight or interested in a new feature? Please make sure to add an issue for it in the [issue tracker](https://github.com/projectblacklight/arclight/issues) as follows:
 
  - Make sure you have a [GitHub account](https://github.com/signup/free)
- - Submit a new [Github issue](https://github.com/sul-dlss/arclight/issues) by:
+ - Submit a new [Github issue](https://github.com/projectblacklight/arclight/issues) by:
     - Clearly describing the issue
     - Provide a descriptive summary
     - Explain the expected behavior
@@ -20,7 +20,7 @@ ArcLight also welcomes code and documentation contributions. We follow the [pull
 
 #### Pull request overview
 
-1. Fork it ( http://github.com/sul-dlss/arclight/fork )
+1. Fork it ( http://github.com/projectblacklight/arclight/fork )
 2. Create your feature branch (`git checkout -b my-new-feature`)
 3. Commit your changes (`git commit -am 'Add some feature'`)
 4. Push to the branch (`git push origin my-new-feature`)
@@ -40,4 +40,4 @@ Here are some general rules to follow for merging pull requests.
 - If you are uncertain, bring other contributors into the conversation by creating a comment that includes their `@username`.
 - If you like the pull request, but want others to chime in, create a +1 comment and tag a user.
 
-If you wish to ask questions or participate further, see our general [README](https://github.com/sul-dlss/arclight/blob/master/README.md).
+If you wish to ask questions or participate further, see our general [README](https://github.com/projectblacklight/arclight/blob/main/README.md).

@@ -12,7 +12,7 @@ Gem::Specification.new do |spec|
 
   spec.summary       = ''
   spec.description   = ''
-  spec.homepage      = 'https://github.com/sul-dlss/arclight'
+  spec.homepage      = 'https://github.com/projectblacklight/arclight'
   spec.license       = 'Apache-2.0'
 
   spec.files         = `git ls-files -z`.split("\x0").reject do |f|
