@@ -35,38 +35,4 @@ RSpec.describe CatalogController, type: :controller do
       end
     end
   end
-
-  describe '#facet_limit_for' do
-    let(:blacklight_config) { controller.blacklight_config }
-
-    it 'defaults to a limit of 10 for shown field facets' do
-      expect(blacklight_config.facet_fields.key?('collection_sim')).to be true
-      expect(blacklight_config.facet_fields['collection_sim'].limit).to eq 10
-      expect(controller.facet_limit_for('collection_sim')).to eq 10
-
-      expect(blacklight_config.facet_fields.key?('creator_ssim')).to be true
-      expect(blacklight_config.facet_fields['creator_ssim'].limit).to eq 10
-      expect(controller.facet_limit_for('creator_ssim')).to eq 10
-
-      expect(blacklight_config.facet_fields.key?('level_sim')).to be true
-      expect(blacklight_config.facet_fields['level_sim'].limit).to eq 10
-      expect(controller.facet_limit_for('level_sim')).to eq 10
-
-      expect(blacklight_config.facet_fields.key?('names_ssim')).to be true
-      expect(blacklight_config.facet_fields['names_ssim'].limit).to eq 10
-      expect(controller.facet_limit_for('names_ssim')).to eq 10
-
-      expect(blacklight_config.facet_fields.key?('repository_sim')).to be true
-      expect(blacklight_config.facet_fields['repository_sim'].limit).to eq 10
-      expect(controller.facet_limit_for('repository_sim')).to eq 10
-
-      expect(blacklight_config.facet_fields.key?('geogname_sim')).to be true
-      expect(blacklight_config.facet_fields['geogname_sim'].limit).to eq 10
-      expect(controller.facet_limit_for('geogname_sim')).to eq 10
-
-      expect(blacklight_config.facet_fields.key?('access_subjects_ssim')).to be true
-      expect(blacklight_config.facet_fields['access_subjects_ssim'].limit).to eq 10
-      expect(controller.facet_limit_for('access_subjects_ssim')).to eq 10
-    end
-  end
 end
