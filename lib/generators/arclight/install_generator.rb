@@ -50,8 +50,7 @@ module Arclight
     def inject_js
       inject_into_file 'app/assets/javascripts/application.js', after: '//= require blacklight/blacklight' do
         "\n// Required by Arclight" \
-        "\n//= require arclight/arclight" \
-        "\n//= require stickyfill"
+        "\n//= require arclight/arclight"
       end
     end
 
