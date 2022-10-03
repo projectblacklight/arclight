@@ -49,6 +49,8 @@
 }
 
 .within-collection-dropdown {
+  flex-basis: calc(20ch + 2rem);
+  flex-basis: max-content;
   min-width: 0;
 
   @include media-breakpoint-up(sm) {

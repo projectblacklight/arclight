@@ -1,38 +1,11 @@
-<%
-# Overridden from Blacklight to add a drop down that allows the user to choose to search w/i the collection or all collections
-%>
-<%= form_tag search_action_url, method: :get, class: 'search-query-form pr-0', role: 'search' do %>
-  <%= render_hash_as_hidden_fields(search_state.params_for_search.except(:q, :search_field, :qt, :page, :utf8).merge(f: (search_state.params_for_search[:f] || {}).except(:collection_sim))) %>
-  <div class="d-md-flex">
+<%= render((blacklight_config&.view_config(document_index_view_type)&.search_bar_component || Blacklight::SearchBarComponent).new(
+      url: search_action_url,
+      advanced_search_url: search_action_url(action: 'advanced_search'),
+      params: search_state.params_for_search.except(:qt).merge(f: (search_state.params_for_search[:f] || {}).except(:collection_sim)),
+      presenter: presenter,
+      autocomplete_path: search_action_path(action: :suggest))) do |c| %>
+
+  <% c.prepend do %>
     <%= render 'catalog/within_collection_dropdown' %>
-
-    <% if search_fields.length > 1 %>
-      <label for="search_field" class="sr-only"><%= t('blacklight.search.form.search_field.label') %></label>
-    <% end %>
-    <div class="input-group flex-nowrap">
-      <% if search_fields.length > 1 %>
-          <%= select_tag(:search_field,
-                         options_for_select(search_fields, h(params[:search_field])),
-                         title: t('blacklight.search.form.search_field.title'),
-                         id: "search_field",
-                         class: "custom-select search-field") %>
-      <% elsif search_fields.length == 1 %>
-        <%= hidden_field_tag :search_field, search_fields.first.last %>
-      <% end %>
-
-      <label for="q" class="sr-only"><%= t('blacklight.search.form.search.label') %></label>
-      <%
-        # Use "autocomplete_path: suggest_index_catalog_path" explicitly so that the RepositoriesController gets the appropriate
-        # autocomplete path w/o having to have the search form action be local to the controller (by including Blacklight::Catalog)
-      %>
-      <%= text_field_tag :q, params[:q], placeholder: t('blacklight.search.form.search.placeholder'), class: "search-q q rounded-0 form-control", id: "q", autofocus: presenter.autofocus?, data: { autocomplete_enabled: presenter.autocomplete_enabled?, autocomplete_path: suggest_index_catalog_path }  %>
-
-      <span class="input-group-append">
-        <button type="submit" class="btn btn-primary search-btn" id="search">
-          <span class="submit-search-text d-none d-lg-inline"><%= t('blacklight.search.form.submit') %></span>
-          <%= blacklight_icon :search, aria_hidden: true %>
-        </button>
-      </span>
-    </div>
-  </div>
+  <% end %>
 <% end %>
