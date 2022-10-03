@@ -6,7 +6,8 @@
   "globals": {
     "jQuery": true,
     "$": true,
-    "Blacklight": true
+    "Blacklight": true,
+    "bootstrap": true
   },
   "rules": {
     "no-param-reassign": [2, { "props": false }],
