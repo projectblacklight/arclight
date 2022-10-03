@@ -6,7 +6,6 @@
 
 A Rails engine supporting discovery of archival materials, based on [Blacklight](https://projectblacklight.org/)
 
-> ℹ️ From August-October 2019, Stanford University, University of Michigan, Indiana University, Princeton University, and Duke University are collaborating on a second phase of ArcLight! See the [project board](https://github.com/projectblacklight/arclight/projects/2) or our [demo videos](https://www.youtube.com/playlist?list=PLMdUaIJ0G8QiIXZ_SFHASJErD14CJW-p5) to follow our work.
 
 ## Requirements
 
