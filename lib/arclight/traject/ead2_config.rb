@@ -55,7 +55,7 @@ DID_SEARCHABLE_NOTES_FIELDS = %w[
 settings do
   provide 'reader_class_name', 'Arclight::Traject::NokogiriNamespacelessReader'
   provide 'solr_writer.commit_on_close', 'true'
-  provide 'repository', ENV['REPOSITORY_ID']
+  provide 'repository', ENV.fetch('REPOSITORY_ID', nil)
   provide 'logger', Logger.new($stderr)
 end
 
@@ -267,7 +267,7 @@ compose 'components', ->(record, accumulator, _context) { accumulator.concat rec
     accumulator << [
       context.clipboard[:parent].output_hash['id'],
       context.output_hash['ref_ssi']
-    ].join('')
+    ].join
   end
 
   to_field 'ead_ssi' do |_record, accumulator, context|
@@ -301,7 +301,7 @@ compose 'components', ->(record, accumulator, _context) { accumulator.concat rec
   end
 
   to_field 'component_level_isim' do |record, accumulator|
-    accumulator << 1 + NokogiriXpathExtensions.new.is_component(record.ancestors).count
+    accumulator << (1 + NokogiriXpathExtensions.new.is_component(record.ancestors).count)
   end
 
   to_field 'parent_ssim' do |record, accumulator, context|

@@ -13,7 +13,7 @@ RSpec.describe Arclight::DigitalObject do
     end
 
     it 'uses href if label is blank' do
-      expect(empty_label.href).to eq empty_label.href
+      expect(empty_label.href).to eq 'https://example.com/an-object-href'
     end
   end
 

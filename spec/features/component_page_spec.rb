@@ -253,11 +253,11 @@ RSpec.describe 'Component Page', type: :feature do
   describe 'breadcrumb' do
     it 'links home, collection, and parents' do
       within '.al-show-breadcrumb' do
-        expect(page).to have_css 'a', text: 'Home'
-        expect(page).to have_css 'a', text: 'National Library of Medicine. History of Medicine Division'
-        expect(page).to have_css 'a', text: 'Alpha Omega Alpha Archives, 1894-1992'
-        expect(page).to have_css 'a', text: 'Series I: Administrative Records, 1902-1976, bulk 1975-1976'
-        expect(page).to have_css 'a', count: 4
+        expect(page).to have_link 'Home'
+        expect(page).to have_link 'National Library of Medicine. History of Medicine Division'
+        expect(page).to have_link 'Alpha Omega Alpha Archives, 1894-1992'
+        expect(page).to have_link 'Series I: Administrative Records, 1902-1976, bulk 1975-1976'
+        expect(page).to have_link count: 4
       end
     end
   end
@@ -267,8 +267,8 @@ RSpec.describe 'Component Page', type: :feature do
 
     it 'renders links to the files for download' do
       within '.al-show-actions-box-downloads-container' do
-        expect(page).to have_css('a', text: 'Download finding aid (1.23MB)')
-        expect(page).to have_css('a', text: 'Download EAD (123456)')
+        expect(page).to have_link 'Download finding aid (1.23MB)'
+        expect(page).to have_link 'Download EAD (123456)'
       end
     end
   end

@@ -108,7 +108,7 @@ RSpec.describe 'Search results', type: :feature do
 
         within('.blacklight-repository_sim') do
           expect(page).to have_css('h3 button', text: 'Repository')
-          expect(page).to have_css('li .facet-label', text: 'National Library of Medicine. History of Medicine Division', visible: :hidden) # rubocop: disable Metrics/LineLength
+          expect(page).to have_css('li .facet-label', text: 'National Library of Medicine. History of Medicine Division', visible: :hidden)
         end
 
         within('.blacklight-geogname_sim') do

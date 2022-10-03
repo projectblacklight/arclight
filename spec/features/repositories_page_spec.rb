@@ -32,6 +32,8 @@ RSpec.describe 'Repositores Page', type: :feature do
       click_link 'Stanford University Libraries. Special Collections and University Archives'
 
       click_link 'View all of our collections'
+
+      expect(page).to have_css('h2', text: 'Search Results')
     end
 
     it 'does not link the same page in the repository card header' do
@@ -47,7 +49,7 @@ RSpec.describe 'Repositores Page', type: :feature do
       end
     end
 
-    it 'has a title title starting with the repository name ' do
+    it 'has a title title starting with the repository name' do
       visit '/repositories'
 
       click_link 'Stanford University Libraries. Special Collections and University Archives'

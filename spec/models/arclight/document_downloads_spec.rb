@@ -72,7 +72,7 @@ RSpec.describe Arclight::DocumentDownloads do
     context 'when a template is provided for the href' do
       before do
         allow(document).to receive(:repository_config).and_return(
-          instance_double('Arclight::Repository', slug: 'the-repo-id')
+          instance_double(Arclight::Repository, slug: 'the-repo-id')
         )
       end
 

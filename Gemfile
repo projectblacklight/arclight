@@ -31,7 +31,7 @@ else
     end
   end
 
-  case ENV['RAILS_VERSION']
+  case ENV.fetch('RAILS_VERSION', nil)
   when /^4.2/
     gem 'coffee-rails', '~> 4.1.0'
     gem 'responders', '~> 2.0'

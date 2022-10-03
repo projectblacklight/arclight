@@ -23,8 +23,8 @@ RSpec.describe 'Online Content', type: :feature do
       let(:doc_id) { 'aoa271aspace_843e8f9f22bac69872d0802d6fffbb04' }
 
       it 'renders a list of links', js: true do
-        expect(page).to have_link('Folder of digitized stuff')
-        expect(page).to have_css('a', text: /^Letter from Christian B. Anfinsen/)
+        expect(page).to have_link 'Folder of digitized stuff'
+        expect(page).to have_link 'Letter from Christian B. Anfinsen'
       end
     end
 

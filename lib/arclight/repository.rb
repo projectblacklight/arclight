@@ -7,7 +7,7 @@ module Arclight
   class Repository
     include ActiveModel::Conversion # for to_partial_path
 
-    attr_accessor :slug, :collection_count
+    attr_accessor :name, :slug, :collection_count
 
     # @param [String] `slug` the unique identifier for the repository
     # @param [Hash] `data`

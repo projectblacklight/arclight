@@ -11,11 +11,11 @@ RSpec.describe 'Item breadcrumb', type: :feature do
 
     within document do
       within '.breadcrumb-links' do
-        expect(page).to have_css 'a', text: 'National Library of Medicine. History of Medicine Division'
-        expect(page).to have_css 'a', text: 'Alpha Omega Alpha Archives'
-        expect(page).to have_css 'a', text: 'Series I: Administrative Records'
-        expect(page).to have_css 'a', text: 'Reports'
-        expect(page).to have_css 'a', text: 'Expansion Plan'
+        expect(page).to have_link 'National Library of Medicine. History of Medicine Division'
+        expect(page).to have_link 'Alpha Omega Alpha Archives'
+        expect(page).to have_link 'Series I: Administrative Records'
+        expect(page).to have_link 'Reports'
+        expect(page).to have_link 'Expansion Plan'
         click_link 'Expansion Plan'
       end
     end
