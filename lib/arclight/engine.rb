@@ -18,22 +18,6 @@ module Arclight
     config.viewer_class = Arclight::Viewers::OEmbed
     config.oembed_resource_exclude_patterns = [/\.pdf$/, /\.ppt$/]
 
-    Arclight::Engine.config.catalog_controller_field_accessors = %i[
-      summary_field
-      access_field
-      contact_field
-      background_field
-      related_field
-      terms_field
-      cite_field
-      indexed_terms_field
-      in_person_field
-      component_field
-      online_field
-      component_terms_field
-      component_indexed_terms_field
-    ]
-
     Arclight::Engine.config.catalog_controller_group_query_params = {
       group: true,
       'group.field': 'collection_ssi',
@@ -45,12 +29,6 @@ module Arclight
       'parent.fq': '{!term f=level_sim v="Collection"}',
       'parent.defType': 'lucene'
     }
-
-    initializer 'arclight.fields' do
-      Arclight::Engine.config.catalog_controller_field_accessors.each do |field|
-        Blacklight::Configuration.define_field_access field
-      end
-    end
 
     initializer 'arclight.helpers' do
       config.after_initialize do

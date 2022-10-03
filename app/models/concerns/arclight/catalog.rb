@@ -13,6 +13,18 @@ module Arclight
           params[:f].delete(:collection_sim) if params[:f][:collection_sim].blank?
         end
       end
+
+      Blacklight::Configuration.define_field_access :summary_field
+      Blacklight::Configuration.define_field_access :background_field
+      Blacklight::Configuration.define_field_access :related_field
+      Blacklight::Configuration.define_field_access :indexed_terms_field
+      Blacklight::Configuration.define_field_access :in_person_field
+      Blacklight::Configuration.define_field_access :cite_field
+      Blacklight::Configuration.define_field_access :contact_field
+      Blacklight::Configuration.define_field_access :component_field
+      Blacklight::Configuration.define_field_access :component_indexed_terms_field
+      Blacklight::Configuration.define_field_access :terms_field
+      Blacklight::Configuration.define_field_access :component_terms_field
     end
 
     ##
