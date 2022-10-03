@@ -66,7 +66,7 @@ RSpec.describe Arclight::Viewers::OEmbed do
 
     it 'returns a hash with oembed information' do
       attributes = viewer.attributes_for(document.digital_objects.first)
-      expect(attributes[:'data-arclight-oembed']).to eq true
+      expect(attributes[:'data-arclight-oembed']).to be true
     end
 
     it 'returns an empty hash for non-embeddable objects' do

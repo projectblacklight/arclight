@@ -6,12 +6,12 @@ RSpec.describe Arclight::Requests::GoogleForm do
   subject(:valid_object) { described_class.new(document, presenter, '') }
 
   let(:config) do
-    instance_double 'Arclight::Repository',
+    instance_double Arclight::Repository,
                     request_url_for_type: 'https://docs.google.com/abc123',
                     request_mappings_for_type: 'collection_name=abc&eadid=123'
   end
-  let(:document) { instance_double 'Blacklight::SolrDocument', repository_config: config }
-  let(:presenter) { instance_double 'Arclight::ShowPresenter', heading: 'Indiana Jones and the Last Crusade' }
+  let(:document) { instance_double SolrDocument, repository_config: config }
+  let(:presenter) { instance_double Arclight::ShowPresenter, heading: 'Indiana Jones and the Last Crusade' }
 
   describe 'API' do
     it 'responds to needed methods for mapping' do

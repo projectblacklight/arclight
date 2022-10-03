@@ -6,11 +6,11 @@ RSpec.describe Arclight::Requests::AeonWebEad do
   subject(:valid_object) { described_class.new(document, 'http://example.com/sample.xml') }
 
   let(:config) do
-    instance_double 'Arclight::Repository',
+    instance_double Arclight::Repository,
                     request_url_for_type: 'https://sample.request.com',
                     request_mappings_for_type: 'Action=10&Form=31&Value=ead_url'
   end
-  let(:document) { instance_double 'Blacklight::SolrDocument', repository_config: config }
+  let(:document) { instance_double SolrDocument, repository_config: config }
 
   describe '#request_url' do
     it 'returns from the repository config' do

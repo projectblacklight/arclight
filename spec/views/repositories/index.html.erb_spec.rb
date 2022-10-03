@@ -82,7 +82,7 @@ RSpec.describe 'arclight/repositories/index', type: :view do
     end
 
     it 'does not show on repositories detail page' do
-      assign(:repository, instance_double('repository', name: 'My Repository'))
+      assign(:repository, instance_double(Arclight::Repository, name: 'My Repository'))
       allow(view).to receive(:on_repositories_index?).and_return(false)
       allow(view).to receive(:on_repositories_show?).and_return(true)
       render

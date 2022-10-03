@@ -20,14 +20,14 @@ describe Arclight::SearchBehavior do
     context 'when in collection_context view' do
       let(:user_params) { { view: 'online_contents' } }
 
-      it 'does not modify params ' do
+      it 'does not modify params' do
         expect(search_builder_instance.add_facetting_to_solr(solr_params)).to eq({})
       end
     end
     context 'in index view' do
       let(:user_params) { { view: 'index' } }
 
-      it 'calls super (from Blacklight) ' do
+      it 'calls super (from Blacklight)' do
         expect do
           search_builder_instance.add_facetting_to_solr(solr_params)
         end.to raise_error(NoMethodError).with_message(/super/)

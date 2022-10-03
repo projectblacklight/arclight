@@ -8,7 +8,7 @@ module Arclight
     class AeonWebEad
       attr_reader :document, :ead_url
       ##
-      # @param [Blacklight::SolrDocument] document
+      # @param [SolrDocument] document
       # @param [String] ead_url
       def initialize(document, ead_url)
         @document = document

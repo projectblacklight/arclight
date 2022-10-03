@@ -18,7 +18,7 @@ RSpec.describe 'Grouped search results', type: :feature do
   it 'displays breadcrumbs only for component parents' do
     visit search_catalog_path q: 'alpha omega', group: 'true'
     within first('.breadcrumb-links') do
-      expect(page).not_to have_css 'a', text: /Alpha/
+      expect(page).not_to have_link(/Alpha/)
     end
     expect(page).to have_css '.breadcrumb-links a', text: /Series/
   end

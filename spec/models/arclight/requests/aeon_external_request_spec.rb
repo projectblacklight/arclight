@@ -25,11 +25,11 @@ RSpec.describe Arclight::Requests::AeonExternalRequest do
   end
 
   let(:config) do
-    instance_double 'Arclight::Repository',
-                    'request_config_for_type': config_hash
+    instance_double Arclight::Repository,
+                    request_config_for_type: config_hash
   end
   let(:document) do
-    instance_double 'Blacklight::SolrDocument',
+    instance_double SolrDocument,
                     repository_config: config,
                     collection_name: 'Cool Document'
   end

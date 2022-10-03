@@ -19,7 +19,7 @@ xdescribe 'Google Form Request', type: :feature, js: true do
           expect(page).to have_css 'input[name="entry.996397105"][value="aoa271"]', visible: :hidden
           expect(page).to have_css 'input[name="entry.1125277048"][value="Box 1 Folder 1"]', visible: :hidden
           expect(page).to have_css 'input[name="entry.862815208"][value$="William W. Root, n.d."]', visible: :hidden
-          expect(page).to have_css 'button[type="submit"]', text: 'Request'
+          expect(page).to have_button 'Request'
         end
       end
 

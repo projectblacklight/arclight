@@ -7,7 +7,7 @@ RSpec.describe ArclightHelper, type: :helper do
     context 'with active collection search' do
       let(:search_state) do
         instance_double(
-          'Blacklight::SearchState',
+          Blacklight::SearchState,
           params_for_search: { 'f' => { 'level_sim' => ['Collection'] } }
         )
       end
@@ -16,13 +16,13 @@ RSpec.describe ArclightHelper, type: :helper do
         allow(helper).to receive(:search_state).and_return(search_state)
       end
       it do
-        expect(helper.collection_active?).to eq true
+        expect(helper.collection_active?).to be true
       end
     end
     context 'without active collection search' do
       let(:search_state) do
         instance_double(
-          'Blacklight::SearchState',
+          Blacklight::SearchState,
           params_for_search: {}
         )
       end
@@ -31,7 +31,7 @@ RSpec.describe ArclightHelper, type: :helper do
         allow(helper).to receive(:search_state).and_return(search_state)
       end
       it do
-        expect(helper.collection_active?).to eq false
+        expect(helper.collection_active?).to be false
       end
     end
   end
@@ -39,7 +39,7 @@ RSpec.describe ArclightHelper, type: :helper do
     context 'when group is active' do
       let(:search_state) do
         instance_double(
-          'Blacklight::SearchState',
+          Blacklight::SearchState,
           params_for_search: { 'group' => 'true' }
         )
       end
@@ -54,7 +54,7 @@ RSpec.describe ArclightHelper, type: :helper do
     context 'when not grouped' do
       let(:search_state) do
         instance_double(
-          'Blacklight::SearchState',
+          Blacklight::SearchState,
           params_for_search: { 'hello' => 'true' }
         )
       end
@@ -70,7 +70,7 @@ RSpec.describe ArclightHelper, type: :helper do
   describe '#search_with_group' do
     let(:search_state) do
       instance_double(
-        'Blacklight::SearchState',
+        Blacklight::SearchState,
         params_for_search: { 'q' => 'hello', 'page' => '2' }
       )
     end
@@ -88,7 +88,7 @@ RSpec.describe ArclightHelper, type: :helper do
   describe '#search_without_group' do
     let(:search_state) do
       instance_double(
-        'Blacklight::SearchState',
+        Blacklight::SearchState,
         params_for_search: { 'q' => 'hello', 'group' => 'true', 'page' => '2' }
       )
     end
@@ -108,15 +108,15 @@ RSpec.describe ArclightHelper, type: :helper do
     context 'with repositories index' do
       it do
         allow(helper).to receive(:controller_name).twice.and_return('repositories')
-        expect(helper.on_repositories_index?).to eq true
+        expect(helper.on_repositories_index?).to be true
         expect(helper.repositories_active_class).to eq 'active'
       end
     end
     context 'without repositories index' do
       it do
         allow(helper).to receive(:controller_name).twice.and_return('NOT repositories')
-        expect(helper.on_repositories_index?).to eq false
-        expect(helper.repositories_active_class).to eq nil
+        expect(helper.on_repositories_index?).to be false
+        expect(helper.repositories_active_class).to be_nil
       end
     end
   end
@@ -126,22 +126,22 @@ RSpec.describe ArclightHelper, type: :helper do
     context 'with repositories show' do
       it do
         allow(helper).to receive(:controller_name).twice.and_return('repositories')
-        expect(helper.on_repositories_show?).to eq true
-        expect(helper.repositories_active_class).to eq nil
+        expect(helper.on_repositories_show?).to be true
+        expect(helper.repositories_active_class).to be_nil
       end
     end
     context 'without repositories show' do
       it do
         allow(helper).to receive(:controller_name).twice.and_return('NOT repositories')
-        expect(helper.on_repositories_show?).to eq false
-        expect(helper.repositories_active_class).to eq nil
+        expect(helper.on_repositories_show?).to be false
+        expect(helper.repositories_active_class).to be_nil
       end
     end
   end
   describe '#collection_count' do
     context 'when there are items' do
       it 'returns the item count from the Blacklight::Solr::Response' do
-        assign(:response, instance_double('Response', response: { 'numFound' => 2 }))
+        assign(:response, instance_double(Blacklight::Solr::Response, response: { 'numFound' => 2 }))
 
         expect(helper.collection_count).to eq 2
       end
@@ -149,7 +149,7 @@ RSpec.describe ArclightHelper, type: :helper do
 
     context 'when there are no items' do
       it do
-        assign(:response, instance_double('Response', response: {}))
+        assign(:response, instance_double(Blacklight::Solr::Response, response: {}))
         expect(helper.collection_count).to be_nil
       end
     end
@@ -164,10 +164,10 @@ RSpec.describe ArclightHelper, type: :helper do
     end
 
     context 'when the configured fields have content' do
-      let(:document) { SolrDocument.new('acqinfo_ssim': ['Data']) }
+      let(:document) { SolrDocument.new(acqinfo_ssim: ['Data']) }
 
       it 'is true' do
-        expect(helper.fields_have_content?(document, :background_field)).to eq true
+        expect(helper.fields_have_content?(document, :background_field)).to be true
       end
     end
 
@@ -175,7 +175,7 @@ RSpec.describe ArclightHelper, type: :helper do
       let(:document) { SolrDocument.new }
 
       it 'is true' do
-        expect(helper.fields_have_content?(document, :background_field)).to eq false
+        expect(helper.fields_have_content?(document, :background_field)).to be false
       end
     end
   end
@@ -314,7 +314,7 @@ RSpec.describe ArclightHelper, type: :helper do
     context 'when searching within a repository' do
       before do
         expect(helper).to receive_messages(
-          repository_faceted_on: instance_double('Arclight::Repostory', name: 'Repository Name')
+          repository_faceted_on: instance_double(Arclight::Repository, name: 'Repository Name')
         )
       end
 
@@ -325,7 +325,7 @@ RSpec.describe ArclightHelper, type: :helper do
       before do
         expect(helper).to receive_messages(
           search_state: instance_double(
-            'Blacklight::SearchState', params_for_search: { 'f' => { 'level_sim' => ['Collection'] } }
+            Blacklight::SearchState, params_for_search: { 'f' => { 'level_sim' => ['Collection'] } }
           ),
           facet_field_in_params?: false
         )
@@ -340,7 +340,7 @@ RSpec.describe ArclightHelper, type: :helper do
   end
 
   describe 'document_or_parent_icon' do
-    let(:document) { SolrDocument.new('level_ssm': ['collection']) }
+    let(:document) { SolrDocument.new(level_ssm: ['collection']) }
 
     it 'properly assigns the icon' do
       expect(helper.document_or_parent_icon(document)).to eq 'collection'

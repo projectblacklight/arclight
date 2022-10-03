@@ -162,10 +162,10 @@ RSpec.describe 'Collection Page', type: :feature do
   describe 'navigation bar' do
     it 'has configured links' do
       within '.al-sidebar-navigation-context' do
-        expect(page).to have_css 'a[href="#summary"]', text: 'Summary'
-        expect(page).to have_css 'a[href="#background"]', text: 'Background'
-        expect(page).to have_css 'a[href="#related"]', text: 'Related'
-        expect(page).to have_css 'a[href="#indexed-terms"]', text: 'Indexed Terms'
+        expect(page).to have_link 'Summary', href: '#summary'
+        expect(page).to have_link 'Background', href: '#background'
+        expect(page).to have_link 'Related', href: '#related'
+        expect(page).to have_link 'Indexed Terms', href: '#indexed-terms'
       end
     end
 
@@ -174,7 +174,7 @@ RSpec.describe 'Collection Page', type: :feature do
 
       it 'does not include links to those sections' do
         within '.al-sidebar-navigation-context' do
-          expect(page).not_to have_css 'a[href="#related"]', text: 'Related'
+          expect(page).not_to have_link 'Related'
         end
       end
     end
@@ -295,14 +295,14 @@ RSpec.describe 'Collection Page', type: :feature do
             within '#aoa271aspace_dc2aaf83625280ae2e193beb3f4aea78.al-collection-context' do
               expect(page).to have_css '.al-document-container', text: /Box 1, Folder 4\-5/
             end
-            expect(page).to have_css 'a', text: 'Reports'
+            expect(page).to have_link 'Reports'
             within '#aoa271aspace_238a0567431f36f49acea49ef576d408' do
               click_link 'View'
-              expect(page).to have_css 'a', text: 'Expansion Plan'
+              expect(page).to have_link 'Expansion Plan'
               within '#aoa271aspace_f934f1add34289f28bd0feb478e68275' do
                 click_link 'View'
-                expect(page).to have_css 'a', text: 'Initial Phase'
-                expect(page).to have_css 'a', text: 'Phase II: Expansion'
+                expect(page).to have_link 'Initial Phase'
+                expect(page).to have_link 'Phase II: Expansion'
               end
             end
           end
@@ -333,8 +333,8 @@ RSpec.describe 'Collection Page', type: :feature do
   describe 'breadcrumb' do
     it 'links repository and shows collection header 1 text' do
       within '.al-show-breadcrumb' do
-        expect(page).to have_css 'a', text: 'Home'
-        expect(page).to have_css 'a', text: 'National Library of Medicine. History of Medicine Division'
+        expect(page).to have_link 'Home'
+        expect(page).to have_link 'National Library of Medicine. History of Medicine Division'
         expect(page).to have_css 'span', text: 'Alpha Omega Alpha Archives, 1894-1992'
       end
     end
@@ -344,8 +344,8 @@ RSpec.describe 'Collection Page', type: :feature do
 
     it 'renders links to the files for download' do
       within '.al-show-actions-box-downloads-container' do
-        expect(page).to have_css('a', text: 'Download finding aid (1.23MB)')
-        expect(page).to have_css('a', text: 'Download EAD (123456)')
+        expect(page).to have_link 'Download finding aid (1.23MB)'
+        expect(page).to have_link 'Download EAD (123456)'
       end
     end
   end

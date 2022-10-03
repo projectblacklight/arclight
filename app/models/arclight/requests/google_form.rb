@@ -10,7 +10,7 @@ module Arclight
       delegate :collection_name, :collection_creator, :eadid, :containers, to: :document
 
       ##
-      # @param [Blacklight::SolrDocument] document
+      # @param [SolrDocument] document
       # @param [Arclight::ShowPresenter] presenter
       # @param [String] document_url
       def initialize(document, presenter, document_url)

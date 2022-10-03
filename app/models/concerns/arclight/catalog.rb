@@ -9,7 +9,7 @@ module Arclight
     included do
       before_action only: :index do
         if (params.dig(:f, :collection_sim) || []).any?(&:blank?)
-          params[:f][:collection_sim].delete_if(&:blank?)
+          params[:f][:collection_sim].compact_blank!
           params[:f].delete(:collection_sim) if params[:f][:collection_sim].blank?
         end
       end
@@ -19,7 +19,7 @@ module Arclight
     # Overriding the Blacklight method so that the hierarchy view does not start
     # a new search session
     def start_new_search_session?
-      !%w[online_contents collection_context].include?(params[:view]) && super
+      %w[online_contents collection_context].exclude?(params[:view]) && super
     end
 
     ##

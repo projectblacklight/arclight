@@ -24,7 +24,7 @@ RSpec.describe 'catalog/_within_collection_dropdown', type: :view do
     let(:within_collection_context?) { false }
 
     it 'does not render a name attribute on the select (because it does not need to be sent through the form)' do
-      expect(rendered).not_to have_css('select[name]')
+      expect(rendered).not_to have_select 'name'
     end
 
     it 'has the "all collections" option selected' do
