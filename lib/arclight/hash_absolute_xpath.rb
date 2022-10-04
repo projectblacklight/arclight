@@ -19,6 +19,7 @@ module Arclight
 
     COMPONENT_NODE_NAME_REGEX = /^c\d{,2}$/.freeze
     attr_reader :node
+
     def initialize(node)
       @node = node
     end

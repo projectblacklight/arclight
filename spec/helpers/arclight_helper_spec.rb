@@ -15,10 +15,12 @@ RSpec.describe ArclightHelper, type: :helper do
       before do
         allow(helper).to receive(:search_state).and_return(search_state)
       end
+
       it do
         expect(helper.collection_active?).to be true
       end
     end
+
     context 'without active collection search' do
       let(:search_state) do
         instance_double(
@@ -30,11 +32,13 @@ RSpec.describe ArclightHelper, type: :helper do
       before do
         allow(helper).to receive(:search_state).and_return(search_state)
       end
+
       it do
         expect(helper.collection_active?).to be false
       end
     end
   end
+
   describe '#grouped?' do
     context 'when group is active' do
       let(:search_state) do
@@ -47,10 +51,12 @@ RSpec.describe ArclightHelper, type: :helper do
       before do
         allow(helper).to receive(:search_state).and_return(search_state)
       end
+
       it do
         expect(helper.grouped?).to be_truthy
       end
     end
+
     context 'when not grouped' do
       let(:search_state) do
         instance_double(
@@ -62,11 +68,13 @@ RSpec.describe ArclightHelper, type: :helper do
       before do
         allow(helper).to receive(:search_state).and_return(search_state)
       end
+
       it do
         expect(helper.grouped?).to be_falsey
       end
     end
   end
+
   describe '#search_with_group' do
     let(:search_state) do
       instance_double(
@@ -78,6 +86,7 @@ RSpec.describe ArclightHelper, type: :helper do
     before do
       allow(helper).to receive(:search_state).and_return(search_state)
     end
+
     it do
       expect(helper.search_with_group).to eq(
         'q' => 'hello',
@@ -85,6 +94,7 @@ RSpec.describe ArclightHelper, type: :helper do
       )
     end
   end
+
   describe '#search_without_group' do
     let(:search_state) do
       instance_double(
@@ -96,12 +106,14 @@ RSpec.describe ArclightHelper, type: :helper do
     before do
       allow(helper).to receive(:search_state).and_return(search_state)
     end
+
     it do
       expect(helper.search_without_group).to eq(
         'q' => 'hello'
       )
     end
   end
+
   describe '#on_repositories_index?' do
     before { allow(helper).to receive(:action_name).twice.and_return('index') }
 
@@ -112,6 +124,7 @@ RSpec.describe ArclightHelper, type: :helper do
         expect(helper.repositories_active_class).to eq 'active'
       end
     end
+
     context 'without repositories index' do
       it do
         allow(helper).to receive(:controller_name).twice.and_return('NOT repositories')
@@ -120,6 +133,7 @@ RSpec.describe ArclightHelper, type: :helper do
       end
     end
   end
+
   describe '#on_repositories_show?' do
     before { allow(helper).to receive(:action_name).twice.and_return('show') }
 
@@ -130,6 +144,7 @@ RSpec.describe ArclightHelper, type: :helper do
         expect(helper.repositories_active_class).to be_nil
       end
     end
+
     context 'without repositories show' do
       it do
         allow(helper).to receive(:controller_name).twice.and_return('NOT repositories')
@@ -138,6 +153,7 @@ RSpec.describe ArclightHelper, type: :helper do
       end
     end
   end
+
   describe '#collection_count' do
     context 'when there are items' do
       it 'returns the item count from the Blacklight::Solr::Response' do
@@ -366,6 +382,7 @@ RSpec.describe ArclightHelper, type: :helper do
         end
       end
     end
+
     describe '#render_document_config_field_label' do
       it do
         accessors.each do |accessor|
@@ -373,6 +390,7 @@ RSpec.describe ArclightHelper, type: :helper do
         end
       end
     end
+
     describe '#document_config_field_label' do
       it do
         accessors.each do |accessor|
@@ -380,6 +398,7 @@ RSpec.describe ArclightHelper, type: :helper do
         end
       end
     end
+
     describe '#should_render_config_field?' do
       it do
         accessors.each do |accessor|
@@ -387,18 +406,21 @@ RSpec.describe ArclightHelper, type: :helper do
         end
       end
     end
+
     describe '#generic_document_fields' do
       it 'send along the method call' do
         expect(helper).to receive_messages(document_yolos: nil)
         helper.generic_document_fields(field)
       end
     end
+
     describe '#generic_should_render_field?' do
       it 'send along the method call' do
         expect(helper).to receive_messages(should_render_yolo?: nil)
         helper.generic_should_render_field?(field, 0, 1)
       end
     end
+
     describe '#generic_render_document_field_label?' do
       it 'send along the method call' do
         expect(helper).to receive_messages(render_document_yolo_label: nil)
@@ -406,6 +428,7 @@ RSpec.describe ArclightHelper, type: :helper do
       end
     end
   end
+
   describe '#hierarchy_component_context?' do
     it 'requires a parameter to enable' do
       allow(helper).to receive(:params).and_return(hierarchy_context: 'component')

@@ -18,7 +18,6 @@ module Arclight
     def initialize(dates = nil)
       @years = []
       self << parse_ranges(dates) if dates.present?
-      self
     end
 
     # @return [String] a concise, human-readable version of the year range, including gaps
@@ -77,13 +76,14 @@ module Arclight
     # Deals with making a human-readable range for years with 1 or more gaps.
     # It involves detection of streaks between the gaps.
     # @return [String] 1999-2000, 2002 for 1999, 2000, 2002
-    def to_s_with_gaps # rubocop: disable Metrics/AbcSize, Metrics/MethodLength
+    # rubocop:disable Metrics/AbcSize, Metrics/MethodLength
+    def to_s_with_gaps
       raise ArgumentError if years.blank? || years.length < 2
 
       results = []
       streak = [years[0]]
       i = streak.first
-      years[1..-1].each do |j|
+      years[1..].each do |j|
         i += 1
         if i == j
           streak << j
@@ -100,6 +100,7 @@ module Arclight
       results << to_s_for_streak(streak)
       results.join(', ')
     end
+    # rubocop:enable Metrics/AbcSize, Metrics/MethodLength
 
     def to_s_for_streak(streak)
       return streak.min.to_s if streak.min == streak.max

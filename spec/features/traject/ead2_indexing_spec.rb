@@ -394,6 +394,7 @@ describe 'EAD 2 traject indexing', type: :feature do
             .to eq ['No restrictions on access.']
         end
       end
+
       describe 'userestrict' do
         let(:component_with_own_userestrict) do
           result['components'].find { |c| c['ref_ssi'] == ['aspace_72f14d6c32e142baa3eeafdb6e4d69be'] }
@@ -643,6 +644,7 @@ describe 'EAD 2 traject indexing', type: :feature do
         )
       end
     end
+
     context 'when <dao> is child of the <did> in a <c0x> component' do
       let(:component) { result['components'].find { |c| c['id'] == ['aoa271aspace_843e8f9f22bac69872d0802d6fffbb04'] } }
 
@@ -710,6 +712,7 @@ describe 'EAD 2 traject indexing', type: :feature do
       expect(result['normalized_title_ssm']).to include_ignoring_whitespace 'Stanford University student life photograph album, circa 1900-1906'
     end
   end
+
   describe 'EAD top level is not "collection"' do
     let(:fixture_path) do
       Arclight::Engine.root.join('spec', 'fixtures', 'ead', 'sample', 'no-ids-recordgrp-level.xml')

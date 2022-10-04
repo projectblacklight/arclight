@@ -47,6 +47,7 @@ RSpec.describe Arclight::FieldConfigHelpers do
         end
       end
     end
+
     context 'when repository_config is absent' do
       it do
         expect(helper.repository_config_present(nil, document_without_repository)).to be false

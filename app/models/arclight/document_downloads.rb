@@ -37,14 +37,14 @@ module Arclight
     class << self
       def config
         @config ||= begin
-                      YAML.safe_load(::File.read(config_filename))
-                    rescue Errno::ENOENT
-                      {}
-                    end
+          YAML.safe_load(::File.read(config_filename))
+        rescue Errno::ENOENT
+          {}
+        end
       end
 
       def config_filename
-        Rails.root.join('config', 'downloads.yml')
+        Rails.root.join('config/downloads.yml')
       end
 
       # Accessor for the File Class
@@ -58,6 +58,7 @@ module Arclight
     # Model a single file configured in downloads.yml
     class File
       attr_reader :type, :document
+
       def initialize(type:, data:, document:)
         @type = type
         @data = data
@@ -99,13 +100,13 @@ module Arclight
       end
 
       def template_variables
-        data['template'].scan(/%{(\w+)}/).flatten.uniq
+        template.scan(Regexp.union(/%{(\w+)}/, /%<(\w+)>/)).flatten.compact.uniq
       end
 
       def escaped_document_interpolations
-        non_custom_template_variables.map do |method_name|
-          [method_name, escape_non_url_doc_value(document.send(method_name))]
-        end.to_h
+        non_custom_template_variables.index_with do |method_name|
+          escape_non_url_doc_value(document.send(method_name))
+        end
       end
 
       def escape_non_url_doc_value(value)

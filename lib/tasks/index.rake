@@ -23,13 +23,13 @@ namespace :arclight do
 
     print "Loading #{ENV.fetch('FILE', nil)} into index...\n"
     solr_url = begin
-                 Blacklight.default_index.connection.base_uri
-               rescue StandardError
-                 ENV['SOLR_URL'] || 'http://127.0.0.1:8983/solr/blacklight-core'
-               end
-    elapsed_time = Benchmark.realtime {
+      Blacklight.default_index.connection.base_uri
+    rescue StandardError
+      ENV['SOLR_URL'] || 'http://127.0.0.1:8983/solr/blacklight-core'
+    end
+    elapsed_time = Benchmark.realtime do
       `bundle exec traject -u #{solr_url} -i xml -c #{Arclight::Engine.root}/lib/arclight/traject/ead2_config.rb #{ENV.fetch('FILE', nil)}`
-    }
+    end
     print "Indexed #{ENV.fetch('FILE', nil)} (in #{elapsed_time.round(3)} secs).\n"
   end
 
@@ -68,7 +68,7 @@ namespace :arclight do
       ENV['URL'] = l.chomp
       next if ENV['URL'].empty?
 
-      unless ENV.fetch('URL', nil) =~ /\A#{URI.regexp(%w[http https])}\z/
+      unless ENV.fetch('URL', nil) =~ /\A#{URI::DEFAULT_PARSER.make_regexp(%w[http https])}\z/
         puts "Skipping invalid looking url #{ENV.fetch('URL', nil)}"
         next
       end

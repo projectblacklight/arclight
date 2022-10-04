@@ -4,6 +4,7 @@ require 'spec_helper'
 
 RSpec.describe 'Home Page', type: :feature do
   before { visit '/' }
+
   it 'has a custom heading' do
     expect(page).to have_css 'h1', text: 'Archival Collections at Institution'
   end

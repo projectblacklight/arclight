@@ -8,6 +8,7 @@ module Arclight
         'id must be present for all documents and components'
       end
     end
+
     # Unittitle or unitdate must be present on all documents and components
     class TitleNotFound < StandardError
       def message

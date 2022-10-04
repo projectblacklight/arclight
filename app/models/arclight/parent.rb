@@ -6,6 +6,7 @@ module Arclight
   # https://github.com/awead/solr_ead/blob/8cf7ffaa66e0e4c9c0b12f5646d6c2e20984cd99/lib/solr_ead/behaviors.rb#L54-L57
   class Parent
     attr_reader :id, :label, :eadid, :level
+
     def initialize(id:, label:, eadid:, level:)
       @id = id
       @label = label

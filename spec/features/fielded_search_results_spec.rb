@@ -41,6 +41,7 @@ RSpec.describe 'Field-based search results', type: :feature do
           end
         end
       end
+
       context 'for components, fielded content is searchable by' do
         it 'title' do
           visit search_catalog_path q: 'a brief account', search_field: 'all_fields', f: { level_sim: ['File'] }

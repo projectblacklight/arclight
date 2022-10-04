@@ -7,80 +7,6 @@
 # versions of RuboCop, may require this file to be generated again.
 
 # Offense count: 1
-# Configuration parameters: Include.
-# Include: **/*.gemspec
-Gemspec/RequiredRubyVersion:
-  Exclude:
-    - 'arclight.gemspec'
-
-# Offense count: 2
-# Cop supports --auto-correct.
-# Configuration parameters: EnforcedStyleAlignWith, Severity.
-# SupportedStylesAlignWith: start_of_line, begin
-Layout/BeginEndAlignment:
-  Exclude:
-    - 'app/models/arclight/document_downloads.rb'
-    - 'lib/tasks/index.rake'
-
-# Offense count: 1
-# Cop supports --auto-correct.
-# Configuration parameters: EmptyLineBetweenMethodDefs, EmptyLineBetweenClassDefs, EmptyLineBetweenModuleDefs, AllowAdjacentOneLineDefs, NumberOfEmptyLines.
-Layout/EmptyLineBetweenDefs:
-  Exclude:
-    - 'lib/arclight/exceptions.rb'
-
-# Offense count: 7
-# Cop supports --auto-correct.
-# Configuration parameters: AllowAliasSyntax, AllowedMethods.
-# AllowedMethods: alias_method, public, protected, private
-Layout/EmptyLinesAroundAttributeAccessor:
-  Exclude:
-    - 'app/models/arclight/document_downloads.rb'
-    - 'app/models/arclight/parent.rb'
-    - 'app/models/arclight/parents.rb'
-    - 'app/models/arclight/requests/aeon_web_ead.rb'
-    - 'app/models/arclight/requests/google_form.rb'
-    - 'lib/arclight/digital_object.rb'
-    - 'lib/arclight/hash_absolute_xpath.rb'
-
-# Offense count: 2
-# Cop supports --auto-correct.
-Layout/RescueEnsureAlignment:
-  Exclude:
-    - 'app/models/arclight/document_downloads.rb'
-    - 'lib/tasks/index.rake'
-
-# Offense count: 2
-# Configuration parameters: IgnoredMethods.
-Lint/AmbiguousBlockAssociation:
-  Exclude:
-    - 'lib/arclight/traject/ead2_config.rb'
-
-# Offense count: 1
-# Cop supports --auto-correct.
-Lint/RedundantCopDisableDirective:
-  Exclude:
-    - 'spec/features/search_results_spec.rb'
-
-# Offense count: 1
-# Cop supports --auto-correct.
-Lint/SendWithMixinArgument:
-  Exclude:
-    - 'lib/arclight/engine.rb'
-
-# Offense count: 1
-# Cop supports --auto-correct.
-Lint/UriRegexp:
-  Exclude:
-    - 'lib/tasks/index.rake'
-
-# Offense count: 1
-# Configuration parameters: CheckForMethodsWithNoSideEffects.
-Lint/Void:
-  Exclude:
-    - 'lib/arclight/year_range.rb'
-
-# Offense count: 1
 # Configuration parameters: IgnoredMethods, CountRepeatedAttributes.
 Metrics/AbcSize:
   Max: 19
@@ -120,21 +46,6 @@ RSpec/ContextWording:
 RSpec/DescribedClass:
   Exclude:
     - 'spec/presenters/arclight/show_presenter_spec.rb'
-
-# Offense count: 55
-# Cop supports --auto-correct.
-RSpec/EmptyLineAfterExampleGroup:
-  Enabled: false
-
-# Offense count: 10
-# Cop supports --auto-correct.
-RSpec/EmptyLineAfterHook:
-  Exclude:
-    - 'spec/features/collection_page_spec.rb'
-    - 'spec/features/home_page_spec.rb'
-    - 'spec/features/many_component_ead_spec.rb'
-    - 'spec/helpers/arclight_helper_spec.rb'
-    - 'spec/views/repositories/index.html.erb_spec.rb'
 
 # Offense count: 63
 # Configuration parameters: CountAsOne.
@@ -198,13 +109,6 @@ Rails/ContentTag:
     - 'app/helpers/arclight_helper.rb'
 
 # Offense count: 1
-# Configuration parameters: EnforcedStyle.
-# SupportedStyles: slashes, arguments
-Rails/FilePath:
-  Exclude:
-    - 'app/models/arclight/document_downloads.rb'
-
-# Offense count: 1
 # Configuration parameters: Include.
 # Include: app/helpers/**/*.rb
 Rails/HelperInstanceVariable:
@@ -212,21 +116,9 @@ Rails/HelperInstanceVariable:
     - 'app/helpers/arclight_helper.rb'
 
 # Offense count: 1
-# Cop supports --auto-correct.
-Rails/IndexWith:
-  Exclude:
-    - 'app/models/arclight/document_downloads.rb'
-
-# Offense count: 1
 Rails/OutputSafety:
   Exclude:
     - 'app/controllers/concerns/arclight/field_config_helpers.rb'
-
-# Offense count: 1
-# Cop supports --auto-correct.
-Rails/Presence:
-  Exclude:
-    - 'lib/arclight/digital_object.rb'
 
 # Offense count: 7
 # Cop supports --auto-correct.
@@ -241,64 +133,3 @@ Rails/RakeEnvironment:
 Security/Open:
   Exclude:
     - 'lib/tasks/index.rake'
-
-# Offense count: 1
-# Cop supports --auto-correct.
-# Configuration parameters: EnforcedStyle, ProceduralMethods, FunctionalMethods, IgnoredMethods, AllowBracesOnProceduralOneLiners, BracesRequiredMethods.
-# SupportedStyles: line_count_based, semantic, braces_for_chaining, always_braces
-# ProceduralMethods: benchmark, bm, bmbm, create, each_with_object, measure, new, realtime, tap, with_object
-# FunctionalMethods: let, let!, subject, watch
-# IgnoredMethods: lambda, proc, it
-Style/BlockDelimiters:
-  Exclude:
-    - 'lib/tasks/index.rake'
-
-# Offense count: 1
-# Cop supports --auto-correct.
-# Configuration parameters: Keywords.
-# Keywords: TODO, FIXME, OPTIMIZE, HACK, REVIEW, NOTE
-Style/CommentAnnotation:
-  Exclude:
-    - 'app/models/concerns/arclight/solr_document.rb'
-
-# Offense count: 1
-# Cop supports --auto-correct.
-Style/CommentedKeyword:
-  Exclude:
-    - 'lib/arclight/year_range.rb'
-
-# Offense count: 1
-# Configuration parameters: AllowedConstants.
-Style/Documentation:
-  Exclude:
-    - 'lib/arclight.rb'
-
-# Offense count: 4
-# Configuration parameters: MaxUnannotatedPlaceholdersAllowed, IgnoredMethods.
-# SupportedStyles: annotated, template, unannotated
-Style/FormatStringToken:
-  EnforcedStyle: template
-
-# Offense count: 1
-# Cop supports --auto-correct.
-Style/HashEachMethods:
-  Exclude:
-    - 'lib/arclight/repository.rb'
-
-# Offense count: 2
-# Cop supports --auto-correct.
-Style/IfUnlessModifier:
-  Exclude:
-    - 'app/models/concerns/arclight/search_behavior.rb'
-
-# Offense count: 1
-# Cop supports --auto-correct.
-Style/RedundantRegexpEscape:
-  Exclude:
-    - 'spec/features/collection_page_spec.rb'
-
-# Offense count: 1
-# Cop supports --auto-correct.
-Style/StringConcatenation:
-  Exclude:
-    - 'spec/lib/arclight/repository_spec.rb'

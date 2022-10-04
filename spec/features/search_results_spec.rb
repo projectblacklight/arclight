@@ -154,6 +154,7 @@ RSpec.describe 'Search results', type: :feature do
       expect(page).not_to have_css('.al-repository-card')
     end
   end
+
   describe 'sorting' do
     it 'provides a dropdown with all the options' do
       visit search_catalog_path q: '', search_field: 'all_fields'

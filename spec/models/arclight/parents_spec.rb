@@ -42,12 +42,14 @@ RSpec.describe Arclight::Parents do
         expect(dot_eadid_instance.eadid).to eq 'abc123-xml'
       end
     end
+
     context 'with no data' do
       it 'returns an instance of itself' do
         expect(described_class.from_solr_document(empty_document)).to be_an described_class
       end
     end
   end
+
   describe '#as_parents' do
     context 'with good data' do
       it 'returns an array' do
@@ -69,6 +71,7 @@ RSpec.describe Arclight::Parents do
         expect(good_instance.as_parents.first.level).to eq 'collection'
       end
     end
+
     context 'with no data' do
       it 'returns an empty array' do
         expect(described_class.new(ids: [], labels: [], eadid: '', levels: '').as_parents).to eq []

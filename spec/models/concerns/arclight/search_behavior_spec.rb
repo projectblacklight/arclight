@@ -24,6 +24,7 @@ describe Arclight::SearchBehavior do
         expect(search_builder_instance.add_facetting_to_solr(solr_params)).to eq({})
       end
     end
+
     context 'in index view' do
       let(:user_params) { { view: 'index' } }
 
@@ -43,12 +44,14 @@ describe Arclight::SearchBehavior do
         expect(search_builder_instance.add_hierarchy_max_rows(solr_params)).to include(rows: 999_999_999)
       end
     end
+
     context 'when not in online_contents view' do
       it 'does not affect rows param' do
         expect(search_builder_instance.add_hierarchy_max_rows(solr_params)).to eq({})
       end
     end
   end
+
   describe '#add_hierarchy_sort' do
     context 'when in online_contents view' do
       let(:user_params) { { view: 'online_contents' } }
@@ -57,17 +60,20 @@ describe Arclight::SearchBehavior do
         expect(search_builder_instance.add_hierarchy_sort(solr_params)).to include(sort: 'sort_ii asc')
       end
     end
+
     context 'when not in online_contents view' do
       it 'does not affect sort param' do
         expect(search_builder_instance.add_hierarchy_sort(solr_params)).to eq({})
       end
     end
   end
+
   describe '#add_highlighting' do
     it 'enables highlighting' do
       expect(search_builder_instance.add_highlighting(solr_params)).to include('hl' => true)
     end
   end
+
   describe '#add_grouping' do
     context 'when group is selected' do
       let(:user_params) { { group: 'true' } }
@@ -85,6 +91,7 @@ describe Arclight::SearchBehavior do
         )
       end
     end
+
     context 'when group is not selected' do
       it 'enables highlighting' do
         expect(search_builder_instance.add_grouping(solr_params)).not_to include(

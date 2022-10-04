@@ -20,11 +20,13 @@ RSpec.describe Arclight::Requests::GoogleForm do
       end
     end
   end
+
   describe '#url' do
     it 'returns from the repository config' do
       expect(valid_object.url).to eq 'https://docs.google.com/abc123'
     end
   end
+
   describe '#form_mapping' do
     subject(:form_mapping) { valid_object.form_mapping }
 
@@ -36,6 +38,7 @@ RSpec.describe Arclight::Requests::GoogleForm do
       expect(form_mapping).to include('collection_name' => 'abc', 'eadid' => '123')
     end
   end
+
   describe '#title' do
     it 'gets the heading from the presenter' do
       expect(valid_object.title).to eq 'Indiana Jones and the Last Crusade'

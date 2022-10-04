@@ -19,6 +19,7 @@ RSpec.describe CatalogController, type: :controller do
         expect(session[:preferred_view]).to eq 'list'
       end
     end
+
     context 'any other view' do
       it 'starts a search_session' do
         allow(controller).to receive(:search_results)
