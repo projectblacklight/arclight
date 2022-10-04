@@ -63,13 +63,6 @@ RSpec.describe Arclight::FieldConfigHelpers do
     end
   end
 
-  describe '#highlight_terms' do
-    it 'renders bg-info class' do
-      content = helper.highlight_terms(value: ['Restricted until 2018.'])
-      expect(content).to eq '<span class="bg-info">Restricted until 2018.</span>'
-    end
-  end
-
   describe '#before_you_visit_note_present' do
     it 'is true when the visit note is present in the config' do
       expect(
@@ -94,13 +87,6 @@ RSpec.describe Arclight::FieldConfigHelpers do
     it 'is returns the visit note' do
       content = helper.context_access_tab_visit_note(document: document_with_repository)
       expect(content).to eq 'Containers are stored offsite and must be pages 2 to 3 days in advance'
-    end
-  end
-
-  describe '#paragraph_separator' do
-    it 'returns paragraphs' do
-      content = helper.paragraph_separator(value: ['The lazy dog', 'jumped over', 'the sleeping fox.'])
-      expect(content).to eq '<p>The lazy dog</p><p>jumped over</p><p>the sleeping fox.</p>'
     end
   end
 end
