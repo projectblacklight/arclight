@@ -4,27 +4,7 @@ module Arclight
   ##
   # A module to add configuration helpers for certain fields used by Arclight
   module FieldConfigHelpers
-    extend ActiveSupport::Concern
-    include ActionView::Helpers::OutputSafetyHelper
-    include ActionView::Helpers::TagHelper
     include Arclight::EadFormatHelpers
-
-    included do
-      if respond_to?(:helper_method)
-        helper_method :repository_config_present
-        helper_method :request_config_present
-        helper_method :context_access_tab_repository
-        helper_method :access_repository_contact
-        helper_method :before_you_visit_note_present
-        helper_method :context_access_tab_visit_note
-        helper_method :highlight_terms
-        helper_method :context_sidebar_containers_request
-        helper_method :item_requestable?
-        helper_method :paragraph_separator
-        helper_method :link_to_name_facet
-        helper_method :render_html_tags
-      end
-    end
 
     def repository_config_present(_, document)
       document.repository_config.present?
@@ -73,7 +53,7 @@ module Arclight
 
     def context_sidebar_containers_request(args)
       document = args[:document]
-      presenter = Arclight::ShowPresenter.new(document, view_context)
+      presenter = Arclight::ShowPresenter.new(document, self)
       ApplicationController.renderer.render(
         'arclight/requests/_google_form',
         layout: false,
@@ -92,9 +72,9 @@ module Arclight
       values = args[:value] || []
 
       values.map do |value|
-        view_context.link_to(
+        link_to(
           value,
-          view_context.search_action_path(f: { names_ssim: [value] })
+          search_action_path(f: { names_ssim: [value] })
         )
       end.to_sentence(options).html_safe
     end

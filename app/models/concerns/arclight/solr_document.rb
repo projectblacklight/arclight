@@ -5,6 +5,7 @@ module Arclight
   # Extends Blacklight::Solr::Document to provide Arclight specific behavior
   module SolrDocument
     extend Blacklight::Solr::Document
+    include ActionView::Helpers::OutputSafetyHelper
     include Arclight::EadFormatHelpers
 
     def repository_config

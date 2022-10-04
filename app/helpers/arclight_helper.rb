@@ -3,6 +3,9 @@
 ##
 # Generic Helpers used in Arclight
 module ArclightHelper
+  include Arclight::EadFormatHelpers
+  include Arclight::FieldConfigHelpers
+
   def aria_hidden_breadcrumb_separator
     safe_join(
       [
