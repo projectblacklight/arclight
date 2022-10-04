@@ -374,18 +374,14 @@ class CatalogController < ApplicationController
 
     ##
     # Online Contents Index View
-    config.view.online_contents
-    config.view.online_contents.display_control = false
+    config.view.online_contents(display_control: false)
 
     ##
     # Collection Context
-    config.view.collection_context
-    config.view.collection_context.display_control = false
-    config.view.collection_context.partials = %i[index_collection_context]
+    config.view.collection_context(display_control: false, partials: %i[index_collection_context])
 
     ##
     # Compact index view
-    config.view.compact
-    config.view.compact.partials = %i[arclight_index_compact]
+    config.view.compact(partials: %i[arclight_index_compact])
   end
 end
