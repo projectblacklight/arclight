@@ -36,15 +36,6 @@ class CatalogController < ApplicationController
     #  # q: '{!term f=id v=$id}'
     # }
 
-    # solr field configuration for search results/index views
-    config.index.title_field = 'normalized_title_ssm'
-    config.index.display_type_field = 'level_ssm'
-    # config.index.thumbnail_field = 'thumbnail_path_ss'
-
-    # solr field configuration for document/show views
-    # config.show.title_field = 'title_display'
-    config.show.display_type_field = 'level_ssm'
-    # config.show.thumbnail_field = 'thumbnail_path_ss'
 
     config.add_results_document_tool(:bookmark, partial: 'bookmark_control', if: :render_bookmarks_control?)
 
@@ -56,6 +47,62 @@ class CatalogController < ApplicationController
 
     config.add_nav_action(:bookmark, partial: 'blacklight/nav/bookmark', if: :render_bookmarks_control?)
     config.add_nav_action(:search_history, partial: 'blacklight/nav/search_history')
+
+    # solr field configuration for search results/index views
+    config.index.partials = %i[arclight_index_default]
+    config.index.title_field = 'normalized_title_ssm'
+    config.index.display_type_field = 'level_ssm'
+    config.index.document_presenter_class = Arclight::IndexPresenter
+    config.index.document_actions << :containers
+    config.index.document_actions << :online_content_label
+    config.add_results_document_tool :arclight_bookmark_control, partial: 'arclight_bookmark_control'
+    config.index.document_actions.delete(:bookmark)
+    # config.index.thumbnail_field = 'thumbnail_path_ss'
+
+    # solr field configuration for document/show views
+    # config.show.title_field = 'title_display'
+    config.show.partials = %i[show_breadcrumbs show_upper_metadata show]
+    config.show.display_type_field = 'level_ssm'
+    # config.show.thumbnail_field = 'thumbnail_path_ss'
+    config.show.document_presenter_class = Arclight::ShowPresenter
+    config.show.metadata_partials = %i[
+      summary_field
+      access_field
+      background_field
+      related_field
+      indexed_terms_field
+    ]
+
+    config.show.context_access_tab_items = %i[
+      terms_field
+      cite_field
+      in_person_field
+      contact_field
+    ]
+
+    config.show.component_metadata_partials = %i[
+      component_field
+      component_indexed_terms_field
+    ]
+
+    config.show.component_access_tab_items = %i[
+      component_terms_field
+      cite_field
+      in_person_field
+      contact_field
+    ]
+
+    ##
+    # Online Contents Index View
+    config.view.online_contents(display_control: false)
+
+    ##
+    # Collection Context
+    config.view.collection_context(display_control: false, partials: %i[index_collection_context])
+
+    ##
+    # Compact index view
+    config.view.compact(partials: %i[arclight_index_compact])
 
     # solr fields that will be treated as facets by the blacklight application
     #   The ordering of the field names is the order of the display
@@ -205,49 +252,6 @@ class CatalogController < ApplicationController
     config.autocomplete_enabled = true
     config.autocomplete_path = 'suggest'
 
-    ##
-    # Arclight Configurations
-
-    config.show.document_presenter_class = Arclight::ShowPresenter
-    config.index.document_presenter_class = Arclight::IndexPresenter
-
-    ##
-    # Configuration for partials
-    config.index.partials = %i[arclight_index_default]
-
-    ##
-    # Configuration for index actions
-    config.index.document_actions << :containers
-    config.index.document_actions << :online_content_label
-    config.add_results_document_tool :arclight_bookmark_control, partial: 'arclight_bookmark_control'
-    config.index.document_actions.delete(:bookmark)
-
-    config.show.metadata_partials = %i[
-      summary_field
-      access_field
-      background_field
-      related_field
-      indexed_terms_field
-    ]
-
-    config.show.context_access_tab_items = %i[
-      terms_field
-      cite_field
-      in_person_field
-      contact_field
-    ]
-
-    config.show.component_metadata_partials = %i[
-      component_field
-      component_indexed_terms_field
-    ]
-
-    config.show.component_access_tab_items = %i[
-      component_terms_field
-      cite_field
-      in_person_field
-      contact_field
-    ]
 
     # ===========================
     # COLLECTION SHOW PAGE FIELDS
@@ -365,21 +369,6 @@ class CatalogController < ApplicationController
 
     # Collection and Component Show Page Access Tab - Contact Section
     config.add_contact_field 'repository_ssm', if: :repository_config_present?, label: 'Contact', helper_method: :access_repository_contact
-
-    # Insert the breadcrumbs at the beginning
-    config.show.partials = %i[show_breadcrumbs show_upper_metadata show]
-
-    ##
-    # Online Contents Index View
-    config.view.online_contents(display_control: false)
-
-    ##
-    # Collection Context
-    config.view.collection_context(display_control: false, partials: %i[index_collection_context])
-
-    ##
-    # Compact index view
-    config.view.compact(partials: %i[arclight_index_compact])
   end
 
   def repository_config_present?(*args)
