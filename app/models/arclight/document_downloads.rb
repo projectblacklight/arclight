@@ -100,7 +100,7 @@ module Arclight
       end
 
       def template_variables
-        data['template'].scan(/%{(\w+)}/).flatten.uniq
+        template.scan(Regexp.union(/%{(\w+)}/, /%<(\w+)>/)).flatten.compact.uniq
       end
 
       def escaped_document_interpolations
