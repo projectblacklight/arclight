@@ -50,7 +50,7 @@ module Arclight
       # Accessor for the File Class
       # @return [Class]
       def file_class
-        File
+        Arclight::DocumentDownloads::File
       end
     end
 
