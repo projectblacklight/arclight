@@ -6,7 +6,7 @@ module Arclight
   class DigitalObject
     attr_reader :label, :href
     def initialize(label:, href:)
-      @label = label.present? ? label : href
+      @label = label.presence || href
       @href = href
     end
 
