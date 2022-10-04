@@ -1,8 +1,0 @@
-<% unless blacklight_config.show.context_access_tab_items.nil? %>
-  <div id="accordion" role="tablist" aria-multiselectable="true">
-    <% items = blacklight_config.show.context_access_tab_items.select { |i|  fields_have_content?(@document, i) }  %>
-    <% items.each_with_index do |item, index| %>
-      <%= render partial: 'context_card', locals: { document: @document, field_accessor: item, card_index: index} %>
-    <% end %>
-  </div>
-<% end %>
