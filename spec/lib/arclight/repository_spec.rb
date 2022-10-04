@@ -136,7 +136,7 @@ RSpec.describe Arclight::Repository do
 
   context 'the repositories.yml template for the generator is valid' do
     let(:repositories_yml_template_file) do
-      'lib/generators/arclight/templates/config/repositories.yml'
+      Arclight::Engine.root.join('lib/generators/arclight/templates/config/repositories.yml')
     end
 
     it 'successfully loads the template repositories file' do
