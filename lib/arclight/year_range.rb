@@ -83,7 +83,7 @@ module Arclight
       results = []
       streak = [years[0]]
       i = streak.first
-      years[1..-1].each do |j|
+      years[1..].each do |j|
         i += 1
         if i == j
           streak << j
