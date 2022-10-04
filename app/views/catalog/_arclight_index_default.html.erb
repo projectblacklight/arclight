@@ -7,7 +7,7 @@
   <div class="col col-no-left-padding d-flex flex-wrap">
     <div class="documentHeader my-w-75 w-md-100 order-0" data-document-id="<%= document.id %>">
       <h3 class="index_title document-title-heading">
-        <%= link_to_document document, document_show_link_field(document), counter: counter %>
+        <%= link_to_document document, counter: counter %>
         <%= content_tag('span', class: 'al-document-extent badge') do %>
           <%= document.extent %>
         <% end if document.extent %>
