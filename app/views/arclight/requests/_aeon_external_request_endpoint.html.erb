@@ -1,5 +1,5 @@
 <% document ||= @document %>
-<% aeon_external_request ||= Arclight::Requests::AeonExternalRequest.new(document, show_presenter(document)) %>
+<% aeon_external_request ||= Arclight::Requests::AeonExternalRequest.new(document, document_presenter(document)) %>
 
 <%= form_tag aeon_external_request.url, method: :post, class: 'al-request-form' do |f| %>
   <%= render(Blacklight::HiddenSearchStateComponent.new(params: aeon_external_request.form_mapping)) %>
