@@ -168,13 +168,6 @@ Rails/ContentTag:
     - 'app/helpers/arclight_helper.rb'
 
 # Offense count: 1
-# Configuration parameters: EnforcedStyle.
-# SupportedStyles: slashes, arguments
-Rails/FilePath:
-  Exclude:
-    - 'app/models/arclight/document_downloads.rb'
-
-# Offense count: 1
 # Configuration parameters: Include.
 # Include: app/helpers/**/*.rb
 Rails/HelperInstanceVariable:

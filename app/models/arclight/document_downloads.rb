@@ -44,7 +44,7 @@ module Arclight
       end
 
       def config_filename
-        Rails.root.join('config', 'downloads.yml')
+        Rails.root.join('config/downloads.yml')
       end
 
       # Accessor for the File Class
