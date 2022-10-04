@@ -382,13 +382,6 @@ RSpec.describe ArclightHelper, type: :helper do
       end
     end
 
-    describe '#generic_document_fields' do
-      it 'send along the method call' do
-        expect(helper).to receive_messages(document_yolos: nil)
-        helper.generic_document_fields(field)
-      end
-    end
-
     describe '#generic_should_render_field?' do
       it 'send along the method call' do
         expect(helper).to receive_messages(should_render_yolo?: nil)

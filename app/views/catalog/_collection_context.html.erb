@@ -9,7 +9,7 @@
     <% unless blacklight_config.show.metadata_partials.nil? %>
       <% blacklight_config.show.metadata_partials.each do |metadata| %>
         <% next unless presenter.fields_have_content?(metadata) %>
-        <%= render partial: 'custom_metadata', locals: { document: @document, field_accessor: metadata } %>
+        <%= render 'custom_metadata', { document: @document, presenter: presenter, field_accessor: metadata } %>
       <% end %>
     <% end %>
   </div>

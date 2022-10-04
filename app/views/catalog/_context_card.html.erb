@@ -1,4 +1,6 @@
-<% doc_presenter = document_presenter(document).with_field_group(field_accessor) %>
+<%# locals: (presenter:) -%>
+
+<% doc_presenter = presenter.with_field_group(field_accessor) %>
 <div class="card">
   <div class="card-header" role="tab" id="heading<%= card_index %>">
     <h3 class="mb-0">
@@ -11,7 +13,7 @@
   <div id="collapse<%= card_index %>" class="collapse <%= 'show' if card_index.zero? %>" role="tabpanel" aria-labelledby="heading<%= card_index %>">
     <div class="card-body">
       <dl>
-        <% generic_document_fields(field_accessor).each do |field_name, field| %>
+        <% presenter.generic_document_fields(field_accessor).each do |field_name, field| %>
           <% if generic_should_render_field?(field_accessor, document, field) %>
             <dt class="blacklight-<%= field_name.parameterize %>">
               <%= generic_render_document_field_label(field_accessor, document, field: field_name) %>

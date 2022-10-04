@@ -1,4 +1,6 @@
-<% doc_presenter = document_presenter(document).with_field_group(field_accessor) %>
+<%# locals: (presenter:) -%>
+
+<% doc_presenter = presenter.with_field_group(field_accessor) %>
 
 <%= content_tag(:div, id: t("arclight.views.show.sections.#{field_accessor}").parameterize) do %>
   <h3 class='al-show-sub-heading'>
@@ -6,7 +8,7 @@
   </h3>
 
   <dl class="row dl-invert">
-    <% generic_document_fields(field_accessor).each do |field_name, field| %>
+    <% presenter.generic_document_fields(field_accessor).each do |field_name, field| %>
       <% if generic_should_render_field?(field_accessor, document, field) %>
         <dt class="blacklight-<%= field_name.parameterize %> col-md-3"><%= generic_render_document_field_label(field_accessor, document, field: field_name) %></dt>
         <dd class="blacklight-<%= field_name.parameterize %> col-md-9"><%= doc_presenter.field_value field %></dd>

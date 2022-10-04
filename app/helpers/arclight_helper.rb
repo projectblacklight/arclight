@@ -245,12 +245,6 @@ module ArclightHelper
 
   ##
   # Calls the method for a configured field
-  def generic_document_fields(config_field)
-    send(:"document_#{config_field}s")
-  end
-
-  ##
-  # Calls the method for a configured field
   def generic_should_render_field?(config_field, document, field)
     send(:"should_render_#{config_field}?", document, field)
   end

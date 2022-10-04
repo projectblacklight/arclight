@@ -24,13 +24,13 @@ module Arclight
       view_context.public_send(:"should_render_#{config_field}?", document, field)
     end
 
-    private
-
     ##
     # Calls the method for a configured field
     def generic_document_fields(config_field)
       view_context.public_send(:"document_#{config_field}s")
     end
+
+    private
 
     def field_group
       @field_group || 'show_field'

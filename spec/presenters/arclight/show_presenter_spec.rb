@@ -67,4 +67,17 @@ describe Arclight::ShowPresenter, type: :presenter do
       end
     end
   end
+
+  describe '#generic_document_fields' do
+    let(:field) { :yolo }
+
+    before do
+      allow(view_context).to receive(:document_yolos)
+    end
+
+    it 'sends along the method call' do
+      presenter.generic_document_fields(field)
+      expect(view_context).to have_received(:document_yolos)
+    end
+  end
 end
