@@ -122,7 +122,7 @@ module Arclight
     end
 
     def containers
-      # note that .titlecase strips punctuation, like hyphens, we want to keep
+      # NOTE: that .titlecase strips punctuation, like hyphens, we want to keep
       fetch('containers_ssim', []).map(&:capitalize)
     end
 

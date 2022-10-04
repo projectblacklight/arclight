@@ -5,6 +5,7 @@ require 'arclight/engine'
 require 'arclight/repository'
 require 'arclight/year_range'
 
+# :nodoc:
 module Arclight
   # Your code goes here...
 end

@@ -27,9 +27,9 @@ namespace :arclight do
                rescue StandardError
                  ENV['SOLR_URL'] || 'http://127.0.0.1:8983/solr/blacklight-core'
                end
-    elapsed_time = Benchmark.realtime {
+    elapsed_time = Benchmark.realtime do
       `bundle exec traject -u #{solr_url} -i xml -c #{Arclight::Engine.root}/lib/arclight/traject/ead2_config.rb #{ENV.fetch('FILE', nil)}`
-    }
+    end
     print "Indexed #{ENV.fetch('FILE', nil)} (in #{elapsed_time.round(3)} secs).\n"
   end
 

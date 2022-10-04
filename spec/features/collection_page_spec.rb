@@ -293,7 +293,7 @@ RSpec.describe 'Collection Page', type: :feature do
           within '#aoa271aspace_563a320bb37d24a9e1e6f7bf95b52671' do
             click_link 'View'
             within '#aoa271aspace_dc2aaf83625280ae2e193beb3f4aea78.al-collection-context' do
-              expect(page).to have_css '.al-document-container', text: /Box 1, Folder 4\-5/
+              expect(page).to have_css '.al-document-container', text: /Box 1, Folder 4-5/
             end
             expect(page).to have_link 'Reports'
             within '#aoa271aspace_238a0567431f36f49acea49ef576d408' do
