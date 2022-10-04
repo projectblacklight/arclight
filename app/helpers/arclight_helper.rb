@@ -154,12 +154,6 @@ module ArclightHelper
     'active' if on_repositories_index?
   end
 
-  def fields_have_content?(document, field_accessor)
-    generic_document_fields(field_accessor).any? do |_, field|
-      generic_should_render_field?(field_accessor, document, field)
-    end
-  end
-
   # If we have a facet on the repository, then return the Repository object for it
   #
   # @return [Repository]
