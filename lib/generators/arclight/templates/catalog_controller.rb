@@ -368,9 +368,7 @@ class CatalogController < ApplicationController
     config.add_contact_field 'repository_ssm', if: :repository_config_present, label: 'Contact', helper_method: :access_repository_contact
 
     # Insert the breadcrumbs at the beginning
-    config.show.partials.unshift(:show_upper_metadata)
-    config.show.partials.unshift(:show_breadcrumbs)
-    config.show.partials.delete(:show_header)
+    config.show.partials = %i[show_breadcrumbs show_upper_metadata show]
 
     ##
     # Online Contents Index View
