@@ -1,6 +1,5 @@
 <% if blacklight_config.show.component_metadata_partials.present? %>
-  <% parents = Arclight::Parents.from_solr_document(document).as_parents %>
-  <dl class="al-metadata-section breadcrumb-item breadcrumb-item-<%= parents.length + 3 %>">
+  <dl class="al-metadata-section breadcrumb-item breadcrumb-item-<%= document.parents.length + 3 %>">
     <% blacklight_config.show.component_metadata_partials.each do |metadata| %>
       <% doc_presenter = document_presenter(document).with_field_group(metadata) %>
       <% generic_document_fields(metadata).each do |field_name, field| %>

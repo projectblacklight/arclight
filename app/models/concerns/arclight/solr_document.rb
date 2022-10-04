@@ -14,6 +14,10 @@ module Arclight
       @repository_config ||= Arclight::Repository.find_by(name: repository)
     end
 
+    def parents
+      @parents ||= Arclight::Parents.from_solr_document(self).as_parents
+    end
+
     def parent_ids
       fetch('parent_ssim', [])
     end
