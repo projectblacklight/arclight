@@ -15,6 +15,7 @@ RSpec.describe 'arclight/repositories/index', type: :view do
 
   context 'renders the three repository examples' do
     before { render }
+
     it 'has the header class' do
       expect(rendered).to have_css('.al-repositories', count: 1)
     end
@@ -75,6 +76,7 @@ RSpec.describe 'arclight/repositories/index', type: :view do
       end
     end
   end
+
   context 'switched extra content' do
     it 'shows on repositories page' do
       render
@@ -95,6 +97,7 @@ RSpec.describe 'arclight/repositories/index', type: :view do
       expect(rendered).not_to have_css('.al-repository-extra')
     end
   end
+
   context 'missing data' do
     it 'handles a missing email' do
       test_data.first.contact_info = nil

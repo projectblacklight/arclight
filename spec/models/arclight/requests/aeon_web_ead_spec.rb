@@ -17,6 +17,7 @@ RSpec.describe Arclight::Requests::AeonWebEad do
       expect(valid_object.request_url).to eq 'https://sample.request.com'
     end
   end
+
   describe '#url' do
     it 'constructs a url with params' do
       expect(valid_object.url).to eq 'https://sample.request.com?Action=10&Form=31&Value=http%3A%2F%2Fexample.com%2Fsample.xml'

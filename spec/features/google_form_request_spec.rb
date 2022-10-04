@@ -31,18 +31,21 @@ xdescribe 'Google Form Request', type: :feature, js: true do
       end
     end
   end
+
   context 'when container is absent' do
     it 'form is absent' do
       visit solr_document_path 'aoa271aspace_238a0567431f36f49acea49ef576d408'
       expect(page).not_to have_css '.al-sticky-sidebar form'
     end
   end
+
   context 'in search results' do
     it 'shows up when item is requestable' do
       visit search_catalog_path q: 'alpha', search_field: 'all_fields'
       expect(page).to have_css 'form[action*="https://docs.google.com"]', count: 4
     end
   end
+
   context 'in collection hierarchy' do
     it 'shows up in hierarchy' do
       visit solr_document_path 'aoa271'

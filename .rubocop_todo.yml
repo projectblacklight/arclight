@@ -6,43 +6,6 @@
 # Note that changes in the inspected code, or installation of new
 # versions of RuboCop, may require this file to be generated again.
 
-# Offense count: 2
-# Cop supports --auto-correct.
-# Configuration parameters: EnforcedStyleAlignWith, Severity.
-# SupportedStylesAlignWith: start_of_line, begin
-Layout/BeginEndAlignment:
-  Exclude:
-    - 'app/models/arclight/document_downloads.rb'
-    - 'lib/tasks/index.rake'
-
-# Offense count: 1
-# Cop supports --auto-correct.
-# Configuration parameters: EmptyLineBetweenMethodDefs, EmptyLineBetweenClassDefs, EmptyLineBetweenModuleDefs, AllowAdjacentOneLineDefs, NumberOfEmptyLines.
-Layout/EmptyLineBetweenDefs:
-  Exclude:
-    - 'lib/arclight/exceptions.rb'
-
-# Offense count: 7
-# Cop supports --auto-correct.
-# Configuration parameters: AllowAliasSyntax, AllowedMethods.
-# AllowedMethods: alias_method, public, protected, private
-Layout/EmptyLinesAroundAttributeAccessor:
-  Exclude:
-    - 'app/models/arclight/document_downloads.rb'
-    - 'app/models/arclight/parent.rb'
-    - 'app/models/arclight/parents.rb'
-    - 'app/models/arclight/requests/aeon_web_ead.rb'
-    - 'app/models/arclight/requests/google_form.rb'
-    - 'lib/arclight/digital_object.rb'
-    - 'lib/arclight/hash_absolute_xpath.rb'
-
-# Offense count: 2
-# Cop supports --auto-correct.
-Layout/RescueEnsureAlignment:
-  Exclude:
-    - 'app/models/arclight/document_downloads.rb'
-    - 'lib/tasks/index.rake'
-
 # Offense count: 1
 # Configuration parameters: IgnoredMethods, CountRepeatedAttributes.
 Metrics/AbcSize:
@@ -83,21 +46,6 @@ RSpec/ContextWording:
 RSpec/DescribedClass:
   Exclude:
     - 'spec/presenters/arclight/show_presenter_spec.rb'
-
-# Offense count: 55
-# Cop supports --auto-correct.
-RSpec/EmptyLineAfterExampleGroup:
-  Enabled: false
-
-# Offense count: 10
-# Cop supports --auto-correct.
-RSpec/EmptyLineAfterHook:
-  Exclude:
-    - 'spec/features/collection_page_spec.rb'
-    - 'spec/features/home_page_spec.rb'
-    - 'spec/features/many_component_ead_spec.rb'
-    - 'spec/helpers/arclight_helper_spec.rb'
-    - 'spec/views/repositories/index.html.erb_spec.rb'
 
 # Offense count: 63
 # Configuration parameters: CountAsOne.

@@ -205,6 +205,7 @@ RSpec.describe 'Collection Page', type: :feature do
         expect(page).to have_css '#online-content', visible: :visible
       end
     end
+
     context 'access tab has visitation notes', js: true do
       let(:doc_id) { 'm0198-xml' }
 
@@ -270,6 +271,7 @@ RSpec.describe 'Collection Page', type: :feature do
 
     describe 'interactions', js: true do
       before { click_link 'Contents' }
+
       it 'contents contain linked level 1 components' do
         within '#contents' do
           click_link 'Series I: Administrative Records, 1902-1976'
@@ -330,6 +332,7 @@ RSpec.describe 'Collection Page', type: :feature do
       end
     end
   end
+
   describe 'breadcrumb' do
     it 'links repository and shows collection header 1 text' do
       within '.al-show-breadcrumb' do
@@ -339,6 +342,7 @@ RSpec.describe 'Collection Page', type: :feature do
       end
     end
   end
+
   context 'content with file downloads', js: true do
     let(:doc_id) { 'a0011-xmlaspace_ref6_lx4' }
 

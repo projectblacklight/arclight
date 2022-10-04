@@ -128,6 +128,7 @@ RSpec.describe 'Component Page', type: :feature do
         end
       end
     end
+
     it 'supports clicks within collection context' do
       within '#collection-context' do
         click_link('Statements of purpose, c.1902')

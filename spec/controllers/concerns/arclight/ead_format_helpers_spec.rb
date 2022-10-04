@@ -22,6 +22,7 @@ RSpec.describe Arclight::EadFormatHelpers do
         expect(content).to eq_ignoring_whitespace 'Affiches americaines. San Domingo: Imprimerie royale du Cap, 1782. Nos. 30, 35.'
       end
     end
+
     describe 'multi-value field separation' do
       it 'wraps multi-value fields in <p> if unwrapped' do
         content = helper.render_html_tags(value: %w[Hello world])

@@ -37,10 +37,10 @@ module Arclight
     class << self
       def config
         @config ||= begin
-                      YAML.safe_load(::File.read(config_filename))
-                    rescue Errno::ENOENT
-                      {}
-                    end
+          YAML.safe_load(::File.read(config_filename))
+        rescue Errno::ENOENT
+          {}
+        end
       end
 
       def config_filename
@@ -58,6 +58,7 @@ module Arclight
     # Model a single file configured in downloads.yml
     class File
       attr_reader :type, :document
+
       def initialize(type:, data:, document:)
         @type = type
         @data = data

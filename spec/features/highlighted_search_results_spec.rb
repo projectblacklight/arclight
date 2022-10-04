@@ -23,6 +23,7 @@ RSpec.describe 'Highlighted search results', type: :feature do
         end
       end
     end
+
     describe '#name' do
       it 'highlights the snippets' do
         visit search_catalog_path q: 'william root', search_field: 'name'

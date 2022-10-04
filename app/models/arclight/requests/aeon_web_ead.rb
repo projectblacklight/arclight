@@ -7,6 +7,7 @@ module Arclight
     # query parameters from the form mapping configuration
     class AeonWebEad
       attr_reader :document, :ead_url
+
       ##
       # @param [SolrDocument] document
       # @param [String] ead_url

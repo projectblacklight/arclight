@@ -96,6 +96,7 @@ RSpec.describe Arclight::Repository do
         expect(repo.thumbnail_url).to eq 'http://example.com/thumbnail_ABC.jpg'
       end
     end
+
     context 'methods' do
       it '#request_config_present?' do
         expect(repo.request_config_present?).to be true
@@ -118,6 +119,7 @@ RSpec.describe Arclight::Repository do
       end
     end
   end
+
   context 'a second repository has data' do
     let(:repo) { described_class.find_by(slug: 'nlm') }
 
@@ -125,6 +127,7 @@ RSpec.describe Arclight::Repository do
       expect(repo.slug).to eq 'nlm'
     end
   end
+
   context 'when missing data' do
     let(:repo) { described_class.find_by(slug: 'sample') }
 
