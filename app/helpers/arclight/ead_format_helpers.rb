@@ -5,7 +5,6 @@ module Arclight
   # A module to add EAD to HTML transformation rules for Arclight
   module EadFormatHelpers # rubocop:disable Metrics/ModuleLength
     extend ActiveSupport::Concern
-    include ActionView::Helpers::OutputSafetyHelper
 
     def render_html_tags(args)
       values = args[:value] || []
@@ -176,7 +175,7 @@ module Arclight
       table_head = node.at_css('thead')
       node.children.first.add_previous_sibling(table_head)
       listhead_node = node.at_css('listhead')
-      return unless listhead_node.present?
+      return if listhead_node.blank?
 
       node.at_css('thead tr th:nth-of-type(1)').content = node.at_css('listhead/head01').content
       node.at_css('thead tr th:nth-of-type(2)').content = node.at_css('listhead/head02').content
@@ -185,7 +184,7 @@ module Arclight
 
     def format_chronlist_caption(node)
       head_node = node.at_css('head')
-      return unless head_node.present?
+      return if head_node.blank?
 
       head_node.name = 'caption'
       head_node['class'] = 'chronlist-head'

@@ -3,7 +3,6 @@
 class CatalogController < ApplicationController
   include Blacklight::Catalog
   include Arclight::Catalog
-  include Arclight::FieldConfigHelpers
 
   configure_blacklight do |config|
     ## Class for sending and receiving requests from a search index
@@ -358,14 +357,14 @@ class CatalogController < ApplicationController
     config.add_component_terms_field 'parent_access_terms_ssm', label: 'Parent Terms of Access', helper_method: :render_html_tags
 
     # Collection and Component Show Page Access Tab - In Person Section
-    config.add_in_person_field 'repository_ssm', if: :repository_config_present, label: 'Location of this collection', helper_method: :context_access_tab_repository
-    config.add_in_person_field 'id', if: :before_you_visit_note_present, label: 'Before you visit', helper_method: :context_access_tab_visit_note # Using ID because we know it will always exist
+    config.add_in_person_field 'repository_ssm', if: :repository_config_present?, label: 'Location of this collection', helper_method: :context_access_tab_repository
+    config.add_in_person_field 'id', if: :before_you_visit_note_present?, label: 'Before you visit', helper_method: :context_access_tab_visit_note # Using ID because we know it will always exist
 
     # Collection and Component Show Page Access Tab - How to Cite Section
     config.add_cite_field 'prefercite_ssm', label: 'Preferred citation', helper_method: :render_html_tags
 
     # Collection and Component Show Page Access Tab - Contact Section
-    config.add_contact_field 'repository_ssm', if: :repository_config_present, label: 'Contact', helper_method: :access_repository_contact
+    config.add_contact_field 'repository_ssm', if: :repository_config_present?, label: 'Contact', helper_method: :access_repository_contact
 
     # Insert the breadcrumbs at the beginning
     config.show.partials = %i[show_breadcrumbs show_upper_metadata show]
@@ -381,5 +380,13 @@ class CatalogController < ApplicationController
     ##
     # Compact index view
     config.view.compact(partials: %i[arclight_index_compact])
+  end
+
+  def repository_config_present?(*args)
+    view_context.repository_config_present(*args)
+  end
+
+  def before_you_visit_note_present?(*args)
+    view_context.before_you_visit_note_present(*args)
   end
 end

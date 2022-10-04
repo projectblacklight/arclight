@@ -118,7 +118,7 @@ Rails/HelperInstanceVariable:
 # Offense count: 1
 Rails/OutputSafety:
   Exclude:
-    - 'app/controllers/concerns/arclight/field_config_helpers.rb'
+    - 'app/helpers/arclight/field_config_helpers.rb'
 
 # Offense count: 7
 # Cop supports --auto-correct.
