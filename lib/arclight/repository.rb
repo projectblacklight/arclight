@@ -84,7 +84,7 @@ module Arclight
     def self.from_yaml(file)
       repos = {}
       data = YAML.safe_load(File.read(file))
-      data.keys.each do |slug|
+      data.each_key do |slug|
         repos[slug] = new(slug, data[slug])
       end
       repos
