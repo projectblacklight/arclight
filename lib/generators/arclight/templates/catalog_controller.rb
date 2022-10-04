@@ -54,9 +54,6 @@ class CatalogController < ApplicationController
     config.add_results_collection_tool(:view_type_group)
 
     config.add_show_tools_partial(:bookmark, partial: 'bookmark_control', if: :render_bookmarks_control?)
-    config.add_show_tools_partial(:email, callback: :email_action, validator: :validate_email_params)
-    config.add_show_tools_partial(:sms, if: :render_sms_action?, callback: :sms_action, validator: :validate_sms_params)
-    config.add_show_tools_partial(:citation)
 
     config.add_nav_action(:bookmark, partial: 'blacklight/nav/bookmark', if: :render_bookmarks_control?)
     config.add_nav_action(:search_history, partial: 'blacklight/nav/search_history')
@@ -369,11 +366,6 @@ class CatalogController < ApplicationController
 
     # Collection and Component Show Page Access Tab - Contact Section
     config.add_contact_field 'repository_ssm', if: :repository_config_present, label: 'Contact', helper_method: :access_repository_contact
-
-    # Remove unused show document actions
-    %i[citation email sms].each do |action|
-      config.view_config(:show).document_actions.delete(action)
-    end
 
     # Insert the breadcrumbs at the beginning
     config.show.partials.unshift(:show_upper_metadata)
