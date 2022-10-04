@@ -47,26 +47,6 @@ module Arclight
       document.repository_config.visit_note
     end
 
-    def highlight_terms(args)
-      safe_join(args[:value].map { |value| content_tag(:span, value, class: 'bg-info') })
-    end
-
-    def context_sidebar_containers_request(args)
-      document = args[:document]
-      presenter = Arclight::ShowPresenter.new(document, self)
-      ApplicationController.renderer.render(
-        'arclight/requests/_google_form',
-        layout: false,
-        locals: {
-          google_form: Arclight::Requests::GoogleForm.new(document, presenter, solr_document_url(document))
-        }
-      )
-    end
-
-    def paragraph_separator(args)
-      safe_join(args[:value].map { |paragraph| content_tag(:p, paragraph) })
-    end
-
     def link_to_name_facet(args)
       options = args[:config]&.separator_options || {}
       values = args[:value] || []
