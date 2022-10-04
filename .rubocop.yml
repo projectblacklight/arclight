@@ -33,7 +33,7 @@ Metrics/BlockLength:
     - 'spec/**/*'
     - 'tasks/**/*'
 
-Metrics/LineLength:
+Layout/LineLength:
   Max: 160
 
 Rails:
