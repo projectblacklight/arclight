@@ -250,12 +250,6 @@ Style/CommentAnnotation:
     - 'app/models/concerns/arclight/solr_document.rb'
 
 # Offense count: 1
-# Cop supports --auto-correct.
-Style/CommentedKeyword:
-  Exclude:
-    - 'lib/arclight/year_range.rb'
-
-# Offense count: 1
 # Configuration parameters: AllowedConstants.
 Style/Documentation:
   Exclude:
