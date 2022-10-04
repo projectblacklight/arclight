@@ -1,4 +1,4 @@
-<% doc_presenter = show_presenter(document).with_field_group(field_accessor) %>
+<% doc_presenter = document_presenter(document).with_field_group(field_accessor) %>
 <div class="container">
   <dl class="row dl-invert">
     <% generic_document_fields(field_accessor).each do |field_name, field| %>

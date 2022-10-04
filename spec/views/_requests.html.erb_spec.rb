@@ -10,6 +10,7 @@ RSpec.describe 'arclight/_requests', type: :view do
   before do
     allow(document).to receive(:repository_config).and_return(config)
     allow(view).to receive(:blacklight_config).and_return(blacklight_config)
+    allow(view).to receive(:action_name).and_return('show')
     allow(view).to receive(:document).and_return(document)
     allow(view).to receive(:item_requestable?).and_return(true)
   end

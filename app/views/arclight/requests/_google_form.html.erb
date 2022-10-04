@@ -1,5 +1,5 @@
 <% document ||= @document %>
-<% google_form ||= Arclight::Requests::GoogleForm.new(document, show_presenter(document), solr_document_path(document)) %>
+<% google_form ||= Arclight::Requests::GoogleForm.new(document, document_presenter(document), solr_document_path(document)) %>
 
 <%= form_tag google_form.url, method: :get, class: 'al-request-form' do |f| %>
   <% google_form.form_mapping.each do |key, value| %>
