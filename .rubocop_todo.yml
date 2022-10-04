@@ -212,12 +212,6 @@ Rails/HelperInstanceVariable:
     - 'app/helpers/arclight_helper.rb'
 
 # Offense count: 1
-# Cop supports --auto-correct.
-Rails/IndexWith:
-  Exclude:
-    - 'app/models/arclight/document_downloads.rb'
-
-# Offense count: 1
 Rails/OutputSafety:
   Exclude:
     - 'app/controllers/concerns/arclight/field_config_helpers.rb'

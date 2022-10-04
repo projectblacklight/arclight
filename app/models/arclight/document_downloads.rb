@@ -103,9 +103,9 @@ module Arclight
       end
 
       def escaped_document_interpolations
-        non_custom_template_variables.map do |method_name|
-          [method_name, escape_non_url_doc_value(document.send(method_name))]
-        end.to_h
+        non_custom_template_variables.index_with do |method_name|
+          escape_non_url_doc_value(document.send(method_name))
+        end
       end
 
       def escape_non_url_doc_value(value)
