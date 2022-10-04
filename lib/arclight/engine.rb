@@ -9,6 +9,7 @@ require 'arclight/normalized_id'
 require 'arclight/normalized_title'
 require 'arclight/digital_object'
 require 'arclight/viewer'
+require 'blacklight_range_limit'
 
 module Arclight
   ##
