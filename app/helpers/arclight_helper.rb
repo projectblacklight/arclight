@@ -4,13 +4,7 @@
 # Generic Helpers used in Arclight
 module ArclightHelper
   def aria_hidden_breadcrumb_separator
-    safe_join(
-      [
-        '<span aria-hidden="true">'.html_safe,
-        t('arclight.breadcrumb_separator'),
-        '</span>'.html_safe
-      ]
-    )
+    tag.span t('arclight.breadcrumb_separator'), aria: { hidden: true }
   end
 
   ##
