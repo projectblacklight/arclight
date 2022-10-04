@@ -1,10 +1,12 @@
+<%# locals: (presenter:) -%>
+
 <nav class='al-sidebar-navigation-context al-sticky-sidebar'
      id="collection-context-sidebar"
      aria-label='<%= t('arclight.views.show.context_nav.title') %>'>
   <ul class='nav nav-pills flex-sm-row flex-md-column text-sm-left text-md-right'>
     <% unless blacklight_config.show.metadata_partials.nil? %>
       <% blacklight_config.show.metadata_partials.each do |item| %>
-        <% next unless fields_have_content?(@document, item) %>
+        <% next unless presenter.fields_have_content?(item) %>
         <li class='nav-item'>
           <%= link_to t("arclight.views.show.sections.#{item}"), "##{t("arclight.views.show.sections.#{item}").parameterize}", class: 'nav-link' %>
         </li>
