@@ -50,36 +50,6 @@ Layout/RescueEnsureAlignment:
     - 'app/models/arclight/document_downloads.rb'
     - 'lib/tasks/index.rake'
 
-# Offense count: 2
-# Configuration parameters: IgnoredMethods.
-Lint/AmbiguousBlockAssociation:
-  Exclude:
-    - 'lib/arclight/traject/ead2_config.rb'
-
-# Offense count: 1
-# Cop supports --auto-correct.
-Lint/RedundantCopDisableDirective:
-  Exclude:
-    - 'spec/features/search_results_spec.rb'
-
-# Offense count: 1
-# Cop supports --auto-correct.
-Lint/SendWithMixinArgument:
-  Exclude:
-    - 'lib/arclight/engine.rb'
-
-# Offense count: 1
-# Cop supports --auto-correct.
-Lint/UriRegexp:
-  Exclude:
-    - 'lib/tasks/index.rake'
-
-# Offense count: 1
-# Configuration parameters: CheckForMethodsWithNoSideEffects.
-Lint/Void:
-  Exclude:
-    - 'lib/arclight/year_range.rb'
-
 # Offense count: 1
 # Configuration parameters: IgnoredMethods, CountRepeatedAttributes.
 Metrics/AbcSize:

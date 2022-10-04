@@ -68,7 +68,7 @@ namespace :arclight do
       ENV['URL'] = l.chomp
       next if ENV['URL'].empty?
 
-      unless ENV.fetch('URL', nil) =~ /\A#{URI.regexp(%w[http https])}\z/
+      unless ENV.fetch('URL', nil) =~ /\A#{URI::DEFAULT_PARSER.make_regexp(%w[http https])}\z/
         puts "Skipping invalid looking url #{ENV.fetch('URL', nil)}"
         next
       end

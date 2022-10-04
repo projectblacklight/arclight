@@ -306,7 +306,7 @@ compose 'components', ->(record, accumulator, _context) { accumulator.concat rec
 
   to_field 'parent_ssim' do |record, accumulator, context|
     accumulator << context.clipboard[:parent].output_hash['id'].first
-    accumulator.concat NokogiriXpathExtensions.new.is_component(record.ancestors).reverse.map { |n| n.attribute('id')&.value }
+    accumulator.concat(NokogiriXpathExtensions.new.is_component(record.ancestors).reverse.map { |n| n.attribute('id')&.value })
   end
 
   to_field 'parent_ssi' do |_record, accumulator, context|
@@ -322,7 +322,7 @@ compose 'components', ->(record, accumulator, _context) { accumulator.concat rec
     # other components
     if parent_ssim && components
       ancestors = parent_ssim.drop(1).map { |x| [x] }
-      accumulator.concat components.select { |c| ancestors.include? c['ref_ssi'] }.flat_map { |c| c['normalized_title_ssm'] }
+      accumulator.concat(components.select { |c| ancestors.include? c['ref_ssi'] }.flat_map { |c| c['normalized_title_ssm'] })
     end
   end
 

@@ -53,7 +53,7 @@ module Arclight
 
     initializer 'arclight.helpers' do
       config.after_initialize do
-        ActionView::Base.send :include, ArclightHelper
+        ActiveSupport.on_load(:action_view) { include ArclightHelper }
       end
     end
   end

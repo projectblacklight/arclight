@@ -18,7 +18,6 @@ module Arclight
     def initialize(dates = nil)
       @years = []
       self << parse_ranges(dates) if dates.present?
-      self
     end
 
     # @return [String] a concise, human-readable version of the year range, including gaps
