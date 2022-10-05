@@ -95,7 +95,7 @@ module ArclightHelper
   end
 
   def collection_active?
-    respond_to?(:search_state) && search_state&.params_for_search&.dig('f', 'level_sim') == ['Collection']
+    search_state.filter('level_sim').values == ['Collection']
   end
 
   def collection_active_class
@@ -150,7 +150,7 @@ module ArclightHelper
   end
 
   def online_contents_context?
-    params[:view] == 'online_contents'
+    document_index_view_type == :online_contents
   end
 
   # determine which icon to show in search results header
@@ -224,7 +224,7 @@ module ArclightHelper
   def within_collection_context?
     return true if record_view?
 
-    results_view? && params.dig(:f, 'collection_sim')
+    results_view? && search_state.filter('collection_sim').any?
   end
 
   def results_view?
