@@ -19,7 +19,7 @@ RSpec.describe 'Grouped search results', type: :feature do
     visit search_catalog_path q: 'alpha omega', group: 'true'
     within first('.breadcrumb-links') do
       expect(page).to have_link 'National Library of Medicine. History of Medicine Division'
-      expect(page).to have_css 'a', count: 1 # Only one link is in the .breadcrumb-links
+      expect(page).to have_link count: 1 # Only one link is in the .breadcrumb-links
     end
     expect(page).to have_css '.breadcrumb-links a', text: /Series/
   end
