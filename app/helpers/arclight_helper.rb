@@ -140,7 +140,7 @@ module ArclightHelper
   # @return [Repository]
   def repository_faceted_on
     repos = search_state.filter('repository_sim').values
-    return if repos.blank?
+    return unless repos.one?
 
     Arclight::Repository.find_by(name: repos.first)
   end
