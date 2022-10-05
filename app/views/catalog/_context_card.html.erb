@@ -11,15 +11,8 @@
   <div id="collapse<%= card_index %>" class="collapse <%= 'show' if card_index.zero? %>" role="tabpanel" aria-labelledby="heading<%= card_index %>">
     <div class="card-body">
       <dl>
-        <% generic_document_fields(field_accessor).each do |field_name, field| %>
-          <% if generic_should_render_field?(field_accessor, document, field) %>
-            <dt class="blacklight-<%= field_name.parameterize %>">
-              <%= generic_render_document_field_label(field_accessor, document, field: field_name) %>
-            </dt>
-            <dd class="blacklight-<%= field_name.parameterize %>">
-              <%= doc_presenter.field_value field %>
-            </dd>
-          <% end %>
+        <% doc_presenter.field_presenters.each do |field_presenter| %>
+          <%= render (field_presenter.component || Blacklight::MetadataFieldComponent).new(field: field_presenter, show: true, layout: Arclight::UpperMetadataLayoutComponent) %>
         <% end %>
       </dl>
     </div>

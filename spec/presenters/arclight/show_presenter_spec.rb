@@ -26,8 +26,8 @@ describe Arclight::ShowPresenter, type: :presenter do
   end
 
   describe '#with_field_group' do
-    it 'defaults to the show_field group when none is set' do
-      expect(presenter.send(:field_group)).to eq 'show_field'
+    it 'is nil when none is set' do
+      expect(presenter.send(:field_group)).to be_nil
     end
 
     it 'sets the field group based on the given field accessor (and returns the presenter)' do
@@ -46,9 +46,9 @@ describe Arclight::ShowPresenter, type: :presenter do
   describe '#fields_have_content?' do
     before do
       allow(view_context).to receive_messages(
-        should_render_field?: true,
-        document_background_fields: CatalogController.blacklight_config.background_fields
+        should_render_field?: true
       )
+      config.add_background_field 'acqinfo_ssim', label: 'Acquisition Information'
     end
 
     context 'when the configured fields have content' do

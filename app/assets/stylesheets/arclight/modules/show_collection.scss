@@ -7,10 +7,12 @@
 .al-show-sub-heading {
   font-size: $h6-font-size;
   text-transform: uppercase;
+}
 
-  + dl > dt {
+.tab-pane {
+  dl > dt {
     font-size: $font-size-sm;
-    margin-top: 4px;
+    margin-top: (1rem - $font-size-sm) / 2;
     text-transform: uppercase;
   }
 }
@@ -28,10 +30,6 @@ p.media .col {
 }
 // Access tab
 #access {
-  dl dt {
-    font-size: $font-size-sm;
-  }
-
   dl dd {
     line-height: 1.4;
     margin-bottom: $spacer;
