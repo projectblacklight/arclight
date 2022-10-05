@@ -54,12 +54,6 @@ module Arclight
       end
     end
 
-    def install_webpacker
-      return unless Rails.version.to_i == 6
-
-      rake 'webpacker:install'
-    end
-
     def add_arclight_search_behavior
       inject_into_file 'app/models/search_builder.rb', after: 'include Blacklight::Solr::SearchBuilderBehavior' do
         "\n  include Arclight::SearchBehavior"
@@ -80,10 +74,6 @@ module Arclight
 
     def modify_blacklight_yml
       gsub_file 'config/locales/blacklight.en.yml', "application_name: 'Blacklight'", "application_name: 'Arclight'"
-    end
-
-    def run_yarn
-      run 'yarn add @babel/core @babel/plugin-external-helpers @babel/plugin-transform-modules-umd @babel/preset-env'
     end
   end
 end
