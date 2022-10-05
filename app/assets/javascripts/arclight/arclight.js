@@ -3,6 +3,4 @@
 //= require arclight/context_navigation
 //= require arclight/oembed_viewer
 //= require arclight/truncator
-
-// Vendor Scripts
-//= require responsiveTruncator
+//= require arclight/responsiveTruncator
