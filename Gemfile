@@ -6,6 +6,7 @@ source 'https://rubygems.org'
 gemspec
 
 gem 'blacklight', github: 'projectblacklight/blacklight', branch: 'main'
+gem 'byebug'
 
 # BEGIN ENGINE_CART BLOCK
 # engine_cart: 2.5.0
