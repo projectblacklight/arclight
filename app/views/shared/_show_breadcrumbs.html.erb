@@ -1,4 +1,3 @@
-<% parents = Arclight::Parents.from_solr_document(document).as_parents %>
 <nav aria-label="breadcrumb">
   <ol class="breadcrumb">
     <li class="breadcrumb-home-link">
@@ -12,15 +11,15 @@
           <span class="media-body" aria-hidden="true"><%= blacklight_icon :repository, classes: 'al-repository-content-icon' %></span><span class="col"><%= t('arclight.show_breadcrumb_label') %></span>
       <% end %>
     </li>
-    <% parents.each_with_index.map do |parent, index| %>
+    <% document.parents.each_with_index.map do |parent, index| %>
       <%= content_tag :li, class: "breadcrumb-item breadcrumb-item-#{index + 1} media" do %>
         <span class="media-body" aria-hidden="true"><%= blacklight_icon document_or_parent_icon(parent) %></span>
         <span class="col"><%= link_to parent.label, solr_document_path(parent.global_id) %></span>
-      <% end %> 
+      <% end %>
     <% end %>
   </ol>
 
-  <%= content_tag :h1, class: "breadcrumb-item breadcrumb-item-#{parents.length + 2} media" do %>
+  <%= content_tag :h1, class: "breadcrumb-item breadcrumb-item-#{document.parents.length + 2} media" do %>
     <span class="media-body" aria-hidden="true"><%= blacklight_icon document_or_parent_icon(document) %></span>
     <span class="col"><%= document.normalized_title %></span>
   <% end %>

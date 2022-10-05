@@ -1,16 +1,15 @@
-<% parents = Arclight::Parents.from_solr_document(document).as_parents %>
 <% presenter = document_presenter(document) %>
 <div class='row'>
   <div class='col-md-12'>
     <% if document.digital_objects.present? %>
-      <%= content_tag :p, class: "media breadcrumb-item breadcrumb-item-#{parents.length + 3}" do %>
+      <%= content_tag :p, class: "media breadcrumb-item breadcrumb-item-#{document.parents.length + 3}" do %>
         <span class="media-body al-online-content-icon" aria-hidden="true"><%= blacklight_icon :online %></span>
         <span class="col text-muted">
           <%= t('arclight.views.show.online_content_upper') %>
         </span>
         <%= render_document_partial(document, 'arclight_viewer') %>
       <% end %>
-    <% end %>    
+    <% end %>
     <div class='row'>
       <div class='col-lg-12'>
         <ul class='nav nav-tabs nav-fill' role='tablist' aria-label='<%= t('arclight.views.show.tablist_nav') %>'>

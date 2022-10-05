@@ -80,7 +80,7 @@ module ArclightHelper
   ##
   # @param [SolrDocument]
   def document_parents(document)
-    Arclight::Parents.from_solr_document(document).as_parents
+    document.parents
   end
 
   def repository_collections_path(repository)

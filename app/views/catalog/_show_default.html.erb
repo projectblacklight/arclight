@@ -1,8 +1,7 @@
-<% parents = Arclight::Parents.from_solr_document(document).as_parents %>
 <div class='row'>
   <div class='col-md-12'>
     <% if document.digital_objects.present? %>
-      <%= content_tag :p, class: "media breadcrumb-item breadcrumb-item-#{parents.length + 3}" do %>
+      <%= content_tag :p, class: "media breadcrumb-item breadcrumb-item-#{document.parents.length + 3}" do %>
         <span class="media-body al-online-content-icon" aria-hidden="true"><%= blacklight_icon :online %></span>
         <span class="col text-muted">
           <%= t('arclight.views.show.online_content_upper') %>
