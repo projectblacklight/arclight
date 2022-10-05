@@ -20,7 +20,7 @@
 <%- if @response.empty? %>
   <%= render "zero_results" %>
 <%- elsif render_grouped_response? %>
-  <%= render_grouped_document_index %>
+  <%= render 'catalog/group' %>
 <%- else %>
   <%= render_document_index %>
 <%- end %>
