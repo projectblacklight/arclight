@@ -8,35 +8,39 @@ module Arclight
     end
 
     def with_field_group(group)
-      self.field_group = group
-      self
-    end
+      if block_given?
+        old_group = field_group
 
-    def fields_have_content?(field_accessor)
-      generic_document_fields(field_accessor).any? do |_, field|
-        generic_should_render_field?(field_accessor, field)
+        begin
+          self.field_group = group
+          yield
+        ensure
+          self.field_group = old_group if block_given?
+        end
+      else
+        self.field_group = group
+        self
       end
     end
 
-    ##
-    # Calls the method for a configured field
-    def generic_should_render_field?(config_field, field)
-      view_context.public_send(:"should_render_#{config_field}?", document, field)
+    def fields_have_content?(field_accessor)
+      with_field_group(field_accessor) do
+        fields_to_render.any?
+      end
     end
 
     private
 
-    ##
-    # Calls the method for a configured field
-    def generic_document_fields(config_field)
-      view_context.public_send(:"document_#{config_field}s")
+    # @return [Hash<String,Configuration::Field>] all the fields for this index view
+    def fields
+      if field_group
+        configuration["#{field_group}s"] || []
+      else
+        super
+      end
     end
 
-    def field_group
-      @field_group || 'show_field'
-    end
-
-    attr_writer :field_group
+    attr_accessor :field_group
 
     def field_config(field)
       BlacklightFieldConfigurationFactory.for(config: configuration, field: field, field_group: field_group)

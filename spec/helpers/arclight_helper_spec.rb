@@ -346,64 +346,6 @@ RSpec.describe ArclightHelper, type: :helper do
     end
   end
 
-  describe 'custom field accessors' do
-    let(:accessors) { Arclight::Engine.config.catalog_controller_field_accessors }
-    let(:field) { :yolo }
-
-    describe '#document_config_fields' do
-      it do
-        accessors.each do |accessor|
-          expect(helper).to respond_to :"document_#{accessor}s"
-        end
-      end
-    end
-
-    describe '#render_document_config_field_label' do
-      it do
-        accessors.each do |accessor|
-          expect(helper).to respond_to :"render_document_#{accessor}_label"
-        end
-      end
-    end
-
-    describe '#document_config_field_label' do
-      it do
-        accessors.each do |accessor|
-          expect(helper).to respond_to :"document_#{accessor}_label"
-        end
-      end
-    end
-
-    describe '#should_render_config_field?' do
-      it do
-        accessors.each do |accessor|
-          expect(helper).to respond_to :"should_render_#{accessor}?"
-        end
-      end
-    end
-
-    describe '#generic_document_fields' do
-      it 'send along the method call' do
-        expect(helper).to receive_messages(document_yolos: nil)
-        helper.generic_document_fields(field)
-      end
-    end
-
-    describe '#generic_should_render_field?' do
-      it 'send along the method call' do
-        expect(helper).to receive_messages(should_render_yolo?: nil)
-        helper.generic_should_render_field?(field, 0, 1)
-      end
-    end
-
-    describe '#generic_render_document_field_label?' do
-      it 'send along the method call' do
-        expect(helper).to receive_messages(render_document_yolo_label: nil)
-        helper.generic_render_document_field_label(field, 0, field: 1)
-      end
-    end
-  end
-
   describe '#hierarchy_component_context?' do
     it 'requires a parameter to enable' do
       allow(helper).to receive(:params).and_return(hierarchy_context: 'component')
