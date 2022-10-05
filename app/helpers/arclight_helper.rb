@@ -139,11 +139,10 @@ module ArclightHelper
   #
   # @return [Repository]
   def repository_faceted_on
-    return unless respond_to?(:search_state) && search_state && facet_field_in_params?('repository_sim')
+    repos = search_state.filter('repository_sim').values
+    return if repos.blank?
 
-    repos = Array(facet_params('repository_sim'))
-    faceted = repos && repos.length == 1 && repos.first
-    Arclight::Repository.find_by(name: repos.first) if faceted
+    Arclight::Repository.find_by(name: repos.first)
   end
 
   def hierarchy_component_context?

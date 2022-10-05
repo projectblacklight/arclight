@@ -300,27 +300,24 @@ RSpec.describe ArclightHelper, type: :helper do
   end
 
   describe '#search_results_header_text' do
-    let(:text) { helper.search_results_header_text }
+    subject(:text) { helper.search_results_header_text }
+
+    let(:blacklight_config) { CatalogController.blacklight_config }
+    let(:search_state) { Blacklight::SearchState.new(params, blacklight_config) }
+    let(:params) { {} }
+
+    before do
+      allow(helper).to receive(:search_state).and_return(search_state)
+    end
 
     context 'when searching within a repository' do
-      before do
-        expect(helper).to receive_messages(
-          repository_faceted_on: Arclight::Repository.new(nil, name: 'Repository Name')
-        )
-      end
+      let(:params) { { 'f' => { 'repository_sim' => ['My Repository'] } } }
 
-      it { expect(text).to eq 'Collections : [Repository Name]' }
+      it { expect(text).to eq 'Collections : [My Repository]' }
     end
 
     context 'when searching all collections' do
-      before do
-        expect(helper).to receive_messages(
-          search_state: instance_double(
-            Blacklight::SearchState, params_for_search: { 'f' => { 'level_sim' => ['Collection'] } }
-          ),
-          facet_field_in_params?: false
-        )
-      end
+      let(:params) { { 'f' => { 'level_sim' => ['Collection'] } } }
 
       it { expect(text).to eq 'Collections' }
     end
