@@ -5,8 +5,6 @@ source 'https://rubygems.org'
 # Specify your gem's dependencies in arclight.gemspec
 gemspec
 
-gem 'rexml' if RUBY_VERSION >= '3'
-
 # BEGIN ENGINE_CART BLOCK
 # engine_cart: 2.5.0
 # engine_cart stanza: 2.5.0
