@@ -305,7 +305,7 @@ RSpec.describe ArclightHelper, type: :helper do
     context 'when searching within a repository' do
       before do
         expect(helper).to receive_messages(
-          repository_faceted_on: instance_double(Arclight::Repository, name: 'Repository Name')
+          repository_faceted_on: Arclight::Repository.new(nil, name: 'Repository Name')
         )
       end
 

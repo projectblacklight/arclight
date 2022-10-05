@@ -1,22 +1,18 @@
 # frozen_string_literal: true
 
+require 'ostruct'
+
 module Arclight
   #
   # Static information about a given repository identified by a unique `slug`
-  #
-  class Repository
+  # rubocop:disable Style/OpenStructUse
+  class Repository < OpenStruct
     include ActiveModel::Conversion # for to_partial_path
-
-    attr_accessor :name, :slug, :collection_count
 
     # @param [String] `slug` the unique identifier for the repository
     # @param [Hash] `data`
     def initialize(slug, data = {})
-      @slug = slug
-      data.each do |field, value|
-        self.class.attr_accessor field.to_sym
-        send("#{field}=", value) if value.present?
-      end
+      super(**data, slug: slug)
     end
 
     # @return [String] handles the formatting of "city, state zip, country"
@@ -124,4 +120,5 @@ module Arclight
       repository
     end
   end
+  # rubocop:enable Style/OpenStructUse
 end
