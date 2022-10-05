@@ -10,18 +10,24 @@ module ArclightHelper
     tag.span t('arclight.breadcrumb_separator'), aria: { hidden: true }
   end
 
+  def breadcrumb_links(*components, count: -1, separator: aria_hidden_breadcrumb_separator)
+    breadcrumb_links = components.flatten.compact
+    if count.positive? && breadcrumb_links.length > count
+      breadcrumb_links = breadcrumb_links.first(count)
+      breadcrumb_links << '&hellip;'.html_safe
+    end
+
+    safe_join(breadcrumb_links, separator)
+  end
+
   ##
   # @param [SolrDocument]
-  def parents_to_links(document)
-    breadcrumb_links = []
-
-    breadcrumb_links << build_repository_link(document)
-
-    breadcrumb_links << document_parents(document).map do |parent|
+  def parents_to_links(document, **kwargs)
+    parent_links = document_parents(document).map do |parent|
       link_to parent.label, solr_document_path(parent.global_id)
     end
 
-    safe_join(breadcrumb_links, aria_hidden_breadcrumb_separator)
+    breadcrumb_links(build_repository_link(document), parent_links, **kwargs)
   end
 
   ##
@@ -33,48 +39,23 @@ module ArclightHelper
   #    shown in the mockup above. The repository and the collection parts are
   #    linked as usual; the ellipses is not linked.
   def regular_compact_breadcrumbs(document)
-    breadcrumb_links = [build_repository_link(document)]
-
-    parents = document_parents(document)
-    breadcrumb_links << parents[0, 1].map do |parent|
-      link_to parent.label, solr_document_path(parent.global_id)
-    end
-
-    breadcrumb_links << '&hellip;'.html_safe if parents.length > 1
-
-    safe_join(
-      breadcrumb_links,
-      aria_hidden_breadcrumb_separator
-    )
+    parents_to_links(document, count: 2)
   end
 
   ##
   # @param [SolrDocument]
-  def component_parents_to_links(document)
-    parents = document_parents(document)
-    return unless parents.length > 1
-
-    safe_join(parents.slice(1, 999).map do |parent|
+  def component_parents_to_links(document, offset: 1, **kwargs)
+    parent_links = document_parents(document).slice(offset, 999)&.map do |parent|
       link_to parent.label, solr_document_path(parent.global_id)
-    end, aria_hidden_breadcrumb_separator)
+    end
+
+    breadcrumb_links(parent_links, **kwargs) if parent_links&.any?
   end
 
   ##
   # @param [SolrDocument]
   def component_top_level_parent_to_links(document)
-    parents = document_parents(document)
-    return unless parents.length > 1
-
-    parent_link = link_to(parents[1].label, solr_document_path(parents[1].global_id))
-    return parent_link if parents.length == 2
-
-    safe_join(
-      [
-        parent_link,
-        aria_hidden_breadcrumb_separator,
-        '&hellip;'.html_safe
-      ]
-    )
+    component_parents_to_links(document, count: 1)
   end
 
   ##
