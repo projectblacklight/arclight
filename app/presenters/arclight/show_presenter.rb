@@ -43,7 +43,17 @@ module Arclight
     attr_accessor :field_group
 
     def field_config(field)
-      BlacklightFieldConfigurationFactory.for(config: configuration, field: field, field_group: field_group)
+      return super unless field_group
+
+      fields.fetch(field) do
+        if defined?(Blacklight::Configuration::NullDisplayField)
+          # For Blacklight 8:
+          Blacklight::Configuration::NullDisplayField.new(field)
+        else
+          # Blacklight 7
+          Blacklight::Configuration::NullField.new(field)
+        end
+      end
     end
   end
 end
