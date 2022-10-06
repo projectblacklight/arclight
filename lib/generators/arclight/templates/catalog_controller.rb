@@ -56,6 +56,7 @@ class CatalogController < ApplicationController
     config.index.document_actions << :containers
     config.index.document_actions << :online_content_label
     config.add_results_document_tool :arclight_bookmark_control, partial: 'arclight_bookmark_control'
+    config.index.search_bar_component = Arclight::SearchBarComponent
     config.index.document_actions.delete(:bookmark)
     # config.index.thumbnail_field = 'thumbnail_path_ss'
 
