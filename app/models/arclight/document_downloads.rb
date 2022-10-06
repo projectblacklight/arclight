@@ -74,7 +74,7 @@ module Arclight
       def size
         return data['size'] if data['size']
 
-        document.send(data['size_accessor'].to_sym) if data['size_accessor']
+        document.public_send(data['size_accessor'].to_sym) if data['size_accessor']
       end
 
       private
@@ -105,7 +105,7 @@ module Arclight
 
       def escaped_document_interpolations
         non_custom_template_variables.index_with do |method_name|
-          escape_non_url_doc_value(document.send(method_name))
+          escape_non_url_doc_value(document.public_send(method_name))
         end
       end
 
