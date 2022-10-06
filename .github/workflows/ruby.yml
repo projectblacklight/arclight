@@ -19,14 +19,28 @@ jobs:
     env:
       RAILS_VERSION: ${{ matrix.rails_version }}
     steps:
-    - uses: actions/checkout@v2
+    - uses: actions/checkout@v3
     - name: Set up Ruby ${{ matrix.ruby }}
-      uses: ruby/setup-ruby@v1
+      uses: ruby/setup-ruby@0a29871fe2b0200a17a4497bae54fe5df0d973aa # v1.115.3
       with:
+        bundler-cache: true
         ruby-version: ${{ matrix.ruby }}
     - name: Install dependencies with Rails ${{ matrix.rails_version }}
       run: bundle install
-    - name: Install dependencies with yarn
-      run: yarn install
     - name: Run tests
-      run: bundle exec rake
+      run: bundle exec rake ci
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+      - name: Install Ruby and gems
+        uses: ruby/setup-ruby@0a29871fe2b0200a17a4497bae54fe5df0d973aa # v1.115.3
+        with:
+          bundler-cache: true
+          ruby-version: 3.1
+      - name: Install dependencies with yarn
+        run: yarn install
+      - name: Lint Ruby files
+        run: bundle exec rake rubocop eslint
+      
