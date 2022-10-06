@@ -14,9 +14,9 @@
             <address>
               <div class="al-repository-street-address">
                 <% %i[building address1 address2 city_state_zip_country].each do |f| %>
-                  <% if repository.send(f).present? %>
+                  <% if repository.public_send(f).present? %>
                     <div class='al-repository-street-address-<%= f %>'>
-                      <%= repository.send(f) %>
+                      <%= repository.public_send(f) %>
                     </div>
                   <% end %>
                 <% end %>

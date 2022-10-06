@@ -1,8 +1,8 @@
 <div class='al-in-person-repository-contact'>
   <% %i[phone contact_info].each do |f| %>
-    <% if repository.send(f).present? %>
+    <% if repository.public_send(f).present? %>
       <div class='al-repository-contact-<%= f %>'>
-        <%= repository.send(f) %>
+        <%= repository.public_send(f) %>
       </div>
     <% end %>
   <% end %>

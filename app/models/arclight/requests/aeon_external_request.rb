@@ -30,7 +30,7 @@ module Arclight
 
       def dynamic_mappings
         config['request_mappings']['accessor'].transform_values do |v|
-          @document.send(v.to_sym)
+          @document.public_send(v.to_sym)
         end
       end
 
