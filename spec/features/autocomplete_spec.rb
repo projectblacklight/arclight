@@ -6,14 +6,10 @@ RSpec.describe 'Autocomplete', type: :feature, js: true do
   context 'site-wide search form' do
     it 'is configured properly to allow non-prefix autocomplete' do
       visit '/catalog'
-      page.execute_script <<-EOF
-        $("[data-autocomplete-enabled]:visible").val("by-laws").trigger("input");
-        $("[data-autocomplete-enabled]:visible").typeahead("open");
-      EOF
-
-      within('.tt-menu') do
-        expect(page).to have_css('.tt-suggestion', text: 'constitution and by-laws', visible: :visible)
-      end
+      find_by_id('q').send_keys 'by-laws'
+      expect(page).to have_content 'amendments to articles'
+      send_keys(:tab)
+      expect(page).to have_field('search for', with: 'amendments to articles of incorporation and revised constitution and              by-laws, 1960')
     end
   end
 end
