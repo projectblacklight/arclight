@@ -25,6 +25,10 @@ class BlacklightFieldConfigurationFactory
   attr_reader :config, :field, :field_group
 
   def null_field
+    # blacklight 8
+    return Blacklight::Configuration::NullDisplayField.new(field) if defined?(Blacklight::Configuration::NullDisplayField)
+
+    # Blacklight 7
     Blacklight::Configuration::NullField.new(field)
   end
 end
