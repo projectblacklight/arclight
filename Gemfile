@@ -5,7 +5,7 @@ source 'https://rubygems.org'
 # Specify your gem's dependencies in arclight.gemspec
 gemspec
 
-gem 'blacklight', github: 'projectblacklight/blacklight', branch: 'main'
+gem 'blacklight', github: 'projectblacklight/blacklight', branch: '2705-prop-default-proc'
 gem 'byebug'
 
 # BEGIN ENGINE_CART BLOCK
