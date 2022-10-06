@@ -233,7 +233,8 @@ class CatalogController < ApplicationController
     end
 
     # These are the parameters passed through in search_state.params_for_search
-    config.search_state_fields += %i[id group hierarchy_context original_document original_parents]
+    config.search_state_fields += %i[id group hierarchy_context original_document]
+    config.search_state_fields << { original_parents: [] }
 
     # "sort results by" select (pulldown)
     # label in pulldown is followed by the name of the SOLR field to sort by and
