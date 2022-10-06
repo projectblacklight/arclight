@@ -5,7 +5,7 @@ require 'spec_helper'
 RSpec.describe 'Autocomplete', type: :feature, js: true do
   context 'site-wide search form' do
     it 'is configured properly to allow non-prefix autocomplete' do
-      visit '/'
+      visit '/catalog'
       page.execute_script <<-EOF
         $("[data-autocomplete-enabled]:visible").val("by-laws").trigger("input");
         $("[data-autocomplete-enabled]:visible").typeahead("open");

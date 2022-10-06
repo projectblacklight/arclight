@@ -1,8 +1,0 @@
-<% unless has_search_parameters? %>
-  <%= render 'home' %>
-<% else %>
-  <% content_for(:sidebar) do %>
-    <%= render 'search_sidebar' %>
-  <% end %>
-  <%= render 'search_results' %>
-<% end %>

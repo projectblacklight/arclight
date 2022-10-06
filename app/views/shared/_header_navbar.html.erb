@@ -12,50 +12,24 @@
     </div>
   </nav>
 
-  <% if controller_name == 'catalog' && !has_search_parameters? && action_name == 'index' %>
-    <div class='al-homepage-masthead jumbotron'>
-      <div class="container">
-        <div class="row align-items-center">
-          <div class="col-md-8 masthead-center" >
-            <h1><%= t('arclight.masthead_heading') %></h1>
-          </div>
-
-          <div class="col-md-4 nav-links d-flex justify-content-end" >
-            <ul class="navbar-nav" aria-label="browse" role="navigation">
-              <%= render 'shared/main_menu_links' %>
-            </ul>
-          </div>
+  <div class='bg-faded al-masthead'>
+    <div class="container">
+      <div class="row align-items-center">
+        <div class="col-md-8" >
+          <span class="h1"><%= t('arclight.masthead_heading') %></span>
         </div>
 
-        <div class='row justify-content-md-center'>
-          <div class='col-12'>
-            <div class='navbar-search'>
-              <%= render_search_bar %>
-            </div>
-          </div>
+        <div class="col-md-4 nav-links d-flex justify-content-end" >
+          <ul class="navbar-nav" aria-label="browse" role="navigation">
+            <%= render 'shared/main_menu_links' %>
+          </ul>
         </div>
       </div>
     </div>
-  <% else %>
-    <div class='bg-faded al-masthead'>
-      <div class="container">
-        <div class="row align-items-center">
-          <div class="col-md-8" >
-            <span class="h1"><%= t('arclight.masthead_heading') %></span>
-          </div>
-
-          <div class="col-md-4 nav-links d-flex justify-content-end" >
-            <ul class="navbar-nav" aria-label="browse" role="navigation">
-              <%= render 'shared/main_menu_links' %>
-            </ul>
-          </div>
-        </div>
-      </div>
+  </div>
+  <div class="navbar-search navbar">
+    <div class="<%= container_classes %>">
+      <%= render_search_bar  %>
     </div>
-    <div class="navbar-search navbar">
-      <div class="<%= container_classes %>">
-        <%= render_search_bar  %>
-      </div>
-    </div>
-  <% end %>
+  </div>
 </header>
