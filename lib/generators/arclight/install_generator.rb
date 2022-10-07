@@ -71,11 +71,45 @@ module Arclight
       gsub_file 'config/locales/blacklight.en.yml', "application_name: 'Blacklight'", "application_name: 'Arclight'"
     end
 
+    def assets
+      if using_importmap?
+        pin_javascript_dependencies
+      else
+        install_javascript_dependencies
+      end
+    end
+
+    private
+
+    def root
+      @root ||= Pathname(destination_root)
+    end
+
+    def using_importmap?
+      @using_importmap ||= root.join('config/importmap.rb').exist?
+    end
+
     # This is the last step because any failure here wouldn't prevent the other steps from running
-    def inject_js
+    def install_javascript_dependencies
       inject_into_file 'app/assets/javascripts/application.js', after: '//= require blacklight/blacklight' do
         "\n// Required by Arclight" \
           "\n//= require arclight/arclight"
+      end
+    end
+
+    def pin_javascript_dependencies
+      say 'Arclight Importmap asset generation'
+
+      append_to_file 'config/importmap.rb', <<~RUBY
+        pin "jquery", to: "https://ga.jspm.io/npm:jquery@3.6.0/dist/jquery.js"
+        pin "arclight", to: "arclight/arclight.js"
+      RUBY
+
+      inject_into_file 'app/javascript/application.js', after: 'import "blacklight"' do
+        "\n  import $ from \"jquery\"\n  " \
+          "window.$ = $ // required by arclight\n  " \
+          "window.jQuery = $ // required by arclight/responsive_truncator.js\n  " \
+          'import("arclight")'
       end
     end
   end
