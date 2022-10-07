@@ -5,7 +5,7 @@
   </div>
 
   <div class="col-md-9 order-md-1">
-    <h2 class="sr-only"><%= t 'arclight.views.show.context' %></h2>
+    <h2 class="sr-only visually-hidden"><%= t 'arclight.views.show.context' %></h2>
     <% unless blacklight_config.show.metadata_partials.nil? %>
       <% blacklight_config.show.metadata_partials.each do |metadata| %>
         <% next unless presenter.fields_have_content?(metadata) %>
