@@ -36,6 +36,10 @@ Capybara.enable_aria_label = true
 
 require 'arclight'
 
+# Requires supporting ruby files with custom matchers and macros, etc,
+# in spec/support/ and its subdirectories.
+Dir[Pathname.new(File.expand_path('support/**/*.rb', __dir__))].sort.each { |f| require f }
+
 RSpec.configure do |config|
   # Enable flags like --only-failures and --next-failure
   config.example_status_persistence_file_path = '.rspec_status'
@@ -43,6 +47,11 @@ RSpec.configure do |config|
   config.expect_with :rspec do |c|
     c.syntax = :expect
   end
+
+  config.infer_spec_type_from_file_location!
+
+  config.before(:each, type: :helper) { helper.extend ControllerLevelHelpers }
+  config.before(:each, type: :view) { view.extend ControllerLevelHelpers }
 end
 
 # Provide a custom matcher that makes it easier to deal with pretty-printed

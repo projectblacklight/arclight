@@ -3,17 +3,19 @@
 require 'spec_helper'
 
 RSpec.describe ArclightHelper, type: :helper do
+  let(:params) { {} }
+  let(:search_state) do
+    Blacklight::SearchState.new(params, CatalogController.blacklight_config)
+  end
+
+  before do
+    allow(helper).to receive(:search_state).and_return(search_state)
+  end
+
   describe '#collection_active?' do
     context 'with active collection search' do
-      let(:search_state) do
-        instance_double(
-          Blacklight::SearchState,
-          params_for_search: { 'f' => { 'level_sim' => ['Collection'] } }
-        )
-      end
-
-      before do
-        allow(helper).to receive(:search_state).and_return(search_state)
+      let(:params) do
+        { 'f' => { 'level_sim' => ['Collection'] } }
       end
 
       it do
@@ -22,13 +24,6 @@ RSpec.describe ArclightHelper, type: :helper do
     end
 
     context 'without active collection search' do
-      let(:search_state) do
-        instance_double(
-          Blacklight::SearchState,
-          params_for_search: {}
-        )
-      end
-
       before do
         allow(helper).to receive(:search_state).and_return(search_state)
       end
@@ -41,11 +36,8 @@ RSpec.describe ArclightHelper, type: :helper do
 
   describe '#grouped?' do
     context 'when group is active' do
-      let(:search_state) do
-        instance_double(
-          Blacklight::SearchState,
-          params_for_search: { 'group' => 'true' }
-        )
+      let(:params) do
+        { 'group' => 'true' }
       end
 
       before do
@@ -58,11 +50,8 @@ RSpec.describe ArclightHelper, type: :helper do
     end
 
     context 'when not grouped' do
-      let(:search_state) do
-        instance_double(
-          Blacklight::SearchState,
-          params_for_search: { 'hello' => 'true' }
-        )
+      let(:params) do
+        { 'hello' => 'true' }
       end
 
       before do
@@ -76,15 +65,8 @@ RSpec.describe ArclightHelper, type: :helper do
   end
 
   describe '#search_with_group' do
-    let(:search_state) do
-      instance_double(
-        Blacklight::SearchState,
-        params_for_search: { 'q' => 'hello', 'page' => '2' }
-      )
-    end
-
-    before do
-      allow(helper).to receive(:search_state).and_return(search_state)
+    let(:params) do
+      { 'q' => 'hello', 'page' => '2' }
     end
 
     it do
@@ -96,15 +78,8 @@ RSpec.describe ArclightHelper, type: :helper do
   end
 
   describe '#search_without_group' do
-    let(:search_state) do
-      instance_double(
-        Blacklight::SearchState,
-        params_for_search: { 'q' => 'hello', 'group' => 'true', 'page' => '2' }
-      )
-    end
-
-    before do
-      allow(helper).to receive(:search_state).and_return(search_state)
+    let(:params) do
+      { 'q' => 'hello', 'group' => 'true', 'page' => '2' }
     end
 
     it do
