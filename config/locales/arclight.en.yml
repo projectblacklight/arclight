@@ -5,7 +5,6 @@ en:
     breadcrumbs:
       aria_label: breadcrumb
     hierarchy:
-      scope_and_contents: Scope and Contents
       scope_note: 'Scope note: '
       view_all: View
     masthead_heading: Archival Collections at Institution
