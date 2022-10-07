@@ -1,16 +1,16 @@
 <%= render(Blacklight::SearchBarComponent.new(
       **@kwargs,
       params: @params.merge(f: (@params[:f] || {}).except(:collection_sim)))) do |c| %>
-  <% c.prepend do %>
+  <% c.with_prepend do %>
     <%= prepend %>
     <%= render 'catalog/within_collection_dropdown' %>
   <% end %>
 
-  <% c.append do %>
+  <% c.with_append do %>
     <%= append %>
   <% end if append? %>
 
-  <% c.search_button do %>
+  <% c.with_search_button do %>
     <%= search_button %>
-  <% end if respond_to?(:search_button?) && search_button? %>
+  <% end if respond_to?(:search_button?) && search_button? # only BL8 has this option %>
 <% end %>
