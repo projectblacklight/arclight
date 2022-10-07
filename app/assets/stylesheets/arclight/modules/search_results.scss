@@ -198,3 +198,33 @@ article.document {
 .btn-outline-secondary:not(:disabled):not(.disabled).active svg, .btn-outline-secondary:hover svg {
   fill: $white;
 }
+
+.sort-pagination {
+  flex-wrap: wrap;
+}
+
+.search-widgets {
+  width: 100%;
+  align-items: center;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+}
+
+
+.result-type-group {
+  order: -1;
+  flex-grow: 1;
+  &.btn-group>.btn {
+    flex-grow: 0;
+  }
+}
+@include media-breakpoint-down(md) {
+  .result-type-group {
+    margin-bottom: 0.5rem;
+    width: 100%;
+  }
+
+  .search-widgets {
+    justify-content: flex-start;
+  }
+}
