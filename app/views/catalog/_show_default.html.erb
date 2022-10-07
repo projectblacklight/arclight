@@ -13,20 +13,20 @@
       <div class='col-md-12'>
         <ul class='nav nav-tabs nav-fill' role='tablist' aria-label='<%= t('arclight.views.show.tablist_nav') %>'>
           <li class='nav-item flex-fill'>
-            <a class='nav-link p-1 p-sm-2 active' data-toggle='tab' href='#context' role='tab'>
+            <a class='nav-link p-1 p-sm-2 active' data-toggle='tab' data-bs-toggle='tab' href='#context' role='tab'>
               <%= t 'arclight.views.show.context' %>
             </a>
           </li>
           <% if document.online_content? && document.children? %>
             <li class='nav-item flex-fill'>
-              <a class='nav-link p-1 p-sm-2' data-toggle='tab' href='#online-content' role='tab' data-arclight-online-content-tab='true'>
+              <a class='nav-link p-1 p-sm-2' data-toggle='tab' data-bs-toggle='tab' href='#online-content' role='tab' data-arclight-online-content-tab='true'>
                 <%= t 'arclight.views.show.online_content' %>
                 <span data-arclight-online-content-tab-count/>
               </a>
             </li>
           <% end %>
           <li class='nav-item flex-fill'>
-            <a class='nav-link p-1 p-sm-2' data-toggle='tab' href='#access' role='tab'>
+            <a class='nav-link p-1 p-sm-2' data-toggle='tab' data-bs-toggle='tab' href='#access' role='tab'>
               <%= t 'arclight.views.show.access' %>
             </a>
           </li>
