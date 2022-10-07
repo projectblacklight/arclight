@@ -304,7 +304,6 @@ class ContextNavigation {
     this.el.parent().data('resolved', true);
     this.addListenersForPlusMinus();
     this.enablebuttons();
-    Blacklight.doBookmarkToggleBehavior();
     this.el.trigger('navigation.contains.elements');
   }
 
