@@ -5,8 +5,6 @@ source 'https://rubygems.org'
 # Specify your gem's dependencies in arclight.gemspec
 gemspec
 
-gem 'blacklight', github: 'projectblacklight/blacklight', branch: 'main'
-
 # BEGIN ENGINE_CART BLOCK
 # engine_cart: 2.5.0
 # engine_cart stanza: 2.5.0
@@ -42,3 +40,6 @@ else
   end
 end
 # END ENGINE_CART BLOCK
+
+# Used by engine_cart if you need to change a specific version of a dependency
+eval_gemfile File.expand_path('spec/test_app_templates/Gemfile.extra', File.dirname(__FILE__))
