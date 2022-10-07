@@ -1,7 +1,5 @@
-(function (global) {
-  var CollectionNavigation;
 
-  CollectionNavigation = {
+  const CollectionNavigation = {
     init: function (el, page = 1) {
       var $el = $(el);
       var data = $el.data();
@@ -71,30 +69,27 @@
     }
   };
 
-  global.CollectionNavigation = CollectionNavigation;
-}(this));
+  Blacklight.onLoad(function () {
+    'use strict';
 
-Blacklight.onLoad(function () {
-  'use strict';
+    $('.al-contents').each(function (i, element) {
+      CollectionNavigation.init(element); // eslint-disable-line no-undef
+    });
 
-  $('.al-contents').each(function (i, element) {
-    CollectionNavigation.init(element); // eslint-disable-line no-undef
-  });
+    $('.al-contents').on('navigation.contains.elements', function (e) {
+      var toEnable = $('[data-hierarchy-enable-me]');
+      var srOnly = $('h2[data-sr-enable-me]');
+      toEnable.removeClass('disabled');
+      toEnable.text(srOnly.data('hasContents'));
+      srOnly.text(srOnly.data('hasContents'));
 
-  $('.al-contents').on('navigation.contains.elements', function (e) {
-    var toEnable = $('[data-hierarchy-enable-me]');
-    var srOnly = $('h2[data-sr-enable-me]');
-    toEnable.removeClass('disabled');
-    toEnable.text(srOnly.data('hasContents'));
-    srOnly.text(srOnly.data('hasContents'));
-
-    $(e.target).find('.collapse').on('show.bs.collapse', function (ee) {
-      var $newTarget = $(ee.target);
-      $newTarget.find('.al-contents').each(function (i, element) {
-        CollectionNavigation.init(element); // eslint-disable-line no-undef
+      $(e.target).find('.collapse').on('show.bs.collapse', function (ee) {
+        var $newTarget = $(ee.target);
+        $newTarget.find('.al-contents').each(function (i, element) {
+          CollectionNavigation.init(element); // eslint-disable-line no-undef
         // Turn off additional ajax requests on show
-        $newTarget.off('show.bs.collapse');
+          $newTarget.off('show.bs.collapse');
+        });
       });
     });
   });
-});

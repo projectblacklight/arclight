@@ -35,5 +35,9 @@ module Arclight
         ActiveSupport.on_load(:action_view) { include ArclightHelper }
       end
     end
+
+    initializer 'arclight.assets', before: 'assets' do |app|
+      app.config.assets.precompile << 'arclight/arclight.js'
+    end
   end
 end
