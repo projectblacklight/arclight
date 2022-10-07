@@ -6,10 +6,6 @@ RSpec.describe 'Repositores Page', type: :feature do
   it 'is navigabe from the home page' do
     visit '/'
 
-    within '.al-homepage-masthead' do
-      click_link 'Repositories'
-    end
-
     within '.al-repositories' do
       expect(page).to have_css('.al-repository h2 a', text: 'My Repository')
     end

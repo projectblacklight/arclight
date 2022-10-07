@@ -24,8 +24,6 @@ en:
       view_less: view less ▼
       view_more: view more ▶
     views:
-      home:
-        title: Archival Collections at Institution - Arclight
       index:
         all_group_results: view all %{count}
         all_results: All results

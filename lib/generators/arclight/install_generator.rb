@@ -41,6 +41,8 @@ module Arclight
       inject_into_file 'config/routes.rb', after: "mount Blacklight::Engine => '/'" do
         "\n    mount Arclight::Engine => '/'\n"
       end
+
+      gsub_file 'config/routes.rb', 'root to: "catalog#index"', 'root to: "arclight/repositories#index"'
     end
 
     def copy_styles
