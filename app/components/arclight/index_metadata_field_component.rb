@@ -8,5 +8,9 @@ module Arclight
 
       @classes = classes + ["al-document-#{@field.key.dasherize}"]
     end
+
+    def truncate?
+      !!@field.field_config.truncate
+    end
   end
 end

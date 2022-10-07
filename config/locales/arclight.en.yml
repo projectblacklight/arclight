@@ -20,8 +20,8 @@ en:
       repository_header: 'Collections : [%{repository}]'
     show_breadcrumb_label: Repository
     truncation:
-      view_less: view less ▼
-      view_more: view more ▶
+      view_less: view less
+      view_more: view more
     views:
       index:
         all_group_results: view all %{count}
