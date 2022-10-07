@@ -7,7 +7,7 @@
 <% end %>
 
 <% content_for(:container_header) do %>
-  <h1 class="sr-only top-content-title"><%= search_results_header_text %></h1>
+  <h1 class="sr-only visually-hidden top-content-title"><%= search_results_header_text %></h1>
   <%= render 'shared/breadcrumbs' %>
   <%= render 'search_results_repository' %>
   <%= render 'constraints' %>
@@ -15,7 +15,7 @@
 
 <%= render 'search_header' %>
 
-<h2 class="sr-only"><%= t('blacklight.search.search_results') %></h2>
+<h2 class="sr-only visually-hidden"><%= t('blacklight.search.search_results') %></h2>
 
 <%- if @response.empty? %>
   <%= render "zero_results" %>

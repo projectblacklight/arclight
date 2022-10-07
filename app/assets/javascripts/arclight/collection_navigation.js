@@ -41,7 +41,7 @@
             $(
               '<span class="badge badge-pill badge-secondary al-online-content-badge">'
                 + numberEntries
-                + '<span class="sr-only">components</span></span>'
+                + '<span class="sr-only visually-hidden">components</span></span>'
             )
           );
         }
