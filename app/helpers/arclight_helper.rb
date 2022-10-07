@@ -6,64 +6,6 @@ module ArclightHelper
   include Arclight::EadFormatHelpers
   include Arclight::FieldConfigHelpers
 
-  def aria_hidden_breadcrumb_separator
-    tag.span t('arclight.breadcrumb_separator'), aria: { hidden: true }
-  end
-
-  def breadcrumb_links(*components, count: -1, separator: aria_hidden_breadcrumb_separator)
-    breadcrumb_links = components.flatten.compact
-    if count.positive? && breadcrumb_links.length > count
-      breadcrumb_links = breadcrumb_links.first(count)
-      breadcrumb_links << '&hellip;'.html_safe
-    end
-
-    safe_join(breadcrumb_links, separator)
-  end
-
-  ##
-  # @param [SolrDocument]
-  def parents_to_links(document, **kwargs)
-    parent_links = document_parents(document).map do |parent|
-      link_to parent.label, solr_document_path(parent.global_id)
-    end
-
-    breadcrumb_links(build_repository_link(document), parent_links, **kwargs)
-  end
-
-  ##
-  # For a non-grouped compact view, display the breadcrumbs with the following
-  # algorithm:
-  #  - Display only the first two parts of the item breadcrumb: the repository
-  #    and the collection.
-  #  - After the collection and the breadcrumb divider icon, show an ellipses as
-  #    shown in the mockup above. The repository and the collection parts are
-  #    linked as usual; the ellipses is not linked.
-  def regular_compact_breadcrumbs(document)
-    parents_to_links(document, count: 2)
-  end
-
-  ##
-  # @param [SolrDocument]
-  def component_parents_to_links(document, offset: 1, **kwargs)
-    parent_links = document_parents(document).slice(offset, 999)&.map do |parent|
-      link_to parent.label, solr_document_path(parent.global_id)
-    end
-
-    breadcrumb_links(parent_links, **kwargs) if parent_links&.any?
-  end
-
-  ##
-  # @param [SolrDocument]
-  def component_top_level_parent_to_links(document)
-    component_parents_to_links(document, count: 1)
-  end
-
-  ##
-  # @param [SolrDocument]
-  def document_parents(document)
-    document.parents
-  end
-
   def repository_collections_path(repository)
     search_action_url(
       f: {
@@ -233,16 +175,5 @@ module ArclightHelper
 
   def record_view?
     controller_name == 'catalog' && action_name == 'show'
-  end
-
-  private
-
-  def build_repository_link(document)
-    repository_path = document.repository_config&.slug
-    if repository_path.present?
-      link_to(document.repository, arclight_engine.repository_path(repository_path))
-    else
-      content_tag(:span, document.repository)
-    end
   end
 end

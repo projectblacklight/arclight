@@ -1,0 +1,55 @@
+<%= content_tag @component,
+  id: @id,
+  data: {
+    'document-id': @document.id.to_s.parameterize,
+    'document-counter': @counter,
+  },
+  itemscope: true,
+  itemtype: @document.itemtype,
+  class: classes.flatten.join(' ') do %>
+  <li id="<%= document.id %>" class="al-collection-context row d-flex align-items-start">
+    <div class="documentHeader row" data-document-id="<%= document.id %>">
+      <% if document.children? %>
+        <div class="al-toggle-children-container">
+          <%= link_to(
+            '',
+            "##{document.id}-collapsible-hierarchy",
+            class: "al-toggle-view-children #{!show_expanded?(document) ? 'collapsed' : ''}",
+            'aria-label': t('arclight.hierarchy.view_all'),
+              data: {
+                toggle: 'collapse'
+              }
+            )
+          %>
+        </div>
+      <% end %>
+      <div class="col-auto">
+        <%= icon %>
+      </div>
+      <div class="col col-no-left-padding d-flex flex-wrap">
+        <div class="index_title document-title-heading my-w-75 w-md-100 order-0">
+          <%= helpers.link_to_document document, counter: @counter %>
+          <% if document.children? %>
+            <span class="badge badge-pill badge-secondary al-number-of-children-badge"><%= document.number_of_children %><span class="sr-only visually-hidden"><%= t(:'arclight.views.index.number_of_components', count: document.number_of_children) %></span></span>
+          <% end %>
+        </div>
+
+        <div class="my-w-25 w-md-100 order-12 order-md-1">
+          <%= helpers.render_index_doc_actions document, wrapping_class: 'd-flex justify-content-end' %>
+        </div>
+
+        <div class="order-2">
+          <%= render Arclight::IndexMetadataFieldComponent.with_collection(@presenter&.field_presenters.select { |field| field.field_config.collection_context }, classes: ['col pl-0 my-0']) %>
+        </div>
+      </div>
+    </div>
+    <% if document.number_of_children > 0 %>
+      <%= content_tag(:div, id: "#{document.id}-collapsible-hierarchy",
+        class: "collapse al-collection-context-collapsible al-hierarchy-level-#{document.component_level} #{'show' if show_expanded?(document)}",
+        data: { resolved: false }
+      ) do %>
+        <%= generic_context_navigation(document, component_level: document.component_level + 1, original_parents: params[:original_parents]) %>
+      <% end %>
+    <% end %>
+  </li>
+<% end %>

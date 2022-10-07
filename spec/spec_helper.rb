@@ -50,6 +50,7 @@ RSpec.configure do |config|
 
   config.infer_spec_type_from_file_location!
 
+  config.include ViewComponent::TestHelpers, type: :component
   config.before(:each, type: :helper) { helper.extend ControllerLevelHelpers }
   config.before(:each, type: :view) { view.extend ControllerLevelHelpers }
 end

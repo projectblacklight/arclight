@@ -54,6 +54,7 @@ class CatalogController < ApplicationController
     config.index.partials = %i[arclight_index_default]
     config.index.title_field = 'normalized_title_ssm'
     config.index.display_type_field = 'level_ssm'
+    config.index.document_component = Arclight::SearchResultComponent
     config.index.document_presenter_class = Arclight::IndexPresenter
     config.index.document_actions << :containers
     config.index.document_actions << :online_content_label
@@ -101,11 +102,11 @@ class CatalogController < ApplicationController
 
     ##
     # Collection Context
-    config.view.collection_context(display_control: false, partials: %i[index_collection_context])
+    config.view.collection_context(display_control: false, document_component: Arclight::DocumentCollectionContextComponent)
 
     ##
     # Compact index view
-    config.view.compact(partials: %i[arclight_index_compact])
+    config.view.compact!
 
     # solr fields that will be treated as facets by the blacklight application
     #   The ordering of the field names is the order of the display
@@ -155,16 +156,13 @@ class CatalogController < ApplicationController
 
     # solr fields to be displayed in the index (search results) view
     #   The ordering of the field names is the order of the display
-    config.add_index_field 'unitid_ssm', label: 'Unit ID'
-    config.add_index_field 'repository_ssm', label: 'Repository'
-    config.add_index_field 'normalized_date_ssm', label: 'Date'
-    config.add_index_field 'creator_ssm', label: 'Creator'
-    config.add_index_field 'language_ssm', label: 'Language'
-    config.add_index_field 'scopecontent_ssm', label: 'Scope Content', helper_method: :render_html_tags
-    config.add_index_field 'extent_ssm', label: 'Physical Description'
-    config.add_index_field 'accessrestrict_ssm', label: 'Conditions Governing Access', helper_method: :render_html_tags
-    config.add_index_field 'collection_ssm', label: 'Collection Title'
-    config.add_index_field 'geogname_ssm', label: 'Place'
+    config.add_index_field 'highlight', accessor: 'highlights', separator_options: {
+      words_connector: '<br/>',
+      two_words_connector: '<br/>',
+      last_word_connector: '<br/>'
+    }, compact: true
+    config.add_index_field 'creator', accessor: true
+    config.add_index_field 'abstract_or_scope', accessor: true, truncate: true, collection_context: true
 
     config.add_facet_field 'has_online_content_ssim', label: 'Access', query: {
       online: { label: 'Online access', fq: 'has_online_content_ssim:true' }

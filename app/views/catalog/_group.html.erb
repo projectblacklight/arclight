@@ -15,7 +15,7 @@
           <%= t('arclight.views.index.group_results_count', count: g.total) %>
         <% end %>
       </div>
-      <%= render_grouped_documents(g.docs) %>
+      <%= render_document_index g.docs %>
     </div>
   <% end %>
 </div>

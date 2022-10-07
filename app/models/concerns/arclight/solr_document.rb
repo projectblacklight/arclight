@@ -146,7 +146,7 @@ module Arclight
                 highlight_response[id].blank? ||
                 highlight_response[id][:text].blank?
 
-      highlight_response[id][:text]
+      highlight_response[id][:text].map(&:html_safe)
     end
 
     # Factory method for constructing the Object modeling downloads

@@ -28,10 +28,6 @@
       }
     }
 
-    form.bookmark-toggle.col-auto {
-      padding-right: 0;
-    }
-
     .breadcrumb-links,
     .al-document-creator,
     .al-document-extent,
@@ -57,6 +53,10 @@ article.document {
   div.al-document-abstract-or-scope,
   div.al-document-creator {
     margin-top: ($spacer * .5);
+  }
+
+  form.bookmark-toggle.col-auto {
+    padding-right: 0;
   }
 }
 
