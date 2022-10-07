@@ -49,13 +49,6 @@ module Arclight
       copy_file 'arclight.scss', 'app/assets/stylesheets/arclight.scss'
     end
 
-    def inject_js
-      inject_into_file 'app/assets/javascripts/application.js', after: '//= require blacklight/blacklight' do
-        "\n// Required by Arclight" \
-          "\n//= require arclight/arclight"
-      end
-    end
-
     def add_arclight_search_behavior
       inject_into_file 'app/models/search_builder.rb', after: 'include Blacklight::Solr::SearchBuilderBehavior' do
         "\n  include Arclight::SearchBehavior"
@@ -76,6 +69,14 @@ module Arclight
 
     def modify_blacklight_yml
       gsub_file 'config/locales/blacklight.en.yml', "application_name: 'Blacklight'", "application_name: 'Arclight'"
+    end
+
+    # This is the last step because any failure here wouldn't prevent the other steps from running
+    def inject_js
+      inject_into_file 'app/assets/javascripts/application.js', after: '//= require blacklight/blacklight' do
+        "\n// Required by Arclight" \
+          "\n//= require arclight/arclight"
+      end
     end
   end
 end
