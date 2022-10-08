@@ -1,0 +1,172 @@
+<div class='d-md-flex justify-content-between al-show'>
+  <div class='al-show-breadcrumb'>
+    <nav aria-label="breadcrumb">
+      <ol class="breadcrumb">
+        <li class="breadcrumb-home-link">
+          <%= link_to t('arclight.routes.home'), root_path %>
+        </li>
+        <li class="media breadcrumb-item  breadcrumb-item-1">
+          <% if document.repository_config.present? %>
+            <span class="media-body" aria-hidden="true"><%= blacklight_icon :repository, classes: 'al-repository-content-icon' %></span>
+            <span class="col"><%= link_to(document.repository_config.name, helpers.arclight_engine.repository_path(document.repository_config.slug)) %></span>
+          <% else %>
+              <span class="media-body" aria-hidden="true"><%= blacklight_icon :repository, classes: 'al-repository-content-icon' %></span><span class="col"><%= t('arclight.show_breadcrumb_label') %></span>
+          <% end %>
+        </li>
+        <% document.parents.each_with_index.map do |parent, index| %>
+          <%= content_tag :li, class: "breadcrumb-item breadcrumb-item-#{index + 1} media" do %>
+            <span class="media-body" aria-hidden="true"><%= blacklight_icon document_or_parent_icon(parent) %></span>
+            <span class="col"><%= link_to parent.label, solr_document_path(parent.global_id) %></span>
+          <% end %>
+        <% end %>
+      </ol>
+
+      <%= content_tag :h1, class: "breadcrumb-item breadcrumb-item-#{document.parents.length + 2} media" do %>
+        <span class="media-body" aria-hidden="true"><%= blacklight_icon document_or_parent_icon(document) %></span>
+        <span class="col"><%= document.normalized_title %></span>
+      <% end %>
+    </nav>
+  </div>
+
+  <div class='al-show-actions-box'>
+    <div class="al-actions-box-container">
+      <% if document.unitid || document.containers.present? %>
+        <div class='al-collection-id'>
+          <% if document.unitid %>
+            <%= t(:'arclight.views.show.collection_id', id: document.unitid) %>
+          <% end %>
+
+          <% if document.unitid && document.containers.present? %>
+            <span> | </span>
+          <% end %>
+
+          <% if document.containers.present? %>
+            <span><%= document.containers.join(', ') %></span>
+          <% end %>
+        </div>
+      <% end %>
+      <div class='al-show-actions-box-options d-flex'>
+        <%= helpers.render partial: 'arclight/requests', locals: { document: document } %>
+        <div class='al-show-actions-box-bookmarks flex-md-fill'>
+          <%= helpers.render partial: 'catalog/bookmark_control', locals: { document: document } %>
+        </div>
+      </div>
+    </div>
+
+    <%= render document.downloads %>
+  </div>
+</div>
+
+
+<% if !document.collection? && blacklight_config.show.component_metadata_partials.present? %>
+  <dl class="al-metadata-section breadcrumb-item breadcrumb-item-<%= document.parents.length + 3 %>">
+    <% blacklight_config.show.component_metadata_partials.each do |metadata| %>
+      <% presenter.with_field_group(metadata) do |p|%>
+        <% p.field_presenters.each do |field_presenter| %>
+          <%= render (field_presenter.component || Blacklight::MetadataFieldComponent).new(field: field_presenter, show: true, layout: Arclight::UpperMetadataLayoutComponent) %>
+        <% end %>
+      <% end %>
+    <% end %>
+  </dl>
+<% end %>
+
+  <div class='row'>
+    <div class='col-md-12'>
+      <% if document.digital_objects.present? %>
+        <%= content_tag :p, class: "media breadcrumb-item breadcrumb-item-#{document.parents.length + 3}" do %>
+          <span class="media-body al-online-content-icon" aria-hidden="true"><%= blacklight_icon :online %></span>
+          <span class="col text-muted">
+            <%= t('arclight.views.show.online_content_upper') %>
+          </span>
+          <%= @document.digital_object_viewer %>
+        <% end %>
+      <% end %>
+
+      <div class='row'>
+        <div class='col-md-12'>
+          <ul class='nav nav-tabs nav-fill' role='tablist' aria-label='<%= t('arclight.views.show.tablist_nav') %>'>
+            <li class='nav-item flex-fill'>
+              <a class='nav-link p-1 p-sm-2 active' data-toggle='tab' data-bs-toggle='tab' href='#context' role='tab'>
+                <%= document.collection? ? t('arclight.views.show.overview') : t('arclight.views.show.context') %>
+              </a>
+            </li>
+
+            <% if document.collection? %>
+              <li class='nav-item flex-fill'>
+                <a class='nav-link p-1 p-sm-2 disabled' data-toggle='tab' data-bs-toggle='tab' href='#contents' role='tab' data-hierarchy-enable-me='true'>
+                  <%= t 'arclight.views.show.no_contents' %>
+                </a>
+              </li>
+            <% end %>
+
+            <% if online_content? %>
+              <li class='nav-item flex-fill'>
+                <a class='nav-link p-1 p-sm-2' data-toggle='tab' data-bs-toggle='tab' href='#online-content' role='tab' data-arclight-online-content-tab='true'>
+                  <%= t 'arclight.views.show.online_content' %>
+                  <% unless document.collection? %>
+                    <span data-arclight-online-content-tab-count/>
+                  <% end %>
+                </a>
+              </li>
+            <% end %>
+
+            <li class='nav-item flex-fill'>
+              <a class='nav-link p-1 p-sm-2' data-toggle='tab' data-bs-toggle='tab' href='#access' role='tab'>
+                <%= t 'arclight.views.show.access' %>
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <div class='tab-content'>
+        <% if document.collection? %>
+          <div class='tab-pane active' id='context' role='tabpanel'>
+            <%= helpers.render 'collection_context', presenter: presenter %>
+          </div>
+        <% end %>
+
+        <div class='tab-pane <%= document.collection? ? '': 'active' %>' id='<%= document.collection? ? 'contents' : 'context' %>' role='tabpanel'>
+          <h2 class="sr-only visually-hidden" data-sr-enable-me='true' data-has-contents=<%= t 'arclight.views.show.has_content' %>><%= document.collection? ? t('arclight.views.show.has_content') : t('arclight.views.show.context') %></h2>
+          <%= content_tag(:div, id: document.collection? ? nil : t("arclight.views.show.sections.collection_context_field").parameterize) do %>
+            <%= generic_context_navigation(@document) %>
+          <% end %>
+        </div>
+
+        <% if online_content? %>
+          <div class='tab-pane' id='online-content' role='tabpanel'>
+            <h2 class="sr-only visually-hidden"><%= t 'arclight.views.show.online_content' %></h2>
+            <%= content_tag(
+              :div, '',
+              class: 'al-contents',
+              data: {
+                arclight: {
+                  path: search_catalog_path,
+                  name: document.collection_name,
+                  access: 'online',
+                  view: 'online_contents',
+                  parent: document.collection? ? nil : document.reference,
+                  search_field: 'within_collection'
+                }
+              }
+            ) %>
+          </div>
+        <% end %>
+
+        <div class='tab-pane' id='access' role='tabpanel'>
+          <h2 class="sr-only visually-hidden"><%= t 'arclight.views.show.access' %></h2>
+          <% items = access_tab_items.select { |i| presenter.fields_have_content?(i) }  %>
+          <% items.each_with_index do |item, index| %>
+            <% presenter.with_field_group(item) do |p| %>
+              <div class="container">
+                <dl class="row dl-invert">
+                  <% p.field_presenters.each do |field_presenter| %>
+                    <%= render (field_presenter.component || Blacklight::MetadataFieldComponent).new(field: field_presenter, show: true) %>
+                  <% end %>
+                </dl>
+              </div>
+            <% end %>
+          <% end %>
+        </div>
+    </div>
+  </div>

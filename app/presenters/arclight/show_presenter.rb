@@ -13,7 +13,7 @@ module Arclight
 
         begin
           self.field_group = group
-          yield
+          yield(self)
         ensure
           self.field_group = old_group if block_given?
         end

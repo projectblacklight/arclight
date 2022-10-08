@@ -99,6 +99,10 @@ module Arclight
       first('level_ssm')
     end
 
+    def collection?
+      level.parameterize == 'collection'
+    end
+
     def digital_object_viewer
       @digital_object_viewer ||= Arclight::Viewer.render(self)
     end
