@@ -103,10 +103,6 @@ module Arclight
       level.parameterize == 'collection'
     end
 
-    def digital_object_viewer
-      @digital_object_viewer ||= Arclight::Viewer.render(self)
-    end
-
     def terms
       render_html_tags(value: [first('userestrict_ssm')])
     end
