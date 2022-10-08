@@ -23,5 +23,10 @@
     </div>
   </div>
 
-  <%= render document.downloads %>
+  <% if document.downloads.files.present? %>
+    <div class=" al-show-actions-box-downloads-container">
+      <%= render Arclight::DocumentDownloadComponent.with_collection(document.downloads.files) %>
+    </div>
+  <% end %>
+
 </div>
