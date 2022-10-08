@@ -1,0 +1,15 @@
+<ol class="breadcrumb">
+  <li class="breadcrumb-home-link">
+    <%= link_to t('arclight.routes.home'), root_path %>
+  </li>
+  <li class="media breadcrumb-item  breadcrumb-item-1">
+    <span class="media-body" aria-hidden="true"><%= blacklight_icon :repository, classes: 'al-repository-content-icon' %></span>
+    <span class="col"><%= repository %></span>
+  </li>
+  <% document.parents.each.with_index(1) do |parent, index| %>
+    <%= tag.li class: "breadcrumb-item breadcrumb-item-#{index} media" do %>
+      <span class="media-body" aria-hidden="true"><%= blacklight_icon document_or_parent_icon(parent) %></span>
+      <span class="col"><%= link_to parent.label, solr_document_path(parent.global_id) %></span>
+    <% end %>
+  <% end %>
+</ol>

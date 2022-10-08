@@ -1,25 +1,7 @@
 <div class='d-md-flex justify-content-between al-show'>
   <div class='al-show-breadcrumb'>
     <nav aria-label="breadcrumb">
-      <ol class="breadcrumb">
-        <li class="breadcrumb-home-link">
-          <%= link_to t('arclight.routes.home'), root_path %>
-        </li>
-        <li class="media breadcrumb-item  breadcrumb-item-1">
-          <% if document.repository_config.present? %>
-            <span class="media-body" aria-hidden="true"><%= blacklight_icon :repository, classes: 'al-repository-content-icon' %></span>
-            <span class="col"><%= link_to(document.repository_config.name, helpers.arclight_engine.repository_path(document.repository_config.slug)) %></span>
-          <% else %>
-              <span class="media-body" aria-hidden="true"><%= blacklight_icon :repository, classes: 'al-repository-content-icon' %></span><span class="col"><%= t('arclight.show_breadcrumb_label') %></span>
-          <% end %>
-        </li>
-        <% document.parents.each_with_index.map do |parent, index| %>
-          <%= content_tag :li, class: "breadcrumb-item breadcrumb-item-#{index + 1} media" do %>
-            <span class="media-body" aria-hidden="true"><%= blacklight_icon document_or_parent_icon(parent) %></span>
-            <span class="col"><%= link_to parent.label, solr_document_path(parent.global_id) %></span>
-          <% end %>
-        <% end %>
-      </ol>
+      <%= render Arclight::BreadcrumbsHierarchyComponent.new(presenter: presenter) %>
 
       <%= content_tag :h1, class: "breadcrumb-item breadcrumb-item-#{document.parents.length + 2} media" do %>
         <span class="media-body" aria-hidden="true"><%= blacklight_icon document_or_parent_icon(document) %></span>
@@ -28,33 +10,7 @@
     </nav>
   </div>
 
-  <div class='al-show-actions-box'>
-    <div class="al-actions-box-container">
-      <% if document.unitid || document.containers.present? %>
-        <div class='al-collection-id'>
-          <% if document.unitid %>
-            <%= t(:'arclight.views.show.collection_id', id: document.unitid) %>
-          <% end %>
-
-          <% if document.unitid && document.containers.present? %>
-            <span> | </span>
-          <% end %>
-
-          <% if document.containers.present? %>
-            <span><%= document.containers.join(', ') %></span>
-          <% end %>
-        </div>
-      <% end %>
-      <div class='al-show-actions-box-options d-flex'>
-        <%= helpers.render partial: 'arclight/requests', locals: { document: document } %>
-        <div class='al-show-actions-box-bookmarks flex-md-fill'>
-          <%= helpers.render partial: 'catalog/bookmark_control', locals: { document: document } %>
-        </div>
-      </div>
-    </div>
-
-    <%= render document.downloads %>
-  </div>
+  <%= render Arclight::DocumentActionsComponent.new(presenter: presenter) %>
 </div>
 
 
