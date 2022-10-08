@@ -3,6 +3,8 @@
 module Arclight
   # Custom presentation methods for show partial
   class ShowPresenter < Blacklight::ShowPresenter
+    attr_accessor :field_group
+
     def heading
       document.normalized_title
     end
@@ -18,14 +20,7 @@ module Arclight
           self.field_group = old_group if block_given?
         end
       else
-        self.field_group = group
-        self
-      end
-    end
-
-    def fields_have_content?(field_accessor)
-      with_field_group(field_accessor) do
-        fields_to_render.any?
+        dup.tap { |x| x.field_group = group }
       end
     end
 
@@ -39,8 +34,6 @@ module Arclight
         super
       end
     end
-
-    attr_accessor :field_group
 
     def field_config(field)
       return super unless field_group

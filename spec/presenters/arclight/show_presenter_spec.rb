@@ -42,29 +42,4 @@ describe Arclight::ShowPresenter, type: :presenter do
       expect(presenter.send(:field_config, 'some_field')).to be_a Blacklight::Configuration::NullField
     end
   end
-
-  describe '#fields_have_content?' do
-    before do
-      allow(view_context).to receive_messages(
-        should_render_field?: true
-      )
-      config.add_background_field 'acqinfo_ssim', label: 'Acquisition Information'
-    end
-
-    context 'when the configured fields have content' do
-      let(:document) { SolrDocument.new(acqinfo_ssim: ['Data']) }
-
-      it 'is true' do
-        expect(presenter.fields_have_content?(:background_field)).to be true
-      end
-    end
-
-    context 'when the configured fields have no content' do
-      let(:document) { SolrDocument.new }
-
-      it 'is true' do
-        expect(presenter.fields_have_content?(:background_field)).to be false
-      end
-    end
-  end
 end
