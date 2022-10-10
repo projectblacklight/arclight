@@ -39,7 +39,11 @@ describe Arclight::ShowPresenter, type: :presenter do
 
   describe '#field_config' do
     it 'returns a field configuration (NullField in this context)' do
-      expect(presenter.send(:field_config, 'some_field')).to be_a Blacklight::Configuration::NullField
+      if Blacklight::VERSION > '8'
+        expect(presenter.send(:field_config, 'some_field')).to be_a Blacklight::Configuration::NullDisplayField
+      else
+        expect(presenter.send(:field_config, 'some_field')).to be_a Blacklight::Configuration::NullField
+      end
     end
   end
 end
