@@ -159,21 +159,7 @@ module ArclightHelper
     )
   end
 
-  ##
-  # Determine if the user is currently under a collection context
-  # This is any record view (because it is either the collection or a component w/i a collection)
-  # or in a result view where a collection facet has been selected
-  def within_collection_context?
-    return true if record_view?
-
-    results_view? && search_state.filter('collection_sim').any?
-  end
-
-  def results_view?
-    controller_name == 'catalog' && action_name == 'index'
-  end
-
-  def record_view?
-    controller_name == 'catalog' && action_name == 'show'
+  def current_context_document
+    @document
   end
 end
