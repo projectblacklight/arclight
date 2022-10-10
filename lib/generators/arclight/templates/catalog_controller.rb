@@ -55,6 +55,7 @@ class CatalogController < ApplicationController
     config.index.title_field = 'normalized_title_ssm'
     config.index.display_type_field = 'level_ssm'
     config.index.document_component = Arclight::SearchResultComponent
+    config.index.group_component = Arclight::GroupComponent
     config.index.document_presenter_class = Arclight::IndexPresenter
     config.index.document_actions << :containers
     config.index.document_actions << :online_content_label
@@ -375,6 +376,9 @@ class CatalogController < ApplicationController
 
     # Collection and Component Show Page Access Tab - Contact Section
     config.add_contact_field 'repository_ssm', if: :repository_config_present?, label: 'Contact', helper_method: :access_repository_contact
+
+    # Group header values
+    config.add_group_header_field 'abstract_or_scope', accessor: true, truncate: true
   end
 
   def repository_config_present?(*args)
