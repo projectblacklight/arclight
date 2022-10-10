@@ -30,7 +30,7 @@ Capybara.register_driver :headless_chrome do |app|
   Capybara::Selenium::Driver.new(app, browser: :chrome, options: browser_options)
 end
 
-Capybara.default_max_wait_time = 25 # our ajax responses are sometimes slow
+Capybara.default_max_wait_time = 5 # our ajax responses are sometimes slow
 
 Capybara.enable_aria_label = true
 
