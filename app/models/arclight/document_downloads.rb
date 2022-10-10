@@ -30,10 +30,6 @@ module Arclight
       end.compact
     end
 
-    def to_partial_path
-      'catalog/document_downloads'
-    end
-
     class << self
       def config
         @config ||= begin

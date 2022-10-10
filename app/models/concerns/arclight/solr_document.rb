@@ -99,8 +99,8 @@ module Arclight
       first('level_ssm')
     end
 
-    def digital_object_viewer
-      @digital_object_viewer ||= Arclight::Viewer.render(self)
+    def collection?
+      level.parameterize == 'collection'
     end
 
     def terms
@@ -146,7 +146,7 @@ module Arclight
                 highlight_response[id].blank? ||
                 highlight_response[id][:text].blank?
 
-      highlight_response[id][:text]
+      highlight_response[id][:text].map(&:html_safe)
     end
 
     # Factory method for constructing the Object modeling downloads

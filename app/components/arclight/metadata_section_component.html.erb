@@ -1,0 +1,13 @@
+<%= tag.div class: 'container', id: t("arclight.views.show.sections.#{@section}").parameterize do %>
+  <% if @heading %>
+    <h3 class='al-show-sub-heading'>
+      <%= t("arclight.views.show.sections.#{@section}", level: @presenter.document.level) %>
+    </h3>
+  <% end %>
+
+  <%= tag.dl class: @classes do %>
+    <% @presenter.field_presenters.each do |field_presenter| %>
+      <%= render (field_presenter.component || Blacklight::MetadataFieldComponent).new(field: field_presenter, show: true, **@metadata_attr) %>
+    <% end %>
+  <% end %>
+<% end %>

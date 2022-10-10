@@ -16,12 +16,17 @@
       </div>
     <% end %>
     <div class='al-show-actions-box-options d-flex'>
-      <%= render partial: 'arclight/requests', locals: { document: document } %>
+      <%= helpers.render partial: 'arclight/requests', locals: { document: document } %>
       <div class='al-show-actions-box-bookmarks flex-md-fill'>
-        <%= render partial: 'catalog/bookmark_control', locals: { document: document } %>
+        <%= helpers.render partial: 'catalog/bookmark_control', locals: { document: document } %>
       </div>
     </div>
   </div>
 
-  <%= render document.downloads %>
+  <% if document.downloads.files.present? %>
+    <div class=" al-show-actions-box-downloads-container">
+      <%= render Arclight::DocumentDownloadComponent.with_collection(document.downloads.files) %>
+    </div>
+  <% end %>
+
 </div>

@@ -1,7 +1,0 @@
-<% viewer.resources.each do |resource| %>
-  <%= content_tag(:div, viewer.attributes_for(resource)) do %>
-    <div class="al-digital-object media breadcrumb-item breadcrumb-item-<%= viewer.document.parents.length + 6 %>">
-      <%= link_to(resource.label, resource.href) %>
-    </div>
-  <% end %>
-<% end %>

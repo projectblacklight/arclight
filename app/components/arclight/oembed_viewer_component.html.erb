@@ -1,0 +1,5 @@
+<%= tag.div(class: 'al-oembed-viewer', 'data-arclight-oembed': true, 'data-arclight-oembed-url': @resource.href) do %>
+  <div class="al-digital-object media breadcrumb-item breadcrumb-item-<%= @depth %>">
+    <%= link_to(@resource.label, @resource.href) %>
+  </div>
+<% end %>

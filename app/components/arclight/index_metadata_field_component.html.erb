@@ -1,0 +1,5 @@
+<div class="row">
+  <%= content_tag('div', class: @classes, data: { 'arclight-truncate': @field.field_config.truncate }.merge(@field.field_config.truncate ? { 'truncate-more': I18n.t('arclight.truncation.view_more'), 'truncate-less': I18n.t('arclight.truncation.view_less')} : {} )) do %>
+    <%= @field.render %>
+  <% end %>
+</div>
