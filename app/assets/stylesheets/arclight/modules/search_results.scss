@@ -43,10 +43,10 @@
 }
 
 article.document {
-  .blacklight-icons svg {
+  svg {
     fill: $secondary;
   }
-  .blacklight-icons.al-online-content-icon svg {
+  .al-online-content-icon svg {
     fill: $green;
   }
   div.breadcrumb-links,
