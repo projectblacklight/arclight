@@ -56,9 +56,8 @@ class CatalogController < ApplicationController
     config.index.display_type_field = 'level_ssm'
     config.index.document_component = Arclight::SearchResultComponent
     config.index.group_component = Arclight::GroupComponent
+    config.index.constraints_component = Arclight::ConstraintsComponent
     config.index.document_presenter_class = Arclight::IndexPresenter
-    config.index.document_actions << :containers
-    config.index.document_actions << :online_content_label
     config.add_results_document_tool :arclight_bookmark_control, partial: 'arclight_bookmark_control'
     config.index.search_bar_component = Arclight::SearchBarComponent
     config.index.document_actions.delete(:bookmark)

@@ -1,3 +1,0 @@
-<%= content_tag('div', class: 'al-document-container col col-no-left-padding text-muted') do %>
-  <%= document.containers.join(', ') %>
-<% end if document.containers.present? && !online_contents_context? %>

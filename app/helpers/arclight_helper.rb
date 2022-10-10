@@ -91,10 +91,6 @@ module ArclightHelper
     params[:hierarchy_context] == 'component'
   end
 
-  def online_contents_context?
-    document_index_view_type == :online_contents
-  end
-
   # determine which icon to show in search results header
   # these icon names will need to be updated when the icons are determined
   def document_or_parent_icon(document)

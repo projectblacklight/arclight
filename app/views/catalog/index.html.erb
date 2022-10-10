@@ -1,0 +1,11 @@
+<% content_for(:sidebar) do %>
+  <%= render 'search_sidebar' %>
+<% end %>
+
+<%= render 'search_results' %>
+
+<%# override upstream to override the search results header, similar to https://github.com/projectblacklight/blacklight/pull/2831 %>
+<% content_for(:container_header, flush: true) do -%>
+  <%= render 'search_results_header' %>
+  <%= render 'constraints' %>
+<% end %>
