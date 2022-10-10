@@ -55,6 +55,7 @@ class CatalogController < ApplicationController
     config.index.title_field = 'normalized_title_ssm'
     config.index.display_type_field = 'level_ssm'
     config.index.document_component = Arclight::SearchResultComponent
+    config.index.constraints_component = Arclight::ConstraintsComponent
     config.index.document_presenter_class = Arclight::IndexPresenter
     config.index.document_actions << :containers
     config.index.document_actions << :online_content_label
