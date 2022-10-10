@@ -52,12 +52,9 @@
     }
 
     &-file {
-      &.blacklight-icons {
+      svg {
         margin-right: $spacer * .5;
-
-        svg {
-          fill: $secondary;
-        }
+        fill: $secondary;
       }
     }
   }

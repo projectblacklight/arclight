@@ -11,10 +11,9 @@ RSpec.describe 'Search results', type: :feature do
 
     it 'renders the expected metadata for a collection' do
       visit search_catalog_path q: '', search_field: 'all_fields'
-
       within('.document.document-position-5') do
         expect(page).to have_css('h3 a', text: 'Alpha Omega Alpha Archives, 1894-1992')
-        expect(page).to have_css('.blacklight-icons svg')
+        expect(page).to have_css('svg')
         expect(page).to have_css('.al-document-creator', text: 'Alpha Omega Alpha')
         expect(page).to have_css('.documentHeader .al-document-extent', text: /^15\.0 linear feet/)
         expect(page).to have_css(

@@ -18,7 +18,7 @@ li.al-collection-context  {
     width: 100%;
   }
 
-  .blacklight-icons {
+  svg {
     padding-top: $spacer * .25;
   }
 
@@ -48,7 +48,7 @@ li.al-collection-context  {
     max-width: 45em;
   }
 
-  .blacklight-icons svg {
+  svg {
     fill: $gray-600;
   }
 
