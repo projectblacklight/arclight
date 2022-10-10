@@ -22,8 +22,16 @@
         </h3>
       </div>
 
-      <div class="my-w-25 w-md-100 order-12 order-md-1">
-        <%= helpers.render_index_doc_actions document, wrapping_class: 'd-flex justify-content-end' %>
+      <div class="my-w-25 w-md-100 order-12 order-md-1 d-flex justify-content-end">
+        <%= content_tag('div', class: 'al-document-container col col-no-left-padding text-muted ml-auto') do %>
+          <%= document.containers.join(', ') %>
+        <% end if document.containers.present? && !online_contents_context? %>
+
+        <div class="d-inline-flex">
+          <%= tag.div blacklight_icon(:online, classes: 'al-online-content-icon') if document.online_content? %>
+
+          <%= helpers.render_index_doc_actions document, wrapping_class: 'd-inline-flex justify-content-end' %>
+        </div>
       </div>
 
       <div class="order-2 mb-2">
