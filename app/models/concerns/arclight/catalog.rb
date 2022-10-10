@@ -25,6 +25,7 @@ module Arclight
       Blacklight::Configuration.define_field_access :component_indexed_terms_field, Blacklight::Configuration::ShowField
       Blacklight::Configuration.define_field_access :terms_field, Blacklight::Configuration::ShowField
       Blacklight::Configuration.define_field_access :component_terms_field, Blacklight::Configuration::ShowField
+      Blacklight::Configuration.define_field_access :group_header_field, Blacklight::Configuration::IndexField
     end
 
     ##

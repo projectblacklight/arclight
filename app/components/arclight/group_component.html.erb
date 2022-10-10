@@ -1,0 +1,30 @@
+<div class='al-grouped-title-bar'>
+  <div class='row'>
+    <div class='col-md-12'>
+      <% if document.repository_config.present? %>
+        <div class='al-grouped-repository breadcrumb-links'>
+          <%= link_to(document.repository_config.name, helpers.arclight_engine.repository_path(document.repository_config.slug)) %>
+        </div>
+      <% end %>
+      <h3><%= helpers.link_to_document document %></h3>
+      <%= tag.span(document.extent, class: 'al-document-extent badge') if document.extent %>
+      <%= render Arclight::IndexMetadataFieldComponent.with_collection(presenter.field_presenters.select { |field| !compact? || field.field_config.compact }) %>
+    </div>
+  </div>
+</div>
+
+<div class="grouped-documents">
+  <div class="al-grouped-more">
+    <% if @group.total > 3 %>
+      <%= t('arclight.views.index.top_group_results', count: 3) %>
+      <%= link_to(
+        t('arclight.views.index.all_group_results', count: @group.total),
+        search_catalog_path(search_within_collection(document.collection_name, helpers.search_without_group)))
+      %>
+    <% else %>
+      <%= t('arclight.views.index.group_results_count', count: @group.total) %>
+    <% end %>
+  </div>
+
+  <%= helpers.render_document_index @group.docs %>
+</div>

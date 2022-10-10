@@ -1,21 +1,4 @@
 <% # container for all groups in index view -%>
 <div class='al-grouped-results'>
-  <% @response.groups.each do |g| %>
-    <% parent_document = g.docs.first.parent_document %>
-    <%= render_document_partial(parent_document, :group_header) %>
-    <div class="grouped-documents">
-      <div class="al-grouped-more">
-        <% if g.total > 3 %>
-          <%= t('arclight.views.index.top_group_results', count: 3) %>
-          <%= link_to(
-            t('arclight.views.index.all_group_results', count: g.total),
-            search_catalog_path(search_within_collection(parent_document.collection_name, search_without_group)))
-          %>
-        <% else %>
-          <%= t('arclight.views.index.group_results_count', count: g.total) %>
-        <% end %>
-      </div>
-      <%= render_document_index g.docs %>
-    </div>
-  <% end %>
+  <%= render (blacklight_config.view_config(document_index_view_type).group_component || Arclight::GroupComponent).with_collection(@response.groups) %>
 </div>
