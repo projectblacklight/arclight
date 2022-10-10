@@ -28,7 +28,7 @@
         <% end if document.containers.present? && !online_contents_context? %>
 
         <div class="d-inline-flex">
-          <%= tag.div blacklight_icon(:online, classes: 'al-online-content-icon') if document.online_content? %>
+          <%= tag.span blacklight_icon(:online), class: 'al-online-content-icon' if document.online_content? %>
 
           <%= helpers.render_index_doc_actions document, wrapping_class: 'd-inline-flex justify-content-end' %>
         </div>
