@@ -66,4 +66,4 @@ import jQuery from "jquery"
 
     addTruncation($this);
   };
-}(jQuery));
+}(window.jQuery));
