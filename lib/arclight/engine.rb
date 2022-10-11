@@ -35,6 +35,12 @@ module Arclight
 
     initializer 'arclight.assets', before: 'assets' do |app|
       app.config.assets.precompile << 'arclight/arclight.js'
+      app.config.assets.precompile << 'arclight/collection_scrollspy.js'
+      app.config.assets.precompile << 'arclight/collection_navigation.js'
+      app.config.assets.precompile << 'arclight/context_navigation.js'
+      app.config.assets.precompile << 'arclight/oembed_viewer.js'
+      app.config.assets.precompile << 'arclight/truncator.js'
+      app.config.assets.precompile << 'arclight/responsiveTruncator.js'
     end
   end
 end
