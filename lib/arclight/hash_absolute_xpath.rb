@@ -17,7 +17,7 @@ module Arclight
       end
     end
 
-    COMPONENT_NODE_NAME_REGEX = /^c\d{,2}$/.freeze
+    COMPONENT_NODE_NAME_REGEX = /^c\d{,2}$/
     attr_reader :node
 
     def initialize(node)
