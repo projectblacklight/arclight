@@ -10,31 +10,12 @@ module Arclight
       document.repository_config&.request_types&.any?
     end
 
-    def context_access_tab_repository(args)
-      document = args[:document]
+    def context_access_tab_repository(value:, **)
       ApplicationController.renderer.render(
         'arclight/repositories/_in_person_repository',
         layout: false,
-        locals: { repository: document.repository_config }
+        locals: { repository: value.first }
       )
-    end
-
-    def access_repository_contact(args)
-      document = args[:document]
-      ApplicationController.renderer.render(
-        'arclight/repositories/_repository_contact',
-        layout: false,
-        locals: { repository: document.repository_config }
-      )
-    end
-
-    def before_you_visit_note_present(_, document)
-      document.repository_config && document.repository_config.visit_note.present?
-    end
-
-    def context_access_tab_visit_note(args)
-      document = args[:document]
-      document.repository_config.visit_note
     end
 
     def link_to_name_facet(args)

@@ -23,36 +23,9 @@ RSpec.describe Arclight::FieldConfigHelpers do
 
   describe '#context_access_tab_repository' do
     it 'renders the in_person_repository partial' do
-      content = Capybara.string(helper.context_access_tab_repository(document: document_with_repository))
+      content = Capybara.string(helper.context_access_tab_repository(value: [document_with_repository.repository_config]))
       expect(content).to have_css('.al-in-person-repository-name', text: 'My Repository')
       expect(content).to have_css('address .al-repository-street-address-building', text: 'My Building')
-    end
-  end
-
-  describe '#before_you_visit_note_present' do
-    it 'is true when the visit note is present in the config' do
-      expect(
-        helper.before_you_visit_note_present(nil, document_with_repository)
-      ).to be true
-    end
-
-    it 'is false when there is no visit note in the config' do
-      expect(
-        helper.before_you_visit_note_present(nil, document_without_visit_note)
-      ).to be false
-    end
-
-    it 'is falsey when there is no config' do
-      expect(
-        helper.before_you_visit_note_present(nil, document_without_repository)
-      ).to be_falsey
-    end
-  end
-
-  describe '#context_access_tab_visit_note' do
-    it 'is returns the visit note' do
-      content = helper.context_access_tab_visit_note(document: document_with_repository)
-      expect(content).to eq 'Containers are stored offsite and must be pages 2 to 3 days in advance'
     end
   end
 end

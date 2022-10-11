@@ -43,13 +43,5 @@ module Arclight
 
       super
     end
-
-    def repository_config_present?(_, document)
-      document.repository_config.present?
-    end
-
-    def before_you_visit_note_present?(*args)
-      view_context.before_you_visit_note_present(*args)
-    end
   end
 end
