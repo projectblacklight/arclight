@@ -2,10 +2,10 @@ Blacklight.onLoad(function () {
   'use strict';
 
   // Any element on page load
-  $('[data-arclight-truncate="true"]').each(function (i, e) {
-    $(e).responsiveTruncate({
-      more: "<%= I18n.t 'arclight.truncation.view_more' %>",
-      less: "<%= I18n.t 'arclight.truncation.view_less' %>"
+  $('[data-arclight-truncate="true"]').each(function (i, el) {
+    $(el).responsiveTruncate({
+      more: el.dataset.truncateMore,
+      less: el.dataset.truncateLess
     });
   });
 
@@ -14,15 +14,15 @@ Blacklight.onLoad(function () {
     $('a[data-toggle="tab"]').on('shown.bs.tab', function () {
       $('[data-arclight-truncate="true"]').each(function (_, el) {
         $(el).responsiveTruncate({
-          more: "<%= I18n.t 'arclight.truncation.view_more' %>",
-          less: "<%= I18n.t 'arclight.truncation.view_less' %>"
+          more: el.dataset.truncateMore,
+          less: el.dataset.truncateLess
         });
       });
     });
     $(e.target).find('[data-arclight-truncate="true"]').each(function (_, el) {
       $(el).responsiveTruncate({
-        more: "<%= I18n.t 'arclight.truncation.view_more' %>",
-        less: "<%= I18n.t 'arclight.truncation.view_less' %>"
+        more: el.dataset.truncateMore,
+        less: el.dataset.truncateLess
       });
     });
   });
