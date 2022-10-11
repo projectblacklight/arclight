@@ -16,16 +16,13 @@
 
 <div class="row">
   <% @collections.each do |document| %>
+    <% doc_presenter = Arclight::IndexPresenter.new(document, self, CatalogController.blacklight_config) %>
     <div class="col-md-12">
       <div class='al-document-title-bar'>
         <div class='row'>
           <div class='col-md-10 col-lg-9'>
-            <h3 class="h5"><%= link_to document.normalized_title, solr_document_path(document.id) %></h3>
-            <%= content_tag('div', class: 'al-document-abstract-or-scope') do %>
-              <%= content_tag('div', 'data-arclight-truncate' => true) do %>
-                <%= render_html_tags(value: [document.abstract_or_scope]) %>
-              <% end %>
-            <% end if document.abstract_or_scope %>
+            <h3 class="h5"><%= link_to doc_presenter.label, solr_document_path(document.id) %></h3>
+            <%= render Arclight::IndexMetadataFieldComponent.with_collection(doc_presenter.field_presenters.select { |p| p.field_config.repository_context }) %>
           </div>
           <% if document.unitid %>
             <div class='col text-right al-collection-id'>
