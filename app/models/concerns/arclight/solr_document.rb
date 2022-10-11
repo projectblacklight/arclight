@@ -38,6 +38,10 @@ module Arclight
       fetch('ead_ssi', nil)&.strip
     end
 
+    def normalized_eadid
+      Arclight::NormalizedId.new(eadid).to_s
+    end
+
     def unitid
       first('unitid_ssm')
     end
