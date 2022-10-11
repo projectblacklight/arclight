@@ -93,13 +93,6 @@ RSpec.describe 'Search results', type: :feature do
           expect(page).to have_css('li .facet-label', text: 'Stanford University', visible: :hidden)
         end
 
-        within('.blacklight-date_range_sim') do
-          expect(page).to have_css('h3 button', text: '')
-          click_button 'Date range'
-          expect(page).to have_css('.range_limit', visible: :visible)
-          expect(page).to have_css('.profile canvas.flot-base', visible: :visible)
-        end
-
         within('.blacklight-names_ssim') do
           expect(page).to have_css('h3 button', text: 'Names')
           expect(page).to have_css('li .facet-label', text: 'Department of Special Collections and University Archives', visible: :hidden)
