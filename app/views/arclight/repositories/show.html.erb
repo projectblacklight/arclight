@@ -23,7 +23,7 @@
             <h3 class="h5"><%= link_to document.normalized_title, solr_document_path(document.id) %></h3>
             <%= content_tag('div', class: 'al-document-abstract-or-scope') do %>
               <%= content_tag('div', 'data-arclight-truncate' => true) do %>
-                <%= document.abstract_or_scope %>
+                <%= render_html_tags(value: [document.abstract_or_scope]) %>
               <% end %>
             <% end if document.abstract_or_scope %>
           </div>

@@ -163,7 +163,7 @@ class CatalogController < ApplicationController
       last_word_connector: '<br/>'
     }, compact: true
     config.add_index_field 'creator', accessor: true
-    config.add_index_field 'abstract_or_scope', accessor: true, truncate: true, collection_context: true
+    config.add_index_field 'abstract_or_scope', accessor: true, truncate: true, collection_context: true, helper_method: :render_html_tags
 
     config.add_facet_field 'has_online_content_ssim', label: 'Access', query: {
       online: { label: 'Online access', fq: 'has_online_content_ssim:true' }
@@ -377,7 +377,7 @@ class CatalogController < ApplicationController
     config.add_contact_field 'repository_ssm', if: :repository_config_present?, label: 'Contact', helper_method: :access_repository_contact
 
     # Group header values
-    config.add_group_header_field 'abstract_or_scope', accessor: true, truncate: true
+    config.add_group_header_field 'abstract_or_scope', accessor: true, truncate: true, helper_method: :render_html_tags
   end
 
   def repository_config_present?(*args)
