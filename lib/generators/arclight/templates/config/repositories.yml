@@ -1,50 +1,43 @@
 nlm:
   name: 'National Library of Medicine. History of Medicine Division'
   description: 'NLM’s History of Medicine Division collects, preserves, makes available, and interprets for diverse audiences one of the world’s richest collections of historical material related to human health and disease.'
-  building: 'Building 38, Room 1E-21'
-  address1: '8600 Rockville Pike'
-  address2: ''
-  city: 'Bethesda'
-  state: 'MD'
-  zip: '20894'
-  country: 'USA'
-  phone: ''
-  contact_info: 'hmdref@nlm.nih.gov'
+  contact_html: |
+    <div class="al-repository-contact-info"><a href="mailto:hmdref@nlm.nih.gov">hmdref@nlm.nih.gov</a></div>
+  location_html: |
+    <div class="al-repository-street-address-building">Building 38, Room 1E-21</div>
+    <div class="al-repository-street-address-address1">8600 Rockville Pike</div>
+    <div class="al-repository-street-address-city_state_zip_country">Bethesda, MD 20894, USA</div>
   thumbnail_url: "https://collections.nlm.nih.gov/pageturnerserver/ajaxp?theurl=http://localhost:8080/fedora/get/nlm:nlmuid-101421040-img/THUMB"
   request_types:
     google_form:
       request_url: 'https://docs.google.com/a/stanford.edu/forms/d/e/1FAIpQLSeOamhY_IcFw4sPnz0ddwWWkrPaHbM5wp7JVbOLOL_mIusEyw/viewform'
       request_mappings: "document_url=entry.1980510262&collection_name=entry.619150170&collection_creator=entry.14428541&eadid=entry.996397105&containers=entry.1125277048&title=entry.862815208"
+
 sul-spec:
   name: 'Stanford University Libraries. Special Collections and University Archives'
   visit_note: 'Special Collections and University Archives materials are stored offsite and must be paged 36 hours in advance.'
   description: 'The Special Collections and University Archives Department of Stanford University Libraries is committed to acquiring, preserving, and providing access to primary source materials that support the research needs of the Stanford community and beyond. There are three distinct divisions in our department: Manuscripts, Rare Books and University Archives. We welcome all students, scholars and members of the general public to the Field Reading Room. Learn more about using and accessing our collections.'
-  building: 'Green Library'
-  address1: '557 Escondido Mall'
-  address2: ''
-  city: 'Stanford'
-  state: 'CA'
-  zip: '94305'
-  country: 'USA'
-  phone: '(650) 725-1022'
-  contact_info: 'specialcollections@stanford.edu'
+  contact_html: |
+    <div class="al-repository-contact-phone">(650) 725-1022</div>
+    <div class="al-repository-contact-info"><a href="mailto:specialcollections@stanford.edu">specialcollections@stanford.edu</a></div>
+  location_html: |
+    <div class="al-repository-street-address-building">Green Library</div>
+    <div class="al-repository-street-address-address1">557 Escondido Mall</div>
+    <div class="al-repository-street-address-city_state_zip_country">Stanford, CA 94305, USA</div>
   thumbnail_url: 'https://library.stanford.edu/sites/default/files/styles/150x150/public/collection/image/Collections-Super-Enlight.jpg'
   request_types:
     aeon_web_ead:
       request_url: 'https://sample.request.com'
       request_mappings: 'Action=10&Form=31&Value=ead_url'
+
 umich-bhl:
   name: 'University of Michigan. Bentley Historical Library'
   description: 'The Bentley Historical Library collects the materials for and promotes the study of the histories of two great, intertwined institutions, the State of Michigan and the University of Michigan. The Library is open without fee to the public, and we welcome researchers regardless of academic or professional affiliation.'
-  building: ''
-  address1: '1150 Beal Ave'
-  address2: ''
-  city: 'Ann Arbor'
-  state: 'MI'
-  zip: '48109-2113'
-  country: 'USA'
-  phone: ''
-  contact_info: 'bentley.ref@umich.edu'
+  contact_html: |
+    <div class="al-repository-contact-info"><a href="mailto:bentley.ref@umich.edu">bentley.ref@umich.edu</a></div>
+  location_html: |
+    <div class="al-repository-street-address-address1">1150 Beal Ave</div>
+    <div class="al-repository-street-address-city_state_zip_country">Ann Arbor, MI 48109-2113, USA</div>
   thumbnail_url: 'https://upload.wikimedia.org/wikipedia/commons/thumb/9/93/Bhlexterior.jpg/150px-Bhlexterior.jpg'
   request_types:
     aeon_external_request_endpoint:

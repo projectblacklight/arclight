@@ -13,30 +13,11 @@
           <div class='col-4 col-md-3 al-repository-contact'>
             <address>
               <div class="al-repository-street-address">
-                <% %i[building address1 address2 city_state_zip_country].each do |f| %>
-                  <% if repository.public_send(f).present? %>
-                    <div class='al-repository-street-address-<%= f %>'>
-                      <%= repository.public_send(f) %>
-                    </div>
-                  <% end %>
-                <% end %>
-             </div>
+                <%= repository.location %>
+              </div>
 
               <div class="al-repository-contact-info">
-                <% if repository.phone.present? %>
-                  <div class='al-repository-contact-info-phone'>
-                    <%= repository.phone %>
-                  </div>
-                <% end %>
-                <% if repository.contact_info.present? %>
-                  <div class='al-repository-contact-info-contact_info'>
-                    <% if repository.contact_info.include?('@') %>
-                      <%= mail_to repository.contact_info %>
-                    <% else %>
-                      <%= repository.contact_info %>
-                    <% end %>
-                  </div>
-                <% end %>
+                <%= repository.contact %>
               </div>
             </address>
           </div>

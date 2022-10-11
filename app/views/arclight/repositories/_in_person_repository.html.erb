@@ -8,12 +8,6 @@
 </div>
 <div class='al-in-person-repository-location'>
   <address>
-    <% %i[building address1 address2 city_state_zip_country].each do |f| %>
-      <% if repository.public_send(f).present? %>
-        <div class='al-repository-contact-<%= f %>'>
-          <%= repository.public_send(f) %>
-        </div>
-      <% end %>
-    <% end %>
+    <%= repository.location %>
   </address>
 </div>

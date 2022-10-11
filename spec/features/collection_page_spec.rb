@@ -215,7 +215,7 @@ RSpec.describe 'Collection Page', type: :feature do
         expect(page).to have_css 'dd', text: /materials are stored offsite and must be paged/
         expect(page).to have_css 'dt', text: 'LOCATION OF THIS COLLECTION:'
         expect(page).to have_css 'dd a', text: /Special Collections and University Archives/
-        expect(page).to have_css 'dd .al-repository-contact-building', text: 'Green Library'
+        expect(page).to have_css 'dd .al-repository-street-address-building', text: 'Green Library'
       end
     end
 
