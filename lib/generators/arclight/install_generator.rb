@@ -33,10 +33,6 @@ module Arclight
       end
     end
 
-    def install_blacklight_range_limit
-      generate 'blacklight_range_limit:install'
-    end
-
     def add_custom_routes
       inject_into_file 'config/routes.rb', after: "mount Blacklight::Engine => '/'" do
         "\n    mount Arclight::Engine => '/'\n"
