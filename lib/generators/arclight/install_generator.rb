@@ -105,7 +105,7 @@ module Arclight
         "\n  import $ from \"jquery\"\n  " \
           "window.$ = $ // required by arclight\n  " \
           "window.jQuery = $ // required by arclight/responsive_truncator.js\n  " \
-          'require "arclight"'
+          'import "arclight"'
       end
     end
   end
