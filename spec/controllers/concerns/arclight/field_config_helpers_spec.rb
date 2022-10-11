@@ -59,7 +59,7 @@ RSpec.describe Arclight::FieldConfigHelpers do
     it 'renders the in_person_repository partial' do
       content = Capybara.string(helper.context_access_tab_repository(document: document_with_repository))
       expect(content).to have_css('.al-in-person-repository-name', text: 'My Repository')
-      expect(content).to have_css('address .al-repository-contact-building', text: 'My Building')
+      expect(content).to have_css('address .al-repository-street-address-building', text: 'My Building')
     end
   end
 

@@ -15,11 +15,12 @@ module Arclight
       super(**data, slug: slug)
     end
 
-    # @return [String] handles the formatting of "city, state zip, country"
-    def city_state_zip_country
-      state_zip = state
-      state_zip += " #{zip}" if zip
-      [city, state_zip, country].compact.join(', ')
+    def contact
+      contact_html&.html_safe
+    end
+
+    def location
+      location_html&.html_safe
     end
 
     # Why are we using self#respond_to? below?
