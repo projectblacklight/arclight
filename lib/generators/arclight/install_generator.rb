@@ -70,6 +70,7 @@ module Arclight
     def assets
       if using_importmap?
         pin_javascript_dependencies
+        import_arclight_javascript
       else
         install_javascript_dependencies
       end
@@ -99,8 +100,16 @@ module Arclight
       append_to_file 'config/importmap.rb', <<~RUBY
         pin "jquery", to: "https://ga.jspm.io/npm:jquery@3.6.0/dist/jquery.js"
         pin "arclight", to: "arclight/arclight.js"
+        # TODO: We may be able to move these to a single importmap for arclight.
+        pin "arclight/collection_navigation", to: "arclight/collection_navigation.js"
+        pin "arclight/context_navigation", to: "arclight/context_navigation.js"
+        pin "arclight/oembed_viewer", to: "arclight/oembed_viewer.js"
+        pin "arclight/truncator", to: "arclight/truncator.js"
+        pin "arclight/responsiveTruncator", to: "arclight/responsiveTruncator.js"
       RUBY
+    end
 
+    def import_arclight_javascript
       inject_into_file 'app/javascript/application.js', after: 'import "blacklight"' do
         "\n  import $ from \"jquery\"\n  " \
           "window.$ = $ // required by arclight\n  " \
