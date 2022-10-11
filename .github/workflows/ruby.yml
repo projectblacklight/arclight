@@ -39,6 +39,8 @@ jobs:
         with:
           bundler: latest
           ruby-version: 3.1
+      - name: Install dependencies with Bundler
+        run: bundle install
       - name: Install dependencies with yarn
         run: yarn install
       - name: Lint Ruby files
