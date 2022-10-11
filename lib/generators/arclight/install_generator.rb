@@ -99,6 +99,13 @@ module Arclight
       append_to_file 'config/importmap.rb', <<~RUBY
         pin "jquery", to: "https://ga.jspm.io/npm:jquery@3.6.0/dist/jquery.js"
         pin "arclight", to: "arclight/arclight.js"
+        # TODO: We may be able to move these to a single importmap for arclight.
+        pin "arclight/collection_scrollspy", to: "arclight/collection_scrollspy.js"
+        pin "arclight/collection_navigation", to: "arclight/collection_navigation.js"
+        pin "arclight/context_navigation", to: "arclight/context_navigation.js"
+        pin "arclight/oembed_viewer", to: "arclight/oembed_viewer.js"
+        pin "arclight/truncator", to: "arclight/truncator.js"
+        pin "arclight/responsiveTruncator", to: "arclight/responsiveTruncator.js"
       RUBY
 
       inject_into_file 'app/javascript/application.js', after: 'import "blacklight"' do
