@@ -367,7 +367,7 @@ class CatalogController < ApplicationController
     config.add_component_terms_field 'parent_access_terms_ssm', label: 'Parent Terms of Access', helper_method: :render_html_tags
 
     # Collection and Component Show Page Access Tab - In Person Section
-    config.add_in_person_field 'repository_location', values: ->(_, document, _) { document.repository_config }, label: 'Location of this collection', helper_method: :context_access_tab_repository
+    config.add_in_person_field 'repository_location', values: ->(_, document, _) { document.repository_config }, label: 'Location of this collection', component: Arclight::RepositoryLocationComponent
     config.add_in_person_field 'before_you_visit', values: ->(_, document, _) { document.repository_config&.visit_note }, label: 'Before you visit'
 
     # Collection and Component Show Page Access Tab - How to Cite Section

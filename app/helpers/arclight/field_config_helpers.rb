@@ -10,14 +10,6 @@ module Arclight
       document.repository_config&.request_types&.any?
     end
 
-    def context_access_tab_repository(value:, **)
-      ApplicationController.renderer.render(
-        'arclight/repositories/_in_person_repository',
-        layout: false,
-        locals: { repository: value.first }
-      )
-    end
-
     def link_to_name_facet(args)
       options = args[:config]&.separator_options || {}
       values = args[:value] || []
