@@ -19,7 +19,7 @@ module Arclight
       ##
       # Url target for Aeon request params
       def request_url
-        document.repository_config.request_url_for_type('aeon_web_ead')
+        request_config['request_url']
       end
 
       ##
@@ -36,12 +36,16 @@ module Arclight
       # @return [Hash]
       def form_mapping
         form_hash = Rack::Utils.parse_nested_query(
-          document.repository_config.request_mappings_for_type('aeon_web_ead')
+          request_config['request_mappings']
         )
         form_hash.each do |key, value|
           respond_to?(value) && form_hash[key] = send(value)
         end
         form_hash
+      end
+
+      def request_config
+        document.repository_config.request_config_for_type('aeon_web_ead')
       end
     end
   end

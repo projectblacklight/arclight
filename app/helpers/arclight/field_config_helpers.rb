@@ -6,18 +6,8 @@ module Arclight
   module FieldConfigHelpers
     include Arclight::EadFormatHelpers
 
-    def repository_config_present(_, document)
-      document.repository_config.present?
-    end
-
-    def item_requestable?(_, options)
-      document = options[:document]
-      request_config_present('', document)
-    end
-
-    def request_config_present(var, document)
-      repository_config_present(var, document) &&
-        document.repository_config.request_config_present?
+    def item_requestable?(document)
+      document.repository_config&.request_types&.any?
     end
 
     def context_access_tab_repository(args)

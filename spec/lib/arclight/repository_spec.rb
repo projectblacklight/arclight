@@ -77,14 +77,6 @@ RSpec.describe Arclight::Repository do
       it '#request_config_present_for_type? is not present' do
         expect(repo.request_config_present_for_type?('fake_type')).to be false
       end
-
-      it '#request_url_for_type' do
-        expect(repo.request_url_for_type('google_form')).to eq 'https://docs.google.com/abc123'
-      end
-
-      it '#request_mappings_for_type' do
-        expect(repo.request_mappings_for_type('google_form')).to eq 'collection_name=abc&eadid=123'
-      end
     end
   end
 
@@ -104,16 +96,8 @@ RSpec.describe Arclight::Repository do
     it 'has new-style request_type' do
       raw_yaml_hash = YAML.safe_load(File.read(repositories_yml_template_file))
       nlm = described_class.find_by(slug: 'nlm', yaml_file: repositories_yml_template_file)
-      google_form_url = nlm.request_url_for_type('google_form')
+      google_form_url = nlm.request_config_for_type('google_form')['request_url']
       expect(google_form_url).to eq raw_yaml_hash['nlm']['request_types']['google_form']['request_url']
-    end
-  end
-
-  describe 'extension' do
-    let(:repo) { described_class.find_by(slug: 'sample') }
-
-    it 'is possible' do
-      expect(repo.downstream_defined_field).to eq 'Custom Data From Consumer'
     end
   end
 

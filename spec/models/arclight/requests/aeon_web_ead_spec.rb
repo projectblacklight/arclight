@@ -7,8 +7,10 @@ RSpec.describe Arclight::Requests::AeonWebEad do
 
   let(:config) do
     instance_double Arclight::Repository,
-                    request_url_for_type: 'https://sample.request.com',
-                    request_mappings_for_type: 'Action=10&Form=31&Value=ead_url'
+                    request_config_for_type: {
+                      request_url: 'https://sample.request.com',
+                      request_mappings: 'Action=10&Form=31&Value=ead_url'
+                    }.with_indifferent_access
   end
   let(:document) { instance_double SolrDocument, repository_config: config }
 

@@ -21,40 +21,6 @@ RSpec.describe Arclight::FieldConfigHelpers do
     SolrDocument.new(accessrestrict_ssm: ['Restricted until 2018.'])
   end
 
-  describe '#repository_config_present' do
-    it 'is true when the repository configuration is present' do
-      expect(
-        helper.repository_config_present(nil, document_with_repository)
-      ).to be true
-    end
-
-    it 'is false when there is no repository configuration present' do
-      expect(
-        helper.repository_config_present(nil, document_without_repository)
-      ).to be false
-    end
-  end
-
-  describe '#request_config_present' do
-    context 'when repository_config is present' do
-      it do
-        expect(helper.request_config_present(nil, document_with_repository)).to be true
-      end
-
-      context 'when no request config is present' do
-        it do
-          expect(helper.request_config_present(nil, document_without_request)).to be false
-        end
-      end
-    end
-
-    context 'when repository_config is absent' do
-      it do
-        expect(helper.repository_config_present(nil, document_without_repository)).to be false
-      end
-    end
-  end
-
   describe '#context_access_tab_repository' do
     it 'renders the in_person_repository partial' do
       content = Capybara.string(helper.context_access_tab_repository(document: document_with_repository))

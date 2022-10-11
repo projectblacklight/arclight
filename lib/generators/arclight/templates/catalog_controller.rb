@@ -379,12 +379,4 @@ class CatalogController < ApplicationController
     # Group header values
     config.add_group_header_field 'abstract_or_scope', accessor: true, truncate: true, helper_method: :render_html_tags
   end
-
-  def repository_config_present?(*args)
-    view_context.repository_config_present(*args)
-  end
-
-  def before_you_visit_note_present?(*args)
-    view_context.before_you_visit_note_present(*args)
-  end
 end
