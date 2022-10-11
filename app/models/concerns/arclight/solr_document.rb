@@ -38,6 +38,10 @@ module Arclight
       fetch('ead_ssi', nil)&.strip
     end
 
+    def normalized_eadid
+      Arclight::NormalizedId.new(eadid).to_s
+    end
+
     def unitid
       first('unitid_ssm')
     end
@@ -153,6 +157,15 @@ module Arclight
     # @return [DocumentDownloads]
     def downloads
       @downloads ||= DocumentDownloads.new(self)
+    end
+
+    def ead_file
+      @ead_file ||= begin
+        files = Arclight::DocumentDownloads.new(self, collection_unitid).files
+        files.find do |file|
+          file.type == 'ead'
+        end
+      end
     end
   end
 end

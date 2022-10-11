@@ -32,20 +32,12 @@ module ArclightHelper
     'col-md-12 show-document'
   end
 
-  def normalize_id(id)
-    Arclight::NormalizedId.new(id).to_s
-  end
-
   def collection_active?
     search_state.filter('level_sim').values == ['Collection']
   end
 
   def collection_active_class
     'active' if collection_active?
-  end
-
-  def collection_count
-    @response.response['numFound']
   end
 
   def grouped?
@@ -58,10 +50,6 @@ module ArclightHelper
 
   def search_without_group
     search_state.params_for_search.except('group', 'page')
-  end
-
-  def search_within_collection(collection_name, search)
-    search.merge(f: { collection_sim: [collection_name] })
   end
 
   def on_repositories_show?
@@ -87,10 +75,6 @@ module ArclightHelper
     Arclight::Repository.find_by(name: repos.first)
   end
 
-  def hierarchy_component_context?
-    params[:hierarchy_context] == 'component'
-  end
-
   # determine which icon to show in search results header
   # these icon names will need to be updated when the icons are determined
   def document_or_parent_icon(document)
@@ -103,21 +87,6 @@ module ArclightHelper
       'folder'
     else
       'container'
-    end
-  end
-
-  def render_grouped_documents(documents)
-    safe_join(
-      documents.each_with_index.map do |document, i|
-        render_document_partial(document, :arclight_index_group_document, document_counter: i)
-      end
-    )
-  end
-
-  def ead_files(document)
-    files = Arclight::DocumentDownloads.new(document, document.collection_unitid).files
-    files.find do |file|
-      file.type == 'ead'
     end
   end
 
@@ -149,7 +118,7 @@ module ArclightHelper
           name: document.collection_name,
           originalDocument: document.id,
           originalParents: original_parents,
-          eadid: normalize_id(document.eadid)
+          eadid: document.normalized_eadid
         }
       }
     )
