@@ -19,7 +19,7 @@
       <%= t('arclight.views.index.top_group_results', count: 3) %>
       <%= link_to(
         t('arclight.views.index.all_group_results', count: @group.total),
-        search_catalog_path(search_within_collection(document.collection_name, helpers.search_without_group)))
+        search_within_collection_url)
       %>
     <% else %>
       <%= t('arclight.views.index.group_results_count', count: @group.total) %>

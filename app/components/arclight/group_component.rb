@@ -15,5 +15,9 @@ module Arclight
     def presenter
       @presenter ||= Arclight::ShowPresenter.new(document, helpers).with_field_group('group_header_field')
     end
+
+    def search_within_collection_url
+      search_catalog_path(helpers.search_without_group.merge(f: { collection_sim: [document.collection_name] }))
+    end
   end
 end

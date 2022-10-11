@@ -60,10 +60,6 @@ module ArclightHelper
     search_state.params_for_search.except('group', 'page')
   end
 
-  def search_within_collection(collection_name, search)
-    search.merge(f: { collection_sim: [collection_name] })
-  end
-
   def on_repositories_show?
     controller_name == 'repositories' && action_name == 'show'
   end
