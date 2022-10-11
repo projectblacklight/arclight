@@ -6,6 +6,8 @@
  * VERSION 0.0.2
  *
 * */
+import jQuery from 'jquery'
+
 (function ($) {
   $.fn.responsiveTruncate = function (options) {
     function addTruncation(el) {
