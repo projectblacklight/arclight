@@ -5,8 +5,6 @@ module Arclight
   # Extends Blacklight::Solr::Document to provide Arclight specific behavior
   module SolrDocument
     extend Blacklight::Solr::Document
-    include ActionView::Helpers::OutputSafetyHelper
-    include Arclight::EadFormatHelpers
 
     def repository_config
       return unless repository
@@ -67,8 +65,7 @@ module Arclight
     end
 
     def abstract_or_scope
-      value = first('abstract_ssm') || first('scopecontent_ssm')
-      render_html_tags(value: [value]) if value.present?
+      first('abstract_ssm') || first('scopecontent_ssm')
     end
 
     def creator
@@ -108,17 +105,17 @@ module Arclight
     end
 
     def terms
-      render_html_tags(value: [first('userestrict_ssm')])
+      first('userestrict_ssm')
     end
 
     # Restrictions for component sidebar
     def parent_restrictions
-      render_html_tags(value: [first('parent_access_restrict_ssm')])
+      first('parent_access_restrict_ssm')
     end
 
     # Terms for component sidebar
     def parent_terms
-      render_html_tags(value: [first('parent_access_terms_ssm')])
+      first('parent_access_terms_ssm')
     end
 
     def digital_objects

@@ -7,7 +7,7 @@ module Arclight
     extend ActiveSupport::Concern
 
     def render_html_tags(args)
-      values = args[:value] || []
+      values = Array(args[:value])
       values.map! do |value|
         transform_ead_to_html(value)
       end
