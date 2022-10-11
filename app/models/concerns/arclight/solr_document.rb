@@ -158,5 +158,14 @@ module Arclight
     def downloads
       @downloads ||= DocumentDownloads.new(self)
     end
+
+    def ead_file
+      @ead_file ||= begin
+        files = Arclight::DocumentDownloads.new(self, collection_unitid).files
+        files.find do |file|
+          file.type == 'ead'
+        end
+      end
+    end
   end
 end

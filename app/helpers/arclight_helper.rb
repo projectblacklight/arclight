@@ -90,13 +90,6 @@ module ArclightHelper
     end
   end
 
-  def ead_files(document)
-    files = Arclight::DocumentDownloads.new(document, document.collection_unitid).files
-    files.find do |file|
-      file.type == 'ead'
-    end
-  end
-
   def show_expanded?(document)
     !original_document?(document) && within_original_tree?(document)
   end
