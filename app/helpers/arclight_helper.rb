@@ -40,10 +40,6 @@ module ArclightHelper
     'active' if collection_active?
   end
 
-  def collection_count
-    @response.response['numFound']
-  end
-
   def grouped?
     respond_to?(:search_state) && search_state&.params_for_search&.dig('group') == 'true'
   end
@@ -79,10 +75,6 @@ module ArclightHelper
     Arclight::Repository.find_by(name: repos.first)
   end
 
-  def hierarchy_component_context?
-    params[:hierarchy_context] == 'component'
-  end
-
   # determine which icon to show in search results header
   # these icon names will need to be updated when the icons are determined
   def document_or_parent_icon(document)
@@ -96,14 +88,6 @@ module ArclightHelper
     else
       'container'
     end
-  end
-
-  def render_grouped_documents(documents)
-    safe_join(
-      documents.each_with_index.map do |document, i|
-        render_document_partial(document, :arclight_index_group_document, document_counter: i)
-      end
-    )
   end
 
   def ead_files(document)

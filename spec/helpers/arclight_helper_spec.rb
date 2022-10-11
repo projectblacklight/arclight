@@ -129,23 +129,6 @@ RSpec.describe ArclightHelper, type: :helper do
     end
   end
 
-  describe '#collection_count' do
-    context 'when there are items' do
-      it 'returns the item count from the Blacklight::Solr::Response' do
-        assign(:response, instance_double(Blacklight::Solr::Response, response: { 'numFound' => 2 }))
-
-        expect(helper.collection_count).to eq 2
-      end
-    end
-
-    context 'when there are no items' do
-      it do
-        assign(:response, instance_double(Blacklight::Solr::Response, response: {}))
-        expect(helper.collection_count).to be_nil
-      end
-    end
-  end
-
   describe '#search_results_header_text' do
     subject(:text) { helper.search_results_header_text }
 
@@ -187,18 +170,6 @@ RSpec.describe ArclightHelper, type: :helper do
       it 'gives the default icon' do
         expect(helper.document_or_parent_icon(document)).to eq 'container'
       end
-    end
-  end
-
-  describe '#hierarchy_component_context?' do
-    it 'requires a parameter to enable' do
-      allow(helper).to receive(:params).and_return(hierarchy_context: 'component')
-      expect(helper.hierarchy_component_context?).to be_truthy
-    end
-
-    it 'omission is disabled' do
-      allow(helper).to receive(:params).and_return({})
-      expect(helper.hierarchy_component_context?).to be_falsey
     end
   end
 end
