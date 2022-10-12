@@ -136,19 +136,25 @@ class ContextNavigation {
     // Add a placeholder so flashes of text are not as significant
     const placeholder = new Placeholder();
     this.el.after(placeholder.$el);
-    $.ajax({
-      url: this.data.arclight.path,
-      data: {
-        'f[component_level_isim][]': this.data.arclight.level,
-        'f[has_online_content_ssim][]': this.data.arclight.access,
-        'f[collection_sim][]': this.data.arclight.name,
-        'f[parent_ssi][]': this.requestParent,
-        search_field: this.data.arclight.search_field,
-        original_parents: this.data.arclight.originalParents,
-        original_document: this.originalDocument,
-        view: 'collection_context'
-      }
-    }).done((response) => this.updateView(response));
+
+    const params = new URLSearchParams({
+      'f[component_level_isim][]': this.data.arclight.level,
+      'f[collection_sim][]': this.data.arclight.name,
+      'f[parent_ssi][]': this.requestParent,
+      original_document: this.originalDocument,
+      view: 'collection_context'
+    });
+    if (this.data.arclight.access) {
+      params.append('f[has_online_content_ssim][]', this.data.arclight.access);
+    }
+    if (this.data.arclight.search_field) {
+      params.append('search_field', this.data.arclight.search_field);
+    }
+    this.data.arclight.originalParents?.forEach((value, i) => params.append(`original_parents[${i}]`, value));
+
+    fetch(this.data.arclight.path + '&' + params)
+      .then((response) => response.text())
+      .then((data) => this.updateView(data));
   }
 
   /**
