@@ -264,9 +264,9 @@ class ContextNavigation {
     this.el.html(this.ul);
 
     // Initialize additional things
-    $itemDoc.find('.context-navigator').each((i, e) => {
+    $itemDoc[0].querySelectorAll('[data-controller="arclight-context-navigation"]').forEach((element) => {
       const contextNavigation = new ContextNavigation(
-        e, this.originalParents, this.originalDocument
+        element, this.originalParents, this.originalDocument
       );
       contextNavigation.getData();
     });
@@ -325,12 +325,13 @@ class ContextNavigation {
       e.preventDefault();
       const targetArea = $($(e.currentTarget).attr('href'));
       if (!targetArea.data('resolved') === true) {
-        targetArea.find('.context-navigator').each((i, ee) => {
+        const areaTag = targetArea[0];
+        areaTag.querySelectorAll('[data-controller="arclight-context-navigation"]').forEach((element) => {
           const contextNavigation = new ContextNavigation(
             // Send null for originalParents. We want to disregard the original
             // component's ancestor trail and instead use the current ID as the
             // parent in the query to populate the navigator.
-            ee, null, this.originalDocument
+            element, null, this.originalDocument
           );
           contextNavigation.getData();
         });
@@ -344,9 +345,11 @@ class ContextNavigation {
  *
  */
 Blacklight.onLoad(function () {
-  $('.context-navigator').each(function (i, e) {
+  document.querySelectorAll('[data-controller="arclight-context-navigation"]').forEach((element) => {
     const contextNavigation = new ContextNavigation(
-        e, $(this).data('arclight').originalParents, $(this).data('arclight').originalDocument
+        element,
+        $(element).data('arclight').originalParents,
+        $(element).data('arclight').originalDocument
       );
     contextNavigation.getData();
   });
