@@ -12,5 +12,21 @@ module Arclight
     def blacklight_config
       presenter.configuration
     end
+
+    def metadata_partials
+      blacklight_config.show.metadata_partials || []
+    end
+
+    def component_metadata_partials
+      blacklight_config.show.component_metadata_partials || []
+    end
+
+    def context_access_tab_items
+      blacklight_config.show.context_access_tab_items || []
+    end
+
+    def component_access_tab_items
+      blacklight_config.show.component_access_tab_items || []
+    end
   end
 end
