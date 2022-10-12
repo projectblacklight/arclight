@@ -65,7 +65,12 @@ module Arclight
     end
 
     def abstract_or_scope
-      first('abstract_ssm') || first('scopecontent_ssm')
+      if first('abstract_ssm')
+        # EAD <abstract> may contain raw #PCDATA not wrapped in an HTML tag
+        "<p>#{first('abstract_ssm')}</p>"
+      else
+        first('scopecontent_ssm')
+      end
     end
 
     def creator
