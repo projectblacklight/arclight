@@ -1,3 +1,5 @@
+import CheckboxSubmit from 'blacklight/checkbox_submit'
+
 class NavigationDocument {
   constructor(el) {
     this.el = $(el);
@@ -305,6 +307,11 @@ class ContextNavigation {
     this.addListenersForPlusMinus();
     this.enablebuttons();
     this.el.trigger('navigation.contains.elements');
+    document.querySelectorAll('form.bookmark-toggle').forEach((el) => {
+      if (el.querySelectorAll('.checkbox').length > 0) return;
+
+      new CheckboxSubmit(el).render()
+    })
   }
 
   // eslint-disable-next-line class-methods-use-this

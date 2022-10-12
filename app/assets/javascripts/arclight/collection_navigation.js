@@ -1,3 +1,4 @@
+import CheckboxSubmit from 'blacklight/checkbox_submit'
 
   const CollectionNavigation = {
     init: function (el, page = 1) {
@@ -59,6 +60,11 @@
           }
         });
 
+        document.querySelectorAll('form.bookmark-toggle').forEach((el) => {
+          if (el.querySelectorAll('.checkbox').length > 0) return;
+
+          new CheckboxSubmit(el).render()
+        })
         $el.hide().html('').append(sortPerPage).append(newDocs)
           .fadeIn(500);
         if (showDocs.length > 0) {

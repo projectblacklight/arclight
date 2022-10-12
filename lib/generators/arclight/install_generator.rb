@@ -106,6 +106,7 @@ module Arclight
         pin "arclight/oembed_viewer", to: "arclight/oembed_viewer.js"
         pin "arclight/truncator", to: "arclight/truncator.js"
         pin "arclight/responsiveTruncator", to: "arclight/responsiveTruncator.js"
+        pin "blacklight/checkbox_submit", to: "blacklight/checkbox_submit.js"
       RUBY
 
       inject_into_file 'app/javascript/application.js', after: 'import "blacklight"' do

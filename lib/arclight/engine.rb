@@ -41,6 +41,9 @@ module Arclight
       app.config.assets.precompile << 'arclight/oembed_viewer.js'
       app.config.assets.precompile << 'arclight/truncator.js'
       app.config.assets.precompile << 'arclight/responsiveTruncator.js'
+
+      app.config.assets.paths << Blacklight::Engine.root.join("app/javascript")
+      app.config.assets.precompile << "blacklight/checkbox_submit.js"
     end
   end
 end
