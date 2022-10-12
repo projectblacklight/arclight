@@ -22,8 +22,9 @@ RSpec.describe 'arclight/_requests', type: :view do
       allow(document_downloads).to receive(:href).and_return('https://sample.request.com')
       allow(document).to receive(:ead_file).and_return(document_downloads)
       allow(config).to receive(:available_request_types).and_return([:aeon_web_ead])
-      allow(config).to receive(:request_url_for_type).and_return('https://sample.request.com')
-      allow(config).to receive(:request_mappings_for_type).and_return('Action=10&Form=31&Value=ead_url')
+      allow(config).to receive(:request_config_for_type).and_return({ 'request_url' => 'https://sample.request.com',
+                                                                      'request_mappings' => 'Action=10&Form=31&Value=ead_url' })
+
       render
     end
 

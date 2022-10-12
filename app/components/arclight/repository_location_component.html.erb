@@ -1,0 +1,20 @@
+<%= render(@layout.new(field: @field)) do |component| %>
+  <% component.label do %>
+    <%= label %>
+  <% end %>
+  <% component.value do %>
+    <div class='al-in-person-repository-name'>
+      <% if repository.thumbnail_url %>
+        <%= image_tag repository.thumbnail_url, alt: '', class: 'img-fluid float-left' %>
+      <% end %>
+      <div>
+        <%= link_to(repository.name, helpers.arclight_engine.repository_path(repository.slug)) %>
+      </div>
+    </div>
+    <div class='al-in-person-repository-location'>
+      <address>
+        <%= repository.location %>
+      </address>
+    </div>
+  <% end %>
+<% end %>

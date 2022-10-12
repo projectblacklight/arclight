@@ -52,44 +52,12 @@ RSpec.describe Arclight::Repository do
         expect(repo.description).to eq 'Lorem ipsum'
       end
 
-      it '#building' do
-        expect(repo.building).to eq 'My Building'
+      it '#location_html' do
+        expect(repo.location).to be_html_safe
       end
 
-      it '#address1' do
-        expect(repo.address1).to eq 'My Street Address'
-      end
-
-      it '#address2' do
-        expect(repo.address2).to eq 'My Extra Address'
-      end
-
-      it '#city' do
-        expect(repo.city).to eq 'My City'
-      end
-
-      it '#state' do
-        expect(repo.state).to eq 'My State'
-      end
-
-      it '#zip' do
-        expect(repo.zip).to eq '12345'
-      end
-
-      it '#country' do
-        expect(repo.country).to eq 'My Country'
-      end
-
-      it '#city_state_zip_country' do
-        expect(repo.city_state_zip_country).to eq 'My City, My State 12345, My Country'
-      end
-
-      it '#phone' do
-        expect(repo.phone).to eq '123-456-7890'
-      end
-
-      it '#contact_info' do
-        expect(repo.contact_info).to eq 'My Contact Info'
+      it '#contact' do
+        expect(repo.contact).to be_html_safe
       end
 
       it '#thumbnail_url' do
@@ -109,14 +77,6 @@ RSpec.describe Arclight::Repository do
       it '#request_config_present_for_type? is not present' do
         expect(repo.request_config_present_for_type?('fake_type')).to be false
       end
-
-      it '#request_url_for_type' do
-        expect(repo.request_url_for_type('google_form')).to eq 'https://docs.google.com/abc123'
-      end
-
-      it '#request_mappings_for_type' do
-        expect(repo.request_mappings_for_type('google_form')).to eq 'collection_name=abc&eadid=123'
-      end
     end
   end
 
@@ -128,38 +88,16 @@ RSpec.describe Arclight::Repository do
     end
   end
 
-  context 'when missing data' do
-    let(:repo) { described_class.find_by(slug: 'sample') }
-
-    it 'handles missing a country' do
-      repo.country = nil
-      expect(repo.city_state_zip_country).to eq 'My City, My State 12345'
-    end
-  end
-
   context 'the repositories.yml template for the generator is valid' do
     let(:repositories_yml_template_file) do
       Arclight::Engine.root.join('lib/generators/arclight/templates/config/repositories.yml')
     end
 
-    it 'successfully loads the template repositories file' do
-      nlm = described_class.find_by(slug: 'nlm', yaml_file: repositories_yml_template_file)
-      expect(nlm.city).to eq 'Bethesda'
-    end
-
     it 'has new-style request_type' do
       raw_yaml_hash = YAML.safe_load(File.read(repositories_yml_template_file))
       nlm = described_class.find_by(slug: 'nlm', yaml_file: repositories_yml_template_file)
-      google_form_url = nlm.request_url_for_type('google_form')
+      google_form_url = nlm.request_config_for_type('google_form')['request_url']
       expect(google_form_url).to eq raw_yaml_hash['nlm']['request_types']['google_form']['request_url']
-    end
-  end
-
-  describe 'extension' do
-    let(:repo) { described_class.find_by(slug: 'sample') }
-
-    it 'is possible' do
-      expect(repo.downstream_defined_field).to eq 'Custom Data From Consumer'
     end
   end
 
