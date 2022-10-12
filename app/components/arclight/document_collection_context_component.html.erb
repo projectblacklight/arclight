@@ -11,11 +11,13 @@
     <div class="documentHeader row" data-document-id="<%= document.id %>">
       <% if document.children? %>
         <div class="al-toggle-children-container">
-          <%= link_to(
-            '',
-            "##{document.id}-collapsible-hierarchy",
-            class: "al-toggle-view-children #{!show_expanded?(document) ? 'collapsed' : ''}",
-            'aria-label': t('arclight.hierarchy.view_all'),
+          <%= link_to('',
+              "##{document.id}-collapsible-hierarchy",
+              class: "al-toggle-view-children#{ ' collapsed' unless show_expanded?(document)}",
+              aria: {
+                label: t('arclight.hierarchy.view_all'),
+                expanded: show_expanded?(document)
+              },
               data: {
                 toggle: 'collapse'
               }
