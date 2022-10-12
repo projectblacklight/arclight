@@ -32,7 +32,7 @@ RSpec.describe 'Online Content', type: :feature do
       let(:doc_id) { 'a0011-xml' }
 
       it 'renders a flat list of the child components with online content', js: true do
-        click_link('Online content')
+        click_button 'Online content'
 
         within('#online-content') do
           expect(page).to have_css('article', count: 1)
@@ -42,7 +42,7 @@ RSpec.describe 'Online Content', type: :feature do
       end
 
       it 'document container is not visible', js: true do
-        click_link('Online content')
+        click_button 'Online content'
 
         within('#online-content') do
           expect(page).to have_css('article', count: 1)
@@ -64,7 +64,7 @@ RSpec.describe 'Online Content', type: :feature do
       let(:doc_id) { 'umich-bhl-851981aspace_9b5b0ff697f0a78a48bad43c55ad324e' }
 
       it 'has next/previous controls', js: true do
-        click_link 'Online content'
+        click_button 'Online content'
 
         expect(page).to have_css '.page-entries', text: '1 - 10 of 12 entries'
 
@@ -79,7 +79,7 @@ RSpec.describe 'Online Content', type: :feature do
 
       it 'adds the count badge', js: true do
         expect(page).to have_css '.al-online-content-badge', text: '12', count: 1
-        click_link 'Online content'
+        click_button 'Online content'
         click_link 'Next »'
         expect(page).to have_css '.al-online-content-badge', text: '12', count: 1
       end

@@ -183,15 +183,15 @@ RSpec.describe 'Collection Page', type: :feature do
   describe 'tabbed display' do
     context 'collection has online content', js: true do
       it 'clicking contents toggles visibility' do
-        click_link 'Contents'
+        click_button 'Contents'
         expect(page).to have_css '#contents', visible: :visible
         expect(page).to have_css '#context', visible: :hidden
         expect(page).to have_css '#access', visible: :hidden
-        click_link 'Overview'
+        click_button 'Overview'
         expect(page).to have_css '#context', visible: :visible
         expect(page).to have_css '#contents', visible: :hidden
         expect(page).to have_css '#access', visible: :hidden
-        click_link 'Access'
+        click_button 'Access'
         expect(page).to have_css '#context', visible: :hidden
         expect(page).to have_css '#contents', visible: :hidden
         expect(page).to have_css '#access', visible: :visible
@@ -200,7 +200,7 @@ RSpec.describe 'Collection Page', type: :feature do
       it 'clicking online contents toggles visibility' do
         expect(page).to have_css '#context', visible: :visible
         expect(page).to have_css '#online-content', visible: :hidden
-        click_link 'Online content'
+        click_button 'Online content'
         expect(page).to have_css '#context', visible: :hidden
         expect(page).to have_css '#online-content', visible: :visible
       end
@@ -210,7 +210,7 @@ RSpec.describe 'Collection Page', type: :feature do
       let(:doc_id) { 'm0198-xml' }
 
       it 'has visitation notes' do
-        click_link 'Access'
+        click_button 'Access'
         expect(page).to have_css 'dt', text: 'BEFORE YOU VISIT:'
         expect(page).to have_css 'dd', text: /materials are stored offsite and must be paged/
         expect(page).to have_css 'dt', text: 'LOCATION OF THIS COLLECTION:'
@@ -223,7 +223,7 @@ RSpec.describe 'Collection Page', type: :feature do
       let(:doc_id) { 'aoa271' }
 
       it 'has a restrictions and access' do
-        click_link 'Access'
+        click_button 'Access'
         expect(page).to have_css 'dt', text: 'RESTRICTIONS:'
         expect(page).to have_css 'dd', text: 'No restrictions on access.'
         expect(page).to have_css 'dt', text: 'TERMS OF ACCESS:'
@@ -235,7 +235,7 @@ RSpec.describe 'Collection Page', type: :feature do
       let(:doc_id) { 'aoa271' }
 
       it 'has citations' do
-        click_link 'Access'
+        click_button 'Access'
         expect(page).to have_css 'dt', text: 'PREFERRED CITATION:'
         expect(page).to have_css 'dd p', text: /Omega Alpha Archives\. 1894-1992/
       end
@@ -245,7 +245,7 @@ RSpec.describe 'Collection Page', type: :feature do
       let(:doc_id) { 'a0011-xml' }
 
       it 'has contacts' do
-        click_link 'Access'
+        click_button 'Access'
         expect(page).to have_css 'dt', text: 'CONTACT:'
         expect(page).to have_css 'dd', text: /specialcollections@stanford.edu/
       end
@@ -270,7 +270,7 @@ RSpec.describe 'Collection Page', type: :feature do
     end
 
     describe 'interactions', js: true do
-      before { click_link 'Contents' }
+      before { click_button 'Contents' }
 
       it 'contents contain linked level 1 components' do
         within '#contents' do
