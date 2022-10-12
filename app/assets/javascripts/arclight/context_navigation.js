@@ -133,7 +133,6 @@ class ContextNavigation {
   }
 
   getData() {
-    const that = this;
     // Add a placeholder so flashes of text are not as significant
     const placeholder = new Placeholder();
     this.el.after(placeholder.$el);
@@ -149,7 +148,7 @@ class ContextNavigation {
         original_document: this.originalDocument,
         view: 'collection_context'
       }
-    }).done((response) => that.updateView(response));
+    }).done((response) => this.updateView(response));
   }
 
   /**
@@ -212,7 +211,6 @@ class ContextNavigation {
    *   each resulting Solr Document
    */
   updateParents(newDocs) {
-    const that = this;
     // Case where this is a parent list and needs to be filed correctly
     //
     // Otherwise, retrieve the parent...
@@ -260,9 +258,9 @@ class ContextNavigation {
     this.el.html(this.ul);
 
     // Initialize additional things
-    $itemDoc.find('.context-navigator').each(function (i, e) {
+    $itemDoc.find('.context-navigator').each((i, e) => {
       const contextNavigation = new ContextNavigation(
-        e, that.originalParents, that.originalDocument
+        e, this.originalParents, this.originalDocument
       );
       contextNavigation.getData();
     });
@@ -277,7 +275,6 @@ class ContextNavigation {
    * @param {string} response - the AJAX response body
    */
   updateView(response) {
-    const that = this;
     var resp = $.parseHTML(response);
     var $doc = $(resp);
     var newDocs = $doc.find('#documents')
@@ -286,8 +283,8 @@ class ContextNavigation {
 
     // See if the original document is located in the returned documents
     const originalDocumentIndex = newDocs
-      .findIndex(doc => doc.id === that.originalDocument);
-    that.parentLi.find('.al-hierarchy-placeholder').remove();
+      .findIndex(doc => doc.id === this.originalDocument);
+    this.parentLi.find('.al-hierarchy-placeholder').remove();
 
     // If the original document in the results, update it. If not update with a
     // more complex procedure
@@ -296,9 +293,9 @@ class ContextNavigation {
     } else {
       this.updateParents(
         newDocs,
-        that.data.arclight.originalParents,
-        that.data.arclight.parent,
-        that.parentLi
+        this.data.arclight.originalParents,
+        this.data.arclight.parent,
+        this.parentLi
       );
     }
     this.el.parent().data('resolved', true);
@@ -318,7 +315,6 @@ class ContextNavigation {
   }
 
   addListenersForPlusMinus() {
-    const that = this;
     this.ul.find('.al-toggle-view-children').on('click', (e) => {
       e.preventDefault();
       const targetArea = $($(e.currentTarget).attr('href'));
@@ -328,7 +324,7 @@ class ContextNavigation {
             // Send null for originalParents. We want to disregard the original
             // component's ancestor trail and instead use the current ID as the
             // parent in the query to populate the navigator.
-            ee, null, that.originalDocument
+            ee, null, this.originalDocument
           );
           contextNavigation.getData();
         });
