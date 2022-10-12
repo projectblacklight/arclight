@@ -24,6 +24,7 @@ Gem::Specification.new do |spec|
   spec.require_paths = ['lib']
 
   spec.add_dependency 'blacklight', '>= 7.14', '< 9'
+  spec.add_dependency 'gretel'
   spec.add_dependency 'rails', '~> 7.0'
   spec.add_dependency 'traject', '~> 3.0'
   spec.add_dependency 'traject_plus', '~> 2.0'

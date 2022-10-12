@@ -57,10 +57,6 @@ module ArclightHelper
     search_state.params_for_search.except('group', 'page')
   end
 
-  def on_repositories_show?
-    controller_name == 'repositories' && action_name == 'show'
-  end
-
   def on_repositories_index?
     controller_name == 'repositories' && action_name == 'index'
   end
