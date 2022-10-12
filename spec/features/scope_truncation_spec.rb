@@ -14,7 +14,7 @@ RSpec.describe 'Scope truncation', type: :feature, js: true do
   context 'in hierarchy' do
     it 'is truncated' do
       visit solr_document_path 'aoa271'
-      click_link 'Contents'
+      click_button 'Contents'
       truncation_works 'be a nyan cat'
     end
   end

@@ -43,4 +43,3 @@ jobs:
         run: yarn install
       - name: Lint Ruby files
         run: bundle exec rake rubocop eslint
-      
