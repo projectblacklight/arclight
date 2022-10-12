@@ -1,0 +1,88 @@
+<div class='d-md-flex justify-content-between al-show'>
+  <div class='al-show-breadcrumb'>
+    <nav aria-label="breadcrumb">
+      <%= render Arclight::BreadcrumbsHierarchyComponent.new(presenter: presenter) %>
+
+      <%= content_tag :h1, class: "breadcrumb-item breadcrumb-item-#{document.parents.length + 2} media" do %>
+        <span class="media-body" aria-hidden="true"><%= blacklight_icon document_or_parent_icon(document) %></span>
+        <span class="col"><%= document.normalized_title %></span>
+      <% end %>
+    </nav>
+  </div>
+
+  <%= render Arclight::DocumentActionsComponent.new(presenter: presenter) %>
+</div>
+
+<%= render Arclight::MetadataSectionComponent.with_collection(blacklight_config.show.component_metadata_partials || [], metadata_attr: { layout: Arclight::UpperMetadataLayoutComponent }, presenter: presenter, classes: ['al-metadata-section', 'breadcrumb-item', "breadcrumb-item-#{document.parents.length + 3}"]) %>
+
+<div class='row'>
+  <div class='col-md-12'>
+    <%= embed %>
+  </div>
+</div>
+
+<div class='row'>
+  <div class='col-md-12'>
+    <ul class='nav nav-tabs nav-fill' role='tablist' aria-label='<%= t('arclight.views.show.tablist_nav') %>'>
+      <li class='nav-item flex-fill'>
+        <a class='nav-link p-1 p-sm-2 active' data-toggle='tab' data-bs-toggle='tab' href='#context' role='tab'>
+          <%= t('arclight.views.show.context') %>
+        </a>
+      </li>
+
+      <% if online_content? %>
+        <li class='nav-item flex-fill'>
+          <a class='nav-link p-1 p-sm-2' data-toggle='tab' data-bs-toggle='tab' href='#online-content' role='tab' data-arclight-online-content-tab='true'>
+            <%= t 'arclight.views.show.online_content' %>
+            <span data-arclight-online-content-tab-count/>
+          </a>
+        </li>
+      <% end %>
+
+      <li class='nav-item flex-fill'>
+        <a class='nav-link p-1 p-sm-2' data-toggle='tab' data-bs-toggle='tab' href='#access' role='tab'>
+          <%= t 'arclight.views.show.access' %>
+        </a>
+      </li>
+    </ul>
+  </div>
+</div>
+
+<div class='row'>
+  <div class='col-md-12'>
+    <div class='tab-content'>
+      <div class='tab-pane active' id='context' role='tabpanel'>
+        <h2 class="sr-only visually-hidden" data-sr-enable-me='true' data-has-contents=<%= t 'arclight.views.show.has_content' %>><%= t('arclight.views.show.context') %></h2>
+        <%= content_tag(:div, id: t("arclight.views.show.sections.collection_context_field").parameterize) do %>
+          <%= generic_context_navigation(@document) %>
+        <% end %>
+      </div>
+
+      <% if online_content? %>
+        <div class='tab-pane' id='online-content' role='tabpanel'>
+          <h2 class="sr-only visually-hidden"><%= t 'arclight.views.show.online_content' %></h2>
+          <%= content_tag(
+            :div, '',
+            class: 'al-contents',
+            data: {
+              arclight: {
+                path: search_catalog_path,
+                name: document.collection_name,
+                access: 'online',
+                view: 'online_contents',
+                parent: document.reference,
+                search_field: 'within_collection'
+              }
+            }
+          ) %>
+        </div>
+      <% end %>
+
+      <div class='tab-pane' id='access' role='tabpanel'>
+        <h2 class="sr-only visually-hidden"><%= t 'arclight.views.show.access' %></h2>
+
+        <%= render Arclight::MetadataSectionComponent.with_collection(blacklight_config.show.component_access_tab_items || [], presenter: presenter) %>
+      </div>
+    </div>
+  </div>
+</div>

@@ -13,9 +13,6 @@
   <%= render Arclight::DocumentActionsComponent.new(presenter: presenter) %>
 </div>
 
-
-<%= render Arclight::MetadataSectionComponent.with_collection(blacklight_config.show.component_metadata_partials || [], metadata_attr: { layout: Arclight::UpperMetadataLayoutComponent }, presenter: presenter, classes: ['al-metadata-section', 'breadcrumb-item', "breadcrumb-item-#{document.parents.length + 3}"]) unless document.collection? %>
-
 <div class='row'>
   <div class='col-md-12'>
     <%= embed %>
@@ -27,25 +24,20 @@
     <ul class='nav nav-tabs nav-fill' role='tablist' aria-label='<%= t('arclight.views.show.tablist_nav') %>'>
       <li class='nav-item flex-fill'>
         <a class='nav-link p-1 p-sm-2 active' data-toggle='tab' data-bs-toggle='tab' href='#context' role='tab'>
-          <%= document.collection? ? t('arclight.views.show.overview') : t('arclight.views.show.context') %>
+          <%= t('arclight.views.show.overview') %>
         </a>
       </li>
 
-      <% if document.collection? %>
         <li class='nav-item flex-fill'>
-          <a class='nav-link p-1 p-sm-2 disabled' data-toggle='tab' data-bs-toggle='tab' href='#contents' role='tab' data-hierarchy-enable-me='true'>
+            <a class='nav-link p-1 p-sm-2 disabled' data-toggle='tab' data-bs-toggle='tab' href='#contents' role='tab' data-hierarchy-enable-me='true'>
             <%= t 'arclight.views.show.no_contents' %>
-          </a>
+            </a>
         </li>
-      <% end %>
 
       <% if online_content? %>
         <li class='nav-item flex-fill'>
           <a class='nav-link p-1 p-sm-2' data-toggle='tab' data-bs-toggle='tab' href='#online-content' role='tab' data-arclight-online-content-tab='true'>
             <%= t 'arclight.views.show.online_content' %>
-            <% unless document.collection? %>
-              <span data-arclight-online-content-tab-count/>
-            <% end %>
           </a>
         </li>
       <% end %>
@@ -62,34 +54,32 @@
 <div class='row'>
   <div class='col-md-12'>
     <div class='tab-content'>
-      <% if document.collection? %>
-        <div class='tab-pane active' id='context' role='tabpanel'>
-          <div class="row">
-            <div class="col-md-3 order-md-2">
+      <div class='tab-pane active' id='context' role='tabpanel'>
+        <div class="row">
+          <div class="col-md-3 order-md-2">
               <nav class='al-sidebar-navigation-context al-sticky-sidebar'
-                id="collection-context-sidebar"
-                aria-label='<%= t('arclight.views.show.context_nav.title') %>'>
-                <ul class='nav nav-pills flex-sm-row flex-md-column text-sm-left text-md-right'>
+              id="collection-context-sidebar"
+              aria-label='<%= t('arclight.views.show.context_nav.title') %>'>
+              <ul class='nav nav-pills flex-sm-row flex-md-column text-sm-left text-md-right'>
                   <% blacklight_config.show.metadata_partials&.select { |item| presenter.with_field_group(item).fields_to_render.any? }&.each do |item| %>
-                    <li class='nav-item'>
+                  <li class='nav-item'>
                       <%= link_to t("arclight.views.show.sections.#{item}"), "##{t("arclight.views.show.sections.#{item}").parameterize}", class: 'nav-link' %>
-                    </li>
+                  </li>
                   <% end %>
-                </ul>
+              </ul>
               </nav>
-            </div>
+          </div>
 
-            <div class="col-md-9 order-md-1">
+          <div class="col-md-9 order-md-1">
               <h2 class="sr-only visually-hidden"><%= t 'arclight.views.show.context' %></h2>
               <%= render Arclight::MetadataSectionComponent.with_collection(blacklight_config.show.metadata_partials || [], presenter: presenter, heading: true) %>
-            </div>
           </div>
         </div>
-      <% end %>
+      </div>
 
-      <div class='tab-pane <%= document.collection? ? '': 'active' %>' id='<%= document.collection? ? 'contents' : 'context' %>' role='tabpanel'>
-        <h2 class="sr-only visually-hidden" data-sr-enable-me='true' data-has-contents=<%= t 'arclight.views.show.has_content' %>><%= document.collection? ? t('arclight.views.show.has_content') : t('arclight.views.show.context') %></h2>
-        <%= content_tag(:div, id: document.collection? ? nil : t("arclight.views.show.sections.collection_context_field").parameterize) do %>
+      <div class='tab-pane' id='contents' role='tabpanel'>
+        <h2 class="sr-only visually-hidden" data-sr-enable-me='true' data-has-contents=<%= t 'arclight.views.show.has_content' %>><%= t('arclight.views.show.has_content') %></h2>
+        <%= content_tag(:div) do %>
           <%= generic_context_navigation(@document) %>
         <% end %>
       </div>
@@ -106,7 +96,7 @@
                 name: document.collection_name,
                 access: 'online',
                 view: 'online_contents',
-                parent: document.collection? ? nil : document.reference,
+                parent: nil,
                 search_field: 'within_collection'
               }
             }
@@ -117,11 +107,7 @@
       <div class='tab-pane' id='access' role='tabpanel'>
         <h2 class="sr-only visually-hidden"><%= t 'arclight.views.show.access' %></h2>
 
-        <% if @document.collection? %>
-          <%= render Arclight::MetadataSectionComponent.with_collection(blacklight_config.show.context_access_tab_items || [], presenter: presenter) %>
-        <% else %>
-          <%= render Arclight::MetadataSectionComponent.with_collection(blacklight_config.show.component_access_tab_items || [], presenter: presenter) %>
-        <% end %>
+        <%= render Arclight::MetadataSectionComponent.with_collection(blacklight_config.show.context_access_tab_items || [], presenter: presenter) %>
       </div>
     </div>
   </div>

@@ -4,6 +4,7 @@ module Arclight
   # Custom presentation methods for show partial
   class ShowPresenter < Blacklight::ShowPresenter
     attr_accessor :field_group
+    delegate :collection?, to: :document
 
     def heading
       document.normalized_title

@@ -3,14 +3,20 @@
 module Arclight
   # Render a single document
   class DocumentComponent < Blacklight::DocumentComponent
-    attr_reader :document
-
-    def online_content?
-      document.online_content? && (document.collection? || document.children?)
+    def initialize(presenter:, **kwargs) # rubocop:disable Lint/MissingSuper
+      @presenter = presenter
+      @kwargs = kwargs
     end
 
-    def blacklight_config
-      presenter.configuration
+    attr_reader :presenter
+    delegate :collection?, to: :presenter
+
+    def call
+      if collection?
+        render CollectionComponent.new(presenter: presenter, **@kwargs)
+      else
+        render NonCollectionComponent.new(presenter: presenter, **@kwargs)
+      end
     end
   end
 end
