@@ -304,17 +304,25 @@ class ContextNavigation {
     this.el.parent().data('resolved', true);
     this.addListenersForPlusMinus();
     this.enablebuttons();
+    this.updateScreenReaderText();
     Blacklight.doBookmarkToggleBehavior();
     this.el.trigger('navigation.contains.elements');
   }
 
-  // eslint-disable-next-line class-methods-use-this
   enablebuttons() {
-    var toEnable = $('[data-hierarchy-enable-me]');
-    var srOnly = $('h2[data-sr-enable-me]');
-    toEnable.removeClass('disabled');
-    toEnable.text(srOnly.data('hasContents'));
-    srOnly.text(srOnly.data('hasContents'));
+    const toEnable = this.findTarget('enableButton');
+    toEnable.classList.remove('disabled');
+    toEnable.innerHTML = toEnable.dataset.hasContents;
+  }
+
+  updateScreenReaderText() {
+    const srOnly = this.findTarget('screenReaderText');
+    srOnly.innerHTML = srOnly.dataset.hasContents;
+  }
+
+  // eslint-disable-next-line class-methods-use-this
+  findTarget(name) {
+    return document.querySelector(`[data-arclight-context-navigation-target="${name}"`);
   }
 
   addListenersForPlusMinus() {
