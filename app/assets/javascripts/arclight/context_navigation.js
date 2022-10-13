@@ -281,15 +281,13 @@ class ContextNavigation {
    * @param {string} response - the AJAX response body
    */
   updateView(response) {
-    var resp = $.parseHTML(response);
-    var $doc = $(resp);
-    var newDocs = $doc.find('#documents')
-      .find('article')
-      .toArray().map(el => new NavigationDocument(el));
+    const parser = new DOMParser();
+    const html = parser.parseFromString(response, 'text/html');
+    const newDocs = Array.from(html.querySelectorAll('#documents article'))
+      .map(el => new NavigationDocument(el));
 
     // See if the original document is located in the returned documents
-    const originalDocumentIndex = newDocs
-      .findIndex(doc => doc.id === this.originalDocument);
+    const originalDocumentIndex = newDocs.findIndex(doc => doc.id === this.originalDocument);
     this.parentLi.find('.al-hierarchy-placeholder').remove();
 
     // If the original document in the results, update it. If not update with a
