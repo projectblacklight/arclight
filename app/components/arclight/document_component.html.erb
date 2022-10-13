@@ -32,7 +32,7 @@
 
       <% if document.collection? %>
         <li class='nav-item flex-fill'>
-          <button class='nav-link p-1 p-sm-2 w-100 disabled' data-toggle='tab' data-target='#contents' aria-controls="contents"  data-bs-toggle='tab' data-bs-target='#contents' href='#contents' role='tab' data-hierarchy-enable-me='true' aria-selected="false">
+          <button class='nav-link p-1 p-sm-2 w-100 disabled' data-toggle='tab' data-target='#contents' aria-controls="contents"  data-bs-toggle='tab' data-bs-target='#contents' href='#contents' role='tab' data-arclight-context-navigation-target='enableButton' data-has-contents="<%= t 'arclight.views.show.has_content' %>" aria-selected="false">
             <%= t 'arclight.views.show.no_contents' %>
           </button>
         </li>
@@ -86,8 +86,8 @@
         </div>
       <% end %>
 
-      <div class='tab-pane<%= document.collection? ? '': ' active' %>' id='<%= document.collection? ? 'contents' : 'context' %>' role='tabpanel'>
-        <h2 class="sr-only visually-hidden" data-sr-enable-me='true' data-has-contents=<%= t 'arclight.views.show.has_content' %>><%= document.collection? ? t('arclight.views.show.has_content') : t('arclight.views.show.context') %></h2>
+      <div class='tab-pane <%= document.collection? ? '': 'active' %>' id='<%= document.collection? ? 'contents' : 'context' %>' role='tabpanel'>
+        <h2 class="sr-only visually-hidden" data-arclight-context-navigation-target='screenReaderText' data-has-contents=<%= t 'arclight.views.show.has_content' %>><%= document.collection? ? t('arclight.views.show.has_content') : t('arclight.views.show.context') %></h2>
         <%= content_tag(:div, id: document.collection? ? nil : t("arclight.views.show.sections.collection_context_field").parameterize) do %>
           <%= generic_context_navigation(@document) %>
         <% end %>
