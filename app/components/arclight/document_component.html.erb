@@ -25,34 +25,34 @@
   <div class='col-md-12'>
     <ul class='nav nav-tabs nav-fill' role='tablist' aria-label='<%= t('arclight.views.show.tablist_nav') %>'>
       <li class='nav-item flex-fill'>
-        <a class='nav-link p-1 p-sm-2 active' data-toggle='tab' data-bs-toggle='tab' href='#context' role='tab'>
+        <button class='nav-link p-1 p-sm-2 w-100 active' data-toggle='tab' data-target='#context' aria-controls="context" data-bs-toggle='tab' data-bs-target='#context' role='tab' aria-selected="true">
           <%= document.collection? ? t('arclight.views.show.overview') : t('arclight.views.show.context') %>
-        </a>
+        </button>
       </li>
 
       <% if document.collection? %>
         <li class='nav-item flex-fill'>
-          <a class='nav-link p-1 p-sm-2 disabled' data-toggle='tab' data-bs-toggle='tab' href='#contents' role='tab' data-arclight-context-navigation-target='enableButton' data-has-contents="<%= t 'arclight.views.show.has_content' %>">
+          <button class='nav-link p-1 p-sm-2 w-100 disabled' data-toggle='tab' data-target='#contents' aria-controls="contents"  data-bs-toggle='tab' data-bs-target='#contents' href='#contents' role='tab' data-arclight-context-navigation-target='enableButton' data-has-contents="<%= t 'arclight.views.show.has_content' %>" aria-selected="false">
             <%= t 'arclight.views.show.no_contents' %>
-          </a>
+          </button>
         </li>
       <% end %>
 
       <% if online_content? %>
         <li class='nav-item flex-fill'>
-          <a class='nav-link p-1 p-sm-2' data-toggle='tab' data-bs-toggle='tab' href='#online-content' role='tab' data-arclight-online-content-tab='true'>
+          <button class='nav-link p-1 p-sm-2 w-100' data-toggle='tab' data-target='#online-content' aria-controls="online-content" data-bs-toggle='tab' data-bs-target='#online-content' href='#online-content' role='tab' data-arclight-online-content-tab='true' aria-selected="false">
             <%= t 'arclight.views.show.online_content' %>
             <% unless document.collection? %>
               <span data-arclight-online-content-tab-count/>
             <% end %>
-          </a>
+          </button>
         </li>
       <% end %>
 
       <li class='nav-item flex-fill'>
-        <a class='nav-link p-1 p-sm-2' data-toggle='tab' data-bs-toggle='tab' href='#access' role='tab'>
+        <button class='nav-link p-1 p-sm-2 w-100' data-toggle='tab' data-target='#access' aria-controls="access" data-bs-toggle='tab' data-bs-target='#access' href='#access' role='tab' aria-selected="false">
           <%= t 'arclight.views.show.access' %>
-        </a>
+        </button>
       </li>
     </ul>
   </div>

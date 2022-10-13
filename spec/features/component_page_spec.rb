@@ -28,7 +28,7 @@ RSpec.describe 'Component Page', type: :feature do
     it 'clicking context toggles visibility', js: true do
       expect(page).to have_css '#context', visible: :visible
       expect(page).to have_css '#access', visible: :hidden
-      click_link 'Access'
+      click_button 'Access'
       expect(page).to have_css '#context', visible: :hidden
       expect(page).to have_css '#access', visible: :visible
     end
@@ -231,13 +231,13 @@ RSpec.describe 'Component Page', type: :feature do
 
   describe 'access tab', js: true do
     it 'has visitation notes' do
-      click_link 'Access'
+      click_button 'Access'
       expect(page).to have_css 'dt', text: 'LOCATION OF THIS COLLECTION:'
       expect(page).to have_css 'dd', text: 'Building 38, Room 1E-21'
     end
 
     it 'has a restrictions and access' do
-      click_link 'Access'
+      click_button 'Access'
       expect(page).to have_css 'dt', text: 'PARENT RESTRICTIONS:'
       expect(page).to have_css 'dd', text: /^RESTRICTED: Access to these folders requires prior written approval./
       expect(page).to have_css 'dt', text: 'TERMS OF ACCESS:'
@@ -245,7 +245,7 @@ RSpec.describe 'Component Page', type: :feature do
     end
 
     it 'has a contact' do
-      click_link 'Access'
+      click_button 'Access'
       expect(page).to have_css 'dt', text: 'CONTACT:'
       expect(page).to have_css 'dd', text: 'hmdref@nlm.nih.gov'
     end

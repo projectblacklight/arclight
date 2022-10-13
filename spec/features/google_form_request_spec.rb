@@ -49,7 +49,7 @@ xdescribe 'Google Form Request', type: :feature, js: true do
   context 'in collection hierarchy' do
     it 'shows up in hierarchy' do
       visit solr_document_path 'aoa271'
-      click_link 'Contents'
+      click_button 'Contents'
       first('.al-toggle-view-all').click
       within '#contents' do
         expect(page).to have_css 'form[action*="https://docs.google.com"]', count: 22
