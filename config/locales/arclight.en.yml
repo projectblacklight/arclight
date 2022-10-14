@@ -63,7 +63,7 @@ en:
           default: Download (%{size})
           ead: Download EAD (%{size})
           pdf: Download finding aid (%{size})
-        embedded_content: ONLINE CONTENT
+        embedded_content: Online content
         expand: Expand
         has_content: Collection contents
         online_content:
