@@ -209,3 +209,10 @@ dl.deflist dt {
 .text-underline {
   text-decoration: underline;
 }
+
+#contents {
+  border-bottom: $border-width solid $border-color;
+  border-top: $border-width solid $border-color;
+  margin: $spacer 0;
+  padding: $spacer 0;
+}

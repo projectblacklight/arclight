@@ -51,6 +51,7 @@ en:
         access: Access
         collapse: Collapse
         collection_id: 'Collection ID: %{id}'
+        contents: Contents
         context: Collection context
         context_nav:
           title: Collection overview
