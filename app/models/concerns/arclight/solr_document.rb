@@ -4,12 +4,18 @@ module Arclight
   ##
   # Extends Blacklight::Solr::Document to provide Arclight specific behavior
   module SolrDocument
-    extend Blacklight::Solr::Document
+    include Blacklight::Solr::Document
 
     def repository_config
       return unless repository
 
       @repository_config ||= Arclight::Repository.find_by(name: repository)
+    end
+
+    def collection
+      return self if collection?
+
+      SolrDocument.find(normalized_eadid)
     end
 
     def parents

@@ -11,14 +11,6 @@ RSpec.describe 'Scope truncation', type: :feature, js: true do
     end
   end
 
-  context 'in hierarchy' do
-    it 'is truncated' do
-      visit solr_document_path 'aoa271'
-      click_button 'Contents'
-      truncation_works 'be a nyan cat'
-    end
-  end
-
   context 'respository path' do
     it 'is truncated' do
       visit arclight_engine.repository_path 'sul-spec'

@@ -1,5 +1,6 @@
 <div class='al-show-actions-box'>
   <div class="al-actions-box-container">
+    <h2><%= document.collection.normalized_title %></h2>
     <% if document.unitid || document.containers.present? %>
       <div class='al-collection-id'>
         <% if document.unitid %>
@@ -17,9 +18,6 @@
     <% end %>
     <div class='al-show-actions-box-options d-flex'>
       <%= helpers.render partial: 'arclight/requests', locals: { document: document } %>
-      <div class='al-show-actions-box-bookmarks flex-md-fill'>
-        <%= helpers.render partial: 'catalog/bookmark_control', locals: { document: document } %>
-      </div>
     </div>
   </div>
 

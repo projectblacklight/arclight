@@ -1,4 +1,4 @@
-<%= tag.div class: 'container', id: t("arclight.views.show.sections.#{@section}").parameterize do %>
+<%= tag.div id: t("arclight.views.show.sections.#{@section}").parameterize do %>
   <% if @heading %>
     <h3 class='al-show-sub-heading'>
       <%= t("arclight.views.show.sections.#{@section}", level: @presenter.document.level) %>

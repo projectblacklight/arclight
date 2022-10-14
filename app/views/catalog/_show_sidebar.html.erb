@@ -1,0 +1,28 @@
+<div class="sidebar-section">
+  <%= render Arclight::DocumentActionsComponent.new(presenter: document_presenter(@document)) %>
+</div>
+
+<%= render 'show_tools' %>
+<nav id="about-collection-nav" class="al-sidebar-navigation-context sidebar-section">
+  <h2><%= t('arclight.views.show.context_nav.title') %></h2>
+  <ul class='nav flex-column'>
+    <% unless blacklight_config.show.metadata_partials.nil? %>
+      <% blacklight_config.show.metadata_partials.each do |item| %>
+        <% next unless document_presenter(document.collection).with_field_group(item).fields_to_render.any? %>
+        <li class='nav-item'>
+          <%= link_to t("arclight.views.show.sections.#{item}"),
+            [
+              solr_document_path(document.normalized_eadid),
+              "##{t("arclight.views.show.sections.#{item}").parameterize}"
+            ].join, class: 'nav-link pl-0', data: { turbolinks: 'false' }
+          %>
+        </li>
+      <% end %>
+    <% end %>
+  </ul>
+</nav>
+
+<div id="collection-context" class="sidebar-section">
+  <h2><%= t('arclight.views.show.has_content') %></h2>
+  <%= generic_context_navigation(@document) %>
+</div>

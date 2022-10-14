@@ -24,16 +24,6 @@ RSpec.describe 'Component Page', type: :feature do
     visit solr_document_path(id: doc_id)
   end
 
-  describe 'tabbed display' do
-    it 'clicking context toggles visibility', js: true do
-      expect(page).to have_css '#context', visible: :visible
-      expect(page).to have_css '#access', visible: :hidden
-      click_button 'Access'
-      expect(page).to have_css '#context', visible: :hidden
-      expect(page).to have_css '#access', visible: :visible
-    end
-  end
-
   describe 'label/title' do
     it 'does not double escape entities in the heading' do
       expect(page).to have_css('h1', text: /"A brief account of the origin of/)
@@ -75,7 +65,7 @@ RSpec.describe 'Component Page', type: :feature do
 
   describe 'direct online content items' do
     it 'includes links to online content' do
-      expect(page).to have_css('.al-digital-object.breadcrumb-item', text: 'Folder of digitized stuff')
+      expect(page).to have_css('.al-digital-object', text: 'Folder of digitized stuff')
     end
   end
 
@@ -109,8 +99,6 @@ RSpec.describe 'Component Page', type: :feature do
         )
         expect(page).to have_css('.al-number-of-children-badge', text: '25')
         expect(page).to have_css('.al-online-content-icon')
-        expect(page).to have_css('form.bookmark-toggle')
-        expect(page).to have_css '.al-document-container', text: 'Box 1, Folder 1'
       end
     end
 
@@ -137,7 +125,6 @@ RSpec.describe 'Component Page', type: :feature do
       within '#collection-context' do
         expect(page).to have_css 'li.al-hierarchy-highlight', text: 'Statements of purpose, c.1902'
         expect(page).to have_css '.document-title-heading', text: /"A brief account of the origin/
-        expect(page).to have_css '.al-document-container', text: 'Box 1, Folder 1'
         expect(page).to have_css(
           '.document-title-heading',
           text: 'Constitution - notes on drafting of constitution, c.1902-1903'
@@ -231,13 +218,11 @@ RSpec.describe 'Component Page', type: :feature do
 
   describe 'access tab', js: true do
     it 'has visitation notes' do
-      click_button 'Access'
       expect(page).to have_css 'dt', text: 'LOCATION OF THIS COLLECTION:'
       expect(page).to have_css 'dd', text: 'Building 38, Room 1E-21'
     end
 
     it 'has a restrictions and access' do
-      click_button 'Access'
       expect(page).to have_css 'dt', text: 'PARENT RESTRICTIONS:'
       expect(page).to have_css 'dd', text: /^RESTRICTED: Access to these folders requires prior written approval./
       expect(page).to have_css 'dt', text: 'TERMS OF ACCESS:'
@@ -245,7 +230,6 @@ RSpec.describe 'Component Page', type: :feature do
     end
 
     it 'has a contact' do
-      click_button 'Access'
       expect(page).to have_css 'dt', text: 'CONTACT:'
       expect(page).to have_css 'dd', text: 'hmdref@nlm.nih.gov'
     end

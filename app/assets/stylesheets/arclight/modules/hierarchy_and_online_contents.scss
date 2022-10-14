@@ -1,94 +1,3 @@
-.documents-online_contents {
-  .document-title-heading {
-    font-size: $h5-font-size;
-  }
-
-  .document-title-containers {
-    &:after {
-      padding-right: 3px;
-    }
-  }
-
-  .al-hierarchy-children-status {
-    font-size: $h6-font-size;
-    margin-top: 6px;
-    text-align: left;
-  }
-
-  .bookmark-toggle,
-  .al-request-form {
-    font-size: $font-size-sm;
-  }
-
-  // Headings and text
-  .al-document-abstract-or-scope {
-    font-size: 0.85rem;
-    line-height: 1.5;
-    max-width: 45em;
-  }
-
-  .al-hierarchy-sub-heading {
-    color: $gray-600;
-    font-size: $font-size-sm;
-    font-weight: normal;
-    text-transform: uppercase;
-  }
-
-  // Series level
-  .blacklight-series .document-title-heading,
-  .blacklight-subseries .document-title-heading,
-  .blacklight-file .document-title-heading,
-  .blacklight-binder .document-title-heading,
-  .blacklight-other .document-title-heading {
-    font-size: $h5-font-size;
-    font-weight: 400;
-    margin-bottom: ($spacer / 2);
-  }
-
-  .blacklight-series,
-  .blacklight-file {
-    // Additional for levels below series
-    .blacklight-subseries .document-title-heading,
-    .blacklight-file .document-title-heading,
-    .blacklight-binder .document-title-heading,
-    .blacklight-other .document-title-heading {
-      font-size: $h6-font-size;
-
-      .documentHeader {
-        margin-top: $spacer;
-      }
-    }
-
-    // Icongraphy for each level
-    .blacklight-subseries .document-title-heading,
-    .al-hierarchy-level-1 .blacklight-file .document-title-heading,
-    .al-hierarchy-level-1 .blacklight-binder .document-title-heading,
-    .al-hierarchy-level-1 .blacklight-other .document-title-heading {
-      padding-left: 10px;
-
-      &:before {
-        color: $gray-600;
-        content: "\027E9";
-        padding-right: 3px;
-      }
-    }
-
-    .al-hierarchy-level-2 .document-title-heading,
-    .al-hierarchy-level-2 .blacklight-file .document-title-heading {
-      &:before {
-        content: "\027E9 \027E9";
-      }
-    }
-
-    .al-hierarchy-level-3 .document-title-heading,
-    .al-hierarchy-level-3 .blacklight-file .document-title-heading {
-      &:before {
-        content: "\027E9 \027E9 \027E9";
-      }
-    }
-  }
-}
-
 .al-hierarchy-highlight > .documentHeader {
   background: $mark-bg;
 }
@@ -118,60 +27,25 @@
   margin-bottom: $spacer;
 }
 
-// Component show page, Collection context section
-#collection-context {
-  h1 {
-    font-size: $h5-font-size;
-  }
-
-  ul {
-    list-style: none;
-    flex-grow: 1;
-  }
-
-  .documents-online_contents {
-    .documentHeader {
-      margin-top: 1.5rem;
-    }
-  }
-
-  // Top-level context
-  .al-hierarchy-level-0 .document-title-heading {
-    font-size: $h5-font-size;
-    margin-bottom: ($spacer / 2);
-  }
-
-  // All subsequent levels
-  @for $i from 1 through 12 {
-    .al-hierarchy-level-#{$i} .document-title-heading {
-      font-size: $h6-font-size;
-    }
-  }
-
-  .prev-siblings li, li.al-collection-context {
-    visibility: visible;
-    opacity: 1;
-    transition: visibility 0s, height 0.5s, opacity 0.5s linear;
-
-    &.collapsed {
-      visibility: hidden;
-      height: 0;
-      opacity: 0;
-    }
+.alert {
+  .blacklight-icons svg {
+    height: 1.5rem;
+    width: 1.5rem;
   }
 }
 
-// Indentation styling for all level hierarchies
-@mixin hierarchy-levels {
-  @for $i from 1 through 12 {
-    .al-hierarchy-level-#{$i} {
-      margin-left: 20px;
-      // provides for n indention
-      &.extra-indent {
-        margin-left: ($i * 20) + px;
-      }
-    }
-  }
+.title-container {
+  border-bottom: $border-width solid $border-color;
+  padding-bottom: $spacer * .5;
+  margin-bottom: $spacer * .75;
 }
 
-@include hierarchy-levels;
+.online-contents {
+  margin-bottom: $spacer;
+  margin-top: $spacer;
+
+  h2 {
+    font-size: 1rem;
+    text-transform: uppercase;
+  }
+}

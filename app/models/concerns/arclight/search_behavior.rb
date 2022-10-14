@@ -18,7 +18,7 @@ module Arclight
     ##
     # Override Blacklight's method so that some views don't add Solr facets into the request.
     def add_facetting_to_solr(solr_params)
-      return solr_params if %w[collection_context online_contents].include? blacklight_params[:view]
+      return solr_params if %w[collection_context].include? blacklight_params[:view]
 
       super(solr_params)
     end
@@ -33,7 +33,7 @@ module Arclight
     ##
     # For the asynch views, set the sort order to preserve the order of components
     def add_hierarchy_sort(solr_params)
-      solr_params[:sort] = 'sort_ii asc' if %w[online_contents collection_context].include? blacklight_params[:view]
+      solr_params[:sort] = 'sort_ii asc' if %w[collection_context].include? blacklight_params[:view]
       solr_params
     end
 
