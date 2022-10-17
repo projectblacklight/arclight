@@ -1,0 +1,57 @@
+[data-arclight-truncate=true] {
+
+  // content is clamped to 3 lines unless expanded
+  .content {
+    overflow: hidden;
+    display: -webkit-box;
+    text-overflow: ellipsis;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 3;
+  }
+
+  &.expanded .content {
+    display: initial;
+  }
+
+  // safari truncation fix
+  .content > * {
+    margin: 0;
+  }
+
+  // expand/collapse toggle is only shown if content is truncated
+  button {
+    display: none;
+  }
+
+  &.truncated button {
+    display: inline-block;
+  }
+
+  // "view more"/"view less" text swaps when content is expanded
+  .view-more {
+    display: inline;
+  }
+
+  .view-less {
+    display: none;
+  }
+
+  &.expanded {
+    .view-more {
+      display: none;
+    }
+
+    .view-less {
+      display: inline;
+    }
+  }
+
+  // icon rotates when content is expanded
+  .icon::before {
+    content: "▶";
+  }
+
+  &.expanded .icon::before {
+    content: "▼";
+  }
+}

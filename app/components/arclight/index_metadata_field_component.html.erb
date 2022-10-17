@@ -1,5 +1,14 @@
 <div class="row">
-  <%= content_tag('div', class: @classes, data: { 'arclight-truncate': @field.field_config.truncate }.merge(@field.field_config.truncate ? { 'truncate-more': I18n.t('arclight.truncation.view_more'), 'truncate-less': I18n.t('arclight.truncation.view_less')} : {} )) do %>
-    <%= @field.render %>
+  <%= tag.div(class: @classes, data: { 'arclight-truncate': truncate? }) do %>
+    <% if truncate? %>
+      <%= tag.div @field.render, class: 'content' %>
+      <%= button_tag(type: :button, class: 'btn btn-sm btn-link', aria: { hidden: true }) do %>
+        <%= tag.span t('arclight.truncation.view_more'), class: 'view-more' %>
+        <%= tag.span t('arclight.truncation.view_less'), class: 'view-less' %>
+        <%= tag.span(class: 'icon') %>
+      <% end %>
+    <% else %>
+      <%= @field.render %>
+    <% end %>
   <% end %>
 </div>
