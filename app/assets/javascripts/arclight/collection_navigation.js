@@ -64,7 +64,6 @@
         if (showDocs.length > 0) {
           $el.trigger('navigation.contains.elements');
         }
-        Blacklight.doBookmarkToggleBehavior();
       });
     }
   };
