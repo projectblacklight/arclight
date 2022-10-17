@@ -40,3 +40,6 @@ else
   end
 end
 # END ENGINE_CART BLOCK
+
+# Used by engine_cart if you need to change a specific version of a dependency
+eval_gemfile File.expand_path('spec/test_app_templates/Gemfile.extra', File.dirname(__FILE__))

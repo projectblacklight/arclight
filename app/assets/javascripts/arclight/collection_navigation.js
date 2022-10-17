@@ -1,4 +1,3 @@
-
   const CollectionNavigation = {
     init: function (el, page = 1) {
       var $el = $(el);

@@ -1,5 +1,5 @@
-//= require arclight/collection_navigation
-//= require arclight/context_navigation
-//= require arclight/oembed_viewer
-//= require arclight/truncator
-//= require arclight/responsiveTruncator
+import 'arclight/collection_navigation'
+import 'arclight/context_navigation'
+import 'arclight/oembed_viewer'
+import 'arclight/truncator'
+import 'arclight/responsiveTruncator'
