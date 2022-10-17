@@ -3,7 +3,8 @@
     "es6": true
   },
   "parserOptions": {
-    "ecmaVersion": 2020
+    "ecmaVersion": 2020,
+    "sourceType": "module"
   },
   "extends": "airbnb-base/legacy",
   "globals": {
@@ -15,6 +16,8 @@
   "rules": {
     "no-param-reassign": [2, { "props": false }],
     "func-names": ["error", "never"],
-    "indent": ["warn"]
+    "indent": ["warn"],
+    "quotes": ["error", "single", { "avoidEscape": true }],
+    "semi": ["warn", "never"]
   }
 }
