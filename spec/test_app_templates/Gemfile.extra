@@ -1,1 +1,1 @@
-gem 'blacklight', github: 'projectblacklight/blacklight', branch: 'main'
+gem 'blacklight', github: 'projectblacklight/blacklight', branch: 'main' if ENV['BLACKLIGHT_VERSION'] == 'main'
