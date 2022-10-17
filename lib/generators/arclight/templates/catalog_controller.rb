@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+# Blacklight controller that handles searches and document requests
 class CatalogController < ApplicationController
   include Blacklight::Catalog
   include Arclight::Catalog
