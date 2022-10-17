@@ -5,6 +5,7 @@
 module ArclightHelper
   include Arclight::EadFormatHelpers
   include Arclight::FieldConfigHelpers
+  include Blacklight::LayoutHelperBehavior
 
   def repository_collections_path(repository)
     search_action_url(
@@ -28,8 +29,12 @@ module ArclightHelper
 
   ##
   # Classes used for customized show page in arclight
-  def custom_show_content_classes
-    'col-md-12 show-document'
+  def show_content_classes
+    'col-8 show-document order-2'
+  end
+
+  def show_sidebar_classes
+    'col-4 order-1 collection-sidebar'
   end
 
   def collection_active?

@@ -25,7 +25,7 @@
       <div class="my-w-25 w-md-100 order-12 order-md-1 d-flex justify-content-end">
         <%= content_tag('div', class: 'al-document-container col col-no-left-padding text-muted ml-auto') do %>
           <%= document.containers.join(', ') %>
-        <% end if document.containers.present? && !online_contents_context? %>
+        <% end if document.containers.present? %>
 
         <div class="d-inline-flex">
           <%= tag.span blacklight_icon(:online), class: 'al-online-content-icon' if document.online_content? %>

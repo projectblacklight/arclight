@@ -6,7 +6,6 @@ describe 'Aeon Web EAD Request', type: :feature, js: true do
   context 'when EAD URL template is provided' do
     it 'creates a request link' do
       visit solr_document_path 'm0198-xml'
-      click_button 'Contents'
 
       within '#m0198-xmlaspace_ref11_d0s' do
         click_link 'Pages 1-78'

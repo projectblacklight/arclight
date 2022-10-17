@@ -35,7 +35,7 @@ RSpec.describe 'Collection Page', type: :feature do
   describe 'online content indicator' do
     context 'when there is online content available' do
       it 'is rendered' do
-        expect(page).to have_css('.nav-link', text: 'Online content')
+        expect(page).to have_css('.alert', text: 'Online content')
       end
     end
 
@@ -43,7 +43,7 @@ RSpec.describe 'Collection Page', type: :feature do
       let(:doc_id) { 'm0198-xml' }
 
       it 'is not rendered' do
-        expect(page).not_to have_css('.badge-success', text: 'online content')
+        expect(page).not_to have_css('.alert', text: 'Online content')
       end
     end
   end
@@ -162,10 +162,10 @@ RSpec.describe 'Collection Page', type: :feature do
   describe 'navigation bar' do
     it 'has configured links' do
       within '.al-sidebar-navigation-context' do
-        expect(page).to have_link 'Summary', href: '#summary'
-        expect(page).to have_link 'Background', href: '#background'
-        expect(page).to have_link 'Related', href: '#related'
-        expect(page).to have_link 'Indexed Terms', href: '#indexed-terms'
+        expect(page).to have_link 'Summary', href: /#summary/
+        expect(page).to have_link 'Background', href: /#background/
+        expect(page).to have_link 'Related', href: /#related/
+        expect(page).to have_link 'Indexed Terms', href: /#indexed-terms/
       end
     end
 
@@ -180,122 +180,21 @@ RSpec.describe 'Collection Page', type: :feature do
     end
   end
 
-  describe 'tabbed display' do
-    context 'collection has online content', js: true do
-      it 'clicking contents toggles visibility' do
-        click_button 'Contents'
-        expect(page).to have_css '#contents', visible: :visible
-        expect(page).to have_css '#context', visible: :hidden
-        expect(page).to have_css '#access', visible: :hidden
-        click_button 'Overview'
-        expect(page).to have_css '#context', visible: :visible
-        expect(page).to have_css '#contents', visible: :hidden
-        expect(page).to have_css '#access', visible: :hidden
-        click_button 'Access'
-        expect(page).to have_css '#context', visible: :hidden
-        expect(page).to have_css '#contents', visible: :hidden
-        expect(page).to have_css '#access', visible: :visible
-      end
-
-      it 'clicking online contents toggles visibility' do
-        expect(page).to have_css '#context', visible: :visible
-        expect(page).to have_css '#online-content', visible: :hidden
-        click_button 'Online content'
-        expect(page).to have_css '#context', visible: :hidden
-        expect(page).to have_css '#online-content', visible: :visible
-      end
-    end
-
-    context 'access tab has visitation notes', js: true do
-      let(:doc_id) { 'm0198-xml' }
-
-      it 'has visitation notes' do
-        click_button 'Access'
-        expect(page).to have_css 'dt', text: 'BEFORE YOU VISIT:'
-        expect(page).to have_css 'dd', text: /materials are stored offsite and must be paged/
-        expect(page).to have_css 'dt', text: 'LOCATION OF THIS COLLECTION:'
-        expect(page).to have_css 'dd a', text: /Special Collections and University Archives/
-        expect(page).to have_css 'dd .al-repository-street-address-building', text: 'Green Library'
-      end
-    end
-
-    context 'access tab has terms and conditions', js: true do
-      let(:doc_id) { 'aoa271' }
-
-      it 'has a restrictions and access' do
-        click_button 'Access'
-        expect(page).to have_css 'dt', text: 'RESTRICTIONS:'
-        expect(page).to have_css 'dd', text: 'No restrictions on access.'
-        expect(page).to have_css 'dt', text: 'TERMS OF ACCESS:'
-        expect(page).to have_css 'dd', text: /^Copyright was transferred/
-      end
-    end
-
-    context 'access tab has citations', js: true do
-      let(:doc_id) { 'aoa271' }
-
-      it 'has citations' do
-        click_button 'Access'
-        expect(page).to have_css 'dt', text: 'PREFERRED CITATION:'
-        expect(page).to have_css 'dd p', text: /Omega Alpha Archives\. 1894-1992/
-      end
-    end
-
-    context 'access tab has contact', js: true do
-      let(:doc_id) { 'a0011-xml' }
-
-      it 'has contacts' do
-        click_button 'Access'
-        expect(page).to have_css 'dt', text: 'CONTACT:'
-        expect(page).to have_css 'dd', text: /specialcollections@stanford.edu/
-      end
-    end
-
-    context 'collection has no online content' do
-      let(:doc_id) { 'm0198-xml' }
-
-      it 'does not display an online content tab' do
-        expect(page).not_to have_css '.nav-link', text: 'Online content'
-      end
-    end
-  end
-
   describe 'context and contents' do
-    it 'contents are not visible by default' do
-      expect(page).to have_css '#contents', visible: :all
-    end
-
-    it 'context is visible' do
-      expect(page).to have_css '#context', visible: :visible
-    end
-
     describe 'interactions', js: true do
-      before { click_button 'Contents' }
-
       it 'contents contain linked level 1 components' do
-        within '#contents' do
+        within '#collection-context' do
           click_link 'Series I: Administrative Records, 1902-1976'
         end
         expect(page).to have_css '.show-document', text: /Series I: Administrative Records/
       end
 
-      it 'component metadata' do
-        within '#contents' do
-          within '#aoa271aspace_563a320bb37d24a9e1e6f7bf95b52671 ' do
-            expect(page).to have_css(
-              '.al-document-abstract-or-scope',
-              text: /Administrative records include/
-            )
-          end
-        end
-      end
-
       it 'sub components are viewable and expandable' do
-        within '#contents' do
+        within '#collection-context' do
           within '#aoa271aspace_563a320bb37d24a9e1e6f7bf95b52671' do
             click_link 'View'
             within '#aoa271aspace_dc2aaf83625280ae2e193beb3f4aea78.al-collection-context' do
-              expect(page).to have_css '.al-document-container', text: /Box 1, Folder 4-5/
+              expect(page).to have_link 'Constitution and by-laws'
             end
             expect(page).to have_link 'Reports'
             within '#aoa271aspace_238a0567431f36f49acea49ef576d408' do
@@ -318,10 +217,6 @@ RSpec.describe 'Collection Page', type: :feature do
             text: /25/
           )
         end
-      end
-
-      it 'has bookmark controls' do
-        expect(page).to have_css 'form.bookmark-toggle', count: 8
       end
 
       it 'clicking contents does not change the session results view context' do

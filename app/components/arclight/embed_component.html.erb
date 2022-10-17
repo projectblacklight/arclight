@@ -1,12 +1,12 @@
-<%= tag.p class: "media breadcrumb-item breadcrumb-item-#{depth + 3}" do %>
+<%= tag.p class: "media" do %>
   <span class="media-body al-online-content-icon" aria-hidden="true"><%= helpers.blacklight_icon :online %></span>
-  <span class="col text-muted">
-    <%= t('arclight.views.show.online_content_upper') %>
+  <span class="col text-muted text-uppercase">
+    <%= t('arclight.views.show.embedded_content') %>
   </span>
-  <%= render Arclight::OembedViewerComponent.with_collection(embeddable_resources, document: @document, depth: depth + 6) %>
+  <%= render Arclight::OembedViewerComponent.with_collection(embeddable_resources, document: @document) %>
 
   <% linked_resources.each do |resource| %>
-    <div class="al-digital-object media breadcrumb-item breadcrumb-item-<%= depth + 6 %>">
+    <div class="al-digital-object">
       <%= link_to(resource.label, resource.href) %>
     </div>
   <% end %>

@@ -51,9 +51,10 @@ en:
         access: Access
         collapse: Collapse
         collection_id: 'Collection ID: %{id}'
+        contents: Contents
         context: Collection context
         context_nav:
-          title: Collection context navigation
+          title: Collection overview
         download:
           default: Download
           ead: Download EAD
@@ -62,13 +63,14 @@ en:
           default: Download (%{size})
           ead: Download EAD (%{size})
           pdf: Download finding aid (%{size})
+        embedded_content: Online content
         expand: Expand
-        has_content: Contents
-        no_contents: No content inventory
-        online_content: Online content
-        online_content_upper: ONLINE CONTENT
+        has_content: Collection contents
+        online_content:
+          description: Some materials from this collection are available online.
+          link_text: Show only online content.
+          title: Online content
         our_collections: Our Collections
-        overview: Overview
         sections:
           access_field: Access and Use
           background_field: Background
@@ -79,7 +81,6 @@ en:
           related_field: Related
           scope_and_arrangement_field: Scope and Arrangement
           summary_field: Summary
-        tablist_nav: Context
     within_collection_dropdown:
       all_collections: all collections
       label_html: Search<span class="sr-only visually-hidden"> within</span>

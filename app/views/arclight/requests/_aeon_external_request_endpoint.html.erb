@@ -3,7 +3,7 @@
 
 <%= form_tag aeon_external_request.url, method: :post, class: 'al-request-form' do |f| %>
   <%= render(Blacklight::HiddenSearchStateComponent.new(params: aeon_external_request.form_mapping)) %>
-  <button type='submit' class='al-request-button btn-link'>
+  <button type='submit' class='al-request-button btn btn-primary btn-sm'>
     <%= t('arclight.request.container') %>
   </button>
 <% end %>

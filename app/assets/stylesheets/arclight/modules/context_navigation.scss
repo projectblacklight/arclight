@@ -1,75 +1,38 @@
-#contents > .context-navigator,
-#collection-context > .context-navigator {
-  padding-left: $spacer;
+#contents {
+  overflow-y: auto;
 }
 
-ul.al-context-nav-parent {
-  padding-left: 0px;
-}
+.context-navigator {
+  font-size: 0.875rem;
 
-li.al-collection-context  {
-  flex-grow: 1;
-  margin-right: 0;
-  margin-left: 0;
-  padding-left: 15px;
-  max-width: 100%;
-
-  .al-collection-context-collapsible {
-    width: 100%;
+  .al-context-nav-parent {
+    list-style: none;
+    overflow-wrap: break-word;
+    padding-left: 2rem;
   }
 
-  .blacklight-icons {
-    padding-top: $spacer * .25;
+  .prev-siblings {
+    list-style: none;
   }
 
-  .al-number-of-children-badge {
-    font-size: 12px;
-    vertical-align: middle;
+  .al-toggle-view-children {
+    padding-right: $spacer * 0.5;
+    margin-left: -2rem;
   }
 
   .documentHeader {
-    flex-grow: 1;
-    margin-bottom: $spacer;
-    width: 100%;
+    display: flex;
+    justify-content: flex-start;
   }
 
-  .document-title-heading {
-    font-size: 1.25rem;
-  }
+  .al-collection-context {
+    @extend .my-2;
 
-  .col.col-no-left-padding.d-flex.flex-wrap {
-    flex-grow: 1;
-  }
-  .order-2 .row {
-    margin-left: 0;
-  }
-
-  .al-document-abstract-or-scope {
-    max-width: 45em;
-  }
-
-  .blacklight-icons svg {
-    fill: $gray-600;
-  }
-
-  .al-online-content-icon svg {
-    fill: $green;
-  }
-  @media (max-width: 767px) {
-    padding-left: 0;
-    .al-document-abstract-or-scope {
-      max-width: 25em;
+    &.collapsed {
+      visibility: hidden;
+      height: 0;
+      opacity: 0;
+      margin: 0 !important;
     }
-  }
-}
-
-@media (max-width: 767px) {
-  .blacklight-catalog.blacklight-catalog-show {
-    #context {
-      padding: 10px;
-    }
-  }
-  ul.al-context-nav-parent {
-    padding-left: 40px;
   }
 }

@@ -5,8 +5,7 @@
   <% google_form.form_mapping.each do |key, value| %>
     <%= hidden_field_tag value, google_form.public_send(key) %>
   <% end %>
-  <!-- Note: previous button class was 'al-request-button btn-link' -->
-  <button type='submit' class='btn btn-secondary btn-sm'>
+  <button type='submit' class='al-request-button btn btn-primary btn-sm'>
     <%= t('arclight.request.container') %>
   </button>
 <% end %>

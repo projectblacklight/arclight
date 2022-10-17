@@ -1,5 +1,4 @@
-.documents-list,
-.documents-online_contents {
+.documents-list {
   margin-bottom: $spacer;
 
   // Result item header
@@ -227,5 +226,39 @@ article.document {
 
   .search-widgets {
     justify-content: flex-start;
+  }
+}
+
+.show-document {
+  .al-contents {
+    .breadcrumb-links {
+      display: none;
+    }
+
+    .sort-pagination {
+      margin-bottom: 0;
+    }
+
+    article {
+      padding-left: 1rem;
+      padding-right: 1rem;
+    }
+
+    article:first-child {
+      padding-top: 1rem;
+    }
+
+    article:nth-child(odd) {
+      background-color: $gray-100;
+    }
+
+    .index_title {
+      font-size: 1rem;
+    }
+
+    .bookmark-toggle {
+      display: none;
+    }
+
   }
 }

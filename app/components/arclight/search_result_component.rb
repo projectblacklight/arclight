@@ -11,10 +11,6 @@ module Arclight
       presenter.view_config.key.to_s == 'compact'
     end
 
-    def online_contents_context?
-      presenter.view_config.key.to_s == 'online_contents'
-    end
-
     def icon
       blacklight_icon helpers.document_or_parent_icon(@document)
     end

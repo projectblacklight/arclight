@@ -1,15 +1,10 @@
 // Collection context
-.al-sticky-sidebar {
-  position: sticky;
-  top: 0;
-}
-
 .al-show-sub-heading {
   font-size: $h6-font-size;
   text-transform: uppercase;
 }
 
-.tab-pane {
+#access, #metadata {
   dl > dt {
     font-size: $font-size-sm;
     margin-top: (1rem - $font-size-sm) / 2;

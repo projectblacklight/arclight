@@ -11,7 +11,7 @@ module Arclight
     end
 
     def repository
-      return tag.span(t('arclight.show_breadcrumb_label'), class: 'col') if document.repository_config.blank?
+      return tag.span(t('arclight.show_breadcrumb_label')) if document.repository_config.blank?
 
       link_to(document.repository_config.name, helpers.arclight_engine.repository_path(document.repository_config.slug))
     end

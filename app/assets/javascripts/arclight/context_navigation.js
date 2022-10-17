@@ -304,21 +304,7 @@ class ContextNavigation {
     }
     this.el.parent().data('resolved', true);
     this.addListenersForPlusMinus();
-    this.enablebuttons();
-    this.updateScreenReaderText();
-    Blacklight.doBookmarkToggleBehavior();
     this.el.trigger('navigation.contains.elements');
-  }
-
-  enablebuttons() {
-    const toEnable = this.findTarget('enableButton');
-    toEnable.classList.remove('disabled');
-    toEnable.innerHTML = toEnable.dataset.hasContents;
-  }
-
-  updateScreenReaderText() {
-    const srOnly = this.findTarget('screenReaderText');
-    srOnly.innerHTML = srOnly.dataset.hasContents;
   }
 
   // eslint-disable-next-line class-methods-use-this
