@@ -1,9 +1,7 @@
 Blacklight.onLoad(function () {
-  'use strict';
+  'use strict'
 
-  var oEmbedViewerSelector = '[data-arclight-oembed="true"]';
-
-  $(oEmbedViewerSelector).each(function (i, element) {
+  document.querySelectorAll('[data-arclight-oembed="true"]').each((element) => {
     var $el = $(element);
     var loadedAttr = $el.attr('loaded');
     var data = $el.data();
@@ -35,4 +33,4 @@ Blacklight.onLoad(function () {
       });
     });
   });
-});
+})
