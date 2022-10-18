@@ -33,24 +33,10 @@
         var showDocs = $doc.find('article.document'); // The list of search results
         var newDocs = $doc.find('#documents'); // The container that holds the search results
         var sortPerPage = $doc.find('#sortAndPerPage'); // The row on the search page that has prev/next, per-page and relevance controls
-        var pageEntries = sortPerPage.find('.page-entries'); // This is the entity that shows: "1-10 of 9,873"
-
-        // Scrape the html for number of results and turn it into an integer
-        var numberEntries = parseInt(pageEntries.find('strong').last().text().replace(/,/g, ''), 10);
 
         // Hide these until we re-enable in the future
         sortPerPage.find('.result-type-group').hide(); // Arclight's "Group by collection / All results"
         sortPerPage.find('.search-widgets').hide(); // Sort by and per-page widgets.
-
-        if (!isNaN(numberEntries)) {
-          $('[data-arclight-online-content-tab-count]').html(
-            $(
-              '<span class="badge badge-pill badge-secondary al-online-content-badge">'
-                + numberEntries
-                + '<span class="sr-only visually-hidden">components</span></span>'
-            )
-          );
-        }
 
         sortPerPage.find('a').on('click', function (e) {
           // Make the previous and next links work via javascript and not as regular links
