@@ -8,34 +8,24 @@ module Arclight
 
     included do
       self.default_processor_chain += %i[
-        add_hierarchy_max_rows
-        add_hierarchy_sort
         add_highlighting
         add_grouping
+        add_hierarchy_behavior
       ]
     end
 
-    ##
-    # Override Blacklight's method so that some views don't add Solr facets into the request.
-    def add_facetting_to_solr(solr_params)
-      return solr_params if %w[collection_context].include? blacklight_params[:view]
+    # rubocop:disable Metrics/AbcSize, Metrics/CyclomaticComplexity
+    def add_hierarchy_behavior(solr_parameters)
+      return unless search_state.controller&.action_name == 'hierarchy'
 
-      super(solr_params)
+      solr_parameters[:fq] ||= []
+      solr_parameters[:fq] << "_nest_parent_:#{blacklight_params[:id]}"
+      solr_parameters[:rows] = blacklight_params[:per_page]&.to_i || blacklight_params[:limit]&.to_i || 999_999_999
+      solr_parameters[:start] = blacklight_params[:offset] if blacklight_params[:offset]
+      solr_parameters[:sort] = 'sort_ii asc'
+      solr_parameters[:facet] = false
     end
-
-    ##
-    # For the collection_context views, set a higher (unlimited) maximum document return
-    def add_hierarchy_max_rows(solr_params)
-      solr_params[:rows] = 999_999_999 if %w[collection_context].include? blacklight_params[:view]
-      solr_params
-    end
-
-    ##
-    # For the asynch views, set the sort order to preserve the order of components
-    def add_hierarchy_sort(solr_params)
-      solr_params[:sort] = 'sort_ii asc' if %w[collection_context].include? blacklight_params[:view]
-      solr_params
-    end
+    # rubocop:enable Metrics/AbcSize, Metrics/CyclomaticComplexity
 
     ##
     # Add highlighting

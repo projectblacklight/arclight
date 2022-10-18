@@ -1,0 +1,32 @@
+<% if paginate? && @target_index >= 0 && @target_index >= @maximum_left_gap %>
+  <%# render the hierarchy as: outer (left) window ... window ... because our current document hierarchy is so far down the list it'd be buried %>
+  <%= helpers.turbo_frame_tag "al-hierarchy-#{@document.id}-left", loading: 'lazy', src: hierarchy_path(limit: @left_outer_window, key: '-left') %>
+  <%= tag.turbo_frame id: "al-hierarchy-#{@document.id}-gap" do %>
+    <ul>
+      <li>
+        <%= link_to t('arclight.views.show.expand'), hierarchy_path(offset: @left_outer_window, limit: @target_index - @left_outer_window - (@window / 2), key: '-gap'), class: 'btn btn-secondary btn-sm' %>
+      </li>
+    </ul>
+  <% end %>
+  <%= helpers.turbo_frame_tag "al-hierarchy-#{@document.id}-window", src: hierarchy_path(offset: @target_index - (@window / 2), limit: @window, key: '-window') %>
+  <%= tag.turbo_frame id: "al-hierarchy-#{@document.id}-right" do %>
+    <ul>
+      <li>
+        <%= link_to t('arclight.views.show.expand'), hierarchy_path(offset: @target_index + (@window / 2), key: '-right'), class: 'btn btn-secondary btn-sm' %>
+      </li>
+    </ul>
+  <% end %>
+<% elsif paginate? %>
+  <%# render the first N documents, and let the user expand the remaining if desired %>
+  <%= helpers.turbo_frame_tag "al-hierarchy-#{@document.id}", loading: ('lazy' unless @target_index >= 0), src: hierarchy_path(limit: @maximum_left_gap) %>
+  <%= tag.turbo_frame id: "al-hierarchy-#{@document.id}-right" do %>
+    <ul>
+      <li>
+        <%= link_to t('arclight.views.show.expand'), hierarchy_path(offset: @maximum_left_gap, key: '-right'), class: 'btn btn-secondary btn-sm' %>
+      </li>
+    </ul>
+  <% end %>
+<% else %>
+  <%# there aren't enough to bother paginating, so load them all at once %>
+  <%= helpers.turbo_frame_tag "al-hierarchy-#{@document.id}", loading: ('lazy' unless @target_index >= 0), src: hierarchy_path %>
+<% end %>

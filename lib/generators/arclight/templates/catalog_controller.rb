@@ -103,10 +103,6 @@ class CatalogController < ApplicationController
     ]
 
     ##
-    # Collection Context
-    config.view.collection_context(display_control: false, document_component: Arclight::DocumentCollectionContextComponent)
-
-    ##
     # Compact index view
     config.view.compact!
 

@@ -196,7 +196,11 @@ RSpec.describe 'Collection Page', type: :feature do
             within '#aoa271aspace_dc2aaf83625280ae2e193beb3f4aea78.al-collection-context' do
               expect(page).to have_link 'Constitution and by-laws'
             end
+            click_link 'Expand'
             expect(page).to have_link 'Reports'
+            el = find_by_id('aoa271aspace_238a0567431f36f49acea49ef576d408')
+            evaluate_script "window.scrollTo(0,#{el.rect.y - 100})"
+            sleep 1
             within '#aoa271aspace_238a0567431f36f49acea49ef576d408' do
               click_link 'View'
               expect(page).to have_link 'Expansion Plan'

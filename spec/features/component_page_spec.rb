@@ -112,7 +112,6 @@ RSpec.describe 'Component Page', type: :feature do
           expect(page).to have_css 'li:nth-child(2)', text: 'Statements of purpose, c.1902'
           expect(page).to have_css 'li:nth-child(3)',
                                    text: 'Constitution - notes on drafting of constitution, c.1902-1903'
-          expect(page).to have_css 'li', count: 32
         end
       end
     end
@@ -153,35 +152,27 @@ RSpec.describe 'Component Page', type: :feature do
       end
     end
 
-    context 'when there are more than two previous sibling documents for the current document' do
-      let(:doc_id) { 'm0198-xmlaspace_ref13_yl7' }
+    context 'when there are more than ten previous sibling documents for the current document' do
+      let(:doc_id) { 'lc0100aspace_ca60f0c03c4638b89e0348c3c6f7b50e' }
 
-      it 'hides all but the first previous sibling document items' do
+      it 'hides all but the first sibling document items' do
         within '#collection-context' do
-          expect(page).to have_css '.document-title-heading', text: 'Pages 273-353'
-          expect(page).to have_css '.document-title-heading', text: 'Pages 171-272'
-          expect(page).to have_css '.document-title-heading', text: 'Pages 79-170'
-          expect(page).not_to have_css '.document-title-heading', text: 'Pages 1-78'
+          expect(page).to have_css '.document-title-heading', text: 'Item AA001'
+          expect(page).to have_css '.document-title-heading', text: 'Item AA002'
+          expect(page).to have_css '.document-title-heading', text: 'Item AA003'
+          expect(page).not_to have_css '.document-title-heading', text: 'Item AA004'
+          expect(page).to have_css '.document-title-heading', text: 'Item AA059'
         end
       end
 
       it 'offers a button for displaying the hidden sibling document items' do
         within '#collection-context' do
           expect(page).to have_css '.btn-secondary', text: 'Expand'
-          expect(page).not_to have_css '.document-title-heading', text: 'Pages 1-78'
-          expect(page).to have_css '.document-title-heading', text: 'Pages 79-170'
-          expect(page).to have_css '.document-title-heading', text: 'Pages 171-272'
-          expect(page).to have_css '.document-title-heading', text: 'Pages 273-353'
+          expect(page).not_to have_css '.document-title-heading', text: 'Item AA004'
 
           first('.btn-secondary', text: 'Expand').click
 
-          expect(page).to have_css '.btn-secondary', text: 'Collapse'
-          expect(page).to have_css '.document-title-heading', text: 'Pages 1-78'
-
-          first('.btn-secondary', text: 'Collapse').click
-
-          expect(page).to have_css '.btn-secondary', text: 'Expand'
-          expect(page).not_to have_css '.document-title-heading', text: 'Pages 1-78'
+          expect(page).to have_css '.document-title-heading', text: 'Item AA004'
         end
       end
     end
@@ -198,7 +189,9 @@ RSpec.describe 'Component Page', type: :feature do
 
       it 'includes ancestor\'s preceding sibling when clicking ancestor\'s Expand button' do
         within '#collection-context' do
-          find('#aoa271aspace_563a320bb37d24a9e1e6f7bf95b52671-collapsible-hierarchy .prev-siblings button').click
+          within('#aoa271aspace_563a320bb37d24a9e1e6f7bf95b52671-collapsible-hierarchy') do
+            first('.btn-secondary', text: 'Expand').click
+          end
           expect(page).to have_css '.document-title-heading', text: 'Officers and directors - lists, 1961, n.d.'
         end
       end

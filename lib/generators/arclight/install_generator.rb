@@ -77,6 +77,19 @@ module Arclight
       end
     end
 
+    def inject_arclight_routes
+      inject_into_file 'config/routes.rb', after: /concern :exportable.*\n/ do
+        <<-ROUTE
+        \n    concern :hierarchy, Arclight::Routes::Hierarchy.new
+        ROUTE
+      end
+      inject_into_file 'config/routes.rb', after: /resources :solr_documents.*\n/ do
+        <<-ROUTE
+          \n    concerns :hierarchy
+        ROUTE
+      end
+    end
+
     private
 
     def root
@@ -101,8 +114,6 @@ module Arclight
       append_to_file 'config/importmap.rb', <<~RUBY
         pin "arclight", to: "arclight/arclight.js"
         # TODO: We may be able to move these to a single importmap for arclight.
-        pin "arclight/collection_navigation", to: "arclight/collection_navigation.js"
-        pin "arclight/context_navigation", to: "arclight/context_navigation.js"
         pin "arclight/oembed_viewer", to: "arclight/oembed_viewer.js"
         pin "arclight/truncator", to: "arclight/truncator.js"
       RUBY

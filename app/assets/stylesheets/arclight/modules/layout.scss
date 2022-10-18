@@ -107,20 +107,6 @@
   }
 }
 
-// Collapse +/- indicators
-.al-toggle-view-children {
-  &::after {
-    content: image-url('blacklight/plus.svg');
-  }
-  &:not(.collapsed)::after {
-    content: image-url('blacklight/minus.svg');
-  }
-}
-
-.al-toggle-children-container {
-  margin-left: -1.5rem;
-}
-
 .bookmark-toggle .toggle-bookmark {
   display: inline;
   margin-bottom: 0;
