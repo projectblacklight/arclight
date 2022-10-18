@@ -11,19 +11,23 @@
                         '</div>';
       placeholder = new Array(3).join(placeholder);
       $el.html(placeholder);
-      $.ajax({
-        url: data.arclight.path,
-        data: {
-          'f[component_level_isim][]': data.arclight.level,
-          'f[has_online_content_ssim][]': data.arclight.access,
-          'f[collection_sim][]': data.arclight.name,
-          'f[parent_ssim][]': data.arclight.parent,
-          page: page,
-          search_field: data.arclight.search_field,
-          view: data.arclight.view || 'hierarchy'
-        }
-      }).done(function (response) {
-        var resp = $.parseHTML(response);
+
+      const params = new URLSearchParams({
+        'f[component_level_isim][]': data.arclight.level,
+        'f[collection_sim][]': data.arclight.name,
+        'f[parent_ssim][]': data.arclight.parent,
+        page: page,
+        search_field: data.arclight.search_field,
+        view: data.arclight.view || 'hierarchy'
+      });
+      if (data.arclight.access) {
+        params.append('f[has_online_content_ssim][]', data.arclight.access);
+      }
+
+      fetch(data.arclight.path + '?' + params)
+      .then((response) => response.text())
+      .then((body) => {
+        var resp = $.parseHTML(body);
         var $doc = $(resp);
         var showDocs = $doc.find('article.document'); // The list of search results
         var newDocs = $doc.find('#documents'); // The container that holds the search results
