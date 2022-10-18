@@ -111,9 +111,8 @@ module Arclight
 
     def import_arclight_javascript
       inject_into_file 'app/javascript/application.js', after: 'import "blacklight"' do
-        "\n  import $ from \"jquery\"\n  " \
-          "window.$ = $ // required by arclight\n  " \
-          "window.jQuery = $ // required by arclight/responsive_truncator.js\n  " \
+        "\nimport $ from \"jquery\"\n" \
+          "window.$ = $ // required by arclight\n" \
           'import "arclight"'
       end
     end
