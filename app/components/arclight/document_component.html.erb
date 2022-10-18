@@ -46,8 +46,7 @@
 <% elsif document.children? %>
 <div id="contents">
   <h2 class="al-show-sub-heading"><%= t 'arclight.views.show.contents' %></h2>
-  <%= content_tag(
-      :div, '',
+  <%= tag.div '',
       class: 'al-contents',
       data: {
         arclight: {
@@ -59,7 +58,7 @@
           view: 'compact'
         }
       }
-    ) %>
+  %>
 </div>
 <% end %>
 

@@ -109,28 +109,23 @@ module ArclightHelper
     document.id == params['original_document']
   end
 
-  # rubocop:disable Metrics/MethodLength
   def generic_context_navigation(document, original_parents: document.parent_ids, component_level: 1)
-    content_tag(
-      :div,
-      '',
-      class: 'context-navigator',
-      data: {
-        collapse: I18n.t('arclight.views.show.collapse'),
-        expand: I18n.t('arclight.views.show.expand'),
-        controller: 'arclight-context-navigation',
-        arclight: {
-          level: component_level,
-          path: search_catalog_path(hierarchy_context: 'component'),
-          name: document.collection_name,
-          originalDocument: document.id,
-          originalParents: original_parents,
-          eadid: document.normalized_eadid
-        }
-      }
-    )
+    tag.div('',
+            class: 'context-navigator',
+            data: {
+              collapse: I18n.t('arclight.views.show.collapse'),
+              expand: I18n.t('arclight.views.show.expand'),
+              controller: 'arclight-context-navigation',
+              arclight: {
+                level: component_level,
+                path: search_catalog_path(hierarchy_context: 'component'),
+                name: document.collection_name,
+                originalDocument: document.id,
+                originalParents: original_parents,
+                eadid: document.normalized_eadid
+              }
+            })
   end
-  # rubocop:enable Metrics/MethodLength
 
   def current_context_document
     @document
