@@ -27,7 +27,8 @@
       fetch(data.arclight.path + '?' + params)
       .then((response) => response.text())
       .then((body) => {
-        var resp = $.parseHTML(body);
+        const parser = new DOMParser()
+        const resp = parser.parseFromString(body, 'text/html')
         var $doc = $(resp);
         var showDocs = $doc.find('article.document'); // The list of search results
         var newDocs = $doc.find('#documents'); // The container that holds the search results
