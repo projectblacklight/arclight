@@ -80,25 +80,17 @@ class Placeholder {
    * Builds the element set which contains the placeholder markup
    *   classes
    */
-  /* eslint-disable class-methods-use-this */
-  buildElement() {
-    const elementMarkup = '<div class="al-hierarchy-placeholder">' +
-      '<h3 class="col-md-9"></h3>' +
-      '<p class="col-md-6"></p>' +
-      '<p class="col-md-12"></p>' +
-      '<p class="col-md-3"></p>' +
-      '</div>';
-    const markup = Array(3).join(elementMarkup);
-
-    return $(markup);
-  }
-  /* eslint-enable class-methods-use-this */
-
-  /*
-   * @constructor
-   */
-  constructor() {
-    this.$el = this.buildElement();
+  static after(element) {
+    const elementMarkup = `<div class="al-hierarchy-placeholder">
+      <h3 class="col-md-9"></h3>
+      <p class="col-md-6"></p>
+      <p class="col-md-12"></p>
+      <p class="col-md-3"></p>
+      </div>`
+    const markup = Array(3).join(elementMarkup).trim()
+    const template = document.createElement('template')
+    template.innerHTML = markup
+    element.after(template.content)
   }
 }
 
@@ -134,8 +126,7 @@ class ContextNavigation {
 
   getData() {
     // Add a placeholder so flashes of text are not as significant
-    const placeholder = new Placeholder();
-    this.el.after(placeholder.$el);
+    Placeholder.after(this.el)
 
     const params = new URLSearchParams({
       'f[component_level_isim][]': this.data.arclight.level,
