@@ -105,7 +105,6 @@ module Arclight
         pin "arclight/context_navigation", to: "arclight/context_navigation.js"
         pin "arclight/oembed_viewer", to: "arclight/oembed_viewer.js"
         pin "arclight/truncator", to: "arclight/truncator.js"
-        pin "arclight/responsiveTruncator", to: "arclight/responsiveTruncator.js"
       RUBY
     end
 
