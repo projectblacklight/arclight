@@ -65,14 +65,14 @@
   Blacklight.onLoad(function () {
     'use strict';
 
-    $('.al-contents').each(function (i, element) {
+    $('[data-controller="arclight-contents"]').each(function (i, element) {
       CollectionNavigation.init(element); // eslint-disable-line no-undef
     });
 
-    $('.al-contents').on('navigation.contains.elements', function (e) {
+    $('[data-controller="arclight-contents"]').on('navigation.contains.elements', function (e) {
       $(e.target).find('.collapse').on('show.bs.collapse', function (ee) {
         var $newTarget = $(ee.target);
-        $newTarget.find('.al-contents').each(function (i, element) {
+        $newTarget.find('[data-controller="arclight-contents"]').each(function (i, element) {
           CollectionNavigation.init(element); // eslint-disable-line no-undef
         // Turn off additional ajax requests on show
           $newTarget.off('show.bs.collapse');
