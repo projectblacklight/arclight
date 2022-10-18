@@ -2,7 +2,9 @@
 
 module Arclight
   # Override Blacklight's SearchBarComponent to add a dropdown for choosing
-  # the context of the search (within this collection or all collections)
+  # the context of the search (within "this collection" or "all collections").
+  # If a collection has not been chosen, it displays a dropdown with only "all collections"
+  # as the only selectable option.
   class SearchBarComponent < Blacklight::SearchBarComponent
     def initialize(**kwargs)
       super
@@ -11,19 +13,20 @@ module Arclight
     end
 
     def within_collection_options
+      value = collection_name || 'none-selected'
       options_for_select(
         [
           [t('arclight.within_collection_dropdown.all_collections'), ''],
-          [t('arclight.within_collection_dropdown.this_collection'), collection_name]
+          [t('arclight.within_collection_dropdown.this_collection'), value]
         ],
-        selected: collection_name.presence || '',
-        disabled: (collection_name if collection_name.blank?)
+        selected: collection_name,
+        disabled: 'none-selected'
       )
     end
 
     def collection_name
-      Array(@params.dig(:f, :collection_sim)).first ||
-        (helpers.current_context_document.respond_to?(:collection_name) && helpers.current_context_document&.collection_name)
+      @collection_name ||= Array(@params.dig(:f, :collection_sim)).first ||
+                           helpers.current_context_document&.collection_name
     end
   end
 end

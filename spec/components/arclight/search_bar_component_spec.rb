@@ -49,10 +49,6 @@ RSpec.describe Arclight::SearchBarComponent, type: :component do
         expect(rendered).not_to have_select 'name'
       end
 
-      it 'has the "all collections" option selected' do
-        expect(rendered).to have_css('select option[selected]', text: 'all collections')
-      end
-
       it 'has the "this collection" option disabled' do
         expect(rendered).to have_css('select option[disabled]', text: 'this collection')
       end

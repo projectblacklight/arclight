@@ -31,7 +31,6 @@ RSpec.describe 'Collection filtering', type: :feature do
       visit search_catalog_path(q: 'File')
 
       within 'form.search-query-form' do
-        expect(page).to have_select('Search', selected: 'all collections')
         expect(page).to have_css('#within_collection option[disabled]', text: 'this collection')
       end
     end
