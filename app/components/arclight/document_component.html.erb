@@ -21,7 +21,7 @@
           <span class="media-body al-online-content-icon" aria-hidden="true"><%= helpers.blacklight_icon :online %></span>
           <h2 class="d-inline"><%= t('arclight.views.show.online_content.title') %></h2>
         </div>
-        <div class="ml-3">
+        <div class="ml-3 ms-3">
           <div><%= t('arclight.views.show.online_content.description') %></div>
           <%= link_to t('arclight.views.show.online_content.link_text'), helpers.search_action_path(f: { collection_sim: [document.collection_name], has_online_content_ssim: ['online'] }) %>
         </div>
