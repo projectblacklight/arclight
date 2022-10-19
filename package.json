@@ -1,7 +1,11 @@
 {
   "name": "arclight",
-  "description": "",
-  "main": "index.js",
+  "version": "1.0.0-pre.1",
+  "description": "The frontend for arclight",
+  "main": "app/assets/javascript/arclight/arclight.js",
+  "files": [
+    "app/assets"
+  ],
   "devDependencies": {
     "eslint": "^7.32.0",
     "eslint-config-airbnb-base": "^11.1.3",
