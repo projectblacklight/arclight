@@ -43,6 +43,7 @@ module Arclight
 
     def copy_styles
       copy_file 'arclight.scss', 'app/assets/stylesheets/arclight.scss'
+      remove_file 'app/assets/stylesheets/blacklight.scss' # Avoid two copies of bootstrap
     end
 
     def add_arclight_search_behavior
