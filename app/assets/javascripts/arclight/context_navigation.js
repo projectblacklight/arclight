@@ -1,26 +1,32 @@
 class NavigationDocument {
+  /**
+   * @param {Element} el - the <article> element
+   */
   constructor(el) {
-    this.el = $(el);
+    this.el = el
   }
 
   get id() {
-    return this.el.find('[data-document-id]').data().documentId;
+    return this.el.querySelector('[data-document-id]').dataset.documentId
   }
 
   setAsHighlighted() {
-    this.el.find('li.al-collection-context').addClass('al-hierarchy-highlight');
+    this.el.querySelector('li.al-collection-context').classList.add('al-hierarchy-highlight')
   }
 
   makeCollapsible() {
-    this.el.find('li.al-collection-context').addClass('collapsible');
+    this.el.querySelector('li.al-collection-context').classList.add('collapsible')
   }
 
   collapse() {
-    this.el.find('li.al-collection-context').addClass('collapsed');
+    this.el.querySelector('li.al-collection-context').classList.add('collapsed')
   }
 
+  /**
+   * @return {Element} the <li> element that was within the <article>
+   */
   render() {
-    return this.el.html();
+    return this.el.firstElementChild
   }
 }
 
@@ -110,7 +116,8 @@ class ContextNavigation {
     this.eadid = this.data.arclight.eadid;
     this.originalParents = originalParents; // let originalParents stay null
     this.originalDocument = originalDocument || this.data.arclight.originalDocument;
-    this.ul = $('<ul class="al-context-nav-parent"></ul>');
+    this.ul = document.createElement('ul')
+    this.ul.classList.add('al-context-nav-parent')
   }
 
   // Gets the targetId to select, based off of parents and current level
@@ -168,7 +175,7 @@ class ContextNavigation {
     $ul.addClass('prev-siblings');
     const button = new ExpandButton(this.data);
     $ul.append(button.$el);
-    return $ul;
+    return $ul[0];
   }
 
   /**
@@ -192,22 +199,20 @@ class ContextNavigation {
         siblingDoc.collapse();
       });
 
-      const prevSiblingList = this.buildExpandList();
-      const renderedPrevSiblingItems = prevSiblingDocs.map(doc => doc.render()).join('');
+      const prevSiblingList = this.buildExpandList()
+      prevSiblingDocs.map(doc => prevSiblingList.append(doc.render()))
 
-      prevSiblingList.append(renderedPrevSiblingItems);
-      this.ul.append(prevSiblingList);
+      this.ul.append(prevSiblingList)
 
       nextSiblingDocs = newDocs.slice(originalDocumentIndex);
     } else {
       nextSiblingDocs = newDocs;
     }
 
-    const renderedNextSiblingItems = nextSiblingDocs.map(newDoc => newDoc.render()).join('');
-
     // Insert the rendered sibling documents before the <li> elements
-    this.ul.append(renderedNextSiblingItems);
-    this.el.html(this.ul);
+    nextSiblingDocs.map(doc => this.ul.append(doc.render()))
+
+    this.el.html($(this.ul))
   }
 
   /**
@@ -223,48 +228,40 @@ class ContextNavigation {
     let newDocIndex = newDocs.findIndex(doc => doc.id === this.targetId);
 
     if (newDocIndex === -1) {
-      const renderedDocs = newDocs.map(newDoc => newDoc.render()).join('');
-      this.ul.append(renderedDocs);
-      this.el.html(this.ul);
+      newDocs.map(newDoc => this.ul.append(newDoc.render()))
+      this.el.html($(this.ul))
       return;
     }
     // Update the docs before the item
     // Retrieves the documents up to and including the "new document"
     const beforeDocs = newDocs.slice(0, newDocIndex);
-    let prevParentList = null;
-    let renderedBeforeDocs;
     if (beforeDocs.length > 1) {
       beforeDocs.forEach(function (parentDoc) {
         parentDoc.makeCollapsible();
         parentDoc.collapse();
       });
-      renderedBeforeDocs = beforeDocs.map(newDoc => newDoc.render()).join('');
-      prevParentList = this.buildExpandList();
-      prevParentList.append(renderedBeforeDocs);
+      const prevParentList = this.buildExpandList()
+      beforeDocs.map(doc => prevParentList.append(doc.render()))
+      this.ul.append(prevParentList)
     } else {
-      renderedBeforeDocs = beforeDocs.map(newDoc => newDoc.render()).join('');
+      beforeDocs.map(newDoc => this.ul.append(newDoc.render()))
     }
 
-    // Silly but works for now
-    this.ul.append(prevParentList || renderedBeforeDocs);
-
-    let itemDoc = newDocs.slice(newDocIndex, newDocIndex + 1);
-    let renderedItemDoc = itemDoc.map(doc => doc.render()).join('');
+    const itemDoc = newDocs.slice(newDocIndex, newDocIndex + 1)[0]
 
     // Update the item
-    const $itemDoc = $(renderedItemDoc);
-    this.ul.append($itemDoc);
+    const renderedItemDoc = itemDoc.render()
+    this.ul.append(renderedItemDoc)
 
     // Update the docs after the item
-    const afterDocs = newDocs.slice(newDocIndex + 1, newDocs.length);
-    const renderedAfterDocs = afterDocs.map(newDoc => newDoc.render()).join('');
+    const afterDocs = newDocs.slice(newDocIndex + 1, newDocs.length)
 
     // Insert the documents after the current
-    this.ul.append(renderedAfterDocs);
-    this.el.html(this.ul);
+    afterDocs.map(newDoc => this.ul.append(newDoc.render()))
+    this.el.html($(this.ul))
 
     // Initialize additional things
-    $itemDoc[0].querySelectorAll('[data-controller="arclight-context-navigation"]').forEach((element) => {
+    renderedItemDoc.querySelectorAll('[data-controller="arclight-context-navigation"]').forEach((element) => {
       const contextNavigation = new ContextNavigation(
         element, this.originalParents, this.originalDocument
       );
@@ -313,7 +310,7 @@ class ContextNavigation {
   }
 
   addListenersForPlusMinus() {
-    this.ul.find('.al-toggle-view-children').on('click', (e) => {
+    $(this.ul).find('.al-toggle-view-children').on('click', (e) => {
       e.preventDefault();
       const targetArea = $($(e.currentTarget).attr('href'));
       if (!targetArea.data('resolved') === true) {
