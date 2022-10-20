@@ -1,11 +1,11 @@
 class OembedLoader {
   constructor(el) {
-    this.el = $(el)
+    this.el = el
   }
 
   load() {
-    const loadedAttr = this.el.attr('loaded')
-    var data = this.el.data()
+    const loadedAttr = this.el.getAttribute('loaded')
+    var data = this.el.dataset
     var resourceUrl = data.arclightOembedUrl
     if (loadedAttr && loadedAttr === 'loaded') {
       return
@@ -32,10 +32,8 @@ class OembedLoader {
     fetch(oEmbedEndPoint)
       .then((response) => response.text())
       .then((body) => {
-        this.el.hide()
-          .html(body)
-          .fadeIn(500)
-        this.el.attr('loaded', 'loaded')
+        this.el.innerHTML = body
+        this.el.setAttribute('loaded', 'loaded')
       })
   }
 }
