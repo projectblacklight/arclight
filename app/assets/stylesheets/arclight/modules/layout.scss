@@ -4,19 +4,33 @@
   margin-bottom: $spacer;
 }
 
-.al-show-breadcrumb .breadcrumb {
-  background-color: transparent;
-  margin-bottom: 0;
-  padding: 0;
+.al-show-breadcrumb {
+  border-bottom: $border-width solid $border-color;
+  padding-bottom: $spacer * .5;
+  margin-bottom: $spacer * .75;
 
-  .breadcrumb-item + .breadcrumb-item {
-    padding-top: 2px;
+  .breadcrumb {
+    .breadcrumb-item .breadcrumb {
+      padding-left: 0.5rem;
+    }
 
-    &::before {
-      content: '';
+    .breadcrumb-item-1 > .breadcrumb {
+      padding-left: 1rem;
+    }
+
+    .breadcrumb-item-3:first-of-type {
+      &::before {
+        content: escape-svg(url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='20' height='15'><path fill-rule='evenodd' d='M1.5 1.5A.5.5 0 0 0 1 2v4.8a2.5 2.5 0 0 0 2.5 2.5h9.793l-3.347 3.346a.5.5 0 0 0 .708.708l4.2-4.2a.5.5 0 0 0 0-.708l-4-4a.5.5 0 0 0-.708.708L13.293 8.3H3.5A1.5 1.5 0 0 1 2 6.8V2a.5.5 0 0 0-.5-.5z'></path></svg>"));
+      }
     }
   }
+
+  .breadcrumb-item-1, .breadcrumb-item-4 { // breadcrumb-item-3 can have multiple on one line
+    flex: 1 0 100%;
+    color: $gray-600;
+  }
 }
+
 
 .collection-sidebar {
   padding-right: 1rem;
@@ -77,39 +91,6 @@
         }
       }
     }
-  }
-}
-
-.al-show-breadcrumb {
-  border-bottom: $border-width solid $border-color;
-  padding-bottom: $spacer * .5;
-  margin-bottom: $spacer * .75;
-}
-
-.breadcrumb-item {
-  flex: 1 0 100%;
-
-  &.al-bc-item {
-    &::before {
-      content: '»' !important;
-    }
-  }
-}
-
-// Show page breadcrumbs
-@for $i from 1 to 20 {
-  .breadcrumb-item.breadcrumb-item-#{$i}.media {
-    padding-left: 0;
-
-    @media (max-width: 767px) {
-      &::before {
-        padding-right: 0;
-      }
-    }
-
-    @media (min-width: 768px) {
-      padding-left: ($i - 1) * 10px;
-	  }
   }
 }
 

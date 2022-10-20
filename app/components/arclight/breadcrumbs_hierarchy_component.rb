@@ -8,7 +8,11 @@ module Arclight
       super
 
       @presenter = presenter
+      collections, @parents_under_collection = document.parents.partition(&:collection?)
+      @collection = collections.first
     end
+
+    attr_reader :collection, :parents_under_collection
 
     def repository
       return tag.span(t('arclight.show_breadcrumb_label')) if document.repository_config.blank?

@@ -14,6 +14,10 @@ module Arclight
       @level = level
     end
 
+    def collection?
+      level == 'collection'
+    end
+
     ##
     # Concatenates the eadid and the id, to return an "id" in the context of
     # Blacklight and Solr

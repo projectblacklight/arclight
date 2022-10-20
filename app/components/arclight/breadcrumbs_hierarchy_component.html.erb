@@ -5,16 +5,29 @@
   <li class="media breadcrumb-item  breadcrumb-item-1">
     <span aria-hidden="true"><%= blacklight_icon :repository, classes: 'al-repository-content-icon' %></span>
     <span class="col"><%= repository %></span>
-  </li>
-  <% document.parents.each.with_index(1) do |parent, index| %>
-    <%= tag.li class: "breadcrumb-item breadcrumb-item-2 media" do %>
-      <span aria-hidden="true"><%= blacklight_icon document_or_parent_icon(parent) %></span>
-      <span class="col"><%= link_to parent.label, solr_document_path(parent.global_id) %></span>
-    <% end %>
-  <% end %>
+    <ol class="breadcrumb">
+      <% if collection %>
+        <li class="media breadcrumb-item breadcrumb-item-2">
+          <span aria-hidden="true"><%= blacklight_icon :collection, classes: 'al-collection-content-icon' %></span>
+          <span class="col"><%= link_to collection.label, solr_document_path(collection.global_id) %></span>
 
-  <%= tag.li class: "breadcrumb-item breadcrumb-item-2 media" do %>
-    <span aria-hidden="true"><%= blacklight_icon document_or_parent_icon(document) %></span>
-    <span class="col"><%= @presenter.heading %></span>
-  <% end %>
+          <ol class="breadcrumb">
+            <% parents_under_collection.each do |parent| %>
+              <li class="breadcrumb-item breadcrumb-item-3 media">
+                <span class="col"><%= link_to parent.label, solr_document_path(parent.global_id) %></span>
+              </li>
+            <% end %>
+
+            <li class="breadcrumb-item breadcrumb-item-4 media">
+             <span class="col"><%= @presenter.heading %></span>
+            </li>
+          </ol>
+        </li>
+      <% else # this is a collection %>
+        <li class="breadcrumb-item breadcrumb-item-4 media">
+          <span class="col"><%= @presenter.heading %></span>
+        </li>
+      <% end %>
+    </ol>
+  </li>
 </ol>
