@@ -31,7 +31,7 @@ Blacklight.onLoad(() => {
   });
 
   // activate when elements get loaded into context navigator
-  const navigator = document.querySelector('.al-contents, [data-controller="arclight-context-navigation"]');
+  const navigator = document.querySelector('[data-controller="arclight-contents"], [data-controller="arclight-context-navigation"]')
   if (navigator) {
     navigator.addEventListener('navigation.contains.elements', event => {
       document.querySelectorAll('[data-toggle="tab"]').forEach(tab => {
