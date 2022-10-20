@@ -101,33 +101,35 @@ class Placeholder {
 
 class ContextNavigation {
   constructor(el, originalParents = null, originalDocument = null) {
+    this.buttonData = { expand: el.dataset.expand, collapse: el.dataset.collapse }
+    // This data comes from ArclightHelper#generic_context_navigation
+    this.data = JSON.parse(el.dataset.arclight)
     this.el = $(el);
-    this.data = this.el.data();
     this.parentLi = this.el.parent();
-    this.eadid = this.data.arclight.eadid;
+    this.eadid = this.data.eadid
     this.originalParents = originalParents; // let originalParents stay null
-    this.originalDocument = originalDocument || this.data.arclight.originalDocument;
+    this.originalDocument = originalDocument || this.data.originalDocument
     this.ul = document.createElement('ul')
     this.ul.classList.add('al-context-nav-parent')
   }
 
   // Gets the targetId to select, based off of parents and current level
   get targetId() {
-    if (this.originalParents && this.originalParents[this.data.arclight.level]) {
-      return `${this.eadid}${this.originalParents[this.data.arclight.level]}`;
+    if (this.originalParents && this.originalParents[this.data.level]) {
+      return `${this.eadid}${this.originalParents[this.data.level]}`
     }
-    return this.data.arclight.originalDocument;
+    return this.data.originalDocument
   }
 
   get requestParent() {
     // Cases where you're viewing a component page (use its ancestor trail)...
-    if (this.originalParents && this.originalParents[this.data.arclight.level - 1]) {
-      return this.originalParents[this.data.arclight.level - 1];
+    if (this.originalParents && this.originalParents[this.data.level - 1]) {
+      return this.originalParents[this.data.level - 1]
     }
     // Cases where there are no parents provided...
     //   1) when on a top-level collection page
     //   2) when +/- gets clicked
-    return this.data.arclight.originalDocument.replace(this.eadid, '');
+    return this.data.originalDocument.replace(this.eadid, '')
   }
 
   getData() {
@@ -135,21 +137,21 @@ class ContextNavigation {
     Placeholder.after(this.el)
 
     const params = new URLSearchParams({
-      'f[component_level_isim][]': this.data.arclight.level,
-      'f[collection_sim][]': this.data.arclight.name,
+      'f[component_level_isim][]': this.data.level,
+      'f[collection_sim][]': this.data.name,
       'f[parent_ssi][]': this.requestParent,
       original_document: this.originalDocument,
       view: 'collection_context'
     });
-    if (this.data.arclight.access) {
-      params.append('f[has_online_content_ssim][]', this.data.arclight.access);
+    if (this.data.access) {
+      params.append('f[has_online_content_ssim][]', this.data.access);
     }
-    if (this.data.arclight.search_field) {
-      params.append('search_field', this.data.arclight.search_field);
+    if (this.data.search_field) {
+      params.append('search_field', this.data.search_field);
     }
-    this.data.arclight.originalParents?.forEach((value, i) => params.append(`original_parents[${i}]`, value));
+    this.data.originalParents?.forEach((value, i) => params.append(`original_parents[${i}]`, value));
 
-    fetch(this.data.arclight.path + '&' + params)
+    fetch(this.data.path + '&' + params)
       .then((response) => response.text())
       .then((data) => this.updateView(data));
   }
@@ -162,7 +164,7 @@ class ContextNavigation {
   buildExpandList() {
     const ul = document.createElement('ul')
     ul.classList.add('pl-0', 'prev-siblings')
-    const button = new ExpandButton(this.data)
+    const button = new ExpandButton(this.buttonData)
     ul.append(button.el)
     return ul
   }
@@ -283,8 +285,8 @@ class ContextNavigation {
     } else {
       this.updateParents(
         newDocs,
-        this.data.arclight.originalParents,
-        this.data.arclight.parent,
+        this.data.originalParents,
+        this.data.parent,
         this.parentLi
       );
     }
