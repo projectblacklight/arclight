@@ -99,7 +99,6 @@ module Arclight
       say 'Arclight Importmap asset generation'
 
       append_to_file 'config/importmap.rb', <<~RUBY
-        pin "jquery", to: "https://ga.jspm.io/npm:jquery@3.6.0/dist/jquery.js"
         pin "arclight", to: "arclight/arclight.js"
         # TODO: We may be able to move these to a single importmap for arclight.
         pin "arclight/collection_navigation", to: "arclight/collection_navigation.js"
@@ -111,9 +110,7 @@ module Arclight
 
     def import_arclight_javascript
       inject_into_file 'app/javascript/application.js', after: 'import "blacklight"' do
-        "\nimport $ from \"jquery\"\n" \
-          "window.$ = $ // required by arclight\n" \
-          'import "arclight"'
+        "\nimport \"arclight\""
       end
     end
   end
