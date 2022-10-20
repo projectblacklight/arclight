@@ -60,21 +60,23 @@
     }
   };
 
-  Blacklight.onLoad(function () {
+  Blacklight.onLoad(() => {
     'use strict';
 
-    $('[data-controller="arclight-contents"]').each(function (i, element) {
-      CollectionNavigation.init(element); // eslint-disable-line no-undef
-    });
+    document.querySelectorAll('[data-controller="arclight-contents"]').forEach((element) => {
+      CollectionNavigation.init(element)
+    })
 
-    $('[data-controller="arclight-contents"]').on('navigation.contains.elements', function (e) {
-      $(e.target).find('.collapse').on('show.bs.collapse', function (ee) {
-        var $newTarget = $(ee.target);
-        $newTarget.find('[data-controller="arclight-contents"]').each(function (i, element) {
-          CollectionNavigation.init(element); // eslint-disable-line no-undef
-        // Turn off additional ajax requests on show
-          $newTarget.off('show.bs.collapse');
-        });
-      });
-    });
-  });
+    document.querySelectorAll('[data-controller="arclight-contents"]').forEach((element) => {
+      element.addEventListener('navigation.contains.elements', (containsEvent) => {
+        containsEvent.target.querySelectorAll('.collapse').forEach((collapseElement) => {
+          collapseElement.addEventListener('show.bs.collapse', (collapseEvent) => {
+            const newTarget = collapseEvent.target
+            newTarget.querySelectorAll('[data-controller="arclight-contents"]').forEach((collectionElement) => {
+              CollectionNavigation.init(collectionElement)
+            })
+          }, { once: true })
+        })
+      })
+    })
+  })
