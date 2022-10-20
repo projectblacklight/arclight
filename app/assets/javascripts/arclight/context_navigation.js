@@ -302,22 +302,24 @@ class ContextNavigation {
   }
 
   addListenersForPlusMinus() {
-    $(this.ul).find('.al-toggle-view-children').on('click', (e) => {
-      e.preventDefault();
-      const targetArea = $($(e.currentTarget).attr('href'));
-      if (!targetArea.data('resolved') === true) {
-        const areaTag = targetArea[0];
-        areaTag.querySelectorAll('[data-controller="arclight-context-navigation"]').forEach((element) => {
-          const contextNavigation = new ContextNavigation(
-            // Send null for originalParents. We want to disregard the original
-            // component's ancestor trail and instead use the current ID as the
-            // parent in the query to populate the navigator.
-            element, null, this.originalDocument
-          );
-          contextNavigation.getData();
-        });
-      }
-    });
+    this.ul.querySelectorAll('.al-toggle-view-children').forEach((element) => {
+      element.addEventListener('click', (e) => {
+        e.preventDefault()
+        const targetSelector = e.currentTarget.getAttribute('href')
+        const targetArea = document.querySelector(targetSelector)
+        if (targetArea.dataset.resolved !== true) {
+          targetArea.querySelectorAll('[data-controller="arclight-context-navigation"]').forEach((navElement) => {
+            const contextNavigation = new ContextNavigation(
+              // Send null for originalParents. We want to disregard the original
+              // component's ancestor trail and instead use the current ID as the
+              // parent in the query to populate the navigator.
+              navElement, null, this.originalDocument
+            )
+            contextNavigation.getData()
+          })
+        }
+      })
+    })
   }
 }
 
@@ -327,11 +329,12 @@ class ContextNavigation {
  */
 Blacklight.onLoad(function () {
   document.querySelectorAll('[data-controller="arclight-context-navigation"]').forEach((element) => {
+    const data = JSON.parse(element.dataset.arclight)
     const contextNavigation = new ContextNavigation(
-        element,
-        $(element).data('arclight').originalParents,
-        $(element).data('arclight').originalDocument
-      );
-    contextNavigation.getData();
-  });
-});
+      element,
+      data.originalParents,
+      data.originalDocument
+    )
+    contextNavigation.getData()
+  })
+})
