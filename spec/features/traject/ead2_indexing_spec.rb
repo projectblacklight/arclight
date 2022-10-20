@@ -12,6 +12,9 @@ describe 'EAD 2 traject indexing', type: :feature do
       i.load_config_file(Arclight::Engine.root.join('lib/arclight/traject/ead2_config.rb'))
     end
   end
+  let(:all_components) do
+    components(result) - [result]
+  end
   let(:fixture_path) do
     Arclight::Engine.root.join('spec', 'fixtures', 'ead', 'sul-spec', 'a0011.xml')
   end
@@ -26,6 +29,12 @@ describe 'EAD 2 traject indexing', type: :feature do
   end
   let(:record) do
     records.first
+  end
+
+  def components(result)
+    [result] + result.fetch('components', []).flat_map do |component|
+      components(component)
+    end
   end
 
   before do
@@ -114,7 +123,7 @@ describe 'EAD 2 traject indexing', type: :feature do
     end
 
     describe 'components' do
-      let(:first_component) { result['components'].first }
+      let(:first_component) { all_components.first }
 
       it 'ref' do
         %w[ref_ssm ref_ssi].each do |field|
@@ -153,7 +162,7 @@ describe 'EAD 2 traject indexing', type: :feature do
 
       it 'geogname' do
         %w[geogname_sim geogname_ssm].each do |field|
-          expect(result['components'].first[field]).to be_nil
+          expect(all_components.first[field]).to be_nil
         end
       end
 
@@ -174,7 +183,7 @@ describe 'EAD 2 traject indexing', type: :feature do
       end
 
       it 'containers' do
-        component = result['components'].find { |c| c['ref_ssi'] == ['aspace_ref6_lx4'] }
+        component = all_components.find { |c| c['ref_ssi'] == ['aspace_ref6_lx4'] }
         expect(component['containers_ssim']).to eq ['box 1']
       end
 
@@ -182,17 +191,16 @@ describe 'EAD 2 traject indexing', type: :feature do
         let(:fixture_path) do
           Arclight::Engine.root.join('spec', 'fixtures', 'ead', 'nlm', 'alphaomegaalpha.xml')
         end
-        let(:level_component) { result['components'].find { |c| c['ref_ssi'] == ['aspace_a951375d104030369a993ff943f61a77'] } }
-        let(:other_level_component) { result['components'].find { |c| c['ref_ssi'] == ['aspace_e6db65d47e891d61d69c2798c68a8f02'] } }
+
+        let(:level_component) { all_components.find { |c| c['ref_ssi'] == ['aspace_a951375d104030369a993ff943f61a77'] } }
+        let(:other_level_component) { all_components.find { |c| c['ref_ssi'] == ['aspace_e6db65d47e891d61d69c2798c68a8f02'] } }
 
         it 'is the level Capitalized' do
           expect(level_component['level_ssm']).to eq(['Series'])
-          expect(level_component['level_sim']).to eq(['Series'])
         end
 
         it 'is the otherlevel attribute when the level attribute is "otherlevel"' do
           expect(other_level_component['level_ssm']).to eq(['Binder'])
-          expect(other_level_component['level_sim']).to eq(['Binder'])
         end
 
         it 'sort' do
@@ -209,7 +217,7 @@ describe 'EAD 2 traject indexing', type: :feature do
     end
 
     it 'selects the components' do
-      expect(result['components'].length).to eq 404
+      expect(all_components.length).to eq 404
     end
 
     it 'indexes top-level daos' do
@@ -224,7 +232,7 @@ describe 'EAD 2 traject indexing', type: :feature do
     end
 
     context 'when nested component' do
-      let(:nested_component) { result['components'].find { |c| c['id'] == ['lc0100aspace_32ad9025a3a286358baeae91b5d7696e'] } }
+      let(:nested_component) { all_components.find { |c| c['id'] == ['lc0100aspace_32ad9025a3a286358baeae91b5d7696e'] } }
 
       it 'correctly determines component level' do
         expect(nested_component['component_level_isim']).to eq [2]
@@ -245,8 +253,8 @@ describe 'EAD 2 traject indexing', type: :feature do
     let(:fixture_path) do
       Arclight::Engine.root.join('spec', 'fixtures', 'ead', 'nlm', 'ncaids544-id-test.xml')
     end
-    let(:component_with_descendants) { result['components'].find { |c| c['id'] == ['ncaids544-testd0e452'] } }
-    let(:nested_component) { result['components'].find { |c| c['id'] == ['ncaids544-testd0e631'] } }
+    let(:component_with_descendants) { all_components.find { |c| c['id'] == ['ncaids544-testd0e452'] } }
+    let(:nested_component) { all_components.find { |c| c['id'] == ['ncaids544-testd0e631'] } }
 
     it 'counts child components' do
       expect(component_with_descendants['child_component_count_isim']).to eq [9]
@@ -314,7 +322,7 @@ describe 'EAD 2 traject indexing', type: :feature do
 
     describe 'component-level' do
       it 'indexes own notes, not notes from descendants' do
-        component = result['components'].find { |c| c['id'] == ['aoa271aspace_563a320bb37d24a9e1e6f7bf95b52671'] }
+        component = all_components.find { |c| c['id'] == ['aoa271aspace_563a320bb37d24a9e1e6f7bf95b52671'] }
         expect(component).to include 'scopecontent_ssm'
         expect(component['scopecontent_ssm']).to include(a_string_matching(/provide important background context./))
         expect(component['scopecontent_ssm']).not_to include(a_string_matching(/correspondence, and a nametag./))
@@ -341,7 +349,7 @@ describe 'EAD 2 traject indexing', type: :feature do
     end
 
     it 'extent at the component level' do
-      component = result['components'].find { |c| c['ref_ssi'] == ['aspace_a951375d104030369a993ff943f61a77'] }
+      component = all_components.find { |c| c['ref_ssi'] == ['aspace_a951375d104030369a993ff943f61a77'] }
       %w[extent_ssm extent_teim].each do |field|
         expect(component[field]).to equal_array_ignoring_whitespace(
           ['1.5 Linear Feet']
@@ -350,58 +358,69 @@ describe 'EAD 2 traject indexing', type: :feature do
     end
 
     it 'selects the components' do
-      expect(result['components'].length).to eq 38
+      expect(all_components.length).to eq 38
     end
 
     context 'nested component' do
       describe 'accessrestrict' do
-        let(:component_with_own_accessrestrict) do
-          result['components'].find { |c| c['ref_ssi'] == ['aspace_dba76dab6f750f31aa5fc73e5402e71d'] }
-        end
-        let(:component_inheriting_accessrestrict_from_parent) do
-          result['components'].find { |c| c['ref_ssi'] == ['aspace_843e8f9f22bac69872d0802d6fffbb04'] }
-        end
-        let(:component_inheriting_accessrestrict_from_grandparent) do
-          result['components'].find { |c| c['ref_ssi'] == ['aspace_4b4fa033c630a45d41fcd608cf0d184d'] }
-        end
-        let(:component_inheriting_accessrestrict_from_collection) do
-          result['components'].find { |c| c['ref_ssi'] == ['aspace_72f14d6c32e142baa3eeafdb6e4d69be'] }
+        context 'with its own accessrestrct' do
+          let(:component_with_own_accessrestrict) do
+            all_components.find { |c| c['ref_ssi'] == ['aspace_dba76dab6f750f31aa5fc73e5402e71d'] }
+          end
+
+          it 'has own accessrestrict' do
+            expect(component_with_own_accessrestrict['accessrestrict_ssm'])
+              .to include(a_string_matching(/Restricted until 2018./))
+            expect(component_with_own_accessrestrict['parent_access_restrict_ssm'])
+              .to include(a_string_matching(/No restrictions on access/))
+          end
         end
 
-        it 'has own accessrestrict' do
-          expect(component_with_own_accessrestrict['accessrestrict_ssm'])
-            .to include(a_string_matching(/Restricted until 2018./))
-          expect(component_with_own_accessrestrict['parent_access_restrict_ssm'])
-            .to include(a_string_matching(/No restrictions on access/))
+        context 'with an accessrestrict on the parent' do
+          let(:component_inheriting_accessrestrict_from_parent) do
+            all_components.find { |c| c['ref_ssi'] == ['aspace_843e8f9f22bac69872d0802d6fffbb04'] }
+          end
+
+          it 'gets accessrestrict from parent component' do
+            expect(component_inheriting_accessrestrict_from_parent['accessrestrict_ssm'])
+              .to be_nil
+            expect(component_inheriting_accessrestrict_from_parent['parent_access_restrict_ssm'])
+              .to include(a_string_matching(/RESTRICTED: Access to these folders requires prior written approval./))
+          end
         end
 
-        it 'gets accessrestrict from parent component' do
-          expect(component_inheriting_accessrestrict_from_parent['accessrestrict_ssm'])
-            .to be_nil
-          expect(component_inheriting_accessrestrict_from_parent['parent_access_restrict_ssm'])
-            .to include(a_string_matching(/RESTRICTED: Access to these folders requires prior written approval./))
+        context 'with an accessrestrict on the grandparent' do
+          let(:component_inheriting_accessrestrict_from_grandparent) do
+            all_components.find { |c| c['ref_ssi'] == ['aspace_4b4fa033c630a45d41fcd608cf0d184d'] }
+          end
+
+          it 'gets accessrestrict from grandparent component' do
+            expect(component_inheriting_accessrestrict_from_grandparent['accessrestrict_ssm']).to be_nil
+            expect(component_inheriting_accessrestrict_from_grandparent['parent_access_restrict_ssm'])
+              .to include(a_string_matching(/RESTRICTED: Access to these folders requires prior written approval./))
+          end
         end
 
-        it 'gets accessrestrict from grandparent component' do
-          expect(component_inheriting_accessrestrict_from_grandparent['accessrestrict_ssm']).to be_nil
-          expect(component_inheriting_accessrestrict_from_grandparent['parent_access_restrict_ssm'])
-            .to include(a_string_matching(/RESTRICTED: Access to these folders requires prior written approval./))
-        end
+        context 'with an accessrestrict on the collection' do
+          let(:component_inheriting_accessrestrict_from_collection) do
+            all_components.find { |c| c['ref_ssi'] == ['aspace_72f14d6c32e142baa3eeafdb6e4d69be'] }
+          end
 
-        it 'gets accessrestrict from collection' do
-          expect(component_inheriting_accessrestrict_from_collection['accessrestrict_ssm']).to be_nil
-          expect(component_inheriting_accessrestrict_from_collection['parent_access_restrict_ssm'])
-            .to eq ['No restrictions on access.']
+          it 'gets accessrestrict from collection' do
+            expect(component_inheriting_accessrestrict_from_collection['accessrestrict_ssm']).to be_nil
+            expect(component_inheriting_accessrestrict_from_collection['parent_access_restrict_ssm'])
+              .to eq ['No restrictions on access.']
+          end
         end
       end
 
       describe 'userestrict' do
         let(:component_with_own_userestrict) do
-          result['components'].find { |c| c['ref_ssi'] == ['aspace_72f14d6c32e142baa3eeafdb6e4d69be'] }
+          all_components.find { |c| c['ref_ssi'] == ['aspace_72f14d6c32e142baa3eeafdb6e4d69be'] }
         end
 
         let(:component_inheriting_userestrict_from_collection) do
-          result['components'].find { |c| c['ref_ssi'] == ['aspace_dba76dab6f750f31aa5fc73e5402e71d'] }
+          all_components.find { |c| c['ref_ssi'] == ['aspace_dba76dab6f750f31aa5fc73e5402e71d'] }
         end
 
         it 'has own userestrict' do
@@ -420,10 +439,10 @@ describe 'EAD 2 traject indexing', type: :feature do
       end
 
       describe 'parents & titles' do
-        let(:component_with_many_parents) { result['components'].find { |c| c['ref_ssi'] == ['aspace_f934f1add34289f28bd0feb478e68275'] } }
+        let(:component_with_many_parents) { all_components.find { |c| c['ref_ssi'] == ['aspace_f934f1add34289f28bd0feb478e68275'] } }
 
         it 'parent_unittitles should be displayable and searchable' do
-          component = result['components'].find { |c| c['id'] == ['aoa271aspace_563a320bb37d24a9e1e6f7bf95b52671'] }
+          component = all_components.find { |c| c['id'] == ['aoa271aspace_563a320bb37d24a9e1e6f7bf95b52671'] }
           %w[parent_unittitles_ssm parent_unittitles_teim].each do |field|
             expect(component[field]).to contain_exactly(
               'Alpha Omega Alpha Archives, 1894-1992'
@@ -456,12 +475,12 @@ describe 'EAD 2 traject indexing', type: :feature do
     end
 
     it 'only indexes containers within a given component' do
-      component = result['components'].find { |c| c['id'] == ['aoa271aspace_843e8f9f22bac69872d0802d6fffbb04'] }
+      component = all_components.find { |c| c['id'] == ['aoa271aspace_843e8f9f22bac69872d0802d6fffbb04'] }
       expect(component['containers_ssim']).to eq ['box 1', 'folder 1']
     end
 
     it 'only indexes containers at the same level of the component' do
-      component = result['components'].find { |c| c['id'] == ['aoa271aspace_563a320bb37d24a9e1e6f7bf95b52671'] }
+      component = all_components.find { |c| c['id'] == ['aoa271aspace_563a320bb37d24a9e1e6f7bf95b52671'] }
       expect(component['containers_ssim']).to be_nil
     end
   end
@@ -484,7 +503,7 @@ describe 'EAD 2 traject indexing', type: :feature do
     end
 
     it 'indexes controlaccess subjects within a component' do
-      component = result['components'].find { |c| c['id'] == ['aoa271aspace_81c806b82a14c3c79d395bbd383b886f'] }
+      component = all_components.find { |c| c['id'] == ['aoa271aspace_81c806b82a14c3c79d395bbd383b886f'] }
       %w[access_subjects_ssm access_subjects_ssim].each do |field|
         expect(component).to include field
         expect(component[field]).to contain_exactly 'Minutes'
@@ -538,13 +557,13 @@ describe 'EAD 2 traject indexing', type: :feature do
 
     describe 'component-level' do
       it 'indexes <controlaccess> names in a shared names field' do
-        component = result['components'].find { |c| c['id'] == ['aoa271aspace_843e8f9f22bac69872d0802d6fffbb04'] }
+        component = all_components.find { |c| c['id'] == ['aoa271aspace_843e8f9f22bac69872d0802d6fffbb04'] }
         expect(component).to include 'names_ssim'
         expect(component['names_ssim']).to include_ignoring_whitespace 'Robertson\'s Crab House'
       end
 
       it 'indexes names in fields for specific name types, regardless of <controlaccess>' do
-        component = result['components'].find { |c| c['id'] == ['aoa271aspace_843e8f9f22bac69872d0802d6fffbb04'] }
+        component = all_components.find { |c| c['id'] == ['aoa271aspace_843e8f9f22bac69872d0802d6fffbb04'] }
         expect(component['corpname_ssm']).to include_ignoring_whitespace 'Robertson\'s Crab House'
         expect(component['persname_ssm']).to include_ignoring_whitespace 'Anfinsen, Christian B.'
       end
@@ -557,7 +576,7 @@ describe 'EAD 2 traject indexing', type: :feature do
     end
 
     it 'indexes geognames' do
-      component = result['components'].find { |d| d['id'] == ['aoa271aspace_843e8f9f22bac69872d0802d6fffbb04'] }
+      component = all_components.find { |d| d['id'] == ['aoa271aspace_843e8f9f22bac69872d0802d6fffbb04'] }
       expect(component).to include 'geogname_sim'
       expect(component['geogname_sim']).to include('Popes Creek (Md.)')
 
@@ -572,7 +591,7 @@ describe 'EAD 2 traject indexing', type: :feature do
     end
 
     it 'creates date_range_sim' do
-      component = result['components'].find { |d| d['id'] == ['aoa271aspace_563a320bb37d24a9e1e6f7bf95b52671'] }
+      component = all_components.find { |d| d['id'] == ['aoa271aspace_563a320bb37d24a9e1e6f7bf95b52671'] }
       date_range = component['date_range_sim']
       expect(date_range).to be_an Array
       expect(date_range.length).to eq 75
@@ -588,8 +607,8 @@ describe 'EAD 2 traject indexing', type: :feature do
 
     it 'indexes the values as stored facetable strings and multiple displayable strings' do
       expect(result).to include 'components'
-      expect(result['components']).not_to be_empty
-      first_component = result['components'].first
+      expect(all_components).not_to be_empty
+      first_component = all_components.first
 
       expect(first_component).to include 'acqinfo_ssim'
       expect(first_component['acqinfo_ssim']).to contain_exactly(
@@ -609,8 +628,8 @@ describe 'EAD 2 traject indexing', type: :feature do
 
       it 'indexes the values as stored facetable strings and multiple displayable strings' do
         expect(result).to include 'components'
-        expect(result['components']).not_to be_empty
-        first_component = result['components'].first
+        expect(all_components).not_to be_empty
+        first_component = all_components.first
 
         expect(first_component).to include 'acqinfo_ssim'
         expect(first_component['acqinfo_ssim']).to equal_array_ignoring_whitespace(
@@ -631,7 +650,7 @@ describe 'EAD 2 traject indexing', type: :feature do
     end
 
     context 'when <dao> is direct child of <c0x> component' do
-      let(:component) { result['components'].find { |c| c['id'] == ['aoa271aspace_e6db65d47e891d61d69c2798c68a8f02'] } }
+      let(:component) { all_components.find { |c| c['id'] == ['aoa271aspace_e6db65d47e891d61d69c2798c68a8f02'] } }
 
       it 'gets the digital object' do
         expect(component['digital_objects_ssm']).to eq(
@@ -646,7 +665,7 @@ describe 'EAD 2 traject indexing', type: :feature do
     end
 
     context 'when <dao> is child of the <did> in a <c0x> component' do
-      let(:component) { result['components'].find { |c| c['id'] == ['aoa271aspace_843e8f9f22bac69872d0802d6fffbb04'] } }
+      let(:component) { all_components.find { |c| c['id'] == ['aoa271aspace_843e8f9f22bac69872d0802d6fffbb04'] } }
 
       it 'gets the digital objects' do
         expect(component['digital_objects_ssm']).to eq(
@@ -669,12 +688,12 @@ describe 'EAD 2 traject indexing', type: :feature do
     let(:fixture_path) do
       Arclight::Engine.root.join('spec', 'fixtures', 'ead', 'sample', 'no-ids-recordgrp-level.xml')
     end
-    let(:first_component) { result['components'].first }
-    let(:second_component) { result['components'].second }
+    let(:first_component) { all_components.first }
+    let(:second_component) { all_components.second }
 
     it 'mints component ids by hashing absolute paths' do
       expect(result).to include 'components'
-      expect(result['components']).not_to be_empty
+      expect(all_components).not_to be_empty
 
       expect(first_component['ref_ssi']).to contain_exactly('al_4bf70b448ac8351a147acff1dd8b1c0b9a791980')
       expect(first_component['id']).to contain_exactly('ehllHemingwayErnest-sampleal_4bf70b448ac8351a147acff1dd8b1c0b9a791980')

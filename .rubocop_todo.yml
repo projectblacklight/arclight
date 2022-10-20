@@ -76,7 +76,7 @@ RSpec/MultipleMemoizedHelpers:
 # Offense count: 19
 # Configuration parameters: AllowedGroups.
 RSpec/NestedGroups:
-  Max: 4
+  Max: 5
 
 # Offense count: 7
 # This cop supports unsafe autocorrection (--autocorrect-all).
