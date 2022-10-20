@@ -57,12 +57,12 @@ en:
           title: Collection overview
         download:
           default: Download
-          ead: Download EAD
-          pdf: Download finding aid
-        download_with_size:
-          default: Download (%{size})
-          ead: Download EAD (%{size})
-          pdf: Download finding aid (%{size})
+          multiple:
+            ead: EAD
+            pdf: Finding aid
+          single:
+            ead: Download EAD
+            pdf: Download finding aid
         embedded_content: Online content
         expand: Expand
         has_content: Collection contents

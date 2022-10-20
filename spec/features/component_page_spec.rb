@@ -252,8 +252,9 @@ RSpec.describe 'Component Page', type: :feature do
 
     it 'renders links to the files for download' do
       within '.al-show-actions-box-downloads-container' do
-        expect(page).to have_link 'Download finding aid (1.23MB)'
-        expect(page).to have_link 'Download EAD (123456)'
+        click_button 'Download'
+        expect(page).to have_link 'Finding aid'
+        expect(page).to have_link 'EAD'
       end
     end
   end
