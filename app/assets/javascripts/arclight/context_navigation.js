@@ -104,9 +104,9 @@ class ContextNavigation {
     this.buttonData = { expand: el.dataset.expand, collapse: el.dataset.collapse }
     // This data comes from ArclightHelper#generic_context_navigation
     this.data = JSON.parse(el.dataset.arclight)
-    this.el = $(el);
-    this.parentLi = this.el.parent();
     this.eadid = this.data.eadid
+    this.el = el
+    this.parentLi = el.parentNode
     this.originalParents = originalParents; // let originalParents stay null
     this.originalDocument = originalDocument || this.data.originalDocument
     this.ul = document.createElement('ul')
@@ -203,7 +203,7 @@ class ContextNavigation {
     // Insert the rendered sibling documents before the <li> elements
     nextSiblingDocs.map(doc => this.ul.append(doc.render()))
 
-    this.el.html($(this.ul))
+    this.el.replaceChildren(this.ul)
   }
 
   /**
@@ -220,7 +220,7 @@ class ContextNavigation {
 
     if (newDocIndex === -1) {
       newDocs.map(newDoc => this.ul.append(newDoc.render()))
-      this.el.html($(this.ul))
+      this.el.replaceChildren(this.ul)
       return;
     }
     // Update the docs before the item
@@ -249,7 +249,7 @@ class ContextNavigation {
 
     // Insert the documents after the current
     afterDocs.map(newDoc => this.ul.append(newDoc.render()))
-    this.el.html($(this.ul))
+    this.el.replaceChildren(this.ul)
 
     // Initialize additional things
     renderedItemDoc.querySelectorAll('[data-controller="arclight-context-navigation"]').forEach((element) => {
@@ -276,7 +276,7 @@ class ContextNavigation {
 
     // See if the original document is located in the returned documents
     const originalDocumentIndex = newDocs.findIndex(doc => doc.id === this.originalDocument);
-    this.parentLi.find('.al-hierarchy-placeholder').remove();
+    this.parentLi.querySelectorAll('.al-hierarchy-placeholder').forEach((placeholder) => placeholder.remove())
 
     // If the original document in the results, update it. If not update with a
     // more complex procedure
@@ -290,9 +290,10 @@ class ContextNavigation {
         this.parentLi
       );
     }
-    this.el.parent().data('resolved', true);
+    this.el.parentNode.dataset.resolved = true
     this.addListenersForPlusMinus();
-    this.el.trigger('navigation.contains.elements');
+    const event = new CustomEvent('navigation.contains.elements')
+    this.el.dispatchEvent(event)
   }
 
   // eslint-disable-next-line class-methods-use-this
