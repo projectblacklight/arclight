@@ -96,7 +96,6 @@ end
 
 to_field 'unitid_ssm', extract_xpath('/ead/archdesc/did/unitid')
 to_field 'unitid_teim', extract_xpath('/ead/archdesc/did/unitid')
-to_field 'collection_unitid_ssm', extract_xpath('/ead/archdesc/did/unitid')
 
 to_field 'normalized_title_ssm' do |_record, accumulator, context|
   dates = Arclight::NormalizedDate.new(
@@ -116,16 +115,11 @@ to_field 'normalized_date_ssm' do |_record, accumulator, context|
   ).to_s
 end
 
-to_field 'collection_ssm' do |_record, accumulator, context|
-  accumulator.concat context.output_hash.fetch('normalized_title_ssm', [])
-end
-to_field 'collection_sim' do |_record, accumulator, context|
-  accumulator.concat context.output_hash.fetch('normalized_title_ssm', [])
-end
-to_field 'collection_ssi' do |_record, accumulator, context|
-  accumulator.concat context.output_hash.fetch('normalized_title_ssm', [])
-end
 to_field 'collection_title_tesim' do |_record, accumulator, context|
+  accumulator.concat context.output_hash.fetch('normalized_title_ssm', [])
+end
+
+to_field 'collection_sim' do |_record, accumulator, context|
   accumulator.concat context.output_hash.fetch('normalized_title_ssm', [])
 end
 

@@ -79,16 +79,7 @@ describe Arclight::SearchBehavior do
       let(:user_params) { { group: 'true' } }
 
       it 'adds grouping params' do
-        expect(search_builder_instance.add_grouping(solr_params)).to include(
-          group: true,
-          'group.field': 'collection_ssi',
-          'group.ngroups': true,
-          'group.limit': 3,
-          'parent.fl': '*',
-          'parent.q': '{!term f=collection_sim v=$row.collection_ssi}',
-          'parent.fq': '{!term f=level_sim v="Collection"}',
-          'parent.defType': 'lucene'
-        )
+        expect(search_builder_instance.add_grouping(solr_params)).to include(Arclight::Engine.config.catalog_controller_group_query_params)
       end
     end
 

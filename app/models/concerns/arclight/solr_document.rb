@@ -12,12 +12,6 @@ module Arclight
       @repository_config ||= Arclight::Repository.find_by(name: repository)
     end
 
-    def collection
-      return self if collection?
-
-      SolrDocument.find(normalized_eadid)
-    end
-
     def parents
       @parents ||= Arclight::Parents.from_solr_document(self).as_parents
     end
@@ -34,12 +28,10 @@ module Arclight
       fetch('parent_levels_ssm', [])
     end
 
-    def parent_document
-      self.class.new fetch('parent').fetch('docs', []).first
-    end
-
+    # Get this document's EAD ID, or fall back to the collection (especially
+    # for components that may not have their own.
     def eadid
-      fetch('ead_ssi', nil)&.strip
+      first('ead_ssi')&.strip || collection&.first('ead_ssi')&.strip
     end
 
     def normalized_eadid
@@ -51,19 +43,27 @@ module Arclight
     end
 
     def repository
-      first('repository_ssm')
+      first('repository_ssm') || collection&.first('repository_ssm')
     end
 
     def repository_and_unitid
       [repository, unitid].compact.join(': ')
     end
 
+    # @return [SolrDocument] a SolrDocument representing the EAD collection
+    #   that this document belongs to
+    def collection
+      return self if collection?
+
+      @collection ||= self.class.new(self['collection']&.dig('docs', 0), @response)
+    end
+
     def collection_name
-      first('collection_ssm')
+      collection&.normalized_title
     end
 
     def collection_unitid
-      first('collection_unitid_ssm')
+      collection&.unitid
     end
 
     def extent
@@ -79,7 +79,7 @@ module Arclight
     end
 
     def collection_creator
-      first('collection_creator_ssm')
+      collection&.creator
     end
 
     def online_content?
@@ -107,7 +107,7 @@ module Arclight
     end
 
     def collection?
-      level.parameterize == 'collection'
+      level&.parameterize == 'collection'
     end
 
     def terms

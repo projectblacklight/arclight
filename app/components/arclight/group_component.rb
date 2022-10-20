@@ -9,7 +9,7 @@ module Arclight
     end
 
     def document
-      @document ||= @group.docs.first.parent_document
+      @document ||= @group.docs.first.collection
     end
 
     def presenter

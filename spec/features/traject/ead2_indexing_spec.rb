@@ -98,10 +98,6 @@ describe 'EAD 2 traject indexing', type: :feature do
       expect(result['unitid_ssm']).to eq ['A0011']
     end
 
-    it 'collection_unitid' do
-      expect(result['collection_unitid_ssm']).to eq ['A0011']
-    end
-
     it 'creator' do
       %w[creator_ssm creator_ssim creator_corpname_ssm creator_corpname_ssim creators_ssim creator_sort].each do |field|
         expect(result[field]).to equal_array_ignoring_whitespace ['Stanford University']
@@ -117,7 +113,7 @@ describe 'EAD 2 traject indexing', type: :feature do
     end
 
     it 'collection has normalized_title' do
-      %w[collection_ssm collection_sim collection_ssi collection_title_tesim].each do |field|
+      %w[collection_sim collection_title_tesim].each do |field|
         expect(result[field]).to include_ignoring_whitespace 'Stanford University student life photograph album, circa 1900-1906'
       end
     end
@@ -133,16 +129,6 @@ describe 'EAD 2 traject indexing', type: :feature do
 
       it 'id' do
         expect(first_component).to include 'id' => ['a0011-xmlaspace_ref6_lx4']
-      end
-
-      it 'ead_ssi should be parents' do
-        expect(first_component['ead_ssi']).to eq result['ead_ssi']
-      end
-
-      it 'repository' do
-        %w[repository_sim repository_ssm].each do |field|
-          expect(first_component[field]).to include 'Stanford University Libraries. Special Collections and University Archives'
-        end
       end
 
       it 'has_online_content' do
@@ -167,19 +153,7 @@ describe 'EAD 2 traject indexing', type: :feature do
       end
 
       it 'collection has normalized title' do
-        %w[collection_sim collection_ssm collection_ssi].each do |field|
-          expect(first_component[field]).to include_ignoring_whitespace 'Stanford University student life photograph album, circa 1900-1906'
-        end
-      end
-
-      it 'creator' do
-        %w[collection_creator_ssm].each do |field|
-          expect(first_component[field]).to equal_array_ignoring_whitespace ['Stanford University']
-        end
-      end
-
-      it 'collection_unitid' do
-        expect(first_component['collection_unitid_ssm']).to eq ['A0011']
+        expect(first_component['collection_sim']).to include_ignoring_whitespace 'Stanford University student life photograph album, circa 1900-1906'
       end
 
       it 'containers' do

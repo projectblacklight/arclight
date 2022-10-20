@@ -87,10 +87,6 @@ to_field 'id' do |_record, accumulator, context|
   ].join
 end
 
-to_field 'ead_ssi' do |_record, accumulator, _context|
-  accumulator << settings[:root].output_hash['ead_ssi'].first
-end
-
 to_field 'title_filing_si', extract_xpath('./did/unittitle'), first_only
 to_field 'title_ssm', extract_xpath('./did/unittitle')
 to_field 'title_teim', extract_xpath('./did/unittitle')
@@ -154,22 +150,11 @@ to_field 'parent_levels_ssm' do |_record, accumulator, _context|
 end
 
 to_field 'unitid_ssm', extract_xpath('./did/unitid')
-to_field 'collection_unitid_ssm' do |_record, accumulator, _context|
-  accumulator.concat Array.wrap(settings[:root].output_hash['unitid_ssm'])
-end
-to_field 'repository_ssm' do |_record, accumulator, _context|
-  accumulator << settings[:root].clipboard[:repository]
-end
 to_field 'repository_sim' do |_record, accumulator, _context|
   accumulator << settings[:root].clipboard[:repository]
 end
-to_field 'collection_ssm' do |_record, accumulator, _context|
-  accumulator.concat settings[:root].output_hash['normalized_title_ssm']
-end
+
 to_field 'collection_sim' do |_record, accumulator, _context|
-  accumulator.concat settings[:root].output_hash['normalized_title_ssm']
-end
-to_field 'collection_ssi' do |_record, accumulator, _context|
   accumulator.concat settings[:root].output_hash['normalized_title_ssm']
 end
 
@@ -181,9 +166,6 @@ to_field 'creator_ssim', extract_xpath('./did/origination')
 to_field 'creators_ssim', extract_xpath('./did/origination')
 to_field 'creator_sort' do |record, accumulator|
   accumulator << record.xpath('./did/origination').map(&:text).join(', ')
-end
-to_field 'collection_creator_ssm' do |_record, accumulator, _context|
-  accumulator.concat Array.wrap(settings[:root].output_hash['creator_ssm'])
 end
 to_field 'has_online_content_ssim', extract_xpath('.//dao') do |_record, accumulator|
   accumulator.replace([accumulator.any?])
