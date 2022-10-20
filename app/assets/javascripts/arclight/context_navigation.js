@@ -39,12 +39,10 @@ class ExpandButton {
   /**
    * This retrieves the <li> elements which are hidden/rendered in response to
    *   clicking the <button> element
-   * @param {jQuery} $li - the <button> element
-   * @return {jQuery} - a jQuery object containing the targeted <li>
+   * @return {NodeList} - a list of targeted <li>
    */
   findCollapsibleSiblings() {
-    const $siblings = this.$el.parent().children('li.collapsible');
-    return $siblings;
+    return this.el.parentNode.querySelectorAll('li.collapsible')
   }
 
   /**
@@ -54,13 +52,13 @@ class ExpandButton {
    *   <button> element
    */
   handleClick() {
-    const $targeted = this.findCollapsibleSiblings();
+    const listItems = this.findCollapsibleSiblings();
+    listItems.forEach((item) => item.classList.toggle('collapsed'))
 
-    $targeted.toggleClass('collapsed');
-    this.$el.toggleClass('collapsed');
+    this.el.classList.toggle('collapsed')
 
-    const containerText = this.$el.hasClass('collapsed') ? this.collapseText : this.expandText;
-    this.$el.text(containerText);
+    const containerText = this.el.classList.contains('collapsed') ? this.collapseText : this.expandText;
+    this.el.textContent = containerText
   }
 
   /**
@@ -70,9 +68,10 @@ class ExpandButton {
     this.collapseText = data.collapse;
     this.expandText = data.expand;
 
-    this.$el = $(`<button class="my-3 btn btn-secondary btn-sm">${this.expandText}</button>`);
-    this.handleClick = this.handleClick.bind(this);
-    this.$el.click(this.handleClick);
+    this.el = document.createElement('button')
+    this.el.classList.add('my-3', 'btn', 'btn-secondary', 'btn-sm')
+    this.el.innerText = this.expandText
+    this.el.addEventListener('click', (e) => this.handleClick(e))
   }
 }
 
@@ -158,15 +157,14 @@ class ContextNavigation {
   /**
    * Constructs a <ul> container element with an ElementButton instance appended
    * within it
-   * @returns {jQuery}
+   * @returns {Element}
    */
   buildExpandList() {
-    const $ul = $('<ul></ul>');
-    $ul.addClass('pl-0');
-    $ul.addClass('prev-siblings');
-    const button = new ExpandButton(this.data);
-    $ul.append(button.$el);
-    return $ul[0];
+    const ul = document.createElement('ul')
+    ul.classList.add('pl-0', 'prev-siblings')
+    const button = new ExpandButton(this.data)
+    ul.append(button.el)
+    return ul
   }
 
   /**
