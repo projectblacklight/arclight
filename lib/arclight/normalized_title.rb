@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require 'arclight/exceptions'
+
 module Arclight
   ##
   # A utility class to normalize titles, typically by joining
