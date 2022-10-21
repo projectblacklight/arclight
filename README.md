@@ -107,12 +107,19 @@ Then visit http://localhost:3000. It will also start a Solr instance on port 898
 
 You can also run `bin/console` for an interactive prompt that will allow you to experiment.
 
-### Release a new version of the gem
+### Releasing
 
-To release a new version:
+#### To release a new gem:
 
 1. Update the version number in `lib/arclight/version.rb`
 2. Run `bundle exec rake release`, which will create a git tag for the version, push git commits and tags, build the gem file (e.g., `gem build arclight.gemspec`) and push the `.gem` file to [rubygems.org](https://rubygems.org) (e.g., `gem push arclight-x.y.z.gem`).
+
+#### To release the frontend sources:
+
+When any of the javascript components or SASS sources in the gem are changed, this package should be published to NPM with the following steps:
+1. [Install npm](https://www.npmjs.com/get-npm)
+2. Bump the version number in `package.json`
+3. run `npm publish` to push the javascript package to https://npmjs.org/package/arclight
 
 ## Contributing
 
