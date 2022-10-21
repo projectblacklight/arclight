@@ -35,8 +35,12 @@ module Arclight
 
     initializer 'arclight.assets', before: 'assets' do |app|
       app.config.assets.precompile << 'arclight/arclight.js'
+      app.config.assets.precompile << 'arclight/bookmarks.js'
       app.config.assets.precompile << 'arclight/oembed_viewer.js'
       app.config.assets.precompile << 'arclight/truncator.js'
+
+      app.config.assets.paths << Blacklight::Engine.root.join("app/javascript")
+      app.config.assets.precompile << "blacklight/checkbox_submit.js"
     end
   end
 end

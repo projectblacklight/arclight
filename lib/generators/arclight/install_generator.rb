@@ -114,8 +114,10 @@ module Arclight
       append_to_file 'config/importmap.rb', <<~RUBY
         pin "arclight", to: "arclight/arclight.js"
         # TODO: We may be able to move these to a single importmap for arclight.
+        pin "arclight/bookmarks", to: "arclight/bookmarks.js"
         pin "arclight/oembed_viewer", to: "arclight/oembed_viewer.js"
         pin "arclight/truncator", to: "arclight/truncator.js"
+        pin "blacklight/checkbox_submit", to: "blacklight/checkbox_submit.js"
       RUBY
     end
 

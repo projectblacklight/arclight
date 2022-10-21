@@ -31,9 +31,13 @@
       <%= tag.span blacklight_icon(:online), class: 'al-online-content-icon' if document.online_content? %>
     </div>
 
-    <%= content_tag('div', class: 'al-document-container text-muted') do %>
-      <%= document.containers.join(', ') %>
-    <% end if document.containers.present? %>
+    <div class="stuff d-flex justify-content-end align-items-start">
+      <%= content_tag('div', class: 'al-document-container text-muted') do %>
+        <%= document.containers.join(', ') %>
+      <% end if document.containers.present? %>
+
+      <%= helpers.render 'catalog/arclight_bookmark_control', document: document %>
+    </div>
   </div>
   <%= render Arclight::IndexMetadataFieldComponent.with_collection(@presenter&.field_presenters.select { |field| field.field_config.collection_context }, classes: ['col pl-0 my-0']) %>
   <% if @hierarchy && document.number_of_children > 0 %>

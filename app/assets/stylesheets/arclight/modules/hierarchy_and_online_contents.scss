@@ -78,9 +78,18 @@ $hierarchy-view-collapse-icon: url("data:image/svg+xml,<svg xmlns='http://www.w3
     margin-bottom: 0.5 * $spacer;
   }
 
+  .stuff {
+    flex-basis: 33%;
+  }
+
   .al-document-container {
-    flex-basis: 25%;
     text-align: right;
+    margin-right: 1rem;
+  }
+  .bookmark-toggle {
+    background-color: transparent !important;
+    border: 0;
+    padding: 0 !important;
   }
 }
 
