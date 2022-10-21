@@ -228,6 +228,16 @@ to_field 'language_ssm', extract_xpath('/ead/archdesc/did/langmaterial')
 
 to_field 'descrules_ssm', extract_xpath('/ead/eadheader/profiledesc/descrules')
 
+# count all descendant components from the top-level
+to_field 'total_component_count_is', first_only do |record, accumulator|
+  accumulator << record.xpath('//c|//c01|//c02|//c03|//c04|//c05|//c06|//c07|//c08|//c09|//c10|//c11|//c12').count
+end
+
+# count all digital objects from the top-level
+to_field 'online_item_count_is', first_only do |record, accumulator|
+  accumulator << record.xpath('//dao').count
+end
+
 # =============================
 # Each component child document
 # <c> <c01> <c12>

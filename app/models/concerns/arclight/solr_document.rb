@@ -23,6 +23,9 @@ module Arclight
     attribute :reference, Blacklight::Types::String, 'ref_ssm'
     attribute :normalized_title, Blacklight::Types::String, 'normalized_title_ssm'
     attribute :normalized_date, Blacklight::Types::String, 'normalized_date_ssm'
+    attribute :total_component_count, Blacklight::Types::String, 'total_component_count_is'
+    attribute :online_item_count, Blacklight::Types::String, 'online_item_count_is'
+    attribute :last_indexed, Blacklight::Types::Date, 'timestamp'
 
     def repository_config
       return unless repository
