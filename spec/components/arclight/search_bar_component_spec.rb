@@ -29,7 +29,7 @@ RSpec.describe Arclight::SearchBarComponent, type: :component do
     end
 
     context 'when in a collection context, e.g. on show page for a collection' do
-      let(:document) { SolrDocument.new(id: 'abc123', collection_ssm: ['some collection']) }
+      let(:document) { SolrDocument.new(id: 'abc123', collection: { docs: [{ normalized_title_ssm: ['some collection'] }] }) }
 
       before do
         allow(view_context).to receive(:current_context_document).and_return(document)

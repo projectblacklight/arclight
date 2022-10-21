@@ -17,14 +17,14 @@ module Arclight
 
     Arclight::Engine.config.catalog_controller_group_query_params = {
       group: true,
-      'group.field': 'collection_ssi',
+      'group.field': '_root_',
       'group.ngroups': true,
       'group.limit': 3,
-      fl: '*,parent:[subquery]',
-      'parent.fl': '*',
-      'parent.q': '{!term f=collection_sim v=$row.collection_ssi}',
-      'parent.fq': '{!term f=level_sim v="Collection"}',
-      'parent.defType': 'lucene'
+      fl: '*,collection:[subquery]',
+      'collection.q': '{!terms f=id v=$row._root_}',
+      'collection.defType': 'lucene',
+      'collection.fl': '*',
+      'collection.rows': 1
     }
 
     initializer 'arclight.helpers' do

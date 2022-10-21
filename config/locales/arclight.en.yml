@@ -88,7 +88,7 @@ en:
   blacklight:
     entry_name:
       grouped:
-        collection_ssi: collection
+        _root_: collections
     search:
       pagination_info:
         pages:

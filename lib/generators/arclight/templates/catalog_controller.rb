@@ -17,7 +17,12 @@ class CatalogController < ApplicationController
 
     ## Default parameters to send to solr for all search-like requests. See also SearchBuilder#processed_parameters
     config.default_solr_params = {
-      rows: 10
+      rows: 10,
+      fl: '*,collection:[subquery]',
+      'collection.q': '{!terms f=id v=$row._root_}',
+      'collection.defType': 'lucene',
+      'collection.fl': '*',
+      'collection.rows': 1
     }
 
     # solr path which will be added to solr base url before the other solr params.
@@ -30,13 +35,14 @@ class CatalogController < ApplicationController
     ## These settings are the Blacklight defaults (see SearchHelper#solr_doc_params) or
     ## parameters included in the Blacklight-jetty document requestHandler.
     #
-    # config.default_document_solr_params = {
-    #  qt: 'document',
-    #  ## These are hard-coded in the blacklight 'document' requestHandler
-    #  # fl: '*',
-    #  # rows: 1,
-    #  # q: '{!term f=id v=$id}'
-    # }
+    config.default_document_solr_params = {
+     qt: 'document',
+     fl: '*,collection:[subquery]',
+     'collection.q': '{!terms f=id v=$row._root_}',
+     'collection.defType': 'lucene',
+     'collection.fl': '*',
+     'collection.rows': 1
+    }
 
 
     config.add_results_document_tool(:bookmark, partial: 'bookmark_control', if: :render_bookmarks_control?)

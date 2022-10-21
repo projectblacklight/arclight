@@ -119,12 +119,12 @@ RSpec.describe Arclight::SolrDocument do
     end
   end
 
-  describe '#parent_document' do
-    let(:document) { SolrDocument.new(parent: { docs: [{ id: 'abc123' }] }) }
+  describe '#collection' do
+    let(:document) { SolrDocument.new(id: 'blah', collection: { docs: [{ id: 'abc123' }] }) }
 
     it 'creates a SolrDocument of the first parent document' do
-      expect(document.parent_document).to be_an SolrDocument
-      expect(document.parent_document.id).to eq 'abc123'
+      expect(document.collection).to be_an SolrDocument
+      expect(document.collection.id).to eq 'abc123'
     end
   end
 
