@@ -283,12 +283,7 @@ class ContextNavigation {
     if (originalDocumentIndex !== -1) {
       this.updateSiblings(newDocs, originalDocumentIndex);
     } else {
-      this.updateParents(
-        newDocs,
-        this.data.originalParents,
-        this.data.parent,
-        this.parentLi
-      );
+      this.updateParents(newDocs)
     }
     this.el.parentNode.dataset.resolved = true
     this.addListenersForPlusMinus();
