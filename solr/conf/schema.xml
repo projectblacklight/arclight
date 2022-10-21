@@ -315,6 +315,7 @@
    <dynamicField name="*_ssi"   type="string"    stored="true"  indexed="true"  multiValued="false" />
    <dynamicField name="*_ssim"  type="string"    stored="true"  indexed="true"  multiValued="true"  />
    <dynamicField name="*_isim"  type="pint"      stored="true"  indexed="true"  multiValued="true"  />
+   <dynamicField name="*_is"    type="pint"      stored="true"  indexed="false" multiValued="false" />
    <dynamicField name="*_ii"    type="pint"      stored="false" indexed="true"  multiValued="false" />
  </fields>
 

@@ -3,6 +3,11 @@ en:
   arclight:
     breadcrumbs:
       aria_label: breadcrumb
+    collection_info_component:
+      collection_id: Collection ID
+      last_indexed: Last indexed
+      online_items: Items available online
+      total_components: Total components
     hierarchy:
       view_all: View
     masthead_heading: Archival Collections at Institution
