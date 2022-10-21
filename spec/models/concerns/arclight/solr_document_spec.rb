@@ -41,6 +41,24 @@ RSpec.describe Arclight::SolrDocument do
     end
   end
 
+  describe '#abstract_or_scope' do
+    let(:document) do
+      SolrDocument.new(abstract_ssm: 'I will be wrapped', scopecontent_ssm: '<p>I am wrapped</p>')
+    end
+
+    it 'returns abstract_ssm wrapped in a <p> tag' do
+      expect(document.abstract_or_scope).to eq '<p>I will be wrapped</p>'
+    end
+
+    context 'when abstract_ssm is not present' do
+      let(:document) { SolrDocument.new(scopecontent_ssm: '<p>I am wrapped</p>') }
+
+      it 'returns scopecontent_ssm' do
+        expect(document.abstract_or_scope).to eq '<p>I am wrapped</p>'
+      end
+    end
+  end
+
   describe 'digital objects' do
     let(:document) do
       SolrDocument.new(
