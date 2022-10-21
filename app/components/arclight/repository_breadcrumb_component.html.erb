@@ -1,0 +1,10 @@
+<li class='breadcrumb-item'>
+  <span class="media-body ml-3" aria-hidden="true">
+    <%= blacklight_icon(:repository, classes: 'al-repository-content-icon') %>
+  </span>
+  <% if repository_path %>
+    <%= link_to(@document.repository, helpers.arclight_engine.repository_path(repository_path)) %>
+  <% else %>
+    <%= @document.repository %>
+  <% end %>
+</li>

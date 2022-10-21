@@ -1,7 +1,6 @@
 ---
 en:
   arclight:
-    breadcrumb_separator: " » "
     breadcrumbs:
       aria_label: breadcrumb
     hierarchy:

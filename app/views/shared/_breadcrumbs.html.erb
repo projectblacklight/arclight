@@ -1,15 +1,15 @@
 <nav class='al-search-breadcrumb' role='navigation' aria-label=<%= t('arclight.breadcrumbs.aria_label') %> >
-  <%= link_to t('arclight.routes.home'), root_path %>
-  <span aria-hidden="true"><%= t('arclight.breadcrumb_separator') %></span>
-  <% if collection_active? %>
-    <%= t('arclight.routes.collections') %>
-  <% elsif on_repositories_index? %>
-    <%= t('arclight.routes.repositories') %>
-  <% elsif on_repositories_show? %>
-    <%= link_to t('arclight.routes.repositories'), arclight_engine.repositories_path %>
-    <span aria-hidden="true"><%= t('arclight.breadcrumb_separator') %></span>
-    <%= @repository.name %>
-  <% else %>
-    <%= t('arclight.routes.search_results') %>
-  <% end %>
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item"><%= link_to t('arclight.routes.home'), root_path %></li>
+    <% if collection_active? %>
+     <li class="breadcrumb-item active" aria-current="page"><%= t('arclight.routes.collections') %></li>
+    <% elsif on_repositories_index? %>
+      <li class="breadcrumb-item active" aria-current="page"><%= t('arclight.routes.repositories') %></li>
+    <% elsif on_repositories_show? %>
+      <li class="breadcrumb-item"><%= link_to t('arclight.routes.repositories'), arclight_engine.repositories_path %></li>
+      <li class="breadcrumb-item active" aria-current="page"><%= @repository.name %></li>
+    <% else %>
+      <li class="breadcrumb-item active" aria-current="page"><%= t('arclight.routes.search_results') %></li>
+    <% end %>
+  </ol>
 </nav>

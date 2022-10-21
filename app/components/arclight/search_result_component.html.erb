@@ -23,7 +23,7 @@
       </div>
 
       <div class="my-w-25 w-md-100 order-12 order-md-1 d-flex justify-content-end">
-        <%= content_tag('div', class: 'al-document-container col col-no-left-padding text-muted ml-auto ms-auto') do %>
+        <%= content_tag('div', class: 'al-document-container col col-no-left-padding text-muted ml-auto') do %>
           <%= document.containers.join(', ') %>
         <% end if document.containers.present? %>
 
@@ -39,13 +39,8 @@
 
         <% rendered_breadcrumbs = capture { render breadcrumbs } %>
         <% if rendered_breadcrumbs.present? %>
-          <div class="row">
-            <div class='breadcrumb-links media'>
-              <span class="media-body ml-3 ms-3" aria-hidden="true"><%= blacklight_icon :repository, classes: 'al-repository-content-icon' %></span>
-              <span class="col ml-2 ms-2 pl-0" >
-                <%= rendered_breadcrumbs %>
-              </span>
-            </div>
+          <div class='breadcrumb-links'>
+            <%= rendered_breadcrumbs %>
           </div>
         <% end %>
       </div>

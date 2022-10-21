@@ -3,12 +3,10 @@
 module Arclight
   # Display the document hierarchy as "breadcrumbs"
   class BreadcrumbComponent < ViewComponent::Base
-    def initialize(document:, count: nil, offset: 0, separator: nil)
+    def initialize(document:, count: nil, offset: 0)
       @document = document
       @count = count
       @offset = offset
-      @breadcrumb_separator = separator
-
       super
     end
 
@@ -17,10 +15,11 @@ module Arclight
 
       if @count && breadcrumb_links.length > @count
         breadcrumb_links = breadcrumb_links.first(@count)
-        breadcrumb_links << '&hellip;'.html_safe
+        breadcrumb_links << tag.li('&hellip;'.html_safe, class: 'breadcrumb-item')
       end
-
-      safe_join(breadcrumb_links, breadcrumb_separator)
+      tag.ol class: 'breadcrumb' do
+        safe_join(breadcrumb_links)
+      end
     end
 
     def components
@@ -29,21 +28,12 @@ module Arclight
       yield build_repository_link
 
       @document.parents.each do |parent|
-        yield link_to(parent.label, solr_document_path(parent.global_id))
+        yield tag.li(class: 'breadcrumb-item') { link_to(parent.label, solr_document_path(parent.global_id)) }
       end
-    end
-
-    def breadcrumb_separator
-      @breadcrumb_separator ||= tag.span(t('arclight.breadcrumb_separator'), aria: { hidden: true })
     end
 
     def build_repository_link
-      repository_path = @document.repository_config&.slug
-      if repository_path.present?
-        link_to(@document.repository, helpers.arclight_engine.repository_path(repository_path))
-      else
-        tag.span(@document.repository)
-      end
+      render Arclight::RepositoryBreadcrumbComponent.new(document: @document)
     end
   end
 end
