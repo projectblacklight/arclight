@@ -32,7 +32,7 @@ class NavigationDocument {
 
 /**
  * Models the "Expand"/"Collapse" button, and provides an onClick event handler
- * for the jQuery element
+ * for the element
  * @class
  */
 class ExpandButton {

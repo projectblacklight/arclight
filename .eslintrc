@@ -8,8 +8,6 @@
   },
   "extends": "airbnb-base/legacy",
   "globals": {
-    "jQuery": true,
-    "$": true,
     "Blacklight": true,
     "bootstrap": true
   },

@@ -14,7 +14,7 @@ class OembedLoader {
     fetch(resourceUrl)
       .then((response) => response.text())
       .then((body) => {
-        const oEmbedEndPoint = this.findOEmbedEndPoint(body)
+        const oEmbedEndPoint = OembedLoader.findOEmbedEndPoint(body)
         if (!oEmbedEndPoint || oEmbedEndPoint.length === 0) {
           return
         }
@@ -25,7 +25,7 @@ class OembedLoader {
   static findOEmbedEndPoint(body) {
     const template = document.createElement('template')
     template.innerHTML = body.match(/<link .*>/g).join('') // Parse out link elements so image assets are not loaded
-    return template.querySelector('link[rel="alternate"][type="application/json+oembed"]').getAttribute('href')
+    return template.querySelector('link[rel="alternate"][type="application/json+oembed"]')?.getAttribute('href')
   }
 
   loadEndPoint(oEmbedEndPoint) {
