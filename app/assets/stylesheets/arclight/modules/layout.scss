@@ -53,7 +53,7 @@
 }
 
 .breadcrumb-home-link {
-  margin-bottom: ($spacer / 4);
+  margin-bottom: ($spacer * 0.25);
 }
 
 .al-show-actions-box {
@@ -152,7 +152,7 @@
     line-height: 1;
   }
     @media (min-width: 1200px) {
-      margin-right: ($spacer / 2);
+      margin-right: ($spacer * 0.5);
     }
 
 }
