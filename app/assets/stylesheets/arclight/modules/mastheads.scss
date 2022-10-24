@@ -25,7 +25,7 @@
     display: block;
     font-size: $h2-font-size;
     margin: 0;
-    padding: ($spacer * 1.5) ($spacer / 2);
+    padding: ($spacer * 1.5) ($spacer * 0.5);
   }
 
   .navbar-nav {
@@ -40,7 +40,7 @@
   + .navbar-search {
     border-bottom: $default-border-styling;
     border-top: $default-border-styling;
-    margin-bottom: ($spacer / 2);
+    margin-bottom: ($spacer * 0.5);
 
     a {
       font-weight: $font-weight-bold;
