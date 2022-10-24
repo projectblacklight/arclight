@@ -16,15 +16,9 @@
         <% end %>
       </div>
     <% end %>
-    <div class='al-show-actions-box-options d-flex'>
+    <div class='al-show-actions-box-options d-inline-flex'>
       <%= helpers.render partial: 'arclight/requests', locals: { document: document } %>
     </div>
+    <%= render Arclight::DocumentDownloadComponent.new(downloads: document.downloads) %>
   </div>
-
-  <% if document.downloads.files.present? %>
-    <div class=" al-show-actions-box-downloads-container">
-      <%= render Arclight::DocumentDownloadComponent.with_collection(document.downloads.files) %>
-    </div>
-  <% end %>
-
 </div>

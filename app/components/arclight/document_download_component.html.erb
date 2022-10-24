@@ -1,4 +1,24 @@
-<div class="al-show-actions-box-downloads media">
-  <%= icon %>
-  <%= link_to(label, @file.href, class: "media-body", **@link_options) %>
+<div class="al-show-actions-box-downloads-container d-inline-flex">
+  <% case files.size %>
+  <% when 2 %>
+    <div class="dropdown">
+      <button class="btn btn-secondary btn-sm dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+        <%= t("arclight.views.show.download.default") %>
+      </button>
+      <ul class="dropdown-menu">
+        <% files.each do |file| %>
+          <li><%= link_to(file.href, class: "dropdown-item", **@link_options) do %>
+            <%= gear_icon %> <%= dropdown_label(file) %>
+          <% end %>
+          </li>
+        <% end %>
+      </ul>
+    </div>
+  <% when 1 %>
+    <% files.each do |file| %>
+      <%= link_to(file.href, class: "btn btn-secondary btn-sm", **@link_options) do %>
+        <%= square_plus_icon %> <%= label(file) %>
+      <% end %>
+    <% end %>
+  <% end %>
 </div>

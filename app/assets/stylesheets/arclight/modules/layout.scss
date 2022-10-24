@@ -74,25 +74,6 @@
     display: flex;
     align-items: center;
   }
-
-  &-downloads {
-    padding-top: $spacer * .25;
-    white-space: nowrap;
-
-    &-container {
-      margin-top: $spacer * .5;
-    }
-
-    &-file {
-      &.blacklight-icons {
-        margin-right: $spacer * .5;
-
-        svg {
-          fill: $secondary;
-        }
-      }
-    }
-  }
 }
 
 // Show page metadata.
