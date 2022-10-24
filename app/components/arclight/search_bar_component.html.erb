@@ -4,14 +4,12 @@
   <% c.with_prepend do %>
     <%= prepend %>
 
-    <div class="input-group within-collection-dropdown flex-nowrap flex-shrink-1 mb-2 mb-md-0 mr-md-2 ms-md-2">
-      <span class="input-group-prepend">
-        <label class="input-group-text" for="within_collection">
-          <%= t('arclight.within_collection_dropdown.label_html') %>
-        </label>
-      </span>
+    <div class="input-group within-collection-dropdown flex-nowrap flex-shrink-1 mb-2 mb-md-0 mr-md-2 me-md-2">
+      <label class="input-group-text" for="within_collection">
+        <%= t('arclight.within_collection_dropdown.label_html') %>
+      </label>
 
-      <%= select_tag ('f[collection_sim][]' if collection_name.present?), within_collection_options, id: 'within_collection', class: 'custom-select search-field rounded-right' %>
+      <%= select_tag ('f[collection_sim][]' if collection_name.present?), within_collection_options, id: 'within_collection', class: 'form-select search-field rounded-end' %>
     </div>
   <% end %>
 
