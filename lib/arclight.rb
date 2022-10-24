@@ -7,5 +7,5 @@ require 'arclight/year_range'
 
 # :nodoc:
 module Arclight
-  # Your code goes here...
+  autoload :Routes, 'arclight/routes'
 end

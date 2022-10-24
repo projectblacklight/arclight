@@ -14,6 +14,10 @@ module Arclight
         end
       end
 
+      before_action only: :hierarchy do
+        blacklight_config.search_state_fields += %i[id limit offset]
+      end
+
       Blacklight::Configuration.define_field_access :summary_field, Blacklight::Configuration::ShowField
       Blacklight::Configuration.define_field_access :background_field, Blacklight::Configuration::ShowField
       Blacklight::Configuration.define_field_access :related_field, Blacklight::Configuration::ShowField
@@ -28,20 +32,8 @@ module Arclight
       Blacklight::Configuration.define_field_access :group_header_field, Blacklight::Configuration::IndexField
     end
 
-    ##
-    # Overriding the Blacklight method so that the hierarchy view does not start
-    # a new search session
-    def start_new_search_session?
-      %w[collection_context].exclude?(params[:view]) && super
-    end
-
-    ##
-    # Overriding the Blacklight method so that hierarchy does not get stored as
-    # the preferred view
-    def store_preferred_view
-      return if %w[collection_context].include?(params[:view])
-
-      super
+    def hierarchy
+      @response = search_service.search_results
     end
   end
 end

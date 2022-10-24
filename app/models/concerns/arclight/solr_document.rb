@@ -170,5 +170,13 @@ module Arclight
         end
       end
     end
+
+    def nest_path
+      self['_nest_path_']
+    end
+
+    def root
+      self['_root_'] || self['id']
+    end
   end
 end

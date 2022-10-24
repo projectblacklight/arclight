@@ -16,58 +16,6 @@ describe Arclight::SearchBehavior do
   end
   let(:search_builder) { search_builder_class.new(context) }
 
-  describe '#add_facetting_to_solr' do
-    context 'when in collection_context view' do
-      let(:user_params) { { view: 'collection_context' } }
-
-      it 'does not modify params' do
-        expect(search_builder_instance.add_facetting_to_solr(solr_params)).to eq({})
-      end
-    end
-
-    context 'in index view' do
-      let(:user_params) { { view: 'index' } }
-
-      it 'calls super (from Blacklight)' do
-        expect do
-          search_builder_instance.add_facetting_to_solr(solr_params)
-        end.to raise_error(NoMethodError).with_message(/super/)
-      end
-    end
-  end
-
-  describe '#add_hierarchy_max_rows' do
-    context 'when in collection_context view' do
-      let(:user_params) { { view: 'collection_context' } }
-
-      it 'adds pseudo unlimited rows to query' do
-        expect(search_builder_instance.add_hierarchy_max_rows(solr_params)).to include(rows: 999_999_999)
-      end
-    end
-
-    context 'when not in collection_context view' do
-      it 'does not affect rows param' do
-        expect(search_builder_instance.add_hierarchy_max_rows(solr_params)).to eq({})
-      end
-    end
-  end
-
-  describe '#add_hierarchy_sort' do
-    context 'when in collection_context view' do
-      let(:user_params) { { view: 'collection_context' } }
-
-      it 'adds component-order sort to query' do
-        expect(search_builder_instance.add_hierarchy_sort(solr_params)).to include(sort: 'sort_ii asc')
-      end
-    end
-
-    context 'when not in collection_context view' do
-      it 'does not affect sort param' do
-        expect(search_builder_instance.add_hierarchy_sort(solr_params)).to eq({})
-      end
-    end
-  end
-
   describe '#add_highlighting' do
     it 'enables highlighting' do
       expect(search_builder_instance.add_highlighting(solr_params)).to include('hl' => true)

@@ -49,7 +49,6 @@ en:
         view_more: View more
       show:
         access: Access
-        collapse: Collapse
         collection_id: 'Collection ID: %{id}'
         contents: Contents
         context: Collection context

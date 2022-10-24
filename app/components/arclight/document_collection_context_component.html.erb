@@ -1,50 +1,46 @@
-<%= content_tag @component,
-  id: @id,
+<%= content_tag :li,
+  id: @document.id,
   data: {
     'document-id': @document.id.to_s.parameterize,
     'document-counter': @counter,
   },
   itemscope: true,
   itemtype: @document.itemtype,
-  class: classes.flatten.join(' ') do %>
-  <li id="<%= document.id %>" class="al-collection-context">
-    <div class="documentHeader" data-document-id="<%= document.id %>">
-      <% if document.children? %>
-        <%= link_to('',
-            "##{document.id}-collapsible-hierarchy",
-            class: "al-toggle-view-children#{ ' collapsed' unless show_expanded?(document)}",
-            aria: {
-              label: t('arclight.hierarchy.view_all'),
-              expanded: show_expanded?(document)
-            },
-            data: {
-              bs_toggle: 'collapse',
-              toggle: 'collapse'
-            }
-          )
-        %>
-      <% end %>
-      <div class="col col-no-left-padding d-flex flex-wrap">
-        <div class="index_title document-title-heading">
-          <%= helpers.link_to_document document, counter: @counter %>
-          <% if document.children? %>
-            <span class="badge badge-pill badge-secondary al-number-of-children-badge"><%= document.number_of_children %><span class="sr-only visually-hidden"><%= t(:'arclight.views.index.number_of_components', count: document.number_of_children) %></span></span>
-          <% end %>
-          <%= tag.span blacklight_icon(:online), class: 'al-online-content-icon' if document.online_content? %>
-        </div>
-
-        <div class="order-2">
-          <%= render Arclight::IndexMetadataFieldComponent.with_collection(@presenter&.field_presenters.select { |field| field.field_config.collection_context }, classes: ['col pl-0 my-0']) %>
-        </div>
-      </div>
-    </div>
-    <% if document.number_of_children > 0 %>
-      <%= content_tag(:div, id: "#{document.id}-collapsible-hierarchy",
-        class: "collapse al-collection-context-collapsible al-hierarchy-level-#{document.component_level} #{'show' if show_expanded?(document)}",
-        data: { resolved: false }
-      ) do %>
-        <%= generic_context_navigation(document, component_level: document.component_level + 1, original_parents: params[:original_parents]) %>
-      <% end %>
+  class: (classes.flatten + ['al-collection-context', ('al-hierarchy-highlight' if current_target?)].compact).join(' ') do %>
+  <div class="documentHeader" data-document-id="<%= document.id %>">
+    <% if @hierarchy && document.children? %>
+      <%= link_to('',
+          "##{document.id}-collapsible-hierarchy",
+          class: "al-toggle-view-children#{ ' collapsed' unless show_expanded?}",
+          aria: {
+            label: t('arclight.hierarchy.view_all'),
+            expanded: show_expanded?
+          },
+          data: {
+            bs_toggle: 'collapse',
+            toggle: 'collapse'
+          }
+        )
+      %>
     <% end %>
-  </li>
+    <div class="index_title document-title-heading" data-turbo="false">
+      <%= helpers.link_to_document document, counter: @counter %>
+      <% if document.children? %>
+        <span class="badge badge-pill bg-secondary badge-secondary al-number-of-children-badge"><%= document.number_of_children %><span class="sr-only visually-hidden"><%= t(:'arclight.views.index.number_of_components', count: document.number_of_children) %></span></span>
+      <% end %>
+      <%= tag.span blacklight_icon(:online), class: 'al-online-content-icon' if document.online_content? %>
+    </div>
+
+    <%= content_tag('div', class: 'al-document-container text-muted') do %>
+      <%= document.containers.join(', ') %>
+    <% end if document.containers.present? %>
+  </div>
+  <%= render Arclight::IndexMetadataFieldComponent.with_collection(@presenter&.field_presenters.select { |field| field.field_config.collection_context }, classes: ['col pl-0 my-0']) %>
+  <% if @hierarchy && document.number_of_children > 0 %>
+    <%= content_tag(:div, id: "#{document.id}-collapsible-hierarchy",
+      class: "collapse al-collection-context-collapsible al-hierarchy-level-#{document.component_level} #{'show' if show_expanded?}"
+    ) do %>
+      <%= render Arclight::DocumentComponentsHierarchyComponent.new(document: @document, target_index: target_index) %>
+    <% end %>
+  <% end %>
 <% end %>

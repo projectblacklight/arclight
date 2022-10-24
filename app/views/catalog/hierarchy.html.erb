@@ -1,0 +1,10 @@
+<p><%= params[:id] %></p>
+<%= turbo_frame_tag "al-hierarchy-#{params[:id]}#{params[:key]}" do %>
+  <%= render partial: "paginate_compact", object: @response if show_pagination? && params[:paginate] %>
+
+  <ul class="documents">
+    <%= render Arclight::DocumentCollectionContextComponent.with_collection(@response.documents, hierarchy: params[:hierarchy].present?) %>
+  </ul>
+
+  <%= render 'results_pagination' if params[:paginate] %>
+<% end %>

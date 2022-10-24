@@ -95,38 +95,6 @@ module ArclightHelper
     end
   end
 
-  def show_expanded?(document)
-    !original_document?(document) && within_original_tree?(document)
-  end
-
-  def within_original_tree?(document)
-    Array.wrap(params['original_parents']).map do |parent|
-      Arclight::Parent.new(id: parent, eadid: document.parent_ids.first, level: nil, label: nil).global_id
-    end.include?(document.id)
-  end
-
-  def original_document?(document)
-    document.id == params['original_document']
-  end
-
-  def generic_context_navigation(document, original_parents: document.parent_ids, component_level: 1)
-    tag.div('',
-            class: 'context-navigator',
-            data: {
-              collapse: I18n.t('arclight.views.show.collapse'),
-              expand: I18n.t('arclight.views.show.expand'),
-              controller: 'arclight-context-navigation',
-              arclight: {
-                level: component_level,
-                path: search_catalog_path(hierarchy_context: 'component'),
-                name: document.collection_name,
-                originalDocument: document.id,
-                originalParents: original_parents,
-                eadid: document.normalized_eadid
-              }
-            })
-  end
-
   def current_context_document
     @document
   end
