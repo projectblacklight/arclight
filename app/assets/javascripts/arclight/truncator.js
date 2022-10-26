@@ -29,17 +29,4 @@ Blacklight.onLoad(() => {
   window.addEventListener('resize', () => {
     document.querySelectorAll('[data-arclight-truncate=true]').forEach(setupTruncation);
   });
-
-  // activate when elements get loaded into context navigator
-  const navigator = document.querySelector('[data-controller="arclight-contents"], [data-controller="arclight-context-navigation"]')
-  if (navigator) {
-    navigator.addEventListener('navigation.contains.elements', event => {
-      document.querySelectorAll('[data-toggle="tab"]').forEach(tab => {
-        tab.addEventListener('shown.bs.tab', () => {
-          document.querySelectorAll('[data-arclight-truncate=true]').forEach(setupTruncation);
-        });
-      });
-      event.target.querySelectorAll('[data-arclight-truncate=true]').forEach(setupTruncation);
-    });
-  }
 });
