@@ -1,8 +1,8 @@
 function setupTruncation(container) {
   // target elements
-  const contentOuter = container.querySelector('.content')
+  const contentOuter = container.querySelector('[data-arclight-truncate-target="content"]')
   const contentInner = Array.from(contentOuter.children)
-  const button = container.querySelector('button')
+  const button = container.querySelector('[data-action="click->arclightTruncate#trigger"]')
 
   // calculate total scrollable inner height vs. observed outer height
   const outerHeight = contentOuter.clientHeight
@@ -23,10 +23,10 @@ function setupTruncation(container) {
 
 Blacklight.onLoad(() => {
   // activate on initial page load
-  document.querySelectorAll('[data-arclight-truncate=true]').forEach(setupTruncation)
+  document.querySelectorAll('[data-controller="arclight-truncate"]').forEach(setupTruncation)
 
   // activate when the page is resized
   window.addEventListener('resize', () => {
-    document.querySelectorAll('[data-arclight-truncate=true]').forEach(setupTruncation);
+    document.querySelectorAll('[data-controller="arclight-truncate"]').forEach(setupTruncation)
   })
 })
