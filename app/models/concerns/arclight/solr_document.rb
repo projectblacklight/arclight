@@ -6,6 +6,24 @@ module Arclight
   module SolrDocument
     include Blacklight::Solr::Document
 
+    attribute :parent_ids, Blacklight::Types::Array, 'parent_ssim'
+    attribute :parent_labels, Blacklight::Types::Array, 'parent_unittitles_ssm'
+    attribute :parent_levels, Blacklight::Types::Array, 'parent_levels_ssm'
+    attribute :unitid, Blacklight::Types::String, 'unitid_ssm'
+    attribute :extent, Blacklight::Types::String, 'extent_ssm'
+    attribute :abstract, Blacklight::Types::String, 'abstract_ssm'
+    attribute :scope, Blacklight::Types::String, 'scopecontent_ssm'
+    attribute :creator, Blacklight::Types::String, 'creator_ssm'
+    attribute :level, Blacklight::Types::String, 'level_ssm'
+    attribute :terms, Blacklight::Types::String, 'userestrict_ssm'
+    # Restrictions for component sidebar
+    attribute :parent_restrictions, Blacklight::Types::String, 'parent_access_restrict_ssm'
+    # Terms for component sidebar
+    attribute :parent_terms, Blacklight::Types::String, 'parent_access_terms_ssm'
+    attribute :reference, Blacklight::Types::String, 'ref_ssm'
+    attribute :normalized_title, Blacklight::Types::String, 'normalized_title_ssm'
+    attribute :normalized_date, Blacklight::Types::String, 'normalized_date_ssm'
+
     def repository_config
       return unless repository
 
@@ -16,18 +34,6 @@ module Arclight
       @parents ||= Arclight::Parents.from_solr_document(self).as_parents
     end
 
-    def parent_ids
-      fetch('parent_ssim', [])
-    end
-
-    def parent_labels
-      fetch('parent_unittitles_ssm', [])
-    end
-
-    def parent_levels
-      fetch('parent_levels_ssm', [])
-    end
-
     # Get this document's EAD ID, or fall back to the collection (especially
     # for components that may not have their own.
     def eadid
@@ -36,10 +42,6 @@ module Arclight
 
     def normalized_eadid
       Arclight::NormalizedId.new(eadid).to_s
-    end
-
-    def unitid
-      first('unitid_ssm')
     end
 
     def repository
@@ -66,16 +68,8 @@ module Arclight
       collection&.unitid
     end
 
-    def extent
-      first('extent_ssm')
-    end
-
     def abstract_or_scope
-      first('abstract_ssm') || first('scopecontent_ssm')
-    end
-
-    def creator
-      first('creator_ssm')
+      abstract || scope
     end
 
     def collection_creator
@@ -94,34 +88,12 @@ module Arclight
       number_of_children.positive?
     end
 
-    def reference
-      first('ref_ssm')
-    end
-
     def component_level
       first('component_level_isim')
     end
 
-    def level
-      first('level_ssm')
-    end
-
     def collection?
       level&.parameterize == 'collection'
-    end
-
-    def terms
-      first('userestrict_ssm')
-    end
-
-    # Restrictions for component sidebar
-    def parent_restrictions
-      first('parent_access_restrict_ssm')
-    end
-
-    # Terms for component sidebar
-    def parent_terms
-      first('parent_access_terms_ssm')
     end
 
     def digital_objects
@@ -136,14 +108,6 @@ module Arclight
     def containers
       # NOTE: that .titlecase strips punctuation, like hyphens, we want to keep
       fetch('containers_ssim', []).map(&:capitalize)
-    end
-
-    def normalized_title
-      first('normalized_title_ssm')
-    end
-
-    def normalized_date
-      first('normalized_date_ssm')
     end
 
     # @return [Array<String>] with embedded highlights using <em>...</em>

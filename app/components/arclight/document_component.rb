@@ -13,6 +13,10 @@ module Arclight
       presenter.configuration
     end
 
+    def breadcrumb_component
+      blacklight_config.show.breadcrumb_component || Arclight::BreadcrumbsHierarchyComponent
+    end
+
     def metadata_partials
       blacklight_config.show.metadata_partials || []
     end
