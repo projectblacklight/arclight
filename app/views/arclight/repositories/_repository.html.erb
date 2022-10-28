@@ -1,18 +1,18 @@
-<div class="al-repository">
+<div class="mb-3 mx-auto al-repository">
   <div class="container">
     <div class='row'>
-      <div class='col-2 align-self-center al-repository-thumbnail hidden-md-down'>
-        <%= image_tag repository.thumbnail_url, alt: repository.name, class: 'img-fluid' %>
+      <div class='col-2 align-self-center d-none d-lg-block al-repository-thumbnail'>
+        <%= image_tag repository.thumbnail_url, alt: repository.name, class: 'img-fluid d-block mx-auto' %>
       </div>
 
-      <div class="col-sm-12 col-lg-10 al-repository-information">
-        <%= content_tag(params[:id] == repository.slug ? :h1 : :h2, class: 'h5 repo-name') do %>
-          <%= link_to_unless(params[:id] == repository.slug, repository.name, arclight_engine.repository_path(repository.slug)) %>
+      <div class="col-sm-12 col-lg-10 py-3 al-repository-information">
+        <%= content_tag(params[:id] == repository.slug ? :h1 : :h2, class: 'h5 mb-3 repo-name') do %>
+        <%= link_to_unless(params[:id] == repository.slug, repository.name, arclight_engine.repository_path(repository.slug)) %>
         <% end %>
-        <div class='row no-gutters justify-content-md-center'>
-          <div class='col-4 col-md-3 al-repository-contact'>
-            <address>
-              <div class="al-repository-street-address">
+        <div class='row no-gutters justify-content-center'>
+          <div class='col-12 col-sm-4 col-md-3 fw-light al-repository-contact'>
+            <address class="text-break">
+              <div class="mb-3 al-repository-street-address">
                 <%= repository.location %>
               </div>
 
@@ -22,19 +22,19 @@
             </address>
           </div>
 
-          <div class='col al-repository-description'>
+          <div class='col-12 col-sm mt-3 mt-sm-0 al-repository-description'>
             <%= repository.description %>
           </div>
 
           <% if on_repositories_index? %>
-            <div class='col col-lg-2 al-repository-extra align-self-center hidden-md-down'>
-              <div class='al-repository-extra-collection-count'>
-                <span class="al-repository-collection-count">
-                  <%= t(:'arclight.views.repositories.number_of_collections', count: repository.collection_count) %>
-                </span>
-               </div>
-               <%= link_to(t(:'arclight.views.repositories.view_more'), arclight_engine.repository_path(repository.slug), class: 'btn btn-secondary btn-sm') %>
+          <div class='col-12 col-lg-2 mt-3 mt-lg-0 text-center al-repository-extra'>
+            <div class='mb-1 fst-italic fw-bold'>
+              <%= t(:'arclight.views.repositories.number_of_collections', count: repository.collection_count) %>
             </div>
+            <% if repository.collection_count&.positive? %>
+            <%= link_to(t(:'arclight.views.repositories.view_more'), arclight_engine.repository_path(repository.slug), class: 'btn btn-secondary btn-sm') %>
+            <% end %>
+          </div>
           <% end %>
         </div>
       </div>
