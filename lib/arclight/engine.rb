@@ -8,6 +8,7 @@ require 'arclight/normalized_date'
 require 'arclight/normalized_id'
 require 'arclight/normalized_title'
 require 'arclight/digital_object'
+require 'gretel'
 
 module Arclight
   ##

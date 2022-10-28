@@ -109,26 +109,6 @@ RSpec.describe ArclightHelper, type: :helper do
     end
   end
 
-  describe '#on_repositories_show?' do
-    before { allow(helper).to receive(:action_name).twice.and_return('show') }
-
-    context 'with repositories show' do
-      it do
-        allow(helper).to receive(:controller_name).twice.and_return('repositories')
-        expect(helper.on_repositories_show?).to be true
-        expect(helper.repositories_active_class).to be_nil
-      end
-    end
-
-    context 'without repositories show' do
-      it do
-        allow(helper).to receive(:controller_name).twice.and_return('NOT repositories')
-        expect(helper.on_repositories_show?).to be false
-        expect(helper.repositories_active_class).to be_nil
-      end
-    end
-  end
-
   describe '#search_results_header_text' do
     subject(:text) { helper.search_results_header_text }
 

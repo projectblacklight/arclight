@@ -1,15 +1,3 @@
-<nav class='al-search-breadcrumb' role='navigation' aria-label=<%= t('arclight.breadcrumbs.aria_label') %> >
-  <ol class="breadcrumb">
-    <li class="breadcrumb-item"><%= link_to t('arclight.routes.home'), root_path %></li>
-    <% if collection_active? %>
-     <li class="breadcrumb-item active" aria-current="page"><%= t('arclight.routes.collections') %></li>
-    <% elsif on_repositories_index? %>
-      <li class="breadcrumb-item active" aria-current="page"><%= t('arclight.routes.repositories') %></li>
-    <% elsif on_repositories_show? %>
-      <li class="breadcrumb-item"><%= link_to t('arclight.routes.repositories'), arclight_engine.repositories_path %></li>
-      <li class="breadcrumb-item active" aria-current="page"><%= @repository.name %></li>
-    <% else %>
-      <li class="breadcrumb-item active" aria-current="page"><%= t('arclight.routes.search_results') %></li>
-    <% end %>
-  </ol>
+<nav class='al-search-breadcrumb' role='navigation' aria-label="<%= t('arclight.breadcrumbs.aria_label') %>">
+  <%= breadcrumbs style: :bootstrap5, aria_current: 'page', autoroot: true %>
 </nav>

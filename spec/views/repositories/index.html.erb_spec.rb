@@ -10,7 +10,6 @@ RSpec.describe 'arclight/repositories/index', type: :view do
     assign(:repositories, test_data)
     allow(view).to receive(:search_action_path).and_return('/')
     allow(view).to receive(:on_repositories_index?).and_return(true)
-    allow(view).to receive(:on_repositories_show?).and_return(false)
   end
 
   context 'renders the three repository examples' do
@@ -86,7 +85,6 @@ RSpec.describe 'arclight/repositories/index', type: :view do
     it 'does not show on repositories detail page' do
       assign(:repository, Arclight::Repository.new(name: 'My Repository'))
       allow(view).to receive(:on_repositories_index?).and_return(false)
-      allow(view).to receive(:on_repositories_show?).and_return(true)
       render
       expect(rendered).not_to have_css('.al-repository-extra')
     end
