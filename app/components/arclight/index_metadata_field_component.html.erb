@@ -1,6 +1,6 @@
 <div class="row">
   <% if truncate? %>
-    <%= tag.div(class: @classes, data: { controller: 'arclight-truncate' }) do %>
+    <%= tag.div(class: @classes + ['truncator'], data: { controller: 'arclight-truncate' }) do %>
       <%= tag.div @field.render, class: 'content', data: { arclight_truncate_target: 'content' } %>
       <%= button_tag(type: :button, class: 'btn btn-sm btn-link',
                      data: { action: 'click->arclightTruncate#trigger' },
