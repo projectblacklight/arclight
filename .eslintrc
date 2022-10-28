@@ -3,13 +3,14 @@
     "es6": true
   },
   "parserOptions": {
-    "ecmaVersion": 2020,
+    "ecmaVersion": 2022,
     "sourceType": "module"
   },
   "extends": "airbnb-base/legacy",
   "globals": {
     "Blacklight": true,
-    "bootstrap": true
+    "bootstrap": true,
+    "Stimulus": true,
   },
   "rules": {
     "no-param-reassign": [2, { "props": false }],

@@ -115,7 +115,7 @@ module Arclight
         pin "arclight", to: "arclight/arclight.js"
         # TODO: We may be able to move these to a single importmap for arclight.
         pin "arclight/oembed_viewer", to: "arclight/oembed_viewer.js"
-        pin "arclight/truncator", to: "arclight/truncator.js"
+        pin "arclight/truncate_controller", to: "arclight/truncate_controller.js"
       RUBY
     end
 
