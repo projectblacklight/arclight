@@ -78,10 +78,10 @@ class CatalogController < ApplicationController
     config.show.document_presenter_class = Arclight::ShowPresenter
     config.show.metadata_partials = %i[
       summary_field
-      access_field
       background_field
       related_field
       indexed_terms_field
+      access_field
     ]
 
     config.show.context_access_tab_items = %i[

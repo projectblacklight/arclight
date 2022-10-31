@@ -209,21 +209,17 @@ RSpec.describe 'Component Page', type: :feature do
     end
   end
 
-  describe 'access tab', js: true do
-    it 'has visitation notes' do
-      expect(page).to have_css 'dt', text: 'LOCATION OF THIS COLLECTION:'
+  describe 'access section' do
+    it 'has access metadata' do
+      expect(page).to have_css 'dt', text: 'Location of this collection:'
       expect(page).to have_css 'dd', text: 'Building 38, Room 1E-21'
-    end
 
-    it 'has a restrictions and access' do
-      expect(page).to have_css 'dt', text: 'PARENT RESTRICTIONS:'
+      expect(page).to have_css 'dt', text: 'Parent Restrictions:'
       expect(page).to have_css 'dd', text: /^RESTRICTED: Access to these folders requires prior written approval./
-      expect(page).to have_css 'dt', text: 'TERMS OF ACCESS:'
+      expect(page).to have_css 'dt', text: 'Terms of Access:'
       expect(page).to have_css 'dd', text: /^Copyright was transferred to the public domain./
-    end
 
-    it 'has a contact' do
-      expect(page).to have_css 'dt', text: 'CONTACT:'
+      expect(page).to have_css 'dt', text: 'Contact:'
       expect(page).to have_css 'dd', text: 'hmdref@nlm.nih.gov'
     end
   end

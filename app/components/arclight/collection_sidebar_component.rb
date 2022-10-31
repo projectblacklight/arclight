@@ -14,6 +14,9 @@ module Arclight
     attr_reader :document, :partials, :collection_presenter
 
     def has_section?(section)
+      # Access field data comes from repositories.yml not from solr, so handle it in a different way.
+      return true if section == :access_field
+
       collection_presenter.with_field_group(section).fields_to_render.any?
     end
 
