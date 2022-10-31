@@ -33,6 +33,10 @@ Metrics/BlockLength:
     - 'spec/**/*'
     - 'tasks/**/*'
 
+Naming/PredicateName:
+  ForbiddenPrefixes:
+    - _is
+
 Layout/LineLength:
   Max: 160
 
