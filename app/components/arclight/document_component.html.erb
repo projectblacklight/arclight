@@ -30,7 +30,9 @@
   <% end %>
 </div>
 
-<%= render Arclight::MetadataSectionComponent.with_collection(component_metadata_partials, metadata_attr: { layout: Arclight::UpperMetadataLayoutComponent }, presenter: presenter, classes: ['al-metadata-section']) unless document.collection? %>
+<%= render Arclight::MetadataSectionComponent.with_collection(component_metadata_partials,
+             metadata_attr: { layout: Arclight::UpperMetadataLayoutComponent },
+             presenter: presenter) unless document.collection? %>
 
 <div class='row'>
   <div class='col-md-12'>
@@ -41,7 +43,9 @@
 <% if document.collection? %>
 <div id="metadata">
   <h2 class="sr-only visually-hidden"><%= t 'arclight.views.show.context' %></h2>
-  <%= render Arclight::MetadataSectionComponent.with_collection(metadata_partials, presenter: presenter, heading: true) %>
+  <%= render Arclight::MetadataSectionComponent.with_collection(metadata_partials,
+                metadata_attr: { layout: Arclight::UpperMetadataLayoutComponent },
+                presenter: presenter, heading: true) %>
 </div>
 <% elsif document.children? %>
 <div id="contents">
@@ -52,15 +56,19 @@
 
 <% access_content = capture do %>
   <% if @document.collection? %>
-    <%= render Arclight::MetadataSectionComponent.with_collection(context_access_tab_items, presenter: presenter) %>
+    <%= render Arclight::MetadataSectionComponent.with_collection(context_access_tab_items,
+                metadata_attr: { layout: Arclight::UpperMetadataLayoutComponent },
+                presenter: presenter) %>
   <% else %>
-    <%= render Arclight::MetadataSectionComponent.with_collection(component_access_tab_items, presenter: presenter) %>
+    <%= render Arclight::MetadataSectionComponent.with_collection(component_access_tab_items,
+                metadata_attr: { layout: Arclight::UpperMetadataLayoutComponent },
+                presenter: presenter) %>
   <% end %>
 <% end %>
 
 <% if access_content.present? %>
-  <div id="access">
-    <h2 class="al-show-sub-heading"><%= t 'arclight.views.show.access' %></h2>
+  <div id="<%= t('arclight.views.show.sections.access_field').parameterize %>">
+    <h2 class="al-show-sub-heading"><%= t 'arclight.views.show.sections.access_field' %></h2>
 
     <%= access_content%>
   </div>

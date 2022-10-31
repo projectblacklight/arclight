@@ -91,18 +91,6 @@
   }
 }
 
-// Show page metadata.
-// Indent to match terminal show page breadcrumb.
-@for $i from 1 to 20 {
-  .al-metadata-section.breadcrumb-item-#{$i} {
-    padding-left: 0;
-
-    @media (min-width: 768px) {
-      padding-left: ($i * 10) + 10px;
-    }
-  }
-}
-
 .bookmark-toggle .toggle-bookmark {
   display: inline;
   margin-bottom: 0;

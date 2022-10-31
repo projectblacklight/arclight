@@ -1,0 +1,15 @@
+<nav id="about-collection-nav" class="al-sidebar-navigation-context sidebar-section">
+  <h2><%= t('arclight.views.show.context_nav.title') %></h2>
+  <ul class='nav flex-column'>
+    <% partials.each do |section| %>
+      <% next unless has_section?(section) %>
+      <li class='nav-item'>
+        <%= link_to section_label(section),
+          document_section_path(section),
+          class: 'nav-link pl-0',
+          data: { turbolinks: 'false' }
+        %>
+      </li>
+    <% end %>
+  </ul>
+</nav>
