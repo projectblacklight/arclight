@@ -1,4 +1,4 @@
-<%= tag.p class: "media" do %>
+<div id="embed">
   <span class="media-body al-online-content-icon" aria-hidden="true"><%= helpers.blacklight_icon :online %></span>
   <span class="col text-muted text-uppercase">
     <%= t('arclight.views.show.embedded_content') %>
@@ -10,4 +10,4 @@
       <%= link_to(resource.label, resource.href) %>
     </div>
   <% end %>
-<% end %>
+</div>
