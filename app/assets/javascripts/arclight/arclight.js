@@ -1,2 +1,4 @@
 import 'arclight/oembed_viewer'
-import 'arclight/truncator'
+
+import Truncate from 'arclight/truncate_controller'
+Stimulus.register('arclight-truncate', Truncate)

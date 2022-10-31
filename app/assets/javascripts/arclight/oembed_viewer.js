@@ -39,8 +39,6 @@ class OembedLoader {
 }
 
 Blacklight.onLoad(function () {
-  'use strict'
-
   document.querySelectorAll('[data-arclight-oembed="true"]').forEach((element) => {
     const loader = new OembedLoader(element)
     loader.load()

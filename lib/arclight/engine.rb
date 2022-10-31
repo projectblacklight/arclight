@@ -37,7 +37,7 @@ module Arclight
     initializer 'arclight.assets', before: 'assets' do |app|
       app.config.assets.precompile << 'arclight/arclight.js'
       app.config.assets.precompile << 'arclight/oembed_viewer.js'
-      app.config.assets.precompile << 'arclight/truncator.js'
+      app.config.assets.precompile << 'arclight/truncate_controller.js'
     end
   end
 end
