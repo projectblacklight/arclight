@@ -1,4 +1,4 @@
-<% if item_requestable?(document) %>
+<% if document.requestable? %>
   <div class='mr-4 me-4 al-show-actions-box-request flex-md-fill'>
     <% document.repository_config.available_request_types.each do |request_type| %>
       <%= render partial: "arclight/requests/#{request_type}", locals: { document: document } %>
