@@ -145,5 +145,9 @@ module Arclight
     def root
       self['_root_'] || self['id']
     end
+
+    def requestable?
+      repository_config&.request_types&.any?
+    end
   end
 end
