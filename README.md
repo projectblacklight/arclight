@@ -84,7 +84,7 @@ See the [CONTRIBUTORS](CONTRIBUTORS.md) file.
 
 ## Development
 
-ArcLight development uses [`solr_wrapper`](https://rubygems.org/gems/solr_wrapper/versions/0.18.1) and [`engine_cart`](https://rubygems.org/gems/engine_cart) to host development instances of Solr and Rails server on your local machine.
+ArcLight requires Solr to be running.  For development you can start this using `solr_wrapper` or you may choose to use Docker. Start Solr using Docker by doing `docker compose up`.
 
 ### Run the test suite
 
