@@ -18,15 +18,12 @@ require 'benchmark'
 #
 namespace :arclight do
   desc 'Index an EAD document, use FILE=<path/to/ead.xml> and REPOSITORY_ID=<myid>'
-  task :index do
+  # We need :environment to have access to the Blacklight confg
+  task index: :environment do
     raise 'Please specify your EAD document, ex. FILE=<path/to/ead.xml>' unless ENV['FILE']
 
     print "Loading #{ENV.fetch('FILE', nil)} into index...\n"
-    solr_url = begin
-      Blacklight.default_index.connection.base_uri
-    rescue StandardError
-      ENV['SOLR_URL'] || 'http://127.0.0.1:8983/solr/blacklight-core'
-    end
+    solr_url = ENV.fetch('SOLR_URL', Blacklight.default_index.connection.base_uri)
     elapsed_time = Benchmark.realtime do
       `bundle exec traject -u #{solr_url} -i xml -c #{Arclight::Engine.root}/lib/arclight/traject/ead2_config.rb #{ENV.fetch('FILE', nil)}`
     end
