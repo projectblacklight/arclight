@@ -1,53 +1,10 @@
 .al-repository {
-  background-color: $gray-200;
   border: $default-border-styling;
-  margin-bottom: $spacer;
+  background-color: $gray-200;
+}
 
-  .al-repository-information {
-    font-size: $font-size-sm;
-    padding: $spacer;
-
-    @media (min-width: 992px) {
-      padding-left: 0;
-    }
-
-    address {
-      margin-bottom: 0;
-    }
-
-    .repo-name {
-      margin-bottom: $spacer;
-    }
-
-    .al-repository-contact,
-    .al-repository-extra-collection-count {
-      font-weight: 300;
-    }
-
-    .al-repository-street-address {
-      margin-bottom: 0.5rem;
-    }
-
-    .al-repository-description {
-      margin-right: $spacer;
-      padding-left: $spacer * 2;
-
-      @media (min-width: 992px) {
-        border-left: $default-border-styling;
-      }
-    }
-
-    .al-repository-extra {
-      text-align: center;
-
-      .al-repository-extra-collection-count {
-        font-style: italic;
-        margin-bottom: $spacer;
-      }
-
-      .al-repository-collection-count {
-        font-weight: $font-weight-bold;
-      }
-    }
+@include media-breakpoint-up(sm) {
+  .al-repository-description {
+    border-left: $default-border-styling;
   }
 }
