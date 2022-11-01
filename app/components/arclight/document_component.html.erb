@@ -54,22 +54,4 @@
 </div>
 <% end %>
 
-<% access_content = capture do %>
-  <% if @document.collection? %>
-    <%= render Arclight::MetadataSectionComponent.with_collection(context_access_tab_items,
-                metadata_attr: { layout: Arclight::UpperMetadataLayoutComponent },
-                presenter: presenter) %>
-  <% else %>
-    <%= render Arclight::MetadataSectionComponent.with_collection(component_access_tab_items,
-                metadata_attr: { layout: Arclight::UpperMetadataLayoutComponent },
-                presenter: presenter) %>
-  <% end %>
-<% end %>
-
-<% if access_content.present? %>
-  <div id="<%= t('arclight.views.show.sections.access_field').parameterize %>">
-    <h2 class="al-show-sub-heading"><%= t 'arclight.views.show.sections.access_field' %></h2>
-
-    <%= access_content%>
-  </div>
-<% end %>
+<%= access %>

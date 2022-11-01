@@ -1,0 +1,14 @@
+
+<% access_content = capture do %>
+  <%= render Arclight::MetadataSectionComponent.with_collection(section_names,
+              metadata_attr: { layout: Arclight::UpperMetadataLayoutComponent },
+              presenter: presenter) %>
+<% end %>
+
+<% if access_content.present? %>
+  <div id="<%= t('arclight.views.show.sections.access_field').parameterize %>">
+    <h2 class="al-show-sub-heading"><%= t 'arclight.views.show.sections.access_field' %></h2>
+
+    <%= access_content%>
+  </div>
+<% end %>

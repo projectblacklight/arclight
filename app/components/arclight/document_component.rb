@@ -25,12 +25,8 @@ module Arclight
       blacklight_config.show.component_metadata_partials || []
     end
 
-    def context_access_tab_items
-      blacklight_config.show.context_access_tab_items || []
-    end
-
-    def component_access_tab_items
-      blacklight_config.show.component_access_tab_items || []
+    def access
+      render (blacklight_config.show.access_component || Arclight::AccessComponent).new(presenter: presenter)
     end
   end
 end
