@@ -5,6 +5,8 @@ module Arclight
   class ShowPresenter < Blacklight::ShowPresenter
     attr_accessor :field_group
 
+    delegate :collection?, to: :document
+
     def heading
       document.normalized_title
     end
