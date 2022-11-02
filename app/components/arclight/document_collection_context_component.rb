@@ -5,10 +5,12 @@ module Arclight
   class DocumentCollectionContextComponent < Arclight::SearchResultComponent
     # @param [SolrDocument] document
     # @param [Boolean] hierarchy whether or not to show hierarchy controls
-    def initialize(document: nil, hierarchy: true, **kwargs)
+    # @param [String] nest_path determines which element to highlight
+    def initialize(document: nil, hierarchy: true, nest_path: nil, **kwargs)
       super(document: document, **kwargs)
 
       @hierarchy = hierarchy
+      @nest_path = nest_path
     end
 
     # we want to eager-load this document's children if we're in the
@@ -43,8 +45,6 @@ module Arclight
       nest_path == @document.nest_path
     end
 
-    def nest_path
-      params['nest_path']
-    end
+    attr_reader :nest_path
   end
 end
