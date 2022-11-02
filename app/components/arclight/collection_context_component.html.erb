@@ -3,10 +3,7 @@
     <h2>Collection</h2>
     <h3><%= title %></h3>
 
-    <div class='al-show-actions-box-options d-inline-flex'>
-      <%= helpers.render partial: 'arclight/requests', locals: { document: document } %>
-    </div>
-    <%= render Arclight::DocumentDownloadComponent.new(downloads: collection.downloads) %>
-    <%= render Arclight::CollectionInfoComponent.new(collection: collection) %>
+    <%= render Arclight::DocumentDownloadComponent.new(downloads: document.downloads) %>
+    <%= render Arclight::CollectionInfoComponent.new(collection: document.collection) %>
   </div>
 </div>

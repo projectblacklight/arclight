@@ -29,8 +29,8 @@ RSpec.describe 'arclight/_requests', type: :view do
     end
 
     it 'renders links to the Aeon request form' do
-      expect(rendered).to have_css '.al-show-actions-box-request'
-      expect(rendered).to have_css '.al-show-actions-box-request a[href^="https://sample.request.com"]'
+      expect(rendered).to have_css '.al-request'
+      expect(rendered).to have_css '.al-request a[href^="https://sample.request.com"]'
     end
   end
 
