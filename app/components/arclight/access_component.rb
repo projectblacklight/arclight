@@ -15,9 +15,11 @@ module Arclight
 
     # @return Array<Symbol> a list of metadata section names
     def section_names
-      return Array(show_config.context_access_tab_items) if collection?
+      return Array(collection_access_items) if collection?
 
-      Array(show_config.component_access_tab_items)
+      Array(component_access_items)
     end
+
+    delegate :collection_access_items, :component_access_items, to: :show_config
   end
 end
