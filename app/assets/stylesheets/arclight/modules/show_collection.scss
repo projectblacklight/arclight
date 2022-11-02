@@ -20,9 +20,6 @@
   fill: $green;
 }
 
-p.media .col {
-  flex: auto;
-}
 // Access tab
 #access {
   dl dd {
@@ -49,9 +46,5 @@ p.media .col {
 }
 
 .al-digital-object.breadcrumb-item {
-  margin-bottom: ($spacer * 0.5);
-}
-
-p.media.breadcrumb-item {
   margin-bottom: ($spacer * 0.5);
 }

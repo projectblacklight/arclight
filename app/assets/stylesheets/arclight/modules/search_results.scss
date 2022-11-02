@@ -167,14 +167,6 @@ article.document {
   padding-right: 0 !important;
 }
 
-.breadcrumb .media .col, h1.media .col {
-  flex-basis: auto;
-}
-
-.breadcrumb .media svg, h1.media svg {
-  fill: $gray-600;
-}
-
 .breadcrumb-links a {
   border-bottom: 1px dashed $gray-600;
   color: $body-color;
