@@ -11,7 +11,8 @@
     <%= content_tag :h1 do %>
       <%= document.normalized_title %>
     <% end %>
-    <%= helpers.render partial: 'catalog/arclight_bookmark_control', locals: { document: document } %>
+    <%= render 'arclight/requests', document: document %>
+    <%= render 'catalog/arclight_bookmark_control', document: document %>
   </div>
 
   <% if @document.collection? && @document.online_content?%>

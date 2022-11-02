@@ -263,10 +263,8 @@ RSpec.describe 'Collection Page', type: :feature do
       let(:doc_id) { 'm0198-xmlaspace_ref11_d0s' }
 
       it 'renders links to the Aeon request form' do
-        within '.al-show-actions-box' do
-          expect(page).to have_css '.al-show-actions-box-request'
-          expect(page).to have_css '.al-show-actions-box-request a[href^="https://sample.request.com"]'
-        end
+        expect(page).to have_css '.al-request'
+        expect(page).to have_css '.al-request a[href^="https://sample.request.com"]'
       end
     end
   end
