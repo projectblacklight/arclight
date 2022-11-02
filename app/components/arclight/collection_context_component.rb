@@ -6,11 +6,10 @@ module Arclight
     def initialize(presenter:)
       super
 
-      @presenter = presenter
+      @collection = presenter.document.collection
     end
 
-    delegate :document, to: :@presenter
-    delegate :collection, to: :document
+    attr_reader :collection
 
     def title
       collection.normalized_title

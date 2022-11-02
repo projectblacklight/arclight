@@ -3,7 +3,7 @@
     <h2>Collection</h2>
     <h3><%= title %></h3>
 
-    <%= render Arclight::DocumentDownloadComponent.new(downloads: document.downloads) %>
-    <%= render Arclight::CollectionInfoComponent.new(collection: document.collection) %>
+    <%= render Arclight::DocumentDownloadComponent.new(downloads: collection.downloads) %>
+    <%= render Arclight::CollectionInfoComponent.new(collection: collection) %>
   </div>
 </div>
