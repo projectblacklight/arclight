@@ -85,7 +85,7 @@ class CatalogController < ApplicationController
       access_field
     ]
 
-    config.show.context_access_tab_items = %i[
+    config.show.collection_access_items = %i[
       terms_field
       cite_field
       in_person_field
@@ -97,7 +97,7 @@ class CatalogController < ApplicationController
       component_indexed_terms_field
     ]
 
-    config.show.component_access_tab_items = %i[
+    config.show.component_access_items = %i[
       component_terms_field
       cite_field
       in_person_field
