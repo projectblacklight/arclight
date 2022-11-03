@@ -55,6 +55,7 @@ settings do
   provide 'solr_writer.commit_on_close', 'true'
   provide 'repository', ENV.fetch('REPOSITORY_ID', nil)
   provide 'logger', Logger.new($stderr)
+  provide 'component_traject_config', File.join(__dir__, 'ead2_component_config.rb')
 end
 
 each_record do |_record, context|
@@ -247,9 +248,8 @@ to_field 'components' do |record, accumulator, context|
   child_components = record.xpath("/ead/archdesc/dsc/c|#{('/ead/archdesc/dsc/c01'..'/ead/archdesc/dsc/c12').to_a.join('|')}")
   next unless child_components.any?
 
-  config_file_path = File.join(__dir__, 'ead2_component_config.rb')
   component_indexer = Traject::Indexer::NokogiriIndexer.new.tap do |i|
-    i.load_config_file(config_file_path)
+    i.load_config_file(context.settings[:component_traject_config])
   end
 
   counter = Class.new do
