@@ -25,6 +25,10 @@ module Arclight
       blacklight_config.show.component_metadata_partials || []
     end
 
+    def online_filter
+      render Arclight::OnlineContentFilterComponent.new(document: document)
+    end
+
     def access
       render (blacklight_config.show.access_component || Arclight::AccessComponent).new(presenter: presenter)
     end
