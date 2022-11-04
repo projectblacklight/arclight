@@ -84,6 +84,7 @@ en:
           related_field: Related
           scope_and_arrangement_field: Scope and Arrangement
           summary_field: Summary
+        toggle_sidebar: Navigate the Collection
     within_collection_dropdown:
       all_collections: all collections
       label_html: Search<span class="sr-only visually-hidden"> within</span>

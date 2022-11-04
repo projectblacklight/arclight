@@ -44,6 +44,14 @@
   }
 }
 
+// offcanvas sidebar is scrollable for smaller screens
+#sidebar {
+  overflow-y: scroll;
+
+  @include media-breakpoint-up(lg) {
+    overflow: hidden;
+  }
+}
 
 .collection-sidebar {
   padding-right: 1rem;
@@ -133,13 +141,6 @@
   .al-request-form {
     display: inline;
     float: right;
-  }
-}
-
-.al-request-button {
-  &.btn-link {
-    font-weight: 600;
-    line-height: 1;
   }
 }
 

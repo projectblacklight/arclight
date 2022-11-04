@@ -11,10 +11,10 @@
     <%= content_tag :h1 do %>
       <%= document.normalized_title %>
     <% end %>
-    <%= render 'arclight/requests', document: document %>
     <%= render 'catalog/arclight_bookmark_control', document: document %>
   </div>
-
+  <%= render 'arclight/requests', document: document %>
+  <%= button_tag(t('arclight.views.show.toggle_sidebar'), type: :button, class: 'btn btn-sm btn-secondary d-lg-none', data: { 'bs-toggle' => 'offcanvas', 'bs-target' => '#sidebar' }, aria: { 'controls' => 'sidebar' }) %>
   <%= online_filter %>
 </div>
 
