@@ -46,6 +46,7 @@ class CatalogController < ApplicationController
 
 
     config.add_results_document_tool(:bookmark, partial: 'bookmark_control', if: :render_bookmarks_control?)
+    config.add_results_document_tool(:online, component: Arclight::OnlineStatusIndicatorComponent)
 
     config.add_results_collection_tool(:group_toggle)
     config.add_results_collection_tool(:sort_widget)
