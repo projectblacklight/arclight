@@ -35,5 +35,10 @@ module Arclight
     def hierarchy
       @response = search_service.search_results
     end
+
+    # Overrides blacklight search state so we can exclude some parameters from being passed into the SearchState
+    def search_state
+      @search_state ||= search_state_class.new(params.except('hierarchy', 'nest_path'), blacklight_config, self)
+    end
   end
 end
