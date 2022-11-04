@@ -103,23 +103,20 @@
   }
 }
 
-.bookmark-toggle .toggle-bookmark {
-  display: inline;
-  margin-bottom: 0;
-  white-space: nowrap;
-}
-
 .bookmark-toggle {
-  display: inline;
-}
+  @extend .card;
+  @extend .bg-light;
+  @extend .p-2;
 
-.show-document {
-  .bookmark-toggle {
-    @extend .card;
-    @extend .bg-light;
-    @extend .p-2;
+  display: inline;
+
+  .toggle-bookmark {
+    display: inline;
+    margin-bottom: 0;
+    white-space: nowrap;
   }
 }
+
 
 .al-hierarchy-side-content {
   .al-request-form {
