@@ -3,6 +3,7 @@
 module Arclight
   # Display the document hierarchy as "breadcrumbs"
   class BreadcrumbComponent < ViewComponent::Base
+    # @param [Integer] count if provided the number of bookmarks is limited to this number
     def initialize(document:, count: nil, offset: 0)
       @document = document
       @count = count
