@@ -7,12 +7,11 @@
   itemscope: true,
   itemtype: @document.itemtype,
   class: classes.flatten.join(' ') do %>
-  <div class="al-search-result-index-article row d-flex align-items-start">
     <div class="col-auto">
       <%= icon %>
     </div>
 
-    <div class="col col-no-left-padding d-flex flex-wrap">
+    <div class="col-sm-9 col-no-left-padding d-flex flex-wrap">
       <div class="documentHeader my-w-75 w-md-100 order-0" data-document-id="<%= document.id %>">
         <h3 class="index_title document-title-heading">
           <%= helpers.link_to_document document, counter: @counter %>
@@ -26,10 +25,6 @@
         <%= content_tag('div', class: 'al-document-container col col-no-left-padding text-muted ml-auto') do %>
           <%= document.containers.join(', ') %>
         <% end if document.containers.present? %>
-
-        <div class="d-inline-flex">
-          <%= helpers.render_index_doc_actions document, wrapping_class: 'd-inline-flex justify-content-end' %>
-        </div>
       </div>
 
       <div class="order-2 mb-2">
@@ -43,5 +38,9 @@
         <% end %>
       </div>
     </div>
-  </div>
+
+
+    <div class="col-sm-2">
+      <%= helpers.render_index_doc_actions document, wrapping_class: 'd-inline-flex justify-content-end' %>
+    </div>
 <% end %>

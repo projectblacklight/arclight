@@ -7,6 +7,10 @@ module Arclight
   class SearchResultComponent < Blacklight::DocumentComponent
     attr_reader :document
 
+    def classes
+      super + ['row']
+    end
+
     def compact?
       presenter.view_config.key.to_s == 'compact'
     end
