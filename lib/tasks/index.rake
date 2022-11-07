@@ -20,14 +20,19 @@ namespace :arclight do
   desc 'Index an EAD document, use FILE=<path/to/ead.xml> and REPOSITORY_ID=<myid>'
   # We need :environment to have access to the Blacklight confg
   task index: :environment do
-    raise 'Please specify your EAD document, ex. FILE=<path/to/ead.xml>' unless ENV['FILE']
+    file = ENV.fetch('FILE', nil)
+    raise 'Please specify your EAD document, ex. FILE=<path/to/ead.xml>' unless file
 
-    print "Loading #{ENV.fetch('FILE', nil)} into index...\n"
+    traject_config_path = ENV.fetch('CONFIG_PATH', "#{Arclight::Engine.root}/lib/arclight/traject/ead2_config.rb")
+
     solr_url = ENV.fetch('SOLR_URL', Blacklight.default_index.connection.base_uri)
+
+    print "Loading #{file} into index...\n"
+
     elapsed_time = Benchmark.realtime do
-      `bundle exec traject -u #{solr_url} -i xml -c #{Arclight::Engine.root}/lib/arclight/traject/ead2_config.rb #{ENV.fetch('FILE', nil)}`
+      `bundle exec traject -u #{solr_url} -i xml -c #{traject_config_path} #{file}`
     end
-    print "Indexed #{ENV.fetch('FILE', nil)} (in #{elapsed_time.round(3)} secs).\n"
+    print "Indexed #{file} (in #{elapsed_time.round(3)} secs).\n"
   end
 
   desc 'Index a directory of EADs, use DIR=<path/to/directory> and REPOSITORY_ID=<myid>'
