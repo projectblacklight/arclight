@@ -4,28 +4,31 @@ module Arclight
   ##
   # Extends Blacklight::Solr::Document to provide Arclight specific behavior
   module SolrDocument
+    extend ActiveSupport::Concern
     include Blacklight::Solr::Document
 
-    attribute :parent_ids, Blacklight::Types::Array, 'parent_ssim'
-    attribute :parent_labels, Blacklight::Types::Array, 'parent_unittitles_ssm'
-    attribute :parent_levels, Blacklight::Types::Array, 'parent_levels_ssm'
-    attribute :unitid, Blacklight::Types::String, 'unitid_ssm'
-    attribute :extent, Blacklight::Types::String, 'extent_ssm'
-    attribute :abstract, Blacklight::Types::String, 'abstract_ssm'
-    attribute :scope, Blacklight::Types::String, 'scopecontent_ssm'
-    attribute :creator, Blacklight::Types::String, 'creator_ssm'
-    attribute :level, Blacklight::Types::String, 'level_ssm'
-    attribute :terms, Blacklight::Types::String, 'userestrict_ssm'
-    # Restrictions for component sidebar
-    attribute :parent_restrictions, Blacklight::Types::String, 'parent_access_restrict_ssm'
-    # Terms for component sidebar
-    attribute :parent_terms, Blacklight::Types::String, 'parent_access_terms_ssm'
-    attribute :reference, Blacklight::Types::String, 'ref_ssm'
-    attribute :normalized_title, Blacklight::Types::String, 'normalized_title_ssm'
-    attribute :normalized_date, Blacklight::Types::String, 'normalized_date_ssm'
-    attribute :total_component_count, Blacklight::Types::String, 'total_component_count_is'
-    attribute :online_item_count, Blacklight::Types::String, 'online_item_count_is'
-    attribute :last_indexed, Blacklight::Types::Date, 'timestamp'
+    included do
+      attribute :parent_ids, Blacklight::Types::Array, 'parent_ssim'
+      attribute :parent_labels, Blacklight::Types::Array, 'parent_unittitles_ssm'
+      attribute :parent_levels, Blacklight::Types::Array, 'parent_levels_ssm'
+      attribute :unitid, Blacklight::Types::String, 'unitid_ssm'
+      attribute :extent, Blacklight::Types::String, 'extent_ssm'
+      attribute :abstract, Blacklight::Types::String, 'abstract_ssm'
+      attribute :scope, Blacklight::Types::String, 'scopecontent_ssm'
+      attribute :creator, Blacklight::Types::String, 'creator_ssm'
+      attribute :level, Blacklight::Types::String, 'level_ssm'
+      attribute :terms, Blacklight::Types::String, 'userestrict_ssm'
+      # Restrictions for component sidebar
+      attribute :parent_restrictions, Blacklight::Types::String, 'parent_access_restrict_ssm'
+      # Terms for component sidebar
+      attribute :parent_terms, Blacklight::Types::String, 'parent_access_terms_ssm'
+      attribute :reference, Blacklight::Types::String, 'ref_ssm'
+      attribute :normalized_title, Blacklight::Types::String, 'normalized_title_ssm'
+      attribute :normalized_date, Blacklight::Types::String, 'normalized_date_ssm'
+      attribute :total_component_count, Blacklight::Types::String, 'total_component_count_is'
+      attribute :online_item_count, Blacklight::Types::String, 'online_item_count_is'
+      attribute :last_indexed, Blacklight::Types::Date, 'timestamp'
+    end
 
     def repository_config
       return unless repository
