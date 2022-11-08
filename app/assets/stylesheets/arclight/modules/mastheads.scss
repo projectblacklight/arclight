@@ -1,22 +1,22 @@
 .navbar-search {
-  // Undo some of Blacklight's extending of column classes.
   .search-query-form {
-    flex-basis: auto !important;
-    max-width: 100% !important;
-  }
-}
+    max-width: 100% !important;   // work around blacklight styles
+    display: flex;
+    gap: .5rem;
 
-.within-collection-dropdown {
-  flex-basis: calc(20ch + 2rem);
-  flex-basis: max-content;
-  min-width: 0;
+    // wrap collection dropdown onto its own line on smaller screens
+    @include media-breakpoint-down(md) {
+      flex-wrap: wrap;
+    }
 
-  @include media-breakpoint-up(sm) {
-    width: 50% !important;
-  }
+    .input-group {
+      width: unset;
+      flex: auto;
+    }
 
-  @include media-breakpoint-up(lg) {
-    min-width: 0;
+    .within-collection-dropdown {
+      flex: none;
+    }
   }
 }
 
