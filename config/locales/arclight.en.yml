@@ -70,7 +70,7 @@ en:
         has_content: Collection contents
         online_content:
           description: Some materials from this collection are available online.
-          link_text: Show only online content.
+          link_text: Show only online content
           title: Online content
         our_collections: Our Collections
         sections:
