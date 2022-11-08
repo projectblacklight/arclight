@@ -7,41 +7,12 @@
   itemscope: true,
   itemtype: @document.itemtype,
   class: classes.flatten.join(' ') do %>
-  <div class="al-search-result-index-article row d-flex align-items-start">
-    <div class="col-auto">
+    <div class="px-2">
       <%= icon %>
     </div>
 
-    <div class="col col-no-left-padding d-flex flex-wrap">
-      <div class="documentHeader my-w-75 w-md-100 order-0" data-document-id="<%= document.id %>">
-        <h3 class="index_title document-title-heading">
-          <%= helpers.link_to_document document, counter: @counter %>
-          <%= content_tag('span', class: 'al-document-extent badge') do %>
-            <%= document.extent %>
-          <% end if document.extent && !compact? %>
-        </h3>
-      </div>
-
-      <div class="my-w-25 w-md-100 order-12 order-md-1 d-flex justify-content-end">
-        <%= content_tag('div', class: 'al-document-container col col-no-left-padding text-muted ml-auto') do %>
-          <%= document.containers.join(', ') %>
-        <% end if document.containers.present? %>
-
-        <div class="d-inline-flex">
-          <%= helpers.render_index_doc_actions document, wrapping_class: 'd-inline-flex justify-content-end' %>
-        </div>
-      </div>
-
-      <div class="order-2 mb-2">
-        <%= render Arclight::IndexMetadataFieldComponent.with_collection(@presenter&.field_presenters.select { |field| !compact? || field.field_config.compact }) %>
-
-        <% rendered_breadcrumbs = capture { render breadcrumbs } %>
-        <% if rendered_breadcrumbs.present? %>
-          <div class='breadcrumb-links'>
-            <%= rendered_breadcrumbs %>
-          </div>
-        <% end %>
-      </div>
+    <div class="container">
+      <%= title %>
+      <%= metadata %>
     </div>
-  </div>
 <% end %>

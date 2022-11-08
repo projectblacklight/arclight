@@ -7,6 +7,13 @@ module Arclight
   class SearchResultComponent < Blacklight::DocumentComponent
     attr_reader :document
 
+    def before_render
+      set_slot(:title, nil, component: Arclight::SearchResultTitleComponent, compact: compact?)
+      debugger
+      set_slot(:metadata, nil, component: Arclight::SearchResultMetadataComponent, fields: presenter.field_presenters.to_a, compact: compact?)
+      super
+    end
+
     def compact?
       presenter.view_config.key.to_s == 'compact'
     end
@@ -22,6 +29,10 @@ module Arclight
       }
 
       Arclight::BreadcrumbComponent.new(document: @document, **args)
+    end
+
+    def classes
+      super + ['d-flex']
     end
 
     delegate :grouped?, to: :helpers

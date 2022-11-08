@@ -1,0 +1,10 @@
+  <div class="order-2 mb-2">
+    <%= render Blacklight::MetadataFieldComponent.with_collection(fields.select { |field| !compact? || field.field_config.compact }, layout: Arclight::RowMetadataLayoutComponent) %>
+
+    <% rendered_breadcrumbs = capture { render breadcrumbs } %>
+    <% if rendered_breadcrumbs.present? %>
+      <div class='breadcrumb-links'>
+        <%= rendered_breadcrumbs %>
+      </div>
+    <% end %>
+  </div>

@@ -1,0 +1,16 @@
+<div class="row">
+  <% if truncate? %>
+    <%= tag.div(class: ['truncator', "al-field-#{@key}"], data: { controller: 'arclight-truncate' }) do %>
+      <%= tag.div @field.render, class: 'content', data: { arclight_truncate_target: 'content' } %>
+      <%= button_tag(type: :button, class: 'btn btn-sm btn-link',
+                      data: { action: 'click->arclight-truncate#trigger' },
+                      aria: { hidden: true }) do %>
+        <%= tag.span t('arclight.truncation.view_more'), class: 'view-more' %>
+        <%= tag.span t('arclight.truncation.view_less'), class: 'view-less' %>
+        <%= tag.span(class: 'icon') %>
+      <% end %>
+    <% end %>
+  <% else %>
+    <%= tag.div @field.render, class: @classes %>
+  <% end %>
+</div>

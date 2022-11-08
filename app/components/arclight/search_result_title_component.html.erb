@@ -1,0 +1,18 @@
+<header class="documentHeader row">
+  <%= content_tag @as, class: @classes do %>
+    <% before_titles.each do |t| %>
+      <%= t %>
+    <% end %>
+
+    <%= title -%>
+    <%= tag.span @document.extent, class: 'al-document-extent badge' if @document.extent && !compact? %>
+
+    <% after_titles.each do |t| %>
+      <%= t %>
+    <% end %>
+  <% end %>
+
+  <% actions.each do |action| %>
+    <%= action %>
+  <% end %>
+</header>
