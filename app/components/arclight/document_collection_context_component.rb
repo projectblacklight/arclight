@@ -6,12 +6,14 @@ module Arclight
     # @param [SolrDocument] document
     # @param [Boolean] hierarchy whether or not to show hierarchy controls
     # @param [String] nest_path determines which element to highlight
-    def initialize(document: nil, hierarchy: true, nest_path: nil, **kwargs)
+    def initialize(document: nil, hierarchy: true, nest_path: nil, blacklight_config: nil, **kwargs)
       super(document: document, **kwargs)
-
       @hierarchy = hierarchy
       @nest_path = nest_path
+      @blacklight_config = blacklight_config
     end
+
+    attr_reader :blacklight_config
 
     # we want to eager-load this document's children if we're in the
     # target document's component hierarchy
@@ -43,6 +45,14 @@ module Arclight
 
     def current_target?
       nest_path == @document.nest_path
+    end
+
+    def online_status
+      render online_status_component.new(document: @document)
+    end
+
+    def online_status_component
+      blacklight_config.show.online_status_component || Arclight::OnlineStatusIndicatorComponent
     end
 
     attr_reader :nest_path

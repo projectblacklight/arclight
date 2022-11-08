@@ -4,6 +4,7 @@
 
   <ul class="documents">
     <%= render Arclight::DocumentCollectionContextComponent.with_collection(@response.documents,
+                                                                            blacklight_config: blacklight_config,
                                                                             nest_path: params[:nest_path],
                                                                             hierarchy: params[:hierarchy].present?) %>
   </ul>
