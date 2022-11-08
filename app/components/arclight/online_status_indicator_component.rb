@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module Arclight
-  # Render an oembed viewer for a document
+  # Render an online status indicator for a document
   class OnlineStatusIndicatorComponent < Blacklight::Component
     def initialize(document:, **)
       @document = document
