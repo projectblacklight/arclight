@@ -5,7 +5,6 @@ module Arclight
   # Extends Blacklight::Solr::Document to provide Arclight specific behavior
   module SolrDocument
     extend ActiveSupport::Concern
-    include Blacklight::Solr::Document
 
     included do
       attribute :parent_ids, Blacklight::Types::Array, 'parent_ssim'
