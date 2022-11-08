@@ -114,6 +114,8 @@
 }
 
 .show-document {
+  @extend .ps-lg-4;
+
   .bookmark-toggle {
     @extend .card;
     @extend .bg-light;
