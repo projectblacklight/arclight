@@ -59,12 +59,6 @@ article.document {
   }
 }
 
-.documents-compact {
-  h3 {
-    font-size: $h5-font-size;
-  }
-}
-
 .al-grouped-results {
   .breadcrumb-links {
     font-size: $font-size-sm;
@@ -119,15 +113,6 @@ article.document {
   }
 }
 
-.documents-compact {
-  .document {
-    .breadcrumb-links,
-    .al-repository-footer {
-      font-size: $font-size-sm;
-    }
-  }
-}
-
 .al-data-range-histogram {
   margin-bottom: $spacer;
 }
@@ -141,22 +126,34 @@ article.document {
 .documents-compact {
   margin-bottom: $spacer;
 
+  h3 {
+    font-size: $h5-font-size;
+  }
+
   .document {
     border-bottom: $default-border-styling;
+    display: flex;
     padding: $spacer 0;
 
     &:first-child {
       padding-top: 0;
+    }
+    .breadcrumb-links,
+    .al-repository-footer {
+      font-size: $font-size-sm;
     }
   }
 }
 
 .index-document-functions {
   display: flex;
+  @extend .justify-content-end;
 }
 
 .al-document-container.text-muted {
   color: $gray-600 !important;
+  font-size: 16px;
+  float: right;
 }
 
 .col-no-left-padding {
