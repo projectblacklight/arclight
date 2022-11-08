@@ -9,6 +9,10 @@ module Arclight
       @classes = classes + ["al-document-#{@field.key.dasherize}"]
     end
 
+    def render?
+      helpers.document_index_view_type != :compact || @field.field_config.compact
+    end
+
     def truncate?
       !!@field.field_config.truncate
     end

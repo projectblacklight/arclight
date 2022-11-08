@@ -28,8 +28,7 @@
       </div>
 
       <div class="order-2 mb-2">
-        <%= render Arclight::IndexMetadataFieldComponent.with_collection(@presenter&.field_presenters.select { |field| !compact? || field.field_config.compact }) %>
-        <%= render Arclight::SearchResultBreadcrumbsComponent.new(document: document, count: compact? ? 2 : nil) %>
+        <%= metadata %>
       </div>
     </div>
 

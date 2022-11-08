@@ -2,19 +2,18 @@
 
 module Arclight
   # Render the breadcrumbs for a search result document
-  class SearchResultBreadcrumbsComponent < Blacklight::Component
-    attr_reader :document
+  class SearchResultBreadcrumbsComponent < Blacklight::MetadataFieldComponent
+    delegate :document, to: :@field
 
-    def initialize(document:, count:)
-      @document = document
-      @count = count
+    def initialize(field:, **kwargs)
+      @field = field
       super
     end
 
     def breadcrumbs
       offset = grouped? ? 2 : 0
 
-      Arclight::BreadcrumbComponent.new(document: document, count: @count, offset: offset)
+      Arclight::BreadcrumbComponent.new(document: document, count: breadcrumb_count, offset: offset)
     end
 
     def rendered_breadcrumbs
@@ -25,6 +24,14 @@ module Arclight
       rendered_breadcrumbs.present?
     end
 
+    def breadcrumb_count
+      @field.field_config.compact&.dig(:count) if compact?
+    end
+
     delegate :grouped?, to: :helpers
+
+    def compact?
+      helpers.document_index_view_type == :compact
+    end
   end
 end
