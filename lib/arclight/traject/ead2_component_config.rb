@@ -227,7 +227,7 @@ to_field 'date_range_sim', extract_xpath('./did/unitdate/@normal', to_text: fals
 end
 
 NAME_ELEMENTS.map do |selector|
-  to_field 'names_ssim', extract_xpath("./controlaccess/#{selector}")
+  to_field 'names_ssim', extract_xpath("./controlaccess/#{selector}"), unique
   to_field "#{selector}_ssm", extract_xpath(".//#{selector}")
 end
 
