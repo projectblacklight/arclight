@@ -29,14 +29,6 @@ module ArclightHelper
 
   ##
   # Classes used for customized show page in arclight
-  def show_content_classes
-    'col-8 show-document order-2'
-  end
-
-  def show_sidebar_classes
-    'col-4 order-1 collection-sidebar'
-  end
-
   def collection_active?
     search_state.filter('level_sim').values == ['Collection']
   end
