@@ -168,14 +168,12 @@ article.document {
 }
 
 .breadcrumb-links a {
-  border-bottom: 1px dashed $gray-600;
+  text-decoration-style: dotted;
   color: $body-color;
 
   &:hover,
   &:active {
-    border-color: inherit;
-    border-bottom-style: solid;
-    text-decoration: none;
+    text-decoration-style: solid;
   }
 }
 
