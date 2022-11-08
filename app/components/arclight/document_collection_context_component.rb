@@ -15,6 +15,10 @@ module Arclight
 
     attr_reader :blacklight_config
 
+    def classes
+      super - ['row']
+    end
+
     # we want to eager-load this document's children if we're in the
     # target document's component hierarchy
     def show_expanded?
