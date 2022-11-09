@@ -45,8 +45,8 @@ article.document {
   .blacklight-icons svg {
     fill: $secondary;
   }
-  .blacklight-icons.al-online-content-icon svg {
-    fill: $green;
+  .al-online-content-icon .blacklight-icons svg {
+    fill: $online-icon-color;
   }
   div.breadcrumb-links,
   div.al-document-abstract-or-scope,
