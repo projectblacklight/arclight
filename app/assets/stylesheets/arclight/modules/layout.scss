@@ -101,6 +101,11 @@
       }
     }
   }
+
+  svg.bi { 
+    vertical-align: text-bottom;
+    color: $light-icon-color;
+  }
 }
 
 .bookmark-toggle {

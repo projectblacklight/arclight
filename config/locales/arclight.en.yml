@@ -6,6 +6,7 @@ en:
     collection_info_component:
       collection_id: Collection ID
       last_indexed: Last indexed
+      more_info: More info
       online_items: Items available online
       total_components: Total components
     hierarchy:
