@@ -1,13 +1,14 @@
 // Colors
 $online-icon-color: $green !default;
-$background-highlight: #ffffaa;
-$default-border-color: $border-color;
+$background-highlight: #ffffaa !default;
+$default-border-color: $border-color  !default;
+$light-icon-color: #f5f5f5 !default;
 
 // Spacing
-$result-item-body-padding: 12px;
+$result-item-body-padding: 12px !default;
 
 // Mixins
-$default-border-styling: 1px solid $default-border-color;
+$default-border-styling: 1px solid $default-border-color !default;
 
 @mixin extent-badge {
   background-color: $gray-200;
