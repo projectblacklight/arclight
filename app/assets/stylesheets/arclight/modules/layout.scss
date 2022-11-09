@@ -106,6 +106,10 @@
     vertical-align: text-bottom;
     color: $light-icon-color;
   }
+  
+  .dropdown-item svg.bi {
+    color: $dark-icon-color;
+  }
 }
 
 .bookmark-toggle {
