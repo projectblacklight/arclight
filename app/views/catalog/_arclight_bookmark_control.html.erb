@@ -7,7 +7,7 @@
   <% unless bookmarked? document %>
     <%= form_tag(bookmark_path(document),
                  method: :put,
-                 class: 'bookmark-toggle col-auto',
+                 class: 'bookmark-toggle ms-2',
                  data: {
                    'doc-id' => document.id,
                    present: "#{blacklight_icon(:bookmark).html_safe}<span class=\"sr-only visually-hidden\">#{t('blacklight.search.bookmarks.present')}",
@@ -21,7 +21,7 @@
   <% else %>
     <%= form_tag(bookmark_path(document),
                  method: :delete,
-                 class: "bookmark-toggle col-auto",
+                 class: "bookmark-toggle ms-2",
                  data: {
                    'doc-id' => document.id,
                    present: "#{blacklight_icon(:bookmark).html_safe}<span class=\"sr-only visually-hidden\">#{t('blacklight.search.bookmarks.present')}",
