@@ -1,0 +1,13 @@
+<header class="documentHeader row" data-document-id="<%= @document.id %>">
+  <h3 class="index_title document-title-heading col">
+    <%= helpers.link_to_document @document, counter: @counter %>
+    <%= tag.span @document.extent, class: 'al-document-extent badge' if @document.extent && !compact? %>
+    <%= tag.span class: 'al-document-container text-muted ml-auto' do %>
+      <%= @document.containers.join(', ') %>
+    <% end if @document.containers.present? %>
+  </h3>
+
+  <% actions.each do |action| %>
+    <%= action %>
+  <% end %>
+</header>
