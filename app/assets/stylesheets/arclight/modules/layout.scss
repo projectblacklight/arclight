@@ -103,14 +103,15 @@
   }
 }
 
-.bookmark-toggle .toggle-bookmark {
-  display: inline;
-  margin-bottom: 0;
-  white-space: nowrap;
-}
-
 .bookmark-toggle {
   display: inline;
+  margin-left: 1em;
+  
+  .toggle-bookmark {
+    display: inline;
+    margin-bottom: 0;
+    white-space: nowrap;
+  }
 }
 
 .show-document {
