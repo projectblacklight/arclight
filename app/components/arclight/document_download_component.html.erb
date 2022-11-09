@@ -8,7 +8,7 @@
       <ul class="dropdown-menu">
         <% files.each do |file| %>
           <li><%= link_to(file.href, class: "dropdown-item", **@link_options) do %>
-            <%= gear_icon %> <%= dropdown_label(file) %>
+            <%= icon_for(file.type) %> <%= dropdown_label(file) %>
           <% end %>
           </li>
         <% end %>
@@ -17,7 +17,7 @@
   <% when 1 %>
     <% files.each do |file| %>
       <%= link_to(file.href, class: "btn btn-secondary btn-sm", **@link_options) do %>
-        <%= square_plus_icon %> <%= label(file) %>
+        <%= download_icon %> <%= label(file) %>
       <% end %>
     <% end %>
   <% end %>
