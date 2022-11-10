@@ -7,14 +7,12 @@
 </div>
 
 <div class="title-container">
-  <div class="d-flex justify-content-between align-items-start">
-    <%= content_tag :h1 do %>
-      <%= document.normalized_title %>
-    <% end %>
-    <%= render 'arclight/requests', document: document %>
-    <%= render 'catalog/arclight_bookmark_control', document: document %>
-  </div>
-
+  <%= content_tag :h1 do %>
+    <%= document.normalized_title %>
+  <% end %>
+  <%= render 'arclight/requests', document: document %>
+  <%= render 'catalog/arclight_bookmark_control', document: document %>
+  <%= button_tag(t('arclight.views.show.toggle_sidebar'), type: :button, class: 'btn btn-sm btn-secondary d-lg-none sidebar-toggle', data: { 'bs-toggle' => 'offcanvas', 'bs-target' => '#sidebar' }, aria: { 'controls' => 'sidebar' }) %>
   <%= online_filter %>
 </div>
 

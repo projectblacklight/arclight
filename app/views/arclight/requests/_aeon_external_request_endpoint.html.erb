@@ -1,9 +1,9 @@
 <% document ||= @document %>
 <% aeon_external_request ||= Arclight::Requests::AeonExternalRequest.new(document, document_presenter(document)) %>
 
-<%= form_tag aeon_external_request.url, method: :post, class: 'al-request-form' do |f| %>
+<%= form_tag aeon_external_request.url, method: :post, class: 'd-inline-block al-request-form' do |f| %>
   <%= render(Blacklight::HiddenSearchStateComponent.new(params: aeon_external_request.form_mapping)) %>
-  <button type='submit' class='al-request-button btn btn-primary btn-sm'>
+  <button type='submit' class='al-request-button btn btn-primary btn-sm me-1'>
     <%= t('arclight.request.container') %>
   </button>
 <% end %>

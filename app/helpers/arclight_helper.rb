@@ -30,11 +30,11 @@ module ArclightHelper
   ##
   # Classes used for customized show page in arclight
   def show_content_classes
-    'col-8 show-document order-2'
+    'col-12 col-lg-8 show-document order-2'
   end
 
   def show_sidebar_classes
-    'col-4 order-1 collection-sidebar'
+    'col-lg-4 order-1 collection-sidebar'
   end
 
   def collection_active?

@@ -103,6 +103,39 @@ $hierarchy-view-collapse-icon: url("data:image/svg+xml,<svg xmlns='http://www.w3
   border-bottom: $border-width solid $border-color;
   padding-bottom: $spacer * .5;
   margin-bottom: $spacer * .75;
+  display: grid;
+  gap: 0.5rem;
+  grid-template-areas:
+    "title bookmark-toggle"
+    "request request"
+    "sidebar-toggle sidebar-toggle";
+  justify-content: start;
+  align-items: start;
+
+  @include media-breakpoint-up(lg) {
+    grid-template-areas:
+      "title request bookmark-toggle"
+      "sidebar-toggle sidebar-toggle sidebar-toggle"
+  }
+
+  h1 {
+    grid-area: title;
+    margin-bottom: 0;
+  }
+
+  .al-request {
+    grid-area: request;
+  }
+
+  .bookmark-toggle {
+    grid-area: bookmark-toggle;
+    margin-left: 0 !important;
+  }
+
+  .sidebar-toggle {
+    grid-area: sidebar-toggle;
+    max-width: fit-content;
+  }
 }
 
 .online-contents {
