@@ -23,6 +23,7 @@ settings do
   # provide 'root' # the root EAD collection indexing context
   # provide 'parent' # the immediate parent component (or collection) indexing context
   # provide 'counter' # a global component counter to provide a global sort order for nested components
+  provide 'component_traject_config', __FILE__
   provide 'reader_class_name', 'Arclight::Traject::NokogiriNamespacelessReader'
   provide 'logger', Logger.new($stderr)
 end
@@ -277,13 +278,14 @@ to_field 'did_note_ssm', extract_xpath('./did/note')
 to_field 'components' do |record, accumulator, context|
   child_components = record.xpath('c|c01|c02|c03|c04|c05|c06|c07|c08|c09|c10|c11|c12')
   component_indexer = Traject::Indexer::NokogiriIndexer.new.tap do |i|
-    i.load_config_file(__FILE__)
+    i.load_config_file(context.settings[:component_traject_config])
   end
 
   component_indexer.settings do
     provide :parent, context
     provide :root, context.settings[:root]
     provide :counter, context.settings[:counter]
+    provide :component_traject_config, context.settings[:component_traject_config]
   end
 
   child_components.each do |child_component|
