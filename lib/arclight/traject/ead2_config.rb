@@ -264,6 +264,7 @@ to_field 'components' do |record, accumulator, context|
     provide :root, context
     provide :counter, counter
     provide :logger, context.settings[:logger]
+    provide :component_traject_config, context.settings[:component_traject_config]
   end
 
   child_components.each do |child_component|
