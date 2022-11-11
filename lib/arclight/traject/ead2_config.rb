@@ -56,6 +56,7 @@ settings do
   provide 'repository', ENV.fetch('REPOSITORY_ID', nil)
   provide 'logger', Logger.new($stderr)
   provide 'component_traject_config', File.join(__dir__, 'ead2_component_config.rb')
+  # provide 'component_identifier_format', '%{root_id}%{ref_id}'
 end
 
 each_record do |_record, context|
@@ -262,6 +263,7 @@ to_field 'components' do |record, accumulator, context|
       provide :counter, counter
       provide :logger, context.settings[:logger]
       provide :component_traject_config, context.settings[:component_traject_config]
+      provide :component_identifier_format, context.settings[:component_identifier_format] if context.settings[:component_identifier_format]
     end
 
     i.load_config_file(context.settings[:component_traject_config])

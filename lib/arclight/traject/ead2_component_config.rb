@@ -26,6 +26,7 @@ settings do
   provide 'component_traject_config', __FILE__
   provide 'reader_class_name', 'Arclight::Traject::NokogiriNamespacelessReader'
   provide 'logger', Logger.new($stderr)
+  provide 'component_identifier_format', '%<root_id>s%<ref_id>s'
 end
 
 NAME_ELEMENTS = %w[corpname famname name persname].freeze
@@ -59,7 +60,9 @@ DID_SEARCHABLE_NOTES_FIELDS = %w[
   physloc
 ].freeze
 
-to_field 'ref_ssi' do |record, accumulator, _context|
+to_field 'ref_ssi' do |record, accumulator, context|
+  next if context.output_hash['ref_ssi']
+
   accumulator << if record.attribute('id').blank?
                    strategy = Arclight::MissingIdStrategy.selected
                    hexdigest = strategy.new(record).to_hexdigest
@@ -82,10 +85,15 @@ to_field 'ref_ssm' do |_record, accumulator, context|
 end
 
 to_field 'id' do |_record, accumulator, context|
-  accumulator << [
-    settings[:root].output_hash['id'],
-    context.output_hash['ref_ssi']
-  ].join
+  next if context.output_hash['id']
+
+  data = {
+    ref_id: context.output_hash['ref_ssi']&.first,
+    root_id: settings[:root].output_hash['id']&.first,
+    repository: settings[:root].settings[:repository]
+  }
+
+  accumulator << (settings[:component_identifier_format] % data)
 end
 
 to_field 'title_filing_si', extract_xpath('./did/unittitle'), first_only
