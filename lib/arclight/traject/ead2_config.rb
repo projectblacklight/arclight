@@ -248,10 +248,6 @@ to_field 'components' do |record, accumulator, context|
   child_components = record.xpath("/ead/archdesc/dsc/c|#{('/ead/archdesc/dsc/c01'..'/ead/archdesc/dsc/c12').to_a.join('|')}")
   next unless child_components.any?
 
-  component_indexer = Traject::Indexer::NokogiriIndexer.new.tap do |i|
-    i.load_config_file(context.settings[:component_traject_config])
-  end
-
   counter = Class.new do
     def increment
       @counter ||= -1
@@ -259,12 +255,16 @@ to_field 'components' do |record, accumulator, context|
     end
   end.new
 
-  component_indexer.settings do
-    provide :parent, context
-    provide :root, context
-    provide :counter, counter
-    provide :logger, context.settings[:logger]
-    provide :component_traject_config, context.settings[:component_traject_config]
+  component_indexer = Traject::Indexer::NokogiriIndexer.new.tap do |i|
+    i.settings do
+      provide :parent, context
+      provide :root, context
+      provide :counter, counter
+      provide :logger, context.settings[:logger]
+      provide :component_traject_config, context.settings[:component_traject_config]
+    end
+
+    i.load_config_file(context.settings[:component_traject_config])
   end
 
   child_components.each do |child_component|
