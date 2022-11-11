@@ -118,4 +118,12 @@ RSpec.describe Arclight::Repository do
       end
     end
   end
+
+  describe 'adding custom fields' do
+    subject { instance.curators_note }
+
+    let(:instance) { described_class.new(curators_note: 'hey') }
+
+    it { is_expected.to eq 'hey' }
+  end
 end
