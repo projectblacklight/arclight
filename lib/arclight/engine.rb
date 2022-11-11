@@ -39,5 +39,9 @@ module Arclight
       app.config.assets.precompile << 'arclight/oembed_viewer.js'
       app.config.assets.precompile << 'arclight/truncate_controller.js'
     end
+
+    initializer 'arclight.importmap', before: 'importmap' do |app|
+      app.config.importmap.paths << Engine.root.join('config/importmap.rb') if app.config.respond_to?(:importmap)
+    end
   end
 end
