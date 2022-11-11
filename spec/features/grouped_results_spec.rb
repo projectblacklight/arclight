@@ -2,7 +2,7 @@
 
 require 'spec_helper'
 
-RSpec.describe 'Grouped search results', type: :feature do
+RSpec.describe 'Grouped search results' do
   it 'displays collection group information' do
     visit search_catalog_path q: 'alpha omega', group: 'true'
     within '.al-grouped-title-bar' do

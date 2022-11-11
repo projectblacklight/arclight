@@ -2,7 +2,7 @@
 
 require 'spec_helper'
 
-RSpec.describe 'Component Page', type: :feature do
+RSpec.describe 'Component Page' do
   let(:doc_id) { 'aoa271aspace_843e8f9f22bac69872d0802d6fffbb04' }
   let(:download_config) do
     ActiveSupport::HashWithIndifferentAccess.new(

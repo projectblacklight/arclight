@@ -2,7 +2,7 @@
 
 require 'spec_helper'
 
-RSpec.describe 'arclight/repositories/index', type: :view do
+RSpec.describe 'arclight/repositories/index' do
   let(:test_data) { Arclight::Repository.all }
 
   before do

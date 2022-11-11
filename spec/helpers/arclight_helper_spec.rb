@@ -2,7 +2,7 @@
 
 require 'spec_helper'
 
-RSpec.describe ArclightHelper, type: :helper do
+RSpec.describe ArclightHelper do
   let(:params) { {} }
   let(:search_state) do
     Blacklight::SearchState.new(params, CatalogController.blacklight_config)

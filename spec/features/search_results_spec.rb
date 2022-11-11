@@ -2,7 +2,7 @@
 
 require 'spec_helper'
 
-RSpec.describe 'Search results', type: :feature do
+RSpec.describe 'Search results' do
   describe 'search results' do
     it 'text search works' do
       visit search_catalog_path q: 'a brief', search_field: 'all_fields'

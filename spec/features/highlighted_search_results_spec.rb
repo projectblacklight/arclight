@@ -2,7 +2,7 @@
 
 require 'spec_helper'
 
-RSpec.describe 'Highlighted search results', type: :feature do
+RSpec.describe 'Highlighted search results' do
   describe 'when querying' do
     describe '#all_fields' do
       it 'highlights the snippets' do

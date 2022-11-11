@@ -2,7 +2,7 @@
 
 require 'spec_helper'
 
-RSpec.describe 'Item breadcrumb', type: :feature do
+RSpec.describe 'Item breadcrumb' do
   it 'results page shows navigable breadcrumbs' do
     visit search_catalog_path q: 'expansion', search_field: 'all_fields'
     document = page.all('article').find do |doc|

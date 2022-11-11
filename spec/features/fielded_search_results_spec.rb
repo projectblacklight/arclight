@@ -2,7 +2,7 @@
 
 require 'spec_helper'
 
-RSpec.describe 'Field-based search results', type: :feature do
+RSpec.describe 'Field-based search results' do
   describe 'searches by' do
     describe '#all_fields' do
       context 'for collections, fielded content is searchable by' do

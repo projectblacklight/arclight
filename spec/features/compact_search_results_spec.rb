@@ -2,7 +2,7 @@
 
 require 'spec_helper'
 
-RSpec.describe 'Compact Search Results', type: :feature do
+RSpec.describe 'Compact Search Results' do
   it 'As a user I should be able to view results in a compact display' do
     visit root_path
     click_button 'Search'

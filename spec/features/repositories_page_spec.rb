@@ -2,7 +2,7 @@
 
 require 'spec_helper'
 
-RSpec.describe 'Repositores Page', type: :feature do
+RSpec.describe 'Repositores Page' do
   it 'is navigabe from the home page' do
     visit '/'
 
