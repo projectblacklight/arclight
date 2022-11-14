@@ -2,7 +2,7 @@
 
 require 'spec_helper'
 
-RSpec.describe 'Collection filtering', type: :feature do
+RSpec.describe 'Collection filtering' do
   context 'when in a search result filtered by collection' do
     it 'has the a select input with the "this collection" option selected' do
       visit search_catalog_path(f: { collection_sim: ['Alpha Omega Alpha Archives, 1894-1992'] })

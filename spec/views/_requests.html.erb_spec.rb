@@ -2,7 +2,7 @@
 
 require 'spec_helper'
 
-RSpec.describe 'arclight/_requests', type: :view do
+RSpec.describe 'arclight/_requests' do
   let(:document) { SolrDocument.new(id: 'abc123') }
   let(:config) { instance_double(Arclight::Repository) }
   let(:blacklight_config) { Blacklight::Configuration.new }

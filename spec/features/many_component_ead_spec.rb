@@ -2,7 +2,7 @@
 
 require 'spec_helper'
 
-RSpec.describe 'Many component EAD', type: :feature do
+RSpec.describe 'Many component EAD' do
   describe 'hierarchy', js: true do
     before { visit solr_document_path 'lc0100' }
 

@@ -2,7 +2,7 @@
 
 require 'spec_helper'
 
-describe 'EAD 2 traject indexing', type: :feature do
+describe 'EAD 2 traject indexing' do
   subject(:result) do
     indexer.map_record(record)
   end

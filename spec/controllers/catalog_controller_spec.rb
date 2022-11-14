@@ -2,7 +2,7 @@
 
 require 'spec_helper'
 
-RSpec.describe CatalogController, type: :controller do
+RSpec.describe CatalogController do
   describe 'index action customizations' do
     context 'any other view' do
       it 'starts a search_session' do

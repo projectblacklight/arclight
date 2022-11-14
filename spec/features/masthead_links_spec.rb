@@ -2,7 +2,7 @@
 
 require 'spec_helper'
 
-RSpec.describe 'Masthead links', type: :feature do
+RSpec.describe 'Masthead links' do
   describe 'collection link' do
     it 'is not active when collection search is not activated' do
       visit search_catalog_path q: 'a brief', search_field: 'all_fields'

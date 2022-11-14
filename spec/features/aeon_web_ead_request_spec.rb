@@ -2,7 +2,7 @@
 
 require 'spec_helper'
 
-describe 'Aeon Web EAD Request', type: :feature, js: true do
+describe 'Aeon Web EAD Request', js: true do
   context 'when EAD URL template is provided' do
     it 'creates a request link' do
       visit solr_document_path 'm0198-xml'

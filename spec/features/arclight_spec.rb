@@ -2,7 +2,7 @@
 
 require 'spec_helper'
 
-RSpec.describe 'Arclight', type: :feature do
+RSpec.describe 'Arclight' do
   it 'an index view is present with search results' do
     visit search_catalog_path q: '', search_field: 'all_fields'
     expect(page).to have_css '.document', count: 10

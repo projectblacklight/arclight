@@ -2,7 +2,7 @@
 
 require 'spec_helper'
 
-RSpec.describe 'Collection Page', type: :feature do
+RSpec.describe 'Collection Page' do
   let(:doc_id) { 'aoa271' }
   let(:download_config) do
     ActiveSupport::HashWithIndifferentAccess.new(

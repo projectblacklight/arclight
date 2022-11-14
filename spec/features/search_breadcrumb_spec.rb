@@ -2,7 +2,7 @@
 
 require 'spec_helper'
 
-RSpec.describe 'Search Breadcrumb', type: :feature do
+RSpec.describe 'Search Breadcrumb' do
   context 'on regular search results' do
     it do
       visit search_catalog_path q: 'a brief', search_field: 'all_fields'
