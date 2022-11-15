@@ -21,7 +21,7 @@ RSpec.describe Arclight::CollectionSidebarComponent, type: :component do
     expect(page).to have_link 'Summary'
     expect(page).to have_link 'Background'
     expect(page).to have_link 'Related'
-    expect(page).to have_link 'Indexed Terms'
-    expect(page).to have_link 'Access and Use'
+    expect(page).to have_link 'Indexed terms'
+    expect(page).to have_link 'Access and use'
   end
 end
