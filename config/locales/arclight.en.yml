@@ -75,16 +75,16 @@ en:
           title: Online content
         our_collections: Our Collections
         sections:
-          access_field: Access and Use
+          access_field: Access and use
           background_field: Background
-          collection_context_field: Collection Context
+          collection_context_field: Collection context
           component_field: About this %{level}
-          component_indexed_terms_field: Indexed Terms
-          indexed_terms_field: Indexed Terms
+          component_indexed_terms_field: Indexed terms
+          indexed_terms_field: Indexed terms
           related_field: Related
-          scope_and_arrangement_field: Scope and Arrangement
+          scope_and_arrangement_field: Scope and arrangement
           summary_field: Summary
-        toggle_sidebar: Navigate the Collection
+        toggle_sidebar: Navigate the collection
     within_collection_dropdown:
       all_collections: all collections
       label_html: Search<span class="sr-only visually-hidden"> within</span>
