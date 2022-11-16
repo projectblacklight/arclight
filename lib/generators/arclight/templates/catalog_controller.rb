@@ -275,8 +275,8 @@ class CatalogController < ApplicationController
     config.add_summary_field 'prefercite_ssm', label: 'Preferred citation', helper_method: :render_html_tags
 
     # Collection Show Page - Background Section
-    config.add_background_field 'scopecontent_ssm', label: 'Scope and Content', helper_method: :render_html_tags
-    config.add_background_field 'bioghist_ssm', label: 'Biographical / Historical', helper_method: :render_html_tags
+    config.add_background_field 'scopecontent_ssm', label: 'Scope and content', helper_method: :render_html_tags
+    config.add_background_field 'bioghist_ssm', label: 'Biographical / historical', helper_method: :render_html_tags
     config.add_background_field 'acqinfo_ssim', label: 'Acquisition information', helper_method: :render_html_tags
     config.add_background_field 'appraisal_ssm', label: 'Appraisal information', helper_method: :render_html_tags
     config.add_background_field 'custodhist_ssm', label: 'Custodial history', helper_method: :render_html_tags
@@ -327,7 +327,7 @@ class CatalogController < ApplicationController
     }
     config.add_component_field 'abstract_ssm', label: 'Abstract', helper_method: :render_html_tags
     config.add_component_field 'extent_ssm', label: 'Extent'
-    config.add_component_field 'scopecontent_ssm', label: 'Scope and Content', helper_method: :render_html_tags
+    config.add_component_field 'scopecontent_ssm', label: 'Scope and content', helper_method: :render_html_tags
     config.add_component_field 'acqinfo_ssim', label: 'Acquisition information', helper_method: :render_html_tags
     config.add_component_field 'appraisal_ssm', label: 'Appraisal information', helper_method: :render_html_tags
     config.add_component_field 'custodhist_ssm', label: 'Custodial history', helper_method: :render_html_tags
@@ -362,13 +362,13 @@ class CatalogController < ApplicationController
 
     # Collection Show Page Access Tab - Terms and Conditions Section
     config.add_terms_field 'accessrestrict_ssm', label: 'Restrictions', helper_method: :render_html_tags
-    config.add_terms_field 'userestrict_ssm', label: 'Terms of Access', helper_method: :render_html_tags
+    config.add_terms_field 'userestrict_ssm', label: 'Terms of access', helper_method: :render_html_tags
 
     # Component Show Page Access Tab - Terms and Condition Section
     config.add_component_terms_field 'accessrestrict_ssm', label: 'Restrictions', helper_method: :render_html_tags
-    config.add_component_terms_field 'userestrict_ssm', label: 'Terms of Access', helper_method: :render_html_tags
-    config.add_component_terms_field 'parent_access_restrict_ssm', label: 'Parent Restrictions', helper_method: :render_html_tags
-    config.add_component_terms_field 'parent_access_terms_ssm', label: 'Parent Terms of Access', helper_method: :render_html_tags
+    config.add_component_terms_field 'userestrict_ssm', label: 'Terms of access', helper_method: :render_html_tags
+    config.add_component_terms_field 'parent_access_restrict_ssm', label: 'Parent restrictions', helper_method: :render_html_tags
+    config.add_component_terms_field 'parent_access_terms_ssm', label: 'Parent terms of access', helper_method: :render_html_tags
 
     # Collection and Component Show Page Access Tab - In Person Section
     config.add_in_person_field 'repository_location', values: ->(_, document, _) { document.repository_config }, label: 'Location of this collection', component: Arclight::RepositoryLocationComponent
