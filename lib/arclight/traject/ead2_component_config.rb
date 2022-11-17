@@ -137,7 +137,7 @@ end
 
 to_field 'parent_unittitles_ssm' do |_rec, accumulator, _context|
   accumulator.concat(settings[:parent].output_hash['parent_unittitles_ssm'] || [])
-  accumulator.concat settings[:parent].output_hash['normalized_title_ssm']
+  accumulator.concat settings[:parent].output_hash['normalized_title_ssm'] || []
 end
 
 to_field 'parent_unittitles_teim' do |_record, accumulator, context|
@@ -147,7 +147,7 @@ end
 to_field 'parent_levels_ssm' do |_record, accumulator, _context|
   ## Top level document
   accumulator.concat settings[:parent].output_hash['parent_levels_ssm'] || []
-  accumulator.concat settings[:parent].output_hash['level_ssm']
+  accumulator.concat settings[:parent].output_hash['level_ssm'] || []
 end
 
 to_field 'unitid_ssm', extract_xpath('./did/unitid')
