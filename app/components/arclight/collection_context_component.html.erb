@@ -4,7 +4,9 @@
     <h2>Collection</h2>
     <h3><%= title %></h3>
 
-    <%= render Arclight::DocumentDownloadComponent.new(downloads: collection.downloads) %>
-    <%= render Arclight::CollectionInfoComponent.new(collection: collection) %>
+    <div class="al-collection-context-actions d-flex flex-wrap gap-1">
+      <%= render Arclight::DocumentDownloadComponent.new(downloads: collection.downloads) %>
+      <%= render Arclight::CollectionInfoComponent.new(collection: collection) %>
+    </div>
   </div>
 </div>
