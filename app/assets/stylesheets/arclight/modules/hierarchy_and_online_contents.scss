@@ -22,7 +22,8 @@ $hierarchy-view-collapse-icon: url("data:image/svg+xml,<svg xmlns='http://www.w3
   }
 }
 
-.al-hierarchy-highlight > .documentHeader {
+.al-hierarchy-highlight > .documentHeader,
+.al-sidebar-navigation-context .active {
   background: $mark-bg;
 }
 
