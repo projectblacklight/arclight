@@ -2,7 +2,7 @@
 
 require 'spec_helper'
 
-describe 'EAD 2 traject indexing' do
+RSpec.describe 'EAD 2 traject indexing' do
   subject(:result) do
     indexer.map_record(record)
   end
@@ -251,7 +251,7 @@ describe 'EAD 2 traject indexing' do
     end
 
     it 'relatedmaterial' do
-      expect(result['relatedmaterial_ssm'].first).to match(/^An unprocessed collection includes/)
+      expect(result['relatedmaterial_ssm'].first).to start_with('<p>An unprocessed collection includes')
     end
 
     it 'abstract' do
@@ -259,23 +259,23 @@ describe 'EAD 2 traject indexing' do
     end
 
     it 'separatedmaterial' do
-      expect(result['separatedmaterial_ssm'].first).to match(/^Birth, Apollonius of Perga brain/)
+      expect(result['separatedmaterial_ssm'].first).to start_with('<p>Birth, Apollonius of Perga brain')
     end
 
     it 'otherfindaid' do
-      expect(result['otherfindaid_ssm'].first).to match(/^Li Europan lingues es membres del/)
+      expect(result['otherfindaid_ssm'].first).to start_with('<p>Li Europan lingues es membres del')
     end
 
     it 'altformavail' do
-      expect(result['altformavail_ssm'].first).to match(/^Rig Veda a mote of dust suspended/)
+      expect(result['altformavail_ssm'].first).to start_with('<p>Rig Veda a mote of dust suspended')
     end
 
     it 'originalsloc' do
-      expect(result['originalsloc_ssm'].first).to match(/^Something incredible is waiting/)
+      expect(result['originalsloc_ssm'].first).to start_with('<p>Something incredible is waiting')
     end
 
     it 'arrangement' do
-      expect(result['arrangement_ssm'].first).to match(/Arranged into seven series./)
+      expect(result['arrangement_ssm'].first).to eq '<p>Arranged into seven series.</p>'
     end
 
     it 'acqinfo' do
@@ -283,7 +283,7 @@ describe 'EAD 2 traject indexing' do
     end
 
     it 'appraisal' do
-      expect(result['appraisal_ssm'].first).to match(/^Corpus callosum something incredible/)
+      expect(result['appraisal_ssm'].first).to start_with('<p>Corpus callosum something incredible')
     end
 
     it 'custodhist' do
