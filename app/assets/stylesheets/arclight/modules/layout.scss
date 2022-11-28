@@ -6,13 +6,15 @@
 
 .al-show-breadcrumb {
   border-bottom: $border-width solid $border-color;
-  padding-bottom: $spacer * .5;
+  padding-bottom: $spacer;
   margin-bottom: $spacer * .75;
   width: 100%;
   
   $bent-arrow: "data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='20' height='15'><path fill-rule='evenodd' d='M1.5 1.5A.5.5 0 0 0 1 2v4.8a2.5 2.5 0 0 0 2.5 2.5h9.793l-3.347 3.346a.5.5 0 0 0 .708.708l4.2-4.2a.5.5 0 0 0 0-.708l-4-4a.5.5 0 0 0-.708.708L13.293 8.3H3.5A1.5 1.5 0 0 1 2 6.8V2a.5.5 0 0 0-.5-.5z'></path></svg>";
 
   .breadcrumb {
+    margin: 0;
+
     .breadcrumb-item .breadcrumb {
       padding-left: 0.5rem;
     }
