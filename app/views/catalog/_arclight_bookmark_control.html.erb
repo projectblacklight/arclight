@@ -1,37 +1,25 @@
 <% if current_or_guest_user %>
-  <%-
-  # Note these two forms are pretty similar but for different :methods, classes, and labels.
-  # but it was simpler to leave them seperate instead of DRYing them, got confusing trying that.
-  # the data-doc-id attribute is used by our JS that converts to a checkbox/label.
-  -%>
-  <% unless bookmarked? document %>
-    <%= form_tag(bookmark_path(document),
-                 method: :put,
-                 class: 'bookmark-toggle ms-2',
-                 data: {
-                   'doc-id' => document.id,
-                   present: "#{blacklight_icon(:bookmark).html_safe}<span class=\"sr-only visually-hidden\">#{t('blacklight.search.bookmarks.present')}",
-                   absent: "#{blacklight_icon(:bookmark).html_safe}<span class=\"sr-only visually-hidden\">#{t('blacklight.search.bookmarks.absent')}",
-                   inprogress: t('blacklight.search.bookmarks.inprogress')
-                }) do %>
-      <%= submit_tag(t('blacklight.bookmarks.add.button'),
-                     id: "bookmark_toggle_#{document.id.to_s.parameterize}",
-                     class: "bookmark-add btn btn-outline-secondary") %>
-    <% end %>
-  <% else %>
-    <%= form_tag(bookmark_path(document),
-                 method: :delete,
-                 class: "bookmark-toggle ms-2",
-                 data: {
-                   'doc-id' => document.id,
-                   present: "#{blacklight_icon(:bookmark).html_safe}<span class=\"sr-only visually-hidden\">#{t('blacklight.search.bookmarks.present')}",
-                   absent: "#{blacklight_icon(:bookmark).html_safe}<span class=\"sr-only visually-hidden\">#{t('blacklight.search.bookmarks.absent')}",
-                   inprogress: t('blacklight.search.bookmarks.inprogress')
-                }) do %>
-      <%= submit_tag(t('blacklight.bookmarks.remove.button'),
-                     id: "bookmark_toggle_#{document.id.to_s.parameterize}",
-                     class: "bookmark-remove btn btn-outline-secondary") %>
-    <% end %>
+  <% bookmarked = bookmarked?(document)%>
+  <%= form_tag(bookmark_path(document),
+              authenticity_token: false,
+              method:  bookmarked ? :delete : :put,
+              class: "bookmark-toggle ms-2",
+              data: {
+                'doc-id' => document.id,
+                present: "#{blacklight_icon(:bookmark).html_safe}<span class=\"sr-only visually-hidden\">#{t('blacklight.search.bookmarks.present')}</span>",
+                absent: "#{blacklight_icon(:bookmark).html_safe}<span class=\"sr-only visually-hidden\">#{t('blacklight.search.bookmarks.absent')}</span>",
+                inprogress: t('blacklight.search.bookmarks.inprogress')
+              }) do %>
+    <div class="checkbox toggle-bookmark">
+      <label class="toggle-bookmark" data-checkboxsubmit-target="label">
+        <input type="checkbox" class="toggle-bookmark" data-checkboxsubmit-target="checkbox">
+        <span data-checkboxsubmit-target="span"><%= bookmarked ? "#{blacklight_icon(:bookmark).html_safe}<span class=\"sr-only visually-hidden\">#{t('blacklight.search.bookmarks.present')}</span>".html_safe : "#{blacklight_icon(:bookmark).html_safe}<span class=\"sr-only visually-hidden\">#{t('blacklight.search.bookmarks.absent')}</span>".html_safe %></span>
+      </label>
+    </div>
+
+    <%= submit_tag(t(bookmarked ? 'remove.button' : 'add.button', scope: 'blacklight.bookmarks'),
+                  id: "bookmark_toggle_#{document.id.to_s.parameterize}",
+                  class: "bookmark-#{bookmarked ? 'remove' : 'add'} btn btn-outline-secondary") %>
   <% end %>
 <% else %>
   &nbsp;
