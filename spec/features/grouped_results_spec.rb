@@ -27,7 +27,7 @@ RSpec.describe 'Grouped search results' do
   it 'displays icons for results' do
     visit search_catalog_path q: 'alpha omega', group: 'true'
     within '.grouped-documents' do
-      expect(page).to have_css '.blacklight-icons', count: 4
+      expect(page).to have_css '.document-type-icon', count: 3
     end
   end
 
