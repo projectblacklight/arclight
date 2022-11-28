@@ -108,7 +108,8 @@ $hierarchy-view-collapse-icon: url("data:image/svg+xml,<svg xmlns='http://www.w3
   grid-template-areas:
     "title bookmark-toggle"
     "request request"
-    "sidebar-toggle sidebar-toggle";
+    "sidebar-toggle sidebar-toggle"
+    "online-contents online-contents";
   justify-content: start;
   align-items: start;
 
@@ -116,6 +117,7 @@ $hierarchy-view-collapse-icon: url("data:image/svg+xml,<svg xmlns='http://www.w3
     grid-template-areas:
       "title request bookmark-toggle"
       "sidebar-toggle sidebar-toggle sidebar-toggle"
+      "online-contents online-contents online-contents";
   }
 
   h1 {
@@ -136,14 +138,13 @@ $hierarchy-view-collapse-icon: url("data:image/svg+xml,<svg xmlns='http://www.w3
     grid-area: sidebar-toggle;
     max-width: fit-content;
   }
-}
 
-.online-contents {
-  margin-bottom: $spacer;
-  margin-top: $spacer;
-
-  h2 {
-    font-size: 1rem;
-    text-transform: uppercase;
+  .online-contents {
+    grid-area: online-contents;
+  
+    h2 {
+      font-size: 1rem;
+      text-transform: uppercase;
+    }
   }
 }
