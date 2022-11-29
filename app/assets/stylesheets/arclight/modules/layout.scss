@@ -27,6 +27,11 @@
         content: escape-svg(url($bent-arrow));
       }
     }
+
+    // last item doesn't get its own line
+    .breadcrumb-item-4 {
+      flex: none;
+    }
   }
 
   .breadcrumb-item-4 {
