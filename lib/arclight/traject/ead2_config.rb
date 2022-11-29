@@ -68,12 +68,14 @@ end
 
 # ==================
 # Top level document
+#
+# NOTE: All fields should be stored in Solr
 # ==================
 
 to_field 'id', extract_xpath('/ead/eadheader/eadid'), strip, gsub('.', '-')
-to_field 'title_filing_si', extract_xpath('/ead/eadheader/filedesc/titlestmt/titleproper[@type="filing"]')
+to_field 'title_filing_ssi', extract_xpath('/ead/eadheader/filedesc/titlestmt/titleproper[@type="filing"]')
 to_field 'title_ssm', extract_xpath('/ead/archdesc/did/unittitle')
-to_field 'title_teim', extract_xpath('/ead/archdesc/did/unittitle')
+to_field 'title_tesim', extract_xpath('/ead/archdesc/did/unittitle')
 to_field 'ead_ssi', extract_xpath('/ead/eadheader/eadid')
 
 to_field 'unitdate_ssm', extract_xpath('/ead/archdesc/did/unitdate')
@@ -87,7 +89,7 @@ to_field 'level_ssm' do |_record, accumulator|
 end
 
 # Keep the original top-level archdesc/@level for Level facet in addition to 'Collection'
-to_field 'level_sim' do |record, accumulator|
+to_field 'level_ssim' do |record, accumulator|
   level = record.at_xpath('/ead/archdesc').attribute('level')&.value
   other_level = record.at_xpath('/ead/archdesc').attribute('otherlevel')&.value
 
@@ -96,7 +98,7 @@ to_field 'level_sim' do |record, accumulator|
 end
 
 to_field 'unitid_ssm', extract_xpath('/ead/archdesc/did/unitid')
-to_field 'unitid_teim', extract_xpath('/ead/archdesc/did/unitid')
+to_field 'unitid_tesim', extract_xpath('/ead/archdesc/did/unitid')
 
 to_field 'normalized_title_ssm' do |_record, accumulator, context|
   dates = Arclight::NormalizedDate.new(
@@ -120,7 +122,7 @@ to_field 'collection_title_tesim' do |_record, accumulator, context|
   accumulator.concat context.output_hash.fetch('normalized_title_ssm', [])
 end
 
-to_field 'collection_sim' do |_record, accumulator, context|
+to_field 'collection_ssim' do |_record, accumulator, context|
   accumulator.concat context.output_hash.fetch('normalized_title_ssm', [])
 end
 
@@ -128,39 +130,30 @@ to_field 'repository_ssm' do |_record, accumulator, context|
   accumulator << context.clipboard[:repository]
 end
 
-to_field 'repository_sim' do |_record, accumulator, context|
+to_field 'repository_ssim' do |_record, accumulator, context|
   accumulator << context.clipboard[:repository]
 end
 
 to_field 'geogname_ssm', extract_xpath('/ead/archdesc/controlaccess/geogname')
-to_field 'geogname_sim', extract_xpath('/ead/archdesc/controlaccess/geogname')
+to_field 'geogname_ssim', extract_xpath('/ead/archdesc/controlaccess/geogname')
 
 to_field 'creator_ssm', extract_xpath('/ead/archdesc/did/origination')
-to_field 'creator_sim', extract_xpath('/ead/archdesc/did/origination')
 to_field 'creator_ssim', extract_xpath('/ead/archdesc/did/origination')
 to_field 'creator_sort' do |record, accumulator|
   accumulator << record.xpath('/ead/archdesc/did/origination').map { |c| c.text.strip }.join(', ')
 end
 
-to_field 'creator_persname_ssm', extract_xpath('/ead/archdesc/did/origination/persname')
 to_field 'creator_persname_ssim', extract_xpath('/ead/archdesc/did/origination/persname')
-to_field 'creator_corpname_ssm', extract_xpath('/ead/archdesc/did/origination/corpname')
-to_field 'creator_corpname_sim', extract_xpath('/ead/archdesc/did/origination/corpname')
 to_field 'creator_corpname_ssim', extract_xpath('/ead/archdesc/did/origination/corpname')
-to_field 'creator_famname_ssm', extract_xpath('/ead/archdesc/did/origination/famname')
 to_field 'creator_famname_ssim', extract_xpath('/ead/archdesc/did/origination/famname')
 
-to_field 'persname_sim', extract_xpath('//persname')
-
 to_field 'creators_ssim' do |_record, accumulator, context|
-  accumulator.concat context.output_hash['creator_persname_ssm'] if context.output_hash['creator_persname_ssm']
-  accumulator.concat context.output_hash['creator_corpname_ssm'] if context.output_hash['creator_corpname_ssm']
-  accumulator.concat context.output_hash['creator_famname_ssm'] if context.output_hash['creator_famname_ssm']
+  accumulator.concat context.output_hash['creator_persname_ssim'] if context.output_hash['creator_persname_ssim']
+  accumulator.concat context.output_hash['creator_corpname_ssim'] if context.output_hash['creator_corpname_ssim']
+  accumulator.concat context.output_hash['creator_famname_ssim'] if context.output_hash['creator_famname_ssim']
 end
 
-to_field 'places_sim', extract_xpath('/ead/archdesc/controlaccess/geogname')
 to_field 'places_ssim', extract_xpath('/ead/archdesc/controlaccess/geogname')
-to_field 'places_ssm', extract_xpath('/ead/archdesc/controlaccess/geogname')
 
 to_field 'access_terms_ssm', extract_xpath('/ead/archdesc/userestrict/*[local-name()!="head"]')
 
@@ -193,11 +186,10 @@ to_field 'digital_objects_ssm', extract_xpath('/ead/archdesc/did/dao|/ead/archde
 end
 
 to_field 'extent_ssm', extract_xpath('/ead/archdesc/did/physdesc/extent')
-to_field 'extent_teim', extract_xpath('/ead/archdesc/did/physdesc/extent')
-to_field 'genreform_sim', extract_xpath('/ead/archdesc/controlaccess/genreform')
-to_field 'genreform_ssm', extract_xpath('/ead/archdesc/controlaccess/genreform')
+to_field 'extent_tesim', extract_xpath('/ead/archdesc/did/physdesc/extent')
+to_field 'genreform_ssim', extract_xpath('/ead/archdesc/controlaccess/genreform')
 
-to_field 'date_range_sim', extract_xpath('/ead/archdesc/did/unitdate/@normal', to_text: false) do |_record, accumulator|
+to_field 'date_range_ssim', extract_xpath('/ead/archdesc/did/unitdate/@normal', to_text: false) do |_record, accumulator|
   range = Arclight::YearRange.new
   next range.years if accumulator.blank?
 
@@ -209,7 +201,7 @@ end
 SEARCHABLE_NOTES_FIELDS.map do |selector|
   to_field "#{selector}_ssm", extract_xpath("/ead/archdesc/#{selector}/*[local-name()!='head']", to_text: false)
   to_field "#{selector}_heading_ssm", extract_xpath("/ead/archdesc/#{selector}/head") unless selector == 'prefercite'
-  to_field "#{selector}_teim", extract_xpath("/ead/archdesc/#{selector}/*[local-name()!='head']")
+  to_field "#{selector}_tesim", extract_xpath("/ead/archdesc/#{selector}/*[local-name()!='head']")
 end
 
 DID_SEARCHABLE_NOTES_FIELDS.map do |selector|
@@ -219,13 +211,10 @@ end
 NAME_ELEMENTS.map do |selector|
   to_field 'names_coll_ssim', extract_xpath("/ead/archdesc/controlaccess/#{selector}")
   to_field 'names_ssim', extract_xpath("//#{selector}"), unique
-  to_field "#{selector}_ssm", extract_xpath("//#{selector}"), unique
+  to_field "#{selector}_ssim", extract_xpath("//#{selector}"), unique
 end
 
-to_field 'corpname_sim', extract_xpath('//corpname')
-
-to_field 'language_sim', extract_xpath('/ead/archdesc/did/langmaterial')
-to_field 'language_ssm', extract_xpath('/ead/archdesc/did/langmaterial')
+to_field 'language_ssim', extract_xpath('/ead/archdesc/did/langmaterial')
 
 to_field 'descrules_ssm', extract_xpath('/ead/eadheader/profiledesc/descrules')
 

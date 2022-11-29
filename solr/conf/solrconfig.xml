@@ -88,45 +88,49 @@
        <str name="qf">
          collection_title_tesim^150
          title_tesim^100
-         name_tesim^10
-         place_tesim^10
+         normalized_title_teim^100
+         name_teim^10
+         place_teim^10
          unitid_identifier_match^5
-         subject_tesim^2
+         subject_teim^2
          text
        </str>
        <str name="pf">
          collection_title_tesim^150
          title_tesim^100
-         name_tesim^10
-         place_tesim^10
+         normalized_title_teim^100
+         name_teim^10
+         place_teim^10
          unitid_identifier_match^5
-         subject_tesim^2
+         subject_teim^2
          text
        </str>
 
        <str name="qf_name">
-         name_tesim
+         name_teim
        </str>
        <str name="pf_name">
-         name_tesim
+         name_teim
        </str>
        <str name="qf_place">
-         place_tesim
+         place_teim
        </str>
        <str name="pf_place">
-         place_tesim
+         place_teim
        </str>
        <str name="qf_subject">
-         subject_tesim
+         subject_teim
        </str>
        <str name="pf_subject">
-         subject_tesim
+         subject_teim
        </str>
        <str name="qf_title">
          title_tesim
+         normalized_title_teim
        </str>
        <str name="pf_title">
          title_tesim
+         normalized_title_teim
        </str>
 
        <int name="ps">3</int>
@@ -137,13 +141,13 @@
          score,
          abstract_ssm,
          accessrestrict_ssm,
-         child_component_count_isim,
+         child_component_count_isi,
          containers_ssim,
          creator_ssm,
          extent_ssm,
          geogname_ssm,
          has_online_content_ssim,
-         language_ssm,
+         language_ssim,
          level_ssm,
          repository_ssm,
          scopecontent_ssm,
@@ -164,14 +168,14 @@
 
        <str name="facet">true</str>
        <str name="facet.mincount">1</str>
-       <str name="facet.field">level_sim</str>
-       <str name="facet.field">creator_sim</str>
-       <str name="facet.field">date_range_sim</str>
+       <str name="facet.field">level_ssim</str>
+       <str name="facet.field">creator_ssim</str>
+       <str name="facet.field">date_range_ssim</str>
        <str name="facet.field">names_ssim</str>
-       <str name="facet.field">geogname_sim</str>
-       <str name="facet.field">access_subjects_sim</str>
-       <str name="facet.field">repository_sim</str>
-       <str name="facet.field">collection_sim</str>
+       <str name="facet.field">geogname_ssim</str>
+       <str name="facet.field">access_subjects_ssim</str>
+       <str name="facet.field">repository_ssim</str>
+       <str name="facet.field">collection_ssim</str>
 
        <str name="spellcheck">true</str>
        <str name="spellcheck.dictionary">default</str>

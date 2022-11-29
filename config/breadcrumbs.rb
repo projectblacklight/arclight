@@ -16,7 +16,7 @@ crumb :repository do |repository|
 end
 
 crumb :search_results do |search_state|
-  if search_state.filter('level_sim').values == ['Collection']
+  if search_state.filter('level_ssim').values == ['Collection']
     link t('arclight.routes.collections')
   else
     link t('arclight.routes.search_results')

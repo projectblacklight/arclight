@@ -12,7 +12,7 @@ module Arclight
       @repository = Arclight::Repository.find_by!(slug: params[:id])
       search_service = Blacklight.repository_class.new(blacklight_config)
       @response = search_service.search(
-        q: "level_sim:Collection repository_sim:\"#{@repository.name}\"",
+        q: "level_ssim:Collection repository_ssim:\"#{@repository.name}\"",
         rows: 100
       )
       @collections = @response.documents
@@ -30,11 +30,11 @@ module Arclight
     def fetch_collection_counts
       search_service = Blacklight.repository_class.new(blacklight_config)
       results = search_service.search(
-        q: 'level_sim:Collection',
-        'facet.field': 'repository_sim',
+        q: 'level_ssim:Collection',
+        'facet.field': 'repository_ssim',
         rows: 0
       )
-      Hash[*results.facet_fields['repository_sim']]
+      Hash[*results.facet_fields['repository_ssim']]
     end
   end
 end

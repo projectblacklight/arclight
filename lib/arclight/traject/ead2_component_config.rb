@@ -60,6 +60,11 @@ DID_SEARCHABLE_NOTES_FIELDS = %w[
   physloc
 ].freeze
 
+# ==================
+# Component elements
+#
+# NOTE: All fields should be stored in Solr
+# ==================
 to_field 'ref_ssi' do |record, accumulator, _context|
   accumulator << if record.attribute('id').blank?
                    strategy = Arclight::MissingIdStrategy.selected
@@ -89,9 +94,9 @@ to_field 'id' do |_record, accumulator, context|
   ].join
 end
 
-to_field 'title_filing_si', extract_xpath('./did/unittitle'), first_only
+to_field 'title_filing_ssi', extract_xpath('./did/unittitle'), first_only
 to_field 'title_ssm', extract_xpath('./did/unittitle')
-to_field 'title_teim', extract_xpath('./did/unittitle')
+to_field 'title_tesim', extract_xpath('./did/unittitle')
 
 to_field 'unitdate_bulk_ssim', extract_xpath('./did/unitdate[@type="bulk"]')
 to_field 'unitdate_inclusive_ssm', extract_xpath('./did/unitdate[@type="inclusive"]')
@@ -137,7 +142,7 @@ to_field 'parent_unittitles_ssm' do |_rec, accumulator, _context|
   accumulator.concat settings[:parent].output_hash['normalized_title_ssm'] || []
 end
 
-to_field 'parent_unittitles_teim' do |_record, accumulator, context|
+to_field 'parent_unittitles_tesim' do |_record, accumulator, context|
   accumulator.concat context.output_hash['parent_unittitles_ssm']
 end
 
@@ -148,16 +153,16 @@ to_field 'parent_levels_ssm' do |_record, accumulator, _context|
 end
 
 to_field 'unitid_ssm', extract_xpath('./did/unitid')
-to_field 'repository_sim' do |_record, accumulator, _context|
+to_field 'repository_ssim' do |_record, accumulator, _context|
   accumulator << settings[:root].clipboard[:repository]
 end
 
-to_field 'collection_sim' do |_record, accumulator, _context|
+to_field 'collection_ssim' do |_record, accumulator, _context|
   accumulator.concat settings[:root].output_hash['normalized_title_ssm']
 end
 
 to_field 'extent_ssm', extract_xpath('./did/physdesc/extent')
-to_field 'extent_teim', extract_xpath('./did/physdesc/extent')
+to_field 'extent_tesim', extract_xpath('./did/physdesc/extent')
 
 to_field 'creator_ssm', extract_xpath('./did/origination')
 to_field 'creator_ssim', extract_xpath('./did/origination')
@@ -168,7 +173,7 @@ end
 to_field 'has_online_content_ssim', extract_xpath('.//dao') do |_record, accumulator|
   accumulator.replace([accumulator.any?])
 end
-to_field 'child_component_count_isim' do |record, accumulator|
+to_field 'child_component_count_isi' do |record, accumulator|
   accumulator << record.xpath('c|c01|c02|c03|c04|c05|c06|c07|c08|c09|c10|c11|c12').count
 end
 
@@ -182,13 +187,13 @@ to_field 'level_ssm' do |record, accumulator|
   accumulator << Arclight::LevelLabel.new(level, other_level).to_s
 end
 
-to_field 'level_sim' do |_record, accumulator, context|
+to_field 'level_ssim' do |_record, accumulator, context|
   next unless context.output_hash['level_ssm']
 
   accumulator.concat context.output_hash['level_ssm']&.map(&:capitalize)
 end
 
-to_field 'sort_ii' do |_record, accumulator, _context|
+to_field 'sort_isi' do |_record, accumulator, _context|
   accumulator.replace([settings[:counter].increment])
 end
 
@@ -215,7 +220,7 @@ to_field 'digital_objects_ssm', extract_xpath('./dao|./did/dao', to_text: false)
   end
 end
 
-to_field 'date_range_sim', extract_xpath('./did/unitdate/@normal', to_text: false) do |_record, accumulator|
+to_field 'date_range_ssim', extract_xpath('./did/unitdate/@normal', to_text: false) do |_record, accumulator|
   range = Arclight::YearRange.new
   next range.years if accumulator.blank?
 
@@ -226,10 +231,10 @@ end
 
 NAME_ELEMENTS.map do |selector|
   to_field 'names_ssim', extract_xpath("./controlaccess/#{selector}"), unique
-  to_field "#{selector}_ssm", extract_xpath(".//#{selector}")
+  to_field "#{selector}_ssim", extract_xpath(".//#{selector}")
 end
 
-to_field 'geogname_sim', extract_xpath('./controlaccess/geogname')
+to_field 'geogname_ssim', extract_xpath('./controlaccess/geogname')
 to_field 'geogname_ssm', extract_xpath('./controlaccess/geogname')
 to_field 'places_ssim', extract_xpath('./controlaccess/geogname')
 
@@ -250,7 +255,7 @@ to_field 'acqinfo_ssim', extract_xpath('/ead/archdesc/descgrp/acqinfo/*[local-na
 to_field 'acqinfo_ssim', extract_xpath('./acqinfo/*[local-name()!="head"]')
 to_field 'acqinfo_ssim', extract_xpath('./descgrp/acqinfo/*[local-name()!="head"]')
 
-to_field 'language_ssm', extract_xpath('./did/langmaterial')
+to_field 'language_ssim', extract_xpath('./did/langmaterial')
 to_field 'containers_ssim' do |record, accumulator|
   record.xpath('./did/container').each do |node|
     accumulator << [node.attribute('type'), node.text].join(' ').strip
@@ -260,7 +265,7 @@ end
 SEARCHABLE_NOTES_FIELDS.map do |selector|
   to_field "#{selector}_ssm", extract_xpath("./#{selector}/*[local-name()!='head']", to_text: false)
   to_field "#{selector}_heading_ssm", extract_xpath("./#{selector}/head")
-  to_field "#{selector}_teim", extract_xpath("./#{selector}/*[local-name()!='head']")
+  to_field "#{selector}_tesim", extract_xpath("./#{selector}/*[local-name()!='head']")
 end
 DID_SEARCHABLE_NOTES_FIELDS.map do |selector|
   to_field "#{selector}_ssm", extract_xpath("./did/#{selector}", to_text: false)

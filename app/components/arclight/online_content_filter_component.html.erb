@@ -6,7 +6,7 @@
     </div>
     <div class="ml-3 ms-3 ml-xl-5 ms-xl-5">
       <div><%= t('arclight.views.show.online_content.description') %></div>
-      <%= link_to t('arclight.views.show.online_content.link_text'), helpers.search_action_path(f: { collection_sim: [collection_name], has_online_content_ssim: ['online'] }) %>
+      <%= link_to t('arclight.views.show.online_content.link_text'), helpers.search_action_path(f: { collection_ssim: [collection_name], has_online_content_ssim: ['online'] }) %>
     </div>
   </div>
 </div>
