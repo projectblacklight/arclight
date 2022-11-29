@@ -15,7 +15,7 @@ RSpec.describe ArclightHelper do
   describe '#collection_active?' do
     context 'with active collection search' do
       let(:params) do
-        { 'f' => { 'level_sim' => ['Collection'] } }
+        { 'f' => { 'level_ssim' => ['Collection'] } }
       end
 
       it do
@@ -121,13 +121,13 @@ RSpec.describe ArclightHelper do
     end
 
     context 'when searching within a repository' do
-      let(:params) { { 'f' => { 'repository_sim' => ['My Repository'] } } }
+      let(:params) { { 'f' => { 'repository_ssim' => ['My Repository'] } } }
 
       it { expect(text).to eq 'Collections : [My Repository]' }
     end
 
     context 'when searching all collections' do
-      let(:params) { { 'f' => { 'level_sim' => ['Collection'] } } }
+      let(:params) { { 'f' => { 'level_ssim' => ['Collection'] } } }
 
       it { expect(text).to eq 'Collections' }
     end

@@ -7,7 +7,7 @@ RSpec.describe 'Field-based search results' do
     describe '#all_fields' do
       context 'for collections, fielded content is searchable by' do
         it 'title' do
-          visit search_catalog_path q: 'student life', search_field: 'all_fields', f: { level_sim: ['Collection'] }
+          visit search_catalog_path q: 'student life', search_field: 'all_fields', f: { level_ssim: ['Collection'] }
           within('.document-position-1') do
             expect(page).to have_css '.index_title', text: /Stanford University student life photograph album/
           end
@@ -44,7 +44,7 @@ RSpec.describe 'Field-based search results' do
 
       context 'for components, fielded content is searchable by' do
         it 'title' do
-          visit search_catalog_path q: 'a brief account', search_field: 'all_fields', f: { level_sim: ['File'] }
+          visit search_catalog_path q: 'a brief account', search_field: 'all_fields', f: { level_ssim: ['File'] }
           within('.document-position-1') do
             expect(page).to have_css '.index_title', text: /A brief account/
           end

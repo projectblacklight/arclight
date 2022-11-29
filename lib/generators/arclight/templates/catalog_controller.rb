@@ -136,14 +136,14 @@ class CatalogController < ApplicationController
     # :index_range can be an array or range of prefixes that will be used to create the navigation
     #  (note: It is case sensitive when searching values)
 
-    config.add_facet_field 'collection_sim', label: 'Collection', limit: 10
+    config.add_facet_field 'collection_ssim', label: 'Collection', limit: 10
     config.add_facet_field 'creator_ssim', label: 'Creator', limit: 10
     config.add_facet_field 'creators_ssim', label: 'Creator', show: false
-    config.add_facet_field 'date_range_sim', label: 'Date range', range: true
-    config.add_facet_field 'level_sim', label: 'Level', limit: 10
+    config.add_facet_field 'date_range_ssim', label: 'Date range', range: true
+    config.add_facet_field 'level_ssim', label: 'Level', limit: 10
     config.add_facet_field 'names_ssim', label: 'Names', limit: 10
-    config.add_facet_field 'repository_sim', label: 'Repository', limit: 10
-    config.add_facet_field 'geogname_sim', label: 'Place', limit: 10
+    config.add_facet_field 'repository_ssim', label: 'Repository', limit: 10
+    config.add_facet_field 'geogname_ssim', label: 'Place', limit: 10
     config.add_facet_field 'places_ssim', label: 'Places', show: false
     config.add_facet_field 'access_subjects_ssim', label: 'Subject', limit: 10
     config.add_facet_field 'component_level_isim', show: false
@@ -200,7 +200,7 @@ class CatalogController < ApplicationController
     config.add_search_field 'within_collection' do |field|
       field.include_in_simple_select = false
       field.solr_parameters = {
-        fq: '-level_sim:Collection'
+        fq: '-level_ssim:Collection'
       }
     end
 
@@ -271,7 +271,7 @@ class CatalogController < ApplicationController
     config.add_summary_field 'creators_ssim', label: 'Creator', link_to_facet: true
     config.add_summary_field 'abstract_ssm', label: 'Abstract', helper_method: :render_html_tags
     config.add_summary_field 'extent_ssm', label: 'Extent'
-    config.add_summary_field 'language_ssm', label: 'Language'
+    config.add_summary_field 'language_ssim', label: 'Language'
     config.add_summary_field 'prefercite_ssm', label: 'Preferred citation', helper_method: :render_html_tags
 
     # Collection Show Page - Background Section
