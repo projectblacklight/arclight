@@ -232,6 +232,10 @@ to_field 'component_level_isim' do |_record, accumulator, _context|
   accumulator << 0
 end
 
+to_field 'sort_isi' do |_record, accumulator, _context|
+  accumulator << 0
+end
+
 # =============================
 # Each component child document
 # <c> <c01> <c12>
@@ -243,7 +247,7 @@ to_field 'components' do |record, accumulator, context|
 
   counter = Class.new do
     def increment
-      @counter ||= -1
+      @counter ||= 0
       @counter += 1
     end
   end.new

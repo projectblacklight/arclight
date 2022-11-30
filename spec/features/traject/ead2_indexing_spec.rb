@@ -73,6 +73,12 @@ describe 'EAD 2 traject indexing' do
       end
     end
 
+    describe 'sort_isi' do
+      it 'is 0' do
+        expect(result['sort_isi']).to eq [0]
+      end
+    end
+
     it 'dates' do
       expect(result['normalized_date_ssm']).to include_ignoring_whitespace 'circa 1900-1906'
       expect(result['unitdate_bulk_ssim']).to be_nil
@@ -184,8 +190,8 @@ describe 'EAD 2 traject indexing' do
         end
 
         it 'sort' do
-          expect(other_level_component['sort_isi']).to eq([2])
-          expect(level_component['sort_isi']).to eq([32])
+          expect(other_level_component['sort_isi']).to eq([3])
+          expect(level_component['sort_isi']).to eq([33])
         end
       end
 
