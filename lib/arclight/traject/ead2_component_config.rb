@@ -23,6 +23,7 @@ settings do
   # provide 'root' # the root EAD collection indexing context
   # provide 'parent' # the immediate parent component (or collection) indexing context
   # provide 'counter' # a global component counter to provide a global sort order for nested components
+  # provide 'depth' # the current nesting depth of the component
   provide 'component_traject_config', __FILE__
   provide 'date_normalizer', 'Arclight::NormalizedDate'
   provide 'reader_class_name', 'Arclight::Traject::NokogiriNamespacelessReader'
@@ -117,15 +118,7 @@ to_field 'normalized_title_ssm' do |_record, accumulator, context|
 end
 
 to_field 'component_level_isim' do |_record, accumulator|
-  level = 1
-  parent = settings[:parent]
-
-  while parent != settings[:root]
-    level += 1
-    parent = parent.settings[:parent]
-  end
-
-  accumulator << level
+  accumulator << (settings[:depth] || 1)
 end
 
 to_field 'parent_ssim' do |_record, accumulator, _context|
@@ -284,6 +277,7 @@ to_field 'components' do |record, accumulator, context|
       provide :parent, context
       provide :root, context.settings[:root]
       provide :counter, context.settings[:counter]
+      provide :depth, context.settings[:depth].to_i + 1
       provide :component_traject_config, context.settings[:component_traject_config]
     end
 

@@ -67,6 +67,12 @@ describe 'EAD 2 traject indexing' do
       expect(result['level_ssim']).to eq ['Collection']
     end
 
+    describe 'component_level_isim' do
+      it 'is 0' do
+        expect(result['component_level_isim']).to eq [0]
+      end
+    end
+
     it 'dates' do
       expect(result['normalized_date_ssm']).to include_ignoring_whitespace 'circa 1900-1906'
       expect(result['unitdate_bulk_ssim']).to be_nil
