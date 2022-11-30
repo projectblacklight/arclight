@@ -228,6 +228,14 @@ to_field 'online_item_count_is', first_only do |record, accumulator|
   accumulator << record.xpath('//dao').count
 end
 
+to_field 'component_level_isim' do |_record, accumulator, _context|
+  accumulator << 0
+end
+
+to_field 'sort_isi' do |_record, accumulator, _context|
+  accumulator << 0
+end
+
 # =============================
 # Each component child document
 # <c> <c01> <c12>
@@ -239,7 +247,7 @@ to_field 'components' do |record, accumulator, context|
 
   counter = Class.new do
     def increment
-      @counter ||= -1
+      @counter ||= 0
       @counter += 1
     end
   end.new
@@ -249,6 +257,7 @@ to_field 'components' do |record, accumulator, context|
       provide :parent, context
       provide :root, context
       provide :counter, counter
+      provide :depth, 1
       provide :logger, context.settings[:logger]
       provide :component_traject_config, context.settings[:component_traject_config]
     end
