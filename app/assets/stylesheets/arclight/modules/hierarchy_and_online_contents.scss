@@ -110,7 +110,7 @@ $hierarchy-view-collapse-icon: url("data:image/svg+xml,<svg xmlns='http://www.w3
     "request request"
     "sidebar-toggle sidebar-toggle"
     "online-contents online-contents";
-  justify-content: start;
+  justify-content: space-between; // This will push the bookmark control to the right when the title is short
   align-items: start;
 
   @include media-breakpoint-up(lg) {
