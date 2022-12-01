@@ -108,6 +108,10 @@
   }
 
   &-info {
+    .dropdown {
+      // prevent dropdown from being cut off by parent container
+      position: static;
+    }
     .dropdown-toggle:after {
       margin-left: 0;
     }
