@@ -2,7 +2,7 @@
 
 require 'spec_helper'
 
-RSpec.describe 'Collection Page', type: :feature do
+RSpec.describe 'Collection Page' do
   let(:doc_id) { 'aoa271' }
   let(:download_config) do
     ActiveSupport::HashWithIndifferentAccess.new(
@@ -75,10 +75,10 @@ RSpec.describe 'Collection Page', type: :feature do
 
     it 'background has configured metadata' do
       within '#background' do
-        expect(page).to have_css('dt', text: 'Scope and Content')
+        expect(page).to have_css('dt', text: 'Scope and content')
         expect(page).to have_css('dd', text: /^Correspondence, documents, records, photos/)
 
-        expect(page).to have_css('dt', text: 'Biographical / Historical')
+        expect(page).to have_css('dt', text: 'Biographical / historical')
         expect(page).to have_css('dd', text: /^Alpha Omega Alpha Honor Medical Society was founded/)
 
         expect(page).to have_css('dt', text: 'Acquisition information')
@@ -165,7 +165,7 @@ RSpec.describe 'Collection Page', type: :feature do
         expect(page).to have_link 'Summary', href: /#summary/
         expect(page).to have_link 'Background', href: /#background/
         expect(page).to have_link 'Related', href: /#related/
-        expect(page).to have_link 'Indexed Terms', href: /#indexed-terms/
+        expect(page).to have_link 'Indexed terms', href: /#indexed-terms/
       end
     end
 

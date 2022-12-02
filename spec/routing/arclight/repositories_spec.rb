@@ -2,7 +2,7 @@
 
 require 'spec_helper'
 
-RSpec.describe 'Vanity repositories routes', type: :routing do
+RSpec.describe 'Vanity repositories routes' do
   routes { Arclight::Engine.routes }
   context 'repositories' do
     it '#index' do

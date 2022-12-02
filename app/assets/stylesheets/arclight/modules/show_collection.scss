@@ -4,24 +4,12 @@
   text-transform: uppercase;
 }
 
-#access, #metadata {
-  dl > dt {
-    font-size: $font-size-sm;
-    margin-top: (1rem - $font-size-sm) * 0.5;
-    text-transform: uppercase;
-  }
-}
-
 .al-collection-actions-menu {
   float: right;
 }
 
-.al-online-content-icon .blacklight-icons svg {
-  fill: $online-icon-color;
-}
-
-// Access tab
-#access {
+// Access
+#access-and-use {
   dl dd {
     line-height: 1.4;
     margin-bottom: $spacer;

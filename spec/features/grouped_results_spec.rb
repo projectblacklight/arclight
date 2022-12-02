@@ -2,7 +2,7 @@
 
 require 'spec_helper'
 
-RSpec.describe 'Grouped search results', type: :feature do
+RSpec.describe 'Grouped search results' do
   it 'displays collection group information' do
     visit search_catalog_path q: 'alpha omega', group: 'true'
     within '.al-grouped-title-bar' do
@@ -27,7 +27,7 @@ RSpec.describe 'Grouped search results', type: :feature do
   it 'displays icons for results' do
     visit search_catalog_path q: 'alpha omega', group: 'true'
     within '.grouped-documents' do
-      expect(page).to have_css '.blacklight-icons', count: 4
+      expect(page).to have_css '.document-type-icon', count: 3
     end
   end
 
@@ -40,7 +40,7 @@ RSpec.describe 'Grouped search results', type: :feature do
     visit search_catalog_path q: 'alpha omega', group: 'true'
     expect(page).to have_css '.al-grouped-more', text: /Top 3 results/
     expect(page).to have_css(
-      '.al-grouped-more a[href*="/catalog?f%5Bcollection_sim%5D%5B%5D=Alpha+Omega+Alpha+Archives%2C+1894-1992"]',
+      '.al-grouped-more a[href*="/catalog?f%5Bcollection_ssim%5D%5B%5D=Alpha+Omega+Alpha+Archives%2C+1894-1992"]',
       text: 'view all 6'
     )
   end

@@ -2,7 +2,7 @@
 
 require 'spec_helper'
 
-RSpec.describe 'Component Page', type: :feature do
+RSpec.describe 'Component Page' do
   let(:doc_id) { 'aoa271aspace_843e8f9f22bac69872d0802d6fffbb04' }
   let(:download_config) do
     ActiveSupport::HashWithIndifferentAccess.new(
@@ -214,9 +214,9 @@ RSpec.describe 'Component Page', type: :feature do
       expect(page).to have_css 'dt', text: 'Location of this collection:'
       expect(page).to have_css 'dd', text: 'Building 38, Room 1E-21'
 
-      expect(page).to have_css 'dt', text: 'Parent Restrictions:'
+      expect(page).to have_css 'dt', text: 'Parent restrictions:'
       expect(page).to have_css 'dd', text: /^RESTRICTED: Access to these folders requires prior written approval./
-      expect(page).to have_css 'dt', text: 'Terms of Access:'
+      expect(page).to have_css 'dt', text: 'Parent terms of access:'
       expect(page).to have_css 'dd', text: /^Copyright was transferred to the public domain./
 
       expect(page).to have_css 'dt', text: 'Contact:'

@@ -2,7 +2,7 @@
 
 require 'spec_helper'
 
-xdescribe 'Google Form Request', type: :feature, js: true do
+xdescribe 'Google Form Request', js: true do
   context 'when container is present' do
     context 'repository is requestable' do
       it 'form is present with filled out values' do

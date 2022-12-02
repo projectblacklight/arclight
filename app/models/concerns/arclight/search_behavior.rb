@@ -22,7 +22,7 @@ module Arclight
       solr_parameters[:fq] << "_nest_parent_:#{blacklight_params[:id]}"
       solr_parameters[:rows] = blacklight_params[:per_page]&.to_i || blacklight_params[:limit]&.to_i || 999_999_999
       solr_parameters[:start] = blacklight_params[:offset] if blacklight_params[:offset]
-      solr_parameters[:sort] = 'sort_ii asc'
+      solr_parameters[:sort] = 'sort_isi asc'
       solr_parameters[:facet] = false
     end
     # rubocop:enable Metrics/AbcSize, Metrics/CyclomaticComplexity

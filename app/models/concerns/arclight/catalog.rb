@@ -8,9 +8,9 @@ module Arclight
 
     included do
       before_action only: :index do
-        if (params.dig(:f, :collection_sim) || []).any?(&:blank?)
-          params[:f][:collection_sim].compact_blank!
-          params[:f].delete(:collection_sim) if params[:f][:collection_sim].blank?
+        if (params.dig(:f, :collection_ssim) || []).any?(&:blank?)
+          params[:f][:collection_ssim].compact_blank!
+          params[:f].delete(:collection_ssim) if params[:f][:collection_ssim].blank?
         end
       end
 

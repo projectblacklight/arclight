@@ -1,4 +1,15 @@
-.blacklight-icons svg {
-  height: 1rem;
-  width: 1rem;
+
+.toggle-bookmark, .breadcrumb-item, .document, .al-online-content-icon {
+  .blacklight-icons svg {
+    height: 1rem;
+    width: 1rem;
+  }
+}
+
+.al-online-content-icon .blacklight-icons svg {
+  fill: $online-icon-color;
+}
+
+.btn > .bi:first-child {
+  @extend .me-1
 }

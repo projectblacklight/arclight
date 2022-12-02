@@ -2,7 +2,7 @@
 
 require 'spec_helper'
 
-RSpec.describe Arclight::RepositoriesController, type: :controller do
+RSpec.describe Arclight::RepositoriesController do
   routes { Arclight::Engine.routes }
   before do
     ENV['REPOSITORY_FILE'] = 'spec/fixtures/config/repositories.yml'

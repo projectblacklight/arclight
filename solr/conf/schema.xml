@@ -280,9 +280,9 @@
    <field name="id" type="string" indexed="true" stored="true" required="true" />
    <field name="_version_" type="plong" indexed="true" stored="true" multiValued="false" />
    <field name="timestamp" type="pdate" indexed="true" stored="true" default="NOW" multiValued="false"/>
-   <!-- default, catch all search field -->
+   <!-- default, catch all search field, also used for search term highlighting (requires stored="true") -->
    <field name="text" type="text" indexed="true" stored="true" multiValued="true"/>
-   <field name="unitid_identifier_match" type="identifier_match" indexed="true" multiValued="true" />
+   <field name="unitid_identifier_match" type="identifier_match" indexed="true" stored="false" multiValued="true" />
 
    <field name="_root_" type="string" indexed="true" stored="true" docValues="false" />
    <field name="_nest_parent_" type="string" indexed="true" stored="true"/>
@@ -307,6 +307,7 @@
         unknown fields indexed and/or stored by default -->
    <!--dynamicField name="*" type="ignored" multiValued="true" /-->
 
+   <!-- To play nice with atomic updates, only use non-stored fields for copyFields -->
    <dynamicField name="*_tesim" type="text_en"   stored="true"  indexed="true"  multiValued="true"  />
    <dynamicField name="*_teim"  type="text_en"   stored="false" indexed="true"  multiValued="true"  />
    <dynamicField name="*_si"    type="string"    stored="false" indexed="true"  multiValued="false" />
@@ -317,6 +318,7 @@
    <dynamicField name="*_isim"  type="pint"      stored="true"  indexed="true"  multiValued="true"  />
    <dynamicField name="*_is"    type="pint"      stored="true"  indexed="false" multiValued="false" />
    <dynamicField name="*_ii"    type="pint"      stored="false" indexed="true"  multiValued="false" />
+   <dynamicField name="*_isi"   type="pint"      stored="true"  indexed="true"  multiValued="false" />
  </fields>
 
  <!-- Field to use to determine and enforce document uniqueness.
@@ -331,42 +333,42 @@
    <!-- Copy Fields -->
 
    <!-- field-based searches -->
-   <copyField source="normalized_title_ssm" dest="title_tesim"/>
-   <copyField source="places_ssm" dest="place_tesim"/>
-   <copyField source="names_ssim" dest="name_tesim"/>
-   <copyField source="access_subjects_ssim" dest="subject_tesim"/>
+   <copyField source="normalized_title_ssm" dest="normalized_title_teim"/>
+   <copyField source="places_ssim" dest="place_teim"/>
+   <copyField source="names_ssim" dest="name_teim"/>
+   <copyField source="access_subjects_ssim" dest="subject_teim"/>
 
    <!-- The catch all `text` field -->
    <!-- grab the fielded searches -->
    <copyField source="normalized_title_ssm" dest="text" />
-   <copyField source="places_ssm" dest="text" />
+   <copyField source="places_ssim" dest="text" />
    <copyField source="names_ssim" dest="text" />
    <copyField source="access_subjects_ssim" dest="text" />
    <!-- grab the searchable notes -->
-   <copyField source="abstract_teim" dest="text" />
-   <copyField source="accessrestricct_teim" dest="text" />
-   <copyField source="accruals_teim" dest="text" />
-   <copyField source="acqinfo_teim" dest="text" />
-   <copyField source="altformavail_teim" dest="text" />
-   <copyField source="appraisal_teim" dest="text" />
-   <copyField source="arrangement_teim" dest="text" />
-   <copyField source="bibliography_teim" dest="text" />
-   <copyField source="bioghist_teim" dest="text" />
-   <copyField source="custodhist_teim" dest="text" />
-   <copyField source="did_note_teim" dest="text" />
-   <copyField source="fileplan_teim" dest="text" />
-   <copyField source="materialspec_teim" dest="text" />
-   <copyField source="note_teim" dest="text" />
-   <copyField source="odd_teim" dest="text" />
-   <copyField source="originalsloc_teim" dest="text" />
-   <copyField source="physdesc_teim" dest="text" />
-   <copyField source="physloc_teim" dest="text" />
-   <copyField source="phystech_teim" dest="text" />
-   <copyField source="processinfo_teim" dest="text" />
-   <copyField source="relatedmaterial_teim" dest="text" />
-   <copyField source="scopecontent_teim" dest="text" />
-   <copyField source="separatedmaterial_teim" dest="text" />
-   <copyField source="userestrict_teim" dest="text" />
+   <copyField source="abstract_tesim" dest="text" />
+   <copyField source="accessrestricct_tesim" dest="text" />
+   <copyField source="accruals_tesim" dest="text" />
+   <copyField source="acqinfo_tesim" dest="text" />
+   <copyField source="altformavail_tesim" dest="text" />
+   <copyField source="appraisal_tesim" dest="text" />
+   <copyField source="arrangement_tesim" dest="text" />
+   <copyField source="bibliography_tesim" dest="text" />
+   <copyField source="bioghist_tesim" dest="text" />
+   <copyField source="custodhist_tesim" dest="text" />
+   <copyField source="did_note_tesim" dest="text" />
+   <copyField source="fileplan_tesim" dest="text" />
+   <copyField source="materialspec_tesim" dest="text" />
+   <copyField source="note_tesim" dest="text" />
+   <copyField source="odd_tesim" dest="text" />
+   <copyField source="originalsloc_tesim" dest="text" />
+   <copyField source="physdesc_tesim" dest="text" />
+   <copyField source="physloc_tesim" dest="text" />
+   <copyField source="phystech_tesim" dest="text" />
+   <copyField source="processinfo_tesim" dest="text" />
+   <copyField source="relatedmaterial_tesim" dest="text" />
+   <copyField source="scopecontent_tesim" dest="text" />
+   <copyField source="separatedmaterial_tesim" dest="text" />
+   <copyField source="userestrict_tesim" dest="text" />
    <!-- grab structured data that's important -->
    <copyField source="unitid_ssm" dest="text" />
    <copyField source="unitid_ssm" dest="unitid_identifier_match" />
@@ -382,9 +384,9 @@
 
    <!-- for suggestions -->
    <copyField source="normalized_title_ssm" dest="suggest"/>
-   <copyField source="collection_sim" dest="suggest"/>
+   <copyField source="collection_ssim" dest="suggest"/>
    <copyField source="names_ssim" dest="suggest"/>
-   <copyField source="repository_sim" dest="suggest"/>
+   <copyField source="repository_ssim" dest="suggest"/>
    <copyField source="places_ssim" dest="suggest"/>
    <copyField source="access_subjects_ssim" dest="suggest"/>
 

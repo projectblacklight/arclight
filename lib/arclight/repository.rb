@@ -1,29 +1,45 @@
 # frozen_string_literal: true
 
-require 'ostruct'
 require 'active_model'
+require 'active_support'
+require 'active_support/core_ext/hash/indifferent_access'
 
 module Arclight
-  #
-  # Static information about a given repository identified by a unique `slug`
+  # Static information about a given repository identified by a unique `slug`.
+  # These data are loaded from config/repositories.yml
   class Repository
     include ActiveModel::Model
-
-    attr_accessor :slug, :name, :description, :visit_note, :contact_html, :location_html, :thumbnail_url, :request_types, :collection_count
+    DEFAULTS = {
+      request_types: {},
+      contact_html: '',
+      location_html: '',
+      visit_note: nil
+    }.freeze
 
     def initialize(attributes = {})
-      super
+      @attributes = DEFAULTS.merge(attributes).with_indifferent_access
+    end
 
-      @request_types ||= {}
+    attr_reader :attributes
+    attr_accessor :collection_count
+
+    def method_missing(field, *args, &block)
+      return attributes[field] if attributes.include?(field)
+
+      super
+    end
+
+    def respond_to_missing?(field, *args)
+      attributes.include?(field) || super
     end
 
     # rubocop:disable Rails/OutputSafety
     def contact
-      contact_html&.html_safe
+      contact_html.html_safe
     end
 
     def location
-      location_html&.html_safe
+      location_html.html_safe
     end
     # rubocop:enable Rails/OutputSafety
 

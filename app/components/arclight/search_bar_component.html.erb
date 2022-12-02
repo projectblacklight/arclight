@@ -1,13 +1,13 @@
 <%= render(Blacklight::SearchBarComponent.new(
       **@kwargs,
-      params: @params.merge(f: (@params[:f] || {}).except(:collection_sim)))) do |c| %>
+      params: @params.merge(f: (@params[:f] || {}).except(:collection_ssim)))) do |c| %>
 
   <% c.with_before_input_group do %>
     <div class="input-group within-collection-dropdown">
       <label class="input-group-text" for="within_collection">
         <%= t('arclight.within_collection_dropdown.label_html') %>
       </label>
-      <%= select_tag ('f[collection_sim][]' if collection_name.present?), within_collection_options, id: 'within_collection', class: 'form-select search-field rounded-end' %>
+      <%= select_tag ('f[collection_ssim][]' if collection_name.present?), within_collection_options, id: 'within_collection', class: 'form-select search-field rounded-end' %>
     </div>
   <% end %>
 

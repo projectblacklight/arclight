@@ -2,7 +2,7 @@
 
 require 'spec_helper'
 
-RSpec.describe 'Search Breadcrumb', type: :feature do
+RSpec.describe 'Search Breadcrumb' do
   context 'on regular search results' do
     it do
       visit search_catalog_path q: 'a brief', search_field: 'all_fields'
@@ -13,7 +13,7 @@ RSpec.describe 'Search Breadcrumb', type: :feature do
     end
 
     it do
-      visit search_catalog_path f: { level_sim: ['Collection'] }, search_field: 'all_fields'
+      visit search_catalog_path f: { level_ssim: ['Collection'] }, search_field: 'all_fields'
       within '.al-search-breadcrumb' do
         expect(page).to have_link 'Home'
         expect(page).to have_content 'Collections'

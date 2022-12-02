@@ -2,7 +2,7 @@
 
 require 'spec_helper'
 
-describe 'EAD 2 traject indexing', type: :feature do
+RSpec.describe 'EAD 2 traject indexing' do
   subject(:result) do
     indexer.map_record(record)
   end
@@ -56,7 +56,7 @@ describe 'EAD 2 traject indexing', type: :feature do
     end
 
     it 'title' do
-      %w[title_ssm title_teim].each do |field|
+      %w[title_ssm title_tesim].each do |field|
         expect(result[field]).to include_ignoring_whitespace 'Stanford University student life photograph album'
       end
       expect(result['normalized_title_ssm']).to include 'Stanford University student life photograph album, circa 1900-1906'
@@ -64,7 +64,19 @@ describe 'EAD 2 traject indexing', type: :feature do
 
     it 'level' do
       expect(result['level_ssm']).to eq ['collection']
-      expect(result['level_sim']).to eq ['Collection']
+      expect(result['level_ssim']).to eq ['Collection']
+    end
+
+    describe 'component_level_isim' do
+      it 'is 0' do
+        expect(result['component_level_isim']).to eq [0]
+      end
+    end
+
+    describe 'sort_isi' do
+      it 'is 0' do
+        expect(result['sort_isi']).to eq [0]
+      end
     end
 
     it 'dates' do
@@ -74,8 +86,8 @@ describe 'EAD 2 traject indexing', type: :feature do
       expect(result['unitdate_other_ssim']).to be_nil
     end
 
-    it 'creates date_range_sim' do
-      date_range = result['date_range_sim']
+    it 'creates date_range_ssim' do
+      date_range = result['date_range_ssim']
       expect(date_range).to be_an Array
       expect(date_range.length).to eq 7
       expect(date_range.first).to eq 1900
@@ -83,13 +95,13 @@ describe 'EAD 2 traject indexing', type: :feature do
     end
 
     it 'repository' do
-      %w[repository_sim repository_ssm].each do |field|
+      %w[repository_ssim repository_ssm].each do |field|
         expect(result[field]).to include 'Stanford University Libraries. Special Collections and University Archives'
       end
     end
 
     it 'geogname' do
-      %w[geogname_sim geogname_ssm].each do |field|
+      %w[geogname_ssim geogname_ssm].each do |field|
         expect(result[field]).to include_ignoring_whitespace 'Yosemite National Park (Calif.)'
       end
     end
@@ -99,7 +111,7 @@ describe 'EAD 2 traject indexing', type: :feature do
     end
 
     it 'creator' do
-      %w[creator_ssm creator_ssim creator_corpname_ssm creator_corpname_ssim creators_ssim creator_sort].each do |field|
+      %w[creator_ssm creator_ssim creator_corpname_ssim creators_ssim creator_sort].each do |field|
         expect(result[field]).to equal_array_ignoring_whitespace ['Stanford University']
       end
     end
@@ -113,7 +125,7 @@ describe 'EAD 2 traject indexing', type: :feature do
     end
 
     it 'collection has normalized_title' do
-      %w[collection_sim collection_title_tesim].each do |field|
+      %w[collection_ssim collection_title_tesim].each do |field|
         expect(result[field]).to include_ignoring_whitespace 'Stanford University student life photograph album, circa 1900-1906'
       end
     end
@@ -147,13 +159,13 @@ describe 'EAD 2 traject indexing', type: :feature do
       end
 
       it 'geogname' do
-        %w[geogname_sim geogname_ssm].each do |field|
+        %w[geogname_ssim geogname_ssm].each do |field|
           expect(all_components.first[field]).to be_nil
         end
       end
 
       it 'collection has normalized title' do
-        expect(first_component['collection_sim']).to include_ignoring_whitespace 'Stanford University student life photograph album, circa 1900-1906'
+        expect(first_component['collection_ssim']).to include_ignoring_whitespace 'Stanford University student life photograph album, circa 1900-1906'
       end
 
       it 'containers' do
@@ -178,9 +190,15 @@ describe 'EAD 2 traject indexing', type: :feature do
         end
 
         it 'sort' do
-          expect(other_level_component['sort_ii']).to eq([2])
-          expect(level_component['sort_ii']).to eq([32])
+          expect(other_level_component['sort_isi']).to eq([3])
+          expect(level_component['sort_isi']).to eq([33])
         end
+      end
+
+      it 'only indexes into fields that will support future atomic updates' do
+        expect(result.keys).not_to include(/_sim$/)
+        expect(result.keys).not_to include(/_ii$/)
+        expect(result.keys).not_to include(/_teim$/)
       end
     end
   end
@@ -231,7 +249,7 @@ describe 'EAD 2 traject indexing', type: :feature do
     let(:nested_component) { all_components.find { |c| c['id'] == ['ncaids544-testd0e631'] } }
 
     it 'counts child components' do
-      expect(component_with_descendants['child_component_count_isim']).to eq [9]
+      expect(component_with_descendants['child_component_count_isi']).to eq [9]
     end
 
     it 'correctly gets the component levels' do
@@ -246,12 +264,12 @@ describe 'EAD 2 traject indexing', type: :feature do
 
     it 'bioghist' do
       expect(result['bioghist_ssm'].first).to match(/Alpha Omega Alpha Honor Medical Society was founded/)
-      expect(result['bioghist_teim'].second).to match(/Hippocratic oath/)
+      expect(result['bioghist_tesim'].second).to match(/Hippocratic oath/)
       expect(result['bioghist_heading_ssm'].first).to match(/^Historical Note/)
     end
 
     it 'relatedmaterial' do
-      expect(result['relatedmaterial_ssm'].first).to match(/^An unprocessed collection includes/)
+      expect(result['relatedmaterial_ssm'].first).to start_with('<p>An unprocessed collection includes')
     end
 
     it 'abstract' do
@@ -259,23 +277,23 @@ describe 'EAD 2 traject indexing', type: :feature do
     end
 
     it 'separatedmaterial' do
-      expect(result['separatedmaterial_ssm'].first).to match(/^Birth, Apollonius of Perga brain/)
+      expect(result['separatedmaterial_ssm'].first).to start_with('<p>Birth, Apollonius of Perga brain')
     end
 
     it 'otherfindaid' do
-      expect(result['otherfindaid_ssm'].first).to match(/^Li Europan lingues es membres del/)
+      expect(result['otherfindaid_ssm'].first).to start_with('<p>Li Europan lingues es membres del')
     end
 
     it 'altformavail' do
-      expect(result['altformavail_ssm'].first).to match(/^Rig Veda a mote of dust suspended/)
+      expect(result['altformavail_ssm'].first).to start_with('<p>Rig Veda a mote of dust suspended')
     end
 
     it 'originalsloc' do
-      expect(result['originalsloc_ssm'].first).to match(/^Something incredible is waiting/)
+      expect(result['originalsloc_ssm'].first).to start_with('<p>Something incredible is waiting')
     end
 
     it 'arrangement' do
-      expect(result['arrangement_ssm'].first).to match(/Arranged into seven series./)
+      expect(result['arrangement_ssm'].first).to eq '<p>Arranged into seven series.</p>'
     end
 
     it 'acqinfo' do
@@ -283,7 +301,7 @@ describe 'EAD 2 traject indexing', type: :feature do
     end
 
     it 'appraisal' do
-      expect(result['appraisal_ssm'].first).to match(/^Corpus callosum something incredible/)
+      expect(result['appraisal_ssm'].first).to start_with('<p>Corpus callosum something incredible')
     end
 
     it 'custodhist' do
@@ -301,6 +319,12 @@ describe 'EAD 2 traject indexing', type: :feature do
         expect(component['scopecontent_ssm']).to include(a_string_matching(/provide important background context./))
         expect(component['scopecontent_ssm']).not_to include(a_string_matching(/correspondence, and a nametag./))
       end
+
+      it 'only indexes into fields that will support future atomic updates' do
+        expect(all_components.flat_map(&:keys)).not_to include(/_sim$/)
+        expect(all_components.flat_map(&:keys)).not_to include(/_ii$/)
+        expect(all_components.flat_map(&:keys)).not_to include(/_teim$/)
+      end
     end
   end
 
@@ -315,7 +339,7 @@ describe 'EAD 2 traject indexing', type: :feature do
     end
 
     it 'extent at the collection level' do
-      %w[extent_ssm extent_teim].each do |field|
+      %w[extent_ssm extent_tesim].each do |field|
         expect(result[field]).to equal_array_ignoring_whitespace(
           ['15.0 linear feet (36 boxes + oversize folder)']
         )
@@ -324,7 +348,7 @@ describe 'EAD 2 traject indexing', type: :feature do
 
     it 'extent at the component level' do
       component = all_components.find { |c| c['ref_ssi'] == ['aspace_a951375d104030369a993ff943f61a77'] }
-      %w[extent_ssm extent_teim].each do |field|
+      %w[extent_ssm extent_tesim].each do |field|
         expect(component[field]).to equal_array_ignoring_whitespace(
           ['1.5 Linear Feet']
         )
@@ -417,7 +441,7 @@ describe 'EAD 2 traject indexing', type: :feature do
 
         it 'parent_unittitles should be displayable and searchable' do
           component = all_components.find { |c| c['id'] == ['aoa271aspace_563a320bb37d24a9e1e6f7bf95b52671'] }
-          %w[parent_unittitles_ssm parent_unittitles_teim].each do |field|
+          %w[parent_unittitles_ssm parent_unittitles_tesim].each do |field|
             expect(component[field]).to contain_exactly(
               'Alpha Omega Alpha Archives, 1894-1992'
             )
@@ -524,8 +548,8 @@ describe 'EAD 2 traject indexing', type: :feature do
       end
 
       it 'indexes all names at any level in a type-specific name field' do
-        expect(result['persname_ssm']).to include_ignoring_whitespace 'Anfinsen, Christian B.'
-        expect(result['corpname_ssm']).to include_ignoring_whitespace 'Robertson\'s Crab House'
+        expect(result['persname_ssim']).to include_ignoring_whitespace 'Anfinsen, Christian B.'
+        expect(result['corpname_ssim']).to include_ignoring_whitespace 'Robertson\'s Crab House'
       end
     end
 
@@ -538,8 +562,8 @@ describe 'EAD 2 traject indexing', type: :feature do
 
       it 'indexes names in fields for specific name types, regardless of <controlaccess>' do
         component = all_components.find { |c| c['id'] == ['aoa271aspace_843e8f9f22bac69872d0802d6fffbb04'] }
-        expect(component['corpname_ssm']).to include_ignoring_whitespace 'Robertson\'s Crab House'
-        expect(component['persname_ssm']).to include_ignoring_whitespace 'Anfinsen, Christian B.'
+        expect(component['corpname_ssim']).to include_ignoring_whitespace 'Robertson\'s Crab House'
+        expect(component['persname_ssim']).to include_ignoring_whitespace 'Anfinsen, Christian B.'
       end
     end
   end
@@ -551,8 +575,8 @@ describe 'EAD 2 traject indexing', type: :feature do
 
     it 'indexes geognames' do
       component = all_components.find { |d| d['id'] == ['aoa271aspace_843e8f9f22bac69872d0802d6fffbb04'] }
-      expect(component).to include 'geogname_sim'
-      expect(component['geogname_sim']).to include('Popes Creek (Md.)')
+      expect(component).to include 'geogname_ssim'
+      expect(component['geogname_ssim']).to include('Popes Creek (Md.)')
 
       expect(component).to include 'geogname_ssm'
       expect(component['geogname_ssm']).to include('Popes Creek (Md.)')
@@ -564,9 +588,9 @@ describe 'EAD 2 traject indexing', type: :feature do
       Arclight::Engine.root.join('spec', 'fixtures', 'ead', 'nlm', 'alphaomegaalpha.xml')
     end
 
-    it 'creates date_range_sim' do
+    it 'creates date_range_ssim' do
       component = all_components.find { |d| d['id'] == ['aoa271aspace_563a320bb37d24a9e1e6f7bf95b52671'] }
-      date_range = component['date_range_sim']
+      date_range = component['date_range_ssim']
       expect(date_range).to be_an Array
       expect(date_range.length).to eq 75
       expect(date_range.first).to eq 1902
@@ -699,7 +723,7 @@ describe 'EAD 2 traject indexing', type: :feature do
     end
 
     it 'title' do
-      %w[title_ssm title_teim].each do |field|
+      %w[title_ssm title_tesim].each do |field|
         expect(result[field]).to include_ignoring_whitespace 'Stanford University student life photograph album'
       end
       expect(result['normalized_title_ssm']).to include_ignoring_whitespace 'Stanford University student life photograph album, circa 1900-1906'
@@ -716,11 +740,11 @@ describe 'EAD 2 traject indexing', type: :feature do
     end
 
     it 'changes EAD level code to human-readable' do
-      expect(result['level_sim']).to include 'Record Group'
+      expect(result['level_ssim']).to include 'Record Group'
     end
 
     it 'retains both original level & Collection for faceting' do
-      expect(result['level_sim']).to eq ['Record Group', 'Collection']
+      expect(result['level_ssim']).to eq ['Record Group', 'Collection']
     end
   end
 end

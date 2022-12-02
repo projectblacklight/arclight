@@ -2,7 +2,7 @@
 
 require 'spec_helper'
 
-RSpec.describe 'Search results', type: :feature do
+RSpec.describe 'Search results' do
   describe 'search results' do
     it 'text search works' do
       visit search_catalog_path q: 'a brief', search_field: 'all_fields'
@@ -25,7 +25,7 @@ RSpec.describe 'Search results', type: :feature do
     end
 
     it 'renders the online content label when there is online content' do
-      visit search_catalog_path f: { level_sim: ['Collection'] }, search_field: 'all_fields'
+      visit search_catalog_path f: { level_ssim: ['Collection'] }, search_field: 'all_fields'
 
       online_doc = page.all('.document').find do |el|
         el.all(
@@ -75,12 +75,12 @@ RSpec.describe 'Search results', type: :feature do
       visit search_catalog_path q: '', search_field: 'all_fields'
 
       within('#facets') do
-        within('.blacklight-collection_sim') do
+        within('.blacklight-collection_ssim') do
           expect(page).to have_css('h3 button', text: 'Collection')
           expect(page).to have_css('li .facet-label', text: 'Alpha Omega Alpha Archives, 1894-1992', visible: :hidden)
         end
 
-        within('.blacklight-level_sim') do
+        within('.blacklight-level_ssim') do
           expect(page).to have_css('h3 button', text: 'Level')
           expect(page).to have_css('li .facet-label', text: 'Series', visible: :hidden) # level != "otherlevel"
           expect(page).to have_css('li .facet-label', text: 'Binder', visible: :hidden) # "otherlevel" with alt value
@@ -99,12 +99,12 @@ RSpec.describe 'Search results', type: :feature do
           expect(page).to have_css('li .facet-label', text: '1118 Badger Vine Special Collections', visible: :hidden)
         end
 
-        within('.blacklight-repository_sim') do
+        within('.blacklight-repository_ssim') do
           expect(page).to have_css('h3 button', text: 'Repository')
           expect(page).to have_css('li .facet-label', text: 'National Library of Medicine. History of Medicine Division', visible: :hidden)
         end
 
-        within('.blacklight-geogname_sim') do
+        within('.blacklight-geogname_ssim') do
           expect(page).to have_css('h3 button', text: 'Place')
           expect(page).to have_css('li .facet-label', text: 'Mindanao Island (Philippines)', visible: :hidden)
           expect(page).to have_css('li .facet-label', text: 'Yosemite National Park (Calif.)', visible: :hidden)
@@ -125,7 +125,7 @@ RSpec.describe 'Search results', type: :feature do
 
     it 'renders the repository card when faceted on repository' do
       visit search_catalog_path f: {
-        repository_sim: ['National Library of Medicine. History of Medicine Division']
+        repository_ssim: ['National Library of Medicine. History of Medicine Division']
       }, search_field: 'all_fields'
 
       expect(page).to have_css('.al-repository-card')

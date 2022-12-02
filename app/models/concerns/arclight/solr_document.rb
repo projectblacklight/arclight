@@ -86,7 +86,7 @@ module Arclight
     end
 
     def number_of_children
-      first('child_component_count_isim') || 0
+      first('child_component_count_isi') || 0
     end
 
     def children?

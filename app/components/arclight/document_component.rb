@@ -32,5 +32,13 @@ module Arclight
     def access
       render (blacklight_config.show.access_component || Arclight::AccessComponent).new(presenter: presenter)
     end
+
+    def toggle_sidebar
+      button_tag(t('arclight.views.show.toggle_sidebar'),
+                 type: :button,
+                 class: 'btn btn-sm btn-secondary d-lg-none sidebar-toggle',
+                 data: { bs_toggle: 'offcanvas', bs_target: '#sidebar' },
+                 aria: { controls: 'sidebar' })
+    end
   end
 end
