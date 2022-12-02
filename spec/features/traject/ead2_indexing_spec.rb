@@ -207,12 +207,10 @@ RSpec.describe 'EAD 2 traject indexing' do
     let(:fixture_path) do
       Arclight::Engine.root.join('spec', 'fixtures', 'ead', 'sample', 'large-components-list.xml')
     end
+    let(:nested_component) { all_components.find { |c| c['id'] == ['lc0100aspace_32ad9025a3a286358baeae91b5d7696e'] } }
 
-    it 'selects the components' do
+    it 'builds the results' do
       expect(all_components.length).to eq 404
-    end
-
-    it 'indexes top-level daos' do
       expect(result['digital_objects_ssm']).to eq(
         [
           JSON.generate(
@@ -221,23 +219,11 @@ RSpec.describe 'EAD 2 traject indexing' do
           )
         ]
       )
-    end
 
-    context 'when nested component' do
-      let(:nested_component) { all_components.find { |c| c['id'] == ['lc0100aspace_32ad9025a3a286358baeae91b5d7696e'] } }
-
-      it 'correctly determines component level' do
-        expect(nested_component['component_level_isim']).to eq [2]
-      end
-
-      it 'parent' do
-        expect(nested_component['parent_ssim']).to eq %w[lc0100 aspace_327a75c226d44aa1a769edb4d2f13c6e]
-        expect(nested_component['parent_ssi']).to eq ['aspace_327a75c226d44aa1a769edb4d2f13c6e']
-      end
-
-      it 'parent_unittitles' do
-        expect(nested_component['parent_unittitles_ssm']).to eq ['Large collection sample, 1843-1872', 'File 1']
-      end
+      expect(nested_component['component_level_isim']).to eq [2]
+      expect(nested_component['parent_ssim']).to eq %w[lc0100 aspace_327a75c226d44aa1a769edb4d2f13c6e]
+      expect(nested_component['parent_ssi']).to eq ['aspace_327a75c226d44aa1a769edb4d2f13c6e']
+      expect(nested_component['parent_unittitles_ssm']).to eq ['Large collection sample, 1843-1872', 'File 1']
     end
   end
 
@@ -262,53 +248,20 @@ RSpec.describe 'EAD 2 traject indexing' do
       Arclight::Engine.root.join('spec', 'fixtures', 'ead', 'nlm', 'alphaomegaalpha.xml')
     end
 
-    it 'bioghist' do
+    it 'builds the document' do
       expect(result['bioghist_ssm'].first).to match(/Alpha Omega Alpha Honor Medical Society was founded/)
       expect(result['bioghist_tesim'].second).to match(/Hippocratic oath/)
       expect(result['bioghist_heading_ssm'].first).to match(/^Historical Note/)
-    end
-
-    it 'relatedmaterial' do
       expect(result['relatedmaterial_ssm'].first).to start_with('<p>An unprocessed collection includes')
-    end
-
-    it 'abstract' do
       expect(result['abstract_ssm'].first).to match(/Alpha Omega Alpha Honor Medical Society/)
-    end
-
-    it 'separatedmaterial' do
       expect(result['separatedmaterial_ssm'].first).to start_with('<p>Birth, Apollonius of Perga brain')
-    end
-
-    it 'otherfindaid' do
       expect(result['otherfindaid_ssm'].first).to start_with('<p>Li Europan lingues es membres del')
-    end
-
-    it 'altformavail' do
       expect(result['altformavail_ssm'].first).to start_with('<p>Rig Veda a mote of dust suspended')
-    end
-
-    it 'originalsloc' do
       expect(result['originalsloc_ssm'].first).to start_with('<p>Something incredible is waiting')
-    end
-
-    it 'arrangement' do
       expect(result['arrangement_ssm'].first).to eq '<p>Arranged into seven series.</p>'
-    end
-
-    it 'acqinfo' do
       expect(result['acqinfo_ssim'].first).to eq 'Donated by Alpha Omega Alpha.'
-    end
-
-    it 'appraisal' do
       expect(result['appraisal_ssm'].first).to start_with('<p>Corpus callosum something incredible')
-    end
-
-    it 'custodhist' do
       expect(result['custodhist_ssm'].first).to match(/Maintained by Alpha Omega Alpha and the family of William Root/)
-    end
-
-    it 'processinfo' do
       expect(result['processinfo_ssm'].first).to match(/Processed in 2001\. Descended from astronomers\./)
     end
 
@@ -698,9 +651,7 @@ RSpec.describe 'EAD 2 traject indexing' do
 
       expect(second_component['ref_ssi']).to contain_exactly('al_54b06e5ad77cab05ec7f6beeaca50022c47d9c7b')
       expect(second_component['id']).to contain_exactly('ehllHemingwayErnest-sampleal_54b06e5ad77cab05ec7f6beeaca50022c47d9c7b')
-    end
 
-    it 'indexes trail of ancestor ids' do
       expect(second_component['parent_ssim']).to equal_array_ignoring_whitespace(
         %w[ehllHemingwayErnest-sample al_4bf70b448ac8351a147acff1dd8b1c0b9a791980]
       )
@@ -717,12 +668,10 @@ RSpec.describe 'EAD 2 traject indexing' do
       Arclight::Traject::NokogiriNamespacelessReader.new(fixture_without_namespaces, indexer.settings)
     end
 
-    it 'id' do
+    it 'builds the document' do
       expect(result['id'].first).to eq_ignoring_whitespace 'a0011-xml'
       expect(result['ead_ssi'].first).to eq_ignoring_whitespace 'a0011.xml'
-    end
 
-    it 'title' do
       %w[title_ssm title_tesim].each do |field|
         expect(result[field]).to include_ignoring_whitespace 'Stanford University student life photograph album'
       end
@@ -735,15 +684,8 @@ RSpec.describe 'EAD 2 traject indexing' do
       Arclight::Engine.root.join('spec', 'fixtures', 'ead', 'sample', 'no-ids-recordgrp-level.xml')
     end
 
-    it 'indexes as collection for routing/display' do
+    it 'builds the level fields' do
       expect(result['level_ssm']).to eq ['collection']
-    end
-
-    it 'changes EAD level code to human-readable' do
-      expect(result['level_ssim']).to include 'Record Group'
-    end
-
-    it 'retains both original level & Collection for faceting' do
       expect(result['level_ssim']).to eq ['Record Group', 'Collection']
     end
   end
