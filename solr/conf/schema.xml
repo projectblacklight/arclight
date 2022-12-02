@@ -309,6 +309,7 @@
 
    <!-- To play nice with atomic updates, only use non-stored fields for copyFields -->
    <dynamicField name="*_tesim" type="text_en"   stored="true"  indexed="true"  multiValued="true"  />
+   <dynamicField name="*_tesm" type="text_en"    stored="true"  indexed="false" multiValued="true"  />
    <dynamicField name="*_teim"  type="text_en"   stored="false" indexed="true"  multiValued="true"  />
    <dynamicField name="*_si"    type="string"    stored="false" indexed="true"  multiValued="false" />
    <dynamicField name="*_sim"   type="string"    stored="false" indexed="true"  multiValued="true"  />

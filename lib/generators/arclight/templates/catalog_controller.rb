@@ -269,30 +269,30 @@ class CatalogController < ApplicationController
 
     # Collection Show Page - Summary Section
     config.add_summary_field 'creators_ssim', label: 'Creator', link_to_facet: true
-    config.add_summary_field 'abstract_ssm', label: 'Abstract', helper_method: :render_html_tags
+    config.add_summary_field 'abstract_tesm', label: 'Abstract', helper_method: :render_html_tags
     config.add_summary_field 'extent_ssm', label: 'Extent'
     config.add_summary_field 'language_ssim', label: 'Language'
-    config.add_summary_field 'prefercite_ssm', label: 'Preferred citation', helper_method: :render_html_tags
+    config.add_summary_field 'prefercite_tesm', label: 'Preferred citation', helper_method: :render_html_tags
 
     # Collection Show Page - Background Section
-    config.add_background_field 'scopecontent_ssm', label: 'Scope and content', helper_method: :render_html_tags
-    config.add_background_field 'bioghist_ssm', label: 'Biographical / historical', helper_method: :render_html_tags
+    config.add_background_field 'scopecontent_tesm', label: 'Scope and content', helper_method: :render_html_tags
+    config.add_background_field 'bioghist_tesm', label: 'Biographical / historical', helper_method: :render_html_tags
     config.add_background_field 'acqinfo_ssim', label: 'Acquisition information', helper_method: :render_html_tags
-    config.add_background_field 'appraisal_ssm', label: 'Appraisal information', helper_method: :render_html_tags
-    config.add_background_field 'custodhist_ssm', label: 'Custodial history', helper_method: :render_html_tags
-    config.add_background_field 'processinfo_ssm', label: 'Processing information', helper_method: :render_html_tags
-    config.add_background_field 'arrangement_ssm', label: 'Arrangement', helper_method: :render_html_tags
-    config.add_background_field 'accruals_ssm', label: 'Accruals', helper_method: :render_html_tags
-    config.add_background_field 'phystech_ssm', label: 'Physical / technical requirements', helper_method: :render_html_tags
-    config.add_background_field 'physloc_ssm', label: 'Physical location', helper_method: :render_html_tags
+    config.add_background_field 'appraisal_tesm', label: 'Appraisal information', helper_method: :render_html_tags
+    config.add_background_field 'custodhist_tesm', label: 'Custodial history', helper_method: :render_html_tags
+    config.add_background_field 'processinfo_tesm', label: 'Processing information', helper_method: :render_html_tags
+    config.add_background_field 'arrangement_tesm', label: 'Arrangement', helper_method: :render_html_tags
+    config.add_background_field 'accruals_tesm', label: 'Accruals', helper_method: :render_html_tags
+    config.add_background_field 'phystech_tesm', label: 'Physical / technical requirements', helper_method: :render_html_tags
+    config.add_background_field 'physloc_tesm', label: 'Physical location', helper_method: :render_html_tags
     config.add_background_field 'descrules_ssm', label: 'Rules or conventions', helper_method: :render_html_tags
 
     # Collection Show Page - Related Section
-    config.add_related_field 'relatedmaterial_ssm', label: 'Related material', helper_method: :render_html_tags
-    config.add_related_field 'separatedmaterial_ssm', label: 'Separated material', helper_method: :render_html_tags
-    config.add_related_field 'otherfindaid_ssm', label: 'Other finding aids', helper_method: :render_html_tags
-    config.add_related_field 'altformavail_ssm', label: 'Alternative form available', helper_method: :render_html_tags
-    config.add_related_field 'originalsloc_ssm', label: 'Location of originals', helper_method: :render_html_tags
+    config.add_related_field 'relatedmaterial_tesm', label: 'Related material', helper_method: :render_html_tags
+    config.add_related_field 'separatedmaterial_tesm', label: 'Separated material', helper_method: :render_html_tags
+    config.add_related_field 'otherfindaid_tesm', label: 'Other finding aids', helper_method: :render_html_tags
+    config.add_related_field 'altformavail_tesm', label: 'Alternative form available', helper_method: :render_html_tags
+    config.add_related_field 'originalsloc_tesm', label: 'Location of originals', helper_method: :render_html_tags
 
     # Collection Show Page - Indexed Terms Section
     config.add_indexed_terms_field 'access_subjects_ssim', label: 'Subjects', link_to_facet: true, separator_options: {
@@ -325,17 +325,17 @@ class CatalogController < ApplicationController
     }, if: lambda { |_context, _field_config, document|
       document.containers.present?
     }
-    config.add_component_field 'abstract_ssm', label: 'Abstract', helper_method: :render_html_tags
+    config.add_component_field 'abstract_tesm', label: 'Abstract', helper_method: :render_html_tags
     config.add_component_field 'extent_ssm', label: 'Extent'
-    config.add_component_field 'scopecontent_ssm', label: 'Scope and content', helper_method: :render_html_tags
+    config.add_component_field 'scopecontent_tesm', label: 'Scope and content', helper_method: :render_html_tags
     config.add_component_field 'acqinfo_ssim', label: 'Acquisition information', helper_method: :render_html_tags
-    config.add_component_field 'appraisal_ssm', label: 'Appraisal information', helper_method: :render_html_tags
-    config.add_component_field 'custodhist_ssm', label: 'Custodial history', helper_method: :render_html_tags
-    config.add_component_field 'processinfo_ssm', label: 'Processing information', helper_method: :render_html_tags
-    config.add_component_field 'arrangement_ssm', label: 'Arrangement', helper_method: :render_html_tags
-    config.add_component_field 'accruals_ssm', label: 'Accruals', helper_method: :render_html_tags
-    config.add_component_field 'phystech_ssm', label: 'Physical / technical requirements', helper_method: :render_html_tags
-    config.add_component_field 'physloc_ssm', label: 'Physical location', helper_method: :render_html_tags
+    config.add_component_field 'appraisal_tesm', label: 'Appraisal information', helper_method: :render_html_tags
+    config.add_component_field 'custodhist_tesm', label: 'Custodial history', helper_method: :render_html_tags
+    config.add_component_field 'processinfo_tesm', label: 'Processing information', helper_method: :render_html_tags
+    config.add_component_field 'arrangement_tesm', label: 'Arrangement', helper_method: :render_html_tags
+    config.add_component_field 'accruals_tesm', label: 'Accruals', helper_method: :render_html_tags
+    config.add_component_field 'phystech_tesm', label: 'Physical / technical requirements', helper_method: :render_html_tags
+    config.add_component_field 'physloc_tesm', label: 'Physical location', helper_method: :render_html_tags
 
     # Component Show Page - Indexed Terms Section
     config.add_component_indexed_terms_field 'access_subjects_ssim', label: 'Subjects', link_to_facet: true, separator_options: {
@@ -361,21 +361,21 @@ class CatalogController < ApplicationController
     # =================
 
     # Collection Show Page Access Tab - Terms and Conditions Section
-    config.add_terms_field 'accessrestrict_ssm', label: 'Restrictions', helper_method: :render_html_tags
-    config.add_terms_field 'userestrict_ssm', label: 'Terms of access', helper_method: :render_html_tags
+    config.add_terms_field 'accessrestrict_tesm', label: 'Restrictions', helper_method: :render_html_tags
+    config.add_terms_field 'userestrict_tesm', label: 'Terms of access', helper_method: :render_html_tags
 
     # Component Show Page Access Tab - Terms and Condition Section
-    config.add_component_terms_field 'accessrestrict_ssm', label: 'Restrictions', helper_method: :render_html_tags
-    config.add_component_terms_field 'userestrict_ssm', label: 'Terms of access', helper_method: :render_html_tags
-    config.add_component_terms_field 'parent_access_restrict_ssm', label: 'Parent restrictions', helper_method: :render_html_tags
-    config.add_component_terms_field 'parent_access_terms_ssm', label: 'Parent terms of access', helper_method: :render_html_tags
+    config.add_component_terms_field 'accessrestrict_tesm', label: 'Restrictions', helper_method: :render_html_tags
+    config.add_component_terms_field 'userestrict_tesm', label: 'Terms of access', helper_method: :render_html_tags
+    config.add_component_terms_field 'parent_access_restrict_tesm', label: 'Parent restrictions', helper_method: :render_html_tags
+    config.add_component_terms_field 'parent_access_terms_tesm', label: 'Parent terms of access', helper_method: :render_html_tags
 
     # Collection and Component Show Page Access Tab - In Person Section
     config.add_in_person_field 'repository_location', values: ->(_, document, _) { document.repository_config }, label: 'Location of this collection', component: Arclight::RepositoryLocationComponent
     config.add_in_person_field 'before_you_visit', values: ->(_, document, _) { document.repository_config&.visit_note }, label: 'Before you visit'
 
     # Collection and Component Show Page Access Tab - How to Cite Section
-    config.add_cite_field 'prefercite_ssm', label: 'Preferred citation', helper_method: :render_html_tags
+    config.add_cite_field 'prefercite_tesm', label: 'Preferred citation', helper_method: :render_html_tags
 
     # Collection and Component Show Page Access Tab - Contact Section
     config.add_contact_field 'repository_contact', values: ->(_, document, _) { document.repository_config&.contact }, label: 'Contact'

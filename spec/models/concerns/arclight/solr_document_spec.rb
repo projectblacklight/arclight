@@ -96,7 +96,7 @@ RSpec.describe Arclight::SolrDocument do
   end
 
   describe '#terms' do
-    let(:document) { SolrDocument.new(userestrict_ssm: 'Must use gloves with photos.') }
+    let(:document) { SolrDocument.new(userestrict_tesm: 'Must use gloves with photos.') }
 
     it 'uses the self terms' do
       expect(document.terms).to eq 'Must use gloves with photos.'
@@ -104,7 +104,7 @@ RSpec.describe Arclight::SolrDocument do
   end
 
   describe '#parent_restrictions' do
-    let(:document) { SolrDocument.new(parent_access_restrict_ssm: 'No access.') }
+    let(:document) { SolrDocument.new(parent_access_restrict_tesm: 'No access.') }
 
     it 'uses the parent_restrictions' do
       expect(document.parent_restrictions).to eq 'No access.'
@@ -112,7 +112,7 @@ RSpec.describe Arclight::SolrDocument do
   end
 
   describe '#parent_terms' do
-    let(:document) { SolrDocument.new(parent_access_terms_ssm: 'Must use gloves with photos.') }
+    let(:document) { SolrDocument.new(parent_access_terms_tesm: 'Must use gloves with photos.') }
 
     it 'uses the parent_terms' do
       expect(document.parent_terms).to eq 'Must use gloves with photos.'

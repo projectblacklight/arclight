@@ -199,7 +199,7 @@ to_field 'date_range_ssim', extract_xpath('/ead/archdesc/did/unitdate/@normal', 
 end
 
 SEARCHABLE_NOTES_FIELDS.map do |selector|
-  to_field "#{selector}_ssm", extract_xpath("/ead/archdesc/#{selector}/*[local-name()!='head']", to_text: false) do |_record, accumulator|
+  to_field "#{selector}_tesm", extract_xpath("/ead/archdesc/#{selector}/*[local-name()!='head']", to_text: false) do |_record, accumulator|
     accumulator.map!(&:to_html)
   end
   to_field "#{selector}_heading_ssm", extract_xpath("/ead/archdesc/#{selector}/head") unless selector == 'prefercite'
@@ -207,7 +207,7 @@ SEARCHABLE_NOTES_FIELDS.map do |selector|
 end
 
 DID_SEARCHABLE_NOTES_FIELDS.map do |selector|
-  to_field "#{selector}_ssm", extract_xpath("/ead/archdesc/did/#{selector}", to_text: false)
+  to_field "#{selector}_tesm", extract_xpath("/ead/archdesc/did/#{selector}", to_text: false)
 end
 
 NAME_ELEMENTS.map do |selector|

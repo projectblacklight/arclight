@@ -139,8 +139,8 @@
        <str name="fl">
          id,
          score,
-         abstract_ssm,
-         accessrestrict_ssm,
+         abstract_tesm,
+         accessrestrict_tesm,
          child_component_count_isi,
          containers_ssim,
          creator_ssm,
@@ -150,7 +150,7 @@
          language_ssim,
          level_ssm,
          repository_ssm,
-         scopecontent_ssm,
+         scopecontent_tesm,
          title_ssm,
          normalized_title_ssm,
          normalized_date_ssm,
@@ -160,8 +160,8 @@
          ead_ssi,
          ref_ssm,
          component_level_isim,
-         parent_access_restrict_ssm,
-         parent_access_terms_ssm,
+         parent_access_restrict_tesm,
+         parent_access_terms_tesm,
          names_coll_ssim
          places_ssim
        </str>

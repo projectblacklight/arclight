@@ -63,12 +63,12 @@ RSpec.describe 'Collection Page' do
     end
 
     it 'html-formatted notes render with paragraphs intact' do
-      within 'dd.blacklight-bioghist_ssm' do
+      within 'dd.blacklight-bioghist_tesm' do
         expect(page).to have_css('p', count: 4)
         expect(page).to have_css('p', text: /^Alpha Omega Alpha Honor Medical Society was founded/)
         expect(page).to have_css('p', text: /^Root and his fellow medical students/)
       end
-      within 'dd.blacklight-abstract_ssm' do
+      within 'dd.blacklight-abstract_tesm' do
         expect(page).to have_css('p', count: 2)
       end
     end
