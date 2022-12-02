@@ -26,6 +26,7 @@ settings do
   # provide 'depth' # the current nesting depth of the component
   provide 'component_traject_config', __FILE__
   provide 'date_normalizer', 'Arclight::NormalizedDate'
+  provide 'title_normalizer', 'Arclight::NormalizedTitle'
   provide 'reader_class_name', 'Arclight::Traject::NokogiriNamespacelessReader'
   provide 'logger', Logger.new($stderr)
 end
@@ -114,7 +115,7 @@ end
 to_field 'normalized_title_ssm' do |_record, accumulator, context|
   title = context.output_hash['title_ssm']&.first
   date = context.output_hash['normalized_date_ssm']&.first
-  accumulator << Arclight::NormalizedTitle.new(title, date).to_s
+  accumulator << settings['title_normalizer'].constantize.new(title, date).to_s
 end
 
 to_field 'component_level_isim' do |_record, accumulator|
