@@ -96,7 +96,7 @@ RSpec.describe Arclight::SolrDocument do
   end
 
   describe '#terms' do
-    let(:document) { SolrDocument.new(userestrict_tesm: 'Must use gloves with photos.') }
+    let(:document) { SolrDocument.new(userestrict_html_tesm: 'Must use gloves with photos.') }
 
     it 'uses the self terms' do
       expect(document.terms).to eq 'Must use gloves with photos.'

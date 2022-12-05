@@ -257,12 +257,12 @@ to_field 'containers_ssim' do |record, accumulator|
 end
 
 SEARCHABLE_NOTES_FIELDS.map do |selector|
-  to_field "#{selector}_tesm", extract_xpath("./#{selector}/*[local-name()!='head']", to_text: false)
+  to_field "#{selector}_html_tesm", extract_xpath("./#{selector}/*[local-name()!='head']", to_text: false)
   to_field "#{selector}_heading_ssm", extract_xpath("./#{selector}/head")
   to_field "#{selector}_tesim", extract_xpath("./#{selector}/*[local-name()!='head']")
 end
 DID_SEARCHABLE_NOTES_FIELDS.map do |selector|
-  to_field "#{selector}_tesm", extract_xpath("./did/#{selector}", to_text: false)
+  to_field "#{selector}_html_tesm", extract_xpath("./did/#{selector}", to_text: false)
 end
 to_field 'did_note_ssm', extract_xpath('./did/note')
 

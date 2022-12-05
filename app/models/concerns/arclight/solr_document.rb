@@ -12,11 +12,11 @@ module Arclight
       attribute :parent_levels, Blacklight::Types::Array, 'parent_levels_ssm'
       attribute :unitid, Blacklight::Types::String, 'unitid_ssm'
       attribute :extent, Blacklight::Types::String, 'extent_ssm'
-      attribute :abstract, Blacklight::Types::String, 'abstract_tesm'
-      attribute :scope, Blacklight::Types::String, 'scopecontent_tesm'
+      attribute :abstract, Blacklight::Types::String, 'abstract_html_tesm'
+      attribute :scope, Blacklight::Types::String, 'scopecontent_html_tesm'
       attribute :creator, Blacklight::Types::String, 'creator_ssm'
       attribute :level, Blacklight::Types::String, 'level_ssm'
-      attribute :terms, Blacklight::Types::String, 'userestrict_tesm'
+      attribute :terms, Blacklight::Types::String, 'userestrict_html_tesm'
       # Restrictions for component sidebar
       attribute :parent_restrictions, Blacklight::Types::String, 'parent_access_restrict_tesm'
       # Terms for component sidebar

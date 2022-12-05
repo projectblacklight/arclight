@@ -84,7 +84,7 @@ RSpec.describe 'Component Page' do
     end
 
     it 'multivalued notes are rendered as paragaphs' do
-      within 'dd.blacklight-appraisal_tesm' do
+      within 'dd.blacklight-appraisal_html_tesm' do
         expect(page).to have_css('p', count: 2)
       end
     end
