@@ -23,6 +23,14 @@
       padding-left: 1rem;
     }
 
+    .breadcrumb-item-2 > .breadcrumb {
+      display: block;
+    }
+
+    .breadcrumb-item-3 {
+      display: inline-block;
+    }
+
     .breadcrumb-item-3:first-of-type {
       // This is if the series is a parent of this item.
       &::before {
@@ -30,9 +38,9 @@
       }
     }
 
-    // last item doesn't get its own line
+    // last item doesn't get its own line unles s
     .breadcrumb-item-4 {
-      flex: none;
+      display: inline-block;
     }
   }
 
