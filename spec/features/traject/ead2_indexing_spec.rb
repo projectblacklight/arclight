@@ -249,28 +249,28 @@ RSpec.describe 'EAD 2 traject indexing' do
     end
 
     it 'builds the document' do
-      expect(result['bioghist_ssm'].first).to match(/Alpha Omega Alpha Honor Medical Society was founded/)
+      expect(result['bioghist_html_tesm'].first).to match(/Alpha Omega Alpha Honor Medical Society was founded/)
       expect(result['bioghist_tesim'].second).to match(/Hippocratic oath/)
       expect(result['bioghist_heading_ssm'].first).to match(/^Historical Note/)
-      expect(result['relatedmaterial_ssm'].first).to start_with('<p>An unprocessed collection includes')
-      expect(result['abstract_ssm'].first).to match(/Alpha Omega Alpha Honor Medical Society/)
-      expect(result['separatedmaterial_ssm'].first).to start_with('<p>Birth, Apollonius of Perga brain')
-      expect(result['otherfindaid_ssm'].first).to start_with('<p>Li Europan lingues es membres del')
-      expect(result['altformavail_ssm'].first).to start_with('<p>Rig Veda a mote of dust suspended')
-      expect(result['originalsloc_ssm'].first).to start_with('<p>Something incredible is waiting')
-      expect(result['arrangement_ssm'].first).to eq '<p>Arranged into seven series.</p>'
+      expect(result['relatedmaterial_html_tesm'].first).to start_with('<p>An unprocessed collection includes')
+      expect(result['abstract_html_tesm'].first).to match(/Alpha Omega Alpha Honor Medical Society/)
+      expect(result['separatedmaterial_html_tesm'].first).to start_with('<p>Birth, Apollonius of Perga brain')
+      expect(result['otherfindaid_html_tesm'].first).to start_with('<p>Li Europan lingues es membres del')
+      expect(result['altformavail_html_tesm'].first).to start_with('<p>Rig Veda a mote of dust suspended')
+      expect(result['originalsloc_html_tesm'].first).to start_with('<p>Something incredible is waiting')
+      expect(result['arrangement_html_tesm'].first).to eq '<p>Arranged into seven series.</p>'
       expect(result['acqinfo_ssim'].first).to eq 'Donated by Alpha Omega Alpha.'
-      expect(result['appraisal_ssm'].first).to start_with('<p>Corpus callosum something incredible')
-      expect(result['custodhist_ssm'].first).to match(/Maintained by Alpha Omega Alpha and the family of William Root/)
-      expect(result['processinfo_ssm'].first).to match(/Processed in 2001\. Descended from astronomers\./)
+      expect(result['appraisal_html_tesm'].first).to start_with('<p>Corpus callosum something incredible')
+      expect(result['custodhist_html_tesm'].first).to match(/Maintained by Alpha Omega Alpha and the family of William Root/)
+      expect(result['processinfo_html_tesm'].first).to match(/Processed in 2001\. Descended from astronomers\./)
     end
 
     describe 'component-level' do
       it 'indexes own notes, not notes from descendants' do
         component = all_components.find { |c| c['id'] == ['aoa271aspace_563a320bb37d24a9e1e6f7bf95b52671'] }
-        expect(component).to include 'scopecontent_ssm'
-        expect(component['scopecontent_ssm']).to include(a_string_matching(/provide important background context./))
-        expect(component['scopecontent_ssm']).not_to include(a_string_matching(/correspondence, and a nametag./))
+        expect(component).to include 'scopecontent_html_tesm'
+        expect(component['scopecontent_html_tesm']).to include(a_string_matching(/provide important background context./))
+        expect(component['scopecontent_html_tesm']).not_to include(a_string_matching(/correspondence, and a nametag./))
       end
 
       it 'only indexes into fields that will support future atomic updates' do
@@ -320,9 +320,9 @@ RSpec.describe 'EAD 2 traject indexing' do
           end
 
           it 'has own accessrestrict' do
-            expect(component_with_own_accessrestrict['accessrestrict_ssm'])
+            expect(component_with_own_accessrestrict['accessrestrict_html_tesm'])
               .to include(a_string_matching(/Restricted until 2018./))
-            expect(component_with_own_accessrestrict['parent_access_restrict_ssm'])
+            expect(component_with_own_accessrestrict['parent_access_restrict_tesm'])
               .to include(a_string_matching(/No restrictions on access/))
           end
         end
@@ -333,9 +333,9 @@ RSpec.describe 'EAD 2 traject indexing' do
           end
 
           it 'gets accessrestrict from parent component' do
-            expect(component_inheriting_accessrestrict_from_parent['accessrestrict_ssm'])
+            expect(component_inheriting_accessrestrict_from_parent['accessrestrict_html_tesm'])
               .to be_nil
-            expect(component_inheriting_accessrestrict_from_parent['parent_access_restrict_ssm'])
+            expect(component_inheriting_accessrestrict_from_parent['parent_access_restrict_tesm'])
               .to include(a_string_matching(/RESTRICTED: Access to these folders requires prior written approval./))
           end
         end
@@ -346,8 +346,8 @@ RSpec.describe 'EAD 2 traject indexing' do
           end
 
           it 'gets accessrestrict from grandparent component' do
-            expect(component_inheriting_accessrestrict_from_grandparent['accessrestrict_ssm']).to be_nil
-            expect(component_inheriting_accessrestrict_from_grandparent['parent_access_restrict_ssm'])
+            expect(component_inheriting_accessrestrict_from_grandparent['accessrestrict_html_tesm']).to be_nil
+            expect(component_inheriting_accessrestrict_from_grandparent['parent_access_restrict_tesm'])
               .to include(a_string_matching(/RESTRICTED: Access to these folders requires prior written approval./))
           end
         end
@@ -358,8 +358,8 @@ RSpec.describe 'EAD 2 traject indexing' do
           end
 
           it 'gets accessrestrict from collection' do
-            expect(component_inheriting_accessrestrict_from_collection['accessrestrict_ssm']).to be_nil
-            expect(component_inheriting_accessrestrict_from_collection['parent_access_restrict_ssm'])
+            expect(component_inheriting_accessrestrict_from_collection['accessrestrict_html_tesm']).to be_nil
+            expect(component_inheriting_accessrestrict_from_collection['parent_access_restrict_tesm'])
               .to eq ['No restrictions on access.']
           end
         end
@@ -375,16 +375,16 @@ RSpec.describe 'EAD 2 traject indexing' do
         end
 
         it 'has own userestrict' do
-          expect(component_with_own_userestrict['userestrict_ssm'])
+          expect(component_with_own_userestrict['userestrict_html_tesm'])
             .to include(a_string_matching(/Original photographs must be handled using gloves/))
-          expect(component_with_own_userestrict['parent_access_terms_ssm'])
+          expect(component_with_own_userestrict['parent_access_terms_tesm'])
             .to include(a_string_matching(/Original photographs must be handled using gloves./))
         end
 
         it 'gets userestrict from collection' do
           expect(component_inheriting_userestrict_from_collection['access_terms_ssm'])
             .to be_nil
-          expect(component_inheriting_userestrict_from_collection['parent_access_terms_ssm'])
+          expect(component_inheriting_userestrict_from_collection['parent_access_terms_tesm'])
             .to include(a_string_matching(/Copyright was transferred to the public domain./))
         end
       end

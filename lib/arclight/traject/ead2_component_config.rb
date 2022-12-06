@@ -192,14 +192,14 @@ to_field 'sort_isi' do |_record, accumulator, _context|
 end
 
 # Get the <accessrestrict> from the closest ancestor that has one (includes top-level)
-to_field 'parent_access_restrict_ssm' do |record, accumulator|
+to_field 'parent_access_restrict_tesm' do |record, accumulator|
   accumulator.concat Array
     .wrap(record.xpath('(./ancestor::*/accessrestrict)[last()]/*[local-name()!="head"]')
     .map(&:text))
 end
 
 # Get the <userestrict> from self OR the closest ancestor that has one (includes top-level)
-to_field 'parent_access_terms_ssm' do |record, accumulator|
+to_field 'parent_access_terms_tesm' do |record, accumulator|
   accumulator.concat Array
     .wrap(record.xpath('(./ancestor-or-self::*/userestrict)[last()]/*[local-name()!="head"]')
     .map(&:text))
@@ -257,12 +257,12 @@ to_field 'containers_ssim' do |record, accumulator|
 end
 
 SEARCHABLE_NOTES_FIELDS.map do |selector|
-  to_field "#{selector}_ssm", extract_xpath("./#{selector}/*[local-name()!='head']", to_text: false)
+  to_field "#{selector}_html_tesm", extract_xpath("./#{selector}/*[local-name()!='head']", to_text: false)
   to_field "#{selector}_heading_ssm", extract_xpath("./#{selector}/head")
   to_field "#{selector}_tesim", extract_xpath("./#{selector}/*[local-name()!='head']")
 end
 DID_SEARCHABLE_NOTES_FIELDS.map do |selector|
-  to_field "#{selector}_ssm", extract_xpath("./did/#{selector}", to_text: false)
+  to_field "#{selector}_html_tesm", extract_xpath("./did/#{selector}", to_text: false)
 end
 to_field 'did_note_ssm', extract_xpath('./did/note')
 

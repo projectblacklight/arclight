@@ -9,7 +9,7 @@ RSpec.describe Arclight::DocumentDownloads do
     SolrDocument.new(
       id: 'abc123',
       unitid_ssm: ['sample_unitid'],
-      userestrict_ssm: ['The Terms of the Collection'],
+      userestrict_html_tesm: ['The Terms of the Collection'],
       extent_ssm: ['42GB'], # This field does not typically hold file size, but for test purposes..
       level_ssm: ['collection'],
       ref_ssm: ['http://example.com/finding-aid.pdf'] # This field does not typically hold URLs, but for test purposes..
