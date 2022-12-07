@@ -25,7 +25,7 @@ RSpec.describe 'Search results' do
     end
 
     it 'renders the online content label when there is online content' do
-      visit search_catalog_path f: { level_ssim: ['Collection'] }, search_field: 'all_fields'
+      visit search_catalog_path f: { level: ['Collection'] }, search_field: 'all_fields'
 
       online_doc = page.all('.document').find do |el|
         el.all(
@@ -75,48 +75,48 @@ RSpec.describe 'Search results' do
       visit search_catalog_path q: '', search_field: 'all_fields'
 
       within('#facets') do
-        within('.blacklight-collection_ssim') do
+        within('.blacklight-collection') do
           expect(page).to have_css('h3 button', text: 'Collection')
           expect(page).to have_css('li .facet-label', text: 'Alpha Omega Alpha Archives, 1894-1992', visible: :hidden)
         end
 
-        within('.blacklight-level_ssim') do
+        within('.blacklight-level') do
           expect(page).to have_css('h3 button', text: 'Level')
           expect(page).to have_css('li .facet-label', text: 'Series', visible: :hidden) # level != "otherlevel"
           expect(page).to have_css('li .facet-label', text: 'Binder', visible: :hidden) # "otherlevel" with alt value
           expect(page).to have_css('li .facet-label', text: 'Other', visible: :hidden) # "otherlevel" but missing alt val
         end
 
-        within('.blacklight-creator_ssim') do
+        within('.blacklight-creator') do
           expect(page).to have_css('h3 button', text: 'Creator')
           expect(page).to have_css('li .facet-label', text: 'Alpha Omega Alpha', visible: :hidden)
           expect(page).to have_css('li .facet-label', text: 'Stanford University', visible: :hidden)
         end
 
-        within('.blacklight-names_ssim') do
+        within('.blacklight-names') do
           expect(page).to have_css('h3 button', text: 'Names')
           expect(page).to have_css('li .facet-label', text: 'Department of Special Collections and University Archives', visible: :hidden)
           expect(page).to have_css('li .facet-label', text: '1118 Badger Vine Special Collections', visible: :hidden)
         end
 
-        within('.blacklight-repository_ssim') do
+        within('.blacklight-repository') do
           expect(page).to have_css('h3 button', text: 'Repository')
           expect(page).to have_css('li .facet-label', text: 'National Library of Medicine. History of Medicine Division', visible: :hidden)
         end
 
-        within('.blacklight-geogname_ssim') do
+        within('.blacklight-place') do
           expect(page).to have_css('h3 button', text: 'Place')
           expect(page).to have_css('li .facet-label', text: 'Mindanao Island (Philippines)', visible: :hidden)
           expect(page).to have_css('li .facet-label', text: 'Yosemite National Park (Calif.)', visible: :hidden)
         end
 
-        within('.blacklight-access_subjects_ssim') do
+        within('.blacklight-subject') do
           expect(page).to have_css('h3 button', text: 'Subject')
           expect(page).to have_css('li .facet-label', text: 'Slides.', visible: :hidden)
           expect(page).to have_css('li .facet-label', text: 'Fraternizing', visible: :hidden)
         end
 
-        within('.blacklight-has_online_content_ssim') do
+        within('.blacklight-access') do
           expect(page).to have_css('h3 button', text: 'Access')
           expect(page).to have_css('li .facet-label', text: 'Online access', visible: :hidden)
         end
@@ -125,7 +125,7 @@ RSpec.describe 'Search results' do
 
     it 'renders the repository card when faceted on repository' do
       visit search_catalog_path f: {
-        repository_ssim: ['National Library of Medicine. History of Medicine Division']
+        repository: ['National Library of Medicine. History of Medicine Division']
       }, search_field: 'all_fields'
 
       expect(page).to have_css('.al-repository-card')
@@ -141,7 +141,7 @@ RSpec.describe 'Search results' do
 
     it 'does not include repository card if faceted on something that is not repository' do
       visit search_catalog_path f: {
-        names_ssim: ['Owner of the reel of yellow nylon rope']
+        names: ['Owner of the reel of yellow nylon rope']
       }, search_field: 'all_fields'
 
       expect(page).not_to have_css('.al-repository-card')

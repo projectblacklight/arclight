@@ -18,7 +18,7 @@ module Arclight
       values.map do |value|
         link_to(
           value,
-          search_action_path(f: { names_ssim: [value] })
+          search_action_path(f: { names: [value] })
         )
       end.to_sentence(options).html_safe
     end

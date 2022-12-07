@@ -33,7 +33,7 @@ RSpec.describe 'Component Page' do
 
   describe 'Indexed Terms names section' do
     it 'includes names dt subheading text' do
-      expect(page).to have_css('dt.blacklight-names_ssim', text: 'Names:')
+      expect(page).to have_css('dt.blacklight-names', text: 'Names:')
     end
 
     it 'includes names dd link text' do
@@ -43,7 +43,7 @@ RSpec.describe 'Component Page' do
 
   describe 'Indexed Terms places section' do
     it 'includes places dt subheading text' do
-      expect(page).to have_css('dt.blacklight-places_ssim', text: 'Places:')
+      expect(page).to have_css('dt.blacklight-places', text: 'Places:')
     end
 
     it 'includes places dd link text' do
@@ -55,11 +55,11 @@ RSpec.describe 'Component Page' do
     let(:doc_id) { 'aoa271aspace_01daa89087641f7fc9dbd7a10d3f2da9' }
 
     it 'includes subjects dt subheading text' do
-      expect(page).to have_css('dt.blacklight-access_subjects_ssim', text: 'Subjects:')
+      expect(page).to have_css('dt.blacklight-access_subjects', text: 'Subjects:')
     end
 
     it 'includes subjects dd link text' do
-      expect(page).to have_css('dd.blacklight-access_subjects_ssim a', text: 'Records')
+      expect(page).to have_css('dd.blacklight-access_subjects a', text: 'Records')
     end
   end
 
@@ -84,7 +84,7 @@ RSpec.describe 'Component Page' do
     end
 
     it 'multivalued notes are rendered as paragaphs' do
-      within 'dd.blacklight-appraisal_html_tesm' do
+      within 'dd.blacklight-appraisal' do
         expect(page).to have_css('p', count: 2)
       end
     end

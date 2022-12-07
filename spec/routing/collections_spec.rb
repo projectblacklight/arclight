@@ -6,7 +6,7 @@ RSpec.describe 'Vanity collections route' do
   routes { Arclight::Engine.routes }
   it 'routes to collection search' do
     expect(get: '/collections').to route_to(
-      'f' => { 'level_ssim' => ['Collection'] },
+      'f' => { 'level' => ['Collection'] },
       controller: 'catalog',
       action: 'index'
     )

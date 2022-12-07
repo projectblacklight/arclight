@@ -40,7 +40,7 @@ RSpec.describe 'Grouped search results' do
     visit search_catalog_path q: 'alpha omega', group: 'true'
     expect(page).to have_css '.al-grouped-more', text: /Top 3 results/
     expect(page).to have_css(
-      '.al-grouped-more a[href*="/catalog?f%5Bcollection_ssim%5D%5B%5D=Alpha+Omega+Alpha+Archives%2C+1894-1992"]',
+      '.al-grouped-more a[href*="/catalog?f%5Bcollection%5D%5B%5D=Alpha+Omega+Alpha+Archives%2C+1894-1992"]',
       text: 'view all 6'
     )
   end
