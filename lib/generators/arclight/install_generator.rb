@@ -64,6 +64,10 @@ module Arclight
       copy_file 'config/downloads.yml' unless File.exist?('config/downloads.yml')
     end
 
+    def add_i18n_config
+      copy_file 'config/locales/arclight.en.yml'
+    end
+
     def modify_blacklight_yml
       gsub_file 'config/locales/blacklight.en.yml', "application_name: 'Blacklight'", "application_name: 'Arclight'"
     end

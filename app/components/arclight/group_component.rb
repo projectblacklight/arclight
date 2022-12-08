@@ -17,7 +17,7 @@ module Arclight
     end
 
     def search_within_collection_url
-      search_catalog_path(helpers.search_without_group.merge(f: { collection_ssim: [document.collection_name] }))
+      search_catalog_path(helpers.search_without_group.merge(f: { collection: [document.collection_name] }))
     end
   end
 end

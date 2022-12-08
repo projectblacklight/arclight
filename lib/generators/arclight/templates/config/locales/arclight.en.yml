@@ -1,0 +1,55 @@
+en:
+  blacklight:
+    search:
+      fields:
+        abstract: Abstract
+        creators: Creator
+        extent: Extent
+        language: Language
+        prefercite: Preferred citation
+
+        scopecontent: Scope and content
+        bioghist: Biographical / historical
+        acqinfo: Acquisition information
+        appraisal: Appraisal information
+        custodhist: Custodial history
+        processinfo: Processing information
+        arrangement: Arrangement
+        accruals: Accruals
+        phystech: Physical / technical requirements
+        physloc: Physical location
+        descrules: Rules or conventions
+
+        relatedmaterial: Related material
+        separatedmaterial: Separated material
+        otherfindaid: Other finding aids
+        altformavail: Alternative form available
+        originalsloc: Location of originals
+
+        access_subjects: Subjects
+        names_coll: Names
+        places: Places
+
+        containers: Containers
+        names: Names
+
+        restrictions: Restrictions
+        terms: Terms of access
+        parent_restrictions: Parent restrictions
+        parent_terms: Parent terms of access
+        repository_location: Location of this collection
+        before_you_visit: Before you visit
+        repository_contact: Contact
+
+        facet:
+          collection: Collection
+          creator: Creator
+          creators: Creator
+          date_range: Date range
+          level: Level
+          names: Names
+          repository: Repository
+          place: Place
+          places: Places
+          subject: Subject
+          access: Access

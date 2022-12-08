@@ -17,10 +17,10 @@ RSpec.describe Arclight::SearchBarComponent, type: :component do
 
   describe 'within collection dropdown' do
     context 'when in a collection context on the search results page' do
-      let(:params) { { f: { collection_ssim: ['some collection'] } } }
+      let(:params) { { f: { collection: ['some collection'] } } }
 
       it 'renders a name attribute on the select (so it will be sent through the form)' do
-        expect(rendered).to have_css('select[name="f[collection_ssim][]"]')
+        expect(rendered).to have_css('select[name="f[collection][]"]')
       end
 
       it 'has the "this collection" option selected' do
@@ -36,7 +36,7 @@ RSpec.describe Arclight::SearchBarComponent, type: :component do
       end
 
       it 'renders a name attribute on the select (so it will be sent through the form)' do
-        expect(rendered).to have_css('select[name="f[collection_ssim][]"]')
+        expect(rendered).to have_css('select[name="f[collection][]"]')
       end
 
       it 'has the "this collection" option selected' do

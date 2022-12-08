@@ -63,12 +63,12 @@ RSpec.describe 'Collection Page' do
     end
 
     it 'html-formatted notes render with paragraphs intact' do
-      within 'dd.blacklight-bioghist_html_tesm' do
+      within 'dd.blacklight-bioghist' do
         expect(page).to have_css('p', count: 4)
         expect(page).to have_css('p', text: /^Alpha Omega Alpha Honor Medical Society was founded/)
         expect(page).to have_css('p', text: /^Root and his fellow medical students/)
       end
-      within 'dd.blacklight-abstract_html_tesm' do
+      within 'dd.blacklight-abstract' do
         expect(page).to have_css('p', count: 2)
       end
     end
@@ -145,7 +145,7 @@ RSpec.describe 'Collection Page' do
         click_link name
       end
 
-      within '.blacklight-names_ssim.facet-limit-active' do
+      within '.blacklight-names.facet-limit-active' do
         expect(page).to have_css('.facet-label .selected', text: name)
       end
     end

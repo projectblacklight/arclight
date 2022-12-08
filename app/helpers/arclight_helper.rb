@@ -10,8 +10,8 @@ module ArclightHelper
   def repository_collections_path(repository)
     search_action_url(
       f: {
-        repository_ssim: [repository.name],
-        level_ssim: ['Collection']
+        repository: [repository.name],
+        level: ['Collection']
       }
     )
   end
@@ -38,7 +38,7 @@ module ArclightHelper
   end
 
   def collection_active?
-    search_state.filter('level_ssim').values == ['Collection']
+    search_state.filter('level').values == ['Collection']
   end
 
   def collection_active_class
@@ -70,7 +70,7 @@ module ArclightHelper
   #
   # @return [Repository]
   def repository_faceted_on
-    repos = search_state.filter('repository_ssim').values
+    repos = search_state.filter('repository').values
     return unless repos.one?
 
     Arclight::Repository.find_by(name: repos.first)

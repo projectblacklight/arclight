@@ -13,7 +13,7 @@ RSpec.describe 'Search Breadcrumb' do
     end
 
     it do
-      visit search_catalog_path f: { level_ssim: ['Collection'] }, search_field: 'all_fields'
+      visit search_catalog_path f: { level: ['Collection'] }, search_field: 'all_fields'
       within '.al-search-breadcrumb' do
         expect(page).to have_link 'Home'
         expect(page).to have_content 'Collections'
