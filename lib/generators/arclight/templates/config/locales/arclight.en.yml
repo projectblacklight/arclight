@@ -44,12 +44,10 @@ en:
         facet:
           collection: Collection
           creator: Creator
-          creators: Creator
           date_range: Date range
           level: Level
           names: Names
           repository: Repository
           place: Place
-          places: Places
           subject: Subject
           access: Access

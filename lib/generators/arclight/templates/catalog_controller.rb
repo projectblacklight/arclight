@@ -138,20 +138,12 @@ class CatalogController < ApplicationController
 
     config.add_facet_field 'collection', field: 'collection_ssim', limit: 10
     config.add_facet_field 'creator', field: 'creator_ssim', limit: 10
-    config.add_facet_field 'creators', field: 'creators_ssim', show: false
     config.add_facet_field 'date_range', field: 'date_range_ssim', range: true
     config.add_facet_field 'level', field: 'level_ssim', limit: 10
     config.add_facet_field 'names', field: 'names_ssim', limit: 10
     config.add_facet_field 'repository', field: 'repository_ssim', limit: 10
     config.add_facet_field 'place', field: 'geogname_ssim', limit: 10
-    config.add_facet_field 'places', field: 'places_ssim', show: false
     config.add_facet_field 'subject', field: 'access_subjects_ssim', limit: 10
-    config.add_facet_field 'component_level_isim', show: false
-
-    # Note that parent_ssim is an array of all ancestor nodes, including the parent
-    # parent_ssi is just the immediate parent; it's used in queries for context nav
-    config.add_facet_field 'parent_ssim', show: false
-    config.add_facet_field 'parent_ssi', show: false
 
     # Have BL send all facet field names to Solr, which has been the default
     # previously. Simply remove these lines if you'd rather use Solr request
