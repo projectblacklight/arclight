@@ -1,4 +1,3 @@
-<% document ||= @document %>
 <% if parsed_files = document.ead_file %>
   <% aeon_web_ead ||= Arclight::Requests::AeonWebEad.new(document, parsed_files.href) %>
   <% aeon_web_ead_url = aeon_web_ead&.url %>
