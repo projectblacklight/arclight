@@ -150,7 +150,8 @@
       <analyzer type="index">
         <tokenizer class="solr.WhitespaceTokenizerFactory" />
         <filter class="solr.KeywordRepeatFilterFactory" />
-        <filter class="solr.WordDelimiterGraphFilterFactory"/>
+        <filter class="solr.WordDelimiterGraphFilterFactory" />
+        <filter class="solr.SynonymGraphFilterFactory" synonyms="synonyms.txt" />
         <filter class="solr.EnglishPossessiveFilterFactory"/>
         <filter class="solr.ICUFoldingFilterFactory" />
         <filter class="solr.KeywordMarkerFilterFactory" protected="protwords.txt"/>
@@ -162,7 +163,7 @@
         <tokenizer class="solr.WhitespaceTokenizerFactory" />
         <filter class="solr.KeywordRepeatFilterFactory" />
         <filter class="solr.WordDelimiterGraphFilterFactory"/>
-        <filter class="solr.SynonymFilterFactory" synonyms="synonyms.txt" ignoreCase="true" expand="true"/>
+        <filter class="solr.SynonymGraphFilterFactory" synonyms="synonyms.txt" />
         <filter class="solr.ICUFoldingFilterFactory" />
         <filter class="solr.EnglishPossessiveFilterFactory"/>
         <filter class="solr.KeywordMarkerFilterFactory" protected="protwords.txt"/>
