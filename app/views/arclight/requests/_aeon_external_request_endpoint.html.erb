@@ -1,4 +1,3 @@
-<% document ||= @document %>
 <% aeon_external_request ||= Arclight::Requests::AeonExternalRequest.new(document, document_presenter(document)) %>
 
 <%= form_tag aeon_external_request.url, method: :post, class: 'd-inline-block al-request-form' do |f| %>
