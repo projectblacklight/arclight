@@ -35,7 +35,7 @@ module Arclight
 
     def add_custom_routes
       inject_into_file 'config/routes.rb', after: "mount Blacklight::Engine => '/'" do
-        "\n    mount Arclight::Engine => '/'\n"
+        "\n  mount Arclight::Engine => '/'\n"
       end
 
       gsub_file 'config/routes.rb', 'root to: "catalog#index"', 'root to: "arclight/repositories#index"'
@@ -82,16 +82,12 @@ module Arclight
     end
 
     def inject_arclight_routes
-      inject_into_file 'config/routes.rb', after: /concern :exportable.*\n/ do
-        <<-ROUTE
-        \n    concern :hierarchy, Arclight::Routes::Hierarchy.new
-        ROUTE
-      end
-      inject_into_file 'config/routes.rb', after: /resources :solr_documents.*\n/ do
-        <<-ROUTE
-          \n    concerns :hierarchy
-        ROUTE
-      end
+      inject_into_file 'config/routes.rb',
+                       "  concern :hierarchy, Arclight::Routes::Hierarchy.new\n",
+                       after: /concern :exportable.*\n/
+      inject_into_file 'config/routes.rb',
+                       "  concerns :hierarchy\n",
+                       after: /resources :solr_documents.*\n/
     end
 
     private
