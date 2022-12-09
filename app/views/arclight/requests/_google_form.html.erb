@@ -1,4 +1,3 @@
-<% document ||= @document %>
 <% google_form ||= Arclight::Requests::GoogleForm.new(document, document_presenter(document), solr_document_path(document)) %>
 
 <%= form_tag google_form.url, method: :get, class: 'd-inline-block al-request-form' do |f| %>
