@@ -45,8 +45,8 @@ class CatalogController < ApplicationController
     }
 
     config.header_component = Arclight::HeaderComponent
-    config.add_results_document_tool(:bookmark, partial: 'bookmark_control', if: :render_bookmarks_control?)
     config.add_results_document_tool(:online, component: Arclight::OnlineStatusIndicatorComponent)
+    config.add_results_document_tool(:arclight_bookmark_control, partial: 'arclight_bookmark_control')
 
     config.add_results_collection_tool(:group_toggle)
     config.add_results_collection_tool(:sort_widget)
@@ -64,9 +64,7 @@ class CatalogController < ApplicationController
     config.index.group_component = Arclight::GroupComponent
     config.index.constraints_component = Arclight::ConstraintsComponent
     config.index.document_presenter_class = Arclight::IndexPresenter
-    config.add_results_document_tool :arclight_bookmark_control, partial: 'arclight_bookmark_control'
     config.index.search_bar_component = Arclight::SearchBarComponent
-    config.index.document_actions.delete(:bookmark)
     # config.index.thumbnail_field = 'thumbnail_path_ss'
 
     # solr field configuration for document/show views
