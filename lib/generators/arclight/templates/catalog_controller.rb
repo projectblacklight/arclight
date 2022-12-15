@@ -46,7 +46,7 @@ class CatalogController < ApplicationController
 
     config.header_component = Arclight::HeaderComponent
     config.add_results_document_tool(:online, component: Arclight::OnlineStatusIndicatorComponent)
-    config.add_results_document_tool(:arclight_bookmark_control, partial: 'arclight_bookmark_control')
+    config.add_results_document_tool(:arclight_bookmark_control, component: Arclight::BookmarkComponent)
 
     config.add_results_collection_tool(:group_toggle)
     config.add_results_collection_tool(:sort_widget)
