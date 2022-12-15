@@ -117,12 +117,7 @@ module Arclight
 
     # @return [Array<String>] with embedded highlights using <em>...</em>
     def highlights
-      highlight_response = response[:highlighting]
-      return if highlight_response.blank? ||
-                highlight_response[id].blank? ||
-                highlight_response[id][:text].blank?
-
-      highlight_response[id][:text].map(&:html_safe)
+      highlight_field(CatalogController.blacklight_config.highlight_field)
     end
 
     # Factory method for constructing the Object modeling downloads
