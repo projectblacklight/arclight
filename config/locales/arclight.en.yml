@@ -11,7 +11,7 @@ en:
       total_components: Total components
     hierarchy:
       view_all: View
-    masthead_heading: Archival Collections at Institution
+    masthead_heading_html: Archival Collections at Institution
     repositories: Repositories
     request:
       container: Request
