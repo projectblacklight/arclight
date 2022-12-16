@@ -31,7 +31,7 @@ module Arclight
     # Add highlighting
     def add_highlighting(solr_params)
       solr_params['hl'] = true
-      solr_params['hl.fl'] = 'text'
+      solr_params['hl.fl'] = CatalogController.blacklight_config.highlight_field
       solr_params['hl.snippets'] = 3
       solr_params
     end
