@@ -1,12 +1,12 @@
 <div class="offcanvas-lg offcanvas-start p-3 p-lg-1" tabindex="-1" id="sidebar">
-  <%= render Arclight::CollectionContextComponent.new(presenter: document_presenter(@document)) %>
+  <%= render Arclight::CollectionContextComponent.new(presenter: document_presenter(document)) %>
   <%= render 'show_tools' %>
-  <%= render Arclight::CollectionSidebarComponent.new(document: @document,
-                                                      collection_presenter: document_presenter(@document.collection),
+  <%= render Arclight::CollectionSidebarComponent.new(document: document,
+                                                      collection_presenter: document_presenter(document.collection),
                                                       partials: blacklight_config.show.metadata_partials) %>
 
   <div id="collection-context" class="sidebar-section">
     <h2><%= t('arclight.views.show.has_content') %></h2>
-    <%= turbo_frame_tag "al-hierarchy-#{@document.root}", loading: 'lazy', src: hierarchy_solr_document_path(id: @document.root, nest_path: @document.nest_path, hierarchy: true) %>
+    <%= turbo_frame_tag "al-hierarchy-#{document.root}", loading: 'lazy', src: hierarchy_solr_document_path(id: document.root, nest_path: @document.nest_path, hierarchy: true) %>
   </div>
 </div>
