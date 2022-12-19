@@ -12,6 +12,7 @@ module Arclight
     attr_reader :collection
 
     delegate :total_component_count, :online_item_count, :last_indexed, :collection_unitid, to: :collection
+    delegate :blacklight_icon, to: :helpers
 
     def info_icon
       icon = <<~SVG

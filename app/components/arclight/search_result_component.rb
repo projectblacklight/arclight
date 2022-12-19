@@ -12,7 +12,7 @@ module Arclight
     end
 
     def icon
-      blacklight_icon helpers.document_or_parent_icon(@document)
+      helpers.blacklight_icon helpers.document_or_parent_icon(@document)
     end
   end
 end

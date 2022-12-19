@@ -4,6 +4,8 @@ module Arclight
   # Render the hierarchy for a document
   class BreadcrumbsHierarchyComponent < ViewComponent::Base
     delegate :document, to: :@presenter
+    delegate :blacklight_icon, to: :helpers
+
     def initialize(presenter:)
       super
 
