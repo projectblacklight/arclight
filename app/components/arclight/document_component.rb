@@ -13,6 +13,11 @@ module Arclight
       presenter.configuration
     end
 
+    # @return [Blacklight::Configuration::ToolConfig] the configuration for the bookmark
+    def bookmark_config
+      blacklight_config.index.document_actions.arclight_bookmark_control
+    end
+
     def breadcrumb_component
       blacklight_config.show.breadcrumb_component || Arclight::BreadcrumbsHierarchyComponent
     end
