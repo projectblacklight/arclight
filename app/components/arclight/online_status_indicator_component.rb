@@ -13,7 +13,7 @@ module Arclight
     end
 
     def call
-      tag.span blacklight_icon(:online), class: 'al-online-content-icon'
+      tag.span helpers.blacklight_icon(:online), class: 'al-online-content-icon'
     end
   end
 end

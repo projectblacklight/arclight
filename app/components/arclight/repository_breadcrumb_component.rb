@@ -8,6 +8,8 @@ module Arclight
       @document = document
     end
 
+    delegate :blacklight_icon, to: :helpers
+
     def repository_path
       @document.repository_config&.slug
     end
