@@ -7,26 +7,26 @@ module Arclight
     extend ActiveSupport::Concern
 
     included do
-      attribute :parent_ids, Blacklight::Types::Array, 'parent_ssim'
-      attribute :parent_labels, Blacklight::Types::Array, 'parent_unittitles_ssm'
-      attribute :parent_levels, Blacklight::Types::Array, 'parent_levels_ssm'
-      attribute :unitid, Blacklight::Types::String, 'unitid_ssm'
-      attribute :extent, Blacklight::Types::String, 'extent_ssm'
-      attribute :abstract, Blacklight::Types::String, 'abstract_html_tesm'
-      attribute :scope, Blacklight::Types::String, 'scopecontent_html_tesm'
-      attribute :creator, Blacklight::Types::String, 'creator_ssm'
-      attribute :level, Blacklight::Types::String, 'level_ssm'
-      attribute :terms, Blacklight::Types::String, 'userestrict_html_tesm'
+      attribute :parent_ids, :array, 'parent_ssim'
+      attribute :parent_labels, :array, 'parent_unittitles_ssm'
+      attribute :parent_levels, :array, 'parent_levels_ssm'
+      attribute :unitid, :string, 'unitid_ssm'
+      attribute :extent, :string, 'extent_ssm'
+      attribute :abstract, :string, 'abstract_html_tesm'
+      attribute :scope, :string, 'scopecontent_html_tesm'
+      attribute :creator, :string, 'creator_ssm'
+      attribute :level, :string, 'level_ssm'
+      attribute :terms, :string, 'userestrict_html_tesm'
       # Restrictions for component sidebar
-      attribute :parent_restrictions, Blacklight::Types::String, 'parent_access_restrict_tesm'
+      attribute :parent_restrictions, :string, 'parent_access_restrict_tesm'
       # Terms for component sidebar
-      attribute :parent_terms, Blacklight::Types::String, 'parent_access_terms_tesm'
-      attribute :reference, Blacklight::Types::String, 'ref_ssm'
-      attribute :normalized_title, Blacklight::Types::String, 'normalized_title_ssm'
-      attribute :normalized_date, Blacklight::Types::String, 'normalized_date_ssm'
-      attribute :total_component_count, Blacklight::Types::String, 'total_component_count_is'
-      attribute :online_item_count, Blacklight::Types::String, 'online_item_count_is'
-      attribute :last_indexed, Blacklight::Types::Date, 'timestamp'
+      attribute :parent_terms, :string, 'parent_access_terms_tesm'
+      attribute :reference, :string, 'ref_ssm'
+      attribute :normalized_title, :string, 'normalized_title_ssm'
+      attribute :normalized_date, :string, 'normalized_date_ssm'
+      attribute :total_component_count, :string, 'total_component_count_is'
+      attribute :online_item_count, :string, 'online_item_count_is'
+      attribute :last_indexed, :date, 'timestamp'
     end
 
     def repository_config
