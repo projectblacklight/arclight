@@ -319,7 +319,7 @@ RSpec/Capybara/NegationMatcher: # new in 2.14
 RSpec/Capybara/SpecificActions: # new in 2.14
   Enabled: true
 RSpec/FactoryBot/ConsistentParenthesesStyle: # new in 2.14
-  Enabled: false # https://github.com/rspec/rspec-rails/issues/2635
+  Enabled: false # https://github.com/rubocop/rubocop-rspec/issues/1480
 RSpec/Rails/InferredSpecType: # new in 2.14
   Enabled: true
 Rails/ActionOrder: # new in 2.17
@@ -328,3 +328,13 @@ Rails/IgnoredColumnsAssignment: # new in 2.17
   Enabled: true
 Rails/WhereNotWithMultipleConditions: # new in 2.17
   Enabled: true
+Style/ArrayIntersect: # new in 1.40
+  Enabled: true
+Style/RedundantConstantBase: # new in 1.40
+  Enabled: true
+RSpec/DuplicatedMetadata: # new in 2.16
+  Enabled: true
+RSpec/PendingWithoutReason: # new in 2.16
+  Enabled: true
+RSpec/FactoryBot/FactoryNameStyle: # new in 2.16
+  Enabled: false # https://github.com/rubocop/rubocop-rspec/issues/1523
