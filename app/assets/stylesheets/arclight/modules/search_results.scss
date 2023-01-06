@@ -49,8 +49,8 @@ article.document {
     fill: $online-icon-color;
   }
   div.breadcrumb-links,
-  div.al-document-abstract-or-scope,
-  div.al-document-creator {
+  dd.al-document-abstract-or-scope,
+  dd.al-document-creator {
     margin-top: ($spacer * .5);
   }
 
