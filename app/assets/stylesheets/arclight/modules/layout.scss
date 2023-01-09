@@ -154,7 +154,7 @@
 .show-document {
   @extend .ps-lg-4;
 
-  .bookmark-toggle {
+  .title-container .bookmark-toggle {
     @extend .card;
     @extend .bg-light;
     @extend .p-2;
