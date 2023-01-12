@@ -11,17 +11,22 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
+        blacklight_version: ['latest']
         rails_version: [7.0.4]
         ruby: ['3.0']
         include:
           - rails_version: 7.0.4
             ruby: 3.1
+          - rails_version: 7.0.4
+            ruby: 3.1
+            blacklight_version: 'main'
     env:
       RAILS_VERSION: ${{ matrix.rails_version }}
+      BLACKLIGHT_VERSION: ${{ matrix.blacklight_version }}
     steps:
     - uses: actions/checkout@v3
     - name: Set up Ruby ${{ matrix.ruby }}
-      uses: ruby/setup-ruby@v1 
+      uses: ruby/setup-ruby@v1
       with:
         bundler: latest
         ruby-version: ${{ matrix.ruby }}
