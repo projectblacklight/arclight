@@ -191,7 +191,6 @@
           catenateAll="1"
           />
         <filter class="solr.ICUFoldingFilterFactory" />
-        <filter class="solr.WordDelimiterGraphFilterFactory"/>
       </analyzer>
     </fieldType>
 
