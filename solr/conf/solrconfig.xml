@@ -89,9 +89,9 @@
          collection_title_tesim^150
          title_tesim^100
          normalized_title_teim^100
+         unitid_identifier_match^40
          name_teim^10
          place_teim^10
-         unitid_identifier_match^5
          subject_teim^2
          text
        </str>
@@ -99,9 +99,9 @@
          collection_title_tesim^150
          title_tesim^100
          normalized_title_teim^100
+         unitid_identifier_match^40
          name_teim^10
          place_teim^10
-         unitid_identifier_match^5
          subject_teim^2
          text
        </str>
