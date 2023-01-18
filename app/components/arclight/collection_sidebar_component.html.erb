@@ -1,5 +1,5 @@
-<nav id="about-collection-nav" class="al-sidebar-navigation-context sidebar-section">
-  <h2><%= t('arclight.views.show.context_nav.title') %></h2>
+<nav class="al-sidebar-navigation-context sidebar-section" aria-labelledby="collection-nav">
+  <h2 id="collection-nav"><%= t('arclight.views.show.context_nav.title') %></h2>
   <ul class='nav flex-column'>
     <% partials.each do |section| %>
       <% next unless has_section?(section) %>
