@@ -35,9 +35,11 @@ module Arclight
     end
 
     initializer 'arclight.assets', before: 'assets' do |app|
-      app.config.assets.precompile << 'arclight/arclight.js'
-      app.config.assets.precompile << 'arclight/oembed_viewer.js'
-      app.config.assets.precompile << 'arclight/truncate_controller.js'
+      # rubocop:disable Lint/ConstantDefinitionInBlock
+      PRECOMPILE_ASSETS = %w[arclight/arclight.js arclight/oembed_viewer.js arclight/truncate_controller.js arclight/collection_link_controller.js].freeze
+      # rubocop:enable Lint/ConstantDefinitionInBlock
+
+      app.config.assets.precompile += PRECOMPILE_ASSETS
     end
 
     initializer 'arclight.importmap', before: 'importmap' do |app|

@@ -3,11 +3,11 @@
   <ul class='nav flex-column'>
     <% partials.each do |section| %>
       <% next unless has_section?(section) %>
-      <li class='nav-item'>
+      <li class='nav-item' data-controller="arclight-collection-link" data-action="hashchange@window->arclight-collection-link#highlight">
         <%= link_to section_label(section),
           document_section_path(section),
           class: 'nav-link pl-0 ps-0 py-1',
-          data: { turbolinks: 'false' }
+          data: { arclight_collection_link_target: 'link' }
         %>
       </li>
     <% end %>
