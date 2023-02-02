@@ -5,8 +5,8 @@
     <h3><%= title %></h3>
 
     <div class="al-collection-context-actions d-flex flex-wrap gap-1">
-      <%= render Arclight::DocumentDownloadComponent.new(downloads: collection.downloads) %>
-      <%= render Arclight::CollectionInfoComponent.new(collection: collection) %>
+      <%= document_download %>
+      <%= collection_info %>
     </div>
   </div>
 </div>
