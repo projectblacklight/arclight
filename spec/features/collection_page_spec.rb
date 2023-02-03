@@ -35,7 +35,7 @@ RSpec.describe 'Collection Page' do
   describe 'online content indicator' do
     context 'when there is online content available' do
       it 'is rendered' do
-        expect(page).to have_css('.alert', text: 'Online content')
+        expect(page).to have_css('.card', text: 'Online content')
       end
     end
 
@@ -43,7 +43,7 @@ RSpec.describe 'Collection Page' do
       let(:doc_id) { 'm0198-xml' }
 
       it 'is not rendered' do
-        expect(page).not_to have_css('.alert', text: 'Online content')
+        expect(page).not_to have_css('.card', text: 'Online content')
       end
     end
   end
