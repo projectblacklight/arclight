@@ -1,16 +1,16 @@
 <p><%= params[:id] %></p>
 <%= turbo_frame_tag "al-hierarchy-#{params[:id]}#{params[:key]}" do %>
   <%= render partial: "paginate_compact", object: @response if show_pagination? && params[:paginate] %>
-
+  <% presenters = @response.documents.map{ | document | document_presenter(document) } %>
   <% if params[:hierarchy].present? %>
     <ul class="documents">
-      <%= render Arclight::DocumentCollectionHierarchyComponent.with_collection(@response.documents,
+      <%= render Arclight::DocumentCollectionHierarchyComponent.with_collection(presenters,
                                                                                 blacklight_config: blacklight_config,
                                                                                 nest_path: params[:nest_path]) %>
     </ul>
   <% else %>
     <table class="table table-striped">
-      <%= render Arclight::DocumentCollectionContextComponent.with_collection(@response.documents,
+      <%= render Arclight::DocumentCollectionContextComponent.with_collection(presenters,
                                                                               blacklight_config: blacklight_config) %>
     </table>
   <% end %>

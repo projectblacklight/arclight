@@ -3,7 +3,7 @@
 module Arclight
   # Display a single document in the collection hierarchy
   class DocumentCollectionHierarchyComponent < Arclight::SearchResultComponent
-    # @param [SolrDocument] document
+    # @param [Blacklight::DocumentPresenter] document
     # @param [String] nest_path determines which element to highlight
     def initialize(document: nil, nest_path: nil, blacklight_config: nil, **kwargs)
       super(document: document, **kwargs)
