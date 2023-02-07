@@ -17,6 +17,7 @@ describe Arclight::ShowPresenter, type: :presenter do
 
   before do
     config.show.title_field = :normalized_title_ssm
+    allow(view_context).to receive(:action_name).and_return(:show)
   end
 
   describe '#heading' do
