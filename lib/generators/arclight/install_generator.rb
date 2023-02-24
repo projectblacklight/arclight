@@ -120,9 +120,7 @@ module Arclight
     end
 
     def import_arclight_javascript
-      inject_into_file 'app/javascript/application.js', after: 'import "blacklight"' do
-        "\nimport \"arclight\""
-      end
+      append_to_file 'app/javascript/application.js', "\nimport \"arclight\""
     end
   end
 end
