@@ -3,3 +3,5 @@ if ENV['BLACKLIGHT_VERSION'] == 'github'
 elsif ENV['BLACKLIGHT_VERSION'] && !ENV['BLACKLIGHT_VERSION'].empty?
   gem 'blacklight', ENV['BLACKLIGHT_VERSION']
 end
+
+gem 'concurrent-ruby', '1.2.0'
