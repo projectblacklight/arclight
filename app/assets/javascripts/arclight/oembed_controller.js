@@ -1,6 +1,6 @@
 import { Controller } from '@hotwired/stimulus'
 
-export default class extends Controller {
+export default class OembedController extends Controller {
   static values = {
     url: String
   }
@@ -12,30 +12,21 @@ export default class extends Controller {
       return
     }
 
-    fetch(this.urlTarget)
-      .then((response) => response.text())
+    fetch(this.urlValue)
+      .then((response) => {
+        if (response.ok) return response.text()
+        throw new Error(`HTTP error, status = ${response.status}`)
+      })
       .then((body) => {
-        const oEmbedEndPoint = this.findOEmbedEndPoint(body)
+        const oEmbedEndPoint = OembedController.findOEmbedEndPoint(body)
         if (!oEmbedEndPoint || oEmbedEndPoint.length === 0) {
-          console.warn(`No oEmbed endpoint found in <head> at ${this.urlTarget}`)
+          console.warn(`No oEmbed endpoint found in <head> at ${this.urlValue}`)
           return
         }
         this.loadEndPoint(oEmbedEndPoint)
+      }).catch(error => {
+        console.error(error)
       })
-  }
-
-  // Convert data-arclight-oembed-* attributes to URL parameters for the viewer
-  static normalizeParams(attributes) {
-    return Object.keys(attributes).reduce((acc, attribute) => {
-      // Reverse data attribute name conversion. See:
-      // https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/dataset#name_conversion
-      const parameterName = attribute.replace('arclightOembed', '')
-        .replace(/([a-z])([A-Z])/g, '$1-$2')
-        .toLowerCase()
-
-      acc[parameterName] = attributes[attribute]
-      return acc
-    }, {})
   }
 
   static findOEmbedEndPoint(body, extraParams = {}) {
