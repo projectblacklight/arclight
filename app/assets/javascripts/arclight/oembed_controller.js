@@ -1,23 +1,23 @@
-class OembedLoader {
-  constructor(el) {
-    this.el = el
+import { Controller } from '@hotwired/stimulus'
+
+export default class extends Controller {
+  static values = {
+    url: String
   }
 
-  load() {
-    const loadedAttr = this.el.getAttribute('loaded')
-    const { arclightOembed, arclightOembedUrl, ...extraOembedParams } = this.el.dataset
-    const extraParams = OembedLoader.normalizeParams(extraOembedParams)
+  connect() {
+    const loadedAttr = this.element.getAttribute('loaded')
 
     if (loadedAttr && loadedAttr === 'loaded') {
       return
     }
 
-    fetch(arclightOembedUrl)
+    fetch(this.urlTarget)
       .then((response) => response.text())
       .then((body) => {
-        const oEmbedEndPoint = OembedLoader.findOEmbedEndPoint(body, extraParams)
+        const oEmbedEndPoint = this.findOEmbedEndPoint(body)
         if (!oEmbedEndPoint || oEmbedEndPoint.length === 0) {
-          console.warn(`No oEmbed endpoint found in <head> at ${arclightOembedUrl}`)
+          console.warn(`No oEmbed endpoint found in <head> at ${this.urlTarget}`)
           return
         }
         this.loadEndPoint(oEmbedEndPoint)
@@ -57,15 +57,8 @@ class OembedLoader {
     fetch(oEmbedEndPoint)
       .then((response) => response.json())
       .then((json) => {
-        this.el.innerHTML = json.html
-        this.el.setAttribute('loaded', 'loaded')
+        this.element.innerHTML = json.html
+        this.element.setAttribute('loaded', 'loaded')
       })
   }
 }
-
-Blacklight.onLoad(function () {
-  document.querySelectorAll('[data-arclight-oembed="true"]').forEach((element) => {
-    const loader = new OembedLoader(element)
-    loader.load()
-  })
-})
