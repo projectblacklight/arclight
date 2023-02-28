@@ -1,3 +1,4 @@
+[![Gem Version](https://badge.fury.io/rb/arclight.svg)](https://badge.fury.io/rb/arclight)
 ![Build Status](https://github.com/projectblacklight/arclight/workflows/CI/badge.svg)
 [![All Contributors](https://img.shields.io/badge/all_contributors-17-orange.svg?style=flat-square)](CONTRIBUTORS.md)
 [![Code Climate Test Coverage](https://codeclimate.com/github/projectblacklight/arclight/badges/coverage.svg)](https://codeclimate.com/github/projectblacklight/arclight/coverage)
