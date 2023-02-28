@@ -18,12 +18,12 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/projectblacklight/arclight.git"
+    "url": "https://github.com/projectblacklight/arclight.git"
   },
   "author": "",
   "license": "Apache-2.0",
   "bugs": {
     "url": "https://github.com/projectblacklight/arclight/issues"
   },
-  "homepage": "https://github.com/projectblacklight/arclight#readme"
+  "homepage": "https://library.stanford.edu/projects/arclight"
 }

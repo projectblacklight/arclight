@@ -10,10 +10,11 @@ Gem::Specification.new do |spec|
   spec.authors       = ['Darren Hardy', 'Jessie Keck', 'Gordon Leacock', 'Jack Reed']
   spec.email         = ['drh@stanford.edu', 'jessie.keck@gmail.com', 'gordonl@umich.edu', 'phillipjreed@gmail.com']
 
-  spec.summary       = ''
+  spec.summary       = 'A Blacklight-based environment to support discovery and delivery for archives and special collections'
   spec.description   = ''
-  spec.homepage      = 'https://github.com/projectblacklight/arclight'
-  spec.license       = 'Apache-2.0'
+  spec.homepage      = 'https://library.stanford.edu/projects/arclight'
+  spec.metadata = { 'source_code_uri' => 'https://github.com/projectblacklight/arclight' }
+  spec.license = 'Apache-2.0'
 
   spec.required_ruby_version = '>= 3.0.0'
   spec.files = `git ls-files -z`.split("\x0").reject do |f|
