@@ -18,7 +18,7 @@ export default class OembedController extends Controller {
         throw new Error(`HTTP error, status = ${response.status}`)
       })
       .then((body) => {
-        const oEmbedEndPoint = OembedController.findOEmbedEndPoint(body)
+        const oEmbedEndPoint = this.findOEmbedEndPoint(body)
         if (!oEmbedEndPoint || oEmbedEndPoint.length === 0) {
           console.warn(`No oEmbed endpoint found in <head> at ${this.urlValue}`)
           return
@@ -29,7 +29,10 @@ export default class OembedController extends Controller {
       })
   }
 
-  static findOEmbedEndPoint(body, extraParams = {}) {
+  // We are choosing not to make this class static so that downstream classes
+  // can override it and access values to populate extraParams.
+  // E.g. https://github.com/sul-dlss/vt-arclight/blob/main/app/javascript/controllers/sul_embed_controller.js
+  findOEmbedEndPoint(body, extraParams = {}) { // eslint-disable-line class-methods-use-this
     // Parse out link elements so image assets are not loaded
     const template = document.createElement('template')
     template.innerHTML = body.match(/<link .*>/g).join('')
