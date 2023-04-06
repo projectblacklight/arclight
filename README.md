@@ -70,7 +70,7 @@ bundle exec rake arclight:seed
 
 * General
   * [ArcLight demo site](https://arclight-demo.projectblacklight.org/)
-  * [ArcLight Github Wiki](https://github.com/projectblacklight/arclight/wiki): developer/implementor documentation
+  * [ArcLight Github wiki](https://github.com/projectblacklight/arclight/wiki): developer/implementor documentation
   * [Blacklight wiki](https://github.com/projectblacklight/blacklight/wiki)
   * Use the [ArcLight Google Group](http://groups.google.com/d/forum/arclight-community) to contact us with questions
 * ArcLight MVP:
