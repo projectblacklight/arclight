@@ -11,8 +11,8 @@ A Rails engine supporting discovery of archival materials, based on [Blacklight]
 
 ## Requirements
 
-* [Ruby](https://www.ruby-lang.org/en/) 2.7 or later
-* [Rails](http://rubyonrails.org) 6.1 or later
+* [Ruby](https://www.ruby-lang.org/en/) 3.0.3 or later
+* [Rails](http://rubyonrails.org) 7.0 or later
 * Solr 8.1 or later
 
 ## Installation
@@ -70,15 +70,11 @@ bundle exec rake arclight:seed
 
 * General
   * [ArcLight demo site](https://arclight-demo.projectblacklight.org/)
-  * [ArcLight project wiki](https://bit.ly/arclightproject): includes design process documentation
-  * [ArcLight Github Wiki](https://github.com/projectblacklight/arclight/wiki): developer/implementor documentation
+  * [ArcLight Github wiki](https://github.com/projectblacklight/arclight/wiki): developer/implementor documentation
   * [Blacklight wiki](https://github.com/projectblacklight/blacklight/wiki)
   * Use the [ArcLight Google Group](http://groups.google.com/d/forum/arclight-community) to contact us with questions
-* ArcLight Phase II:
-  * [Project overview](https://wiki.duraspace.org/display/samvera/ArcLight+Phase+II)
 * ArcLight MVP:
   * [MVP sprint demo videos](https://www.youtube.com/playlist?list=PLMdUaIJ0G8QgbuDCUVvFhTSTO96N37lRA)
-  * [Project overview](https://wiki.duraspace.org/display/samvera/ArcLight+MVP)
 
 ## Contributors
 
