@@ -1,8 +1,8 @@
 <%= render(@layout.new(field: @field)) do |component| %>
-  <% component.label do %>
+  <% component.with_label do %>
     <%= label %>
   <% end %>
-  <% component.value do %>
+  <% component.with_value do %>
     <div class='al-in-person-repository-name'>
       <% if repository.thumbnail_url %>
         <%= image_tag repository.thumbnail_url, alt: '', class: 'img-fluid float-left' %>
