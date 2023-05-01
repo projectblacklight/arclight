@@ -13,7 +13,7 @@ RSpec.describe Arclight::BreadcrumbComponent, type: :component do
   end
 
   let(:render) do
-    component.render_in(controller.view_context)
+    component.render_in(vc_test_controller.view_context)
   end
 
   let(:rendered) do

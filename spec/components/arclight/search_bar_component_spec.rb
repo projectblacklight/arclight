@@ -6,7 +6,7 @@ RSpec.describe Arclight::SearchBarComponent, type: :component do
   let(:render) do
     component.render_in(view_context)
   end
-  let(:view_context) { controller.view_context }
+  let(:view_context) { vc_test_controller.view_context }
 
   let(:rendered) do
     Capybara::Node::Simple.new(render)
