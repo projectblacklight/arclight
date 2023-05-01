@@ -3,6 +3,3 @@
 collection:
   dir: solr/conf/
   name: blacklight-core
-
-# Added as workaround for https://github.com/cbeer/solr_wrapper/issues/150
-checksum: 1ff1bd22255b0ae5a1ade1d03596c1f35d4fa69fa1a16e823eaa554b30ba1311f031af6e1f95a94dbdd3a1dbf308eeb068e7303b74f83584a8bb443505078cbb
