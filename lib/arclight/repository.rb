@@ -13,6 +13,8 @@ module Arclight
       request_types: {},
       contact_html: '',
       location_html: '',
+      description_html: '',
+      thumbnail_url: 'https://archives.library.wcsu.edu/faImages/arclight_default.jpg',
       visit_note: nil
     }.freeze
 
@@ -40,6 +42,10 @@ module Arclight
 
     def location
       location_html.html_safe
+    end
+
+    def description
+      description_html.html_safe
     end
     # rubocop:enable Rails/OutputSafety
 
