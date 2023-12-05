@@ -61,10 +61,12 @@
 
 // offcanvas sidebar is scrollable for smaller screens
 #sidebar {
-  overflow-y: scroll;
-
   @include media-breakpoint-up(lg) {
-    overflow: hidden;
+    .sidebar-items {
+      height: 100vh;
+      overflow-y: auto;
+      position: sticky;
+    }
   }
 }
 
