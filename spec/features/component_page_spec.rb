@@ -182,7 +182,7 @@ RSpec.describe 'Component Page' do
 
       it 'enables expanding nodes outside of own ancestor tree' do
         within '#collection-context' do
-          find('#aoa271aspace_01daa89087641f7fc9dbd7a10d3f2da9 .al-toggle-view-children').click
+          find('#aoa271aspace_01daa89087641f7fc9dbd7a10d3f2da9-hierarchy-item .al-toggle-view-children').click
           expect(page).to have_css '.document-title-heading', text: 'Miscellaneous 1999'
         end
       end
@@ -202,7 +202,7 @@ RSpec.describe 'Component Page' do
 
       it 'expands child nodes when clicked' do
         within '#collection-context' do
-          find('#pc0170-xmlaspace_ref5_edi .al-toggle-view-children').click
+          find('#pc0170-xmlaspace_ref5_edi-hierarchy-item .al-toggle-view-children').click
           expect(page).to have_css '.document-title-heading', text: 'Restricted images, 1979-2000'
         end
       end
