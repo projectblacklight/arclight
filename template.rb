@@ -2,9 +2,9 @@
 
 gem 'arclight'
 
-run 'bundle install'
+after_bundle do
+  generate 'blacklight:install', '--devise'
+  generate 'arclight:install', '-f'
 
-generate 'blacklight:install', '--devise'
-generate 'arclight:install', '-f'
-
-rake 'db:migrate'
+  rake 'db:migrate'
+end
