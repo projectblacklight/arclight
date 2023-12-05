@@ -22,7 +22,7 @@ module Arclight
     def install_blacklight_locale_picker
       gem 'blacklight-locale_picker'
 
-      Bundler.with_clean_env do
+      Bundler.with_unbundled_env do
         run 'bundle install'
       end
 
