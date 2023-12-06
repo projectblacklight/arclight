@@ -40,6 +40,14 @@ RSpec.describe Arclight::EadFormatHelpers do
       end
     end
 
+    describe 'converts conflicting tags' do
+      # this is needed because browsers apply display:none to <title> tags by default
+      it 'converts <title> tags to <span> tags' do
+        content = helper.render_html_tags(value: %w[<title>Title</title>])
+        expect(content).to eq_ignoring_whitespace '<span>Title</span>'
+      end
+    end
+
     describe 'nodes with @render attributes' do
       it 'altrender custom -> html class' do
         content = helper.render_html_tags(value: ['<emph render="altrender" altrender="my-custom-class">special text</emph>'])
