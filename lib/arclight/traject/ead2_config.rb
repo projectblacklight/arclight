@@ -189,7 +189,7 @@ to_field 'extent_ssm', extract_xpath('/ead/archdesc/did/physdesc/extent')
 to_field 'extent_tesim', extract_xpath('/ead/archdesc/did/physdesc/extent')
 to_field 'genreform_ssim', extract_xpath('/ead/archdesc/controlaccess/genreform')
 
-to_field 'date_range_ssim', extract_xpath('/ead/archdesc/did/unitdate/@normal', to_text: false) do |_record, accumulator|
+to_field 'date_range_isim', extract_xpath('/ead/archdesc/did/unitdate/@normal', to_text: false) do |_record, accumulator|
   range = Arclight::YearRange.new
   next range.years if accumulator.blank?
 
