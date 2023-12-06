@@ -1,5 +1,5 @@
 <%= content_tag :li,
-  id: @document.id,
+  id: "#{@document.id}-hierarchy-item",
   data: {
     'document-id': @document.id.to_s.parameterize,
     'document-counter': @counter,
