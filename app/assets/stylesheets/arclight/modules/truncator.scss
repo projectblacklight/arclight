@@ -29,10 +29,12 @@
   // "view more"/"view less" text swaps when content is expanded
   .view-more {
     display: inline;
+    font-size: 1.5rem;
   }
 
   .view-less {
     display: none;
+    font-size: 1.5rem;
   }
 
   &.expanded {
