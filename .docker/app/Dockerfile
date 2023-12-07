@@ -11,7 +11,6 @@ RUN apk add --update --no-cache \
   libxslt-dev \
   nodejs \
   shared-mime-info \
-  sqlite \
   sqlite-dev \
   tzdata \
   yarn
