@@ -41,13 +41,32 @@ namespace :arclight do
       Rake::Task['engine_cart:generate'].invoke
     end
 
-    print 'Starting Solr...'
-    SolrWrapper.wrap do |solr|
-      puts 'done.'
-      solr.with_collection do
-        Rake::Task['arclight:seed'].invoke
+    if ENV['SOLR_ENV'] == 'docker-compose'
+      puts "Using docker solr"
+      within_test_app do
+        system "bundle exec rails s #{args[:rails_server_args]}"
+      end
+    elsif system('docker-compose -v')
+      # We're not running docker-compose up but still want to use a docker instance of solr.
+      begin
+        puts "Starting Solr"
+        system_with_error_handling "docker-compose up -d solr"
         within_test_app do
           system "bundle exec rails s #{args[:rails_server_args]}"
+        end
+      ensure
+        puts "Stopping Solr"
+        system_with_error_handling "docker-compose stop solr"
+      end
+    else
+      print 'Starting Solr...'
+      SolrWrapper.wrap do |solr|
+        puts 'done.'
+        solr.with_collection do
+          Rake::Task['arclight:seed'].invoke
+          within_test_app do
+            system "bundle exec rails s #{args[:rails_server_args]}"
+          end
         end
       end
     end
