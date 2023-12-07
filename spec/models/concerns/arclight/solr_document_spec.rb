@@ -88,10 +88,15 @@ RSpec.describe Arclight::SolrDocument do
   end
 
   describe '#containers' do
-    let(:document) { SolrDocument.new(containers_ssim: ['box 1', 'folder 4-5']) }
+    let(:document) { SolrDocument.new(containers_ssim: ['box 1', 'folder 4-5', 'box ABC']) }
+
+    it 'handles capitalization properly' do
+      expect(document.containers.first).to eq 'Box 1'
+      expect(document.containers.last).to eq 'Box ABC'
+    end
 
     it 'uses our rules for joining' do
-      expect(document.containers.join(', ')).to eq 'Box 1, Folder 4-5'
+      expect(document.containers.join(', ')).to eq 'Box 1, Folder 4-5, Box ABC'
     end
   end
 
