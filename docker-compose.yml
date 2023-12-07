@@ -27,13 +27,13 @@ services:
       - SOLR_VERSION # Set via environment variable or use default defined in .env file
     image: "solr:${SOLR_VERSION}"
     volumes:
-      - $PWD/lib/generators/blacklight/templates/solr/conf:/opt/solr/conf
+      - ./solr/conf:/opt/solr/conf
     ports:
       - "${SOLR_PORT}:8983"
     entrypoint:
       - docker-entrypoint.sh
       - solr-precreate
-      - blacklight-core
+      - arclight-core
       - /opt/solr/conf
       - "-Xms256m"
       - "-Xmx512m"
