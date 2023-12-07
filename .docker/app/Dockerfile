@@ -5,11 +5,13 @@ FROM ruby:${ALPINE_RUBY_VERSION}-alpine
 RUN apk add --update --no-cache \
   bash \
   build-base \
+  gcompat \
   git \
   libxml2-dev \
   libxslt-dev \
   nodejs \
   shared-mime-info \
+  sqlite \
   sqlite-dev \
   tzdata \
   yarn
