@@ -12,6 +12,8 @@ services:
       #- .:/app
     depends_on:
       - solr
+    env_file:
+      - .env
     ports:
       - "3000:3000"
     environment:
@@ -28,12 +30,14 @@ services:
     image: "solr:${SOLR_VERSION}"
     volumes:
       - ./solr/conf:/opt/solr/conf
+    env_file:
+      - .env 
     ports:
       - "${SOLR_PORT}:8983"
     entrypoint:
       - docker-entrypoint.sh
       - solr-precreate
-      - arclight-core
+      - arclight
       - /opt/solr/conf
       - "-Xms256m"
       - "-Xmx512m"
