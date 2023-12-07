@@ -111,8 +111,13 @@ module Arclight
     end
 
     def containers
-      # NOTE: that .titlecase strips punctuation, like hyphens, we want to keep
-      fetch('containers_ssim', []).map(&:capitalize)
+      # NOTE: Keep uppercase characters if present, but upcase the first if not already
+      containers_field = fetch('containers_ssim', []).reject(&:empty?)
+      return [] if containers_field.blank?
+
+      containers_field.map do |container|
+        container.dup.sub!(/\A./, &:upcase)
+      end
     end
 
     # @return [Array<String>] with embedded highlights using <em>...</em>
