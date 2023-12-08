@@ -5,6 +5,7 @@
 module ArclightHelper
   include Arclight::EadFormatHelpers
   include Arclight::FieldConfigHelpers
+  include Blacklight::DocumentHelperBehavior
   include Blacklight::LayoutHelperBehavior
 
   def repository_collections_path(repository)
@@ -89,6 +90,16 @@ module ArclightHelper
     else
       'container'
     end
+  end
+
+  ##
+  # Override of BL core https://github.com/projectblacklight/blacklight/blob/v8.1.0/app/helpers/blacklight/document_helper_behavior.rb#L55
+  # Remove document_type check. It isn't a method on arclight documents
+  # Check if the document is in the user's bookmarks
+  # @param [Blacklight::Document] document
+  # @return [Boolean]
+  def bookmarked?(document)
+    current_bookmarks.any? { |x| x.document_id == document.id }
   end
 
   def current_context_document
