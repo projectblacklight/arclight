@@ -22,6 +22,10 @@ $hierarchy-view-collapse-icon: url("data:image/svg+xml,<svg xmlns='http://www.w3
   }
 }
 
+.al-hierarchy-highlight > .documentHeader {
+  font-weight: bold;
+}
+
 #collection-context {
   ul {
     list-style: none;
