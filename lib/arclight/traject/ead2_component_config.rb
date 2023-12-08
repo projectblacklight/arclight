@@ -214,7 +214,7 @@ to_field 'digital_objects_ssm', extract_xpath('./dao|./did/dao', to_text: false)
   end
 end
 
-to_field 'date_range_ssim', extract_xpath('./did/unitdate/@normal', to_text: false) do |_record, accumulator|
+to_field 'date_range_isim', extract_xpath('./did/unitdate/@normal', to_text: false) do |_record, accumulator|
   range = Arclight::YearRange.new
   next range.years if accumulator.blank?
 

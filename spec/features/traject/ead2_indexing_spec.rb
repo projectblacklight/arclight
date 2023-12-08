@@ -86,8 +86,8 @@ RSpec.describe 'EAD 2 traject indexing' do
       expect(result['unitdate_other_ssim']).to be_nil
     end
 
-    it 'creates date_range_ssim' do
-      date_range = result['date_range_ssim']
+    it 'creates date_range_isim' do
+      date_range = result['date_range_isim']
       expect(date_range).to be_an Array
       expect(date_range.length).to eq 7
       expect(date_range.first).to eq 1900
@@ -541,9 +541,9 @@ RSpec.describe 'EAD 2 traject indexing' do
       Arclight::Engine.root.join('spec', 'fixtures', 'ead', 'nlm', 'alphaomegaalpha.xml')
     end
 
-    it 'creates date_range_ssim' do
+    it 'creates date_range_isim' do
       component = all_components.find { |d| d['id'] == ['aoa271aspace_563a320bb37d24a9e1e6f7bf95b52671'] }
-      date_range = component['date_range_ssim']
+      date_range = component['date_range_isim']
       expect(date_range).to be_an Array
       expect(date_range.length).to eq 75
       expect(date_range.first).to eq 1902

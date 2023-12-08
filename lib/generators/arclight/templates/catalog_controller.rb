@@ -140,7 +140,7 @@ class CatalogController < ApplicationController
 
     config.add_facet_field 'collection', field: 'collection_ssim', limit: 10
     config.add_facet_field 'creator', field: 'creator_ssim', limit: 10
-    config.add_facet_field 'date_range', field: 'date_range_ssim', range: true
+    config.add_facet_field 'date_range', field: 'date_range_isim', range: true
     config.add_facet_field 'level', field: 'level_ssim', limit: 10
     config.add_facet_field 'names', field: 'names_ssim', limit: 10
     config.add_facet_field 'repository', field: 'repository_ssim', limit: 10

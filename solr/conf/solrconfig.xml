@@ -170,7 +170,7 @@
        <str name="facet.mincount">1</str>
        <str name="facet.field">level_ssim</str>
        <str name="facet.field">creator_ssim</str>
-       <str name="facet.field">date_range_ssim</str>
+       <str name="facet.field">date_range_isim</str>
        <str name="facet.field">names_ssim</str>
        <str name="facet.field">geogname_ssim</str>
        <str name="facet.field">access_subjects_ssim</str>
