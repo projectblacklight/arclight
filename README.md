@@ -114,7 +114,7 @@ $ docker compose up
 ```
 This should bring up a dockerized solr and arclight running at ports 8983 and 3000, with the seed data indexed.
 
-NOTE: If you are on an m1/m2 mac, you will have to do the following first:
+NOTE: If you are on an M1/M2 mac, you will have to do the following first:
 
 ```sh
 $ export DOCKER_DEFAULT_PLATFORM=linux/amd64
