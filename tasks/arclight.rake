@@ -78,13 +78,24 @@ namespace :arclight do
     Dir.glob('spec/fixtures/ead/*').each do |dir|
       next unless File.directory?(dir)
 
-      within_test_app do
-        # Sets the REPOSITORY_ID to the name of the file's containing directory
-        system("REPOSITORY_ID=#{File.basename(dir)} " \
-               "REPOSITORY_FILE=#{Arclight::Engine.root}/spec/fixtures/config/repositories.yml " \
-               "DIR=#{Arclight::Engine.root}/#{dir} " \
-               'SOLR_URL=http://127.0.0.1:8983/solr/blacklight-core ' \
-               'rake arclight:index_dir')
+      if ENV['SOLR_ENV'] == 'docker-compose' or system('docker-compose -v')
+        within_test_app do
+          # Sets the REPOSITORY_ID to the name of the file's containing directory
+          system("REPOSITORY_ID=#{File.basename(dir)} " \
+                 "REPOSITORY_FILE=#{Arclight::Engine.root}/spec/fixtures/config/repositories.yml " \
+                 "DIR=#{Arclight::Engine.root}/#{dir} " \
+                 'SOLR_URL=http://solr:8983/solr/arclight ' \
+                 'rake arclight:index_dir')
+        end
+      else
+        within_test_app do
+          # Sets the REPOSITORY_ID to the name of the file's containing directory
+          system("REPOSITORY_ID=#{File.basename(dir)} " \
+                 "REPOSITORY_FILE=#{Arclight::Engine.root}/spec/fixtures/config/repositories.yml " \
+                 "DIR=#{Arclight::Engine.root}/#{dir} " \
+                 'SOLR_URL=http://127.0.0.1:8983/solr/blacklight-core ' \
+                 'rake arclight:index_dir')
+        end      
       end
     end
   end
