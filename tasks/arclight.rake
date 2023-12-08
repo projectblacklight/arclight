@@ -78,13 +78,13 @@ namespace :arclight do
     Dir.glob('spec/fixtures/ead/*').each do |dir|
       next unless File.directory?(dir)
 
-      if ENV['SOLR_ENV'] == 'docker-compose' or system('docker-compose -v')
+      if ENV['SOLR_ENV'] == 'docker-compose'
         within_test_app do
           # Sets the REPOSITORY_ID to the name of the file's containing directory
           system("REPOSITORY_ID=#{File.basename(dir)} " \
                  "REPOSITORY_FILE=#{Arclight::Engine.root}/spec/fixtures/config/repositories.yml " \
                  "DIR=#{Arclight::Engine.root}/#{dir} " \
-                 'SOLR_URL=http://solr:8983/solr/arclight ' \
+                 "SOLR_URL=#{ENV['SOLR_URL']} " \
                  'rake arclight:index_dir')
         end
       else
