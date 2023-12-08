@@ -10,7 +10,6 @@ RSpec.describe Arclight::DocumentDownloads do
       id: 'abc123',
       unitid_ssm: ['sample_unitid'],
       userestrict_html_tesm: ['The Terms of the Collection'],
-      extent_ssm: ['42GB'], # This field does not typically hold file size, but for test purposes..
       level_ssm: ['collection'],
       ref_ssm: ['http://example.com/finding-aid.pdf'] # This field does not typically hold URLs, but for test purposes..
     )
@@ -55,10 +54,14 @@ RSpec.describe Arclight::DocumentDownloads do
     end
 
     context 'when a size_accessor is provided for the size' do
+      before do
+        allow(document).to receive(:finding_aid_size).and_return('42GB')
+      end
+
       let(:file_params) do
         {
           data: {
-            'size_accessor' => 'extent',
+            'size_accessor' => 'finding_aid_size',
             'href' => 'http://example.com/finding-aid.pdf'
           }
         }

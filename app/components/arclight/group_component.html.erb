@@ -7,7 +7,9 @@
         </div>
       <% end %>
       <h3><%= helpers.link_to_document document %></h3>
-      <%= tag.span(document.extent, class: 'al-document-extent badge') if document.extent %>
+      <% document.extent.each do |extent| %>
+        <%= tag.span extent, class: 'al-document-extent badge' unless compact? %>
+      <% end %>        
       <%= render Arclight::IndexMetadataFieldComponent.with_collection(presenter.field_presenters.select { |field| !compact? || field.field_config.compact }) %>
     </div>
   </div>

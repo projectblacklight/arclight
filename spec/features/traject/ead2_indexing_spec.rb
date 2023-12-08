@@ -120,6 +120,10 @@ RSpec.describe 'EAD 2 traject indexing' do
       expect(result['places_ssim']).to equal_array_ignoring_whitespace ['Yosemite National Park (Calif.)']
     end
 
+    it 'physdesc' do
+      expect(result['extent_ssm']).to equal_array_ignoring_whitespace ['1.25 Linear Feet (1 volume)', '1 document case', '16 DVDRs']
+    end
+
     it 'has_online_content' do
       expect(result['has_online_content_ssim']).to eq [true]
     end
@@ -293,9 +297,7 @@ RSpec.describe 'EAD 2 traject indexing' do
 
     it 'extent at the collection level' do
       %w[extent_ssm extent_tesim].each do |field|
-        expect(result[field]).to equal_array_ignoring_whitespace(
-          ['15.0 linear feet (36 boxes + oversize folder)']
-        )
+        expect(result[field]).to equal_array_ignoring_whitespace(['15.0 linear feet (36 boxes + oversize folder)', '3 CDs'])
       end
     end
 
