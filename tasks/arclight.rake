@@ -78,7 +78,7 @@ namespace :arclight do
     Dir.glob('spec/fixtures/ead/*').each do |dir|
       next unless File.directory?(dir)
 
-      if ENV['SOLR_ENV'] == 'docker-compose'
+      if ENV['SOLR_ENV'] == 'docker-compose' or system('docker-compose -v')
         within_test_app do
           # Sets the REPOSITORY_ID to the name of the file's containing directory
           system("REPOSITORY_ID=#{File.basename(dir)} " \
