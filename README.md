@@ -105,6 +105,21 @@ Then visit http://localhost:3000. It will also start a Solr instance on port 898
 
 You can also run `bin/console` for an interactive prompt that will allow you to experiment.
 
+### Docker Development Environment
+
+Another option for a local development environment is to use the included docker materials to spin up a local dockerized devleopment instance. After cloning this repository, run the following command inside the project directory:
+
+```sh
+$ docker compose up
+```
+This should bring up a dockerized solr and arclight running at ports 8983 and 3000, with the seed data indexed.
+
+NOTE: If you are on an m1/m2 mac, you will have to do the following first:
+
+```sh
+$ export DOCKER_DEFAULT_PLATFORM=linux/amd64
+```
+
 ### Releasing
 
 #### To release a new gem:
