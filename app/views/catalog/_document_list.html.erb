@@ -2,7 +2,7 @@
 <% # https://github.com/projectblacklight/blacklight/blob/v8.1.0/app/views/catalog/_document_list.html.erb %>
 <% # container for all documents in index list view -%>
 <% view_config = local_assigns[:view_config] || blacklight_config&.view_config(document_index_view_type) %>
-<div id="<%= 'documents' unless grouped? %>" class="al-document-listings documents-<%= view_config&.key || document_index_view_type %>">
+<div <%= 'id="documents"'.html_safe unless grouped? %> class="al-document-listings documents-<%= view_config&.key || document_index_view_type %>">
   <% document_presenters = documents.map { |doc| document_presenter(doc) } -%>
   <%= render view_config.document_component.with_collection(document_presenters, partials: view_config.partials, counter_offset: @response&.start || 0) %>
 </div>
