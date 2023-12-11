@@ -24,7 +24,11 @@
       %>
     <% end %>
     <div class="index_title document-title-heading" data-turbo="false">
-      <%= helpers.link_to_document document, counter: @counter %>
+      <% if current_target? %>
+        <%= document.normalized_title %>
+      <% else %>
+        <%= helpers.link_to_document document, counter: @counter %>
+      <% end %>
       <% if document.children? %>
         <span class="badge badge-pill bg-secondary badge-secondary al-number-of-children-badge"><%= document.number_of_children %><span class="sr-only visually-hidden"><%= t(:'arclight.views.index.number_of_components', count: document.number_of_children) %></span></span>
       <% end %>
