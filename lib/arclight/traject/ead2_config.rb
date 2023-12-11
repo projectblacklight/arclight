@@ -275,7 +275,6 @@ to_field 'components' do |record, accumulator, context|
       provide :depth, 1
       provide :logger, context.settings[:logger]
       provide :component_traject_config, context.settings[:component_traject_config]
-      provide :component_identifier_format, context.settings[:component_identifier_format] if context.settings[:component_identifier_format]
     end
 
     i.load_config_file(context.settings[:component_traject_config])
