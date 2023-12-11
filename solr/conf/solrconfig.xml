@@ -75,7 +75,15 @@
        <int name="rows">10</int>
 
        <str name="q.alt">*:*</str>
-       <str name="mm">2&lt;-1 5&lt;-2 6&lt;90%</str>
+
+       <!-- Minimum Should Match parameter (mm) -->
+       <str name="mm">4&lt;90%</str>
+       <!-- 1-4 term query, all must match
+            5+ term query, 90% must match; rounded down, so e.g.:
+            * 5-10 term query, all but one must match
+            * 11-20 term query, all but two must match
+            * 21-29 term query, all but three must match, etc.
+       -->
 
        <!-- this qf and pf are used by default, if not otherwise specified by
             client. The default blacklight_config will use these for the
