@@ -4,8 +4,7 @@
     <%= tag.dd(class: @classes + ['truncator'], data: { controller: 'arclight-truncate' }) do %>
       <%= tag.div @field.render, class: 'content', data: { arclight_truncate_target: 'content' } %>
       <%= button_tag(type: :button, class: 'btn btn-sm btn-link px-0',
-                     data: { action: 'click->arclight-truncate#trigger' },
-                     aria: { hidden: true }) do %>
+                     data: { action: 'click->arclight-truncate#trigger' }) do %>
         <%= tag.span t('arclight.truncation.view_more'), class: 'view-more' %>
         <%= tag.span t('arclight.truncation.view_less'), class: 'view-less' %>
         <%= tag.span(class: 'icon') %>
