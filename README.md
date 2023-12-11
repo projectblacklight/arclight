@@ -112,7 +112,7 @@ Another option for a local development environment is to use the included docker
 ```sh
 $ docker compose up
 ```
-This should bring up a dockerized solr and arclight running at ports 8983 and 3000, with the seed data indexed.
+This should bring up a dockerized solr and arclight running at ports 8983 and 3000, with the seed data indexed. This uses a mount which allows you to make changes in your IDE/text editor of choice and see them reflected in the running app without a restart.
 
 NOTE: If you are on an M1/M2 mac, you will have to do the following first:
 
