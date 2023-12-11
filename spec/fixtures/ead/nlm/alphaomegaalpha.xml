@@ -41,9 +41,12 @@
         <corpname source="ingest">Alpha Omega Alpha</corpname>
       </origination>
       <unitid>MS C 271</unitid>
-      <physdesc altrender="whole">
+      <physdesc altrender="part">
         <extent altrender="materialtype spaceoccupied">15.0 linear feet (36 boxes + oversize
           folder)</extent>
+      </physdesc>
+      <physdesc altrender="part">
+        <extent altrender="materialtype spaceoccupied">3 CDs</extent>
       </physdesc>
       <unitdate normal="1894/1992" type="inclusive">1894-1992</unitdate>
       <langmaterial id="aspace_1cf405d4520ad390ab7b5532eab3ea00">Collection materials primarily in

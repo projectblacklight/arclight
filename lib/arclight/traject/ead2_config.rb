@@ -185,8 +185,22 @@ to_field 'digital_objects_ssm', extract_xpath('/ead/archdesc/did/dao|/ead/archde
   end
 end
 
-to_field 'extent_ssm', extract_xpath('/ead/archdesc/did/physdesc/extent')
-to_field 'extent_tesim', extract_xpath('/ead/archdesc/did/physdesc/extent')
+to_field 'extent_ssm' do |record, accumulator|
+  physdescs = record.xpath('/ead/archdesc/did/physdesc')
+  extents_per_physdesc = physdescs.map do |physdesc|
+    extents = physdesc.xpath('./extent').map { |e| e.text.strip }
+    # Join extents within the same physdesc with an empty string
+    extents.join(' ')
+  end
+
+  # Add each physdesc separately to the accumulator
+  accumulator.concat(extents_per_physdesc)
+end
+
+to_field 'extent_tesim' do |_record, accumulator, context|
+  accumulator.concat context.output_hash['extent_ssm'] || []
+end
+
 to_field 'genreform_ssim', extract_xpath('/ead/archdesc/controlaccess/genreform')
 
 to_field 'date_range_isim', extract_xpath('/ead/archdesc/did/unitdate/@normal', to_text: false) do |_record, accumulator|

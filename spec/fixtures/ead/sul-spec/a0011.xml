@@ -77,11 +77,15 @@
                 </corpname>
             </origination>
             <unitid>A0011</unitid>
-            <physdesc altrender="whole">
-                <extent altrender="materialtype spaceoccupied">1.25 Linear
-                    Feet
-                </extent>
+            <physdesc altrender="part">
+                <extent altrender="materialtype spaceoccupied">1.25 Linear Feet</extent>
                 <extent altrender="carrier">(1 volume)</extent>
+            </physdesc>
+            <physdesc altrender="part">
+                <extent altrender="materialtype spaceoccupied">1 document case</extent>
+            </physdesc>
+            <physdesc altrender="part">
+                <extent altrender="materialtype spaceoccupied">16 DVDRs</extent>
             </physdesc>
             <unitdate normal="1900/1906" type="inclusive">circa 1900-1906
             </unitdate>
