@@ -107,18 +107,26 @@ You can also run `bin/console` for an interactive prompt that will allow you to 
 
 ### Docker Development Environment
 
+**NOTE:** If you are on an M1/M2 mac, you will have to do the following first:
+
+```sh
+$ export DOCKER_DEFAULT_PLATFORM=linux/amd64
+```
+
 Another option for a local development environment is to use the included docker materials to spin up a local dockerized devleopment instance. After cloning this repository, run the following command inside the project directory:
 
 ```sh
 $ docker compose up
 ```
-This should bring up a dockerized solr and arclight running at ports 8983 and 3000, with the seed data indexed. This uses a mount which allows you to make changes in your IDE/text editor of choice and see them reflected in the running app without a restart.
 
-NOTE: If you are on an M1/M2 mac, you will have to do the following first:
+or for a full rebuild and with containers running in the background:
 
 ```sh
-$ export DOCKER_DEFAULT_PLATFORM=linux/amd64
+$  docker-compose -f docker-compose.yml up --build -d --force-recreate 
 ```
+
+Either should bring up a dockerized solr and arclight running at ports 8983 and 3000, with the seed data indexed. This uses a mount which allows you to make changes in your IDE/text editor of choice and see them reflected in the running app without a restart.
+
 
 ### Releasing
 
