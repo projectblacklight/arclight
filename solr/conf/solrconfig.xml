@@ -101,6 +101,12 @@
          name_teim^10
          place_teim^10
          subject_teim^2
+         id
+         ead_ssi
+         ref_ssm
+         unitid_ssm
+         container_teim
+         parent_unittitles_tesim
          text
        </str>
        <str name="pf">
@@ -111,9 +117,33 @@
          name_teim^10
          place_teim^10
          subject_teim^2
+         id
+         ead_ssi
+         ref_ssm
+         unitid_ssm
+         container_teim
+         parent_unittitles_tesim
          text
        </str>
 
+       <str name="qf_container">
+         container_teim
+       </str>
+       <str name="pf_container">
+         container_teim
+       </str>
+       <str name="qf_identifier">
+         id
+         ead_ssi
+         ref_ssm
+         unitid_ssm
+       </str>
+       <str name="pf_identifier">
+         id
+         ead_ssi
+         ref_ssm
+         unitid_ssm
+       </str>
        <str name="qf_name">
          name_teim
        </str>

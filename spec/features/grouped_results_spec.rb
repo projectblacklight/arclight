@@ -11,7 +11,7 @@ RSpec.describe 'Grouped search results' do
       expect(page).to have_css('.al-document-extent.badge', count: 3)
     end
     within '.grouped-documents' do
-      expect(page).to have_css 'article', count: 1
+      expect(page).to have_css 'article', count: 2
     end
   end
 
@@ -41,7 +41,7 @@ RSpec.describe 'Grouped search results' do
     expect(page).to have_css '.al-grouped-more', text: /Top 3 results/
     expect(page).to have_css(
       '.al-grouped-more a[href*="/catalog?f%5Bcollection%5D%5B%5D=Alpha+Omega+Alpha+Archives%2C+1894-1992"]',
-      text: 'view all 6'
+      text: 'view all 39'
     )
   end
 
