@@ -113,7 +113,7 @@ You can also run `bin/console` for an interactive prompt that will allow you to 
 $ export DOCKER_DEFAULT_PLATFORM=linux/amd64
 ```
 
-Another option for a local development environment is to use the included docker materials to spin up a local dockerized devleopment instance. After cloning this repository, run the following command inside the project directory:
+Another option for a local development environment is to use the included docker materials to spin up a local dockerized development instance. After cloning this repository, run the following command inside the project directory:
 
 ```sh
 $ docker compose up
