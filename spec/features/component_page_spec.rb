@@ -189,7 +189,7 @@ RSpec.describe 'Component Page' do
 
       it 'includes ancestor\'s preceding sibling when clicking ancestor\'s Expand button' do
         within '#collection-context' do
-          within('#aoa271aspace_563a320bb37d24a9e1e6f7bf95b52671-collapsible-hierarchy') do
+          within('#collapsible-hierarchy-aoa271aspace_563a320bb37d24a9e1e6f7bf95b52671') do
             first('.btn-secondary', text: 'Expand').click
           end
           expect(page).to have_css '.document-title-heading', text: 'Officers and directors - lists, 1961, n.d.'

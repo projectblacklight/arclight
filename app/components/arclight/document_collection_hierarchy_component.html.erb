@@ -10,7 +10,7 @@
   <div class="documentHeader" data-document-id="<%= document.id %>">
     <% if document.children? %>
       <%= link_to('',
-          "##{document.id}-collapsible-hierarchy",
+          "#collapsible-hierarchy-#{document.id}",
           class: "al-toggle-view-children#{ ' collapsed' unless show_expanded?}",
           aria: {
             label: t('arclight.hierarchy.view_all'),
@@ -37,7 +37,7 @@
   
   <%= render Arclight::IndexMetadataFieldComponent.with_collection(@presenter&.field_presenters.select { |field| field.field_config.collection_context }, classes: ['col pl-0 my-0']) %>
   <% if document.number_of_children > 0 %>
-    <%= content_tag(:div, id: "#{document.id}-collapsible-hierarchy",
+    <%= content_tag(:div, id: "collapsible-hierarchy-#{document.id}",
       class: "collapse al-collection-context-collapsible al-hierarchy-level-#{document.component_level} #{'show' if show_expanded?}"
     ) do %>
       <%= render Arclight::DocumentComponentsHierarchyComponent.new(document: @document, target_index: target_index) %>
