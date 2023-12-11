@@ -28,12 +28,12 @@
 
   // "view more"/"view less" text swaps when content is expanded
   .view-more {
-    color: $blue-600;
+    color: shade-color($link-color, 20%);
     display: inline;
   }
 
   .view-less {
-    color: $blue-600;
+    color: shade-color($link-color, 20%);
     display: none;
   }
 
