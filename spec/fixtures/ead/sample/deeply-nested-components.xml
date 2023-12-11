@@ -345,6 +345,14 @@
                     <unittitle>History</unittitle>
                     <container id="aspace_3041649c800dc2e4f9be4811394656c5" label="Box" type="box">16</container>
                   </did>
+                  <altformavail id="aspace_9afbfea15746adffb0da0f4f61c1e1be">
+                    <head>Online Streaming in Media Collections Online</head>
+                    <p>
+                      <extref xlink:href="https://media.dlib.indiana.edu/media_objects/pv63gh62z">
+                        https://media.dlib.indiana.edu/media_objects/pv63gh62z
+                      </extref>
+                    </p>
+                  </altformavail>
                 </c06>
                 <c06 id="aspace_d1c270314f9ca687b5fd961f6c36c4fa" level="file">
                   <did>
