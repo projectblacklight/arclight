@@ -136,35 +136,7 @@
        <int name="ps">3</int>
        <float name="tie">0.01</float>
 
-       <str name="fl">
-         id,
-         score,
-         abstract_html_tesm,
-         accessrestrict_html_tesm,
-         child_component_count_isi,
-         containers_ssim,
-         creator_ssm,
-         extent_ssm,
-         geogname_ssm,
-         has_online_content_ssim,
-         language_ssim,
-         level_ssm,
-         repository_ssm,
-         scopecontent_html_tesm,
-         title_ssm,
-         normalized_title_ssm,
-         normalized_date_ssm,
-         unitid_ssm,
-         parent_ssim,
-         parent_unittitles_ssm,
-         ead_ssi,
-         ref_ssm,
-         component_level_isim,
-         parent_access_restrict_tesm,
-         parent_access_terms_tesm,
-         names_coll_ssim
-         places_ssim
-       </str>
+       <str name="fl">*</str>
 
        <str name="facet">true</str>
        <str name="facet.mincount">1</str>
