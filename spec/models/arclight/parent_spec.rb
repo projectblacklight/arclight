@@ -15,7 +15,7 @@ RSpec.describe Arclight::Parent do
     end
 
     it 'returns a correct global identifier' do
-      expect(instance.global_id).to eq '123abc'
+      expect(instance.global_id).to eq '123_abc'
     end
   end
 end

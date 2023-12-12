@@ -58,7 +58,6 @@ settings do
   provide 'solr_writer.commit_on_close', 'true'
   provide 'repository', ENV.fetch('REPOSITORY_ID', nil)
   provide 'logger', Logger.new($stderr)
-  provide 'component_traject_config', File.join(__dir__, 'ead2_component_config.rb')
 end
 
 each_record do |_record, context|

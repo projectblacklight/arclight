@@ -29,8 +29,8 @@ RSpec.describe Arclight::BreadcrumbComponent, type: :component do
 
     it 'renders only that many breadcrumb links' do
       expect(rendered).to have_selector 'li', text: 'my repository'
-      expect(rendered).to have_link 'DEF', href: '/catalog/abc123def'
-      expect(rendered).not_to have_link 'GHI', href: '/catalog/abc123ghi'
+      expect(rendered).to have_link 'DEF', href: '/catalog/abc123_def'
+      expect(rendered).not_to have_link 'GHI', href: '/catalog/abc123_ghi'
     end
 
     it 'renders an ellipsis if there are more links than the count' do
@@ -43,14 +43,14 @@ RSpec.describe Arclight::BreadcrumbComponent, type: :component do
 
     it 'skips some breadcrumb links' do
       expect(rendered).not_to have_selector 'li', text: 'my repository'
-      expect(rendered).not_to have_link 'DEF', href: '/catalog/abc123def'
-      expect(rendered).to have_link 'GHI', href: '/catalog/abc123ghi'
+      expect(rendered).not_to have_link 'DEF', href: '/catalog/abc123_def'
+      expect(rendered).to have_link 'GHI', href: '/catalog/abc123_ghi'
     end
   end
 
   it 'renders breadcrumb links' do
     expect(rendered).to have_selector 'li', text: 'my repository'
-    expect(rendered).to have_link 'DEF', href: '/catalog/abc123def'
-    expect(rendered).to have_link 'GHI', href: '/catalog/abc123ghi'
+    expect(rendered).to have_link 'DEF', href: '/catalog/abc123_def'
+    expect(rendered).to have_link 'GHI', href: '/catalog/abc123_ghi'
   end
 end

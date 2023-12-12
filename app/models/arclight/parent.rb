@@ -25,7 +25,7 @@ module Arclight
     def global_id
       return id if eadid == id
 
-      "#{eadid}#{id}"
+      "#{eadid}_#{id}"
     end
   end
 end

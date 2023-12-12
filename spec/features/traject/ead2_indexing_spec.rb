@@ -144,7 +144,7 @@ RSpec.describe 'EAD 2 traject indexing' do
       end
 
       it 'id' do
-        expect(first_component).to include 'id' => ['a0011-xmlaspace_ref6_lx4']
+        expect(first_component).to include 'id' => ['a0011-xml_aspace_ref6_lx4']
       end
 
       it 'has_online_content' do
@@ -211,7 +211,7 @@ RSpec.describe 'EAD 2 traject indexing' do
     let(:fixture_path) do
       Arclight::Engine.root.join('spec', 'fixtures', 'ead', 'sample', 'large-components-list.xml')
     end
-    let(:nested_component) { all_components.find { |c| c['id'] == ['lc0100aspace_32ad9025a3a286358baeae91b5d7696e'] } }
+    let(:nested_component) { all_components.find { |c| c['id'] == ['lc0100_aspace_32ad9025a3a286358baeae91b5d7696e'] } }
 
     it 'builds the results' do
       expect(all_components.length).to eq 404
@@ -235,8 +235,8 @@ RSpec.describe 'EAD 2 traject indexing' do
     let(:fixture_path) do
       Arclight::Engine.root.join('spec', 'fixtures', 'ead', 'nlm', 'ncaids544-id-test.xml')
     end
-    let(:component_with_descendants) { all_components.find { |c| c['id'] == ['ncaids544-testd0e452'] } }
-    let(:nested_component) { all_components.find { |c| c['id'] == ['ncaids544-testd0e631'] } }
+    let(:component_with_descendants) { all_components.find { |c| c['id'] == ['ncaids544-test_d0e452'] } }
+    let(:nested_component) { all_components.find { |c| c['id'] == ['ncaids544-test_d0e631'] } }
 
     it 'counts child components' do
       expect(component_with_descendants['child_component_count_isi']).to eq [9]
@@ -271,7 +271,7 @@ RSpec.describe 'EAD 2 traject indexing' do
 
     describe 'component-level' do
       it 'indexes own notes, not notes from descendants' do
-        component = all_components.find { |c| c['id'] == ['aoa271aspace_563a320bb37d24a9e1e6f7bf95b52671'] }
+        component = all_components.find { |c| c['id'] == ['aoa271_aspace_563a320bb37d24a9e1e6f7bf95b52671'] }
         expect(component).to include 'scopecontent_html_tesm'
         expect(component['scopecontent_html_tesm']).to include(a_string_matching(/provide important background context./))
         expect(component['scopecontent_html_tesm']).not_to include(a_string_matching(/correspondence, and a nametag./))
@@ -395,7 +395,7 @@ RSpec.describe 'EAD 2 traject indexing' do
         let(:component_with_many_parents) { all_components.find { |c| c['ref_ssi'] == ['aspace_f934f1add34289f28bd0feb478e68275'] } }
 
         it 'parent_unittitles should be displayable and searchable' do
-          component = all_components.find { |c| c['id'] == ['aoa271aspace_563a320bb37d24a9e1e6f7bf95b52671'] }
+          component = all_components.find { |c| c['id'] == ['aoa271_aspace_563a320bb37d24a9e1e6f7bf95b52671'] }
           %w[parent_unittitles_ssm parent_unittitles_tesim].each do |field|
             expect(component[field]).to contain_exactly(
               'Alpha Omega Alpha Archives, 1894-1992'
@@ -428,12 +428,12 @@ RSpec.describe 'EAD 2 traject indexing' do
     end
 
     it 'only indexes containers within a given component' do
-      component = all_components.find { |c| c['id'] == ['aoa271aspace_843e8f9f22bac69872d0802d6fffbb04'] }
+      component = all_components.find { |c| c['id'] == ['aoa271_aspace_843e8f9f22bac69872d0802d6fffbb04'] }
       expect(component['containers_ssim']).to eq ['box 1', 'folder 1']
     end
 
     it 'only indexes containers at the same level of the component' do
-      component = all_components.find { |c| c['id'] == ['aoa271aspace_563a320bb37d24a9e1e6f7bf95b52671'] }
+      component = all_components.find { |c| c['id'] == ['aoa271_aspace_563a320bb37d24a9e1e6f7bf95b52671'] }
       expect(component['containers_ssim']).to be_nil
     end
   end
@@ -456,7 +456,7 @@ RSpec.describe 'EAD 2 traject indexing' do
     end
 
     it 'indexes controlaccess subjects within a component' do
-      component = all_components.find { |c| c['id'] == ['aoa271aspace_81c806b82a14c3c79d395bbd383b886f'] }
+      component = all_components.find { |c| c['id'] == ['aoa271_aspace_81c806b82a14c3c79d395bbd383b886f'] }
       %w[access_subjects_ssm access_subjects_ssim].each do |field|
         expect(component).to include field
         expect(component[field]).to contain_exactly 'Minutes'
@@ -510,13 +510,13 @@ RSpec.describe 'EAD 2 traject indexing' do
 
     describe 'component-level' do
       it 'indexes <controlaccess> names in a shared names field' do
-        component = all_components.find { |c| c['id'] == ['aoa271aspace_843e8f9f22bac69872d0802d6fffbb04'] }
+        component = all_components.find { |c| c['id'] == ['aoa271_aspace_843e8f9f22bac69872d0802d6fffbb04'] }
         expect(component).to include 'names_ssim'
         expect(component['names_ssim']).to include_ignoring_whitespace 'Robertson\'s Crab House'
       end
 
       it 'indexes names in fields for specific name types, regardless of <controlaccess>' do
-        component = all_components.find { |c| c['id'] == ['aoa271aspace_843e8f9f22bac69872d0802d6fffbb04'] }
+        component = all_components.find { |c| c['id'] == ['aoa271_aspace_843e8f9f22bac69872d0802d6fffbb04'] }
         expect(component['corpname_ssim']).to include_ignoring_whitespace 'Robertson\'s Crab House'
         expect(component['persname_ssim']).to include_ignoring_whitespace 'Anfinsen, Christian B.'
       end
@@ -529,7 +529,7 @@ RSpec.describe 'EAD 2 traject indexing' do
     end
 
     it 'indexes geognames' do
-      component = all_components.find { |d| d['id'] == ['aoa271aspace_843e8f9f22bac69872d0802d6fffbb04'] }
+      component = all_components.find { |d| d['id'] == ['aoa271_aspace_843e8f9f22bac69872d0802d6fffbb04'] }
       expect(component).to include 'geogname_ssim'
       expect(component['geogname_ssim']).to include('Popes Creek (Md.)')
 
@@ -544,7 +544,7 @@ RSpec.describe 'EAD 2 traject indexing' do
     end
 
     it 'creates date_range_isim' do
-      component = all_components.find { |d| d['id'] == ['aoa271aspace_563a320bb37d24a9e1e6f7bf95b52671'] }
+      component = all_components.find { |d| d['id'] == ['aoa271_aspace_563a320bb37d24a9e1e6f7bf95b52671'] }
       date_range = component['date_range_isim']
       expect(date_range).to be_an Array
       expect(date_range.length).to eq 75
@@ -603,7 +603,7 @@ RSpec.describe 'EAD 2 traject indexing' do
     end
 
     context 'when <dao> is direct child of <c0x> component' do
-      let(:component) { all_components.find { |c| c['id'] == ['aoa271aspace_e6db65d47e891d61d69c2798c68a8f02'] } }
+      let(:component) { all_components.find { |c| c['id'] == ['aoa271_aspace_e6db65d47e891d61d69c2798c68a8f02'] } }
 
       it 'gets the digital object' do
         expect(component['digital_objects_ssm']).to eq(
@@ -618,7 +618,7 @@ RSpec.describe 'EAD 2 traject indexing' do
     end
 
     context 'when <dao> is child of the <did> in a <c0x> component' do
-      let(:component) { all_components.find { |c| c['id'] == ['aoa271aspace_843e8f9f22bac69872d0802d6fffbb04'] } }
+      let(:component) { all_components.find { |c| c['id'] == ['aoa271_aspace_843e8f9f22bac69872d0802d6fffbb04'] } }
 
       it 'gets the digital objects' do
         expect(component['digital_objects_ssm']).to eq(
@@ -649,10 +649,10 @@ RSpec.describe 'EAD 2 traject indexing' do
       expect(all_components).not_to be_empty
 
       expect(first_component['ref_ssi']).to contain_exactly('al_4bf70b448ac8351a147acff1dd8b1c0b9a791980')
-      expect(first_component['id']).to contain_exactly('ehllHemingwayErnest-sampleal_4bf70b448ac8351a147acff1dd8b1c0b9a791980')
+      expect(first_component['id']).to contain_exactly('ehllHemingwayErnest-sample_al_4bf70b448ac8351a147acff1dd8b1c0b9a791980')
 
       expect(second_component['ref_ssi']).to contain_exactly('al_54b06e5ad77cab05ec7f6beeaca50022c47d9c7b')
-      expect(second_component['id']).to contain_exactly('ehllHemingwayErnest-sampleal_54b06e5ad77cab05ec7f6beeaca50022c47d9c7b')
+      expect(second_component['id']).to contain_exactly('ehllHemingwayErnest-sample_al_54b06e5ad77cab05ec7f6beeaca50022c47d9c7b')
 
       expect(second_component['parent_ssim']).to equal_array_ignoring_whitespace(
         %w[ehllHemingwayErnest-sample al_4bf70b448ac8351a147acff1dd8b1c0b9a791980]
