@@ -1,17 +1,19 @@
 ARG ALPINE_RUBY_VERSION
 
-FROM ruby:${ALPINE_RUBY_VERSION}-alpine
+FROM --platform=linux/amd64 ruby:${ALPINE_RUBY_VERSION}-bookworm
 
-RUN apk add --update --no-cache \
+ENV DEBIAN_FRONTEND noninteractive
+
+RUN apt-get update -qq && \
+    apt-get install -y \
   bash \
-  build-base \
-  gcompat \
+  build-essential \
   git \
   libxml2-dev \
   libxslt-dev \
   nodejs \
   shared-mime-info \
-  sqlite-dev \
+  sqlite3 \
   tzdata \
   yarn
 
