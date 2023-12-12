@@ -51,11 +51,13 @@ DID_SEARCHABLE_NOTES_FIELDS = %w[
 ].freeze
 
 settings do
+  provide 'component_traject_config', File.join(__dir__, 'ead2_component_config.rb')
+  provide 'date_normalizer', 'Arclight::NormalizedDate'
+  provide 'title_normalizer', 'Arclight::NormalizedTitle'
   provide 'reader_class_name', 'Arclight::Traject::NokogiriNamespacelessReader'
   provide 'solr_writer.commit_on_close', 'true'
   provide 'repository', ENV.fetch('REPOSITORY_ID', nil)
   provide 'logger', Logger.new($stderr)
-  provide 'component_traject_config', File.join(__dir__, 'ead2_component_config.rb')
 end
 
 each_record do |_record, context|
@@ -100,22 +102,18 @@ end
 to_field 'unitid_ssm', extract_xpath('/ead/archdesc/did/unitid')
 to_field 'unitid_tesim', extract_xpath('/ead/archdesc/did/unitid')
 
-to_field 'normalized_title_ssm' do |_record, accumulator, context|
-  dates = Arclight::NormalizedDate.new(
+to_field 'normalized_date_ssm' do |_record, accumulator, context|
+  accumulator << settings['date_normalizer'].constantize.new(
     context.output_hash['unitdate_inclusive_ssm'],
     context.output_hash['unitdate_bulk_ssim'],
     context.output_hash['unitdate_other_ssim']
   ).to_s
-  title = context.output_hash['title_ssm'].first
-  accumulator << Arclight::NormalizedTitle.new(title, dates).to_s
 end
 
-to_field 'normalized_date_ssm' do |_record, accumulator, context|
-  accumulator << Arclight::NormalizedDate.new(
-    context.output_hash['unitdate_inclusive_ssm'],
-    context.output_hash['unitdate_bulk_ssim'],
-    context.output_hash['unitdate_other_ssim']
-  ).to_s
+to_field 'normalized_title_ssm' do |_record, accumulator, context|
+  title = context.output_hash['title_ssm']&.first
+  date = context.output_hash['normalized_date_ssm']&.first
+  accumulator << settings['title_normalizer'].constantize.new(title, date).to_s
 end
 
 to_field 'collection_title_tesim' do |_record, accumulator, context|
