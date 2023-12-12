@@ -29,7 +29,7 @@ settings do
   provide 'title_normalizer', 'Arclight::NormalizedTitle'
   provide 'reader_class_name', 'Arclight::Traject::NokogiriNamespacelessReader'
   provide 'logger', Logger.new($stderr)
-  provide 'component_identifier_format', '%<root_id>s%<ref_id>s'
+  provide 'component_identifier_format', '%<root_id>s_%<ref_id>s'
 end
 
 NAME_ELEMENTS = %w[corpname famname name persname].freeze

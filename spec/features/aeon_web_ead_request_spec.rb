@@ -7,7 +7,7 @@ describe 'Aeon Web EAD Request', js: true do
     it 'creates a request link' do
       visit solr_document_path 'm0198-xml'
 
-      within '#m0198-xmlaspace_ref11_d0s-hierarchy-item' do
+      within '#m0198-xml_aspace_ref11_d0s-hierarchy-item' do
         click_link 'Pages 1-78'
       end
       expect(page).to have_css(

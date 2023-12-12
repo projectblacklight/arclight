@@ -191,20 +191,20 @@ RSpec.describe 'Collection Page' do
 
       it 'sub components are viewable and expandable' do
         within '#collection-context' do
-          within '#aoa271aspace_563a320bb37d24a9e1e6f7bf95b52671-hierarchy-item' do
+          within '#aoa271_aspace_563a320bb37d24a9e1e6f7bf95b52671-hierarchy-item' do
             click_link 'View'
-            within '#aoa271aspace_dc2aaf83625280ae2e193beb3f4aea78-hierarchy-item.al-collection-context' do
+            within '#aoa271_aspace_dc2aaf83625280ae2e193beb3f4aea78-hierarchy-item.al-collection-context' do
               expect(page).to have_link 'Constitution and by-laws'
             end
             click_link 'Expand'
             expect(page).to have_link 'Reports'
-            el = find_by_id('aoa271aspace_238a0567431f36f49acea49ef576d408-hierarchy-item')
+            el = find_by_id('aoa271_aspace_238a0567431f36f49acea49ef576d408-hierarchy-item')
             evaluate_script "window.scrollTo(0,#{el.rect.y - 100})"
             sleep 1
-            within '#aoa271aspace_238a0567431f36f49acea49ef576d408-hierarchy-item' do
+            within '#aoa271_aspace_238a0567431f36f49acea49ef576d408-hierarchy-item' do
               click_link 'View'
               expect(page).to have_link 'Expansion Plan'
-              within '#aoa271aspace_f934f1add34289f28bd0feb478e68275-hierarchy-item' do
+              within '#aoa271_aspace_f934f1add34289f28bd0feb478e68275-hierarchy-item' do
                 click_link 'View'
                 expect(page).to have_link 'Initial Phase'
                 expect(page).to have_link 'Phase II: Expansion'
@@ -215,7 +215,7 @@ RSpec.describe 'Collection Page' do
       end
 
       it 'includes the number of direct children of the component' do
-        within '#aoa271aspace_563a320bb37d24a9e1e6f7bf95b52671-hierarchy-item' do
+        within '#aoa271_aspace_563a320bb37d24a9e1e6f7bf95b52671-hierarchy-item' do
           expect(page).to have_css(
             '.al-number-of-children-badge',
             text: /25/
@@ -243,7 +243,7 @@ RSpec.describe 'Collection Page' do
   end
 
   context 'content with file downloads', js: true do
-    let(:doc_id) { 'a0011-xmlaspace_ref6_lx4' }
+    let(:doc_id) { 'a0011-xml_aspace_ref6_lx4' }
 
     it 'renders links to the files for download' do
       within '.al-show-actions-box-downloads-container' do
@@ -260,7 +260,7 @@ RSpec.describe 'Collection Page' do
     end
 
     context 'with EAD documents which require Aeon requests' do
-      let(:doc_id) { 'm0198-xmlaspace_ref11_d0s' }
+      let(:doc_id) { 'm0198-xml_aspace_ref11_d0s' }
 
       it 'renders links to the Aeon request form' do
         expect(page).to have_css '.al-request'

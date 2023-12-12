@@ -6,11 +6,11 @@ xdescribe 'Google Form Request', js: true do
   context 'when container is present' do
     context 'repository is requestable' do
       it 'form is present with filled out values' do
-        visit solr_document_path 'aoa271aspace_843e8f9f22bac69872d0802d6fffbb04'
+        visit solr_document_path 'aoa271_aspace_843e8f9f22bac69872d0802d6fffbb04'
 
         within 'form' do
           expect(page).to have_css(
-            'input[name="entry.1980510262"][value$="catalog/aoa271aspace_843e8f9f22bac69872d0802d6fffbb04"]',
+            'input[name="entry.1980510262"][value$="catalog/aoa271_aspace_843e8f9f22bac69872d0802d6fffbb04"]',
             visible: :hidden
           )
           expect(page).to have_css('input[name="entry.619150170"][value="Alpha Omega Alpha Archives, 1894-1992"]',
@@ -25,7 +25,7 @@ xdescribe 'Google Form Request', js: true do
 
       context 'repository is not requestable' do
         it 'form is absent' do
-          visit solr_document_path 'm0198-xmlaspace_ref14_di4'
+          visit solr_document_path 'm0198-xml_aspace_ref14_di4'
           expect(page).not_to have_css 'form'
         end
       end
@@ -34,7 +34,7 @@ xdescribe 'Google Form Request', js: true do
 
   context 'when container is absent' do
     it 'form is absent' do
-      visit solr_document_path 'aoa271aspace_238a0567431f36f49acea49ef576d408'
+      visit solr_document_path 'aoa271_aspace_238a0567431f36f49acea49ef576d408'
       expect(page).not_to have_css 'form'
     end
   end
@@ -57,7 +57,7 @@ xdescribe 'Google Form Request', js: true do
     end
 
     it 'shows up in context' do
-      visit solr_document_path 'aoa271aspace_843e8f9f22bac69872d0802d6fffbb04'
+      visit solr_document_path 'aoa271_aspace_843e8f9f22bac69872d0802d6fffbb04'
       within '#collection-context' do
         expect(page).to have_css 'form[action*="https://docs.google.com"]', count: 3
       end
