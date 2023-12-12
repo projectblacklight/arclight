@@ -1,4 +1,4 @@
 <% # container for all groups in index view -%>
-<div class='al-grouped-results'>
+<div id="documents" class='al-grouped-results'>
   <%= render (blacklight_config.view_config(document_index_view_type).group_component || Arclight::GroupComponent).with_collection(@response.groups) %>
 </div>
