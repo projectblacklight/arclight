@@ -37,7 +37,7 @@ services:
     entrypoint:
       - docker-entrypoint.sh
       - solr-precreate
-      - arclight
+      - blacklight-core
       - /opt/solr/conf
       - "-Xms256m"
       - "-Xmx512m"
