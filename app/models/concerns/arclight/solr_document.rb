@@ -7,7 +7,7 @@ module Arclight
     extend ActiveSupport::Concern
 
     included do
-      attribute :parent_ids, :array, 'parent_ssim'
+      attribute :parent_ids, :array, 'parent_ids_ssim'
       attribute :parent_labels, :array, 'parent_unittitles_ssm'
       attribute :parent_levels, :array, 'parent_levels_ssm'
       attribute :unitid, :string, 'unitid_ssm'

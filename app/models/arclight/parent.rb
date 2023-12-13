@@ -17,15 +17,5 @@ module Arclight
     def collection?
       level == 'collection'
     end
-
-    ##
-    # Concatenates the eadid and the id, to return an "id" in the context of
-    # Blacklight and Solr
-    # @return [String]
-    def global_id
-      return id if eadid == id
-
-      "#{eadid}_#{id}"
-    end
   end
 end

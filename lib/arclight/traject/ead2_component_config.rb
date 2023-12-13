@@ -138,6 +138,11 @@ to_field 'parent_ssi' do |_record, accumulator, _context|
   accumulator.concat settings[:parent].output_hash['ref_ssi'] || settings[:parent].output_hash['id']
 end
 
+to_field 'parent_ids_ssim' do |_record, accumulator, _context|
+  accumulator.concat(settings[:parent].output_hash['parent_ids_ssim'] || [])
+  accumulator.concat settings[:parent].output_hash['id']
+end
+
 to_field 'parent_unittitles_ssm' do |_rec, accumulator, _context|
   accumulator.concat(settings[:parent].output_hash['parent_unittitles_ssm'] || [])
   accumulator.concat settings[:parent].output_hash['normalized_title_ssm'] || []
