@@ -122,19 +122,19 @@ RSpec.describe 'EAD 2 traject indexing' do
 
     describe 'physdesc' do
       it 'direct text' do
-        expect(result['physdesc_ssm']).to equal_array_ignoring_whitespace ['Photographic album', 'Single bound volume']
+        expect(result['physdesc_tesim']).to equal_array_ignoring_whitespace ['Photographic album', 'Single bound volume']
       end
 
       it 'extent' do
-        expect(result['extent_ssm']).to equal_array_ignoring_whitespace ['1.25 Linear Feet (1 volume)', '1 document case', '16 DVDRs']
+        expect(result['extent_tesim']).to equal_array_ignoring_whitespace ['1.25 Linear Feet (1 volume)', '1 document case', '16 DVDRs']
       end
 
       it 'physfacet' do
-        expect(result['physfacet_ssm']).to equal_array_ignoring_whitespace ['Printed material', 'Digital Video Disc']
+        expect(result['physfacet_tesim']).to equal_array_ignoring_whitespace ['Printed material', 'Digital Video Disc']
       end
 
       it 'dimensions' do
-        expect(result['dimensions_ssm']).to equal_array_ignoring_whitespace ['20 x 20 in.', '7.5 x 5.5 in.']
+        expect(result['dimensions_tesim']).to equal_array_ignoring_whitespace ['20 x 20 in.', '7.5 x 5.5 in.']
       end
     end
 
@@ -311,7 +311,7 @@ RSpec.describe 'EAD 2 traject indexing' do
 
     describe 'physdesc at the collection level' do
       it 'direct text' do
-        expect(result['physdesc_ssm']).to equal_array_ignoring_whitespace ['Boxes and folders', 'Compact discs']
+        expect(result['physdesc_tesim']).to equal_array_ignoring_whitespace ['Boxes and folders', 'Compact discs']
       end
 
       it 'extent' do
@@ -321,11 +321,11 @@ RSpec.describe 'EAD 2 traject indexing' do
       end
 
       it 'physfacet' do
-        expect(result['physfacet_ssm']).to equal_array_ignoring_whitespace ['Compact digital disc']
+        expect(result['physfacet_tesim']).to equal_array_ignoring_whitespace ['Compact digital disc']
       end
 
       it 'dimensions' do
-        expect(result['dimensions_ssm']).to equal_array_ignoring_whitespace ['7.5 x 5.5 in.']
+        expect(result['dimensions_tesim']).to equal_array_ignoring_whitespace ['7.5 x 5.5 in.']
       end
     end
 
@@ -335,7 +335,7 @@ RSpec.describe 'EAD 2 traject indexing' do
       end
 
       it 'direct text' do
-        expect(component['physdesc_ssm']).to equal_array_ignoring_whitespace ['Cards and sheets of various sizes']
+        expect(component['physdesc_tesim']).to equal_array_ignoring_whitespace ['Cards and sheets of various sizes']
       end
 
       it 'extent' do
@@ -347,11 +347,11 @@ RSpec.describe 'EAD 2 traject indexing' do
       end
 
       it 'physfacet' do
-        expect(component['physfacet_ssm']).to equal_array_ignoring_whitespace ['Informational cards']
+        expect(component['physfacet_tesim']).to equal_array_ignoring_whitespace ['Informational cards']
       end
 
       it 'dimensions' do
-        expect(component['dimensions_ssm']).to equal_array_ignoring_whitespace ['various']
+        expect(component['dimensions_tesim']).to equal_array_ignoring_whitespace ['various']
       end
     end
 

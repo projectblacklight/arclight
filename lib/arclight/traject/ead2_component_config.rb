@@ -168,7 +168,7 @@ to_field 'collection_ssim' do |_record, accumulator, _context|
 end
 
 # This accumulates direct text from a physdesc, ignoring child elements handled elsewhere
-to_field 'physdesc_ssm', extract_xpath('./did/physdesc', to_text: false) do |_record, accumulator|
+to_field 'physdesc_tesim', extract_xpath('./did/physdesc', to_text: false) do |_record, accumulator|
   accumulator.map! do |element|
     physdesc = []
     element.children.map do |child|
@@ -178,10 +178,6 @@ to_field 'physdesc_ssm', extract_xpath('./did/physdesc', to_text: false) do |_re
     end.flatten
     physdesc.join(' ') unless physdesc.empty?
   end
-end
-
-to_field 'physdesc_tesim' do |_record, accumulator, context|
-  accumulator.concat context.output_hash['physdesc_ssm'] || []
 end
 
 to_field 'extent_ssm' do |record, accumulator|
@@ -200,10 +196,7 @@ to_field 'extent_tesim' do |_record, accumulator, context|
   accumulator.concat context.output_hash['extent_ssm'] || []
 end
 
-to_field 'physfacet_ssm', extract_xpath('./did/physdesc/physfacet')
 to_field 'physfacet_tesim', extract_xpath('./did/physdesc/physfacet')
-
-to_field 'dimensions_ssm', extract_xpath('./did/physdesc/dimensions')
 to_field 'dimensions_tesim', extract_xpath('./did/physdesc/dimensions')
 
 to_field 'creator_ssm', extract_xpath('./did/origination')
