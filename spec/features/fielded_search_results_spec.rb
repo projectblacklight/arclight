@@ -76,7 +76,7 @@ RSpec.describe 'Field-based search results' do
       end
 
       it 'matches titles with a boost for multiple hits' do
-        visit search_catalog_path q: 'alpha omega alpha archives', search_field: 'keyword'
+        visit search_catalog_path q: 'alpha omega alpha', search_field: 'keyword'
         expect(page).to have_css '.index_title', count: 6
         within('.document-position-1') do
           expect(page).to have_css '.index_title', text: /Alpha Omega Alpha Archives, 1894-1992/
