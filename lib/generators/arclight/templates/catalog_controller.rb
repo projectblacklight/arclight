@@ -279,6 +279,8 @@ class CatalogController < ApplicationController
     config.add_background_field 'accruals', field: 'accruals_html_tesm', helper_method: :render_html_tags
     config.add_background_field 'phystech', field: 'phystech_html_tesm', helper_method: :render_html_tags
     config.add_background_field 'physloc', field: 'physloc_html_tesm', helper_method: :render_html_tags
+    config.add_background_field 'physfacet', field: 'physfacet_ssm', helper_method: :render_html_tags
+    config.add_background_field 'dimensions', field: 'dimensions_ssm', helper_method: :render_html_tags
     config.add_background_field 'materialspec', field: 'materialspec_tesim', helper_method: :render_html_tags
     config.add_background_field 'fileplan', field: 'fileplan_html_tesim', helper_method: :render_html_tags
     config.add_background_field 'descrules', field: 'descrules_ssm', helper_method: :render_html_tags
@@ -335,6 +337,8 @@ class CatalogController < ApplicationController
     config.add_component_field 'phystech', field: 'phystech_html_tesm', helper_method: :render_html_tags
     config.add_component_field 'materialspec', field: 'materialspec_tesim', helper_method: :render_html_tags
     config.add_component_field 'physloc', field: 'physloc_html_tesm', helper_method: :render_html_tags
+    config.add_component_field 'physfacet', field: 'physfacet_tesim', helper_method: :render_html_tags
+    config.add_component_field 'dimensions', field: 'dimensions_tesim', helper_method: :render_html_tags
     config.add_component_field 'fileplan', field: 'fileplan_html_tesim', helper_method: :render_html_tags
     config.add_component_field 'altformavail', field: 'altformavail_html_tesim', helper_method: :render_html_tags
     config.add_component_field 'otherfindaid', field: 'otherfindaid_html_tesm', helper_method: :render_html_tags

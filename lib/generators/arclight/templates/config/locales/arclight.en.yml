@@ -18,6 +18,8 @@ en:
         accruals: Accruals
         phystech: Physical / technical requirements
         physloc: Physical location
+        physfacet: Physical facet
+        dimensions: Dimensions
         descrules: Rules or conventions
 
         relatedmaterial: Related material

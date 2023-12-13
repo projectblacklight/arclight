@@ -41,11 +41,19 @@
         <corpname source="ingest">Alpha Omega Alpha</corpname>
       </origination>
       <unitid>MS C 271</unitid>
+      <physdesc>
+        Boxes and folders
+      </physdesc>
+      <physdesc>
+        Compact discs
+      </physdesc>
       <physdesc altrender="part">
         <extent altrender="materialtype spaceoccupied">15.0 linear feet (36 boxes + oversize
           folder)</extent>
       </physdesc>
       <physdesc altrender="part">
+        <dimensions>7.5 x 5.5 in.</dimensions>
+        <physfacet>Compact digital disc</physfacet>
         <extent altrender="materialtype spaceoccupied">3 CDs</extent>
       </physdesc>
       <unitdate normal="1894/1992" type="inclusive">1894-1992</unitdate>
@@ -393,7 +401,7 @@
         <bioghist id="aspace_ff0f536406ce214f5u38e1f7c798d76e">
           <head>Historical Note</head>
           <p>
-            The Society started keeping consistent adminstrative records in 1975, the same year that E. L. Doctorow published <emph render="italic">Ragtime</emph>. 
+            The Society started keeping consistent adminstrative records in 1975, the same year that E. L. Doctorow published <emph render="italic">Ragtime</emph>.
           </p>
         </bioghist>
         <accessrestrict id="aspace_7bbec2cdc1e6e0cb7b2ff1acb7c9e364">
@@ -724,8 +732,16 @@
         <did>
           <unittitle>Series II: Membership,</unittitle>
           <unitid>MS C 271.II</unitid>
-          <physdesc altrender="whole"><extent altrender="materialtype spaceoccupied">1.5 Linear
-              Feet</extent></physdesc>
+          <physdesc>
+            Cards and sheets of various sizes
+          </physdesc>
+          <physdesc>
+            <physfacet>Informational cards</physfacet>
+          </physdesc>
+          <physdesc altrender="whole">
+            <dimensions>various</dimensions>
+            <extent altrender="materialtype spaceoccupied">1.5 Linear Feet</extent>
+          </physdesc>
           <unitdate normal="1902/1973" type="inclusive">1902-1973</unitdate>
           <abstract id="aspace_e806089c6553f2132b727ead99b47a70">Contains a mixture of membership
             cards and membership rosters.</abstract>
