@@ -11,7 +11,7 @@
               }) do %>
     <div class="checkbox toggle-bookmark">
       <label class="toggle-bookmark" data-checkboxsubmit-target="label">
-        <input type="checkbox" class="toggle-bookmark" data-checkboxsubmit-target="checkbox">
+        <input type="checkbox" class="toggle-bookmark" data-checkboxsubmit-target="checkbox" <%= 'checked="checked"' if bookmarked? %>>
         <span data-checkboxsubmit-target="span"><%= bookmarked? ? "#{blacklight_icon(:bookmark).html_safe}<span class=\"sr-only visually-hidden\">#{t('blacklight.search.bookmarks.present')}</span>".html_safe : "#{blacklight_icon(:bookmark).html_safe}<span class=\"sr-only visually-hidden\">#{t('blacklight.search.bookmarks.absent')}</span>".html_safe %></span>
       </label>
     </div>
