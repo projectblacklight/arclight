@@ -226,8 +226,8 @@ RSpec.describe 'Collection Page' do
       it 'clicking contents does not change the session results view context' do
         visit search_catalog_path q: '', search_field: 'all_fields'
 
-        expect(page).to have_css('#documents.documents-list')
-        expect(page).not_to have_css('#documents.documents-hierarchy')
+        expect(page).to have_css('.al-document-listings.documents-list')
+        expect(page).not_to have_css('.al-document-listings.documents-hierarchy')
       end
     end
   end
