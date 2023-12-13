@@ -7,7 +7,7 @@ nlm:
     <div class="al-repository-street-address-building">Building 38, Room 1E-21</div>
     <div class="al-repository-street-address-address1">8600 Rockville Pike</div>
     <div class="al-repository-street-address-city_state_zip_country">Bethesda, MD 20894, USA</div>
-  thumbnail_url: "https://collections.nlm.nih.gov/pageturnerserver/ajaxp?theurl=http://localhost:8080/fedora/get/nlm:nlmuid-101421040-img/THUMB"
+  thumbnail_url: "https://upload.wikimedia.org/wikipedia/commons/thumb/8/8b/United_States_National_Library_of_Medicine_1999.jpg/500px-United_States_National_Library_of_Medicine_1999.jpg"
   request_types:
     google_form:
       request_url: 'https://docs.google.com/a/stanford.edu/forms/d/e/1FAIpQLSeOamhY_IcFw4sPnz0ddwWWkrPaHbM5wp7JVbOLOL_mIusEyw/viewform'
@@ -24,7 +24,7 @@ sul-spec:
     <div class="al-repository-street-address-building">Green Library</div>
     <div class="al-repository-street-address-address1">557 Escondido Mall</div>
     <div class="al-repository-street-address-city_state_zip_country">Stanford, CA 94305, USA</div>
-  thumbnail_url: 'https://library.stanford.edu/sites/default/files/styles/150x150/public/collection/image/Collections-Super-Enlight.jpg'
+  thumbnail_url: 'https://upload.wikimedia.org/wikipedia/commons/thumb/2/2b/Stanford_University_Green_Library_Bing_Wing.jpg/500px-Stanford_University_Green_Library_Bing_Wing.jpg'
   request_types:
     aeon_web_ead:
       request_url: 'https://sample.request.com'
