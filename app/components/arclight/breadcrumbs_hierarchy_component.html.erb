@@ -9,12 +9,12 @@
       <% if collection %>
         <li class="breadcrumb-item breadcrumb-item-2">
           <span aria-hidden="true"><%= blacklight_icon :collection, classes: 'al-collection-content-icon' %></span>
-          <span class="breadcrumb-text"><%= link_to collection.label, solr_document_path(collection.global_id) %></span>
+          <span class="breadcrumb-text"><%= link_to collection.label, solr_document_path(collection.id) %></span>
 
           <ol class="breadcrumb">
             <% parents_under_collection.each do |parent| %>
               <li class="breadcrumb-item breadcrumb-item-3">
-                <span class="breadcrumb-text"><%= link_to parent.label, solr_document_path(parent.global_id) %></span>
+                <span class="breadcrumb-text"><%= link_to parent.label, solr_document_path(parent.id) %></span>
               </li>
             <% end %>
 
