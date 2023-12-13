@@ -155,8 +155,21 @@ to_field 'collection_ssim' do |_record, accumulator, _context|
   accumulator.concat settings[:root].output_hash['normalized_title_ssm']
 end
 
-to_field 'extent_ssm', extract_xpath('./did/physdesc/extent')
-to_field 'extent_tesim', extract_xpath('./did/physdesc/extent')
+to_field 'extent_ssm' do |record, accumulator|
+  physdescs = record.xpath('./did/physdesc')
+  extents_per_physdesc = physdescs.map do |physdesc|
+    extents = physdesc.xpath('./extent').map { |e| e.text.strip }
+    # Join extents within the same physdesc with an empty string
+    extents.join(' ')
+  end
+
+  # Add each physdesc separately to the accumulator
+  accumulator.concat(extents_per_physdesc)
+end
+
+to_field 'extent_tesim' do |_record, accumulator, context|
+  accumulator.concat context.output_hash['extent_ssm'] || []
+end
 
 to_field 'creator_ssm', extract_xpath('./did/origination')
 to_field 'creator_ssim', extract_xpath('./did/origination')
@@ -214,7 +227,7 @@ to_field 'digital_objects_ssm', extract_xpath('./dao|./did/dao', to_text: false)
   end
 end
 
-to_field 'date_range_ssim', extract_xpath('./did/unitdate/@normal', to_text: false) do |_record, accumulator|
+to_field 'date_range_isim', extract_xpath('./did/unitdate/@normal', to_text: false) do |_record, accumulator|
   range = Arclight::YearRange.new
   next range.years if accumulator.blank?
 

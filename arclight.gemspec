@@ -43,5 +43,4 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency 'selenium-webdriver'
   spec.add_development_dependency 'simplecov'
   spec.add_development_dependency 'solr_wrapper'
-  spec.add_development_dependency 'webdrivers'
 end

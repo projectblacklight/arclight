@@ -25,6 +25,9 @@ en:
         otherfindaid: Other finding aids
         altformavail: Alternative form available
         originalsloc: Location of originals
+        materialspec: Material specific details
+        fileplan: File plan
+        odd: Other descriptive data
 
         access_subjects: Subjects
         names_coll: Names

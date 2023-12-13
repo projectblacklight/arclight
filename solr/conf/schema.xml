@@ -347,7 +347,7 @@
    <copyField source="access_subjects_ssim" dest="text" />
    <!-- grab the searchable notes -->
    <copyField source="abstract_tesim" dest="text" />
-   <copyField source="accessrestricct_tesim" dest="text" />
+   <copyField source="accessrestrict_tesim" dest="text" />
    <copyField source="accruals_tesim" dest="text" />
    <copyField source="acqinfo_tesim" dest="text" />
    <copyField source="altformavail_tesim" dest="text" />

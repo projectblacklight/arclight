@@ -15,7 +15,6 @@ EngineCart.load_application!
 require 'rspec/rails'
 
 require 'selenium-webdriver'
-require 'webdrivers'
 
 Capybara.javascript_driver = :headless_chrome
 

@@ -32,7 +32,7 @@
 <% elsif document.children? %>
 <div id="contents">
   <h2 class="al-show-sub-heading"><%= t 'arclight.views.show.contents' %></h2>
-  <%= helpers.turbo_frame_tag "al-hierarchy-#{document.id}", loading: 'lazy', src: helpers.hierarchy_solr_document_path(id: document.id, paginate: true, per_page: 50) %>
+  <%= helpers.turbo_frame_tag "al-hierarchy-#{document.id}-document", loading: 'lazy', src: helpers.hierarchy_solr_document_path(id: document.id, paginate: true, key: '-document', per_page: 50) %>
 </div>
 <% end %>
 

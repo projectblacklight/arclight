@@ -26,9 +26,18 @@ module Arclight
     def ead_to_html_scrubber
       Loofah::Scrubber.new do |node|
         format_render_attributes(node) if node.attr('render').present?
+        convert_to_span(node) if CONVERT_TO_SPAN_TAGS.include? node.name
+        format_links(node) if %w[extptr extref extrefloc ptr ref].include? node.name
         format_lists(node) if %w[list chronlist].include? node.name
         node
       end
+    end
+
+    # Tags that should be converted to <span> tags because of formatting conflicts between XML and HTML
+    CONVERT_TO_SPAN_TAGS = ['title'].freeze
+
+    def convert_to_span(node)
+      node.name = 'span'
     end
 
     def condense_whitespace(str)
@@ -89,6 +98,17 @@ module Arclight
         node.name = 'span'
         node['class'] = 'text-underline'
       end
+    end
+
+    def format_links(node)
+      node.remove_attribute('target')
+      node.remove_attribute('type')
+      if %w[extptr extref extrefloc].include? node.name
+        node['target'] = '_blank'
+        node['class'] = 'external-link'
+      end
+      node.content = node['title'] if (%w[extptr ptr].include? node.name) && node['title'].present?
+      node.name = 'a' if node['href'].present?
     end
 
     def format_lists(node)

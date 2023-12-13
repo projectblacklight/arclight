@@ -11,7 +11,7 @@ module Arclight
       attribute :parent_labels, :array, 'parent_unittitles_ssm'
       attribute :parent_levels, :array, 'parent_levels_ssm'
       attribute :unitid, :string, 'unitid_ssm'
-      attribute :extent, :string, 'extent_ssm'
+      attribute :extent, :array, 'extent_ssm'
       attribute :abstract, :string, 'abstract_html_tesm'
       attribute :scope, :string, 'scopecontent_html_tesm'
       attribute :creator, :string, 'creator_ssm'
@@ -111,8 +111,13 @@ module Arclight
     end
 
     def containers
-      # NOTE: that .titlecase strips punctuation, like hyphens, we want to keep
-      fetch('containers_ssim', []).map(&:capitalize)
+      # NOTE: Keep uppercase characters if present, but upcase the first if not already
+      containers_field = fetch('containers_ssim', []).reject(&:empty?)
+      return [] if containers_field.blank?
+
+      containers_field.map do |container|
+        container.dup.sub!(/\A./, &:upcase)
+      end
     end
 
     # @return [Array<String>] with embedded highlights using <em>...</em>

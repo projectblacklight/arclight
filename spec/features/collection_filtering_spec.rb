@@ -21,7 +21,7 @@ RSpec.describe 'Collection filtering' do
 
       click_button 'Search'
 
-      expect(page).to have_css('#documents .document', count: 10) # has results
+      expect(page).to have_css('.al-document-listings .document', count: 10) # has results
       expect(page).not_to have_css('.constraint-value .filter-value', text: 'Alpha Omega Alpha Archives, 1894-1992')
     end
   end
@@ -52,7 +52,7 @@ RSpec.describe 'Collection filtering' do
       click_button 'Search'
 
       expect(page).to have_css('.constraint-value .filter-value', text: 'Alpha Omega Alpha Archives, 1894-1992')
-      expect(page).to have_css('#documents .document', count: 1) # has results
+      expect(page).to have_css('.al-document-listings .document', count: 1) # has results
     end
 
     it 'allows the user to choose to search all collections' do
@@ -63,7 +63,7 @@ RSpec.describe 'Collection filtering' do
       click_button 'Search'
 
       expect(page).not_to have_css('.constraint-value .filter-value', text: 'Alpha Omega Alpha Archives, 1894-1992')
-      expect(page).to have_css('#documents .document', count: 10) # has results
+      expect(page).to have_css('.al-document-listings .document', count: 10) # has results
     end
   end
 end

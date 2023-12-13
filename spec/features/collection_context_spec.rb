@@ -15,13 +15,13 @@ RSpec.describe 'Collection context', js: true do
     end
 
     it 'siblings are not expanded' do
-      expect(page).to have_css '.al-toggle-view-children.collapsed[href="#aoa271aspace_b70574c7229e6f237f780579cc04595d-collapsible-hierarchy"]'
+      expect(page).to have_css '.al-toggle-view-children.collapsed[href="#collapsible-hierarchy-aoa271aspace_b70574c7229e6f237f780579cc04595d"]'
     end
 
     it 'direct ancestors are expanded' do
-      expect(page).to have_css '#aoa271aspace_f934f1add34289f28bd0feb478e68275-collapsible-hierarchy.show', visible: :visible
-      expect(page).to have_css '#aoa271aspace_238a0567431f36f49acea49ef576d408-collapsible-hierarchy.show', visible: :visible
-      expect(page).to have_css '#aoa271aspace_563a320bb37d24a9e1e6f7bf95b52671-collapsible-hierarchy.show', visible: :visible
+      expect(page).to have_css '#collapsible-hierarchy-aoa271aspace_f934f1add34289f28bd0feb478e68275.show', visible: :visible
+      expect(page).to have_css '#collapsible-hierarchy-aoa271aspace_238a0567431f36f49acea49ef576d408.show', visible: :visible
+      expect(page).to have_css '#collapsible-hierarchy-aoa271aspace_563a320bb37d24a9e1e6f7bf95b52671.show', visible: :visible
     end
 
     it 'siblings above are hidden' do
