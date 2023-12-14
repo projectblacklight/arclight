@@ -27,6 +27,7 @@ module Arclight
       Loofah::Scrubber.new do |node|
         format_render_attributes(node) if node.attr('render').present?
         convert_to_span(node) if CONVERT_TO_SPAN_TAGS.include? node.name
+        convert_to_br(node) if CONVERT_TO_BR_TAG.include? node.name
         format_links(node) if %w[extptr extref extrefloc ptr ref].include? node.name
         format_lists(node) if %w[list chronlist].include? node.name
         node
@@ -35,9 +36,15 @@ module Arclight
 
     # Tags that should be converted to <span> tags because of formatting conflicts between XML and HTML
     CONVERT_TO_SPAN_TAGS = ['title'].freeze
+    # Tags that should be converted to <span> tags because of formatting conflicts between XML and HTML
+    CONVERT_TO_BR_TAG = ['lb'].freeze
 
     def convert_to_span(node)
       node.name = 'span'
+    end
+
+    def convert_to_br(node)
+      node.name = 'br'
     end
 
     def condense_whitespace(str)

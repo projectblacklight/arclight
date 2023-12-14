@@ -39,6 +39,11 @@ RSpec.describe Arclight::EadFormatHelpers do
         content = helper.render_html_tags(value: %w[<title>Title</title>])
         expect(content).to eq_ignoring_whitespace '<span>Title</span>'
       end
+
+      it 'converts <lb> tags to <br> tags' do
+        content = helper.render_html_tags(value: %w[My<lb/>line-break])
+        expect(content).to eq_ignoring_whitespace 'My<br>line-break'
+      end
     end
 
     describe 'nodes with @render attributes' do
