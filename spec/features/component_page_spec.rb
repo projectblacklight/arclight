@@ -90,6 +90,25 @@ RSpec.describe 'Component Page' do
     end
   end
 
+  describe 'other materials fields' do
+    let(:doc_id) { 'aoa271_aspace_0d7174f0081ee8fd43f08872cfd7adc3' }
+
+    it 'displays relatedmaterial' do
+      expect(page).to have_css('dt', text: 'Related material')
+      expect(page).to have_css('dd', text: /^Records relating to the Alpha Omega Commission are held/)
+    end
+
+    it 'displays separatedmaterial' do
+      expect(page).to have_css('dt', text: 'Separated material')
+      expect(page).to have_css('dd', text: /^Photographs and sound recordings have been transferred/)
+    end
+
+    it 'displays originalsloc' do
+      expect(page).to have_css('dt', text: 'Location of originals')
+      expect(page).to have_css('dd', text: /^File contains photocopies of original still held by the donor/)
+    end
+  end
+
   describe 'collection context', js: true do
     it 'has ancestor component with badge having children count' do
       within '#collection-context' do
