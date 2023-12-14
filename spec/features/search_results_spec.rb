@@ -87,7 +87,7 @@ RSpec.describe 'Search results' do
           expect(page).to have_css('li .facet-label', text: 'Other', visible: :hidden) # "otherlevel" but missing alt val
         end
 
-        within('.blacklight-creator') do
+        within('.blacklight-creators') do
           expect(page).to have_css('h3 button', text: 'Creator')
           expect(page).to have_css('li .facet-label', text: 'Alpha Omega Alpha', visible: :hidden)
           expect(page).to have_css('li .facet-label', text: 'Stanford University', visible: :hidden)
