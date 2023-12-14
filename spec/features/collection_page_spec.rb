@@ -73,7 +73,7 @@ RSpec.describe 'Collection Page' do
       end
     end
 
-    it 'background has configured metadata' do
+    it 'background has configured metadata' do # rubocop:disable RSpec/MultipleExpectations
       within '#background' do
         expect(page).to have_css('dt', text: 'Scope and content')
         expect(page).to have_css('dd', text: /^Correspondence, documents, records, photos/)
@@ -98,6 +98,15 @@ RSpec.describe 'Collection Page' do
 
         expect(page).to have_css('dt', text: 'Arrangement')
         expect(page).to have_css('dd', text: /^Arranged into seven series\./)
+
+        expect(page).to have_css('dt', text: 'Physical description')
+        expect(page).to have_css('dd', text: /^Boxes and folders/)
+
+        expect(page).to have_css('dt', text: 'Physical facet')
+        expect(page).to have_css('dd', text: /^Compact digital disc/)
+
+        expect(page).to have_css('dt', text: 'Dimensions')
+        expect(page).to have_css('dd', text: /^7\.5 x 5\.5 in\./)
 
         expect(page).to have_css('dt', text: 'Rules or conventions')
         expect(page).to have_css('dd', text: /^Finding aid prepared using Rules for Archival Description/)

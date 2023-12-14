@@ -120,8 +120,22 @@ RSpec.describe 'EAD 2 traject indexing' do
       expect(result['places_ssim']).to equal_array_ignoring_whitespace ['Yosemite National Park (Calif.)']
     end
 
-    it 'physdesc' do
-      expect(result['extent_ssm']).to equal_array_ignoring_whitespace ['1.25 Linear Feet (1 volume)', '1 document case', '16 DVDRs']
+    describe 'physdesc' do
+      it 'direct text' do
+        expect(result['physdesc_tesim']).to equal_array_ignoring_whitespace ['Photographic album', 'Single bound volume']
+      end
+
+      it 'extent' do
+        expect(result['extent_tesim']).to equal_array_ignoring_whitespace ['1.25 Linear Feet (1 volume)', '1 document case', '16 DVDRs']
+      end
+
+      it 'physfacet' do
+        expect(result['physfacet_tesim']).to equal_array_ignoring_whitespace ['Printed material', 'Digital Video Disc']
+      end
+
+      it 'dimensions' do
+        expect(result['dimensions_tesim']).to equal_array_ignoring_whitespace ['20 x 20 in.', '7.5 x 5.5 in.']
+      end
     end
 
     it 'has_online_content' do
@@ -295,18 +309,49 @@ RSpec.describe 'EAD 2 traject indexing' do
       ).to_a.first
     end
 
-    it 'extent at the collection level' do
-      %w[extent_ssm extent_tesim].each do |field|
-        expect(result[field]).to equal_array_ignoring_whitespace(['15.0 linear feet (36 boxes + oversize folder)', '3 CDs'])
+    describe 'physdesc at the collection level' do
+      it 'direct text' do
+        expect(result['physdesc_tesim']).to equal_array_ignoring_whitespace ['Boxes and folders', 'Compact discs']
+      end
+
+      it 'extent' do
+        %w[extent_ssm extent_tesim].each do |field|
+          expect(result[field]).to equal_array_ignoring_whitespace(['15.0 linear feet (36 boxes + oversize folder)', '3 CDs'])
+        end
+      end
+
+      it 'physfacet' do
+        expect(result['physfacet_tesim']).to equal_array_ignoring_whitespace ['Compact digital disc']
+      end
+
+      it 'dimensions' do
+        expect(result['dimensions_tesim']).to equal_array_ignoring_whitespace ['7.5 x 5.5 in.']
       end
     end
 
-    it 'extent at the component level' do
-      component = all_components.find { |c| c['ref_ssi'] == ['aspace_a951375d104030369a993ff943f61a77'] }
-      %w[extent_ssm extent_tesim].each do |field|
-        expect(component[field]).to equal_array_ignoring_whitespace(
-          ['1.5 Linear Feet']
-        )
+    describe 'physdesc at the component level' do
+      let(:component) do
+        all_components.find { |c| c['ref_ssi'] == ['aspace_a951375d104030369a993ff943f61a77'] }
+      end
+
+      it 'direct text' do
+        expect(component['physdesc_tesim']).to equal_array_ignoring_whitespace ['Cards and sheets of various sizes']
+      end
+
+      it 'extent' do
+        %w[extent_ssm extent_tesim].each do |field|
+          expect(component[field]).to equal_array_ignoring_whitespace(
+            ['1.5 Linear Feet']
+          )
+        end
+      end
+
+      it 'physfacet' do
+        expect(component['physfacet_tesim']).to equal_array_ignoring_whitespace ['Informational cards']
+      end
+
+      it 'dimensions' do
+        expect(component['dimensions_tesim']).to equal_array_ignoring_whitespace ['various']
       end
     end
 
