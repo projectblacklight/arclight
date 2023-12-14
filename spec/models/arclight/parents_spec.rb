@@ -5,8 +5,8 @@ require 'spec_helper'
 RSpec.describe Arclight::Parents do
   let(:document) do
     SolrDocument.new(
-      parent_ssim: %w[def ghi],
-      parent_unittitles_ssm: %w[DEF GHI],
+      parent_ids_ssim: %w[abc123 abc123_def abc123_ghi],
+      parent_unittitles_ssm: %w[ABC123 DEF GHI],
       ead_ssi: 'abc123',
       parent_levels_ssm: %w[collection]
     )
@@ -14,8 +14,8 @@ RSpec.describe Arclight::Parents do
 
   let(:dot_eadid_doc) do
     SolrDocument.new(
-      parent_ssim: %w[def ghi],
-      parent_unittitles_ssm: %w[DEF GHI],
+      parent_ids_ssim: %w[abc123-xml abc123-xml_def abc123-xml_ghi],
+      parent_unittitles_ssm: %w[ABC123 DEF GHI],
       ead_ssi: 'abc123.xml',
       parent_levels_ssm: %w[collection]
     )
@@ -32,8 +32,8 @@ RSpec.describe Arclight::Parents do
       end
 
       it 'values are appropriately set' do
-        expect(good_instance.ids).to eq %w[def ghi]
-        expect(good_instance.labels).to eq %w[DEF GHI]
+        expect(good_instance.ids).to eq %w[abc123 abc123_def abc123_ghi]
+        expect(good_instance.labels).to eq %w[ABC123 DEF GHI]
         expect(good_instance.eadid).to eq 'abc123'
         expect(good_instance.levels).to eq %w[collection]
       end
@@ -65,8 +65,8 @@ RSpec.describe Arclight::Parents do
       end
 
       it 'the containing parents have the correct data' do
-        expect(good_instance.as_parents.first.id).to eq 'def'
-        expect(good_instance.as_parents.first.label).to eq 'DEF'
+        expect(good_instance.as_parents.first.id).to eq 'abc123'
+        expect(good_instance.as_parents.first.label).to eq 'ABC123'
         expect(good_instance.as_parents.first.eadid).to eq 'abc123'
         expect(good_instance.as_parents.first.level).to eq 'collection'
       end

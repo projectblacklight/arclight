@@ -23,7 +23,7 @@ describe 'Document Tools' do
     end
 
     context 'for components' do
-      let(:doc_id) { 'm0198-xmlaspace_ref11_d0s' }
+      let(:doc_id) { 'm0198-xml_aspace_ref11_d0s' }
 
       pending 'renders the bookmark option' do
         expect(page).to have_css('.al-document-title-bar form.bookmark-toggle')

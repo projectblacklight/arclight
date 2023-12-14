@@ -29,6 +29,7 @@ settings do
   provide 'title_normalizer', 'Arclight::NormalizedTitle'
   provide 'reader_class_name', 'Arclight::Traject::NokogiriNamespacelessReader'
   provide 'logger', Logger.new($stderr)
+  provide 'component_identifier_format', '%<root_id>s_%<ref_id>s'
 end
 
 NAME_ELEMENTS = %w[corpname famname name persname].freeze
@@ -67,7 +68,9 @@ DID_SEARCHABLE_NOTES_FIELDS = %w[
 #
 # NOTE: All fields should be stored in Solr
 # ==================
-to_field 'ref_ssi' do |record, accumulator, _context|
+to_field 'ref_ssi' do |record, accumulator, context|
+  next if context.output_hash['ref_ssi']
+
   accumulator << if record.attribute('id').blank?
                    strategy = Arclight::MissingIdStrategy.selected
                    hexdigest = strategy.new(record).to_hexdigest
@@ -90,10 +93,14 @@ to_field 'ref_ssm' do |_record, accumulator, context|
 end
 
 to_field 'id' do |_record, accumulator, context|
-  accumulator << [
-    settings[:root].output_hash['id'],
-    context.output_hash['ref_ssi']
-  ].join
+  next if context.output_hash['id']
+
+  data = {
+    root_id: settings[:root].output_hash['id']&.first,
+    ref_id: context.output_hash['ref_ssi']&.first
+  }
+
+  accumulator << (settings[:component_identifier_format] % data)
 end
 
 to_field 'title_filing_ssi', extract_xpath('./did/unittitle'), first_only
@@ -129,6 +136,11 @@ end
 
 to_field 'parent_ssi' do |_record, accumulator, _context|
   accumulator.concat settings[:parent].output_hash['ref_ssi'] || settings[:parent].output_hash['id']
+end
+
+to_field 'parent_ids_ssim' do |_record, accumulator, _context|
+  accumulator.concat(settings[:parent].output_hash['parent_ids_ssim'] || [])
+  accumulator.concat settings[:parent].output_hash['id']
 end
 
 to_field 'parent_unittitles_ssm' do |_rec, accumulator, _context|
@@ -293,6 +305,7 @@ to_field 'components' do |record, accumulator, context|
       provide :counter, context.settings[:counter]
       provide :depth, context.settings[:depth].to_i + 1
       provide :component_traject_config, context.settings[:component_traject_config]
+      provide :component_identifier_format, context.settings[:component_identifier_format]
     end
 
     i.load_config_file(context.settings[:component_traject_config])
