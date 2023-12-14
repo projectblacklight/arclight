@@ -26,6 +26,15 @@ $hierarchy-view-collapse-icon: url("data:image/svg+xml,<svg xmlns='http://www.w3
   background: $mark-bg;
 }
 
+li.collapse .al-hierarchy-more {
+  display: none;
+}
+
+li.collapse.show .al-hierarchy-more {
+  display: block;
+  margin-bottom: 5px;
+}
+
 #collection-context {
   ul {
     list-style: none;

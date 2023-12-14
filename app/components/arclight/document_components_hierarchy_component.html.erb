@@ -19,12 +19,14 @@
 <% elsif paginate? %>
   <%# render the first N documents, and let the user expand the remaining if desired %>
   <%= helpers.turbo_frame_tag "al-hierarchy-#{@document.id}-sidebar", loading: ('lazy' unless @target_index >= 0), src: hierarchy_path(limit: @maximum_left_gap, key: '-sidebar') %>
-  <%= tag.turbo_frame id: "al-hierarchy-#{@document.id}-right" do %>
-    <ul>
-      <li>
-        <%= link_to t('arclight.views.show.expand'), hierarchy_path(offset: @maximum_left_gap, key: '-right'), class: 'btn btn-secondary btn-sm' %>
-      </li>
-    </ul>
+  <% num_pages.each do |page| %>
+    <%= tag.turbo_frame id: "al-hierarchy-#{@document.id}-right", class: "al-hierarchy-more" do %>
+      <ul>
+        <li>
+          <%= link_to "\"#{@document.normalized_title.truncate(25, seperator: ' ')}\" Items #{more_text(page)}", hierarchy_path(offset: get_offset(page), limit: @maximum_left_gap, key: '-right'), class: 'btn btn-secondary btn-sm' %>
+        </li>
+      </ul>
+    <% end %>
   <% end %>
 <% else %>
   <%# there aren't enough to bother paginating, so load them all at once %>
