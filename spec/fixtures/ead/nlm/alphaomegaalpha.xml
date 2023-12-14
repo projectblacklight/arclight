@@ -474,6 +474,16 @@
           <did>
             <unittitle>Constitution and by-laws - drafts,</unittitle>
             <unitdate normal="1902/1904" type="inclusive">1902-1904</unitdate>
+            <physdesc>
+              Mixed Materials
+            </physdesc>
+            <physdesc>
+              <physfacet>Boxes and folders</physfacet>
+            </physdesc>
+            <physdesc altrender="whole">
+              <dimensions>various</dimensions>
+              <extent altrender="materialtype spaceoccupied">2 Linear Feet</extent>
+            </physdesc>
             <container id="aspace_19171bacef2f302c352195eaafca6b75" label="Mixed Materials"
               type="box">1</container>
             <container id="aspace_4cceb568b39913f2342e43dd3d54b772"

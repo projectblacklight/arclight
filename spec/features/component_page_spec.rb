@@ -83,6 +83,17 @@ RSpec.describe 'Component Page' do
       expect(page).to have_css('dd', text: /^These papers were maintained by the staff/)
     end
 
+    it 'shows configured component fields' do
+      expect(page).to have_css('dt', text: 'Extent')
+      expect(page).to have_css('dd', text: /^2 Linear Feet/)
+      expect(page).to have_css('dt', text: 'Physical description')
+      expect(page).to have_css('dd', text: /^Mixed Materials/)
+      expect(page).to have_css('dt', text: 'Dimensions')
+      expect(page).to have_css('dd', text: /^various/)
+      expect(page).to have_css('dt', text: 'Physical facet')
+      expect(page).to have_css('dd', text: /^Boxes and folders/)
+    end
+
     it 'multivalued notes are rendered as paragaphs' do
       within 'dd.blacklight-appraisal' do
         expect(page).to have_css('p', count: 2)
