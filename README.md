@@ -82,7 +82,7 @@ See the [CONTRIBUTORS](CONTRIBUTORS.md) file.
 
 ## Development
 
-ArcLight requires Solr to be running.  For development you can start this using `solr_wrapper` or you may choose to use Docker. Start Solr using Docker by doing `docker compose solr up`.
+ArcLight requires Solr to be running.  For development you can start this using `solr_wrapper` or you may choose to use Docker. Start Solr using Docker by doing `docker compose up solr`.
 
 ### Run the test suite
 
