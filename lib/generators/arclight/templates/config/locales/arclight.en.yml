@@ -21,6 +21,7 @@ en:
         physdesc: Physical description
         physfacet: Physical facet
         dimensions: Dimensions
+        indexes: Indexes
         descrules: Rules or conventions
 
         relatedmaterial: Related material

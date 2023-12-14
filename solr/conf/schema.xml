@@ -361,6 +361,7 @@
    <copyField source="custodhist_tesim" dest="text" />
    <copyField source="did_note_tesim" dest="text" />
    <copyField source="fileplan_tesim" dest="text" />
+   <copyField source="indexes_tesim" dest="text" />
    <copyField source="language_ssim" dest="text" />
    <copyField source="materialspec_tesim" dest="text" />
    <copyField source="note_tesim" dest="text" />

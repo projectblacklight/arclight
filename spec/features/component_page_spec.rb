@@ -92,6 +92,8 @@ RSpec.describe 'Component Page' do
       expect(page).to have_css('dd', text: /^various/)
       expect(page).to have_css('dt', text: 'Physical facet')
       expect(page).to have_css('dd', text: /^Boxes and folders/)
+      expect(page).to have_css('dt', text: 'Scope and content')
+      expect(page).to have_css('table thead tr th', text: 'GHI')
     end
 
     it 'multivalued notes are rendered as paragaphs' do
