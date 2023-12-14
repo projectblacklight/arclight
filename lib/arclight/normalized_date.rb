@@ -45,6 +45,5 @@ module Arclight
       result << "bulk #{bulk}" if bulk.present?
       result.compact.map(&:strip).join(', ')
     end
-
   end
 end
