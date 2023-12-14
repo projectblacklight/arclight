@@ -26,6 +26,7 @@ module Arclight
       Blacklight::Configuration.define_field_access :cite_field, Blacklight::Configuration::ShowField
       Blacklight::Configuration.define_field_access :contact_field, Blacklight::Configuration::ShowField
       Blacklight::Configuration.define_field_access :component_field, Blacklight::Configuration::ShowField
+      Blacklight::Configuration.define_field_access :component_related_field, Blacklight::Configuration::ShowField
       Blacklight::Configuration.define_field_access :component_indexed_terms_field, Blacklight::Configuration::ShowField
       Blacklight::Configuration.define_field_access :terms_field, Blacklight::Configuration::ShowField
       Blacklight::Configuration.define_field_access :component_terms_field, Blacklight::Configuration::ShowField

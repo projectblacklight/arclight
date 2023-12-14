@@ -1,0 +1,14 @@
+
+<% related_content = capture do %>
+    <%= render Arclight::MetadataSectionComponent.with_collection(section_names,
+                metadata_attr: { layout: Arclight::UpperMetadataLayoutComponent },
+                presenter: presenter) %>
+  <% end %>
+  
+  <% if related_content.present? %>
+    <div id="<%= t('arclight.views.show.sections.related_field').parameterize %>">
+      <h2 class="al-show-sub-heading"><%= t 'arclight.views.show.sections.related_field' %></h2>
+  
+      <%= related_content %>
+    </div>
+  <% end %>

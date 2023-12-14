@@ -38,6 +38,10 @@ module Arclight
       render (blacklight_config.show.access_component || Arclight::AccessComponent).new(presenter: presenter)
     end
 
+    def related
+      render (blacklight_config.show.related || Arclight::RelatedComponent).new(presenter: presenter)
+    end
+
     def toggle_sidebar
       button_tag(t('arclight.views.show.toggle_sidebar'),
                  type: :button,

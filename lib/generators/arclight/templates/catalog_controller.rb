@@ -77,6 +77,7 @@ class CatalogController < ApplicationController
     config.show.breadcrumb_component = Arclight::BreadcrumbsHierarchyComponent
     config.show.embed_component = Arclight::EmbedComponent
     config.show.access_component = Arclight::AccessComponent
+    config.show.related_component = Arclight::AccessComponent
     config.show.online_status_component = Arclight::OnlineStatusIndicatorComponent
     config.show.display_type_field = 'level_ssm'
     # config.show.thumbnail_field = 'thumbnail_path_ss'
@@ -106,6 +107,10 @@ class CatalogController < ApplicationController
       cite_field
       in_person_field
       contact_field
+    ]
+
+    config.show.component_related_items = %i[
+      component_related_field
     ]
 
     ##
@@ -300,9 +305,9 @@ class CatalogController < ApplicationController
     # Collection Show Page - Related Section
     config.add_related_field 'relatedmaterial', field: 'relatedmaterial_html_tesm', helper_method: :render_html_tags
     config.add_related_field 'separatedmaterial', field: 'separatedmaterial_html_tesm', helper_method: :render_html_tags
+    config.add_related_field 'originalsloc', field: 'originalsloc_html_tesm', helper_method: :render_html_tags
     config.add_related_field 'otherfindaid', field: 'otherfindaid_html_tesm', helper_method: :render_html_tags
     config.add_related_field 'altformavail', field: 'altformavail_html_tesm', helper_method: :render_html_tags
-    config.add_related_field 'originalsloc', field: 'originalsloc_html_tesm', helper_method: :render_html_tags
     config.add_related_field 'odd', field: 'odd_html_tesim', helper_method: :render_html_tags
 
     # Collection Show Page - Indexed Terms Section
@@ -372,6 +377,11 @@ class CatalogController < ApplicationController
       two_words_connector: '<br/>',
       last_word_connector: '<br/>'
     }
+
+    # Component Show Page - Related Section
+    config.add_component_related_field 'relatedmaterial', field: 'relatedmaterial_html_tesm', helper_method: :render_html_tags
+    config.add_component_related_field 'separatedmaterial', field: 'separatedmaterial_html_tesm', helper_method: :render_html_tags
+    config.add_component_related_field 'originalsloc', field: 'originalsloc_html_tesm', helper_method: :render_html_tags
 
     # =================
     # ACCESS TAB FIELDS
