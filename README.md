@@ -82,7 +82,7 @@ See the [CONTRIBUTORS](CONTRIBUTORS.md) file.
 
 ## Development
 
-ArcLight requires Solr to be running.  For development you can start this using `solr_wrapper` or you may choose to use Docker. Start Solr using Docker by doing `docker compose up`.
+ArcLight requires Solr to be running.  For development you can start this using `solr_wrapper` or you may choose to use Docker. Start Solr using Docker by doing `docker compose solr up`.
 
 ### Run the test suite
 
@@ -128,7 +128,7 @@ $  docker-compose -f docker-compose.yml up --build -d --force-recreate
 Either should bring up a dockerized solr and arclight running at ports 8983 and 3000, with the seed data indexed. This uses a mount which allows you to make changes in your IDE/text editor of choice and see them reflected in the running app without a restart.
 
 
-### Releasing
+## Releasing
 
 #### To release a new gem:
 
