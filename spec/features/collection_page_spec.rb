@@ -129,6 +129,9 @@ RSpec.describe 'Collection Page' do
 
         expect(page).to have_css('dt', text: 'Location of originals')
         expect(page).to have_css('dd', text: /^Something incredible is waiting/)
+
+        expect(page).to have_css('dt', text: 'Other descriptive data')
+        expect(page).to have_css('dd', text: /^Contact Information/)
       end
     end
 
