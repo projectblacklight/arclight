@@ -137,6 +137,7 @@ RSpec.describe 'Collection Page' do
         expect(page).to have_css('dt', text: 'Subjects')
         expect(page).to have_css('dt', text: 'Names')
         expect(page).to have_css('dt', text: 'Places')
+        expect(page).to have_css('dt', text: 'Indexes')
         expect(page).to have_css('dd', text: 'Societies')
         expect(page).to have_css('dd', text: 'Photographs')
         expect(page).to have_css('dd', text: 'Medicine')
@@ -144,6 +145,7 @@ RSpec.describe 'Collection Page' do
         expect(page).to have_css('dd', text: 'Root, William Webster, 1867-1932')
         expect(page).to have_css('dd', text: 'Bierring, Walter L. (Walter Lawrence), 1868-1961')
         expect(page).to have_css('dd', text: 'Mindanao Island (Philippines)')
+        expect(page).to have_css('td', text: 'ABC Something')
         expect(page).not_to have_css('dd', text: 'Higgins, L. Raymond')
       end
     end

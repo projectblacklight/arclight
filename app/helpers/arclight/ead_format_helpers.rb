@@ -23,6 +23,7 @@ module Arclight
             .scrub!(:strip).to_html
     end
 
+    # rubocop:disable Metrics/AbcSize
     def ead_to_html_scrubber
       Loofah::Scrubber.new do |node|
         format_render_attributes(node) if node.attr('render').present?
@@ -30,13 +31,17 @@ module Arclight
         convert_to_br(node) if CONVERT_TO_BR_TAG.include? node.name
         format_links(node) if %w[extptr extref extrefloc ptr ref].include? node.name
         format_lists(node) if %w[list chronlist].include? node.name
+        format_indexes(node) if node.name == 'index'
+        format_tables(node) if node.name == 'table'
         node
       end
     end
+    # rubocop:enable Metrics/AbcSize
 
     # Tags that should be converted to <span> tags because of formatting conflicts between XML and HTML
     CONVERT_TO_SPAN_TAGS = ['title'].freeze
-    # Tags that should be converted to <span> tags because of formatting conflicts between XML and HTML
+
+    # Tags that should be converted to HTML <br/> tags
     CONVERT_TO_BR_TAG = ['lb'].freeze
 
     def convert_to_span(node)
@@ -244,6 +249,61 @@ module Arclight
         event_node['class'] = 'chronlist-item-event'
       end
       multi_events.each { |event_node| event_node.name = 'div' }
+    end
+
+    # Format EAD <index> elements
+    def format_indexes(node)
+      index_head = node.at_css('head')
+      index_head&.name = 'h3'
+      index_head&.add_class('index-head')
+      index_head['id'] = ['index-', index_head.text].join.parameterize if index_head.present?
+      format_indexentries(node)
+      node.name = 'div'
+    end
+
+    # Grab all of the <indexentry> children as a nodeset, move them into
+    # a <table>, wrap each entry in a <tr> & each value in a <td>.
+    def format_indexentries(node)
+      indexentries = node.css('indexentry')
+      return if indexentries.blank?
+
+      indexentries.first.previous = '<table class="table indexentries" />'
+      indexentries.map do |i|
+        i.parent = node.at_css('table.table.indexentries')
+        i.wrap('<tr/>')
+        i.element_children.map { |c| c.wrap('<td/>') }
+        # Assuming two columns in an index, create a blank cell for entries
+        # with a missing value.
+        i.add_child('<td/>') if i.element_children.count == 1
+      end
+    end
+
+    # Format EAD <table> elements, converting <tgroup> to HTML <table>.
+    # Ignoring <colspec>, @colname, @colwidth complex rendering
+    # logic for now.
+    # rubocop:disable Metrics/AbcSize, Metrics/MethodLength
+    def format_tables(node)
+      node.remove_attribute('frame')
+      node.name = 'div' if node.css('tgroup').present?
+      format_table_head(node)
+      tgroups = node.css('tgroup')
+      tgroups&.map do |t|
+        t.name = 'table'
+        t.remove_attribute('cols')
+        t.add_class('table')
+        t.css('row').map { |r| r.name = 'tr' }
+        t.css('thead entry').map { |e| e.name = 'th' }
+        t.css('tbody entry').map { |e| e.name = 'td' }
+      end
+    end
+    # rubocop:enable Metrics/AbcSize, Metrics/MethodLength
+
+    def format_table_head(node)
+      table_head = node.at_css('head')
+      return if table_head.blank?
+
+      table_head.name = 'h3'
+      table_head.add_class('table-head')
     end
   end
 end

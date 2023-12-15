@@ -72,7 +72,6 @@ RSpec.describe Arclight::NormalizedDate do
     context 'no inclusive but bulk' do
       let(:unitdates) { %w[1963 1954-1990] }
       let(:unitdate_labels) { ['bulk', ''] }
-
       it 'does not know what to do' do
         expect(normalized_date).to eq 'bulk 1963, 1954-1990'
       end

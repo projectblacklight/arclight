@@ -425,5 +425,97 @@ RSpec.describe Arclight::EadFormatHelpers do
         end
       end
     end
+
+    describe 'indexes' do
+      describe 'basic index with name/ref pairs' do
+        it 'index -> table' do
+          content = helper.render_html_tags(value: [%(
+            <index>
+              <head>Alphabetical Listing By Client</head>
+              <p>Here's a brief note describing the index</p>
+              <indexentry>
+                <name>Absorbine Jr.</name>
+                <ref>1947 Feb. 17</ref>
+              </indexentry>
+              <indexentry>
+                <name>Action Gemeinsinn</name>
+                <ref>1962 Feb. 7</ref>
+              </indexentry>
+              <indexentry>
+                <name>Alexander Smith Inc.</name>
+                <ref>1952 Mar. 24</ref>
+              </indexentry>
+            </index>
+          )])
+          expect(content).to eq_ignoring_whitespace %(
+            <div>
+              <h3 class="index-head" id="index-alphabetical-listing-by-client">Alphabetical Listing By Client</h3>
+              <p>Here's a brief note describing the index</p>
+              <table class="table indexentries">
+                <tr>
+                 <td>Absorbine Jr.</td>
+                 <td>1947 Feb. 17</td>
+                </tr>
+                <tr>
+                  <td>Action Gemeinsinn</td>
+                  <td>1962 Feb. 7</td>
+                </tr>
+                <tr>
+                  <td>Alexander Smith Inc.</td>
+                  <td>1952 Mar. 24</td>
+                </tr>
+              </table>
+            </div>
+          )
+        end
+      end
+    end
+
+    describe 'tables' do
+      describe 'table with headers' do
+        it 'EAD table -> HTML table' do
+          content = helper.render_html_tags(value: [%(
+            <table frame="none">
+              <tgroup cols="3">
+                <thead>
+                  <row>
+                    <entry colname="1">Major Family Members</entry>
+                    <entry colname="2">Spouses</entry>
+                    <entry colname="3">Children</entry>
+                  </row>
+                </thead>
+                <tbody>
+                  <row>
+                    <entry colname="1">John Albemarle (1760-1806)</entry>
+                    <entry colname="2">Mary Frances Delaney (1769-1835)</entry>
+                    <entry colname="3">John Delaney Albemarle (1787-1848)</entry>
+                  </row>
+                </tbody>
+              </tgroup>
+            </table>
+          )])
+          expect(content).to eq_ignoring_whitespace %(
+            <div>
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th>Major Family Members</th>
+                    <th>Spouses</th>
+                    <th>Children</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>John Albemarle (1760-1806)</td>
+                    <td>Mary Frances Delaney (1769-1835)</td>
+                    <td>John Delaney Albemarle (1787-1848)</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          )
+        end
+      end
+    end
   end
 end
