@@ -107,10 +107,14 @@ to_field 'title_filing_ssi', extract_xpath('./did/unittitle'), first_only
 to_field 'title_ssm', extract_xpath('./did/unittitle')
 to_field 'title_tesim', extract_xpath('./did/unittitle')
 
-to_field 'unitdates_ssm', extract_xpath('/ead/archdesc/did/unitdate')
+to_field 'unitdates_ssm', extract_xpath('./did/unitdate')
 to_field 'unitdates_labels_ssm' do |record, accumulator|
-  record.xpath('/ead/archdesc/did/unitdate').each do |unitdate|
-    accumulator << unitdate.attribute('type')&.value
+  record.xpath('.//did/unitdate').each do |unitdate|
+    if unitdate.attribute('type')
+      accumulator << unitdate.attribute('type')&.value
+    else
+      accumulator << ""
+    end
   end
 end
 

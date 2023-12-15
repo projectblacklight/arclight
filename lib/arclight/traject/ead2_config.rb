@@ -83,7 +83,11 @@ to_field 'ead_ssi', extract_xpath('/ead/eadheader/eadid')
 to_field 'unitdates_ssm', extract_xpath('/ead/archdesc/did/unitdate')
 to_field 'unitdates_labels_ssm' do |record, accumulator|
   record.xpath('/ead/archdesc/did/unitdate').each do |unitdate|
-    accumulator << unitdate.attribute('type')&.value
+    if unitdate.attribute('type')
+      accumulator << unitdate.attribute('type')&.value
+    else
+      accumulator << ""
+    end
   end
 end
 

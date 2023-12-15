@@ -56,7 +56,9 @@
         <physfacet>Compact digital disc</physfacet>
         <extent altrender="materialtype spaceoccupied">3 CDs</extent>
       </physdesc>
+      <unitdate normal="1888">1888</unitdate>
       <unitdate normal="1894/1992" type="inclusive">1894-1992</unitdate>
+      <unitdate normal="1903/1962" type="bulk">1903-1962</unitdate>
       <langmaterial id="aspace_1cf405d4520ad390ab7b5532eab3ea00">Collection materials primarily in
           <language langcode="eng">English.</language></langmaterial>
       <abstract id="aspace_3dcd45a7a2d2d0a1568d71906a03a4c1">
@@ -392,6 +394,7 @@
           <unitid>MS C 271.I</unitid>
           <unitdate normal="1902/1976" type="inclusive">1902-1976</unitdate>
           <unitdate normal="1902/1976" type="bulk">1975-1976</unitdate>
+          <unitdate normal="1988">1988</unitdate>
         </did>
         <scopecontent id="aspace_00d4328c32ed5e54eac5c662aa45245a">
           <p>Administrative records include details materials directly related to the history and
