@@ -327,6 +327,9 @@ class CatalogController < ApplicationController
       last_word_connector: '<br/>'
     }
 
+    config.add_indexed_terms_field 'indexes', field: 'indexes_html_tesm',
+                                              helper_method: :render_html_tags
+
     # ==========================
     # COMPONENT SHOW PAGE FIELDS
     # ==========================
@@ -378,6 +381,9 @@ class CatalogController < ApplicationController
       two_words_connector: '<br/>',
       last_word_connector: '<br/>'
     }
+
+    config.add_component_indexed_terms_field 'indexes', field: 'indexes_html_tesm',
+                                              helper_method: :render_html_tags
 
     # =================
     # ACCESS TAB FIELDS

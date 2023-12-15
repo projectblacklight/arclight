@@ -226,6 +226,9 @@ to_field 'date_range_isim', extract_xpath('/ead/archdesc/did/unitdate/@normal', 
   accumulator.replace range.years
 end
 
+to_field 'indexes_html_tesm', extract_xpath('/ead/archdesc/index', to_text: false)
+to_field 'indexes_tesim', extract_xpath('/ead/archdesc/index')
+
 SEARCHABLE_NOTES_FIELDS.map do |selector|
   to_field "#{selector}_html_tesm", extract_xpath("/ead/archdesc/#{selector}/*[local-name()!='head']", to_text: false) do |_record, accumulator|
     accumulator.map!(&:to_html)

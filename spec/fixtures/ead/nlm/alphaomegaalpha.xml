@@ -385,6 +385,21 @@
       <persname source="mesh">Bierring, Walter L. (Walter Lawrence), 1868-1961</persname>
       <geogname source="lcsh">Mindanao Island (Philippines)</geogname>
     </controlaccess>
+    <index id="aspace_c42daf6e91923b8bee57622436d8f8a4">
+      <head>Alphabetical Listing of Test Titles</head>
+      <indexentry>
+        <title>ABC Something</title>
+        <ref>Box RN2</ref>
+      </indexentry>
+      <indexentry>
+        <title>B402 Something</title>
+        <ref>Box OV2 </ref>
+      </indexentry>
+      <indexentry>
+        <title>C200 Something</title>
+        <ref>Box DO14</ref>
+       </indexentry>
+    </index>
     <dsc>
       <c id="aspace_563a320bb37d24a9e1e6f7bf95b52671" level="series">
         <did>
@@ -501,6 +516,35 @@
             Office in the records storage facility until they were transferred, at his
             family's request in 1988.</p>
           </custodhist>
+          <scopecontent id="aspace_63fb9d2df5fb62ff01de34b0dd002155">
+            <p>Here is a table in a paragraph.</p>
+            <p>
+              <table frame="none">
+                <head>Test Table</head>
+                <tgroup cols="3">
+                  <thead>
+                    <row>
+                      <entry colname="1">ABC</entry>
+                      <entry colname="2">DEF</entry>
+                      <entry colname="3">GHI</entry>
+                    </row>
+                  </thead>
+                  <tbody>
+                    <row>
+                      <entry colname="1">123</entry>
+                      <entry colname="2">456</entry>
+                      <entry colname="3">789</entry>
+                    </row>
+                    <row>
+                      <entry colname="1">012</entry>
+                      <entry colname="2">345</entry>
+                      <entry colname="3">678</entry>
+                    </row>
+                  </tbody>
+                </tgroup>
+              </table>
+            </p>
+          </scopecontent>
         </c>
         <c id="aspace_a8b5c3a57013462581d0e807241fcf93" level="otherlevel">
           <did>
