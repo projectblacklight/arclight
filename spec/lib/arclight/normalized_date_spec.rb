@@ -6,7 +6,7 @@ RSpec.describe Arclight::NormalizedDate do
   subject(:normalized_date) { described_class.new(unitdates, unitdate_labels).to_s }
 
   let(:unitdates) { ['1905', '1927-2000', '1982-1995'] }
-  let(:unitdate_labels) { '', 'inclusive', 'bulk' }
+  let(:unitdate_labels) { ['', 'inclusive', 'bulk'] }
 
   context 'under normal conditions' do
     it 'joins dates' do
@@ -27,8 +27,8 @@ RSpec.describe Arclight::NormalizedDate do
     # NOTE: This test is the only place where the code that exercises this is routable
     # This has to be a multidimensional array, and the resulting XML nodes sent in are always flat
     context 'multiples' do
-      let(:unitdates) { [%w[1990-2000 2001-2002 2004 1990-2004]] }
-      let(:unitdate_labels) { [%w[inclusive inclusive INCLUSIVE bulk] }
+      let(:unitdates) { ['1990-2000', '2001-2002', '2004', '1990-2004'] }
+      let(:unitdate_labels) { ['inclusive', 'inclusive', 'INCLUSIVE', 'bulk'] }
 
       it 'uses compressed joined years' do
         expect(normalized_date).to eq '1990-2000, 2001-2002, 2004, bulk 1990-2004'
@@ -43,12 +43,12 @@ RSpec.describe Arclight::NormalizedDate do
       end
     end
 
-    context 'circa' do
+    context 'circa and mixed case' do
       let(:unitdates) { ['1990-2000', 'c.1995'] }
-      let(:unitdate_labels) { ['', 'bulk'] }
+      let(:unitdate_labels) { ['', 'BuLk'] }
 
       it 'do not normalized term "circa"' do
-        expect(normalized_date).to eq '1990-2000, bulk c.1995'
+        expect(normalized_date).to eq '1990-2000, BuLk c.1995'
       end
     end
 
@@ -83,7 +83,7 @@ RSpec.describe Arclight::NormalizedDate do
       let(:unitdate_labels) { nil }
 
       it 'does not know what to do' do
-        expect(normalized_date).to be_nil
+        expect(normalized_date).to eq ''
       end
     end
   end
