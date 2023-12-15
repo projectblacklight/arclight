@@ -598,41 +598,30 @@ RSpec.describe 'EAD 2 traject indexing' do
     end
   end
 
-  describe 'for documents with <acqinfo> elements' do
-    let(:fixture_path) do
-      Arclight::Engine.root.join('spec', 'fixtures', 'ead', 'nlm', 'alphaomegaalpha.xml')
-    end
-
-    it 'indexes the values as stored facetable strings and multiple displayable strings' do
-      expect(result).to include 'components'
-      expect(all_components).not_to be_empty
-      first_component = all_components.first
-
-      expect(first_component).to include 'acqinfo_ssim'
-      expect(first_component['acqinfo_ssim']).to contain_exactly(
-        'Donated by Alpha Omega Alpha.'
-      )
-
-      expect(first_component).to include 'acqinfo_ssim'
-      expect(first_component['acqinfo_ssim']).to contain_exactly(
-        'Donated by Alpha Omega Alpha.'
-      )
-    end
-
-    context 'when documents have <acqinfo> elements within <descgrp> elements' do
+  describe 'acqinfo for components' do
+    context 'when a component does not have its own <acqinfo> element' do
       let(:fixture_path) do
-        Arclight::Engine.root.join('spec', 'fixtures', 'ead', 'nlm', 'ncaids544-id-test.xml')
+        Arclight::Engine.root.join('spec', 'fixtures', 'ead', 'nlm', 'alphaomegaalpha.xml')
       end
 
-      it 'indexes the values as stored facetable strings and multiple displayable strings' do
+      it 'does not inherit acqinfo from top-level collection' do
         expect(result).to include 'components'
         expect(all_components).not_to be_empty
         first_component = all_components.first
 
-        expect(first_component).to include 'acqinfo_ssim'
-        expect(first_component['acqinfo_ssim']).to equal_array_ignoring_whitespace(
-          ["Gift, John L. Parascandola, PHS Historian's Office, 3/1/1994, Acc. #812. Gift, Donald Goldman, Acc. #2005-21."]
-        )
+        expect(first_component).not_to include 'acqinfo_ssim'
+      end
+    end
+
+    context 'when a component has its own <acqinfo> element' do
+      let(:fixture_path) do
+        Arclight::Engine.root.join('spec', 'fixtures', 'ead', 'nlm', 'ncaids544-id-test.xml')
+      end
+
+      it 'indexes the values as stored facetable strings' do
+        expect(result).to include 'components'
+        expect(all_components).not_to be_empty
+        first_component = all_components.first
 
         expect(first_component).to include 'acqinfo_ssim'
         expect(first_component['acqinfo_ssim']).to equal_array_ignoring_whitespace(

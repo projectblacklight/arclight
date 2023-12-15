@@ -288,8 +288,6 @@ to_field 'access_subjects_ssm' do |_record, accumulator, context|
   accumulator.concat(context.output_hash.fetch('access_subjects_ssim', []))
 end
 
-to_field 'acqinfo_ssim', extract_xpath('/ead/archdesc/acqinfo/*[local-name()!="head"]')
-to_field 'acqinfo_ssim', extract_xpath('/ead/archdesc/descgrp/acqinfo/*[local-name()!="head"]')
 to_field 'acqinfo_ssim', extract_xpath('./acqinfo/*[local-name()!="head"]')
 to_field 'acqinfo_ssim', extract_xpath('./descgrp/acqinfo/*[local-name()!="head"]')
 
