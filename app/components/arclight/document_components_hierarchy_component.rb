@@ -30,17 +30,6 @@ module Arclight
       page * @maximum_left_gap
     end
 
-    def more_text(page)
-      offset = get_offset(page)
-      last_item = offset + (@maximum_left_gap - 1)
-
-      if page == num_pages.last
-        last_item = @document.number_of_children
-      end
-
-      "#{offset + 1} to #{last_item}"
-    end
-
     def hierarchy_path(**kwargs)
       helpers.hierarchy_solr_document_path(id: @document.id, hierarchy: true, nest_path: params[:nest_path], **kwargs)
     end
