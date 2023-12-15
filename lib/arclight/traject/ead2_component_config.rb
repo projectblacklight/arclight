@@ -107,15 +107,17 @@ to_field 'title_filing_ssi', extract_xpath('./did/unittitle'), first_only
 to_field 'title_ssm', extract_xpath('./did/unittitle')
 to_field 'title_tesim', extract_xpath('./did/unittitle')
 
-to_field 'unitdate_bulk_ssim', extract_xpath('./did/unitdate[@type="bulk"]')
-to_field 'unitdate_inclusive_ssm', extract_xpath('./did/unitdate[@type="inclusive"]')
-to_field 'unitdate_other_ssim', extract_xpath('./did/unitdate[not(@type)]')
+to_field 'unitdates_ssm', extract_xpath('/ead/archdesc/did/unitdate')
+to_field 'unitdates_labels_ssm' do |record, accumulator|
+  record.xpath('/ead/archdesc/did/unitdate').each do |unitdate|
+    accumulator << unitdate.attribute('type')&.value
+  end
+end
 
 to_field 'normalized_date_ssm' do |_record, accumulator, context|
   accumulator << settings['date_normalizer'].constantize.new(
-    context.output_hash['unitdate_inclusive_ssm'],
-    context.output_hash['unitdate_bulk_ssim'],
-    context.output_hash['unitdate_other_ssim']
+    context.output_hash['unitdates_ssm'],
+    context.output_hash['unitdates_labels_ssm']
   ).to_s
 end
 
