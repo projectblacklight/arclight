@@ -39,16 +39,11 @@ module Arclight
 
     # @see http://www2.archivists.org/standards/DACS/part_I/chapter_2/4_date for rules
     def normalize
-      if inclusive.present?
-        result = inclusive.to_s
-        result << ", bulk #{bulk}" if bulk.present?
-      elsif other.present?
-        result = other.to_s
-      else
-        result = nil
-      end
-
-      result&.strip
+      result = []
+      result << inclusive if inclusive.present?
+      result << other if other.present?
+      result << "bulk #{bulk}" if bulk.present?
+      result.compact.map(&:strip).join(', ')
     end
   end
 end
