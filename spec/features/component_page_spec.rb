@@ -122,6 +122,15 @@ RSpec.describe 'Component Page' do
     end
   end
 
+  describe 'odd' do
+    let(:doc_id) { 'umich-bhl-851981_aspace_533f0fb03170d86408e0b1dde0d92fa7' }
+
+    it 'displays odd' do
+      expect(page).to have_css('dt', text: 'Other descriptive data')
+      expect(page).to have_css('dd', text: /^WJR and WMAQ/)
+    end
+  end
+
   describe 'collection context', js: true do
     it 'has ancestor component with badge having children count' do
       within '#collection-context' do

@@ -306,7 +306,7 @@ class CatalogController < ApplicationController
     config.add_related_field 'otherfindaid', field: 'otherfindaid_html_tesm', helper_method: :render_html_tags
     config.add_related_field 'altformavail', field: 'altformavail_html_tesm', helper_method: :render_html_tags
     config.add_related_field 'originalsloc', field: 'originalsloc_html_tesm', helper_method: :render_html_tags
-    config.add_related_field 'odd', field: 'odd_html_tesim', helper_method: :render_html_tags
+    config.add_related_field 'odd', field: 'odd_html_tesm', helper_method: :render_html_tags
 
     # Collection Show Page - Indexed Terms Section
     config.add_indexed_terms_field 'access_subjects', field: 'access_subjects_ssim', link_to_facet: true, separator_options: {
@@ -361,7 +361,7 @@ class CatalogController < ApplicationController
     config.add_component_field 'fileplan', field: 'fileplan_html_tesim', helper_method: :render_html_tags
     config.add_component_field 'altformavail', field: 'altformavail_html_tesim', helper_method: :render_html_tags
     config.add_component_field 'otherfindaid', field: 'otherfindaid_html_tesm', helper_method: :render_html_tags
-    config.add_component_field 'odd', field: 'odd_html_tesim', helper_method: :render_html_tags
+    config.add_component_field 'odd', field: 'odd_html_tesm', helper_method: :render_html_tags
     config.add_component_field 'relatedmaterial', field: 'relatedmaterial_html_tesm', helper_method: :render_html_tags
     config.add_component_field 'separatedmaterial', field: 'separatedmaterial_html_tesm', helper_method: :render_html_tags
     config.add_component_field 'originalsloc', field: 'originalsloc_html_tesm', helper_method: :render_html_tags
