@@ -229,6 +229,14 @@ end
 to_field 'indexes_html_tesm', extract_xpath('/ead/archdesc/index', to_text: false)
 to_field 'indexes_tesim', extract_xpath('/ead/archdesc/index')
 
+# Skip over elaborate bibliography text and only index list of child bibref elements.
+# The bibref elements can be in many places for collection level; ignore if in subordinate components.
+to_field 'bibref_tesm', extract_xpath('/ead//bibliography//bibref[not(ancestor::dsc)]') do |_record, accumulator|
+  accumulator.map! do |b|
+    b&.strip
+  end.flatten!
+end
+
 SEARCHABLE_NOTES_FIELDS.map do |selector|
   to_field "#{selector}_html_tesm", extract_xpath("/ead/archdesc/#{selector}/*[local-name()!='head']", to_text: false) do |_record, accumulator|
     accumulator.map!(&:to_html)
