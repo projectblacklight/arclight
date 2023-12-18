@@ -48,6 +48,7 @@ DID_SEARCHABLE_NOTES_FIELDS = %w[
   abstract
   materialspec
   physloc
+  note
 ].freeze
 
 settings do
