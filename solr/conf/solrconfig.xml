@@ -122,13 +122,13 @@
          name_teim^20
          place_teim^20
          subject_teim^^5
-         id^2
-         ead_ssi^2
+         id
+         ead_ssi
          ref_ssm^2
          unitid_ssm^2
          container_teim^2
          parent_unittitles_tesim^2
-         text^2
+         text
        </str>
 
        <str name="qf_container">
@@ -144,8 +144,8 @@
          unitid_ssm
        </str>
        <str name="pf_identifier">
-         id^2
-         ead_ssi^2
+         id
+         ead_ssi
          ref_ssm^2
          unitid_ssm^2
        </str>
