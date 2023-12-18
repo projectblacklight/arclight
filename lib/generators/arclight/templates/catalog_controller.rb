@@ -276,7 +276,7 @@ class CatalogController < ApplicationController
     # ===========================
 
     # Collection Show Page - Summary Section
-    config.add_summary_field 'creators', field: 'creators_ssim', link_to_facet: true
+    config.add_summary_field 'creators', field: 'creator_ssim', link_to_facet: true
     config.add_summary_field 'abstract', field: 'abstract_html_tesm', helper_method: :render_html_tags
     config.add_summary_field 'extent', field: 'extent_ssm'
     config.add_summary_field 'language', field: 'language_ssim'
@@ -342,6 +342,7 @@ class CatalogController < ApplicationController
     }, if: lambda { |_context, _field_config, document|
       document.containers.present?
     }
+    config.add_component_field 'creators', field: 'creator_ssim', link_to_facet: true
     config.add_component_field 'abstract', field: 'abstract_html_tesm', helper_method: :render_html_tags
     config.add_component_field 'extent', field: 'extent_ssm'
     config.add_component_field 'scopecontent', field: 'scopecontent_html_tesm', helper_method: :render_html_tags

@@ -202,9 +202,7 @@ to_field 'dimensions_tesim', extract_xpath('./did/physdesc/dimensions')
 to_field 'indexes_html_tesm', extract_xpath('./index', to_text: false)
 to_field 'indexes_tesim', extract_xpath('./index')
 
-to_field 'creator_ssm', extract_xpath('./did/origination')
 to_field 'creator_ssim', extract_xpath('./did/origination')
-to_field 'creators_ssim', extract_xpath('./did/origination')
 to_field 'creator_sort' do |record, accumulator|
   accumulator << record.xpath('./did/origination').map(&:text).join(', ')
 end
