@@ -1,6 +1,8 @@
 <%= render(Blacklight::SearchBarComponent.new(
       **@kwargs,
-      params: @params.merge(f: (@params[:f] || {}).except(:collection)))) do |c| %>
+      params: @params.merge(f: (@params[:f] || {}).except(:collection)),
+                            q: @q,
+                            search_field: @search_field)) do |c| %>
 
   <% c.with_before_input_group do %>
     <div class="input-group within-collection-dropdown">

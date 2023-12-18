@@ -9,6 +9,11 @@ RSpec.describe 'Search results' do
       expect(page).to have_css '.index_title', text: /A brief account/
     end
 
+    it 'retains the search query in the search box' do
+      visit search_catalog_path q: 'papers', search_field: 'all_fields'
+      expect(page).to have_css 'input#q[value="papers"]'
+    end
+
     it 'renders the expected metadata for a collection' do
       visit search_catalog_path q: '', search_field: 'all_fields'
 

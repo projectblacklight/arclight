@@ -129,4 +129,11 @@ RSpec.describe 'Field-based search results' do
       end
     end
   end
+
+  describe 'search box scope retention' do
+    it 'retains the selected field on the search results page' do
+      visit search_catalog_path q: 'root', search_field: 'name'
+      expect(page).to have_select 'search_field', selected: 'Name'
+    end
+  end
 end
