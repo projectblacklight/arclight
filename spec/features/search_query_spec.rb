@@ -24,6 +24,24 @@ RSpec.describe 'Search queries' do
         expect(page).to have_css '.index_title', text: /Amendments to articles of incorporation and revised constitution/
       end
     end
+
+    context 'when two terms match two docs but proximity differs (pf test)' do
+      it 'counts the doc where the terms are in close proximity as more relevant' do
+        visit search_catalog_path q: 'splendiferous escapades', search_field: 'all_fields'
+        within('.document-position-1') do
+          expect(page).to have_css '.al-document-abstract-or-scope',
+                                   text: /This will test the splendiferous escapades phrase/
+        end
+      end
+
+      it 'counts the doc where the terms are are far apart as less relevant' do
+        visit search_catalog_path q: 'splendiferous escapades', search_field: 'all_fields'
+        within('.document-position-2') do
+          expect(page).to have_css '.al-document-abstract-or-scope',
+                                   text: /This splendiferous test will help/
+        end
+      end
+    end
   end
 
   describe 'default all fields search for' do
