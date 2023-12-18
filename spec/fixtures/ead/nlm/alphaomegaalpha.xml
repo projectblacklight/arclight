@@ -680,6 +680,11 @@
             <container id="aspace_b60ff470b57285b4f198c8a7edcf2f61"
               parent="aspace_1579b968f44866f4066a9387e4446ce1" type="folder">15</container>
           </did>
+          <scopecontent id="aspace_7482a2ddff80393b0c12a926f9bd6ee1">
+            <head>Scope and Contents Phrase Query (pf) test 1</head>
+            <p>This will test the splendiferous escapades phrase to help ensure that relevance
+              is impacted by the proximity of search terms.</p>
+          </scopecontent>
         </c>
         <c id="aspace_d908ca557e8b2f6a4d13002616b086c1" level="otherlevel">
           <did>
@@ -688,6 +693,11 @@
             <container id="aspace_6d4dfa7db9a186576147009f3d5bd9ee" label="Mixed Materials"
               type="folder">1</container>
           </did>
+          <scopecontent id="aspace_98ae59df3f802993a01476bc133bae04">
+            <head>Scope and Contents Phrase Query (pf) test 2</head>
+            <p>This splendiferous test will help to ensure that the relevance
+              is impacted by the proximity of search term phrase escapades.</p>
+          </scopecontent>
         </c>
         <c id="aspace_a68ee517caa6d765f01eb923c177af2b" level="otherlevel">
           <did>
