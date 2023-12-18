@@ -48,6 +48,7 @@ DID_SEARCHABLE_NOTES_FIELDS = %w[
   abstract
   materialspec
   physloc
+  note
 ].freeze
 
 settings do
@@ -240,7 +241,6 @@ end
 DID_SEARCHABLE_NOTES_FIELDS.map do |selector|
   to_field "#{selector}_html_tesm", extract_xpath("/ead/archdesc/did/#{selector}", to_text: false)
 end
-to_field 'did_note_ssm', extract_xpath('ead/archdesc/did/note')
 
 NAME_ELEMENTS.map do |selector|
   to_field 'names_coll_ssim', extract_xpath("/ead/archdesc/controlaccess/#{selector}")
