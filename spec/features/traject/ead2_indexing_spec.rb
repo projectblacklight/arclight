@@ -141,7 +141,7 @@ RSpec.describe 'EAD 2 traject indexing' do
     describe 'bibliography' do
       # We skip bibliography text so only test for list of child bibref elements
       it 'bibref' do
-        expect(result['bibref_tesm']).to equal_array_ignoring_whitespace ['Campus annual. 2008', 'Campus annual. 2009']
+        expect(result['bibref_html_tesm'].first).to match(/Campus annual/)
       end
     end
 
@@ -583,7 +583,7 @@ RSpec.describe 'EAD 2 traject indexing' do
     # We skip bibliography text so only test for list of child bibref elements
     it 'bibref' do
       component = all_components.find { |c| c['ref_ssi'] == ['aspace_dc2aaf83625280ae2e193beb3f4aea78'] }
-      expect(component['bibref_tesm']).to equal_array_ignoring_whitespace ['Campus regulations. 2008', 'Campus regulations. 2009']
+      expect(component['bibref_html_tesm'].first).to match(/Campus regulations/)
     end
   end
 

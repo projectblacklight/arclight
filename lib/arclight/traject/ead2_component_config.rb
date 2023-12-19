@@ -301,11 +301,7 @@ to_field 'containers_ssim' do |record, accumulator|
 end
 
 # Skip over elaborate bibliography text and only index list of child bibref elements
-to_field 'bibref_tesm', extract_xpath('.//bibliography//bibref') do |_record, accumulator|
-  accumulator.map! do |b|
-    b&.strip
-  end.flatten!
-end
+to_field 'bibref_html_tesm', extract_xpath('.//bibliography//bibref', to_text: false)
 
 SEARCHABLE_NOTES_FIELDS.map do |selector|
   to_field "#{selector}_html_tesm", extract_xpath("./#{selector}/*[local-name()!='head']", to_text: false)

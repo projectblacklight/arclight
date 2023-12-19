@@ -112,7 +112,7 @@ RSpec.describe 'Collection Page' do
         expect(page).to have_css('dd', text: /^Finding aid prepared using Rules for Archival Description/)
 
         expect(page).to have_css('dt', text: 'Bibliography')
-        expect(page).to have_css('dd', text: /^Medical society annual. 2008/)
+        expect(page).to have_css('dd', text: /Medical society annual. 2008/)
       end
     end
 
