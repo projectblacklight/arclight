@@ -86,6 +86,8 @@ RSpec.describe 'Component Page' do
     it 'shows configured component fields' do
       expect(page).to have_css('dt', text: 'Extent')
       expect(page).to have_css('dd', text: /^2 Linear Feet/)
+      expect(page).to have_css('dt', text: 'Language')
+      expect(page).to have_css('dd', text: 'English')
       expect(page).to have_css('dt', text: 'Physical description')
       expect(page).to have_css('dd', text: /^Mixed Materials/)
       expect(page).to have_css('dt', text: 'Dimensions')
