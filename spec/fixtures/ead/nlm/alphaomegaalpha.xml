@@ -490,6 +490,9 @@
           <did>
             <unittitle>Constitution and by-laws - drafts,</unittitle>
             <unitdate normal="1902/1904" type="inclusive">1902-1904</unitdate>
+            <langmaterial>
+              <language langcode="eng">English</language>
+            </langmaterial>
             <physdesc>
               Mixed Materials
             </physdesc>

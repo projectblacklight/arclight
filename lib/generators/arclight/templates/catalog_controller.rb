@@ -347,6 +347,7 @@ class CatalogController < ApplicationController
     config.add_component_field 'abstract', field: 'abstract_html_tesm', helper_method: :render_html_tags
     config.add_component_field 'extent', field: 'extent_ssm'
     config.add_component_field 'scopecontent', field: 'scopecontent_html_tesm', helper_method: :render_html_tags
+    config.add_component_field 'language', field: 'language_ssim'
     config.add_component_field 'acqinfo', field: 'acqinfo_ssim', helper_method: :render_html_tags
     config.add_component_field 'bioghist', field: 'bioghist_html_tesm', helper_method: :render_html_tags
     config.add_component_field 'appraisal', field: 'appraisal_html_tesm', helper_method: :render_html_tags
@@ -368,7 +369,7 @@ class CatalogController < ApplicationController
     config.add_component_field 'separatedmaterial', field: 'separatedmaterial_html_tesm', helper_method: :render_html_tags
     config.add_component_field 'originalsloc', field: 'originalsloc_html_tesm', helper_method: :render_html_tags
     config.add_component_field 'note', field: 'note_html_tesm', helper_method: :render_html_tags
-  
+
     # Component Show Page - Indexed Terms Section
     config.add_component_indexed_terms_field 'access_subjects', field: 'access_subjects_ssim', link_to_facet: true, separator_options: {
       words_connector: '<br/>',
