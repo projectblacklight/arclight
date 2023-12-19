@@ -29,6 +29,15 @@
     </profiledesc>
   </eadheader>
   <archdesc level="collection">
+    <bibliography>
+      <head>Selected Bibliography</head>
+      <bibref>
+        <title render="italic">Medical society annual</title>. 2008
+      </bibref>
+      <bibref>
+        <title render="italic">Medical society annual</title>. 2009
+      </bibref>
+    </bibliography>
     <did>
       <langmaterial>
         <language langcode="eng">English</language>
@@ -487,6 +496,15 @@
           </did>
         </c>
         <c id="aspace_dc2aaf83625280ae2e193beb3f4aea78" level="otherlevel">
+          <bibliography>
+            <head>Selected Bibliography</head>
+            <bibref>
+              <title render="italic">Campus regulations</title>. 2008
+            </bibref>
+            <bibref>
+              <title render="italic">Campus regulations</title>. 2009
+            </bibref>
+          </bibliography>
           <did>
             <unittitle>Constitution and by-laws - drafts,</unittitle>
             <unitdate normal="1902/1904" type="inclusive">1902-1904</unitdate>
