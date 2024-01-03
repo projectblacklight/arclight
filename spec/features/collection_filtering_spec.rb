@@ -21,7 +21,7 @@ RSpec.describe 'Collection filtering' do
 
       click_button 'Search'
 
-      expect(page).to have_css('#documents .document', count: 10) # has results
+      expect(page).to have_css('.al-document-listings .document', count: 10) # has results
       expect(page).not_to have_css('.constraint-value .filter-value', text: 'Alpha Omega Alpha Archives, 1894-1992')
     end
   end
@@ -38,7 +38,7 @@ RSpec.describe 'Collection filtering' do
 
   context 'when on a record view' do
     it 'has the a select input with the "this collection" option selected' do
-      visit solr_document_path('lc0100aspace_327a75c226d44aa1a769edb4d2f13c6e')
+      visit solr_document_path('lc0100_aspace_327a75c226d44aa1a769edb4d2f13c6e')
 
       within 'form.search-query-form' do
         expect(page).to have_select('Search', selected: 'this collection')
@@ -46,24 +46,24 @@ RSpec.describe 'Collection filtering' do
     end
 
     it 'searches within the collection context by default' do
-      visit solr_document_path('aoa271aspace_dba76dab6f750f31aa5fc73e5402e71d')
+      visit solr_document_path('aoa271_aspace_dba76dab6f750f31aa5fc73e5402e71d')
 
       fill_in 'q', with: 'File'
       click_button 'Search'
 
       expect(page).to have_css('.constraint-value .filter-value', text: 'Alpha Omega Alpha Archives, 1894-1992')
-      expect(page).to have_css('#documents .document', count: 1) # has results
+      expect(page).to have_css('.al-document-listings .document', count: 2) # has results
     end
 
     it 'allows the user to choose to search all collections' do
-      visit solr_document_path('aoa271aspace_dba76dab6f750f31aa5fc73e5402e71d')
+      visit solr_document_path('aoa271_aspace_dba76dab6f750f31aa5fc73e5402e71d')
 
       select 'all collections', from: 'Search within'
       fill_in 'q', with: 'File'
       click_button 'Search'
 
       expect(page).not_to have_css('.constraint-value .filter-value', text: 'Alpha Omega Alpha Archives, 1894-1992')
-      expect(page).to have_css('#documents .document', count: 10) # has results
+      expect(page).to have_css('.al-document-listings .document', count: 10) # has results
     end
   end
 end

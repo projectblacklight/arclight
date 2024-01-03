@@ -29,6 +29,7 @@ settings do
   provide 'title_normalizer', 'Arclight::NormalizedTitle'
   provide 'reader_class_name', 'Arclight::Traject::NokogiriNamespacelessReader'
   provide 'logger', Logger.new($stderr)
+  provide 'component_identifier_format', '%<root_id>s_%<ref_id>s'
 end
 
 NAME_ELEMENTS = %w[corpname famname name persname].freeze
@@ -60,6 +61,7 @@ DID_SEARCHABLE_NOTES_FIELDS = %w[
   abstract
   materialspec
   physloc
+  note
 ].freeze
 
 # ==================
@@ -67,7 +69,9 @@ DID_SEARCHABLE_NOTES_FIELDS = %w[
 #
 # NOTE: All fields should be stored in Solr
 # ==================
-to_field 'ref_ssi' do |record, accumulator, _context|
+to_field 'ref_ssi' do |record, accumulator, context|
+  next if context.output_hash['ref_ssi']
+
   accumulator << if record.attribute('id').blank?
                    strategy = Arclight::MissingIdStrategy.selected
                    hexdigest = strategy.new(record).to_hexdigest
@@ -90,10 +94,14 @@ to_field 'ref_ssm' do |_record, accumulator, context|
 end
 
 to_field 'id' do |_record, accumulator, context|
-  accumulator << [
-    settings[:root].output_hash['id'],
-    context.output_hash['ref_ssi']
-  ].join
+  next if context.output_hash['id']
+
+  data = {
+    root_id: settings[:root].output_hash['id']&.first,
+    ref_id: context.output_hash['ref_ssi']&.first
+  }
+
+  accumulator << (settings[:component_identifier_format] % data)
 end
 
 to_field 'title_filing_ssi', extract_xpath('./did/unittitle'), first_only
@@ -131,6 +139,11 @@ to_field 'parent_ssi' do |_record, accumulator, _context|
   accumulator.concat settings[:parent].output_hash['ref_ssi'] || settings[:parent].output_hash['id']
 end
 
+to_field 'parent_ids_ssim' do |_record, accumulator, _context|
+  accumulator.concat(settings[:parent].output_hash['parent_ids_ssim'] || [])
+  accumulator.concat settings[:parent].output_hash['id']
+end
+
 to_field 'parent_unittitles_ssm' do |_rec, accumulator, _context|
   accumulator.concat(settings[:parent].output_hash['parent_unittitles_ssm'] || [])
   accumulator.concat settings[:parent].output_hash['normalized_title_ssm'] || []
@@ -155,12 +168,42 @@ to_field 'collection_ssim' do |_record, accumulator, _context|
   accumulator.concat settings[:root].output_hash['normalized_title_ssm']
 end
 
-to_field 'extent_ssm', extract_xpath('./did/physdesc/extent')
-to_field 'extent_tesim', extract_xpath('./did/physdesc/extent')
+# This accumulates direct text from a physdesc, ignoring child elements handled elsewhere
+to_field 'physdesc_tesim', extract_xpath('./did/physdesc', to_text: false) do |_record, accumulator|
+  accumulator.map! do |element|
+    physdesc = []
+    element.children.map do |child|
+      next if child.instance_of?(Nokogiri::XML::Element)
 
-to_field 'creator_ssm', extract_xpath('./did/origination')
+      physdesc << child.text&.strip unless child.text&.strip&.empty?
+    end.flatten
+    physdesc.join(' ') unless physdesc.empty?
+  end
+end
+
+to_field 'extent_ssm' do |record, accumulator|
+  physdescs = record.xpath('./did/physdesc')
+  extents_per_physdesc = physdescs.map do |physdesc|
+    extents = physdesc.xpath('./extent').map { |e| e.text.strip }
+    # Join extents within the same physdesc with an empty string
+    extents.join(' ') unless extents.empty?
+  end
+
+  # Add each physdesc separately to the accumulator
+  accumulator.concat(extents_per_physdesc)
+end
+
+to_field 'extent_tesim' do |_record, accumulator, context|
+  accumulator.concat context.output_hash['extent_ssm'] || []
+end
+
+to_field 'physfacet_tesim', extract_xpath('./did/physdesc/physfacet')
+to_field 'dimensions_tesim', extract_xpath('./did/physdesc/dimensions')
+
+to_field 'indexes_html_tesm', extract_xpath('./index', to_text: false)
+to_field 'indexes_tesim', extract_xpath('./index')
+
 to_field 'creator_ssim', extract_xpath('./did/origination')
-to_field 'creators_ssim', extract_xpath('./did/origination')
 to_field 'creator_sort' do |record, accumulator|
   accumulator << record.xpath('./did/origination').map(&:text).join(', ')
 end
@@ -214,7 +257,7 @@ to_field 'digital_objects_ssm', extract_xpath('./dao|./did/dao', to_text: false)
   end
 end
 
-to_field 'date_range_ssim', extract_xpath('./did/unitdate/@normal', to_text: false) do |_record, accumulator|
+to_field 'date_range_isim', extract_xpath('./did/unitdate/@normal', to_text: false) do |_record, accumulator|
   range = Arclight::YearRange.new
   next range.years if accumulator.blank?
 
@@ -244,8 +287,6 @@ to_field 'access_subjects_ssm' do |_record, accumulator, context|
   accumulator.concat(context.output_hash.fetch('access_subjects_ssim', []))
 end
 
-to_field 'acqinfo_ssim', extract_xpath('/ead/archdesc/acqinfo/*[local-name()!="head"]')
-to_field 'acqinfo_ssim', extract_xpath('/ead/archdesc/descgrp/acqinfo/*[local-name()!="head"]')
 to_field 'acqinfo_ssim', extract_xpath('./acqinfo/*[local-name()!="head"]')
 to_field 'acqinfo_ssim', extract_xpath('./descgrp/acqinfo/*[local-name()!="head"]')
 
@@ -264,7 +305,6 @@ end
 DID_SEARCHABLE_NOTES_FIELDS.map do |selector|
   to_field "#{selector}_html_tesm", extract_xpath("./did/#{selector}", to_text: false)
 end
-to_field 'did_note_ssm', extract_xpath('./did/note')
 
 # =============================
 # Each component child document
@@ -280,6 +320,7 @@ to_field 'components' do |record, accumulator, context|
       provide :counter, context.settings[:counter]
       provide :depth, context.settings[:depth].to_i + 1
       provide :component_traject_config, context.settings[:component_traject_config]
+      provide :component_identifier_format, context.settings[:component_identifier_format]
     end
 
     i.load_config_file(context.settings[:component_traject_config])

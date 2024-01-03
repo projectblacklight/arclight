@@ -4,14 +4,14 @@ require 'spec_helper'
 
 RSpec.describe 'Grouped search results' do
   it 'displays collection group information' do
-    visit search_catalog_path q: 'alpha omega', group: 'true'
+    visit search_catalog_path q: 'student life', group: 'true'
     within '.al-grouped-title-bar' do
-      expect(page).to have_css 'h3 a', text: /Alpha/
-      expect(page).to have_css '.al-document-abstract-or-scope', text: /founded in 1902/
-      expect(page).to have_css '.badge', text: '15.0 linear feet (36 boxes + oversize folder)'
+      expect(page).to have_css 'h3 a', text: /photograph album/
+      expect(page).to have_css '.al-document-abstract-or-scope', text: /track meets/
+      expect(page).to have_css('.al-document-extent.badge', count: 3)
     end
     within '.grouped-documents' do
-      expect(page).to have_css 'article', count: 3
+      expect(page).to have_css 'article', count: 2
     end
   end
 
@@ -41,7 +41,7 @@ RSpec.describe 'Grouped search results' do
     expect(page).to have_css '.al-grouped-more', text: /Top 3 results/
     expect(page).to have_css(
       '.al-grouped-more a[href*="/catalog?f%5Bcollection%5D%5B%5D=Alpha+Omega+Alpha+Archives%2C+1894-1992"]',
-      text: 'view all 6'
+      text: 'view all 39'
     )
   end
 
@@ -52,7 +52,7 @@ RSpec.describe 'Grouped search results' do
       within '.al-grouped-title-bar' do
         expect(page).to have_css 'h3 a', text: /Alpha/
         expect(page).not_to have_css '.al-document-abstract-or-scope', text: /founded in 1902/
-        expect(page).to have_css '.badge', text: '15.0 linear feet (36 boxes + oversize folder)'
+        expect(page).not_to have_css('.badge')
       end
     end
   end

@@ -29,7 +29,7 @@ module Arclight
       yield build_repository_link
 
       @document.parents.each do |parent|
-        yield tag.li(class: 'breadcrumb-item') { link_to(parent.label, solr_document_path(parent.global_id)) }
+        yield tag.li(class: 'breadcrumb-item') { link_to(parent.label, solr_document_path(parent.id)) }
       end
     end
 

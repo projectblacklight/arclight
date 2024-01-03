@@ -48,14 +48,17 @@ DID_SEARCHABLE_NOTES_FIELDS = %w[
   abstract
   materialspec
   physloc
+  note
 ].freeze
 
 settings do
+  provide 'component_traject_config', File.join(__dir__, 'ead2_component_config.rb')
+  provide 'date_normalizer', 'Arclight::NormalizedDate'
+  provide 'title_normalizer', 'Arclight::NormalizedTitle'
   provide 'reader_class_name', 'Arclight::Traject::NokogiriNamespacelessReader'
   provide 'solr_writer.commit_on_close', 'true'
   provide 'repository', ENV.fetch('REPOSITORY_ID', nil)
   provide 'logger', Logger.new($stderr)
-  provide 'component_traject_config', File.join(__dir__, 'ead2_component_config.rb')
 end
 
 each_record do |_record, context|
@@ -100,22 +103,18 @@ end
 to_field 'unitid_ssm', extract_xpath('/ead/archdesc/did/unitid')
 to_field 'unitid_tesim', extract_xpath('/ead/archdesc/did/unitid')
 
-to_field 'normalized_title_ssm' do |_record, accumulator, context|
-  dates = Arclight::NormalizedDate.new(
+to_field 'normalized_date_ssm' do |_record, accumulator, context|
+  accumulator << settings['date_normalizer'].constantize.new(
     context.output_hash['unitdate_inclusive_ssm'],
     context.output_hash['unitdate_bulk_ssim'],
     context.output_hash['unitdate_other_ssim']
   ).to_s
-  title = context.output_hash['title_ssm'].first
-  accumulator << Arclight::NormalizedTitle.new(title, dates).to_s
 end
 
-to_field 'normalized_date_ssm' do |_record, accumulator, context|
-  accumulator << Arclight::NormalizedDate.new(
-    context.output_hash['unitdate_inclusive_ssm'],
-    context.output_hash['unitdate_bulk_ssim'],
-    context.output_hash['unitdate_other_ssim']
-  ).to_s
+to_field 'normalized_title_ssm' do |_record, accumulator, context|
+  title = context.output_hash['title_ssm']&.first
+  date = context.output_hash['normalized_date_ssm']&.first
+  accumulator << settings['title_normalizer'].constantize.new(title, date).to_s
 end
 
 to_field 'collection_title_tesim' do |_record, accumulator, context|
@@ -185,11 +184,41 @@ to_field 'digital_objects_ssm', extract_xpath('/ead/archdesc/did/dao|/ead/archde
   end
 end
 
-to_field 'extent_ssm', extract_xpath('/ead/archdesc/did/physdesc/extent')
-to_field 'extent_tesim', extract_xpath('/ead/archdesc/did/physdesc/extent')
+# This accumulates direct text from a physdesc, ignoring child elements handled elsewhere
+to_field 'physdesc_tesim', extract_xpath('/ead/archdesc/did/physdesc', to_text: false) do |_record, accumulator|
+  accumulator.map! do |element|
+    physdesc = []
+    element.children.map do |child|
+      next if child.instance_of?(Nokogiri::XML::Element)
+
+      physdesc << child.text&.strip unless child.text&.strip&.empty?
+    end.flatten
+    physdesc.join(' ') unless physdesc.empty?
+  end
+end
+
+to_field 'extent_ssm' do |record, accumulator|
+  physdescs = record.xpath('/ead/archdesc/did/physdesc')
+  extents_per_physdesc = physdescs.map do |physdesc|
+    extents = physdesc.xpath('./extent').map { |e| e.text.strip }
+    # Join extents within the same physdesc with an empty string
+    extents.join(' ') unless extents.empty?
+  end
+
+  # Add each physdesc separately to the accumulator
+  accumulator.concat(extents_per_physdesc)
+end
+
+to_field 'extent_tesim' do |_record, accumulator, context|
+  accumulator.concat context.output_hash['extent_ssm'] || []
+end
+
+to_field 'physfacet_tesim', extract_xpath('/ead/archdesc/did/physdesc/physfacet')
+to_field 'dimensions_tesim', extract_xpath('/ead/archdesc/did/physdesc/dimensions')
+
 to_field 'genreform_ssim', extract_xpath('/ead/archdesc/controlaccess/genreform')
 
-to_field 'date_range_ssim', extract_xpath('/ead/archdesc/did/unitdate/@normal', to_text: false) do |_record, accumulator|
+to_field 'date_range_isim', extract_xpath('/ead/archdesc/did/unitdate/@normal', to_text: false) do |_record, accumulator|
   range = Arclight::YearRange.new
   next range.years if accumulator.blank?
 
@@ -197,6 +226,9 @@ to_field 'date_range_ssim', extract_xpath('/ead/archdesc/did/unitdate/@normal', 
   range << range.parse_ranges(ranges)
   accumulator.replace range.years
 end
+
+to_field 'indexes_html_tesm', extract_xpath('/ead/archdesc/index', to_text: false)
+to_field 'indexes_tesim', extract_xpath('/ead/archdesc/index')
 
 SEARCHABLE_NOTES_FIELDS.map do |selector|
   to_field "#{selector}_html_tesm", extract_xpath("/ead/archdesc/#{selector}/*[local-name()!='head']", to_text: false) do |_record, accumulator|

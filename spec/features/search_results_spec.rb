@@ -9,6 +9,11 @@ RSpec.describe 'Search results' do
       expect(page).to have_css '.index_title', text: /A brief account/
     end
 
+    it 'retains the search query in the search box' do
+      visit search_catalog_path q: 'papers', search_field: 'all_fields'
+      expect(page).to have_css 'input#q[value="papers"]'
+    end
+
     it 'renders the expected metadata for a collection' do
       visit search_catalog_path q: '', search_field: 'all_fields'
 
@@ -87,7 +92,7 @@ RSpec.describe 'Search results' do
           expect(page).to have_css('li .facet-label', text: 'Other', visible: :hidden) # "otherlevel" but missing alt val
         end
 
-        within('.blacklight-creator') do
+        within('.blacklight-creators') do
           expect(page).to have_css('h3 button', text: 'Creator')
           expect(page).to have_css('li .facet-label', text: 'Alpha Omega Alpha', visible: :hidden)
           expect(page).to have_css('li .facet-label', text: 'Stanford University', visible: :hidden)
@@ -104,14 +109,14 @@ RSpec.describe 'Search results' do
           expect(page).to have_css('li .facet-label', text: 'National Library of Medicine. History of Medicine Division', visible: :hidden)
         end
 
-        within('.blacklight-place') do
-          expect(page).to have_css('h3 button', text: 'Place')
+        within('.blacklight-places') do
+          expect(page).to have_css('h3 button', text: 'Places')
           expect(page).to have_css('li .facet-label', text: 'Mindanao Island (Philippines)', visible: :hidden)
           expect(page).to have_css('li .facet-label', text: 'Yosemite National Park (Calif.)', visible: :hidden)
         end
 
-        within('.blacklight-subject') do
-          expect(page).to have_css('h3 button', text: 'Subject')
+        within('.blacklight-access_subjects') do
+          expect(page).to have_css('h3 button', text: 'Subjects')
           expect(page).to have_css('li .facet-label', text: 'Slides.', visible: :hidden)
           expect(page).to have_css('li .facet-label', text: 'Fraternizing', visible: :hidden)
         end

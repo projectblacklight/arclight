@@ -18,6 +18,10 @@ en:
         accruals: Accruals
         phystech: Physical / technical requirements
         physloc: Physical location
+        physdesc: Physical description
+        physfacet: Physical facet
+        dimensions: Dimensions
+        indexes: Indexes
         descrules: Rules or conventions
 
         relatedmaterial: Related material
@@ -25,6 +29,11 @@ en:
         otherfindaid: Other finding aids
         altformavail: Alternative form available
         originalsloc: Location of originals
+        materialspec: Material specific details
+        fileplan: File plan
+        odd: Other descriptive data
+        note: Note
+        did_note: Note
 
         access_subjects: Subjects
         names_coll: Names

@@ -77,11 +77,25 @@
                 </corpname>
             </origination>
             <unitid>A0011</unitid>
-            <physdesc altrender="whole">
-                <extent altrender="materialtype spaceoccupied">1.25 Linear
-                    Feet
-                </extent>
+            <physdesc altrender="part">
+                Photographic album
+            </physdesc>
+            <physdesc altrender="part">
+                Single bound volume
+            </physdesc>
+            <physdesc altrender="part">
+                <physfacet>Printed material</physfacet>
+                <extent altrender="materialtype spaceoccupied">1.25 Linear Feet</extent>
                 <extent altrender="carrier">(1 volume)</extent>
+            </physdesc>
+            <physdesc altrender="part">
+                <dimensions>20 x 20 in.</dimensions>
+                <extent altrender="materialtype spaceoccupied">1 document case</extent>
+            </physdesc>
+            <physdesc altrender="part">
+                <dimensions>7.5 x 5.5 in.</dimensions>
+                <physfacet>Digital Video Disc</physfacet>
+                <extent altrender="materialtype spaceoccupied">16 DVDRs</extent>
             </physdesc>
             <unitdate normal="1900/1906" type="inclusive">circa 1900-1906
             </unitdate>
@@ -133,6 +147,9 @@
                 here: http://purl.stanford.edu/kc844kt2526
             </p>
         </altformavail>
+        <note>
+          <p>For more information, please contact us.</p>
+        </note>
         <controlaccess>
             <genreform source="aat">Photoprints.</genreform>
             <geogname source="lcsh">Yosemite National Park (Calif.)

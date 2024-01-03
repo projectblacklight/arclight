@@ -18,7 +18,7 @@
   <% end %>
 <% elsif paginate? %>
   <%# render the first N documents, and let the user expand the remaining if desired %>
-  <%= helpers.turbo_frame_tag "al-hierarchy-#{@document.id}", loading: ('lazy' unless @target_index >= 0), src: hierarchy_path(limit: @maximum_left_gap) %>
+  <%= helpers.turbo_frame_tag "al-hierarchy-#{@document.id}-sidebar", loading: ('lazy' unless @target_index >= 0), src: hierarchy_path(limit: @maximum_left_gap, key: '-sidebar') %>
   <%= tag.turbo_frame id: "al-hierarchy-#{@document.id}-right" do %>
     <ul>
       <li>
@@ -28,5 +28,5 @@
   <% end %>
 <% else %>
   <%# there aren't enough to bother paginating, so load them all at once %>
-  <%= helpers.turbo_frame_tag "al-hierarchy-#{@document.id}", loading: ('lazy' unless @target_index >= 0), src: hierarchy_path %>
+  <%= helpers.turbo_frame_tag "al-hierarchy-#{@document.id}-sidebar", loading: ('lazy' unless @target_index >= 0), src: hierarchy_path(key: '-sidebar') %>
 <% end %>

@@ -1,0 +1,9 @@
+// Original style comes from https://github.com/twbs/bootstrap/blob/v5.3.2/scss/_dropdown.scss#L184
+// via https://github.com/projectblacklight/blacklight/blob/v8.1.0/app/assets/stylesheets/blacklight/_search_form.scss#L25
+.input-group > .search-autocomplete-wrapper {
+  ul {
+    li {
+      white-space: normal;
+    }
+  }
+}

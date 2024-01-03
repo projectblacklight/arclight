@@ -25,7 +25,7 @@ module Arclight
     end
 
     def collection_name
-      @collection_name ||= Array(@params.dig(:f, :collection)).first ||
+      @collection_name ||= Array(@params.dig(:f, :collection)).reject(&:empty?).first ||
                            helpers.current_context_document&.collection_name
     end
   end

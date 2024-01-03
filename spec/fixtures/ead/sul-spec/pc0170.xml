@@ -104,6 +104,7 @@
           <physdesc altrender="whole">
             <extent altrender="materialtype spaceoccupied">27534 computer file(s) (tiff)</extent>
           </physdesc>
+          <materialspec>Some images are transparencies designed for use with an overhead projector.</materialspec>
           <unitdate normal="1978/2003" type="inclusive">1978-2003</unitdate>
         </did>
         <c02 audience="internal" id="aspace_6a6648be46e57d220d1f4f6d07316570" level="subseries">
@@ -115,6 +116,22 @@
             <head>Conditions Governing Access</head>
             <p>Restricted 60 years from date of creation.</p>
           </accessrestrict>
+          <fileplan>
+            <list type="ordered">
+                <defitem>
+                    <label>1</label>
+                    <item>Creative Services</item>
+                </defitem>
+                <defitem>
+                    <label>2</label>
+                    <item>University Graphics</item>
+                </defitem>
+                <defitem>
+                    <label>3</label>
+                    <item>Digital Media Team</item>
+                </defitem>
+            </list>
+          </fileplan>
         </c02>
       </c01>
       <c01 audience="internal" id="aspace_3ae9806cb62aaa689044200960f0dc3c" level="series">

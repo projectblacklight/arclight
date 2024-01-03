@@ -16,7 +16,7 @@ RSpec.describe 'Many component EAD' do
       within '#collection-context' do
         click_link 'View'
         click_link 'Expand'
-        within '#lc0100aspace_327a75c226d44aa1a769edb4d2f13c6e-collapsible-hierarchy' do
+        within '#collapsible-hierarchy-lc0100_aspace_327a75c226d44aa1a769edb4d2f13c6e' do
           expect(page).to have_css 'li.al-collection-context', count: 202
         end
       end

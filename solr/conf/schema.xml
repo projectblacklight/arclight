@@ -338,6 +338,7 @@
    <copyField source="places_ssim" dest="place_teim"/>
    <copyField source="names_ssim" dest="name_teim"/>
    <copyField source="access_subjects_ssim" dest="subject_teim"/>
+   <copyField source="containers_ssim" dest="container_teim" />
 
    <!-- The catch all `text` field -->
    <!-- grab the fielded searches -->
@@ -345,9 +346,11 @@
    <copyField source="places_ssim" dest="text" />
    <copyField source="names_ssim" dest="text" />
    <copyField source="access_subjects_ssim" dest="text" />
+   <copyField source="containers_ssim" dest="text" />
+
    <!-- grab the searchable notes -->
    <copyField source="abstract_tesim" dest="text" />
-   <copyField source="accessrestricct_tesim" dest="text" />
+   <copyField source="accessrestrict_tesim" dest="text" />
    <copyField source="accruals_tesim" dest="text" />
    <copyField source="acqinfo_tesim" dest="text" />
    <copyField source="altformavail_tesim" dest="text" />
@@ -358,10 +361,13 @@
    <copyField source="custodhist_tesim" dest="text" />
    <copyField source="did_note_tesim" dest="text" />
    <copyField source="fileplan_tesim" dest="text" />
+   <copyField source="indexes_tesim" dest="text" />
+   <copyField source="language_ssim" dest="text" />
    <copyField source="materialspec_tesim" dest="text" />
    <copyField source="note_tesim" dest="text" />
    <copyField source="odd_tesim" dest="text" />
    <copyField source="originalsloc_tesim" dest="text" />
+   <copyField source="parent_unittitles_tesim" dest="text" />
    <copyField source="physdesc_tesim" dest="text" />
    <copyField source="physloc_tesim" dest="text" />
    <copyField source="phystech_tesim" dest="text" />

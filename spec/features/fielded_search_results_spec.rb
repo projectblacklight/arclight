@@ -76,8 +76,8 @@ RSpec.describe 'Field-based search results' do
       end
 
       it 'matches titles with a boost for multiple hits' do
-        visit search_catalog_path q: 'alpha omega alpha archives', search_field: 'keyword'
-        expect(page).to have_css '.index_title', count: 6
+        visit search_catalog_path q: 'alpha omega alpha', search_field: 'keyword'
+        expect(page).to have_css '.index_title', count: 10
         within('.document-position-1') do
           expect(page).to have_css '.index_title', text: /Alpha Omega Alpha Archives, 1894-1992/
         end
@@ -113,6 +113,27 @@ RSpec.describe 'Field-based search results' do
       within('.document-position-2') do
         expect(page).to have_css '.index_title', text: /Dr. Root and L. Raymond Higgins/
       end
+    end
+
+    it '#container' do
+      visit search_catalog_path q: '"folder 12"', search_field: 'container'
+      within('.document-position-1') do
+        expect(page).to have_css '.index_title', text: /Amendments to articles of incorporation/
+      end
+    end
+
+    it '#identifer' do
+      visit search_catalog_path q: 'aoa271', search_field: 'identifier'
+      within('.document-position-1') do
+        expect(page).to have_css '.index_title', text: /Alpha Omega Alpha Archives/
+      end
+    end
+  end
+
+  describe 'search box scope retention' do
+    it 'retains the selected field on the search results page' do
+      visit search_catalog_path q: 'root', search_field: 'name'
+      expect(page).to have_select 'search_field', selected: 'Name'
     end
   end
 end

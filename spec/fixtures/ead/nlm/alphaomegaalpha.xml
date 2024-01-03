@@ -41,9 +41,20 @@
         <corpname source="ingest">Alpha Omega Alpha</corpname>
       </origination>
       <unitid>MS C 271</unitid>
-      <physdesc altrender="whole">
+      <physdesc>
+        Boxes and folders
+      </physdesc>
+      <physdesc>
+        Compact discs
+      </physdesc>
+      <physdesc altrender="part">
         <extent altrender="materialtype spaceoccupied">15.0 linear feet (36 boxes + oversize
           folder)</extent>
+      </physdesc>
+      <physdesc altrender="part">
+        <dimensions>7.5 x 5.5 in.</dimensions>
+        <physfacet>Compact digital disc</physfacet>
+        <extent altrender="materialtype spaceoccupied">3 CDs</extent>
       </physdesc>
       <unitdate normal="1894/1992" type="inclusive">1894-1992</unitdate>
       <langmaterial id="aspace_1cf405d4520ad390ab7b5532eab3ea00">Collection materials primarily in
@@ -374,6 +385,21 @@
       <persname source="mesh">Bierring, Walter L. (Walter Lawrence), 1868-1961</persname>
       <geogname source="lcsh">Mindanao Island (Philippines)</geogname>
     </controlaccess>
+    <index id="aspace_c42daf6e91923b8bee57622436d8f8a4">
+      <head>Alphabetical Listing of Test Titles</head>
+      <indexentry>
+        <title>ABC Something</title>
+        <ref>Box RN2</ref>
+      </indexentry>
+      <indexentry>
+        <title>B402 Something</title>
+        <ref>Box OV2 </ref>
+      </indexentry>
+      <indexentry>
+        <title>C200 Something</title>
+        <ref>Box DO14</ref>
+       </indexentry>
+    </index>
     <dsc>
       <c id="aspace_563a320bb37d24a9e1e6f7bf95b52671" level="series">
         <did>
@@ -387,6 +413,12 @@
             operation of Alpha Omega Alpha. Not all records are necessarily official documents
             but provide important background context.</p>
         </scopecontent>
+        <bioghist id="aspace_ff0f536406ce214f5u38e1f7c798d76e">
+          <head>Historical Note</head>
+          <p>
+            The Society started keeping consistent adminstrative records in 1975, the same year that E. L. Doctorow published <emph render="italic">Ragtime</emph>.
+          </p>
+        </bioghist>
         <accessrestrict id="aspace_7bbec2cdc1e6e0cb7b2ff1acb7c9e364">
           <head>Conditions Governing Access</head>
           <p>RESTRICTED: Access to these folders requires prior written approval. To request access,
@@ -400,7 +432,8 @@
             </origination>
             <unittitle>"A brief account of the origin of the Alpha Omega Alpha Honorary Fraternity"
               - William W. Root,</unittitle>
-            <unitdate>n.d.</unitdate>
+            <unitdate>ca. 1967</unitdate>
+            <unitdate type="inclusive">n.d.</unitdate>
             <container id="aspace_d258aae2bcdc020db8152ebcd05b648f" label="Mixed Materials"
               type="box">1</container>
             <container id="aspace_8a0450988fafd6cee4c334fe4811c392"
@@ -457,6 +490,19 @@
           <did>
             <unittitle>Constitution and by-laws - drafts,</unittitle>
             <unitdate normal="1902/1904" type="inclusive">1902-1904</unitdate>
+            <langmaterial>
+              <language langcode="eng">English</language>
+            </langmaterial>
+            <physdesc>
+              Mixed Materials
+            </physdesc>
+            <physdesc>
+              <physfacet>Boxes and folders</physfacet>
+            </physdesc>
+            <physdesc altrender="whole">
+              <dimensions>various</dimensions>
+              <extent altrender="materialtype spaceoccupied">2 Linear Feet</extent>
+            </physdesc>
             <container id="aspace_19171bacef2f302c352195eaafca6b75" label="Mixed Materials"
               type="box">1</container>
             <container id="aspace_4cceb568b39913f2342e43dd3d54b772"
@@ -473,6 +519,35 @@
             Office in the records storage facility until they were transferred, at his
             family's request in 1988.</p>
           </custodhist>
+          <scopecontent id="aspace_63fb9d2df5fb62ff01de34b0dd002155">
+            <p>Here is a table in a paragraph.</p>
+            <p>
+              <table frame="none">
+                <head>Test Table</head>
+                <tgroup cols="3">
+                  <thead>
+                    <row>
+                      <entry colname="1">ABC</entry>
+                      <entry colname="2">DEF</entry>
+                      <entry colname="3">GHI</entry>
+                    </row>
+                  </thead>
+                  <tbody>
+                    <row>
+                      <entry colname="1">123</entry>
+                      <entry colname="2">456</entry>
+                      <entry colname="3">789</entry>
+                    </row>
+                    <row>
+                      <entry colname="1">012</entry>
+                      <entry colname="2">345</entry>
+                      <entry colname="3">678</entry>
+                    </row>
+                  </tbody>
+                </tgroup>
+              </table>
+            </p>
+          </scopecontent>
         </c>
         <c id="aspace_a8b5c3a57013462581d0e807241fcf93" level="otherlevel">
           <did>
@@ -516,6 +591,24 @@
           </did>
         </c>
         <c id="aspace_0d7174f0081ee8fd43f08872cfd7adc3" level="otherlevel">
+          <originalsloc>
+            <p>File contains photocopies of original still held by the donor.</p>
+          </originalsloc>
+          <separatedmaterial>
+            <p>Photographs and sound recordings have been transferred to the appropriate
+            custodial divisions of the Library where they are identified as part of these papers.
+            Among the sound recordings are the following broadcasts:</p>
+            <list>Example broadcast</list>
+          </separatedmaterial>
+          <separatedmaterial>
+            <p>Other papers of Alpha Omega, which relate chiefly to his early years
+            and public service in California, are held by the California State Archives in
+            Sacramento.</p>
+          </separatedmaterial>
+          <relatedmaterial>
+            <p>Records relating to the Alpha Omega Commission are held in the National
+            Archives and Records Administration.</p>
+          </relatedmaterial>
           <did>
             <unittitle>Review of constitution and suggestions,</unittitle>
             <unitdate>n.d.</unitdate>
@@ -590,6 +683,11 @@
             <container id="aspace_b60ff470b57285b4f198c8a7edcf2f61"
               parent="aspace_1579b968f44866f4066a9387e4446ce1" type="folder">15</container>
           </did>
+          <scopecontent id="aspace_7482a2ddff80393b0c12a926f9bd6ee1">
+            <head>Scope and Contents Phrase Query (pf) test 1</head>
+            <p>This will test the splendiferous escapades phrase to help ensure that relevance
+              is impacted by the proximity of search terms.</p>
+          </scopecontent>
         </c>
         <c id="aspace_d908ca557e8b2f6a4d13002616b086c1" level="otherlevel">
           <did>
@@ -598,6 +696,11 @@
             <container id="aspace_6d4dfa7db9a186576147009f3d5bd9ee" label="Mixed Materials"
               type="folder">1</container>
           </did>
+          <scopecontent id="aspace_98ae59df3f802993a01476bc133bae04">
+            <head>Scope and Contents Phrase Query (pf) test 2</head>
+            <p>This splendiferous test will help to ensure that the relevance
+              is impacted by the proximity of search term phrase escapades.</p>
+          </scopecontent>
         </c>
         <c id="aspace_a68ee517caa6d765f01eb923c177af2b" level="otherlevel">
           <did>
@@ -715,11 +818,22 @@
         <did>
           <unittitle>Series II: Membership,</unittitle>
           <unitid>MS C 271.II</unitid>
-          <physdesc altrender="whole"><extent altrender="materialtype spaceoccupied">1.5 Linear
-              Feet</extent></physdesc>
+          <physdesc>
+            Cards and sheets of various sizes
+          </physdesc>
+          <physdesc>
+            <physfacet>Informational cards</physfacet>
+          </physdesc>
+          <physdesc altrender="whole">
+            <dimensions>various</dimensions>
+            <extent altrender="materialtype spaceoccupied">1.5 Linear Feet</extent>
+          </physdesc>
           <unitdate normal="1902/1973" type="inclusive">1902-1973</unitdate>
           <abstract id="aspace_e806089c6553f2132b727ead99b47a70">Contains a mixture of membership
             cards and membership rosters.</abstract>
+          <note>
+              <p>For more information, please contact us.</p>
+          </note>
         </did>
       </c>
       <c id="aspace_d5765d98e333f83b6278c00e9a81f31f" level="series">

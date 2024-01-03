@@ -3,7 +3,7 @@
 require 'spec_helper'
 
 RSpec.describe 'Component Page' do
-  let(:doc_id) { 'aoa271aspace_843e8f9f22bac69872d0802d6fffbb04' }
+  let(:doc_id) { 'aoa271_aspace_843e8f9f22bac69872d0802d6fffbb04' }
   let(:download_config) do
     ActiveSupport::HashWithIndifferentAccess.new(
       default: {
@@ -52,7 +52,7 @@ RSpec.describe 'Component Page' do
   end
 
   describe 'Indexed Terms subjects section' do
-    let(:doc_id) { 'aoa271aspace_01daa89087641f7fc9dbd7a10d3f2da9' }
+    let(:doc_id) { 'aoa271_aspace_01daa89087641f7fc9dbd7a10d3f2da9' }
 
     it 'includes subjects dt subheading text' do
       expect(page).to have_css('dt.blacklight-access_subjects', text: 'Subjects:')
@@ -70,7 +70,7 @@ RSpec.describe 'Component Page' do
   end
 
   describe 'metadata' do
-    let(:doc_id) { 'aoa271aspace_dc2aaf83625280ae2e193beb3f4aea78' }
+    let(:doc_id) { 'aoa271_aspace_dc2aaf83625280ae2e193beb3f4aea78' }
 
     it 'uses our rules for displaying containers' do
       expect(page).to have_css('dd', text: 'Box 1, Folder 4-5')
@@ -83,10 +83,53 @@ RSpec.describe 'Component Page' do
       expect(page).to have_css('dd', text: /^These papers were maintained by the staff/)
     end
 
+    it 'shows configured component fields' do
+      expect(page).to have_css('dt', text: 'Extent')
+      expect(page).to have_css('dd', text: /^2 Linear Feet/)
+      expect(page).to have_css('dt', text: 'Language')
+      expect(page).to have_css('dd', text: 'English')
+      expect(page).to have_css('dt', text: 'Physical description')
+      expect(page).to have_css('dd', text: /^Mixed Materials/)
+      expect(page).to have_css('dt', text: 'Dimensions')
+      expect(page).to have_css('dd', text: /^various/)
+      expect(page).to have_css('dt', text: 'Physical facet')
+      expect(page).to have_css('dd', text: /^Boxes and folders/)
+      expect(page).to have_css('dt', text: 'Scope and content')
+      expect(page).to have_css('table thead tr th', text: 'GHI')
+    end
+
     it 'multivalued notes are rendered as paragaphs' do
       within 'dd.blacklight-appraisal' do
         expect(page).to have_css('p', count: 2)
       end
+    end
+  end
+
+  describe 'other materials fields' do
+    let(:doc_id) { 'aoa271_aspace_0d7174f0081ee8fd43f08872cfd7adc3' }
+
+    it 'displays relatedmaterial' do
+      expect(page).to have_css('dt', text: 'Related material')
+      expect(page).to have_css('dd', text: /^Records relating to the Alpha Omega Commission are held/)
+    end
+
+    it 'displays separatedmaterial' do
+      expect(page).to have_css('dt', text: 'Separated material')
+      expect(page).to have_css('dd', text: /^Photographs and sound recordings have been transferred/)
+    end
+
+    it 'displays originalsloc' do
+      expect(page).to have_css('dt', text: 'Location of originals')
+      expect(page).to have_css('dd', text: /^File contains photocopies of original still held by the donor/)
+    end
+  end
+
+  describe 'odd' do
+    let(:doc_id) { 'umich-bhl-851981_aspace_533f0fb03170d86408e0b1dde0d92fa7' }
+
+    it 'displays odd' do
+      expect(page).to have_css('dt', text: 'Other descriptive data')
+      expect(page).to have_css('dd', text: /^WJR and WMAQ/)
     end
   end
 
@@ -143,7 +186,7 @@ RSpec.describe 'Component Page' do
     end
 
     context 'duplicate titles' do
-      let(:doc_id) { 'lc0100aspace_c5ef89d4ae68bb77e7c641f3edb3f1c8' }
+      let(:doc_id) { 'lc0100_aspace_c5ef89d4ae68bb77e7c641f3edb3f1c8' }
 
       it 'does not highlight duplicate titles' do
         within '#collection-context .al-hierarchy-highlight' do
@@ -153,7 +196,7 @@ RSpec.describe 'Component Page' do
     end
 
     context 'when there are more than ten previous sibling documents for the current document' do
-      let(:doc_id) { 'lc0100aspace_ca60f0c03c4638b89e0348c3c6f7b50e' }
+      let(:doc_id) { 'lc0100_aspace_ca60f0c03c4638b89e0348c3c6f7b50e' }
 
       it 'hides all but the first sibling document items' do
         within '#collection-context' do
@@ -178,18 +221,18 @@ RSpec.describe 'Component Page' do
     end
 
     context 'when on a deeply nested component' do
-      let(:doc_id) { 'aoa271aspace_6ea193f778e553ca9ea0d00a3e5a1891' }
+      let(:doc_id) { 'aoa271_aspace_6ea193f778e553ca9ea0d00a3e5a1891' }
 
       it 'enables expanding nodes outside of own ancestor tree' do
         within '#collection-context' do
-          find('#aoa271aspace_01daa89087641f7fc9dbd7a10d3f2da9 .al-toggle-view-children').click
+          find('#aoa271_aspace_01daa89087641f7fc9dbd7a10d3f2da9-hierarchy-item .al-toggle-view-children').click
           expect(page).to have_css '.document-title-heading', text: 'Miscellaneous 1999'
         end
       end
 
       it 'includes ancestor\'s preceding sibling when clicking ancestor\'s Expand button' do
         within '#collection-context' do
-          within('#aoa271aspace_563a320bb37d24a9e1e6f7bf95b52671-collapsible-hierarchy') do
+          within('#collapsible-hierarchy-aoa271_aspace_563a320bb37d24a9e1e6f7bf95b52671') do
             first('.btn-secondary', text: 'Expand').click
           end
           expect(page).to have_css '.document-title-heading', text: 'Officers and directors - lists, 1961, n.d.'
@@ -198,11 +241,11 @@ RSpec.describe 'Component Page' do
     end
 
     context 'when on a component with an eadid with . normalized to -' do
-      let(:doc_id) { 'pc0170-xmlaspace_ref1_z0j' }
+      let(:doc_id) { 'pc0170-xml_aspace_ref1_z0j' }
 
       it 'expands child nodes when clicked' do
         within '#collection-context' do
-          find('#pc0170-xmlaspace_ref5_edi .al-toggle-view-children').click
+          find('#pc0170-xml_aspace_ref5_edi-hierarchy-item .al-toggle-view-children').click
           expect(page).to have_css '.document-title-heading', text: 'Restricted images, 1979-2000'
         end
       end
@@ -237,7 +280,7 @@ RSpec.describe 'Component Page' do
   end
 
   context 'content with file downloads', js: true do
-    let(:doc_id) { 'a0011-xmlaspace_ref6_lx4' }
+    let(:doc_id) { 'a0011-xml_aspace_ref6_lx4' }
 
     it 'renders links to the files for download' do
       within '.al-show-actions-box-downloads-container' do
