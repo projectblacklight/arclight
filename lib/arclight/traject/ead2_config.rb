@@ -89,21 +89,18 @@ to_field 'id', extract_xpath('/ead/eadheader/eadid'), strip, gsub('.', '-')
 #end
 
 
-#to_field 'ead_ssi' do |_record, accumulator, context|
-#  eadid = _record.xpath('/ead/eadheader/eadid').first.content.strip.gsub('.', '-')
-#  accumulator << [
-#    settings['repository'],
-#    "_",
-#    eadid.to_s
-#  ].join
-#end
-
-
-
 to_field 'title_filing_ssi', extract_xpath('/ead/eadheader/filedesc/titlestmt/titleproper[@type="filing"]')
 to_field 'title_ssm', extract_xpath('/ead/archdesc/did/unittitle')
 to_field 'title_tesim', extract_xpath('/ead/archdesc/did/unittitle')
-to_field 'ead_ssi', extract_xpath('/ead/eadheader/eadid')
+
+to_field 'ead_ssi' do |_record, accumulator, context|
+  eadid = _record.xpath('/ead/eadheader/eadid').first.content.strip.gsub('.', '-')
+  accumulator << [
+    settings['repository'],
+    "_",
+    eadid.to_s
+  ].join
+end
 
 to_field 'unitdate_ssm', extract_xpath('/ead/archdesc/did/unitdate')
 to_field 'unitdate_bulk_ssim', extract_xpath('/ead/archdesc/did/unitdate[@type="bulk"]')
