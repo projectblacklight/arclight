@@ -1,7 +1,7 @@
 sample:
   name: 'My Repository'
   visit_note: 'Containers are stored offsite and must be pages 2 to 3 days in advance'
-  description: 'Lorem ipsum'
+  description_html: 'Lorem ipsum'
   contact_html: |
     <div class="al-repository-contact-phone">123-456-7890</div>
     <div class="al-repository-contact-info">My Contact Info</div>
@@ -17,12 +17,12 @@ sample:
           request_mappings: 'collection_name=abc&eadid=123'
 sample-noreq:
   name: 'Repository with no request types'
-  description: 'Repository with no request types'
+  description_html: 'Repository with no request types'
   thumbnail_url: 'http://example.com/thumbnail_ABC.jpg'
 sul-spec:
   name: 'Stanford University Libraries. Special Collections and University Archives'
   visit_note: 'Special Collections and University Archives materials are stored offsite and must be paged 36 hours in advance.'
-  description: 'The Special Collections and University Archives Department of Stanford University Libraries is committed to acquiring, preserving, and providing access to primary source materials that support the research needs of the Stanford community and beyond. There are three distinct divisions in our department: Manuscripts, Rare Books and University Archives. We welcome all students, scholars and members of the general public to the Field Reading Room. Learn more about using and accessing our collections.'
+  description_html: 'The Special Collections and University Archives Department of Stanford University Libraries is committed to acquiring, preserving, and providing access to primary source materials that support the research needs of the Stanford community and beyond. There are three distinct divisions in our department: Manuscripts, Rare Books and University Archives. We welcome all students, scholars and members of the general public to the Field Reading Room. Learn more about using and accessing our collections.'
   contact_html: |
     <div class="al-repository-contact-phone">(650) 725-1022</div>
     <div class="al-repository-contact-info"><a href="mailto:specialcollections@stanford.edu">specialcollections@stanford.edu</a></div>
@@ -37,7 +37,7 @@ sul-spec:
       request_mappings: 'Action=10&Form=31&Value=ead_url'
 nlm:
   name: 'National Library of Medicine. History of Medicine Division'
-  description: 'NLM’s History of Medicine Division collects, preserves, makes available, and interprets for diverse audiences one of the world’s richest collections of historical material related to human health and disease.'
+  description_html: 'NLM’s History of Medicine Division collects, preserves, makes available, and interprets for diverse audiences one of the world’s richest collections of historical material related to human health and disease.'
   contact_html: |
     <div class="al-repository-contact-info"><a href="mailto:hmdref@nlm.nih.gov">hmdref@nlm.nih.gov</a></div>
   location_html: |
@@ -52,7 +52,7 @@ nlm:
 
 umich-bhl:
   name: 'University of Michigan. Bentley Historical Library'
-  description: 'The Bentley Historical Library collects the materials for and promotes the study of the histories of two great, intertwined institutions, the State of Michigan and the University of Michigan. The Library is open without fee to the public, and we welcome researchers regardless of academic or professional affiliation.'
+  description_html: 'The Bentley Historical Library collects the materials for and promotes the study of the histories of two great, intertwined institutions, the State of Michigan and the University of Michigan. The Library is open without fee to the public, and we welcome researchers regardless of academic or professional affiliation.'
   contact_html: |
     <div class="al-repository-contact-info"><a href="mailto:bentley.ref@umich.edu">bentley.ref@umich.edu</a></div>
   location_html: |
