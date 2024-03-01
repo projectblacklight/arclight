@@ -5,9 +5,9 @@ require 'spec_helper'
 describe 'Aeon Web EAD Request', js: true do
   context 'when EAD URL template is provided' do
     it 'creates a request link' do
-      visit solr_document_path 'm0198-xml'
+      visit solr_document_path 'sul-spec_m0198-xml'
 
-      within '#m0198-xml_aspace_ref11_d0s-hierarchy-item' do
+      within '#sul-spec_m0198-xml_aspace_ref11_d0s-hierarchy-item' do
         click_link 'Pages 1-78'
       end
       expect(page).to have_css(

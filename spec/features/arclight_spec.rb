@@ -10,7 +10,7 @@ RSpec.describe 'Arclight' do
 
   describe 'eadid with a period' do
     it 'is visitable with a hyphen' do
-      visit solr_document_path('m0198-xml_aspace_ref11_d0s')
+      visit solr_document_path('sul-spec_m0198-xml_aspace_ref11_d0s')
       expect(page).to have_css 'h1', text: 'Pages 1-78'
     end
   end

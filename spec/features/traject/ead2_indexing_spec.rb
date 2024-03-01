@@ -51,8 +51,8 @@ RSpec.describe 'EAD 2 traject indexing' do
     end
 
     it 'id' do
-      expect(result['id'].first).to eq 'a0011-xml'
-      expect(result['ead_ssi'].first).to eq_ignoring_whitespace 'a0011.xml'
+      expect(result['id'].first).to eq 'sul-spec_a0011-xml'
+      expect(result['ead_ssi'].first).to eq_ignoring_whitespace 'sul-spec_a0011.xml'
     end
 
     it 'title' do
@@ -158,7 +158,7 @@ RSpec.describe 'EAD 2 traject indexing' do
       end
 
       it 'id' do
-        expect(first_component).to include 'id' => ['a0011-xml_aspace_ref6_lx4']
+        expect(first_component).to include 'id' => ['sul-spec_a0011-xml_aspace_ref6_lx4']
       end
 
       it 'has_online_content' do
@@ -705,7 +705,7 @@ RSpec.describe 'EAD 2 traject indexing' do
     end
 
     it 'builds the document' do
-      expect(result['id'].first).to eq_ignoring_whitespace 'a0011-xml'
+      expect(result['id'].first).to eq_ignoring_whitespace 'a0011-xml' #wut
       expect(result['ead_ssi'].first).to eq_ignoring_whitespace 'a0011.xml'
 
       %w[title_ssm title_tesim].each do |field|

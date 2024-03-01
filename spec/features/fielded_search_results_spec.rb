@@ -123,7 +123,7 @@ RSpec.describe 'Field-based search results' do
     end
 
     it '#identifer' do
-      visit search_catalog_path q: 'aoa271', search_field: 'identifier'
+      visit search_catalog_path q: 'nlm_aoa271', search_field: 'identifier'
       within('.document-position-1') do
         expect(page).to have_css '.index_title', text: /Alpha Omega Alpha Archives/
       end

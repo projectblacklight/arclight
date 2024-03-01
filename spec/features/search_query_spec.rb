@@ -29,7 +29,7 @@ RSpec.describe 'Search queries' do
   describe 'default all fields search for' do
     context 'EAD ID' do
       it 'returns a collection with a matching EAD ID' do
-        visit search_catalog_path q: 'umich-bhl-851981', search_field: 'all_fields'
+        visit search_catalog_path q: 'sample_umich-bhl-851981', search_field: 'all_fields'
         expect(page).to have_css '.index_title', text: /Interlochen Center for The Arts records/
       end
     end
@@ -43,7 +43,7 @@ RSpec.describe 'Search queries' do
 
     context 'component full ID (with eadid & ref)' do
       it 'returns a component with a matching full ID' do
-        visit search_catalog_path q: 'aoa271_aspace_2d7e583e94eb2b46d5dd1a0ec4cdca1f', search_field: 'all_fields'
+        visit search_catalog_path q: 'nlm_aoa271_aspace_2d7e583e94eb2b46d5dd1a0ec4cdca1f', search_field: 'all_fields'
         expect(page).to have_css '.index_title', text: /Dr. Root and L. Raymond Higgins/
       end
     end
