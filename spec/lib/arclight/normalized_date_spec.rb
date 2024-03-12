@@ -84,7 +84,7 @@ RSpec.describe Arclight::NormalizedDate do
       let(:date_other) { nil }
 
       it 'does not know what to do' do
-        expect(normalized_date).to eq ''
+        expect(normalized_date).to be_nil
       end
     end
   end
