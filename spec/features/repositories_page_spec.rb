@@ -38,7 +38,7 @@ RSpec.describe 'Repositores Page' do
       click_link 'Stanford University Libraries. Special Collections and University Archives'
 
       within '.al-repository' do
-        expect(page).not_to have_css(
+        expect(page).to have_no_css(
           'h2 a',
           text: 'Stanford University Libraries. Special Collections and University Archives'
         )
