@@ -7,7 +7,7 @@ RSpec.describe 'Masthead links' do
     it 'is not active when collection search is not activated' do
       visit search_catalog_path q: 'a brief', search_field: 'all_fields'
       within '.al-masthead' do
-        expect(page).not_to have_css 'li.nav-item.active', text: 'Collections'
+        expect(page).to have_no_css 'li.nav-item.active', text: 'Collections'
       end
     end
 

@@ -25,7 +25,7 @@ RSpec.describe 'Collection context', js: true do
     end
 
     it 'siblings above are hidden' do
-      expect(page).not_to have_css '#aoa271_aspace_843e8f9f22bac69872d0802d6fffbb04'
+      expect(page).to have_no_css '#aoa271_aspace_843e8f9f22bac69872d0802d6fffbb04'
     end
   end
 end

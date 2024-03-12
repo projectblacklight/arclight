@@ -19,7 +19,7 @@ RSpec.describe 'Highlighted search results' do
       it 'does not highlight the snippets on empty query' do
         visit search_catalog_path q: '', search_field: 'all_fields'
         within '.document-position-1' do
-          expect(page).not_to have_css '.al-document-highlight'
+          expect(page).to have_no_css '.al-document-highlight'
         end
       end
     end
