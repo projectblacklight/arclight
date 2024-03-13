@@ -45,6 +45,15 @@ RSpec.describe 'Grouped search results' do
     )
   end
 
+  it 'retains existing facet selections when viewing all in a collection' do
+    visit search_catalog_path q: 'large sample', group: 'true', f: { level: ['File'] }
+    expect(page).to have_css '.al-grouped-more', text: /Top 3 results/
+    expect(page).to have_css(
+      '.al-grouped-more a[href*="/catalog?f%5Bcollection%5D%5B%5D=Large+collection+sample%2C+1843-1872&f%5Blevel%5D%5B%5D=File&q=large+sample"]',
+      text: 'view all 202'
+    )
+  end
+
   context 'when in compact view' do
     it 'does not render the collection abstract/scope' do
       visit search_catalog_path q: 'alpha omega', group: 'true', view: 'compact'
