@@ -57,7 +57,7 @@ settings do
   provide 'date_normalizer', 'Arclight::NormalizedDate'
   provide 'title_normalizer', 'Arclight::NormalizedTitle'
   provide 'reader_class_name', 'Arclight::Traject::NokogiriNamespacelessReader'
-  provide 'solr_writer.commit_on_close', 'true'
+  provide 'solr_writer.commit_on_close', 'false'
   provide 'repository', ENV.fetch('REPOSITORY_ID', nil)
   provide 'logger', Logger.new($stderr)
 end
