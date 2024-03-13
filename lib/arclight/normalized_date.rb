@@ -43,7 +43,7 @@ module Arclight
       result << inclusive if inclusive.present?
       result << other if other.present?
       result << "bulk #{bulk}" if bulk.present?
-      result.compact.map(&:strip).join(', ')
+      result.compact.map(&:strip).join(', ').presence
     end
   end
 end
