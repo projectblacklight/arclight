@@ -51,8 +51,8 @@ RSpec.describe 'Grouped search results' do
 
       within '.al-grouped-title-bar' do
         expect(page).to have_css 'h3 a', text: /Alpha/
-        expect(page).not_to have_css '.al-document-abstract-or-scope', text: /founded in 1902/
-        expect(page).not_to have_css('.badge')
+        expect(page).to have_no_css '.al-document-abstract-or-scope', text: /founded in 1902/
+        expect(page).to have_no_css('.badge')
       end
     end
   end

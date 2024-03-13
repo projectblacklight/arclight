@@ -12,7 +12,7 @@ RSpec.describe 'Compact Search Results' do
 
     click_link 'Compact'
 
-    expect(page).not_to have_css('.documents-list')
+    expect(page).to have_no_css('.documents-list')
     expect(page).to have_css('.documents-compact')
     expect(page).to have_css('article.document', count: 10)
     within '.document-position-3' do

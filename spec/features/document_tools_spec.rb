@@ -18,7 +18,7 @@ describe 'Document Tools' do
       let(:doc_id) { 'aoa271' }
 
       it 'does not render the bookmark option' do
-        expect(page).not_to have_css('.al-document-title-bar form.bookmark-toggle')
+        expect(page).to have_no_css('.al-document-title-bar form.bookmark-toggle')
       end
     end
 

@@ -248,8 +248,6 @@ to_field 'extent_tesim' do |_record, accumulator, context|
   accumulator.concat context.output_hash['extent_ssm'] || []
 end
 
-#to_field 'extent_teim', extract_xpath('/ead/archdesc/did/physdesc/extent')
-#to_field 'genreform_sim', extract_xpath('/ead/archdesc/controlaccess/genreform')
 to_field 'physfacet_tesim', extract_xpath('/ead/archdesc/did/physdesc/physfacet')
 to_field 'dimensions_tesim', extract_xpath('/ead/archdesc/did/physdesc/dimensions')
 
@@ -285,7 +283,6 @@ NAME_ELEMENTS.map do |selector|
   to_field "#{selector}_ssim", extract_xpath("//#{selector}"), unique
 end
 
-#to_field 'corpname_sim', extract_xpath('//corpname')
 to_field 'language_ssim', extract_xpath('/ead/archdesc/did/langmaterial')
 
 to_field 'descrules_ssm', extract_xpath('/ead/eadheader/profiledesc/descrules')

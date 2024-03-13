@@ -18,7 +18,7 @@ RSpec.describe Arclight::DocumentDownloadComponent, type: :component do
     let(:files) { [] }
 
     it 'renders nothing' do
-      expect(page).not_to have_css('*')
+      expect(page).to have_no_css('*')
     end
   end
 

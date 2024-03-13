@@ -20,7 +20,7 @@ RSpec.describe Arclight::SearchBarComponent, type: :component do
       let(:params) { { f: { collection: ['some collection'] } } }
 
       it 'renders a name attribute on the select (so it will be sent through the form)' do
-        expect(rendered).to have_css('select[name="f[collection][]"]')
+        expect(rendered).to have_select('f[collection][]')
       end
 
       it 'has the "this collection" option selected' do
@@ -36,7 +36,7 @@ RSpec.describe Arclight::SearchBarComponent, type: :component do
       end
 
       it 'renders a name attribute on the select (so it will be sent through the form)' do
-        expect(rendered).to have_css('select[name="f[collection][]"]')
+        expect(rendered).to have_select('f[collection][]')
       end
 
       it 'has the "this collection" option selected' do
@@ -46,7 +46,7 @@ RSpec.describe Arclight::SearchBarComponent, type: :component do
 
     context 'when not in a collection context' do
       it 'does not render a name attribute on the select (because it does not need to be sent through the form)' do
-        expect(rendered).not_to have_select 'name'
+        expect(rendered).to have_no_select 'name'
       end
 
       it 'has the "this collection" option disabled' do
