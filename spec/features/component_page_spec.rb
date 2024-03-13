@@ -27,7 +27,7 @@ RSpec.describe 'Component Page' do
   describe 'label/title' do
     it 'does not double escape entities in the heading' do
       expect(page).to have_css('h1', text: /"A brief account of the origin of/)
-      expect(page).not_to have_css('h1', text: /^&quot;A brief account of the origin of/)
+      expect(page).to have_no_css('h1', text: /^&quot;A brief account of the origin of/)
     end
   end
 
@@ -203,7 +203,7 @@ RSpec.describe 'Component Page' do
           expect(page).to have_css '.document-title-heading', text: 'Item AA001'
           expect(page).to have_css '.document-title-heading', text: 'Item AA002'
           expect(page).to have_css '.document-title-heading', text: 'Item AA003'
-          expect(page).not_to have_css '.document-title-heading', text: 'Item AA004'
+          expect(page).to have_no_css '.document-title-heading', text: 'Item AA004'
           expect(page).to have_css '.document-title-heading', text: 'Item AA059'
         end
       end
@@ -211,7 +211,7 @@ RSpec.describe 'Component Page' do
       it 'offers a button for displaying the hidden sibling document items' do
         within '#collection-context' do
           expect(page).to have_css '.btn-secondary', text: 'Expand'
-          expect(page).not_to have_css '.document-title-heading', text: 'Item AA004'
+          expect(page).to have_no_css '.document-title-heading', text: 'Item AA004'
 
           first('.btn-secondary', text: 'Expand').click
 

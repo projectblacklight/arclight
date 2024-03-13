@@ -51,14 +51,14 @@ RSpec.describe 'Search results' do
       end
 
       within not_online_doc do
-        expect(page).not_to have_css('.al-online-content-icon')
+        expect(page).to have_no_css('.al-online-content-icon')
       end
     end
 
     it 'does not include result numbers in the document header' do
       visit search_catalog_path q: '', search_field: 'all_fields'
 
-      expect(page).not_to have_css('.document-counter')
+      expect(page).to have_no_css('.document-counter')
     end
 
     it 'does not double escape entities in the heading' do
@@ -67,7 +67,7 @@ RSpec.describe 'Search results' do
         'h3.index_title',
         text: '"A brief account of the origin of the Alpha Omega Alpha Honorary Fraternity" - William W. Root, n.d.'
       )
-      expect(page).not_to have_css(
+      expect(page).to have_no_css(
         'h3.index_title',
         text: /&quote;A brief account of the origin/
       )
@@ -135,13 +135,13 @@ RSpec.describe 'Search results' do
 
       expect(page).to have_css('.al-repository-card')
       expect(page).to have_css('.al-repository')
-      expect(page).not_to have_css('.al-repository-extra')
+      expect(page).to have_no_css('.al-repository-extra')
     end
 
     it 'does not include repository card if not faceted on repository' do
       visit search_catalog_path q: '', search_field: 'all_fields'
 
-      expect(page).not_to have_css('.al-repository-card')
+      expect(page).to have_no_css('.al-repository-card')
     end
 
     it 'does not include repository card if faceted on something that is not repository' do
@@ -149,7 +149,7 @@ RSpec.describe 'Search results' do
         names: ['Owner of the reel of yellow nylon rope']
       }, search_field: 'all_fields'
 
-      expect(page).not_to have_css('.al-repository-card')
+      expect(page).to have_no_css('.al-repository-card')
     end
   end
 

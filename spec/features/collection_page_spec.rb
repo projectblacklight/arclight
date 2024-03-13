@@ -43,7 +43,7 @@ RSpec.describe 'Collection Page' do
       let(:doc_id) { 'sul-spec_m0198-xml' }
 
       it 'is not rendered' do
-        expect(page).not_to have_css('.card', text: 'Online content')
+        expect(page).to have_no_css('.card', text: 'Online content')
       end
     end
   end
@@ -149,7 +149,7 @@ RSpec.describe 'Collection Page' do
         expect(page).to have_css('dd', text: 'Bierring, Walter L. (Walter Lawrence), 1868-1961')
         expect(page).to have_css('dd', text: 'Mindanao Island (Philippines)')
         expect(page).to have_css('td', text: 'ABC Something')
-        expect(page).not_to have_css('dd', text: 'Higgins, L. Raymond')
+        expect(page).to have_no_css('dd', text: 'Higgins, L. Raymond')
       end
     end
 
@@ -168,7 +168,7 @@ RSpec.describe 'Collection Page' do
       let(:doc_id) { 'sul-spec_m0198-xml' }
 
       it 'are not displayed' do
-        expect(page).not_to have_css('.al-show-sub-heading', text: 'Related')
+        expect(page).to have_no_css('.al-show-sub-heading', text: 'Related')
       end
     end
   end
@@ -188,7 +188,7 @@ RSpec.describe 'Collection Page' do
 
       it 'does not include links to those sections' do
         within '.al-sidebar-navigation-context' do
-          expect(page).not_to have_link 'Related'
+          expect(page).to have_no_link 'Related'
         end
       end
     end
@@ -241,7 +241,7 @@ RSpec.describe 'Collection Page' do
         visit search_catalog_path q: '', search_field: 'all_fields'
 
         expect(page).to have_css('.al-document-listings.documents-list')
-        expect(page).not_to have_css('.al-document-listings.documents-hierarchy')
+        expect(page).to have_no_css('.al-document-listings.documents-hierarchy')
       end
     end
   end

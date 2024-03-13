@@ -87,12 +87,13 @@ RSpec.describe 'arclight/repositories/index' do
       allow(view).to receive(:on_repositories_index?).and_return(false)
       render
       expect(rendered).not_to have_css('.al-repository-extra')
+      expect(rendered).to have_no_css('.al-repository-extra')
     end
 
     it 'does not show on search page' do
       allow(view).to receive(:on_repositories_index?).and_return(false)
       render
-      expect(rendered).not_to have_css('.al-repository-extra')
+      expect(rendered).to have_no_css('.al-repository-extra')
     end
   end
 end

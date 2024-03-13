@@ -705,7 +705,7 @@ RSpec.describe 'EAD 2 traject indexing' do
     end
 
     it 'builds the document' do
-      expect(result['id'].first).to eq_ignoring_whitespace 'a0011-xml' #wut
+      expect(result['id'].first).to eq_ignoring_whitespace 'a0011-xml'
       expect(result['ead_ssi'].first).to eq_ignoring_whitespace 'a0011.xml'
 
       %w[title_ssm title_tesim].each do |field|
