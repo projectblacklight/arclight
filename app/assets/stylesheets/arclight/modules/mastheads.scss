@@ -1,4 +1,5 @@
 .navbar-search {
+  z-index: 10;
   .search-query-form {
     max-width: 100% !important;   // work around blacklight styles
     display: flex;
