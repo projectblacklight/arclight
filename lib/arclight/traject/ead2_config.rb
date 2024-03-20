@@ -240,6 +240,7 @@ end
 
 DID_SEARCHABLE_NOTES_FIELDS.map do |selector|
   to_field "#{selector}_html_tesm", extract_xpath("/ead/archdesc/did/#{selector}", to_text: false)
+  to_field "#{selector}_tesim", extract_xpath("/ead/archdesc/did/#{selector}")
 end
 
 NAME_ELEMENTS.map do |selector|
