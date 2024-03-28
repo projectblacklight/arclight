@@ -142,12 +142,14 @@
          ead_ssi
          ref_ssm
          unitid_ssm
+         unitid_identifier_match
        </str>
        <str name="pf_identifier">
          id^2
          ead_ssi^2
          ref_ssm^2
          unitid_ssm^2
+         unitid_identifier_match^2
        </str>
        <str name="qf_name">
          name_teim
