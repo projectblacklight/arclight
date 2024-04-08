@@ -81,12 +81,16 @@ end
 
 to_field 'id' do |_record, accumulator, context|
   eadid = _record.xpath('/ead/eadheader/eadid').first.content.strip.gsub('.', '-')
-  id_parts = [
-    settings['repository'] && settings['repository'] + "_", # Add repository and underscore only if repository is not nil
-    eadid.to_s
-  ].compact
+  repository = settings['repository']
+  if repository
+    repository_prefix = repository + "_"
+    id = [
+      eadid.start_with?(repository_prefix) ? nil : repository_prefix,
+      eadid.to_s
+    ].compact.join
 
-  accumulator << id_parts.join
+    accumulator << id
+  end
 end
 
 to_field 'title_filing_ssi', extract_xpath('/ead/eadheader/filedesc/titlestmt/titleproper[@type="filing"]')
@@ -103,15 +107,18 @@ to_field 'title_tesim', extract_xpath('/ead/archdesc/did/unittitle')
 #end
 
 to_field 'ead_ssi' do |_record, accumulator, context|
-  eadid = _record.xpath('/ead/eadheader/eadid').first.content.strip
-  id_parts = [
-    settings['repository'] && settings['repository'] + "_", # Add repository and underscore only if repository is not nil
-    eadid.to_s
-  ].compact
+  eadid = _record.xpath('/ead/eadheader/eadid').first.content.strip.gsub('.', '-')
+  repository = settings['repository']
+  if repository
+    repository_prefix = repository + "_"
+    id = [
+      eadid.start_with?(repository_prefix) ? nil : repository_prefix,
+      eadid.to_s
+    ].compact.join
 
-  accumulator << id_parts.join
+    accumulator << id
+  end
 end
-
 
 #to_field 'ead_ssi', extract_xpath('/ead/eadheader/eadid')
 
