@@ -25,6 +25,9 @@ module Arclight
 
     def normalize
       result = [title, date].compact.join(', ')
+
+      result = ["untitled"] if result.blank?
+
       raise Arclight::Exceptions::TitleNotFound if result.blank?
 
       result
