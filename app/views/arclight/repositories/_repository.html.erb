@@ -10,21 +10,35 @@
         <%= link_to_unless(params[:id] == repository.slug, repository.name, arclight_engine.repository_path(repository.slug)) %>
         <% end %>
         <div class='row no-gutters justify-content-center'>
-          <div class='col-12 col-sm-4 col-md-3 fw-light al-repository-contact'>
-            <address class="text-break">
-              <div class="mb-3 al-repository-street-address">
-                <%= repository.location %>
-              </div>
+          <% if repository.description.length < 4 %>
+	          <div class='col-12 col-sm-4 col-md-10 fw-light al-repository-contact'>
+	            <address class="text-break">
+	              <div class="mb-3 al-repository-street-address">
+	                <%= repository.location %>
+	              </div>
+	              <div class="al-repository-contact-info">
+	                <%= repository.contact %>
+	              </div>
+	            </address>
+		</div>
+            <% end %>
 
-              <div class="al-repository-contact-info">
-                <%= repository.contact %>
-              </div>
-            </address>
-          </div>
+          <% if repository.description.length > 3 %>
+	          <div class='col-12 col-sm-4 col-md-3 fw-light al-repository-contact'>
+	            <address class="text-break">
+	              <div class="mb-3 al-repository-street-address">
+	                <%= repository.location %>
+	              </div>
+	              <div class="al-repository-contact-info">
+	                <%= repository.contact %>
+	              </div>
+        	    </address>
+	          </div>
 
-          <div class='col-12 col-sm mt-3 mt-sm-0 al-repository-description'>
-            <%= repository.description %>
-          </div>
+                 <div class='col-12 col-sm mt-3 mt-sm-0 al-repository-description'>
+        	    <%= repository.description %>
+ 	         </div>
+            <% end %>
 
           <% if on_repositories_index? %>
           <div class='col-12 col-lg-2 mt-3 mt-lg-0 text-center al-repository-extra'>
@@ -32,7 +46,8 @@
               <%= t(:'arclight.views.repositories.number_of_collections', count: repository.collection_count) %>
             </div>
             <% if repository.collection_count&.positive? %>
-            <%= link_to(t(:'arclight.views.repositories.view_more'), arclight_engine.repository_path(repository.slug), class: 'btn btn-secondary btn-sm') %>
+
+            <%= link_to(t(:'arclight.views.repositories.view_all_collections'), repository_collections_path(repository), class: 'btn btn-secondary btn-sm') %>
             <% end %>
           </div>
           <% end %>
