@@ -29,6 +29,7 @@ module Arclight
       attribute :total_component_count, :string, 'total_component_count_is'
       attribute :online_item_count, :string, 'online_item_count_is'
       attribute :last_indexed, :date, 'timestamp'
+      attribute :collection_id, :string, '_root_'
     end
 
     def repository_config

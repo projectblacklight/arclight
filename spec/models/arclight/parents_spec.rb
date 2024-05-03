@@ -8,6 +8,7 @@ RSpec.describe Arclight::Parents do
       parent_ids_ssim: %w[abc123 abc123_def abc123_ghi],
       parent_unittitles_ssm: %w[ABC123 DEF GHI],
       ead_ssi: 'abc123',
+      _root_: 'abc123',
       parent_levels_ssm: %w[collection]
     )
   end
@@ -17,6 +18,7 @@ RSpec.describe Arclight::Parents do
       parent_ssim: %w[abc123 def ghi],
       parent_unittitles_ssm: %w[ABC123 DEF GHI],
       ead_ssi: 'abc123',
+      _root_: 'abc123',
       parent_levels_ssm: %w[collection]
     )
   end
