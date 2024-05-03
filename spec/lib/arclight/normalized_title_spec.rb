@@ -120,10 +120,7 @@ RSpec.describe Arclight::NormalizedTitle do
     let(:date) { nil }
 
     it do
-      expect { normalized_title }.to raise_error(
-        Arclight::Exceptions::TitleNotFound,
-        '<unittitle/> or <unitdate/> must be present for all documents and components'
-      )
+      expect(normalized_title).to eq "untitled"
     end
   end
 end
