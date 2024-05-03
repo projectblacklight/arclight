@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 module Arclight
+  include ArclightHelper
   # Controller for our /repositories index page
   class RepositoriesController < ApplicationController
     def index
@@ -10,12 +11,21 @@ module Arclight
 
     def show
       @repository = Arclight::Repository.find_by!(slug: params[:id])
-      search_service = Blacklight.repository_class.new(blacklight_config)
-      @response = search_service.search(
-        q: "level_ssim:Collection repository_ssim:\"#{@repository.name}\"",
-        rows: 100
-      )
-      @collections = @response.documents
+#      search_service = Blacklight.repository_class.new(blacklight_config)
+#      @response = search_service.search(
+#        q: "level_ssim:Collection repository_ssim:\"#{@repository.name}\"",
+#        rows: 100
+#      )
+#      @collections = @response.documents
+###       ArclightHelper::repository_collections_path(@repository)
+
+    redirect_to search_action_url(
+      f: {
+        repository: [@repository.name],
+        level: ['Collection']
+      }
+    )
+
     end
 
     private

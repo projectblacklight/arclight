@@ -59,8 +59,12 @@ settings do
   provide 'reader_class_name', 'Arclight::Traject::NokogiriNamespacelessReader'
   provide 'solr_writer.commit_on_close', 'false'
   provide 'repository', ENV.fetch('REPOSITORY_ID', nil)
-  provide 'logger', Logger.new($stderr)
+  provide 'logger', Logger.new($stderr).tap { |log| log.level = Logger::ERROR }
+#  provide 'logger', Logger.new($stderr)
+
 end
+
+
 
 each_record do |_record, context|
 
@@ -282,6 +286,7 @@ end
 
 DID_SEARCHABLE_NOTES_FIELDS.map do |selector|
   to_field "#{selector}_html_tesm", extract_xpath("/ead/archdesc/did/#{selector}", to_text: false)
+  to_field "#{selector}_tesim", extract_xpath("/ead/archdesc/did/#{selector}")
 end
 
 NAME_ELEMENTS.map do |selector|
