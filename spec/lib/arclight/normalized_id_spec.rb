@@ -31,4 +31,12 @@ RSpec.describe Arclight::NormalizedId do
       )
     end
   end
+
+  context 'when additional keyword arguments are supplied' do
+    subject(:normalized_id) { described_class.new('abc123.xml', title: 'a title', repository: 'repo').to_s }
+
+    it 'accepts the additional arguments without changing the output' do
+      expect(normalized_id).to eq 'abc123-xml'
+    end
+  end
 end
