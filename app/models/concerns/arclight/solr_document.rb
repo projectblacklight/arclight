@@ -8,8 +8,6 @@ module Arclight
 
     included do
       attribute :parent_ids, :array, 'parent_ids_ssim'
-      attribute :legacy_parent_ids, :array, 'parent_ssim'
-      Arclight.deprecation.deprecate_methods(self, legacy_parent_ids: 'Use `parent_ids` instead')
       attribute :parent_labels, :array, 'parent_unittitles_ssm'
       attribute :parent_levels, :array, 'parent_levels_ssm'
       attribute :unitid, :string, 'unitid_ssm'

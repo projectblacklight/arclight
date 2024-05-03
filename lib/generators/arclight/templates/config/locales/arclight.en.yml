@@ -33,6 +33,7 @@ en:
         fileplan: File plan
         odd: Other descriptive data
         note: Note
+        did_note: Note
 
         access_subjects: Subjects
         names_coll: Names

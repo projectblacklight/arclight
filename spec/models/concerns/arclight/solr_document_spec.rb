@@ -6,7 +6,6 @@ RSpec.describe Arclight::SolrDocument do
   let(:document) { SolrDocument.new(id: '123') }
 
   describe 'custom accessors' do
-    it { expect(document).to respond_to(:legacy_parent_ids) }
     it { expect(document).to respond_to(:parent_ids) }
     it { expect(document).to respond_to(:parent_labels) }
     it { expect(document).to respond_to(:eadid) }

@@ -55,22 +55,4 @@ RSpec.describe Arclight::BreadcrumbComponent, type: :component do
     expect(rendered).to have_link 'DEF', href: '/catalog/abc123_def'
     expect(rendered).to have_link 'GHI', href: '/catalog/abc123_ghi'
   end
-
-  context 'with legacy parent_ssm data' do
-    let(:legacy_document) do
-      SolrDocument.new(
-        parent_ssim: %w[abc123 def ghi],
-        parent_unittitles_ssm: %w[ABC123 DEF GHI],
-        ead_ssi: 'abc123',
-        repository_ssm: 'my repository'
-      )
-    end
-
-    let(:component) { described_class.new(document: legacy_document, **attr) }
-
-    it 'renders breadcrumb links' do
-      expect(rendered).to have_link 'DEF', href: '/catalog/abc123def'
-      expect(rendered).to have_link 'GHI', href: '/catalog/abc123ghi'
-    end
-  end
 end
