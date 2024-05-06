@@ -80,7 +80,7 @@ to_field 'ref_ssi' do |record, accumulator, context|
                    logger.warn('MISSING ID WARNING') do
                      [
                        "A component in #{parent_id} did not have an ID so one was minted using the #{strategy} strategy.",
-                       "The ID of this document will be #{root_id}#{hexdigest}."
+                       "The ID of this document will be #{root_id}_#{hexdigest}."
                      ].join(' ')
                    end
                    record['id'] = hexdigest
