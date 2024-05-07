@@ -29,13 +29,11 @@ module Arclight
     end
 
     def document_path
-      @document_path ||= solr_document_path(normalized_eadid)
+      @document_path ||= solr_document_path(document.collection_id)
     end
 
     def section_anchor(section)
       "##{t("arclight.views.show.sections.#{section}").parameterize}"
     end
-
-    delegate :normalized_eadid, to: :document
   end
 end

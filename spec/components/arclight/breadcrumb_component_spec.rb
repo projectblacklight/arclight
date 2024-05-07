@@ -8,7 +8,8 @@ RSpec.describe Arclight::BreadcrumbComponent, type: :component do
       parent_ids_ssim: %w[abc123 abc123_def abc123_ghi],
       parent_unittitles_ssm: %w[ABC123 DEF GHI],
       ead_ssi: 'abc123',
-      repository_ssm: 'my repository'
+      repository_ssm: 'my repository',
+      _root_: 'abc123'
     )
   end
 
@@ -62,7 +63,8 @@ RSpec.describe Arclight::BreadcrumbComponent, type: :component do
         parent_ssim: %w[abc123 def ghi],
         parent_unittitles_ssm: %w[ABC123 DEF GHI],
         ead_ssi: 'abc123',
-        repository_ssm: 'my repository'
+        repository_ssm: 'my repository',
+        _root_: 'abc123'
       )
     end
 

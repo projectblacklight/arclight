@@ -13,7 +13,7 @@ RSpec.describe Arclight::CollectionSidebarComponent, type: :component do
     render_inline(component)
   end
 
-  let(:document) { instance_double(SolrDocument, normalized_eadid: 'foo') }
+  let(:document) { instance_double(SolrDocument, collection_id: 'foo') }
   let(:collection_presenter) { instance_double(Arclight::ShowPresenter, with_field_group: group_presenter) }
   let(:group_presenter) { instance_double(Arclight::ShowPresenter, fields_to_render: [double]) }
 
