@@ -17,15 +17,13 @@ module Arclight
 #        rows: 100
 #      )
 #      @collections = @response.documents
-###       ArclightHelper::repository_collections_path(@repository)
 
-    redirect_to search_action_url(
-      f: {
-        repository: [@repository.name],
-        level: ['Collection']
-      }
-    )
-
+      redirect_to search_action_url(
+        f: {
+          repository: [@repository.name],
+          level: ['Collection']
+        }
+      )
     end
 
     private

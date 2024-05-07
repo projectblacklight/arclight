@@ -57,10 +57,10 @@ settings do
   provide 'date_normalizer', 'Arclight::NormalizedDate'
   provide 'title_normalizer', 'Arclight::NormalizedTitle'
   provide 'reader_class_name', 'Arclight::Traject::NokogiriNamespacelessReader'
-  provide 'solr_writer.commit_on_close', 'false'
+  provide 'solr_writer.commit_on_close', 'true'
   provide 'repository', ENV.fetch('REPOSITORY_ID', nil)
-  provide 'logger', Logger.new($stderr).tap { |log| log.level = Logger::ERROR }
-#  provide 'logger', Logger.new($stderr)
+#  provide 'logger', Logger.new($stderr).tap { |log| log.level = Logger::ERROR }
+  provide 'logger', Logger.new($stderr)
 
 end
 
@@ -86,45 +86,48 @@ end
 to_field 'id' do |_record, accumulator, context|
   eadid = _record.xpath('/ead/eadheader/eadid').first.content.strip.gsub('.', '-')
   repository = settings['repository']
-  if repository
+
+  if repository && eadid.start_with?("#{repository}_")
+    id = eadid.to_s
+  elsif repository
     repository_prefix = repository + "_"
     id = [
-      eadid.start_with?(repository_prefix) ? nil : repository_prefix,
+      repository_prefix,
       eadid.to_s
-    ].compact.join
-
-    accumulator << id
+    ].join
+  else
+    id = eadid.to_s
   end
+
+  accumulator << id
 end
+
 
 to_field 'title_filing_ssi', extract_xpath('/ead/eadheader/filedesc/titlestmt/titleproper[@type="filing"]')
 to_field 'title_ssm', extract_xpath('/ead/archdesc/did/unittitle')
 to_field 'title_tesim', extract_xpath('/ead/archdesc/did/unittitle')
 
-#to_field 'ead_ssi' do |_record, accumulator, context|
-#  eadid = _record.xpath('/ead/eadheader/eadid').first.content.strip.gsub('.', '-')
-#  accumulator << [
-#    settings['repository'],
-#    "_",
-#    eadid.to_s
-#  ].join
-#end
+#to_field 'ead_ssi', extract_xpath('/ead/eadheader/eadid')
 
 to_field 'ead_ssi' do |_record, accumulator, context|
-  eadid = _record.xpath('/ead/eadheader/eadid').first.content.strip.gsub('.', '-')
+  eadid = _record.xpath('/ead/eadheader/eadid').first.content.strip#.gsub('.', '-')
   repository = settings['repository']
-  if repository
+
+  if repository && eadid.start_with?("#{repository}_")
+    id = eadid.to_s
+  elsif repository
     repository_prefix = repository + "_"
     id = [
-      eadid.start_with?(repository_prefix) ? nil : repository_prefix,
+      repository_prefix,
       eadid.to_s
-    ].compact.join
-
-    accumulator << id
+    ].join
+  else
+    id = eadid.to_s
   end
+
+  accumulator << id
 end
 
-#to_field 'ead_ssi', extract_xpath('/ead/eadheader/eadid')
 
 to_field 'unitdate_ssm', extract_xpath('/ead/archdesc/did/unitdate')
 to_field 'unitdate_bulk_ssim', extract_xpath('/ead/archdesc/did/unitdate[@type="bulk"]')

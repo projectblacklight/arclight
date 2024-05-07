@@ -7,8 +7,13 @@
 
       <div class="col-sm-12 col-lg-10 py-3 al-repository-information">
         <%= content_tag(params[:id] == repository.slug ? :h1 : :h2, class: 'h5 mb-3 repo-name') do %>
-        <%= link_to_unless(params[:id] == repository.slug, repository.name, arclight_engine.repository_path(repository.slug)) %>
+	        <% if on_repositories_index? %>
+		        <%= link_to_unless(params[:id] == repository.slug, repository.name, arclight_engine.repository_path(repository.slug)) %>
+	        <% else %>
+		        <% repository.name  %>	
+	        <% end %>
         <% end %>
+
         <div class='row no-gutters justify-content-center'>
           <% if repository.description.length < 4 %>
 	          <div class='col-12 col-sm-4 col-md-10 fw-light al-repository-contact'>

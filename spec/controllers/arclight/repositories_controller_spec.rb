@@ -24,15 +24,15 @@ RSpec.describe Arclight::RepositoriesController do
   end
 
   describe '#show' do
-    it 'looks up the repository detail page' do
-      get :show, params: { id: 'nlm' }
-      repo = controller.instance_variable_get(:@repository)
-      expect(repo).to be_an(Arclight::Repository)
-      expect(repo.slug).to eq 'nlm'
-      collections = controller.instance_variable_get(:@collections)
-      expect(collections.first).to be_an(SolrDocument)
-      expect(collections.find { |c| c.id == 'nlm_aoa271' }.unitid).to eq 'MS C 271'
-    end
+#    it 'looks up the repository detail page' do		#removed because we skip the repositories detail page
+#      get :show, params: { id: 'nlm' }
+#      repo = controller.instance_variable_get(:@repository)
+#      expect(repo).to be_an(Arclight::Repository)
+#      expect(repo.slug).to eq 'nlm'
+#      collections = controller.instance_variable_get(:@collections)
+#      expect(collections.first).to be_an(SolrDocument)
+#      expect(collections.find { |c| c.id == 'nlm_aoa271' }.unitid).to eq 'MS C 271'
+#    end
 
     it 'raises RecordNotFound if non-registered slug' do
       expect { get :show, params: { id: 'not-registered' } }.to raise_error(
