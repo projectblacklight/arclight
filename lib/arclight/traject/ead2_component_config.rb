@@ -304,6 +304,7 @@ SEARCHABLE_NOTES_FIELDS.map do |selector|
 end
 DID_SEARCHABLE_NOTES_FIELDS.map do |selector|
   to_field "#{selector}_html_tesm", extract_xpath("./did/#{selector}", to_text: false)
+  to_field "#{selector}_tesim", extract_xpath("./did/#{selector}")
 end
 to_field 'did_note_ssm', extract_xpath('./did/note')
 # =============================
