@@ -6,6 +6,7 @@ require 'traject/nokogiri_reader'
 require 'traject_plus'
 require 'traject_plus/macros'
 require 'arclight/level_label'
+require 'arclight/normalized_id'
 require 'arclight/normalized_date'
 require 'arclight/normalized_title'
 require 'active_model/conversion' ## Needed for Arclight::Repository
@@ -53,6 +54,7 @@ DID_SEARCHABLE_NOTES_FIELDS = %w[
 
 settings do
   provide 'component_traject_config', File.join(__dir__, 'ead2_component_config.rb')
+  provide 'id_normalizer', 'Arclight::NormalizedId'
   provide 'date_normalizer', 'Arclight::NormalizedDate'
   provide 'title_normalizer', 'Arclight::NormalizedTitle'
   provide 'reader_class_name', 'Arclight::Traject::NokogiriNamespacelessReader'
@@ -75,7 +77,13 @@ end
 # NOTE: All fields should be stored in Solr
 # ==================
 
-to_field 'id', extract_xpath('/ead/eadheader/eadid'), strip, gsub('.', '-')
+to_field 'id' do |record, accumulator|
+  id = record.at_xpath('/ead/eadheader/eadid')&.text
+  title = record.at_xpath('/ead/archdesc/did/unittitle')&.text
+  repository = settings['repository']
+  accumulator << settings['id_normalizer'].constantize.new(id, title: title, repository: repository).to_s
+end
+
 to_field 'title_filing_ssi', extract_xpath('/ead/eadheader/filedesc/titlestmt/titleproper[@type="filing"]')
 to_field 'title_ssm', extract_xpath('/ead/archdesc/did/unittitle')
 to_field 'title_tesim', extract_xpath('/ead/archdesc/did/unittitle')
