@@ -46,8 +46,8 @@ $hierarchy-view-collapse-icon: url("data:image/svg+xml,<svg xmlns='http://www.w3
     display: none;
   }
 
-  turbo-frame[loading]:not([complete]) {
-    &::after {
+  turbo-frame[busy] {
+    &::before {
       @extend .placeholder !optional;
       animation: placeholder-glow 2s ease-in-out infinite;
       content: 'Loading...';
