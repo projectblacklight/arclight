@@ -7,6 +7,7 @@ module Arclight
     extend ActiveSupport::Concern
 
     included do
+      attribute :collection_id, :string, '_root_'
       attribute :parent_ids, :array, 'parent_ids_ssim'
       attribute :legacy_parent_ids, :array, 'parent_ssim'
       Arclight.deprecation.deprecate_methods(self, legacy_parent_ids: 'Use `parent_ids` instead')
@@ -29,7 +30,6 @@ module Arclight
       attribute :total_component_count, :string, 'total_component_count_is'
       attribute :online_item_count, :string, 'online_item_count_is'
       attribute :last_indexed, :date, 'timestamp'
-      attribute :collection_id, :string, '_root_'
     end
 
     def repository_config
