@@ -51,6 +51,7 @@ module Arclight
     def normalized_eadid
       Arclight::NormalizedId.new(eadid).to_s
     end
+    Arclight.deprecation.deprecate_methods(self, normalized_eadid: 'Use `collection_id` instead')
 
     def repository
       first('repository_ssm') || collection&.first('repository_ssm')
