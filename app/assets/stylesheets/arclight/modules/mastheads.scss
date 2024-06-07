@@ -27,11 +27,11 @@
 
 .al-masthead {
   --al-mastead-active-link-color: var(--bs-gray-700);
+  --al-masthead-title-size: #{$h2-font-size};
 
-  h1,
   .h1 {
     display: block;
-    font-size: $h2-font-size;
+    font-size: var(--al-masthead-title-size);
     margin: 0;
     padding: ($spacer * 1.5) ($spacer * 0.5);
   }
