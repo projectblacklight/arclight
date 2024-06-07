@@ -117,7 +117,7 @@ You can also run `bin/console` for an interactive prompt that will allow you to 
 When any of the javascript components or SASS sources in the gem are changed, this package should be published to NPM with the following steps:
 1. [Install npm](https://www.npmjs.com/get-npm)
 2. Bump the version number in `package.json`
-3. run `npm publish` to push the javascript package to https://npmjs.org/package/arclight
+3. run `npm run build && npm publish` to push the javascript package to https://npmjs.org/package/arclight
 
 ## Contributing
 
