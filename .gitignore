@@ -9,6 +9,7 @@
 /pkg/
 /spec/reports/
 /tmp/
+/app/assets/builds/
 
 # rspec failure tracking
 .rspec_status

@@ -1,5 +1,7 @@
-
-.toggle-bookmark, .breadcrumb-item, .document, .al-online-content-icon {
+.toggle-bookmark,
+.breadcrumb-item,
+.document,
+.al-online-content-icon {
   .blacklight-icons svg {
     height: 1rem;
     width: 1rem;
@@ -11,5 +13,5 @@
 }
 
 .btn > .bi:first-child {
-  @extend .me-1
+  margin-inline-end: 0.25rem !important;
 }

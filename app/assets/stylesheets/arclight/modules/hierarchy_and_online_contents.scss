@@ -48,9 +48,14 @@ $hierarchy-view-collapse-icon: url("data:image/svg+xml,<svg xmlns='http://www.w3
 
   turbo-frame[busy] {
     &::before {
-      @extend .placeholder !optional;
       animation: placeholder-glow 2s ease-in-out infinite;
-      content: 'Loading...';
+      background-color: currentcolor;
+      content: "Loading...";
+      cursor: wait;
+      display: inline-block;
+      min-height: 1em;
+      opacity: 0.5;
+      vertical-align: middle;
       display: inline-block;
       margin-left: 1.5rem;
     }
@@ -101,8 +106,8 @@ $hierarchy-view-collapse-icon: url("data:image/svg+xml,<svg xmlns='http://www.w3
 
 .title-container {
   border-bottom: $border-width solid $border-color;
-  padding-bottom: $spacer * .5;
-  margin-bottom: $spacer * .75;
+  padding-bottom: $spacer * 0.5;
+  margin-bottom: $spacer * 0.75;
   display: grid;
   gap: 0.5rem;
   grid-template-areas:
@@ -142,7 +147,7 @@ $hierarchy-view-collapse-icon: url("data:image/svg+xml,<svg xmlns='http://www.w3
   .online-contents {
     grid-area: online-contents;
     margin-bottom: 1rem;
-  
+
     h2 {
       font-size: 1rem;
       text-transform: uppercase;

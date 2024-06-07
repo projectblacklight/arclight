@@ -9,9 +9,12 @@
   "devDependencies": {
     "eslint": "^8.26.0",
     "eslint-config-airbnb-base": "^15.0.0",
-    "eslint-plugin-import": "^2.2.0"
+    "eslint-plugin-import": "^2.2.0",
+    "sass": "^1.59.3",
+    "bootstrap": "^5.2.0"
   },
   "scripts": {
+    "build": "sass ./app/assets/stylesheets/arclight/build.scss:./app/assets/builds/arclight.css --no-source-map --load-path=node_modules",
     "lint": "eslint './app/assets/javascripts/**/*.{js,es6}'",
     "lint:fix": "eslint --fix './app/assets/javascripts/**/*.{js,es6}'",
     "test": "echo \"Error: no test specified\" && exit 1"
