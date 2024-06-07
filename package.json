@@ -1,6 +1,6 @@
 {
   "name": "arclight",
-  "version": "1.1.4",
+  "version": "1.2.0",
   "description": "The frontend for arclight",
   "main": "app/assets/javascript/arclight/arclight.js",
   "files": [
