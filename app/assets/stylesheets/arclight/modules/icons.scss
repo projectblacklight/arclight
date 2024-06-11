@@ -1,3 +1,6 @@
+:root {
+  --al-online-icon-color: #{$online-icon-color};
+}
 .toggle-bookmark,
 .breadcrumb-item,
 .document,
@@ -9,7 +12,7 @@
 }
 
 .al-online-content-icon .blacklight-icons svg {
-  fill: $online-icon-color;
+  fill: var(--al-online-icon-color);
 }
 
 .btn > .bi:first-child {
