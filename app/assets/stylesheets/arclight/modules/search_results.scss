@@ -1,3 +1,7 @@
+:root {
+  --al-content-icon-color: #{$secondary};
+}
+
 .documents-list {
   margin-bottom: $spacer;
 
@@ -43,10 +47,7 @@
 
 article.document {
   .blacklight-icons svg {
-    fill: $secondary;
-  }
-  .al-online-content-icon .blacklight-icons svg {
-    fill: $online-icon-color;
+    fill: var(--al-content-icon-color);
   }
   div.breadcrumb-links,
   dd.al-document-abstract-or-scope,
