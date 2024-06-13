@@ -31,10 +31,7 @@
   --bs-nav-link-font-weight: 700;
 
   .h1 {
-    display: block;
     font-size: var(--al-masthead-title-size);
-    margin: 0;
-    padding: ($spacer * 1.5) ($spacer * 0.5);
   }
 
   .navbar-nav {
