@@ -3,8 +3,8 @@
     <%= helpers.link_to_document @document, counter: @counter %>
     <% @document.extent.each do |extent| %>
       <%= tag.span extent, class: 'al-document-extent badge' unless compact? %>
-    <% end %>    
-    <%= tag.span class: 'al-document-container text-muted ml-auto' do %>
+    <% end %>
+    <%= tag.span class: 'al-document-container text-muted' do %>
       <%= @document.containers.join(', ') %>
     <% end if @document.containers.present? %>
   </h3>
