@@ -89,6 +89,7 @@ en:
       all_collections: all collections
       label_html: Search<span class="sr-only visually-hidden"> within</span>
       this_collection: this collection
+      this_repository: this repository
   blacklight:
     entry_name:
       grouped:
