@@ -33,7 +33,8 @@ module Arclight
     class << self
       def config
         @config ||= begin
-          YAML.safe_load(::File.read(config_filename))
+          content = ERB.new(::File.read(config_filename)).result
+          YAML.safe_load(content)
         rescue Errno::ENOENT
           {}
         end
