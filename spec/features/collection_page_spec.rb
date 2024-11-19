@@ -73,7 +73,7 @@ RSpec.describe 'Collection Page' do
       end
     end
 
-    it 'background has configured metadata' do # rubocop:disable RSpec/MultipleExpectations
+    it 'background has configured metadata' do
       within '#background' do
         expect(page).to have_css('dt', text: 'Scope and content')
         expect(page).to have_css('dd', text: /^Correspondence, documents, records, photos/)
