@@ -2,7 +2,7 @@
 
 require 'spec_helper'
 
-RSpec.describe 'Collection context', js: true do
+RSpec.describe 'Collection context', :js do
   let(:doc_id) { 'aoa271_aspace_6ea193f778e553ca9ea0d00a3e5a1891' }
 
   before do

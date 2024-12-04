@@ -76,7 +76,7 @@ RSpec.describe 'Search results' do
     # Very little metadata exists at the component level to drive any tests
     it 'renders metadata to meet minumum DACS requirements for a component'
 
-    it 'renders facets', js: true do
+    it 'renders facets', :js do
       visit search_catalog_path q: '', search_field: 'all_fields'
 
       within('#facets') do

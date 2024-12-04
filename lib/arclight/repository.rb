@@ -72,7 +72,7 @@ module Arclight
     # @return [Hash<Slug,Repository>]
     def self.from_yaml(file)
       repos = {}
-      data = YAML.safe_load(File.read(file))
+      data = YAML.safe_load_file(file)
       data.each_key do |slug|
         repos[slug] = new(data[slug].merge(slug: slug))
       end

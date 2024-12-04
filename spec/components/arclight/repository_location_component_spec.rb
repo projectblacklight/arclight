@@ -4,7 +4,9 @@ require 'spec_helper'
 
 RSpec.describe Arclight::RepositoryLocationComponent, type: :component do
   let(:field) do
+    # rubocop:disable Rails/RedundantActiveRecordAllMethod
     instance_double(Blacklight::FieldPresenter, key: 'blah', document: nil, label: 'blah', values: [Arclight::Repository.all.first], render_field?: true)
+    # rubocop:enable Rails/RedundantActiveRecordAllMethod
   end
   let(:render) do
     component.render_in(vc_test_controller.view_context)

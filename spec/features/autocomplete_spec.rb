@@ -2,7 +2,7 @@
 
 require 'spec_helper'
 
-RSpec.describe 'Autocomplete', js: true do
+RSpec.describe 'Autocomplete', :js do
   context 'site-wide search form' do
     it 'is configured properly to allow non-prefix autocomplete' do
       visit '/catalog'

@@ -8,11 +8,8 @@ RSpec.describe 'arclight/_requests' do
   let(:blacklight_config) { Blacklight::Configuration.new }
 
   before do
-    allow(document).to receive(:repository_config).and_return(config)
-    allow(document).to receive(:requestable?).and_return(true)
-    allow(view).to receive(:blacklight_config).and_return(blacklight_config)
-    allow(view).to receive(:action_name).and_return('show')
-    allow(view).to receive(:document).and_return(document)
+    allow(document).to receive_messages(repository_config: config, requestable?: true)
+    allow(view).to receive_messages(blacklight_config: blacklight_config, action_name: 'show', document: document)
   end
 
   context 'with EAD documents which require Aeon requests' do
@@ -21,9 +18,9 @@ RSpec.describe 'arclight/_requests' do
     before do
       allow(document_downloads).to receive(:href).and_return('https://sample.request.com')
       allow(document).to receive(:ead_file).and_return(document_downloads)
-      allow(config).to receive(:available_request_types).and_return([:aeon_web_ead])
-      allow(config).to receive(:request_config_for_type).and_return({ 'request_url' => 'https://sample.request.com',
-                                                                      'request_mappings' => 'Action=10&Form=31&Value=ead_url' })
+      allow(config).to receive_messages(available_request_types: [:aeon_web_ead],
+                                        request_config_for_type: { 'request_url' => 'https://sample.request.com',
+                                                                   'request_mappings' => 'Action=10&Form=31&Value=ead_url' })
 
       render
     end
@@ -55,8 +52,7 @@ RSpec.describe 'arclight/_requests' do
     end
 
     before do
-      allow(config).to receive(:available_request_types).and_return([:aeon_external_request_endpoint])
-      allow(config).to receive(:request_config_for_type).and_return(config_hash)
+      allow(config).to receive_messages(available_request_types: [:aeon_external_request_endpoint], request_config_for_type: config_hash)
       render
     end
 

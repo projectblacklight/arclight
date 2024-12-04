@@ -29,7 +29,7 @@ RSpec.describe Arclight::BreadcrumbComponent, type: :component do
     let(:attr) { { count: 2 } }
 
     it 'renders only that many breadcrumb links' do
-      expect(rendered).to have_selector 'li', text: 'my repository'
+      expect(rendered).to have_css 'li', text: 'my repository'
       expect(rendered).to have_link 'ABC123', href: '/catalog/abc123'
       expect(rendered).to have_no_link 'DEF', href: '/catalog/abc123_def'
       expect(rendered).to have_no_link 'GHI', href: '/catalog/abc123_ghi'
@@ -52,7 +52,7 @@ RSpec.describe Arclight::BreadcrumbComponent, type: :component do
   end
 
   it 'renders breadcrumb links' do
-    expect(rendered).to have_selector 'li', text: 'my repository'
+    expect(rendered).to have_css 'li', text: 'my repository'
     expect(rendered).to have_link 'DEF', href: '/catalog/abc123_def'
     expect(rendered).to have_link 'GHI', href: '/catalog/abc123_ghi'
   end

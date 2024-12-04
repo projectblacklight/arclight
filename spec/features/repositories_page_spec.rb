@@ -17,7 +17,7 @@ RSpec.describe 'Repositores Page' do
     it 'is navigable form the Repositories page' do
       visit '/repositories'
 
-      click_link 'Stanford University Libraries. Special Collections and University Archives'
+      click_on 'Stanford University Libraries. Special Collections and University Archives'
 
       expect(page).to have_css('h2', text: 'Our Collections')
     end
@@ -25,9 +25,9 @@ RSpec.describe 'Repositores Page' do
     it 'links to all the repositories collections' do
       visit '/repositories'
 
-      click_link 'Stanford University Libraries. Special Collections and University Archives'
+      click_on 'Stanford University Libraries. Special Collections and University Archives'
 
-      click_link 'View all of our collections'
+      click_on 'View all of our collections'
 
       expect(page).to have_css('h2', text: 'Search Results')
     end
@@ -35,7 +35,7 @@ RSpec.describe 'Repositores Page' do
     it 'does not link the same page in the repository card header' do
       visit '/repositories'
 
-      click_link 'Stanford University Libraries. Special Collections and University Archives'
+      click_on 'Stanford University Libraries. Special Collections and University Archives'
 
       within '.al-repository' do
         expect(page).to have_no_css(
@@ -48,7 +48,7 @@ RSpec.describe 'Repositores Page' do
     it 'has a title title starting with the repository name' do
       visit '/repositories'
 
-      click_link 'Stanford University Libraries. Special Collections and University Archives'
+      click_on 'Stanford University Libraries. Special Collections and University Archives'
 
       expect(page.body).to include('<title>Stanford University Libraries. Special Collections and University Archives - Arclight</title>')
     end

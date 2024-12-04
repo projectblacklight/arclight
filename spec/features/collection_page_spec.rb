@@ -156,7 +156,7 @@ RSpec.describe 'Collection Page' do
     it 'indexed name terms link to the appropriate name facet' do
       name = 'Root, William Webster, 1867-1932'
       within '#indexed-terms' do
-        click_link name
+        click_on name
       end
 
       within '.blacklight-names.facet-limit-active' do
@@ -195,10 +195,10 @@ RSpec.describe 'Collection Page' do
   end
 
   describe 'context and contents' do
-    describe 'interactions', js: true do
+    describe 'interactions', :js do
       it 'contents contain linked level 1 components' do
         within '#collection-context' do
-          click_link 'Series I: Administrative Records, 1902-1976'
+          click_on 'Series I: Administrative Records, 1902-1976'
         end
         expect(page).to have_css '.show-document', text: /Series I: Administrative Records/
       end
@@ -206,20 +206,20 @@ RSpec.describe 'Collection Page' do
       it 'sub components are viewable and expandable' do
         within '#collection-context' do
           within '#aoa271_aspace_563a320bb37d24a9e1e6f7bf95b52671-hierarchy-item' do
-            click_link 'View'
+            click_on 'View'
             within '#aoa271_aspace_dc2aaf83625280ae2e193beb3f4aea78-hierarchy-item.al-collection-context' do
               expect(page).to have_link 'Constitution and by-laws'
             end
-            click_link 'Expand'
+            click_on 'Expand'
             expect(page).to have_link 'Reports'
             el = find_by_id('aoa271_aspace_238a0567431f36f49acea49ef576d408-hierarchy-item')
             evaluate_script "window.scrollTo(0,#{el.rect.y - 100})"
             sleep 1
             within '#aoa271_aspace_238a0567431f36f49acea49ef576d408-hierarchy-item' do
-              click_link 'View'
+              click_on 'View'
               expect(page).to have_link 'Expansion Plan'
               within '#aoa271_aspace_f934f1add34289f28bd0feb478e68275-hierarchy-item' do
-                click_link 'View'
+                click_on 'View'
                 expect(page).to have_link 'Initial Phase'
                 expect(page).to have_link 'Phase II: Expansion'
               end
@@ -256,12 +256,12 @@ RSpec.describe 'Collection Page' do
     end
   end
 
-  context 'content with file downloads', js: true do
+  context 'content with file downloads', :js do
     let(:doc_id) { 'a0011-xml_aspace_ref6_lx4' }
 
     it 'renders links to the files for download' do
       within '.al-show-actions-box-downloads-container' do
-        click_button 'Download'
+        click_on 'Download'
         expect(page).to have_link 'Finding aid'
         expect(page).to have_link 'EAD'
       end
