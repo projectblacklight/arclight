@@ -5,12 +5,12 @@ require 'spec_helper'
 RSpec.describe 'Compact Search Results' do
   it 'As a user I should be able to view results in a compact display' do
     visit root_path
-    click_button 'Search'
+    click_on 'Search'
 
     expect(page).to have_css('.documents-list')
     expect(page).to have_css('h3.index_title', text: 'Alpha Omega Alpha Archives, 1894-1992')
 
-    click_link 'Compact'
+    click_on 'Compact'
 
     expect(page).to have_no_css('.documents-list')
     expect(page).to have_css('.documents-compact')
@@ -29,7 +29,7 @@ RSpec.describe 'Compact Search Results' do
 
   it 'Shows highlights in compact view' do
     visit search_catalog_path q: 'william root', search_field: 'name'
-    click_link 'Compact'
+    click_on 'Compact'
     within '.document-position-1' do
       within '.al-document-highlight' do
         expect(page).to have_css 'em', text: 'William'

@@ -19,7 +19,7 @@ RSpec.describe 'Collection filtering' do
 
       select 'all collections', from: 'Search within'
 
-      click_button 'Search'
+      click_on 'Search'
 
       expect(page).to have_css('.al-document-listings .document', count: 10) # has results
       expect(page).to have_no_css('.constraint-value .filter-value', text: 'Alpha Omega Alpha Archives, 1894-1992')
@@ -49,7 +49,7 @@ RSpec.describe 'Collection filtering' do
       visit solr_document_path('aoa271_aspace_dba76dab6f750f31aa5fc73e5402e71d')
 
       fill_in 'q', with: 'File'
-      click_button 'Search'
+      click_on 'Search'
 
       expect(page).to have_css('.constraint-value .filter-value', text: 'Alpha Omega Alpha Archives, 1894-1992')
       expect(page).to have_css('.al-document-listings .document', count: 2) # has results
@@ -60,7 +60,7 @@ RSpec.describe 'Collection filtering' do
 
       select 'all collections', from: 'Search within'
       fill_in 'q', with: 'File'
-      click_button 'Search'
+      click_on 'Search'
 
       expect(page).to have_no_css('.constraint-value .filter-value', text: 'Alpha Omega Alpha Archives, 1894-1992')
       expect(page).to have_css('.al-document-listings .document', count: 10) # has results

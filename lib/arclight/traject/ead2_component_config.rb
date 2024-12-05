@@ -86,7 +86,7 @@ to_field 'ref_ssi' do |record, accumulator, context|
                    record['id'] = hexdigest
                    hexdigest
                  else
-                   record.attribute('id')&.value&.strip&.gsub('.', '-')
+                   record.attribute('id')&.value&.strip&.gsub('.', '-') # rubocop:disable Style/SafeNavigationChainLength
                  end
 end
 to_field 'ref_ssm' do |_record, accumulator, context|

@@ -16,7 +16,7 @@ RSpec.describe 'Item breadcrumb' do
         expect(page).to have_link 'Series I: Administrative Records'
         expect(page).to have_link 'Reports'
         expect(page).to have_link 'Expansion Plan'
-        click_link 'Expansion Plan'
+        click_on 'Expansion Plan'
       end
     end
     expect(page).to have_css 'h1', text: 'Expansion Plan'

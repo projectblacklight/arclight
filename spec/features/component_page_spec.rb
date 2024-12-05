@@ -133,7 +133,7 @@ RSpec.describe 'Component Page' do
     end
   end
 
-  describe 'collection context', js: true do
+  describe 'collection context', :js do
     it 'has ancestor component with badge having children count' do
       within '#collection-context' do
         expect(page).to have_css(
@@ -161,7 +161,7 @@ RSpec.describe 'Component Page' do
 
     it 'supports clicks within collection context' do
       within '#collection-context' do
-        click_link('Statements of purpose, c.1902')
+        click_on('Statements of purpose, c.1902')
       end
       expect(page).to have_css 'h1', text: 'Statements of purpose, c.1902'
       within '#collection-context' do
@@ -171,7 +171,7 @@ RSpec.describe 'Component Page' do
           '.document-title-heading',
           text: 'Constitution - notes on drafting of constitution, c.1902-1903'
         )
-        click_link 'Constitution - notes on drafting of constitution, c.1902-1903'
+        click_on 'Constitution - notes on drafting of constitution, c.1902-1903'
       end
       expect(page).to have_css 'h1', text: 'Constitution - notes on drafting of constitution, c.1902-1903'
       within '#collection-context' do
@@ -279,12 +279,12 @@ RSpec.describe 'Component Page' do
     end
   end
 
-  context 'content with file downloads', js: true do
+  context 'content with file downloads', :js do
     let(:doc_id) { 'a0011-xml_aspace_ref6_lx4' }
 
     it 'renders links to the files for download' do
       within '.al-show-actions-box-downloads-container' do
-        click_button 'Download'
+        click_on 'Download'
         expect(page).to have_link 'Finding aid'
         expect(page).to have_link 'EAD'
       end

@@ -8,8 +8,7 @@ RSpec.describe 'arclight/repositories/index' do
   before do
     ENV['REPOSITORY_FILE'] = 'spec/fixtures/config/repositories.yml'
     assign(:repositories, test_data)
-    allow(view).to receive(:search_action_path).and_return('/')
-    allow(view).to receive(:on_repositories_index?).and_return(true)
+    allow(view).to receive_messages(search_action_path: '/', on_repositories_index?: true)
   end
 
   context 'renders the three repository examples' do
