@@ -1,12 +1,39 @@
 version: "3.7"
 
 services:
-  solr:
-    image: solr:latest
+  app:
+    build:
+      context: .
+      dockerfile: .docker/app/Dockerfile
+      args:
+        - ALPINE_RUBY_VERSION
+    # mounting . is causing seg-fault on macosx
     volumes:
-      - $PWD/solr/conf:/opt/solr/conf
+      - .:/app
+    depends_on:
+      - solr
+    env_file:
+      - .env
     ports:
-      - 8983:8983
+      - "3000:3000"
+    environment:
+      - SOLR_URL # Set via environment variable or use default defined in .env file
+      - RAILS_VERSION # Set via environment variable or use default defined in .env file
+      - VIEW_COMPONENT_VERSION # Set via environment variable or use default defined in .env file
+      - SOLR_ENV=docker-compose
+      - ENGINE_CART_RAILS_OPTIONS=--skip-git --skip-listen --skip-spring --skip-keeps --skip-action-cable --skip-coffee --skip-test --skip-solr
+
+  solr:
+    environment:
+      - SOLR_PORT # Set via environment variable or use default defined in .env file
+      - SOLR_VERSION # Set via environment variable or use default defined in .env file
+    image: "solr:${SOLR_VERSION}"
+    volumes:
+      - ./solr/conf:/opt/solr/conf
+    env_file:
+      - .env 
+    ports:
+      - "${SOLR_PORT}:8983"
     entrypoint:
       - docker-entrypoint.sh
       - solr-precreate
