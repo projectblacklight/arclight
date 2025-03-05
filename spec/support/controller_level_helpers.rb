@@ -9,7 +9,5 @@ module ControllerLevelHelpers
     @blacklight_configuration_context ||= Blacklight::Configuration::Context.new(controller)
   end
 
-  def blacklight_config
-    CatalogController.blacklight_config
-  end
+  delegate :blacklight_config, to: :CatalogController
 end

@@ -7,13 +7,20 @@ require 'arclight'
 
 class DependencyNotInstalled < StandardError; end
 
+# Build with our opinionated defaults if none are provided.
+rails_options = ENV.fetch('ENGINE_CART_RAILS_OPTIONS', '')
+rails_options = "#{rails_options} -a propshaft" unless rails_options.match?(/-a\s|--asset-pipeline/)
+rails_options = "#{rails_options} -j importmap" unless rails_options.match?(/-j\s|--javascript/)
+rails_options = "#{rails_options} --css bootstrap" unless rails_options.match?(/--css/)
+ENV['ENGINE_CART_RAILS_OPTIONS'] = rails_options
+
 desc 'Run test suite'
 task ci: %w[arclight:generate] do
   SolrWrapper.wrap do |solr|
     solr.with_collection do
       Rake::Task['arclight:seed'].invoke
       within_test_app do
-        ## Do stuff inside arclight app here
+        system 'bin/rake spec:prepare'
       end
       Rake::Task['spec'].invoke
     end
@@ -47,7 +54,7 @@ namespace :arclight do
       solr.with_collection do
         Rake::Task['arclight:seed'].invoke
         within_test_app do
-          system "bundle exec rails s #{args[:rails_server_args]}"
+          system "bin/dev #{args[:rails_server_args]}"
         end
       end
     end
