@@ -12,8 +12,6 @@ module Arclight
       @document.collection? && @document.online_content?
     end
 
-    def collection_name
-      @document.collection_name
-    end
+    delegate :collection_name, to: :@document
   end
 end

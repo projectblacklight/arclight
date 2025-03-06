@@ -1,5 +1,6 @@
-$breadcrumb-divider: quote("»");
-$logo-image: image_url('arclight/logo.png') !default;
-@import 'bootstrap';
-@import 'blacklight/blacklight';
-@import 'arclight/application';
+:root {
+  --bs-breadcrumb-divider: "»";
+}
+
+// Arclight, imported from arclight frontend package
+@import 'arclight/app/assets/stylesheets/arclight/application';

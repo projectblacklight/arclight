@@ -5,8 +5,10 @@ require 'rails/generators'
 module Arclight
   ##
   # Arclight install generator
-  class Install < Rails::Generators::Base
+  class Install < Rails::Generators::Base # rubocop:disable Metrics/ClassLength
     source_root File.expand_path('templates', __dir__)
+
+    class_option :test, type: :boolean, default: false, aliases: '-t', desc: 'Indicates that app will be installed in a test environment'
 
     def create_blacklight_catalog
       remove_file 'app/controllers/catalog_controller.rb'
@@ -41,9 +43,31 @@ module Arclight
       gsub_file 'config/routes.rb', 'root to: "catalog#index"', 'root to: "arclight/repositories#index"'
     end
 
-    def copy_styles
+    def add_frontend
+      if ENV['CI']
+        run "yarn add file:#{Arclight::Engine.root}"
+      elsif options[:test]
+        run 'yarn link arclight'
+
+      # If a branch was specified (e.g. you are running a template.rb build
+      # against a test branch), use the latest version available on npm
+      elsif ENV['BRANCH']
+        run 'yarn add arclight@latest'
+
+      # Otherwise, pick the version from npm that matches the Arclight
+      # gem version
+      else
+        run "yarn add arclight@#{arclight_yarn_version}"
+      end
+    end
+
+    def add_stylesheets
       copy_file 'arclight.scss', 'app/assets/stylesheets/arclight.scss'
-      remove_file 'app/assets/stylesheets/blacklight.scss' # Avoid two copies of bootstrap
+      append_to_file 'app/assets/stylesheets/application.bootstrap.scss' do
+        <<~CONTENT
+          @import "arclight";
+        CONTENT
+      end
     end
 
     def add_arclight_search_behavior
@@ -121,6 +145,19 @@ module Arclight
 
     def import_arclight_javascript
       append_to_file 'app/javascript/application.js', "\nimport \"arclight\""
+    end
+
+    def package_yarn_version(package_name, requested_version)
+      versions = JSON.parse(`yarn info #{package_name} versions --json`)['data']
+      exact_match = versions.find { |v| v == requested_version }
+      return exact_match if exact_match
+
+      major_version = Gem::Version.new(requested_version).segments.first
+      "^#{major_version}"
+    end
+
+    def arclight_yarn_version
+      package_yarn_version('arclight', Arclight::VERSION)
     end
   end
 end

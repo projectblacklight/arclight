@@ -16,6 +16,12 @@ class TestAppGenerator < Rails::Generators::Base
     end
   end
 
+  # This makes the assets available in the test app so that changes made in
+  # local development can be picked up automatically
+  def link_frontend
+    run 'yarn link'
+  end
+
   def run_blacklight_generator
     say_status('warning', 'GENERATING BL', :yellow)
 
@@ -23,7 +29,7 @@ class TestAppGenerator < Rails::Generators::Base
   end
 
   def install_engine
-    generate 'arclight:install'
+    generate 'arclight:install --test'
   end
 
   def add_test_locales
