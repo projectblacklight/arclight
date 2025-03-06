@@ -82,6 +82,13 @@ See the [CONTRIBUTORS](CONTRIBUTORS.md) file.
 
 ## Development
 
+### Branches
+
+* The `main` branch is for new development for the upcoming 2.0.0 release.
+* The `1.x` series is on the [release-1.x](https://github.com/projectblacklight/arclight/tree/release-1.x) branch
+
+### Start Solr
+
 ArcLight requires Solr to be running.  For development you can start this using `solr_wrapper` or you may choose to use Docker. Start Solr using Docker by doing `docker compose up`.
 
 ### Run the test suite
