@@ -1,3 +1,6 @@
+plugins:
+  - rubocop-factory_bot
+
 require:
   - rubocop-rspec
   - rubocop-rails
