@@ -239,8 +239,8 @@ RSpec.describe 'EAD 2 traject indexing' do
       )
 
       expect(nested_component['component_level_isim']).to eq [2]
-      expect(nested_component['parent_ssim']).to eq %w[lc0100 aspace_327a75c226d44aa1a769edb4d2f13c6e]
       expect(nested_component['parent_ssi']).to eq ['aspace_327a75c226d44aa1a769edb4d2f13c6e']
+      expect(nested_component['parent_ids_ssim']).to eq %w[lc0100 lc0100_aspace_327a75c226d44aa1a769edb4d2f13c6e]
       expect(nested_component['parent_unittitles_ssm']).to eq ['Large collection sample, 1843-1872', 'File 1']
     end
   end
@@ -449,10 +449,10 @@ RSpec.describe 'EAD 2 traject indexing' do
         end
 
         it 'parents are correctly ordered' do
-          expect(component_with_many_parents['parent_ssim']).to eq %w[
+          expect(component_with_many_parents['parent_ids_ssim']).to eq %w[
             aoa271
-            aspace_563a320bb37d24a9e1e6f7bf95b52671
-            aspace_238a0567431f36f49acea49ef576d408
+            aoa271_aspace_563a320bb37d24a9e1e6f7bf95b52671
+            aoa271_aspace_238a0567431f36f49acea49ef576d408
           ]
         end
 
@@ -688,8 +688,8 @@ RSpec.describe 'EAD 2 traject indexing' do
       expect(second_component['ref_ssi']).to contain_exactly('al_54b06e5ad77cab05ec7f6beeaca50022c47d9c7b')
       expect(second_component['id']).to contain_exactly('ehllHemingwayErnest-sample_al_54b06e5ad77cab05ec7f6beeaca50022c47d9c7b')
 
-      expect(second_component['parent_ssim']).to equal_array_ignoring_whitespace(
-        %w[ehllHemingwayErnest-sample al_4bf70b448ac8351a147acff1dd8b1c0b9a791980]
+      expect(second_component['parent_ids_ssim']).to equal_array_ignoring_whitespace(
+        %w[ehllHemingwayErnest-sample ehllHemingwayErnest-sample_al_4bf70b448ac8351a147acff1dd8b1c0b9a791980]
       )
     end
   end
