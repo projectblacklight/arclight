@@ -130,10 +130,6 @@ to_field 'component_level_isim' do |_record, accumulator|
   accumulator << (settings[:depth] || 1)
 end
 
-to_field 'parent_ssi' do |_record, accumulator, _context|
-  accumulator.concat settings[:parent].output_hash['ref_ssi'] || settings[:parent].output_hash['id']
-end
-
 to_field 'parent_ids_ssim' do |_record, accumulator, _context|
   accumulator.concat(settings[:parent].output_hash['parent_ids_ssim'] || [])
   accumulator.concat settings[:parent].output_hash['id']
