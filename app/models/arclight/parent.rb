@@ -7,9 +7,6 @@ module Arclight
   class Parent
     attr_reader :id, :label, :eadid, :level
 
-    alias global_id id
-    Arclight.deprecation.deprecate_methods(self, global_id: 'Call `id` instead')
-
     def initialize(id:, label:, eadid:, level:)
       @id = id
       @label = label
