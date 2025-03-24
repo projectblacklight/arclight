@@ -7,7 +7,7 @@ module Arclight
     extend ActiveSupport::Concern
 
     included do
-      attribute :collection_id, :string, '_root_'
+      attribute :root, :string, '_root_'
       attribute :parent_ids, :array, 'parent_ids_ssim'
       attribute :parent_labels, :array, 'parent_unittitles_ssm'
       attribute :parent_levels, :array, 'parent_levels_ssm'
@@ -139,10 +139,6 @@ module Arclight
 
     def nest_path
       self['_nest_path_']
-    end
-
-    def root
-      self['_root_'] || self['id']
     end
 
     def requestable?
