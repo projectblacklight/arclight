@@ -8,6 +8,7 @@ module Arclight
 
     included do
       attribute :collection_id, :string, '_root_'
+      attribute :nest_path, :string, '_nest_path_'
       attribute :parent_ids, :array, 'parent_ids_ssim'
       attribute :parent_labels, :array, 'parent_unittitles_ssm'
       attribute :parent_levels, :array, 'parent_levels_ssm'
@@ -135,10 +136,6 @@ module Arclight
           file.type == 'ead'
         end
       end
-    end
-
-    def nest_path
-      self['_nest_path_']
     end
 
     def root
