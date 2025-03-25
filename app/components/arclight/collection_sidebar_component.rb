@@ -29,7 +29,7 @@ module Arclight
     end
 
     def document_path
-      @document_path ||= solr_document_path(document.collection_id)
+      @document_path ||= solr_document_path(document.root)
     end
 
     def section_anchor(section)

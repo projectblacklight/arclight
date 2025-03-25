@@ -8,6 +8,7 @@ module Arclight
 
     included do
       attribute :collection_id, :string, '_root_'
+      Arclight.deprecation.deprecate_methods(self, collection_id: 'Use `root` instead')
       attribute :parent_ids, :array, 'parent_ids_ssim'
       attribute :legacy_parent_ids, :array, 'parent_ssim'
       Arclight.deprecation.deprecate_methods(self, legacy_parent_ids: 'Use `parent_ids` instead')
@@ -51,7 +52,7 @@ module Arclight
     def normalized_eadid
       Arclight::NormalizedId.new(eadid).to_s
     end
-    Arclight.deprecation.deprecate_methods(self, normalized_eadid: 'Use `collection_id` instead')
+    Arclight.deprecation.deprecate_methods(self, normalized_eadid: 'Use `root` instead')
 
     def repository
       first('repository_ssm') || collection&.first('repository_ssm')
