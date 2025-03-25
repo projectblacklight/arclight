@@ -106,10 +106,7 @@
          name_teim^10
          place_teim^10
          subject_teim^2
-         id
-         ead_ssi
-         ref_ssm
-         unitid_ssm
+         identifier_search
          container_teim
          parent_unittitles_tesim
          text
@@ -122,10 +119,7 @@
          name_teim^20
          place_teim^20
          subject_teim^5
-         id^2
-         ead_ssi^2
-         ref_ssm^2
-         unitid_ssm^2
+         identifier_search^2
          container_teim^2
          parent_unittitles_tesim^2
          text^2
@@ -138,17 +132,11 @@
          container_teim^2
        </str>
        <str name="qf_identifier">
-         id
-         ead_ssi
-         ref_ssm
-         unitid_ssm
+         identifier_search
          unitid_identifier_match
        </str>
        <str name="pf_identifier">
-         id^2
-         ead_ssi^2
-         ref_ssm^2
-         unitid_ssm^2
+         identifier_search^2
          unitid_identifier_match^2
        </str>
        <str name="qf_name">
