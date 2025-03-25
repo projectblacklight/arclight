@@ -9,7 +9,7 @@ RSpec.describe Arclight::SolrDocument do
     it { expect(document).to respond_to(:parent_ids) }
     it { expect(document).to respond_to(:parent_labels) }
     it { expect(document).to respond_to(:eadid) }
-    it { expect(document).to respond_to(:collection_id) }
+    it { expect(document).to respond_to(:root) }
     it { expect(document).to respond_to(:nest_path) }
   end
 
