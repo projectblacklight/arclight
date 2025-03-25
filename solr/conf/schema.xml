@@ -194,6 +194,23 @@
       </analyzer>
     </fieldType>
 
+    <!-- single token with punctuation terms removed so edismax doesn't look for punctuation terms in these fields -->
+    <!-- On client side, Lucene query parser breaks things up by whitespace *before* field analysis for edismax -->
+    <!-- so punctuation terms (& : ;) are stopwords to allow results from other fields when these chars -->
+    <!-- are surrounded by spaces in query. -->
+    <fieldType name="string_punct_stop" class="solr.TextField" omitNorms="true">
+      <analyzer type="index">
+        <tokenizer class="solr.KeywordTokenizerFactory" />
+        <filter class="solr.ICUNormalizer2FilterFactory" mode="compose" />
+      </analyzer>
+      <analyzer type="query">
+        <tokenizer class="solr.KeywordTokenizerFactory" />
+        <filter class="solr.ICUNormalizer2FilterFactory" mode="compose" />
+        <!-- removing punctuation for Lucene query parser issues -->
+        <filter class="solr.StopFilterFactory" ignoreCase="true" words="stopwords_punctuation.txt"  />
+      </analyzer>
+    </fieldType>
+
     <fieldType name="textSpell" class="solr.TextField" positionIncrementGap="100" >
       <analyzer>
         <tokenizer class="solr.StandardTokenizerFactory"/>
@@ -283,6 +300,7 @@
    <!-- default, catch all search field, also used for search term highlighting (requires stored="true") -->
    <field name="text" type="text" indexed="true" stored="true" multiValued="true"/>
    <field name="unitid_identifier_match" type="identifier_match" indexed="true" stored="false" multiValued="true" />
+   <field name="identifier_search" type="string_punct_stop" indexed="true" stored="false" multiValued="true"/>
 
    <field name="_root_" type="string" indexed="true" stored="true" docValues="false" />
    <field name="_nest_parent_" type="string" indexed="true" stored="true"/>
@@ -347,6 +365,12 @@
    <copyField source="names_ssim" dest="text" />
    <copyField source="access_subjects_ssim" dest="text" />
    <copyField source="containers_ssim" dest="text" />
+
+  <!-- catch all identifier field suitable for search -->
+  <copyField source="id" dest="identifier_search" />
+  <copyField source="ead_ssi" dest="identifier_search" />
+  <copyField source="ref_ssm" dest="identifier_search" />
+  <copyField source="unitid_ssm" dest="identifier_search" />
 
    <!-- grab the searchable notes (SEARCHABLE_NOTES_FIELDS) -->
    <copyField source="accessrestrict_tesim" dest="text" />

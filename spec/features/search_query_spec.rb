@@ -68,6 +68,13 @@ RSpec.describe 'Search queries' do
         expect(page).to have_css '.index_title', text: /The constitution of the Alpha Omega/
       end
     end
+
+    context 'search containing stand-alone punctuation' do
+      it 'returns results' do
+        visit search_catalog_path q: 'constitution amendments - drafts', search_field: 'all_fields'
+        expect(page).to have_css '.index_title', text: /Constitution amendments - drafts/
+      end
+    end
   end
 
   context 'when two terms match two docs but proximity differs (pf test)' do
