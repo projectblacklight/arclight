@@ -141,7 +141,7 @@
         <tokenizer class="solr.ICUTokenizerFactory" />
         <filter class="solr.KeywordRepeatFilterFactory" />
         <filter class="solr.ICUFoldingFilterFactory" />
-        <filter class="solr.PorterStemFilterFactory"/>
+        <filter class="solr.EnglishMinimalStemFilterFactory"/>
         <filter class="solr.RemoveDuplicatesTokenFilterFactory" />
       </analyzer>
     </fieldType>
@@ -155,7 +155,7 @@
         <filter class="solr.EnglishPossessiveFilterFactory"/>
         <filter class="solr.ICUFoldingFilterFactory" />
         <filter class="solr.KeywordMarkerFilterFactory" protected="protwords.txt"/>
-        <filter class="solr.PorterStemFilterFactory"/>
+        <filter class="solr.EnglishMinimalStemFilterFactory"/>
         <filter class="solr.FlattenGraphFilterFactory"/> <!-- required on index analyzers after graph filters -->
         <filter class="solr.RemoveDuplicatesTokenFilterFactory" />
       </analyzer>
@@ -167,7 +167,7 @@
         <filter class="solr.ICUFoldingFilterFactory" />
         <filter class="solr.EnglishPossessiveFilterFactory"/>
         <filter class="solr.KeywordMarkerFilterFactory" protected="protwords.txt"/>
-        <filter class="solr.PorterStemFilterFactory"/>
+        <filter class="solr.EnglishMinimalStemFilterFactory"/>
         <filter class="solr.RemoveDuplicatesTokenFilterFactory" />
       </analyzer>
     </fieldType>

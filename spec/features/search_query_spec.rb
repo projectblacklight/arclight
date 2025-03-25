@@ -77,6 +77,18 @@ RSpec.describe 'Search queries' do
     end
   end
 
+  describe 'stemming is appropriate and not overly aggressive' do
+    it 'does not stem "eugenics" to "eugen" in a search' do
+      visit search_catalog_path q: 'eugenics', search_field: 'all_fields'
+      expect(page).to have_no_css '.index_title', text: /Interlochen Center for The Arts records/
+    end
+
+    it 'stems "walks" to "walk" in a search' do
+      visit search_catalog_path q: 'walks', search_field: 'all_fields'
+      expect(page).to have_css '.index_title', text: /Series III: Correspondence, 1894-1992/
+    end
+  end
+
   context 'when two terms match two docs but proximity differs (pf test)' do
     it 'counts the doc where the terms are in close proximity as more relevant' do
       visit search_catalog_path q: 'splendiferous escapades', search_field: 'all_fields'
