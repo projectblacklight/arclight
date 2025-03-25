@@ -29,7 +29,7 @@ module Arclight
     # @param [SolrDocument] document
     def self.from_solr_document(document)
       ids = document.parent_ids
-      legacy_ids = document.legacy_parent_ids.map { |legacy_id| document.collection_id == legacy_id ? legacy_id : "#{document.collection_id}#{legacy_id}" }
+      legacy_ids = document.legacy_parent_ids.map { |legacy_id| document.root == legacy_id ? legacy_id : "#{document.root}#{legacy_id}" }
       labels = document.parent_labels
       eadid = document.eadid
       levels = document.parent_levels
