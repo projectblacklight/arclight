@@ -6,11 +6,6 @@ module Arclight
   module FieldConfigHelpers
     include Arclight::EadFormatHelpers
 
-    def item_requestable?(document)
-      document.requestable?
-    end
-    Arclight.deprecation.deprecate_methods(self, item_requestable?: 'Call e.g. `document.requestable?` instead')
-
     def link_to_name_facet(args)
       options = args[:config]&.separator_options || {}
       values = args[:value] || []
