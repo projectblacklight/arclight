@@ -10,6 +10,6 @@ module Arclight
   autoload :Routes, 'arclight/routes'
 
   def self.deprecation
-    @deprecation ||= ActiveSupport::Deprecation.new('2.0', 'Arclight')
+    @deprecation ||= ActiveSupport::Deprecation.new('3.0', 'Arclight')
   end
 end
