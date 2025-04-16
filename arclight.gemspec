@@ -24,7 +24,7 @@ Gem::Specification.new do |spec|
   spec.executables   = spec.files.grep(%r{^exe/}) { |f| File.basename(f) }
   spec.require_paths = ['lib']
 
-  spec.add_dependency 'blacklight', '>= 8.0.0', '< 9'
+  spec.add_dependency 'blacklight', '>= 8.0.0', '< 10'
   spec.add_dependency 'gretel'
   spec.add_dependency 'rails', '>= 7.1', '< 9'
   spec.add_dependency 'traject', '~> 3.0'
