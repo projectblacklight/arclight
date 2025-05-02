@@ -12,8 +12,9 @@ module ArclightHelper
     search_action_url(
       f: {
         repository: [repository.name],
-        level: ['Collection']
-      }
+#        level: ['Collection']
+      },
+      group:true,
     )
   end
 
