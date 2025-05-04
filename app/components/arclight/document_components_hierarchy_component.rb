@@ -4,8 +4,8 @@ module Arclight
   # Display a document's constituent components with appropriate lazy-loading
   # to keep the page load time reasonable.
   class DocumentComponentsHierarchyComponent < ViewComponent::Base
-    # rubocop:disable Metrics/ParameterLists
-    def initialize(document: nil, target_index: -1, minimum_pagination_size: 20, left_outer_window: 3, maximum_left_gap: 10, window: 10)
+   # rubocop:disable Metrics/ParameterLists
+    def initialize(document: nil, target_index: -1, minimum_pagination_size: 200, left_outer_window: 30, maximum_left_gap: 100, window: 100)
       super
 
       @document = document
@@ -19,6 +19,15 @@ module Arclight
 
     def paginate?
       @document.number_of_children > @minimum_pagination_size
+    end
+
+    def num_pages
+      number_of_pages = (@document.number_of_children / @maximum_left_gap.to_f).round
+      (1..number_of_pages).to_a
+    end
+
+    def get_offset(page)
+      page * @maximum_left_gap
     end
 
     def hierarchy_path(**kwargs)

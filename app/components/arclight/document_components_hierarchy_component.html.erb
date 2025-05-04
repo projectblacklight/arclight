@@ -19,14 +19,38 @@
 <% elsif paginate? %>
   <%# render the first N documents, and let the user expand the remaining if desired %>
   <%= helpers.turbo_frame_tag "al-hierarchy-#{@document.id}-sidebar", loading: ('lazy' unless @target_index >= 0), src: hierarchy_path(limit: @maximum_left_gap, key: '-sidebar') %>
-  <%= tag.turbo_frame id: "al-hierarchy-#{@document.id}-right" do %>
-    <ul>
-      <li>
-        <%= link_to t('arclight.views.show.expand'), hierarchy_path(offset: @maximum_left_gap, key: '-right'), class: 'btn btn-secondary btn-sm' %>
-      </li>
-    </ul>
+  <div id="al-hierarchy-additional-pages">
+  <% num_pages.each do |page| %>
+      <% hidden = 'd-none' unless page == 1 %>
+    <%= tag.turbo_frame class:"#{hidden}", id: "al-hierarchy-#{@document.id}-#{page}-right" do %>
+      <ul class="al-hierarchy-more" >
+        <li>
+          <%= link_to t('arclight.views.show.expand'), hierarchy_path(offset: get_offset(page), limit: @maximum_left_gap, key: "-#{page}-right"),
+                      id: "al-hierarchy-#{@document.id}-#{page}-more", class: 'btn btn-secondary btn-sm' %>
+        </li>
+      </ul>
+    <% end %>
   <% end %>
+  </div>
 <% else %>
   <%# there aren't enough to bother paginating, so load them all at once %>
   <%= helpers.turbo_frame_tag "al-hierarchy-#{@document.id}-sidebar", loading: ('lazy' unless @target_index >= 0), src: hierarchy_path(key: '-sidebar') %>
 <% end %>
+<script>
+    (function() {
+        function showNextLink(e) {
+            if (e.target.id.startsWith('al-hierarchy') && e.target.id.endsWith('more')) {
+                const id_pieces = e.target.id.split('-');
+                const current_page = parseInt(id_pieces[id_pieces.length - 2]);
+                const next_page = current_page + 1;
+                const t = e.target.id.replace(`${current_page}-more`, `${next_page}-right`)
+                document.getElementById(`${t}`).classList.remove('d-none');
+            }
+        }
+
+        const more_links = document.getElementById('al-hierarchy-additional-pages');
+        if (more_links !== null) {
+            more_links.addEventListener('click', showNextLink);
+        }
+    })();
+</script>
