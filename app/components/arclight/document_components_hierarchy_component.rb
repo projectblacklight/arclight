@@ -24,5 +24,11 @@ module Arclight
     def hierarchy_path(**kwargs)
       helpers.hierarchy_solr_document_path(id: @document.id, hierarchy: true, nest_path: params[:nest_path], **kwargs)
     end
+
+    def expand_hierarchy_component
+      blacklight_config.show.expand_hierarchy_component || Arclight::ExpandHierarchyButtonComponent
+    end
+
+    delegate :blacklight_config, to: :helpers
   end
 end
