@@ -65,6 +65,8 @@ module Arclight
     end
 
     def format_render_attributes(node) # rubocop:disable Metrics/MethodLength, Metrics/AbcSize, Metrics/CyclomaticComplexity
+      node.remove_attribute('type')
+
       case node.attr('render')
       when 'altrender'
         node.name = 'span'
