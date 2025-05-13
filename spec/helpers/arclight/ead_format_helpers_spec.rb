@@ -121,6 +121,13 @@ RSpec.describe Arclight::EadFormatHelpers do
         content = helper.render_html_tags(value: ['The <emph render="underline">Mona Lisa</emph> hangs in the Louvre.'])
         expect(content).to eq 'The <span class="text-underline">Mona Lisa</span> hangs in the Louvre.'
       end
+
+      it 'strips out the type attribute' do
+        content = helper.render_html_tags(value: ['He acted as photo editor for the student daily newspaper, <title
+          type="simple" render="italic">The Chronicle</title>.'])
+        expect(content).to eq_ignoring_whitespace \
+          'He acted as photo editor for the student daily newspaper, <em>The Chronicle</em>.'
+      end
     end
 
     describe 'links' do
