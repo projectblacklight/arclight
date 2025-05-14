@@ -1,0 +1,17 @@
+<%= link_to(
+      "#collapsible-hierarchy-#{document.id}",
+      class: "al-toggle-view-children#{' collapsed' unless expanded }",
+      aria: {
+        label: t('arclight.hierarchy.view_all'),
+        expanded: expanded
+      },
+      data: {
+        bs_toggle: 'collapse',
+        toggle: 'collapse'
+      }
+    ) do %>
+        <span class="al-toggle-view-icon" aria-hidden="true">
+          <%= render Blacklight::Icons::PlusComponent.new(classes: 'icon-plus') %>
+          <%= render Blacklight::Icons::MinusComponent.new(classes: 'icon-minus') %>
+        </span>
+<% end %>

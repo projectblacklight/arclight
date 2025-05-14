@@ -8,21 +8,7 @@
   itemtype: @document.itemtype,
   class: (classes.flatten + ['al-collection-context', ('al-hierarchy-highlight' if current_target?)].compact).join(' ') do %>
   <div class="documentHeader" data-document-id="<%= document.id %>">
-    <% if document.children? %>
-      <%= link_to('',
-          "#collapsible-hierarchy-#{document.id}",
-          class: "al-toggle-view-children#{ ' collapsed' unless show_expanded?}",
-          aria: {
-            label: t('arclight.hierarchy.view_all'),
-            expanded: show_expanded?
-          },
-          data: {
-            bs_toggle: 'collapse',
-            toggle: 'collapse'
-          }
-        )
-      %>
-    <% end %>
+    <%= render(Arclight::HierarchyToggleComponent.new(document: document, expanded: show_expanded?)) %>
     <div class="index_title document-title-heading" data-turbo="false">
       <% if current_target? %>
         <%= document.normalized_title %>

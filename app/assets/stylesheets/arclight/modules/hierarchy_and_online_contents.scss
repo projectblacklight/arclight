@@ -1,23 +1,41 @@
 :root {
   --al-toggle-icon-color: #{$navbar-light-color};
-  /* Font Awesome Free 6.5.2 by @fontawesome - https: //fontawesome.com License - https://fontawesome.com/license/free (CC BY 4.0 License) Copyright 2024 Fonticons, Inc. */
-  --al-hierarchy-view-expand-icon: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 475 512'><path stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' stroke='rgb(0, 0, 0)' fill='rgb(0, 0, 0)' d='M64 32C28.7 32 0 60.7 0 96V416c0 35.3 28.7 64 64 64H384c35.3 0 64-28.7 64-64V96c0-35.3-28.7-64-64-64H64zM200 344V280H136c-13.3 0-24-10.7-24-24s10.7-24 24-24h64V168c0-13.3 10.7-24 24-24s24 10.7 24 24v64h64c13.3 0 24 10.7 24 24s-10.7 24-24 24H248v64c0 13.3-10.7 24-24 24s-24-10.7-24-24z'/></svg>");
-  --al-hierarchy-view-collapse-icon: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 475 512'><path stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' stroke='rgb(0, 0, 0)' fill='rgb(0, 0, 0)' d='M64 32C28.7 32 0 60.7 0 96V416c0 35.3 28.7 64 64 64H384c35.3 0 64-28.7 64-64V96c0-35.3-28.7-64-64-64H64zm88 200H296c13.3 0 24 10.7 24 24s-10.7 24-24 24H152c-13.3 0-24-10.7-24-24s10.7-24 24-24z'/></svg>");
 }
 
 // Collapse +/- indicators
 .al-toggle-view-children {
-  background-color: var(--al-toggle-icon-color);
+  display: flex;
+  align-items: center;
+  justify-content: center;
   flex-shrink: 0;
   height: 1.25rem;
   margin-left: -1.25rem;
   margin-right: 0.25 * $spacer;
   margin-top: 0.1 * $spacer;
-  mask: var(--al-hierarchy-view-expand-icon);
   width: 1.1rem;
 
+  svg {
+    fill: var(--al-toggle-icon-color);
+  }
+
+  .icon-minus {
+    display: none;
+  }
   &:not(.collapsed) {
-    mask: var(--al-hierarchy-view-collapse-icon);
+    .icon-plus {
+      display: none;
+    }
+    .icon-minus {
+      display: inline;
+    }
+  }
+  &.collapsed {
+    .icon-plus {
+      display: inline;
+    }
+    .icon-minus {
+      display: none;
+    }
   }
 }
 
@@ -25,10 +43,18 @@
   background: $mark-bg;
 }
 
+ul.documents {
+  list-style: none;
+  li {
+    list-style: none;
+  }
+}
+
 #collection-context {
+  list-style: none;
+
   ul {
     list-style: none;
-
     padding-left: 1.5rem;
 
     ul {
@@ -68,6 +94,7 @@
 
     li {
       padding: 0.25 * $spacer 0.5 * $spacer;
+      list-style: none;
     }
 
     li:nth-of-type(odd) {
