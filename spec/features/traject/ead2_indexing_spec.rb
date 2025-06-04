@@ -176,6 +176,10 @@ RSpec.describe 'EAD 2 traject indexing' do
         )
       end
 
+      it 'names' do
+        expect(first_component['names_ssim']).to include 'Stanford, Leland'
+      end
+
       it 'geogname' do
         %w[geogname_ssim geogname_ssm].each do |field|
           expect(all_components.first[field]).to be_nil
