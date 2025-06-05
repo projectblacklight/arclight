@@ -79,9 +79,10 @@ end
 
 to_field 'id' do |record, accumulator|
   id = record.at_xpath('/ead/eadheader/eadid')&.text
+  unitid = record.at_xpath('/ead/archdesc/did/unitid')&.text
   title = record.at_xpath('/ead/archdesc/did/unittitle')&.text
   repository = settings['repository']
-  accumulator << settings['id_normalizer'].constantize.new(id, title: title, repository: repository).to_s
+  accumulator << settings['id_normalizer'].constantize.new(id, unitid: unitid, title: title, repository: repository).to_s
 end
 
 to_field 'title_filing_ssi', extract_xpath('/ead/eadheader/filedesc/titlestmt/titleproper[@type="filing"]')
