@@ -259,6 +259,7 @@ end
 
 NAME_ELEMENTS.map do |selector|
   to_field 'names_ssim', extract_xpath("./controlaccess/#{selector}"), unique
+  to_field 'names_ssim', extract_xpath(".//#{selector}"), unique
   to_field "#{selector}_ssim", extract_xpath(".//#{selector}")
 end
 

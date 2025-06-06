@@ -87,6 +87,10 @@ RSpec.describe 'Field-based search results' do
     it '#name' do
       visit search_catalog_path q: 'root', search_field: 'name'
       within('.document-position-1') do
+        expect(page).to have_css '.index_title', text: /Dr. Root and L. Raymond Higgins/
+      end
+
+      within('.document-position-2') do
         expect(page).to have_css '.index_title', text: /Alpha Omega Alpha Archives/
       end
     end

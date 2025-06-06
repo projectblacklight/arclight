@@ -29,8 +29,8 @@ RSpec.describe 'Highlighted search results' do
         visit search_catalog_path q: 'william root', search_field: 'name'
         within '.document-position-1' do
           within '.al-document-highlight' do
-            expect(page).to have_css 'em', text: 'William', count: 3
-            expect(page).to have_css 'em', text: 'Root', count: 3
+            expect(page).to have_css 'em', text: 'William', count: 1
+            expect(page).to have_css 'em', text: 'Root', count: 2
           end
         end
       end
