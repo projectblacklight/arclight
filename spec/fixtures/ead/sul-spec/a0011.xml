@@ -177,6 +177,9 @@
                     <container id="aspace_76137544d2e63550e7a7ef7cf2168c48"
                                label="Mixed Materials" type="box">1
                     </container>
+                    <origination label="Creator">
+                        <persname rules="aacr" source="naf">Stanford, Leland</persname>
+                    </origination>
                 </did>
             </c01>
         </dsc>
