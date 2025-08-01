@@ -51,6 +51,14 @@ RSpec.describe Arclight::BreadcrumbComponent, type: :component do
     end
   end
 
+  context 'with an offset that removes all links' do
+    let(:attr) { { offset: 4 } }
+
+    it 'does not render an empty ordered list' do
+      expect(rendered).to have_no_selector 'ol'
+    end
+  end
+
   it 'renders breadcrumb links' do
     expect(rendered).to have_css 'li', text: 'my repository'
     expect(rendered).to have_link 'DEF', href: '/catalog/abc123_def'
