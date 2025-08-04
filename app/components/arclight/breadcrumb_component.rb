@@ -12,12 +12,8 @@ module Arclight
     end
 
     def call
-      breadcrumb_links = components.drop(@offset)
+      return unless breadcrumb_links.any?
 
-      if @count && breadcrumb_links.length > @count
-        breadcrumb_links = breadcrumb_links.first(@count)
-        breadcrumb_links << tag.li('&hellip;'.html_safe, class: 'breadcrumb-item')
-      end
       tag.ol class: 'breadcrumb' do
         safe_join(breadcrumb_links)
       end
@@ -35,6 +31,20 @@ module Arclight
 
     def build_repository_link
       render Arclight::RepositoryBreadcrumbComponent.new(document: @document)
+    end
+
+    private
+
+    def breadcrumb_links
+      @breadcrumb_links ||= limit_breadcrumb_links(components.drop(@offset))
+    end
+
+    def limit_breadcrumb_links(links)
+      return links unless @count && links.length > @count
+
+      limited_links = links.first(@count)
+      limited_links << tag.li('&hellip;'.html_safe, class: 'breadcrumb-item')
+      limited_links
     end
   end
 end
