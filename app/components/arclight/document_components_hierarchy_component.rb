@@ -6,7 +6,7 @@ module Arclight
   class DocumentComponentsHierarchyComponent < ViewComponent::Base
     # rubocop:disable Metrics/ParameterLists
     def initialize(document: nil, target_index: -1, minimum_pagination_size: 20, left_outer_window: 3, maximum_left_gap: 10, window: 10)
-      super
+      super()
 
       @document = document
       @target_index = target_index&.to_i || -1

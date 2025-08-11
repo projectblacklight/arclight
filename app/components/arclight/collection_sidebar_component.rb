@@ -4,7 +4,7 @@ module Arclight
   # Draw the links to the collection info in the sidebar
   class CollectionSidebarComponent < ViewComponent::Base
     def initialize(document:, partials:, collection_presenter:)
-      super
+      super()
 
       @document = document
       @partials = Array(partials)

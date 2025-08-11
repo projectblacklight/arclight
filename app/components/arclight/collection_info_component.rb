@@ -4,7 +4,7 @@ module Arclight
   # Render information about the collection
   class CollectionInfoComponent < ViewComponent::Base
     def initialize(collection:)
-      super
+      super()
 
       @collection = collection
     end
