@@ -4,7 +4,7 @@ module Arclight
   # Component for rendering an expand button inside the hierarchy view
   class ExpandHierarchyButtonComponent < Blacklight::Component
     def initialize(path:, classes: 'btn btn-secondary btn-sm')
-      super
+      super()
       @path = path
       @classes = classes
     end

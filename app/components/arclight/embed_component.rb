@@ -3,8 +3,8 @@
 module Arclight
   # Render digital object links for a document
   class EmbedComponent < ViewComponent::Base
-    def initialize(document:, presenter:, **kwargs)
-      super
+    def initialize(document:, presenter:, **kwargs) # rubocop:disable Lint/UnusedMethodArgument
+      super()
 
       @document = document
       @presenter = presenter

@@ -8,7 +8,7 @@ module Arclight
     def initialize(document:, expanded:)
       @document = document
       @expanded = expanded
-      super
+      super()
     end
 
     delegate :blacklight_icon, to: :helpers

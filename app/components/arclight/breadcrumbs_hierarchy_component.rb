@@ -7,7 +7,7 @@ module Arclight
     delegate :blacklight_icon, to: :helpers
 
     def initialize(presenter:)
-      super
+      super()
 
       @presenter = presenter
       collections, @parents_under_collection = document.parents.partition(&:collection?)
