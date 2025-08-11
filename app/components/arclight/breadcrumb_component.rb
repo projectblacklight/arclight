@@ -8,7 +8,7 @@ module Arclight
       @document = document
       @count = count
       @offset = offset
-      super
+      super()
     end
 
     def call

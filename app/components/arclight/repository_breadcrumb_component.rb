@@ -4,7 +4,7 @@ module Arclight
   # Draws the repository breadcrumb item for a search result
   class RepositoryBreadcrumbComponent < ViewComponent::Base
     def initialize(document:)
-      super
+      super()
       @document = document
     end
 

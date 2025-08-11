@@ -4,7 +4,7 @@ module Arclight
   # Render access information for a document
   class AccessComponent < ViewComponent::Base
     def initialize(presenter:)
-      super
+      super()
       @show_config = presenter.configuration.show
       @presenter = presenter
     end

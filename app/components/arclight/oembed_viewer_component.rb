@@ -6,7 +6,7 @@ module Arclight
     with_collection_parameter :resource
 
     def initialize(resource:, document:, depth: 0)
-      super
+      super()
 
       @resource = resource
       @document = document

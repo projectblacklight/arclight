@@ -5,7 +5,7 @@ module Arclight
   class OnlineContentFilterComponent < Blacklight::Component
     def initialize(document:)
       @document = document
-      super
+      super()
     end
 
     def render?
