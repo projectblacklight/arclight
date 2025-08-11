@@ -4,7 +4,7 @@ module Arclight
   # ViewComponent for rendering a single document download link
   class DocumentDownloadComponent < ViewComponent::Base
     def initialize(downloads:, **kwargs)
-      super
+      super()
 
       @downloads = downloads
       @link_options = kwargs

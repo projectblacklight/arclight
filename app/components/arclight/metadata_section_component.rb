@@ -6,7 +6,7 @@ module Arclight
     with_collection_parameter :section
 
     def initialize(section:, presenter:, metadata_attr: {}, classes: %w[row dl-invert], heading: false)
-      super
+      super()
 
       @classes = classes
       @section = section
