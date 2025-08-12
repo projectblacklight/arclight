@@ -60,6 +60,15 @@
         </profiledesc>
     </eadheader>
     <archdesc audience="internal" level="collection">
+        <bibliography>
+            <head>Selected Bibliography</head>
+            <bibref>
+                <title render="italic">Campus annual</title>. 2008
+            </bibref>
+            <bibref>
+                <title render="italic">Campus annual</title>. 2009
+            </bibref>
+        </bibliography>
         <did>
             <langmaterial>
                 <language langcode="eng">English</language>
@@ -165,6 +174,12 @@
         </controlaccess>
         <dsc>
             <c01 id="aspace_ref6_lx4" level="file">
+                <bibliography>
+                    <head>Selected Bibliography</head>
+                    <bibref>
+                        <title render="italic">Campus annual.</title>2010
+                    </bibref>
+                </bibliography>
                 <did>
                     <unittitle>Photograph Album</unittitle>
                     <dao audience="internal" xlink:actuate="onRequest"

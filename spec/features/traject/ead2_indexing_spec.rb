@@ -138,6 +138,13 @@ RSpec.describe 'EAD 2 traject indexing' do
       end
     end
 
+    describe 'bibliography' do
+      # We skip bibliography text so only test for list of child bibref elements
+      it 'bibref' do
+        expect(result['bibref_html_tesm'].first).to match(/Campus annual/)
+      end
+    end
+
     it 'has_online_content' do
       expect(result['has_online_content_ssim']).to eq [true]
     end
@@ -568,6 +575,18 @@ RSpec.describe 'EAD 2 traject indexing' do
         expect(component['corpname_ssim']).to include_ignoring_whitespace 'Robertson\'s Crab House'
         expect(component['persname_ssim']).to include_ignoring_whitespace 'Anfinsen, Christian B.'
       end
+    end
+  end
+
+  describe 'bibliography' do
+    let(:fixture_path) do
+      Arclight::Engine.root.join('spec', 'fixtures', 'ead', 'nlm', 'alphaomegaalpha.xml')
+    end
+
+    # We skip bibliography text so only test for list of child bibref elements
+    it 'bibref' do
+      component = all_components.find { |c| c['ref_ssi'] == ['aspace_dc2aaf83625280ae2e193beb3f4aea78'] }
+      expect(component['bibref_html_tesm'].first).to match(/Campus regulations/)
     end
   end
 
