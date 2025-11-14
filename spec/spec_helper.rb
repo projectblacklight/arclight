@@ -10,7 +10,18 @@ SimpleCov.start do
 end
 
 require 'engine_cart'
+
 EngineCart.load_application!
+
+# Rails 7.1.3+ freezes certain internal arrays for
+# performance and safety. Rails::Engine.paths["app"] is frozen
+# but EngineCart tries to modify it, leading to errors like:
+# Failure/Error: EngineCart.load_application!
+# FrozenError: can't modify frozen Array
+Rails::Engine.subclasses.each do |engine|
+  paths = engine.paths['app']
+  engine.paths['app'] = paths.dup unless paths.frozen?
+end
 
 require 'rspec/rails'
 
