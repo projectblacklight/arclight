@@ -10,6 +10,23 @@ SimpleCov.start do
 end
 
 require 'engine_cart'
+
+# Rails 7.1.3+ freezes certain internal arrays for
+# performance and safety. Rails::Engine.paths["app"] is frozen
+# but EngineCart tries to modify it, leading to errors like:
+# Failure/Error: EngineCart.load_application!
+# FrozenError: can't modify frozen Array
+# We need to patch Rails::Engine to prevent path freezing during EngineCart loading
+module Rails
+  class Engine
+    def freeze_config
+      # Override to prevent freezing of config arrays that EngineCart needs to modify
+      # This is a temporary workaround for EngineCart compatibility with Rails 7.1.3+
+      @config.freeze unless defined?(EngineCart)
+    end
+  end
+end
+
 EngineCart.load_application!
 
 require 'rspec/rails'
