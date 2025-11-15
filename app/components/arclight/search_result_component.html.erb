@@ -1,11 +1,11 @@
 <%= content_tag @component,
   id: @id,
   data: {
-    'document-id': @document.id.to_s.parameterize,
+    'document-id': presenter.document.id.to_s.parameterize,
     'document-counter': @counter,
   },
   itemscope: true,
-  itemtype: @document.itemtype,
+  itemtype: presenter.document.itemtype,
   class: classes.flatten.join(' ') do %>
     <div class="px-2 document-type-icon">
       <%= icon %>
