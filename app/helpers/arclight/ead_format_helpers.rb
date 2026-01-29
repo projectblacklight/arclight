@@ -258,7 +258,7 @@ module Arclight
       index_head = node.at_css('head')
       index_head&.name = 'h3'
       index_head&.add_class('index-head')
-      index_head['id'] = ['index-', index_head.text].join.parameterize if index_head.present?
+      index_head.presence&.[]=('id', ['index-', index_head.text].join.parameterize)
       format_indexentries(node)
       node.name = 'div'
     end

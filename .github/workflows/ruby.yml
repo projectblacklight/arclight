@@ -14,6 +14,7 @@ jobs:
       matrix:
         rails_version: [8.0.1]
         ruby: ["3.4"]
+        bundler_version: ["2.7.2"]
         additional_engine_cart_rails_options: [""]
         additional_name: [""]
         include:
@@ -21,20 +22,17 @@ jobs:
             rails_version: 7.2.2.1
           - ruby: "3.2"
             rails_version: 7.1.5.1
-          - ruby: "3.4"
-            rails_version: "8.0.1"
-            blacklight_version: 9.0.0.beta1
-            additional_name: "/ Blacklight 9"
     env:
       RAILS_VERSION: ${{ matrix.rails_version }}
       ENGINE_CART_RAILS_OPTIONS: "--skip-git --skip-listen --skip-spring --skip-keeps --skip-kamal --skip-solid --skip-coffee --skip-test --css bootstrap -a propshaft -j importmap ${{ matrix.additional_engine_cart_rails_options }}"
       BLACKLIGHT_VERSION: ${{ matrix.blacklight_version }}
+      BUNDLER_VERSION: ${{ matrix.bundler_version || '2.7.2' }}
     steps:
       - uses: actions/checkout@v4
       - name: Set up Ruby ${{ matrix.ruby }}
         uses: ruby/setup-ruby@v1
         with:
-          bundler: latest
+          bundler: ${{ matrix.bundler_version || '2.7.2' }}
           ruby-version: ${{ matrix.ruby }}
       - name: Install dependencies with Rails ${{ matrix.rails_version }}
         run: bundle install
@@ -48,7 +46,7 @@ jobs:
       - name: Install Ruby and gems
         uses: ruby/setup-ruby@v1
         with:
-          bundler: latest
+          bundler: ${{ matrix.bundler_version || '2.7.2' }}
           ruby-version: 3.2
       - name: Install dependencies with Bundler
         run: bundle install
