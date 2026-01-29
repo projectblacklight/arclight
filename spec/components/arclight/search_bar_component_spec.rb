@@ -13,7 +13,7 @@ RSpec.describe Arclight::SearchBarComponent, type: :component do
   end
 
   let(:params) { {} }
-  let(:component) { described_class.new(url: '/', params: params) }
+  let(:component) { described_class.new(url: '/', params: params, advanced_search_url: '/advanced') }
 
   describe 'within collection dropdown' do
     context 'when in a collection context on the search results page' do
