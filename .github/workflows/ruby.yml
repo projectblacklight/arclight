@@ -21,10 +21,6 @@ jobs:
             rails_version: 7.2.2.1
           - ruby: "3.2"
             rails_version: 7.1.5.1
-          - ruby: "3.4"
-            rails_version: "8.0.1"
-            blacklight_version: 9.0.0.beta1
-            additional_name: "/ Blacklight 9"
     env:
       RAILS_VERSION: ${{ matrix.rails_version }}
       ENGINE_CART_RAILS_OPTIONS: "--skip-git --skip-listen --skip-spring --skip-keeps --skip-kamal --skip-solid --skip-coffee --skip-test --css bootstrap -a propshaft -j importmap ${{ matrix.additional_engine_cart_rails_options }}"
