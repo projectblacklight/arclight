@@ -2,7 +2,7 @@
   <% component.with_label do %>
     <%= label %>
   <% end %>
-  <% component.with_value do %>
+  <% component.with_value(index: 0) do %>
     <div class='al-in-person-repository-name'>
       <% if repository.thumbnail_url %>
         <%= image_tag repository.thumbnail_url, alt: '', class: 'img-fluid float-left' %>
