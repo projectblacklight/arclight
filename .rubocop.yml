@@ -1,12 +1,10 @@
-plugins:
-  - rubocop-factory_bot
-
 require:
   - rubocop-rspec
   - rubocop-rails
   - rubocop-rake
   - rubocop-rspec_rails
   - rubocop-capybara
+  - rubocop-factory_bot
 
 inherit_from:
   - .rubocop_todo.yml
