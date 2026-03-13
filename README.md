@@ -53,14 +53,17 @@ See the [ArcLight demo](https://arclight-demo.projectblacklight.org/) and [ArcLi
 
 See [Arclight Major Features](https://github.com/projectblacklight/arclight/wiki/Arclight-Major-Features) for a list of features.
 
-### Traject indexing of EAD content
-[Traject](https://github.com/traject/traject) is a high performance way of transforming documents for indexing into Solr and how ArcLight does indexing. An EAD2 can be indexed by doing the following:
+### Indexing of EAD content
+The easiest way to index a EAD 2002 file is using the `rails arclight:index` task:
 
 ```sh
-bundle exec traject -u http://127.0.0.1:8983/solr/blacklight-core -i xml -c lib/arclight/traject/ead2_config.rb spec/fixtures/ead/sample/large-components-list.xml
+FILE=spec/fixtures/ead/sample/large-components-list.xml SOLR_URL=http://127.0.0.1:8983/solr/blacklight-core bundle exec rails arclight:index
 ```
+ArcLight uses [Traject](https://github.com/traject/traject) as a a high performance way of transforming documents for indexing into Solr.
 
-Or
+See the [Indexing EAD in ArcLight](https://github.com/projectblacklight/arclight/wiki/Indexing-EAD-in-ArcLight) wiki page for more details on how to index EAD files into ArcLight with Traject.
+
+#### Seed example EAD files
 
 ```sh
 bundle exec rake arclight:seed
