@@ -8,7 +8,6 @@
 
 A Rails engine supporting discovery of archival materials, based on [Blacklight](https://projectblacklight.org/)
 
-
 ## Requirements
 
 * [Ruby](https://www.ruby-lang.org/en/) 3.0.3 or later
