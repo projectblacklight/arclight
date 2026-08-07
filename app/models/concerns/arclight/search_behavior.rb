@@ -24,6 +24,11 @@ module Arclight
       solr_parameters[:start] = blacklight_params[:offset] if blacklight_params[:offset]
       solr_parameters[:sort] = 'sort_isi asc'
       solr_parameters[:facet] = false
+      # The default fl includes `collection:[subquery]`, which runs a separate
+      # Solr subquery to look up the parent collection for every returned
+      # component (this can be slow). The hierarchy view does not use the collection
+      # subquery, so drop it here and return stored fields.
+      solr_parameters[:fl] = '*'
     end
     # rubocop:enable Metrics/AbcSize, Metrics/CyclomaticComplexity
 
