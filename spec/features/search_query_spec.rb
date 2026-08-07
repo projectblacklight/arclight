@@ -80,6 +80,7 @@ RSpec.describe 'Search queries' do
   describe 'stemming is appropriate and not overly aggressive' do
     it 'does not stem "eugenics" to "eugen" in a search' do
       visit search_catalog_path q: 'eugenics', search_field: 'all_fields'
+      expect(page).to have_css 'input#q[value="eugenics"]'
       expect(page).to have_no_css '.index_title', text: /Interlochen Center for The Arts records/
     end
 
