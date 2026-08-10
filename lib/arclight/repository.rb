@@ -23,7 +23,7 @@ module Arclight
     attr_reader :attributes
     attr_accessor :collection_count
 
-    def method_missing(field, *args, &block)
+    def method_missing(field, *args, &)
       return attributes[field] if attributes.include?(field)
 
       super
@@ -106,8 +106,8 @@ module Arclight
     # @param [String] `slug` or `name` -- same as `find_by`
     # @return [Repository]
     # @raise [ActiveRecord::RecordNotFound] if cannot find repository
-    def self.find_by!(**kwargs)
-      repository = find_by(**kwargs)
+    def self.find_by!(**)
+      repository = find_by(**)
       raise ActiveRecord::RecordNotFound if repository.blank?
 
       repository

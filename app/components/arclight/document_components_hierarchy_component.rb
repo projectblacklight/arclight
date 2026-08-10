@@ -21,8 +21,8 @@ module Arclight
       @document.number_of_children > @minimum_pagination_size
     end
 
-    def hierarchy_path(**kwargs)
-      helpers.hierarchy_solr_document_path(id: @document.id, hierarchy: true, nest_path: params[:nest_path], **kwargs)
+    def hierarchy_path(**)
+      helpers.hierarchy_solr_document_path(id: @document.id, hierarchy: true, nest_path: params[:nest_path], **)
     end
 
     def expand_hierarchy_component

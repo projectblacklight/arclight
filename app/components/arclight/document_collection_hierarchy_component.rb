@@ -5,8 +5,8 @@ module Arclight
   class DocumentCollectionHierarchyComponent < Arclight::SearchResultComponent
     # @param [Blacklight::DocumentPresenter] document
     # @param [String] nest_path determines which element to highlight
-    def initialize(document: nil, nest_path: nil, blacklight_config: nil, **kwargs)
-      super(document: document, **kwargs)
+    def initialize(document: nil, nest_path: nil, blacklight_config: nil, **)
+      super(document: document, **)
       @nest_path = nest_path
       @blacklight_config = blacklight_config
     end

@@ -3,8 +3,8 @@
 module Arclight
   # Render a simple metadata field (e.g. without labels) in a .row div
   class IndexMetadataFieldComponent < Blacklight::MetadataFieldComponent
-    def initialize(field:, classes: ['col'], **kwargs)
-      super(field: field, **kwargs)
+    def initialize(field:, classes: ['col'], **)
+      super(field: field, **)
 
       @classes = classes + ["al-document-#{@field.key.dasherize}"]
     end

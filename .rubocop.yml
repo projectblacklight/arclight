@@ -17,7 +17,7 @@ AllCops:
     - "lib/generators/arclight/templates/**/*"
     - "vendor/**/*"
     - "node_modules/**/*"
-  TargetRubyVersion: 3.0
+  TargetRubyVersion: 3.3
   DisplayCopNames: true
 
 Metrics/ModuleLength:
