@@ -58,6 +58,7 @@ RSpec.describe 'Search results' do
     it 'does not include result numbers in the document header' do
       visit search_catalog_path q: '', search_field: 'all_fields'
 
+      expect(page).to have_css('.index_title')
       expect(page).to have_no_css('.document-counter')
     end
 
@@ -141,6 +142,7 @@ RSpec.describe 'Search results' do
     it 'does not include repository card if not faceted on repository' do
       visit search_catalog_path q: '', search_field: 'all_fields'
 
+      expect(page).to have_css('.index_title')
       expect(page).to have_no_css('.al-repository-card')
     end
 
@@ -149,6 +151,7 @@ RSpec.describe 'Search results' do
         names: ['Owner of the reel of yellow nylon rope']
       }, search_field: 'all_fields'
 
+      expect(page).to have_css('.index_title')
       expect(page).to have_no_css('.al-repository-card')
     end
   end

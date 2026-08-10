@@ -11,7 +11,7 @@ class TestAppGenerator < Rails::Generators::Base
   # after setting up the application
 
   def add_gems
-    Bundler.with_clean_env do
+    Bundler.with_unbundled_env do
       run 'bundle install'
     end
   end
