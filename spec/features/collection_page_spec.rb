@@ -27,7 +27,7 @@ RSpec.describe 'Collection Page' do
   describe 'arclight document header' do
     it 'includes a div with the repository and collection ID' do
       within('.al-show-breadcrumb') do
-        expect(page).to have_content 'National Library of Medicine. History of Medicine Division'
+        expect(page).to have_text 'National Library of Medicine. History of Medicine Division'
       end
     end
   end

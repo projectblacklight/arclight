@@ -26,6 +26,7 @@ xdescribe 'Google Form Request', :js do
       context 'repository is not requestable' do
         it 'form is absent' do
           visit solr_document_path 'm0198-xml_aspace_ref14_di4'
+          expect(page).to have_css 'h1'
           expect(page).to have_no_css 'form'
         end
       end
@@ -35,6 +36,7 @@ xdescribe 'Google Form Request', :js do
   context 'when container is absent' do
     it 'form is absent' do
       visit solr_document_path 'aoa271_aspace_238a0567431f36f49acea49ef576d408'
+      expect(page).to have_css 'h1'
       expect(page).to have_no_css 'form'
     end
   end

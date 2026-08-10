@@ -8,7 +8,7 @@ RSpec.describe 'Search Breadcrumb' do
       visit search_catalog_path q: 'a brief', search_field: 'all_fields'
       within '.al-search-breadcrumb' do
         expect(page).to have_link 'Home'
-        expect(page).to have_content 'Search results'
+        expect(page).to have_text 'Search results'
       end
     end
 
@@ -16,7 +16,7 @@ RSpec.describe 'Search Breadcrumb' do
       visit search_catalog_path f: { level: ['Collection'] }, search_field: 'all_fields'
       within '.al-search-breadcrumb' do
         expect(page).to have_link 'Home'
-        expect(page).to have_content 'Collections'
+        expect(page).to have_text 'Collections'
       end
     end
   end
