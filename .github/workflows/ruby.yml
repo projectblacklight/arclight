@@ -20,8 +20,6 @@ jobs:
         include:
           - ruby: "3.3"
             rails_version: 8.0.5
-          - ruby: "3.3"
-            rails_version: 7.2.3.1
     env:
       RAILS_VERSION: ${{ matrix.rails_version }}
       ENGINE_CART_RAILS_OPTIONS: "--skip-git --skip-listen --skip-spring --skip-keeps --skip-kamal --skip-solid --skip-coffee --skip-test --css bootstrap -a propshaft -j importmap ${{ matrix.additional_engine_cart_rails_options }}"
@@ -47,7 +45,7 @@ jobs:
         uses: ruby/setup-ruby@v1
         with:
           bundler: ${{ matrix.bundler_version || '2.7.2' }}
-          ruby-version: 3.2
+          ruby-version: 3.3
       - name: Install dependencies with Bundler
         run: bundle install
       - name: Install dependencies with yarn

@@ -4,8 +4,8 @@ module Arclight
   # Display a single document in the collection
   class DocumentCollectionContextComponent < Arclight::SearchResultComponent
     # @param [SolrDocument] document
-    def initialize(document: nil, blacklight_config: nil, **kwargs)
-      super(document: document, **kwargs)
+    def initialize(document: nil, blacklight_config: nil, **)
+      super(document: document, **)
       @blacklight_config = blacklight_config
     end
 

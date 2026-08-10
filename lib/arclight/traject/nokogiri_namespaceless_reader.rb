@@ -8,8 +8,8 @@ module Arclight
       # @param args
       # @see ::Traject::NokogiriReader#each
       # @see Enumerable#each
-      def each(*args)
-        return to_enum(:each, *args) unless block_given?
+      def each(*)
+        return to_enum(:each, *) unless block_given?
 
         super do |doc|
           new_doc = doc.dup

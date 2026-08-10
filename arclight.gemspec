@@ -16,7 +16,7 @@ Gem::Specification.new do |spec|
   spec.metadata = { 'source_code_uri' => 'https://github.com/projectblacklight/arclight' }
   spec.license = 'Apache-2.0'
 
-  spec.required_ruby_version = '>= 3.0.0'
+  spec.required_ruby_version = '>= 3.3.0'
   spec.files = `git ls-files -z`.split("\x0").reject do |f|
     f.match(%r{^(test|spec|features)/})
   end
@@ -27,7 +27,7 @@ Gem::Specification.new do |spec|
   spec.add_dependency 'benchmark'
   spec.add_dependency 'blacklight', '>= 9.0.0', '< 10'
   spec.add_dependency 'gretel'
-  spec.add_dependency 'rails', '>= 7.1', '< 9'
+  spec.add_dependency 'rails', '>= 8.0', '< 9'
   spec.add_dependency 'traject', '~> 3.0'
   spec.add_dependency 'traject_plus', '~> 2.0'
 
