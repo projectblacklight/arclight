@@ -16,6 +16,32 @@ describe Arclight::SearchBehavior do
   end
   let(:search_builder) { search_builder_class.new(context) }
 
+  describe '#add_hierarchy_behavior' do
+    let(:solr_params) { {} }
+
+    context 'when the action is hierarchy' do
+      before do
+        allow(context).to receive(:action_name).and_return('hierarchy')
+      end
+
+      it 'restricts fl to stored fields to avoid the per-component collection subquery' do
+        search_builder_instance.add_hierarchy_behavior(solr_params)
+        expect(solr_params[:fl]).to eq('*')
+      end
+    end
+
+    context 'when the action is not hierarchy' do
+      before do
+        allow(context).to receive(:action_name).and_return('index')
+      end
+
+      it 'does not override fl' do
+        search_builder_instance.add_hierarchy_behavior(solr_params)
+        expect(solr_params).not_to have_key(:fl)
+      end
+    end
+  end
+
   describe '#add_highlighting' do
     it 'enables highlighting' do
       expect(search_builder_instance.add_highlighting(solr_params)).to include('hl' => true)
