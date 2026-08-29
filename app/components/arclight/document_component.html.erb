@@ -11,7 +11,7 @@
     <%= document.normalized_title %>
   <% end %>
   <%= render 'arclight/requests', document: document %>
-  <%= render Arclight::BookmarkComponent.new document: document, action: bookmark_config %>
+  <%= render (blacklight_config.index.document_actions.arclight_bookmark_control.component || Arclight::BookmarkComponent).new document: document, action: bookmark_config %>
   <%= toggle_sidebar %>
   <%= online_filter %>
 </div>
