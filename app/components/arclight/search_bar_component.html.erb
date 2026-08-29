@@ -9,7 +9,13 @@
       <label class="input-group-text" for="within_collection">
         <%= t('arclight.within_collection_dropdown.label_html') %>
       </label>
-      <%= select_tag ('f[collection][]' if collection_name.present?), within_collection_options, id: 'within_collection', class: 'form-select search-field rounded-end' %>
+      <% if collection_name.present? %>
+        <%= select_tag 'f[collection][]', within_collection_options, id: 'within_collection', class: 'form-select search-field rounded-end' %>
+      <% elsif repository_name.present? %>
+        <%= select_tag 'f[repository][]', within_collection_options, id: 'within_collection', class: 'form-select search-field rounded-end' %>
+      <% else %>
+        <%= select_tag ('f[collection][]' if collection_name.present?), within_collection_options, id: 'within_collection', class: 'form-select search-field rounded-end' %>
+      <% end %>
     </div>
   <% end %>
 
