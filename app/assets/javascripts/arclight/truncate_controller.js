@@ -21,7 +21,11 @@ export default class extends Controller {
     }
   }
 
-  trigger() {
+  trigger(event) {
+    const button = event.currentTarget
+    const expanded = button.getAttribute('aria-expanded') !== 'true'
+    button.setAttribute('aria-expanded', String(expanded))
+
     this.element.classList.toggle('expanded')
   }
 }
