@@ -3,7 +3,7 @@
   <% if truncate? %>
     <%= tag.dd(class: @classes + ['truncator'], data: { controller: 'arclight-truncate' }) do %>
       <%= tag.div helpers.safe_join(@field.render), class: 'content', data: { arclight_truncate_target: 'content' } %>
-      <%= button_tag(type: :button, class: 'btn btn-sm btn-link px-0',
+      <%= button_tag(type: :button, class: 'btn btn-sm btn-link px-0', 'aria-expanded': 'false',
                      data: { action: 'click->arclight-truncate#trigger' }) do %>
         <%= tag.span t('arclight.truncation.view_more'), class: 'view-more' %>
         <%= tag.span t('arclight.truncation.view_less'), class: 'view-less' %>
