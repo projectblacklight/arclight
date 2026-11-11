@@ -89,11 +89,24 @@ See the [CONTRIBUTORS](CONTRIBUTORS.md) file.
 
 ### Start Solr
 
-ArcLight requires Solr to be running.  For development you can start this using `solr_wrapper` or you may choose to use Docker. Start Solr using Docker by doing `docker compose up`.
+ArcLight requires Solr to be running. The test suite (`bundle exec rake`) and the development server (`bundle exec rake arclight:server`) start Solr for you and stop it when they finish:
+
+* If Docker is installed and running, Solr runs in Docker using `docker-compose.yml`.
+* Otherwise, Solr is downloaded and run with `solr_wrapper` (requires Java), using `.solr_wrapper`.
+
+To use `solr_wrapper` even when Docker is available, set `SOLR_WRAPPER=true`:
+
+```sh
+$ SOLR_WRAPPER=true bundle exec rake arclight:server
+```
+
+To run a different Solr version in Docker, set `SOLR_VERSION` (for example `SOLR_VERSION=9.10.0`).
+
+You can also start Solr yourself with `docker compose up`. The rake tasks will use that Solr and leave it running.
 
 ### Run the test suite
 
-Ensure Solr and Rails are _not_ running (ports 8983 and 3000 respectively), then:
+Ensure Rails is _not_ running (port 3000), and that nothing other than the Docker Solr above is using port 8983, then:
 
 ```sh
 $ bundle exec rake
@@ -106,7 +119,7 @@ If you find that the tests are failing when you run them on a Linux computer, yo
 $ bundle exec rake arclight:server
 ```
 
-Then visit http://localhost:3000. It will also start a Solr instance on port 8983.
+Then visit http://localhost:3000. It will also start Solr on port 8983 (see [Start Solr](#start-solr)) and index the fixture data.
 
 ### Run a console
 
