@@ -5,7 +5,8 @@ require 'spec_helper'
 RSpec.describe Arclight::RepositoryLocationComponent, type: :component do
   let(:field) do
     # rubocop:disable Rails/RedundantActiveRecordAllMethod
-    instance_double(Blacklight::FieldPresenter, key: 'blah', document: nil, label: 'blah', values: [Arclight::Repository.all.first], render_field?: true)
+    instance_double(Blacklight::FieldPresenter, key: 'blah', document: nil, label: 'blah',
+                                                values: [Arclight::Repository.all.first], render: ['My Repository'], render_field?: true)
     # rubocop:enable Rails/RedundantActiveRecordAllMethod
   end
   let(:render) do
@@ -16,7 +17,7 @@ RSpec.describe Arclight::RepositoryLocationComponent, type: :component do
     Capybara::Node::Simple.new(render)
   end
 
-  let(:component) { described_class.new(field: field) }
+  let(:component) { described_class.new(field: field, layout: Blacklight::MetadataFieldLayoutComponent) }
 
   it 'renders the repository location information' do
     expect(rendered).to have_css('.al-in-person-repository-name', text: 'My Repository')

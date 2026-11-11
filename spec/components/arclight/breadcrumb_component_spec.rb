@@ -44,7 +44,7 @@ RSpec.describe Arclight::BreadcrumbComponent, type: :component do
     let(:attr) { { offset: 2 } }
 
     it 'skips some breadcrumb links' do
-      expect(rendered).to have_no_selector 'li', text: 'my repository'
+      expect(rendered).to have_no_css 'li', text: 'my repository'
       expect(rendered).to have_no_link 'ABC123', href: '/catalog/abc123'
       expect(rendered).to have_link 'DEF', href: '/catalog/abc123_def'
       expect(rendered).to have_link 'GHI', href: '/catalog/abc123_ghi'
@@ -55,7 +55,7 @@ RSpec.describe Arclight::BreadcrumbComponent, type: :component do
     let(:attr) { { offset: 4 } }
 
     it 'does not render an empty ordered list' do
-      expect(rendered).to have_no_selector 'ol'
+      expect(rendered).to have_no_css 'ol'
     end
   end
 

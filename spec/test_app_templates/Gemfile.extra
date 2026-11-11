@@ -3,3 +3,7 @@ if ENV['BLACKLIGHT_VERSION'] == 'github'
 elsif ENV['BLACKLIGHT_VERSION'] && !ENV['BLACKLIGHT_VERSION'].empty?
   gem 'blacklight', ENV['BLACKLIGHT_VERSION']
 end
+
+# json 3.x rejects options ActiveSupport still passes (`quirks_mode:` in Rails 8.0's
+# JSON.generate; a positional options hash in ActiveSupport::JSON.decode).
+gem 'json', '< 3.0'
