@@ -1,6 +1,8 @@
 # Place any default configuration for solr_wrapper here
 # port: 8983
+env:
+  SOLR_MODULES: analysis-extras
 collection:
   dir: solr/conf
   name: blacklight-core
-version: 9.7.0
+version: 9.10.1

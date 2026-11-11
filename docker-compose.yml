@@ -1,8 +1,8 @@
-version: "3.7"
-
 services:
   solr:
-    image: solr:9.7.0
+    image: "solr:${SOLR_VERSION:-9.10.1}"
+    environment:
+      - SOLR_MODULES=analysis-extras
     volumes:
       - $PWD/solr/conf:/opt/solr/conf
     ports:
