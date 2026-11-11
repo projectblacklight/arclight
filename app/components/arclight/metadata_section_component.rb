@@ -5,6 +5,16 @@ module Arclight
   class MetadataSectionComponent < ViewComponent::Base
     with_collection_parameter :section
 
+    # Section headings are looked up dynamically via t("arclight.views.show.sections.#{section}")
+    # i18n-tasks-use t('arclight.views.show.sections.background_field')
+    # i18n-tasks-use t('arclight.views.show.sections.collection_context_field')
+    # i18n-tasks-use t('arclight.views.show.sections.component_field')
+    # i18n-tasks-use t('arclight.views.show.sections.component_indexed_terms_field')
+    # i18n-tasks-use t('arclight.views.show.sections.indexed_terms_field')
+    # i18n-tasks-use t('arclight.views.show.sections.related_field')
+    # i18n-tasks-use t('arclight.views.show.sections.scope_and_arrangement_field')
+    # i18n-tasks-use t('arclight.views.show.sections.summary_field')
+
     def initialize(section:, presenter:, metadata_attr: {}, classes: %w[row dl-invert], heading: false)
       super()
 
